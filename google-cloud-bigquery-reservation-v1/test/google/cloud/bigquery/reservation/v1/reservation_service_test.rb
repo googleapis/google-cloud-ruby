@@ -807,12 +807,14 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     # Create request parameters for a unary method.
     parent = "hello world"
     capacity_commitment_ids = ["hello world"]
+    capacity_commitment_id = "hello world"
 
     merge_capacity_commitments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :merge_capacity_commitments, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal ["hello world"], request["capacity_commitment_ids"]
+      assert_equal "hello world", request["capacity_commitment_id"]
       refute_nil options
     end
 
@@ -823,31 +825,31 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use hash object
-      client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids }) do |response, operation|
+      client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.merge_capacity_commitments parent: parent, capacity_commitment_ids: capacity_commitment_ids do |response, operation|
+      client.merge_capacity_commitments parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.merge_capacity_commitments ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids) do |response, operation|
+      client.merge_capacity_commitments ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids }, grpc_options) do |response, operation|
+      client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.merge_capacity_commitments(::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids), grpc_options) do |response, operation|
+      client.merge_capacity_commitments(::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1419,6 +1421,433 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
 
       # Verify method calls
       assert_equal 5, update_bi_reservation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_iam_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::Policy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_iam_policy, name
+      assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_iam_policy resource: resource, options: options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_set_iam_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::Policy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_iam_policy, name
+      assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :test_iam_permissions, name
+      assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, test_iam_permissions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_reservation_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    reservation_group_id = "hello world"
+    reservation_group = {}
+
+    create_reservation_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_reservation_group, name
+      assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["reservation_group_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup), request["reservation_group"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_reservation_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_reservation_group({ parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_reservation_group parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_reservation_group ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest.new(parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_reservation_group({ parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_reservation_group(::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest.new(parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_reservation_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_reservation_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_reservation_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_reservation_group, name
+      assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_reservation_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_reservation_group({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_reservation_group name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_reservation_group ::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_reservation_group({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_reservation_group(::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_reservation_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_reservation_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_reservation_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_reservation_group, name
+      assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_reservation_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_reservation_group({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_reservation_group name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_reservation_group ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_reservation_group({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_reservation_group(::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_reservation_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_reservation_groups
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_reservation_groups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_reservation_groups, name
+      assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_reservation_groups_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_reservation_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_reservation_groups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_reservation_groups ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_reservation_groups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_reservation_groups(::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_reservation_groups_client_stub.call_rpc_count
     end
   end
 

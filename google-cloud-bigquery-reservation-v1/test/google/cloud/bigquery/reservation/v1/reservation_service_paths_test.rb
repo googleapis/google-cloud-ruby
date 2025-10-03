@@ -100,4 +100,16 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientPath
       assert_equal "projects/value0/locations/value1/reservations/value2", path
     end
   end
+
+  def test_reservation_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.reservation_group_path project: "value0", location: "value1", reservation_group: "value2"
+      assert_equal "projects/value0/locations/value1/reservationGroups/value2", path
+    end
+  end
 end

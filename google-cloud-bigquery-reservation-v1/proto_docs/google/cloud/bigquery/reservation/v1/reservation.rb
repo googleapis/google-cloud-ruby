@@ -25,14 +25,14 @@ module Google
           # A reservation is a mechanism used to guarantee slots to users.
           # @!attribute [rw] name
           #   @return [::String]
-          #     The resource name of the reservation, e.g.,
+          #     Identifier. The resource name of the reservation, e.g.,
           #     `projects/*/locations/*/reservations/team1-prod`.
           #     The reservation_id must only contain lower case alphanumeric characters or
           #     dashes. It must start with a letter and must not end with a dash. Its
           #     maximum length is 64 characters.
           # @!attribute [rw] slot_capacity
           #   @return [::Integer]
-          #     Baseline slots available to this reservation. A slot is a unit of
+          #     Optional. Baseline slots available to this reservation. A slot is a unit of
           #     computational power in BigQuery, and serves as the unit of parallelism.
           #
           #     Queries using this reservation might use more slots during runtime if
@@ -48,23 +48,22 @@ module Google
           #     baseline slots every few minutes.
           # @!attribute [rw] ignore_idle_slots
           #   @return [::Boolean]
-          #     If false, any query or pipeline job using this reservation will use idle
-          #     slots from other reservations within the same admin project. If true, a
-          #     query or pipeline job using this reservation will execute with the slot
-          #     capacity specified in the slot_capacity field at most.
+          #     Optional. If false, any query or pipeline job using this reservation will
+          #     use idle slots from other reservations within the same admin project. If
+          #     true, a query or pipeline job using this reservation will execute with the
+          #     slot capacity specified in the slot_capacity field at most.
           # @!attribute [rw] autoscale
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation::Autoscale]
-          #     The configuration parameters for the auto scaling feature.
+          #     Optional. The configuration parameters for the auto scaling feature.
           # @!attribute [rw] concurrency
           #   @return [::Integer]
-          #     Job concurrency target which sets a soft upper bound on the number of jobs
-          #     that can run concurrently in this reservation. This is a soft target due to
-          #     asynchronous nature of the system and various optimizations for small
-          #     queries.
-          #     Default value is 0 which means that concurrency target will be
-          #     automatically computed by the system.
-          #     NOTE: this field is exposed as target job concurrency in the Information
-          #     Schema, DDL and BigQuery CLI.
+          #     Optional. Job concurrency target which sets a soft upper bound on the
+          #     number of jobs that can run concurrently in this reservation. This is a
+          #     soft target due to asynchronous nature of the system and various
+          #     optimizations for small queries. Default value is 0 which means that
+          #     concurrency target will be automatically computed by the system. NOTE: this
+          #     field is exposed as target job concurrency in the Information Schema, DDL
+          #     and BigQuery CLI.
           # @!attribute [r] creation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Creation time of the reservation.
@@ -72,6 +71,7 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Last update time of the reservation.
           # @!attribute [rw] multi_region_auxiliary
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Applicable only for reservations located within one of the BigQuery
           #     multi-regions (US or EU).
@@ -84,7 +84,7 @@ module Google
           #     set this field.
           # @!attribute [rw] edition
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Edition]
-          #     Edition of the reservation.
+          #     Optional. Edition of the reservation.
           # @!attribute [r] primary_location
           #   @return [::String]
           #     Output only. The current location of the reservation's primary replica.
@@ -114,10 +114,13 @@ module Google
           #     will never exceed the max_slots - baseline.
           #
           #
-          #     This field must be set together with the scaling_mode enum value.
+          #     This field must be set together with the scaling_mode enum value,
+          #     otherwise the request will be rejected with error code
+          #     `google.rpc.Code.INVALID_ARGUMENT`.
           #
           #     If the max_slots and scaling_mode are set, the autoscale or
-          #     autoscale.max_slots field must be unset. However, the
+          #     autoscale.max_slots field must be unset. Otherwise the request will be
+          #     rejected with error code `google.rpc.Code.INVALID_ARGUMENT`. However, the
           #     autoscale field may still be in the output. The autopscale.max_slots will
           #     always show as 0 and the autoscaler.current_slots will represent the
           #     current slots from autoscaler excluding idle slots.
@@ -134,12 +137,14 @@ module Google
           #
           #     If the max_slots and scaling_mode are set, then the ignore_idle_slots field
           #     must be aligned with the scaling_mode enum value.(See details in
-          #     ScalingMode comments).
+          #     ScalingMode comments). Otherwise the request will be rejected with
+          #     error code `google.rpc.Code.INVALID_ARGUMENT`.
           #
           #     Please note,  the max_slots is for user to manage the part of slots greater
           #     than the baseline. Therefore, we don't allow users to set max_slots smaller
           #     or equal to the baseline as it will not be meaningful. If the field is
-          #     present and slot_capacity>=max_slots.
+          #     present and slot_capacity>=max_slots, requests will be rejected with error
+          #     code `google.rpc.Code.INVALID_ARGUMENT`.
           #
           #     Please note that if max_slots is set to 0, we will treat it as unset.
           #     Customers can set max_slots to 0 and set scaling_mode to
@@ -147,7 +152,21 @@ module Google
           # @!attribute [rw] scaling_mode
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation::ScalingMode]
           #     Optional. The scaling mode for the reservation.
-          #     If the field is present but max_slots is not present.
+          #     If the field is present but max_slots is not present, requests will be
+          #     rejected with error code `google.rpc.Code.INVALID_ARGUMENT`.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. The labels associated with this reservation. You can use these
+          #     to organize and group your reservations.
+          #     You can set this property when you create or update a reservation.
+          # @!attribute [rw] reservation_group
+          #   @return [::String]
+          #     Optional. The reservation group that this reservation belongs to.
+          #     You can set this property when you create or update a reservation.
+          #     Reservations do not need to belong to a reservation group.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/reservationGroups/\\{reservation_group}
+          #     or just \\{reservation_group}
           # @!attribute [r] replication_status
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation::ReplicationStatus]
           #     Output only. The Disaster Recovery(DR) replication status of the
@@ -158,6 +177,13 @@ module Google
           #     the reservation is either not a DR reservation or the reservation is a DR
           #     secondary or that any replication operations on the reservation have
           #     succeeded.
+          # @!attribute [rw] scheduling_policy
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::SchedulingPolicy]
+          #     Optional. The scheduling policy to use for jobs and queries running under
+          #     this reservation. The scheduling policy controls how the reservation's
+          #     resources are distributed.
+          #
+          #     This feature is not yet generally available.
           class Reservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -172,7 +198,7 @@ module Google
             #     max_slots for that brief period (less than one minute)
             # @!attribute [rw] max_slots
             #   @return [::Integer]
-            #     Number of slots to be scaled when needed.
+            #     Optional. Number of slots to be scaled when needed.
             class Autoscale
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -205,6 +231,15 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # The scaling mode for the reservation. This enum determines how the
             # reservation scales up and down.
             module ScalingMode
@@ -219,7 +254,8 @@ module Google
               # slots and no idle slots will be used.
               #
               # Please note, in this mode, the ignore_idle_slots field must be set to
-              # true.
+              # true. Otherwise the request will be rejected with error code
+              # `google.rpc.Code.INVALID_ARGUMENT`.
               AUTOSCALE_ONLY = 1
 
               # The reservation will scale up using only idle slots contributed by
@@ -239,7 +275,8 @@ module Google
               # to max_slots.
               #
               # Please note, in this mode, the ignore_idle_slots field must be set to
-              # false.
+              # false. Otherwise the request will be rejected with error code
+              # `google.rpc.Code.INVALID_ARGUMENT`.
               IDLE_SLOTS_ONLY = 2
 
               # The reservation will scale up using all slots available to it. It will
@@ -257,9 +294,43 @@ module Google
               # scale up to 1000 slots with 200 baseline and 800 autoscaling slots.
               #
               # Please note, in this mode, the ignore_idle_slots field must be set to
-              # false.
+              # false. Otherwise the request will be rejected with error code
+              # `google.rpc.Code.INVALID_ARGUMENT`.
               ALL_SLOTS = 3
             end
+          end
+
+          # The scheduling policy controls how a reservation's resources are distributed.
+          # @!attribute [rw] concurrency
+          #   @return [::Integer]
+          #     Optional. If present and > 0, the reservation will attempt to limit the
+          #     concurrency of jobs running for any particular project within it to the
+          #     given value.
+          #
+          #     This feature is not yet generally available.
+          # @!attribute [rw] max_slots
+          #   @return [::Integer]
+          #     Optional. If present and > 0, the reservation will attempt to limit the
+          #     slot consumption of queries running for any particular project within it to
+          #     the given value.
+          #
+          #     This feature is not yet generally available.
+          class SchedulingPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A reservation group is a container for reservations.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of the reservation group, e.g.,
+          #     `projects/*/locations/*/reservationGroups/team1-prod`.
+          #     The reservation_group_id must only contain lower case alphanumeric
+          #     characters or dashes. It must start with a letter and must not end with a
+          #     dash. Its maximum length is 64 characters.
+          class ReservationGroup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Capacity commitment is a way to purchase compute capacity for BigQuery jobs
@@ -281,10 +352,10 @@ module Google
           #     with a dash. Its maximum length is 64 characters.
           # @!attribute [rw] slot_count
           #   @return [::Integer]
-          #     Number of slots in this commitment.
+          #     Optional. Number of slots in this commitment.
           # @!attribute [rw] plan
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment::CommitmentPlan]
-          #     Capacity commitment commitment plan.
+          #     Optional. Capacity commitment commitment plan.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment::State]
           #     Output only. State of the commitment.
@@ -298,7 +369,7 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The end of the current commitment period. It is applicable
           #     only for ACTIVE capacity commitments. Note after renewal,
-          #     commitment_end_time is the time the renewed commitment expires. So it would
+          #     commitment_end_time is the time the renewed commitment expires. So itwould
           #     be at a time after commitment_start_time + committed period, because we
           #     don't change commitment_start_time ,
           # @!attribute [r] failure_status
@@ -306,10 +377,12 @@ module Google
           #     Output only. For FAILED commitment plan, provides the reason of failure.
           # @!attribute [rw] renewal_plan
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment::CommitmentPlan]
-          #     The plan this capacity commitment is converted to after commitment_end_time
-          #     passes. Once the plan is changed, committed period is extended according to
-          #     commitment plan. Only applicable for ANNUAL and TRIAL commitments.
+          #     Optional. The plan this capacity commitment is converted to after
+          #     commitment_end_time passes. Once the plan is changed, committed period is
+          #     extended according to commitment plan. Only applicable for ANNUAL and TRIAL
+          #     commitments.
           # @!attribute [rw] multi_region_auxiliary
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Applicable only for commitments located within one of the BigQuery
           #     multi-regions (US or EU).
@@ -322,7 +395,7 @@ module Google
           #     set this field.
           # @!attribute [rw] edition
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Edition]
-          #     Edition of the capacity commitment.
+          #     Optional. Edition of the capacity commitment.
           # @!attribute [r] is_flat_rate
           #   @return [::Boolean]
           #     Output only. If true, the commitment is a flat-rate commitment, otherwise,
@@ -505,6 +578,78 @@ module Google
           end
 
           # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_reservation_group ReservationService.CreateReservationGroup}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. Project, location. E.g.,
+          #     `projects/myproject/locations/US`
+          # @!attribute [rw] reservation_group_id
+          #   @return [::String]
+          #     Required. The reservation group ID. It must only contain lower case
+          #     alphanumeric characters or dashes. It must start with a letter and must not
+          #     end with a dash. Its maximum length is 64 characters.
+          # @!attribute [rw] reservation_group
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+          #     Required. New Reservation Group to create.
+          class CreateReservationGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_reservation_group ReservationService.GetReservationGroup}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Resource name of the reservation group to retrieve. E.g.,
+          #        `projects/myproject/locations/US/reservationGroups/team1-prod`
+          class GetReservationGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservation_groups ReservationService.ListReservationGroups}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource name containing project and location, e.g.:
+          #       `projects/myproject/locations/US`
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     The maximum number of items to return per page.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     The next_page_token value returned from a previous List request, if any.
+          class ListReservationGroupsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservation_groups ReservationService.ListReservationGroups}.
+          # @!attribute [rw] reservation_groups
+          #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup>]
+          #     List of reservations visible to the user.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no
+          #     more results in the list.
+          class ListReservationGroupsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation_group ReservationService.DeleteReservationGroup}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Resource name of the reservation group to retrieve. E.g.,
+          #        `projects/myproject/locations/US/reservationGroups/team1-prod`
+          class DeleteReservationGroupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
           # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_capacity_commitment ReservationService.CreateCapacityCommitment}.
           # @!attribute [rw] parent
           #   @return [::String]
@@ -640,6 +785,12 @@ module Google
           #     specified in the parent.
           #     ID is the last portion of capacity commitment name e.g., 'abc' for
           #     projects/myproject/locations/US/capacityCommitments/abc
+          # @!attribute [rw] capacity_commitment_id
+          #   @return [::String]
+          #     Optional. The optional resulting capacity commitment ID. Capacity
+          #     commitment name will be generated automatically if this field is empty.
+          #     This field must only contain lower case alphanumeric characters or dashes.
+          #     The first and last character cannot be a dash. Max length is 64 characters.
           class MergeCapacityCommitmentsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -655,11 +806,11 @@ module Google
           #     dashes and the max length is 64 characters.
           # @!attribute [rw] assignee
           #   @return [::String]
-          #     The resource which will use the reservation. E.g.
+          #     Optional. The resource which will use the reservation. E.g.
           #     `projects/myproject`, `folders/123`, or `organizations/456`.
           # @!attribute [rw] job_type
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment::JobType]
-          #     Which type of jobs will use the reservation.
+          #     Optional. Which type of jobs will use the reservation.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment::State]
           #     Output only. State of the assignment.
@@ -673,6 +824,14 @@ module Google
           #     the parent reservation edition is ENTERPRISE_PLUS, then the assignment will
           #     give the grantee project/organization access to "Gemini in BigQuery"
           #     features.
+          # @!attribute [rw] scheduling_policy
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::SchedulingPolicy]
+          #     Optional. The scheduling policy to use for jobs and queries of this
+          #     assignee when running under the associated reservation. The scheduling
+          #     policy controls how the reservation's resources are distributed. This
+          #     overrides the default scheduling policy specified on the reservation.
+          #
+          #     This feature is not yet generally available.
           class Assignment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -699,6 +858,23 @@ module Google
               # Continuous SQL jobs will use this reservation. Reservations with
               # continuous assignments cannot be mixed with non-continuous assignments.
               CONTINUOUS = 6
+
+              # Finer granularity background jobs for capturing changes in a source
+              # database and streaming them into BigQuery. Reservations with this job
+              # type take priority over a default BACKGROUND reservation assignment (if
+              # it exists).
+              BACKGROUND_CHANGE_DATA_CAPTURE = 7
+
+              # Finer granularity background jobs for refreshing cached metadata for
+              # BigQuery tables. Reservations with this job type take priority over a
+              # default BACKGROUND reservation assignment (if it exists).
+              BACKGROUND_COLUMN_METADATA_INDEX = 8
+
+              # Finer granularity background jobs for refreshing search indexes upon
+              # BigQuery table columns. Reservations with this job type
+              # take priority over a default BACKGROUND reservation assignment (if it
+              # exists).
+              BACKGROUND_SEARCH_INDEX_REFRESH = 9
             end
 
             # Assignment will remain in PENDING state if no active capacity commitment is
@@ -921,13 +1097,13 @@ module Google
           # Internally stored as google.cloud.bi.v1.BqTableReference.
           # @!attribute [rw] project_id
           #   @return [::String]
-          #     The assigned project ID of the project.
+          #     Optional. The assigned project ID of the project.
           # @!attribute [rw] dataset_id
           #   @return [::String]
-          #     The ID of the dataset in the above project.
+          #     Optional. The ID of the dataset in the above project.
           # @!attribute [rw] table_id
           #   @return [::String]
-          #     The ID of the table in the above dataset.
+          #     Optional. The ID of the table in the above dataset.
           class TableReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -936,7 +1112,7 @@ module Google
           # Represents a BI Reservation.
           # @!attribute [rw] name
           #   @return [::String]
-          #     The resource name of the singleton BI reservation.
+          #     Identifier. The resource name of the singleton BI reservation.
           #     Reservation names have the form
           #     `projects/{project_id}/locations/{location_id}/biReservation`.
           # @!attribute [r] update_time
@@ -944,10 +1120,10 @@ module Google
           #     Output only. The last update timestamp of a reservation.
           # @!attribute [rw] size
           #   @return [::Integer]
-          #     Size of a reservation, in bytes.
+          #     Optional. Size of a reservation, in bytes.
           # @!attribute [rw] preferred_tables
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::TableReference>]
-          #     Preferred tables to use BI capacity for.
+          #     Optional. Preferred tables to use BI capacity for.
           class BiReservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -993,7 +1169,7 @@ module Google
           end
 
           # The failover mode when a user initiates a failover on a reservation
-          # determines how writes that arepending replication are handled after the
+          # determines how writes that are pending replication are handled after the
           # failover is initiated.
           module FailoverMode
             # Invalid value.

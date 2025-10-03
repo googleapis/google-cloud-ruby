@@ -119,6 +119,41 @@
               "methods": [
                 "update_bi_reservation"
               ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "CreateReservationGroup": {
+              "methods": [
+                "create_reservation_group"
+              ]
+            },
+            "GetReservationGroup": {
+              "methods": [
+                "get_reservation_group"
+              ]
+            },
+            "DeleteReservationGroup": {
+              "methods": [
+                "delete_reservation_group"
+              ]
+            },
+            "ListReservationGroups": {
+              "methods": [
+                "list_reservation_groups"
+              ]
             }
           }
         }

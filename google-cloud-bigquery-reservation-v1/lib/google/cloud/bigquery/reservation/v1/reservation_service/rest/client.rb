@@ -1298,7 +1298,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload merge_capacity_commitments(parent: nil, capacity_commitment_ids: nil)
+                # @overload merge_capacity_commitments(parent: nil, capacity_commitment_ids: nil, capacity_commitment_id: nil)
                 #   Pass arguments to `merge_capacity_commitments` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1312,6 +1312,11 @@ module Google
                 #     specified in the parent.
                 #     ID is the last portion of capacity commitment name e.g., 'abc' for
                 #     projects/myproject/locations/US/capacityCommitments/abc
+                #   @param capacity_commitment_id [::String]
+                #     Optional. The optional resulting capacity commitment ID. Capacity
+                #     commitment name will be generated automatically if this field is empty.
+                #     This field must only contain lower case alphanumeric characters or dashes.
+                #     The first and last character cannot be a dash. Max length is 64 characters.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2276,6 +2281,625 @@ module Google
                 end
 
                 ##
+                # Gets the access control policy for a resource.
+                # May return:
+                #
+                # * A`NOT_FOUND` error if the resource doesn't exist or you don't have the
+                #   permission to view it.
+                # * An empty policy if the resource exists but doesn't have a set policy.
+                #
+                # Supported resources are:
+                # - Reservations
+                # - ReservationAssignments
+                #
+                # To call this method, you must have the following Google IAM permissions:
+                #
+                # - `bigqueryreservation.reservations.getIamPolicy` to get policies on
+                # reservations.
+                #
+                # @overload get_iam_policy(request, options = nil)
+                #   Pass arguments to `get_iam_policy` via a request object, either of type
+                #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_iam_policy(resource: nil, options: nil)
+                #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param resource [::String]
+                #     REQUIRED: The resource for which the policy is being requested.
+                #     See the operation documentation for the appropriate value for this field.
+                #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+                #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+                #     `GetIamPolicy`.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Iam::V1::Policy]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Iam::V1::Policy]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::GetIamPolicyRequest.new
+                #
+                #   # Call the get_iam_policy method.
+                #   result = client.get_iam_policy request
+                #
+                #   # The returned object is of type Google::Iam::V1::Policy.
+                #   p result
+                #
+                def get_iam_policy request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.get_iam_policy request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Sets an access control policy for a resource. Replaces any existing
+                # policy.
+                #
+                # Supported resources are:
+                # - Reservations
+                #
+                # To call this method, you must have the following Google IAM permissions:
+                #
+                # - `bigqueryreservation.reservations.setIamPolicy` to set policies on
+                # reservations.
+                #
+                # @overload set_iam_policy(request, options = nil)
+                #   Pass arguments to `set_iam_policy` via a request object, either of type
+                #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+                #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param resource [::String]
+                #     REQUIRED: The resource for which the policy is being specified.
+                #     See the operation documentation for the appropriate value for this field.
+                #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+                #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+                #     the policy is limited to a few 10s of KB. An empty policy is a
+                #     valid policy but certain Cloud Platform services (such as Projects)
+                #     might reject them.
+                #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+                #     the fields in the mask will be modified. If no mask is provided, the
+                #     following default mask is used:
+                #
+                #     `paths: "bindings, etag"`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Iam::V1::Policy]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Iam::V1::Policy]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::SetIamPolicyRequest.new
+                #
+                #   # Call the set_iam_policy method.
+                #   result = client.set_iam_policy request
+                #
+                #   # The returned object is of type Google::Iam::V1::Policy.
+                #   p result
+                #
+                def set_iam_policy request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.set_iam_policy request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Gets your permissions on a resource. Returns an empty set of permissions if
+                # the resource doesn't exist.
+                #
+                # Supported resources are:
+                # - Reservations
+                #
+                # No Google IAM permissions are required to call this method.
+                #
+                # @overload test_iam_permissions(request, options = nil)
+                #   Pass arguments to `test_iam_permissions` via a request object, either of type
+                #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload test_iam_permissions(resource: nil, permissions: nil)
+                #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param resource [::String]
+                #     REQUIRED: The resource for which the policy detail is being requested.
+                #     See the operation documentation for the appropriate value for this field.
+                #   @param permissions [::Array<::String>]
+                #     The set of permissions to check for the `resource`. Permissions with
+                #     wildcards (such as '*' or 'storage.*') are not allowed. For more
+                #     information see
+                #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Iam::V1::TestIamPermissionsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Iam::V1::TestIamPermissionsResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+                #
+                #   # Call the test_iam_permissions method.
+                #   result = client.test_iam_permissions request
+                #
+                #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+                #   p result
+                #
+                def test_iam_permissions request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.test_iam_permissions request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Creates a new reservation group.
+                #
+                # @overload create_reservation_group(request, options = nil)
+                #   Pass arguments to `create_reservation_group` via a request object, either of type
+                #   {::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_reservation_group(parent: nil, reservation_group_id: nil, reservation_group: nil)
+                #   Pass arguments to `create_reservation_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. Project, location. E.g.,
+                #     `projects/myproject/locations/US`
+                #   @param reservation_group_id [::String]
+                #     Required. The reservation group ID. It must only contain lower case
+                #     alphanumeric characters or dashes. It must start with a letter and must not
+                #     end with a dash. Its maximum length is 64 characters.
+                #   @param reservation_group [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup, ::Hash]
+                #     Required. New Reservation Group to create.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest.new
+                #
+                #   # Call the create_reservation_group method.
+                #   result = client.create_reservation_group request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.
+                #   p result
+                #
+                def create_reservation_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_reservation_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_reservation_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_reservation_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.create_reservation_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns information about the reservation group.
+                #
+                # @overload get_reservation_group(request, options = nil)
+                #   Pass arguments to `get_reservation_group` via a request object, either of type
+                #   {::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_reservation_group(name: nil)
+                #   Pass arguments to `get_reservation_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Resource name of the reservation group to retrieve. E.g.,
+                #        `projects/myproject/locations/US/reservationGroups/team1-prod`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest.new
+                #
+                #   # Call the get_reservation_group method.
+                #   result = client.get_reservation_group request
+                #
+                #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.
+                #   p result
+                #
+                def get_reservation_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_reservation_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_reservation_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_reservation_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.get_reservation_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a reservation.
+                # Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has
+                # assignments.
+                #
+                # @overload delete_reservation_group(request, options = nil)
+                #   Pass arguments to `delete_reservation_group` via a request object, either of type
+                #   {::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload delete_reservation_group(name: nil)
+                #   Pass arguments to `delete_reservation_group` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Resource name of the reservation group to retrieve. E.g.,
+                #        `projects/myproject/locations/US/reservationGroups/team1-prod`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest.new
+                #
+                #   # Call the delete_reservation_group method.
+                #   result = client.delete_reservation_group request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_reservation_group request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.delete_reservation_group.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_reservation_group.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.delete_reservation_group.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.delete_reservation_group request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Lists all the reservation groups for the project in the specified location.
+                #
+                # @overload list_reservation_groups(request, options = nil)
+                #   Pass arguments to `list_reservation_groups` via a request object, either of type
+                #   {::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_reservation_groups(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_reservation_groups` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The parent resource name containing project and location, e.g.:
+                #       `projects/myproject/locations/US`
+                #   @param page_size [::Integer]
+                #     The maximum number of items to return per page.
+                #   @param page_token [::String]
+                #     The next_page_token value returned from a previous List request, if any.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/bigquery/reservation/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest.new
+                #
+                #   # Call the list_reservation_groups method.
+                #   result = client.list_reservation_groups request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.
+                #     p item
+                #   end
+                #
+                def list_reservation_groups request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_reservation_groups.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_reservation_groups.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_reservation_groups.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @reservation_service_stub.list_reservation_groups request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @reservation_service_stub, :list_reservation_groups, "reservation_groups", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the ReservationService REST API.
                 #
                 # This class represents the configuration for ReservationService REST,
@@ -2531,6 +3155,41 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :update_bi_reservation
+                    ##
+                    # RPC-specific configuration for `get_iam_policy`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_iam_policy
+                    ##
+                    # RPC-specific configuration for `set_iam_policy`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :set_iam_policy
+                    ##
+                    # RPC-specific configuration for `test_iam_permissions`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :test_iam_permissions
+                    ##
+                    # RPC-specific configuration for `create_reservation_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_reservation_group
+                    ##
+                    # RPC-specific configuration for `get_reservation_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_reservation_group
+                    ##
+                    # RPC-specific configuration for `delete_reservation_group`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_reservation_group
+                    ##
+                    # RPC-specific configuration for `list_reservation_groups`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_reservation_groups
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -2578,6 +3237,20 @@ module Google
                       @get_bi_reservation = ::Gapic::Config::Method.new get_bi_reservation_config
                       update_bi_reservation_config = parent_rpcs.update_bi_reservation if parent_rpcs.respond_to? :update_bi_reservation
                       @update_bi_reservation = ::Gapic::Config::Method.new update_bi_reservation_config
+                      get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                      @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                      set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                      @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                      test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                      @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                      create_reservation_group_config = parent_rpcs.create_reservation_group if parent_rpcs.respond_to? :create_reservation_group
+                      @create_reservation_group = ::Gapic::Config::Method.new create_reservation_group_config
+                      get_reservation_group_config = parent_rpcs.get_reservation_group if parent_rpcs.respond_to? :get_reservation_group
+                      @get_reservation_group = ::Gapic::Config::Method.new get_reservation_group_config
+                      delete_reservation_group_config = parent_rpcs.delete_reservation_group if parent_rpcs.respond_to? :delete_reservation_group
+                      @delete_reservation_group = ::Gapic::Config::Method.new delete_reservation_group_config
+                      list_reservation_groups_config = parent_rpcs.list_reservation_groups if parent_rpcs.respond_to? :list_reservation_groups
+                      @list_reservation_groups = ::Gapic::Config::Method.new list_reservation_groups_config
 
                       yield self if block_given?
                     end
