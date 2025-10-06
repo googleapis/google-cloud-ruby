@@ -185,6 +185,9 @@ module Google
           # @!attribute [rw] shipping
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1::Shipping>]
           #     Shipping rules.
+          # @!attribute [rw] carrier_shipping
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping>]
+          #     Rules for carrier-based shipping.
           # @!attribute [rw] free_shipping_threshold
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1::FreeShippingThreshold>]
           #     Conditions to be met for a product to have free shipping.
@@ -416,6 +419,313 @@ module Google
           class ProductAttributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Carrier-based shipping configuration. Allows for setting shipping speed or
+            # shipping cost based on a carrier's provided info.
+            # @!attribute [rw] country
+            #   @return [::String]
+            #     The [CLDR territory
+            #     code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml)
+            #     of the country to which an item will ship.
+            # @!attribute [rw] region
+            #   @return [::String]
+            #     The geographic region to which a shipping rate applies.
+            #     See [region](https://support.google.com/merchants/answer/6324484) for
+            #     more information.
+            # @!attribute [rw] postal_code
+            #   @return [::String]
+            #     The postal code range that the shipping rate applies to, represented by
+            #     a postal code (eg. `94043`), a postal code prefix followed by a *
+            #     wildcard (eg. `94*`), a range between two postal codes (eg.
+            #     `94043-98033`) or two postal code prefixes of equal length (eg.
+            #     `94*-98*`).
+            # @!attribute [rw] origin_postal_code
+            #   @return [::String]
+            #     The source location postal code from which this offer ships. Represented
+            #     only by a full-length postal code.
+            # @!attribute [rw] flat_price
+            #   @return [::Google::Shopping::Type::Price]
+            #     Fixed shipping price, represented as a number with currency. Cannot be
+            #     set together with
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_price carrierPrice}
+            #     or its adjustments
+            #     ({::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_price_flat_adjustment carrierPriceFlatAdjustment},
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_price_percentage_adjustment carrierPricePercentageAdjustment}).
+            # @!attribute [rw] carrier_price
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierPriceOption]
+            #     Selected carrier to calculate the shipping price from. Select a carrier
+            #     from the [available carriers
+            #     list](https://support.google.com/merchants/answer/15449142#Supported),
+            #     for example `AUSTRALIA_POST_REGULAR`. Price will be calculated by this
+            #     selected carrier, the location expressed in
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#origin_postal_code originPostalCode},
+            #     along with the user location to determine the accurate shipping price.
+            #     Carrier is represented by a carrier service name or a carrier service ID.
+            #     Cannot be set together with
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#flat_price flatPrice}.
+            # @!attribute [rw] carrier_price_flat_adjustment
+            #   @return [::Google::Shopping::Type::Price]
+            #     A flat adjustment on the carrier price. Can be either positive or
+            #     negative. Cannot be zero. Requires `carrier_price` to be present. Cannot
+            #     be set together with
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#flat_price flatPrice}
+            #     and
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_price_percentage_adjustment carrierPricePercentageAdjustment}.
+            # @!attribute [rw] carrier_price_percentage_adjustment
+            #   @return [::Float]
+            #     A percentual adjustment on the carrier price. Can be either positive or
+            #     negative. Cannot be zero. Requires `carrier_price` to be present. Cannot
+            #     be set together with
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#flat_price flatPrice}
+            #     and
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_price_flat_adjustment carrierPriceFlatAdjustment}.
+            # @!attribute [rw] min_handling_time
+            #   @return [::Integer]
+            #     Minimum handling time (inclusive) between when the order is received and
+            #     shipped in business days. 0 means that the order is shipped on the same
+            #     day as it is received if it happens before the cut-off time.
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#min_handling_time minHandlingTime}
+            #     can only be set if
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#max_handling_time maxHandlingTime}
+            #     is also set.
+            # @!attribute [rw] max_handling_time
+            #   @return [::Integer]
+            #     Maximum handling time (inclusive) between when the order is received and
+            #     shipped in business days. 0 means that the order is shipped on the same
+            #     day as it is received if it happens before the cut-off time. Both
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#max_handling_time maxHandlingTime}
+            #     and
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#fixed_max_transit_time fixedMaxTransitTime}
+            #     or
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_transit_time carrierTransitTime}
+            #     are required if providing shipping speeds.
+            # @!attribute [rw] fixed_min_transit_time
+            #   @return [::Integer]
+            #     Minimum transit time (inclusive) between when the order has shipped and
+            #     when it is delivered in business days. 0 means that the order is
+            #     delivered on the same day as it ships.
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#fixed_min_transit_time fixedMinTransitTime}
+            #     can only be set if
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#fixed_max_transit_time fixedMaxTransitTime}
+            #     is set. Cannot be set if
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_transit_time carrierTransitTime}
+            #     is present.
+            # @!attribute [rw] fixed_max_transit_time
+            #   @return [::Integer]
+            #     Maximum transit time (inclusive) between when the order has shipped and
+            #     when it is delivered in business days. 0 means that the order is
+            #     delivered on the same day as it ships. Needs to be provided together with
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#max_handling_time maxHandlingTime}.
+            #     Cannot be set if
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#carrier_transit_time carrierTransitTime}
+            #     is present.
+            # @!attribute [rw] carrier_transit_time
+            #   @return [::Google::Shopping::Merchant::Products::V1::CarrierTransitTimeOption]
+            #     Selected carrier to calculate the shipping speed from. Select a carrier
+            #     from the [available carriers
+            #     list](https://support.google.com/merchants/answer/15449142#Supported),
+            #     for example `AUSTRALIA_POST_REGULAR`. Speed will be calculated by this
+            #     selected carrier, the location expressed in
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#origin_postal_code originPostalCode},
+            #     along with the user location to determine the accurate delivery speed.
+            #     Carrier is represented by a carrier service name or a carrier service ID.
+            #     Cannot be set together with
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#fixed_max_transit_time fixedMaxTransitTime}
+            #     or
+            #     {::Google::Shopping::Merchant::Products::V1::ProductAttributes::CarrierShipping#fixed_min_transit_time fixedMinTransitTime}.
+            class CarrierShipping
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Possible carrier where price is coming from.
+            module CarrierPriceOption
+              # Carrier price option is unspecified.
+              CARRIER_PRICE_OPTION_UNSPECIFIED = 0
+
+              # Australia Post Regular shipping service.
+              AUSTRALIA_POST_REGULAR = 1
+
+              # Australia Post Express shipping service.
+              AUSTRALIA_POST_EXPRESS = 2
+
+              # Australia Post Regular Small shipping service.
+              AUSTRALIA_POST_REGULAR_S = 3
+
+              # Australia Post Regular Medium shipping service.
+              AUSTRALIA_POST_REGULAR_M = 4
+
+              # Australia Post Regular Large shipping service.
+              AUSTRALIA_POST_REGULAR_L = 5
+
+              # Australia Post Regular XL shipping service.
+              AUSTRALIA_POST_REGULAR_XL = 6
+
+              # Australia Post Express Small shipping service.
+              AUSTRALIA_POST_EXPRESS_S = 7
+
+              # Australia Post Express Medium shipping service.
+              AUSTRALIA_POST_EXPRESS_M = 8
+
+              # Australia Post Express Large shipping service.
+              AUSTRALIA_POST_EXPRESS_L = 9
+
+              # Australia Post Express XL shipping service.
+              AUSTRALIA_POST_EXPRESS_XL = 10
+
+              # TNT Road Express shipping service.
+              TNT_ROAD_EXPRESS = 11
+
+              # TNT Overnight Express shipping service.
+              TNT_OVERNIGHT_EXPRESS = 12
+
+              # Toll Road Delivery shipping service.
+              TOLL_ROAD_DELIVERY = 13
+
+              # Toll Overnight Priority shipping service.
+              TOLL_OVERNIGHT_PRIORITY = 14
+
+              # DHL Paket shipping service.
+              DHL_PAKET = 15
+
+              # DHL Packchen shipping service.
+              DHL_PACKCHEN = 16
+
+              # DPD Express 12 shipping service.
+              DPD_EXPRESS_12 = 17
+
+              # DPD Express shipping service.
+              DPD_EXPRESS = 18
+
+              # DPD Classic Parcel shipping service.
+              DPD_CLASSIC_PARCEL = 19
+
+              # Hermes Packchen shipping service.
+              HERMES_PACKCHEN = 20
+
+              # Hermes Paketklasse S shipping service.
+              HERMES_PAKETKLASSE_S = 21
+
+              # Hermes Paketklasse M shipping service.
+              HERMES_PAKETKLASSE_M = 22
+
+              # Hermes Paketklasse L shipping service.
+              HERMES_PAKETKLASSE_L = 23
+
+              # UPS Express shipping service.
+              UPS_EXPRESS = 24
+
+              # UPS Express Saver shipping service.
+              UPS_EXPRESS_SAVER = 25
+
+              # UPS Express Standard shipping service.
+              UPS_EXPRESS_STANDARD = 26
+
+              # DHL Express shipping service.
+              DHL_EXPRESS = 27
+
+              # DHL Express 12 shipping service.
+              DHL_EXPRESS_12 = 28
+
+              # DPD Next Day shipping service.
+              DPD_NEXT_DAY = 29
+
+              # DPD Standard Next Day shipping service.
+              DPD_STANDARD_NEXT_DAY = 30
+
+              # DPD Standard Two Day shipping service.
+              DPD_STANDARD_TWO_DAY = 31
+
+              # RMG 1st Class Small shipping service.
+              RMG_1ST_CLASS_SMALL = 32
+
+              # RMG 1st Class Medium shipping service.
+              RMG_1ST_CLASS_MEDIUM = 33
+
+              # RMG 2nd Class Small shipping service.
+              RMG_2ND_CLASS_SMALL = 34
+
+              # RMG 2nd Class Medium shipping service.
+              RMG_2ND_CLASS_MEDIUM = 35
+
+              # TNT Express shipping service.
+              TNT_EXPRESS = 36
+
+              # TNT Express 10 shipping service.
+              TNT_EXPRESS_10 = 37
+
+              # TNT Express 12 shipping service.
+              TNT_EXPRESS_12 = 38
+
+              # Yodel B2C 48HR shipping service.
+              YODEL_B2C_48HR = 39
+
+              # Yodel B2C 72HR shipping service.
+              YODEL_B2C_72HR = 40
+
+              # Yodel B2C Packet shipping service.
+              YODEL_B2C_PACKET = 41
+
+              # FedEx Ground shipping service.
+              FEDEX_GROUND = 42
+
+              # FedEx Home Delivery shipping service.
+              FEDEX_HOME_DELIVERY = 43
+
+              # FedEx Express Saver shipping service.
+              FEDEX_EXPRESS_SAVER = 44
+
+              # FedEx First Overnight shipping service.
+              FEDEX_FIRST_OVERNIGHT = 45
+
+              # FedEx Priority Overnight shipping service.
+              FEDEX_PRIORITY_OVERNIGHT = 46
+
+              # FedEx Standard Overnight shipping service.
+              FEDEX_STANDARD_OVERNIGHT = 47
+
+              # FedEx 2Day shipping service.
+              FEDEX_2DAY = 48
+
+              # UPS Standard shipping service.
+              UPS_STANDARD = 49
+
+              # UPS 2nd Day Air shipping service.
+              UPS_2ND_DAY_AIR = 50
+
+              # UPS 2nd Day AM shipping service.
+              UPS_2ND_DAY_AM = 51
+
+              # UPS 3 Day Select shipping service.
+              UPS_3_DAY_SELECT = 52
+
+              # UPS Ground shipping service.
+              UPS_GROUND = 53
+
+              # UPS Next Day Air shipping service.
+              UPS_NEXT_DAY_AIR = 54
+
+              # UPS Next Day Air Early AM shipping service.
+              UPS_NEXT_DAY_AIR_EARLY_AM = 55
+
+              # UPS Next Day Air Saver shipping service.
+              UPS_NEXT_DAY_AIR_SAVER = 56
+
+              # USPS Priority Mail Express shipping service.
+              USPS_PRIORITY_MAIL_EXPRESS = 57
+
+              # USPS Media Mail shipping service.
+              USPS_MEDIA_MAIL = 58
+
+              # USPS Ground Advantage Retail shipping service.
+              USPS_GROUND_ADVANTAGE_RETAIL = 59
+
+              # USPS Priority Mail shipping service.
+              USPS_PRIORITY_MAIL = 60
+
+              # USPS Ground Advantage Commercial shipping service.
+              USPS_GROUND_ADVANTAGE_COMMERCIAL = 61
+            end
           end
 
           # The ShippingWeight of the product.
@@ -1295,6 +1605,129 @@ module Google
             # Text NOT created algorithmically using a model derived from sampled
             # content (the default)
             DEFAULT = 2
+          end
+
+          # Possible carrier where transit time is coming from.
+          module CarrierTransitTimeOption
+            # Carrier transit time option is unspecified.
+            CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED = 0
+
+            # DHL Paket shipping service.
+            DHL_PAKET = 1
+
+            # DHL Packchen shipping service.
+            DHL_PACKCHEN = 2
+
+            # DHL Express Easy shipping service.
+            DHL_EXPRESSEASY = 3
+
+            # DPD Express shipping service.
+            DPD_EXPRESS = 4
+
+            # DPD Classic Parcel shipping service.
+            DPD_CLASSIC_PARCEL = 5
+
+            # Hermes Haustur shipping service.
+            HERMES_HAUSTUR = 6
+
+            # Hermes Paketshop shipping service.
+            HERMES_PAKETSHOP = 7
+
+            # GLS Business shipping service.
+            GLS_BUSINESS = 8
+
+            # GLS Express shipping service.
+            GLS_EXPRESS = 9
+
+            # GLS Private shipping service.
+            GLS_PRIVATE = 10
+
+            # Colissimo Domicile shipping service.
+            COLISSIMO_DOMICILE = 11
+
+            # DHL Express 12 AM shipping service.
+            DHL_EXPRESS_12AM = 12
+
+            # DHL Express 9 AM shipping service.
+            DHL_EXPRESS_9AM = 13
+
+            # GEODIS Express shipping service.
+            GEODIS_EXPRESS = 14
+
+            # GEODIS Pack 30 shipping service.
+            GEODIS_PACK_30 = 15
+
+            # GEODIS Same Day shipping service.
+            GEODIS_SAME_DAY = 16
+
+            # GEODIS Top 24 shipping service.
+            GEODIS_TOP_24 = 17
+
+            # TNT Essentiel 24H shipping service.
+            TNT_ESSENTIEL_24H = 18
+
+            # TNT Essentiel Flexibilite shipping service.
+            TNT_ESSENTIEL_FLEXIBILITE = 19
+
+            # FedEx Ground shipping service.
+            FEDEX_GROUND = 20
+
+            # FedEx Home Delivery shipping service.
+            FEDEX_HOME_DELIVERY = 21
+
+            # FedEx Express Saver shipping service.
+            FEDEX_EXPRESS_SAVER = 22
+
+            # FedEx First Overnight shipping service.
+            FEDEX_FIRST_OVERNIGHT = 23
+
+            # FedEx Priority Overnight shipping service.
+            FEDEX_PRIORITY_OVERNIGHT = 24
+
+            # FedEx Standard Overnight shipping service.
+            FEDEX_STANDARD_OVERNIGHT = 25
+
+            # FedEx 2Day shipping service.
+            FEDEX_2DAY = 26
+
+            # UPS 2nd Day Air shipping service.
+            UPS_2ND_DAY_AIR = 27
+
+            # UPS 2nd Day AM shipping service.
+            UPS_2ND_DAY_AM = 28
+
+            # UPS 3 Day Select shipping service.
+            UPS_3_DAY_SELECT = 29
+
+            # UPS Ground shipping service.
+            UPS_GROUND = 30
+
+            # UPS Next Day Air shipping service.
+            UPS_NEXT_DAY_AIR = 31
+
+            # UPS Next Day Air Early AM shipping service.
+            UPS_NEXT_DAY_AIR_EARLY_AM = 32
+
+            # UPS Next Day Air Saver shipping service.
+            UPS_NEXT_DAY_AIR_SAVER = 33
+
+            # USPS Priority Mail Express shipping service.
+            USPS_PRIORITY_MAIL_EXPRESS = 34
+
+            # USPS Media Mail shipping service.
+            USPS_MEDIA_MAIL = 35
+
+            # USPS Ground Advantage Retail shipping service.
+            USPS_GROUND_ADVANTAGE_RETAIL = 36
+
+            # USPS Priority Mail shipping service.
+            USPS_PRIORITY_MAIL = 37
+
+            # USPS Ground Advantage Commercial shipping service.
+            USPS_GROUND_ADVANTAGE_COMMERCIAL = 38
+
+            # USPS First Class Mail shipping service.
+            USPS_FIRST_CLASS_MAIL = 39
           end
         end
       end
