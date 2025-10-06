@@ -750,6 +750,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     parent = "hello world"
     capacity_commitment_ids = ["hello world"]
+    capacity_commitment_id = "hello world"
 
     merge_capacity_commitments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -765,27 +766,27 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
         end
 
         # Use hash object
-        client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids }) do |_result, response|
+        client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.merge_capacity_commitments parent: parent, capacity_commitment_ids: capacity_commitment_ids do |_result, response|
+        client.merge_capacity_commitments parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.merge_capacity_commitments ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids) do |_result, response|
+        client.merge_capacity_commitments ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids }, call_options) do |_result, response|
+        client.merge_capacity_commitments({ parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.merge_capacity_commitments(::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids), call_options) do |_result, response|
+        client.merge_capacity_commitments(::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids, capacity_commitment_id: capacity_commitment_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1291,6 +1292,392 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
 
         # Verify method calls
         assert_equal 5, update_bi_reservation_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_iam_policy resource: resource, options: options do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create test objects.
+    client_result = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, test_iam_permissions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_reservation_group
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    reservation_group_id = "hello world"
+    reservation_group = {}
+
+    create_reservation_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_create_reservation_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_reservation_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_reservation_group({ parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_reservation_group parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_reservation_group ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest.new(parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_reservation_group({ parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_reservation_group(::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest.new(parent: parent, reservation_group_id: reservation_group_id, reservation_group: reservation_group), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_reservation_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_reservation_group
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_reservation_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_get_reservation_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_reservation_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_reservation_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_reservation_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_reservation_group ::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_reservation_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_reservation_group(::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_reservation_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_reservation_group
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_reservation_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_delete_reservation_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_reservation_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_reservation_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_reservation_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_reservation_group ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_reservation_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_reservation_group(::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_reservation_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_reservation_groups
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_reservation_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::ServiceStub.stub :transcode_list_reservation_groups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_reservation_groups_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_reservation_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_reservation_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_reservation_groups ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_reservation_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_reservation_groups(::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_reservation_groups_client_stub.call_count
       end
     end
   end

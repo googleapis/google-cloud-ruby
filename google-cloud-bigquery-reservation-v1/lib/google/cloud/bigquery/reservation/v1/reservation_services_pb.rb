@@ -241,6 +241,51 @@ module Google
               # greater than 0. In order to release BI capacity reservation size
               # must be set to 0.
               rpc :UpdateBiReservation, ::Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest, ::Google::Cloud::Bigquery::Reservation::V1::BiReservation
+              # Gets the access control policy for a resource.
+              # May return:
+              #
+              # * A`NOT_FOUND` error if the resource doesn't exist or you don't have the
+              #   permission to view it.
+              # * An empty policy if the resource exists but doesn't have a set policy.
+              #
+              # Supported resources are:
+              # - Reservations
+              # - ReservationAssignments
+              #
+              # To call this method, you must have the following Google IAM permissions:
+              #
+              # - `bigqueryreservation.reservations.getIamPolicy` to get policies on
+              # reservations.
+              rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+              # Sets an access control policy for a resource. Replaces any existing
+              # policy.
+              #
+              # Supported resources are:
+              # - Reservations
+              #
+              # To call this method, you must have the following Google IAM permissions:
+              #
+              # - `bigqueryreservation.reservations.setIamPolicy` to set policies on
+              # reservations.
+              rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+              # Gets your permissions on a resource. Returns an empty set of permissions if
+              # the resource doesn't exist.
+              #
+              # Supported resources are:
+              # - Reservations
+              #
+              # No Google IAM permissions are required to call this method.
+              rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+              # Creates a new reservation group.
+              rpc :CreateReservationGroup, ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationGroupRequest, ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup
+              # Returns information about the reservation group.
+              rpc :GetReservationGroup, ::Google::Cloud::Bigquery::Reservation::V1::GetReservationGroupRequest, ::Google::Cloud::Bigquery::Reservation::V1::ReservationGroup
+              # Deletes a reservation.
+              # Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has
+              # assignments.
+              rpc :DeleteReservationGroup, ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationGroupRequest, ::Google::Protobuf::Empty
+              # Lists all the reservation groups for the project in the specified location.
+              rpc :ListReservationGroups, ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsRequest, ::Google::Cloud::Bigquery::Reservation::V1::ListReservationGroupsResponse
             end
 
             Stub = Service.rpc_stub_class

@@ -118,6 +118,25 @@ module Google
                 "projects/#{project}/locations/#{location}/reservations/#{reservation}"
               end
 
+              ##
+              # Create a fully-qualified ReservationGroup resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/reservationGroups/{reservation_group}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param reservation_group [String]
+              #
+              # @return [::String]
+              def reservation_group_path project:, location:, reservation_group:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/reservationGroups/#{reservation_group}"
+              end
+
               extend self
             end
           end
