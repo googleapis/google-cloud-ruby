@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.1 (2025-10-06)
+
+#### Documentation
+
+* Update comment in Eventarc Publishing API ([#31567](https://github.com/googleapis/google-cloud-ruby/issues/31567)) 
+
 ### 1.5.0 (2025-09-11)
 
 #### Features
