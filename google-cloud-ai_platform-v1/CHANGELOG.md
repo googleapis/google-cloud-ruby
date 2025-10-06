@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.25.0 (2025-10-06)
+
+#### Features
+
+* add DeploymentTier enum to DeployedIndex ([#31562](https://github.com/googleapis/google-cloud-ruby/issues/31562)) 
+
 ### 1.24.0 (2025-09-28)
 
 #### Features
