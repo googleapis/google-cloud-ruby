@@ -1,5 +1,13 @@
 # Release History
 
+### 1.9.0 (2025-10-07)
+
+#### Features
+
+* Add new `BACKGROUND_CHANGE_DATA_CAPTURE`, `BACKGROUND_COLUMN_METADATA_INDEX`, and `BACKGROUND_SEARCH_INDEX_REFRESH` reservation assignment types ([#31572](https://github.com/googleapis/google-cloud-ruby/issues/31572)) 
+* Add new reservation IAM policy get/set/test methods 
+* Add support for creation and modification of new reservation groups 
+
 ### 1.8.0 (2025-09-11)
 
 #### Features
