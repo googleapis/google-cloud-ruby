@@ -93,6 +93,6 @@ def count_anywhere_caches bucket_name
   end
   end_time = Time.now
   duration = end_time - start_time
-  puts "Total waiting time : #{duration.round(2)} seconds."
+  puts "Total waiting time : #{duration.round 2} seconds."
   result.response.anywhere_caches.count
 end

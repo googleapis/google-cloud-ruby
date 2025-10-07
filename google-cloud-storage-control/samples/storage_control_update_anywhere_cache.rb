@@ -71,7 +71,7 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
     end
     end_time = Time.now
     duration = end_time - start_time
-    puts "Total waiting time : #{duration.round(2)} seconds."
+    puts "Total waiting time : #{duration.round 2} seconds."
     message = "Successfully updated anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
     message = "Failed to update AnywhereCache. Error: #{e.message}"

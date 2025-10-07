@@ -73,7 +73,7 @@ def create_anywhere_cache bucket_name:, zone:
     end
     end_time = Time.now
     duration = end_time - start_time
-    puts "Total polling time: #{duration.round(2)} seconds."
+    puts "Total polling time: #{duration.round 2} seconds."
     message = "Successfully created anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
     message = "Failed to create AnywhereCache. Error: #{e.message}"
