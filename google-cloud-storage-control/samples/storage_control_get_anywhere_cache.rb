@@ -15,13 +15,19 @@
 # [START storage_control_get_anywhere_cache]
 require "google/cloud/storage/control"
 
+# Retrieves an Anywhere Cache configuration for a given bucket.
+#
+# @param bucket_name [String] The name of the bucket.
+# @param anywhere_cache_id [String] A value that, along with the bucket's
+#   name, uniquely identifies the cache. (e.g. "us-east1-b")
+#
+# @example
+#   get_anywhere_cache(
+#     bucket_name: "your-unique-bucket-name",
+#     anywhere_cache_id: "us-east1-b"
+#   )
+#
 def get_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The Name of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-
-  # A value that, along with the bucket's name, uniquely identifies the cache
-  # anywhere_cache_id = "us-east1-b"
-
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
   # Set project to "_" to signify global bucket
@@ -38,9 +44,9 @@ def get_anywhere_cache bucket_name:, anywhere_cache_id:
 
   begin
     result = storage_control_client.get_anywhere_cache request
-    puts "AnywhereCache #{result.name} fetched"
+    puts "Successfully fetched anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
-    puts "Error fetching AnywhereCache: #{e.message}"
+    puts "Failed to fetch AnywhereCache. Error: #{e.message}"
   end
 end
 # [END storage_control_get_anywhere_cache]

@@ -82,14 +82,17 @@ def count_anywhere_caches bucket_name
     parent: parent
   )
   result = storage_control_client.list_anywhere_caches request
-  min_delay = 180 # 3 minutes
+  min_delay = 30 # 30 seconds
   max_delay = 900 # 15 minutes
+  start_time = Time.now
   while result.response.anywhere_caches.count != 0
     puts "Cache not deleted yet, Retrying in #{min_delay} seconds."
     sleep min_delay
     min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
     result = storage_control_client.list_anywhere_caches request
   end
-
+  end_time = Time.now
+  duration = end_time - start_time
+  puts "Total waiting time : #{duration.round(2)} seconds."
   result.response.anywhere_caches.count
 end

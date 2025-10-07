@@ -15,13 +15,21 @@
 # [START storage_control_disable_anywhere_cache]
 require "google/cloud/storage/control"
 
+# Disables a specific Anywhere Cache instance for a bucket.
+# This operation disables the cache but does not delete it. A disabled cache
+# can be re-enabled later.
+#
+# @param bucket_name [String] The name of the bucket.
+# @param anywhere_cache_id [String] A value that, along with the bucket's
+#   name, uniquely identifies the cache instance (e.g., "us-east1-b").
+#
+# @example
+#   disable_anywhere_cache(
+#     bucket_name: "your-unique-bucket-name",
+#     anywhere_cache_id: "us-east1-b"
+#   )
+#
 def disable_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The Name of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-
-  # A value that, along with the bucket's name, uniquely identifies the cache
-  # anywhere_cache_id = "us-east1-b"
-
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
   # Set project to "_" to signify global bucket
@@ -36,9 +44,9 @@ def disable_anywhere_cache bucket_name:, anywhere_cache_id:
   # The cache can be re-enabled later.
   begin
     result = storage_control_client.disable_anywhere_cache request
-    puts "AnywhereCache #{result.name} #{result.state}"
+    puts "Successfully #{result.state&.downcase} anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
-    puts "Error disabling AnywhereCache: #{e.message}"
+    puts "Failed to disable AnywhereCache. Error: #{e.message}"
   end
 end
 # [END storage_control_disable_anywhere_cache]

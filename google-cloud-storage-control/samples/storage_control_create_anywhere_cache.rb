@@ -15,13 +15,25 @@
 # [START storage_control_create_anywhere_cache]
 require "google/cloud/storage/control"
 
+# Creates a new Anywhere Cache for a specified bucket and waits for it
+# to become active.
+#
+# This method initiates the creation of an Anywhere Cache in the given zone for
+# the specified bucket. After sending the creation request, it polls the status
+# of the cache with an exponential backoff strategy until the cache's state is
+# "running". Progress and final status are printed to the console.
+#
+# @param bucket_name [String] The name of the bucket.
+# @param zone [String] The zone where the Anywhere Cache instance should be
+#   located (e.g., "us-east1-b").
+#
+# @example
+#   create_anywhere_cache(
+#     bucket_name: "your-unique-bucket-name",
+#     zone: "us-east1-b"
+#   )
+#
 def create_anywhere_cache bucket_name:, zone:
-  # The Name of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-
-  # Zone where you want to create cache
-  # zone = "your-zone-name"
-
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
   # Set project to "_" to signify global bucket
@@ -46,18 +58,27 @@ def create_anywhere_cache bucket_name:, zone:
       name: name
     )
     result = storage_control_client.get_anywhere_cache get_request
-    min_delay = 180 # 3 minutes
+    min_delay = 30 # 30 seconds
     max_delay = 900 # 15 minutes
-    while result.state != "running"
-      puts "Cache not running yet, current state is #{result.state}. Retrying in #{min_delay} seconds."
+    start_time = Time.now
+    while result.state&.downcase != "running"
+      unless ["paused", "disabled", "creating"].include? result.state&.downcase
+        raise Google::Cloud::Error,
+              "AnywhereCache operation failed on the backend with state #{result.state&.downcase}."
+      end
+      puts "Cache not running yet, current state is #{result.state&.downcase}. Retrying in #{min_delay} seconds."
       sleep min_delay
       min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
       result = storage_control_client.get_anywhere_cache get_request
     end
-    puts "AnywhereCache created - #{result.name}"
+    end_time = Time.now
+    duration = end_time - start_time
+    puts "Total polling time: #{duration.round(2)} seconds."
+    message = "Successfully created anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
-    puts "Error creating AnywhereCache: #{e.message}"
+    message = "Failed to create AnywhereCache. Error: #{e.message}"
   end
+  puts message
 end
 # [END storage_control_create_anywhere_cache]
 create_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__

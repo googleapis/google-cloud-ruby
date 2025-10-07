@@ -40,36 +40,36 @@ describe "Storage Control Anywhere Cache" do
     out_create, _err = capture_io do
       create_anywhere_cache bucket_name: bucket_name, zone: zone
     end
-    assert_includes out_create, "AnywhereCache created - #{anywhere_cache_name}"
+    assert_includes out_create, "Successfully created anywhereCache - #{anywhere_cache_name}."
 
     out_list, _err = capture_io do
       list_anywhere_caches bucket_name: bucket_name
     end
-    assert_includes out_list, "AnywhereCache #{anywhere_cache_name} found in list"
+    assert_includes out_list, "AnywhereCache #{anywhere_cache_name} found in list."
 
     out_get, _err = capture_io do
       get_anywhere_cache bucket_name: bucket_name, anywhere_cache_id: zone
     end
-    assert_includes out_get, "AnywhereCache #{anywhere_cache_name} fetched"
+    assert_includes out_get, "Successfully fetched anywhereCache - #{anywhere_cache_name}."
 
     out_update, _err = capture_io do
       update_anywhere_cache bucket_name: bucket_name, anywhere_cache_id: zone
     end
-    assert_includes out_update, "AnywhereCache #{anywhere_cache_name} updated"
+    assert_includes out_update, "Successfully updated anywhereCache - #{anywhere_cache_name}."
 
     out_pause, _err = capture_io do
       pause_anywhere_cache bucket_name: bucket_name, anywhere_cache_id: zone
     end
-    assert_includes out_pause, "AnywhereCache #{anywhere_cache_name} paused"
+    assert_includes out_pause, "Successfully paused anywhereCache - #{anywhere_cache_name}."
 
     out_resume, _err = capture_io do
       resume_anywhere_cache bucket_name: bucket_name, anywhere_cache_id: zone
     end
-    assert_includes out_resume, "AnywhereCache #{anywhere_cache_name} running"
+    assert_includes out_resume, "Successfully resumed anywhereCache - #{anywhere_cache_name}."
 
     out_disable, _err = capture_io do
       disable_anywhere_cache bucket_name: bucket_name, anywhere_cache_id: zone
     end
-    assert_includes out_disable, "AnywhereCache #{anywhere_cache_name} disabled"
+    assert_includes out_disable, "Successfully disabled anywhereCache - #{anywhere_cache_name}."
   end
 end

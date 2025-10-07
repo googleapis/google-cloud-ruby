@@ -33,10 +33,10 @@ def list_anywhere_caches bucket_name:
   begin
     result = storage_control_client.list_anywhere_caches request
     result.response.anywhere_caches.each do |item|
-      puts "AnywhereCache #{item.name} found in list"
+      puts "AnywhereCache #{item.name} found in list."
     end
   rescue Google::Cloud::Error => e
-    puts "Error listing AnywhereCaches: #{e.message}"
+    puts "Failed to list AnywhereCaches. Error: #{e.message}"
   end
 end
 # [END storage_control_list_anywhere_caches]

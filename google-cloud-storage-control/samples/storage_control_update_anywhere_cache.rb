@@ -15,12 +15,21 @@
 # [START storage_control_update_anywhere_cache]
 require "google/cloud/storage/control"
 
+# Updates an existing Anywhere Cache for a specified
+# bucket. After initiating the update, it polls the cache's status with
+# exponential backoff until the cache state becomes "running".
+#
+# @param bucket_name [String] The name of the GCS bucket containing the cache.
+# @param anywhere_cache_id [String] The unique identifier for the Anywhere Cache.
+#   e.g. "us-east1-b"
+#
+# @example
+#   update_anywhere_cache(
+#     bucket_name: "your-unique-bucket-name",
+#     anywhere_cache_id: "us-east1-b"
+#   )
+#
 def update_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The Name of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-  # A value that, along with the bucket's name, uniquely identifies the cache
-  # anywhere_cache_id = "us-east1-b"
-
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
   # Set project to "_" to signify global bucket
@@ -47,18 +56,27 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
       name: name
     )
     result = storage_control_client.get_anywhere_cache get_request
-    min_delay = 120 # 2 minutes
+    min_delay = 30 # 30 seconds
     max_delay = 600 # 10 minutes
-    while result.state != "running"
-      puts "Cache not running yet, current state is #{result.state}. Retrying in #{min_delay} seconds."
+    start_time = Time.now
+    while result.state&.downcase != "running"
+      unless ["paused", "disabled", "creating"].include? result.state&.downcase
+        raise Google::Cloud::Error,
+              "AnywhereCache operation failed on the backend with state #{result.state&.downcase}."
+      end
+      puts "Cache not running yet, current state is #{result.state&.downcase}. Retrying in #{min_delay} seconds."
       sleep min_delay
       min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
       result = storage_control_client.get_anywhere_cache get_request
     end
-    puts "AnywhereCache #{result.name} updated"
+    end_time = Time.now
+    duration = end_time - start_time
+    puts "Total waiting time : #{duration.round(2)} seconds."
+    message = "Successfully updated anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
-    puts "Error updating AnywhereCache: #{e.message}"
+    message = "Failed to update AnywhereCache. Error: #{e.message}"
   end
+  puts message
 end
 # [END storage_control_update_anywhere_cache]
 update_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__
