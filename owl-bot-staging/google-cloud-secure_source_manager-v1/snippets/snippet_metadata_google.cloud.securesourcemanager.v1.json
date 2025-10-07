@@ -1,0 +1,2095 @@
+{
+  "client_library": {
+    "name": "google-cloud-secure_source_manager-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.securesourcemanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_instances.",
+      "file": "secure_source_manager/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListInstancesResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListInstances",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_instance.",
+      "file": "secure_source_manager/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::Instance",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetInstance",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_instance.",
+      "file": "secure_source_manager/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateInstance",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_instance.",
+      "file": "secure_source_manager/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteInstance",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_sync",
+      "title": "Snippet for the list_repositories call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_repositories.",
+      "file": "secure_source_manager/list_repositories.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_repositories",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_repositories",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListRepositoriesResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListRepositories",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListRepositories",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetRepository_sync",
+      "title": "Snippet for the get_repository call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_repository.",
+      "file": "secure_source_manager/get_repository.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_repository",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_repository",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetRepositoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::Repository",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetRepository",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetRepository",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_sync",
+      "title": "Snippet for the create_repository call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_repository.",
+      "file": "secure_source_manager/create_repository.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_repository",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_repository",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateRepositoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateRepository",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateRepository",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_sync",
+      "title": "Snippet for the update_repository call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_repository.",
+      "file": "secure_source_manager/update_repository.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_repository",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_repository",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateRepository",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateRepository",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_sync",
+      "title": "Snippet for the delete_repository call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_repository.",
+      "file": "secure_source_manager/delete_repository.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_repository",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_repository",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteRepositoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteRepository",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteRepository",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListHooks_sync",
+      "title": "Snippet for the list_hooks call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_hooks.",
+      "file": "secure_source_manager/list_hooks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hooks",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_hooks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListHooksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListHooksResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListHooks",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListHooks",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetHook_sync",
+      "title": "Snippet for the get_hook call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_hook.",
+      "file": "secure_source_manager/get_hook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hook",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_hook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetHookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::Hook",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetHook",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetHook",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateHook_sync",
+      "title": "Snippet for the create_hook call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_hook.",
+      "file": "secure_source_manager/create_hook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_hook",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_hook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateHookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateHook",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateHook",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_sync",
+      "title": "Snippet for the update_hook call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_hook.",
+      "file": "secure_source_manager/update_hook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_hook",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_hook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateHook",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateHook",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_sync",
+      "title": "Snippet for the delete_hook call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_hook.",
+      "file": "secure_source_manager/delete_hook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_hook",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_hook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteHook",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteHook",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetIamPolicyRepo_sync",
+      "title": "Snippet for the get_iam_policy_repo call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_iam_policy_repo.",
+      "file": "secure_source_manager/get_iam_policy_repo.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy_repo",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_iam_policy_repo",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicyRepo",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIamPolicyRepo",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_SetIamPolicyRepo_sync",
+      "title": "Snippet for the set_iam_policy_repo call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#set_iam_policy_repo.",
+      "file": "secure_source_manager/set_iam_policy_repo.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy_repo",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#set_iam_policy_repo",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicyRepo",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.SetIamPolicyRepo",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_TestIamPermissionsRepo_sync",
+      "title": "Snippet for the test_iam_permissions_repo call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#test_iam_permissions_repo.",
+      "file": "secure_source_manager/test_iam_permissions_repo.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions_repo",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#test_iam_permissions_repo",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissionsRepo",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.TestIamPermissionsRepo",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_sync",
+      "title": "Snippet for the create_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_branch_rule.",
+      "file": "secure_source_manager/create_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_sync",
+      "title": "Snippet for the list_branch_rules call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_branch_rules.",
+      "file": "secure_source_manager/list_branch_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_branch_rules",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_branch_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListBranchRulesResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListBranchRules",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRules",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_sync",
+      "title": "Snippet for the get_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_branch_rule.",
+      "file": "secure_source_manager/get_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::BranchRule",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_sync",
+      "title": "Snippet for the update_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_branch_rule.",
+      "file": "secure_source_manager/update_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_sync",
+      "title": "Snippet for the delete_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_branch_rule.",
+      "file": "secure_source_manager/delete_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_sync",
+      "title": "Snippet for the create_pull_request call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_pull_request.",
+      "file": "secure_source_manager/create_pull_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_pull_request",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_pull_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreatePullRequest",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequest",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetPullRequest_sync",
+      "title": "Snippet for the get_pull_request call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_pull_request.",
+      "file": "secure_source_manager/get_pull_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_pull_request",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_pull_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::PullRequest",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetPullRequest",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequest",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequests_sync",
+      "title": "Snippet for the list_pull_requests call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_pull_requests.",
+      "file": "secure_source_manager/list_pull_requests.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_pull_requests",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_pull_requests",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListPullRequestsResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListPullRequests",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequests",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_sync",
+      "title": "Snippet for the update_pull_request call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_pull_request.",
+      "file": "secure_source_manager/update_pull_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_pull_request",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_pull_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdatePullRequest",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequest",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_sync",
+      "title": "Snippet for the merge_pull_request call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#merge_pull_request.",
+      "file": "secure_source_manager/merge_pull_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "merge_pull_request",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#merge_pull_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "MergePullRequest",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.MergePullRequest",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_sync",
+      "title": "Snippet for the open_pull_request call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#open_pull_request.",
+      "file": "secure_source_manager/open_pull_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "open_pull_request",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#open_pull_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "OpenPullRequest",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenPullRequest",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_sync",
+      "title": "Snippet for the close_pull_request call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#close_pull_request.",
+      "file": "secure_source_manager/close_pull_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "close_pull_request",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#close_pull_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ClosePullRequest",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ClosePullRequest",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestFileDiffs_sync",
+      "title": "Snippet for the list_pull_request_file_diffs call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_pull_request_file_diffs.",
+      "file": "secure_source_manager/list_pull_request_file_diffs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_pull_request_file_diffs",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_pull_request_file_diffs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListPullRequestFileDiffs",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestFileDiffs",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_FetchTree_sync",
+      "title": "Snippet for the fetch_tree call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#fetch_tree.",
+      "file": "secure_source_manager/fetch_tree.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_tree",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#fetch_tree",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::FetchTreeResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "FetchTree",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchTree",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_FetchBlob_sync",
+      "title": "Snippet for the fetch_blob call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#fetch_blob.",
+      "file": "secure_source_manager/fetch_blob.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_blob",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#fetch_blob",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::FetchBlobResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "FetchBlob",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchBlob",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_sync",
+      "title": "Snippet for the create_issue call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_issue.",
+      "file": "secure_source_manager/create_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_issue",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateIssue",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssue",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetIssue_sync",
+      "title": "Snippet for the get_issue call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_issue.",
+      "file": "secure_source_manager/get_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_issue",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::Issue",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetIssue",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssue",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListIssues_sync",
+      "title": "Snippet for the list_issues call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_issues.",
+      "file": "secure_source_manager/list_issues.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_issues",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_issues",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListIssuesResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListIssues",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssues",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_sync",
+      "title": "Snippet for the update_issue call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_issue.",
+      "file": "secure_source_manager/update_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_issue",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateIssue",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssue",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_sync",
+      "title": "Snippet for the delete_issue call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_issue.",
+      "file": "secure_source_manager/delete_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_issue",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteIssue",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssue",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_sync",
+      "title": "Snippet for the open_issue call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#open_issue.",
+      "file": "secure_source_manager/open_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "open_issue",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#open_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "OpenIssue",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenIssue",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_sync",
+      "title": "Snippet for the close_issue call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#close_issue.",
+      "file": "secure_source_manager/close_issue.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "close_issue",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#close_issue",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CloseIssue",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CloseIssue",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetPullRequestComment_sync",
+      "title": "Snippet for the get_pull_request_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_pull_request_comment.",
+      "file": "secure_source_manager/get_pull_request_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_pull_request_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_pull_request_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::PullRequestComment",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetPullRequestComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestComments_sync",
+      "title": "Snippet for the list_pull_request_comments call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_pull_request_comments.",
+      "file": "secure_source_manager/list_pull_request_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_pull_request_comments",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_pull_request_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListPullRequestComments",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestComments",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_sync",
+      "title": "Snippet for the create_pull_request_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_pull_request_comment.",
+      "file": "secure_source_manager/create_pull_request_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_pull_request_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_pull_request_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreatePullRequestComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_sync",
+      "title": "Snippet for the update_pull_request_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_pull_request_comment.",
+      "file": "secure_source_manager/update_pull_request_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_pull_request_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_pull_request_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdatePullRequestComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_sync",
+      "title": "Snippet for the delete_pull_request_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_pull_request_comment.",
+      "file": "secure_source_manager/delete_pull_request_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_pull_request_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_pull_request_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeletePullRequestComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeletePullRequestComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_sync",
+      "title": "Snippet for the batch_create_pull_request_comments call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#batch_create_pull_request_comments.",
+      "file": "secure_source_manager/batch_create_pull_request_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_pull_request_comments",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#batch_create_pull_request_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "BatchCreatePullRequestComments",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.BatchCreatePullRequestComments",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_sync",
+      "title": "Snippet for the resolve_pull_request_comments call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#resolve_pull_request_comments.",
+      "file": "secure_source_manager/resolve_pull_request_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resolve_pull_request_comments",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#resolve_pull_request_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ResolvePullRequestComments",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ResolvePullRequestComments",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_sync",
+      "title": "Snippet for the unresolve_pull_request_comments call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#unresolve_pull_request_comments.",
+      "file": "secure_source_manager/unresolve_pull_request_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unresolve_pull_request_comments",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#unresolve_pull_request_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UnresolvePullRequestComments",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UnresolvePullRequestComments",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_sync",
+      "title": "Snippet for the create_issue_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_issue_comment.",
+      "file": "secure_source_manager/create_issue_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_issue_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_issue_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateIssueComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetIssueComment_sync",
+      "title": "Snippet for the get_issue_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_issue_comment.",
+      "file": "secure_source_manager/get_issue_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_issue_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_issue_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::IssueComment",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetIssueComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListIssueComments_sync",
+      "title": "Snippet for the list_issue_comments call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_issue_comments.",
+      "file": "secure_source_manager/list_issue_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_issue_comments",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_issue_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListIssueComments",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssueComments",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_sync",
+      "title": "Snippet for the update_issue_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_issue_comment.",
+      "file": "secure_source_manager/update_issue_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_issue_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_issue_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateIssueComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_sync",
+      "title": "Snippet for the delete_issue_comment call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_issue_comment.",
+      "file": "secure_source_manager/delete_issue_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_issue_comment",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_issue_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteIssueComment",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueComment",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
