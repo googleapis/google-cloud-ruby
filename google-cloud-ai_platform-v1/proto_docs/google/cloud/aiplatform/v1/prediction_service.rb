@@ -46,9 +46,22 @@ module Google
         #     ][google.cloud.aiplatform.v1.DeployedModel.model]
         #     [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
         #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#parameters_schema_uri parameters_schema_uri}.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The user labels for Imagen billing usage only. Only Imagen
+        #     supports labels. For other use cases, it will be ignored.
         class PredictRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for

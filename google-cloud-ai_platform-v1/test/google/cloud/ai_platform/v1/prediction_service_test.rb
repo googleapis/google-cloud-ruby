@@ -74,6 +74,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     endpoint = "hello world"
     instances = [{}]
     parameters = {}
+    labels = {}
 
     predict_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :predict, name
@@ -81,6 +82,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       assert_equal "hello world", request["endpoint"]
       assert_kind_of ::Google::Protobuf::Value, request["instances"].first
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Value), request["parameters"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -91,31 +93,31 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.predict({ endpoint: endpoint, instances: instances, parameters: parameters }) do |response, operation|
+      client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.predict endpoint: endpoint, instances: instances, parameters: parameters do |response, operation|
+      client.predict endpoint: endpoint, instances: instances, parameters: parameters, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters) do |response, operation|
+      client.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.predict({ endpoint: endpoint, instances: instances, parameters: parameters }, grpc_options) do |response, operation|
+      client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters), grpc_options) do |response, operation|
+      client.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

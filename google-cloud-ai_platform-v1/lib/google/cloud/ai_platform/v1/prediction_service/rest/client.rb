@@ -223,7 +223,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload predict(endpoint: nil, instances: nil, parameters: nil)
+              # @overload predict(endpoint: nil, instances: nil, parameters: nil, labels: nil)
               #   Pass arguments to `predict` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -248,6 +248,9 @@ module Google
               #     ][google.cloud.aiplatform.v1.DeployedModel.model]
               #     [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
               #     {::Google::Cloud::AIPlatform::V1::PredictSchemata#parameters_schema_uri parameters_schema_uri}.
+              #   @param labels [::Hash{::String => ::String}]
+              #     Optional. The user labels for Imagen billing usage only. Only Imagen
+              #     supports labels. For other use cases, it will be ignored.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AIPlatform::V1::PredictResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -89,6 +89,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     endpoint = "hello world"
     instances = [{}]
     parameters = {}
+    labels = {}
 
     predict_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +105,27 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.predict({ endpoint: endpoint, instances: instances, parameters: parameters }) do |_result, response|
+        client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.predict endpoint: endpoint, instances: instances, parameters: parameters do |_result, response|
+        client.predict endpoint: endpoint, instances: instances, parameters: parameters, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters) do |_result, response|
+        client.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.predict({ endpoint: endpoint, instances: instances, parameters: parameters }, call_options) do |_result, response|
+        client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters), call_options) do |_result, response|
+        client.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
