@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2025-10-07)
+
+#### Features
+
+* Include CarrierShipping field inside the Products attribute ([#31573](https://github.com/googleapis/google-cloud-ruby/issues/31573)) 
+
 ### 0.2.0 (2025-09-11)
 
 #### Features
