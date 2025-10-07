@@ -1,0 +1,535 @@
+{
+  "client_library": {
+    "name": "google-cloud-gemini_data_analytics-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.geminidataanalytics.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_ListDataAgents_sync",
+      "title": "Snippet for the list_data_agents call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#list_data_agents.",
+      "file": "data_agent_service/list_data_agents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_agents",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#list_data_agents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListDataAgentsResponse",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "ListDataAgents",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.ListDataAgents",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_ListAccessibleDataAgents_sync",
+      "title": "Snippet for the list_accessible_data_agents call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#list_accessible_data_agents.",
+      "file": "data_agent_service/list_accessible_data_agents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_accessible_data_agents",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#list_accessible_data_agents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListAccessibleDataAgentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListAccessibleDataAgentsResponse",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "ListAccessibleDataAgents",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.ListAccessibleDataAgents",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_GetDataAgent_sync",
+      "title": "Snippet for the get_data_agent call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#get_data_agent.",
+      "file": "data_agent_service/get_data_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_agent",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#get_data_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::GetDataAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "GetDataAgent",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.GetDataAgent",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_CreateDataAgent_sync",
+      "title": "Snippet for the create_data_agent call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#create_data_agent.",
+      "file": "data_agent_service/create_data_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_agent",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#create_data_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataAgent",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.CreateDataAgent",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_UpdateDataAgent_sync",
+      "title": "Snippet for the update_data_agent call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#update_data_agent.",
+      "file": "data_agent_service/update_data_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_agent",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#update_data_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataAgent",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.UpdateDataAgent",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_DeleteDataAgent_sync",
+      "title": "Snippet for the delete_data_agent call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#delete_data_agent.",
+      "file": "data_agent_service/delete_data_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_agent",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#delete_data_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataAgent",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.DeleteDataAgent",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#get_iam_policy.",
+      "file": "data_agent_service/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.GetIamPolicy",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataAgentService_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the DataAgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#set_iam_policy.",
+      "file": "data_agent_service/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "DataAgentService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService.SetIamPolicy",
+          "service": {
+            "short_name": "DataAgentService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataAgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_Chat_sync",
+      "title": "Snippet for the chat call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#chat.",
+      "file": "data_chat_service/chat.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "chat",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#chat",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::Message",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "Chat",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.Chat",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_CreateConversation_sync",
+      "title": "Snippet for the create_conversation call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#create_conversation.",
+      "file": "data_chat_service/create_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#create_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::CreateConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::Conversation",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "CreateConversation",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.CreateConversation",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_GetConversation_sync",
+      "title": "Snippet for the get_conversation call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#get_conversation.",
+      "file": "data_chat_service/get_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#get_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::GetConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::Conversation",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "GetConversation",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.GetConversation",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_ListConversations_sync",
+      "title": "Snippet for the list_conversations call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#list_conversations.",
+      "file": "data_chat_service/list_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversations",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#list_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsResponse",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "ListConversations",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.ListConversations",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_ListMessages_sync",
+      "title": "Snippet for the list_messages call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#list_messages.",
+      "file": "data_chat_service/list_messages.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_messages",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#list_messages",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesResponse",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "ListMessages",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.ListMessages",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
