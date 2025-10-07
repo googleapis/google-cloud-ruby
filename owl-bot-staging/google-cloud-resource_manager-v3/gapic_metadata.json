@@ -1,0 +1,332 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.resourcemanager.v3",
+  "libraryPackage": "::Google::Cloud::ResourceManager::V3",
+  "services": {
+    "Folders": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::Folders::Client",
+          "rpcs": {
+            "GetFolder": {
+              "methods": [
+                "get_folder"
+              ]
+            },
+            "ListFolders": {
+              "methods": [
+                "list_folders"
+              ]
+            },
+            "SearchFolders": {
+              "methods": [
+                "search_folders"
+              ]
+            },
+            "CreateFolder": {
+              "methods": [
+                "create_folder"
+              ]
+            },
+            "UpdateFolder": {
+              "methods": [
+                "update_folder"
+              ]
+            },
+            "MoveFolder": {
+              "methods": [
+                "move_folder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "delete_folder"
+              ]
+            },
+            "UndeleteFolder": {
+              "methods": [
+                "undelete_folder"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Organizations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::Organizations::Client",
+          "rpcs": {
+            "GetOrganization": {
+              "methods": [
+                "get_organization"
+              ]
+            },
+            "SearchOrganizations": {
+              "methods": [
+                "search_organizations"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Projects": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::Projects::Client",
+          "rpcs": {
+            "GetProject": {
+              "methods": [
+                "get_project"
+              ]
+            },
+            "ListProjects": {
+              "methods": [
+                "list_projects"
+              ]
+            },
+            "SearchProjects": {
+              "methods": [
+                "search_projects"
+              ]
+            },
+            "CreateProject": {
+              "methods": [
+                "create_project"
+              ]
+            },
+            "UpdateProject": {
+              "methods": [
+                "update_project"
+              ]
+            },
+            "MoveProject": {
+              "methods": [
+                "move_project"
+              ]
+            },
+            "DeleteProject": {
+              "methods": [
+                "delete_project"
+              ]
+            },
+            "UndeleteProject": {
+              "methods": [
+                "undelete_project"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TagBindings": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::TagBindings::Client",
+          "rpcs": {
+            "ListTagBindings": {
+              "methods": [
+                "list_tag_bindings"
+              ]
+            },
+            "CreateTagBinding": {
+              "methods": [
+                "create_tag_binding"
+              ]
+            },
+            "DeleteTagBinding": {
+              "methods": [
+                "delete_tag_binding"
+              ]
+            },
+            "ListEffectiveTags": {
+              "methods": [
+                "list_effective_tags"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TagHolds": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::TagHolds::Client",
+          "rpcs": {
+            "CreateTagHold": {
+              "methods": [
+                "create_tag_hold"
+              ]
+            },
+            "DeleteTagHold": {
+              "methods": [
+                "delete_tag_hold"
+              ]
+            },
+            "ListTagHolds": {
+              "methods": [
+                "list_tag_holds"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TagKeys": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::TagKeys::Client",
+          "rpcs": {
+            "ListTagKeys": {
+              "methods": [
+                "list_tag_keys"
+              ]
+            },
+            "GetTagKey": {
+              "methods": [
+                "get_tag_key"
+              ]
+            },
+            "GetNamespacedTagKey": {
+              "methods": [
+                "get_namespaced_tag_key"
+              ]
+            },
+            "CreateTagKey": {
+              "methods": [
+                "create_tag_key"
+              ]
+            },
+            "UpdateTagKey": {
+              "methods": [
+                "update_tag_key"
+              ]
+            },
+            "DeleteTagKey": {
+              "methods": [
+                "delete_tag_key"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TagValues": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::TagValues::Client",
+          "rpcs": {
+            "ListTagValues": {
+              "methods": [
+                "list_tag_values"
+              ]
+            },
+            "GetTagValue": {
+              "methods": [
+                "get_tag_value"
+              ]
+            },
+            "GetNamespacedTagValue": {
+              "methods": [
+                "get_namespaced_tag_value"
+              ]
+            },
+            "CreateTagValue": {
+              "methods": [
+                "create_tag_value"
+              ]
+            },
+            "UpdateTagValue": {
+              "methods": [
+                "update_tag_value"
+              ]
+            },
+            "DeleteTagValue": {
+              "methods": [
+                "delete_tag_value"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.rapidmigrationassessment.v1",
+  "libraryPackage": "::Google::Cloud::RapidMigrationAssessment::V1",
+  "services": {
+    "RapidMigrationAssessment": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Client",
+          "rpcs": {
+            "CreateCollector": {
+              "methods": [
+                "create_collector"
+              ]
+            },
+            "CreateAnnotation": {
+              "methods": [
+                "create_annotation"
+              ]
+            },
+            "GetAnnotation": {
+              "methods": [
+                "get_annotation"
+              ]
+            },
+            "ListCollectors": {
+              "methods": [
+                "list_collectors"
+              ]
+            },
+            "GetCollector": {
+              "methods": [
+                "get_collector"
+              ]
+            },
+            "UpdateCollector": {
+              "methods": [
+                "update_collector"
+              ]
+            },
+            "DeleteCollector": {
+              "methods": [
+                "delete_collector"
+              ]
+            },
+            "ResumeCollector": {
+              "methods": [
+                "resume_collector"
+              ]
+            },
+            "RegisterCollector": {
+              "methods": [
+                "register_collector"
+              ]
+            },
+            "PauseCollector": {
+              "methods": [
+                "pause_collector"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
