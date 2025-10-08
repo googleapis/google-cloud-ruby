@@ -8,7 +8,7 @@
     "name": "cloudsecuritycompliance",
     "name_pretty": "Cloud Security Compliance V1 API",
     "product_documentation": "https://cloud.google.com/security-command-center/docs/compliance-manager-overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-cloud_security_compliance-v1 is the official client library for the Cloud Security Compliance V1 API. Note that google-cloud-cloud_security_compliance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_security_compliance instead. See the readme for more details.",
