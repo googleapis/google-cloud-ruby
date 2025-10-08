@@ -25,15 +25,10 @@ def create_note note_id:, project_id:
 
   parent = client.project_path project: project_id
   note = {
-    vulnerability: {
-      details: [
-        {
-          affected_cpe_uri:       "your-uri-here",
-          affected_package:       "your-package-here",
-          affected_version_start: { kind: :MINIMUM },
-          fixed_version:          { kind: :MAXIMUM }
-        }
-      ]
+    attestation: {
+      hint: {
+        human_readable_name: "my-attestation-authority"
+      }
     }
   }
   response = client.create_note parent: parent, note_id: note_id, note: note
