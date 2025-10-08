@@ -58,7 +58,6 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
     result = storage_control_client.get_anywhere_cache get_request
     min_delay = 30 # 30 seconds
     max_delay = 600 # 10 minutes
-    start_time = Time.now
     while result.state&.downcase != "running"
       unless ["paused", "disabled", "creating"].include? result.state&.downcase
         raise Google::Cloud::Error,
@@ -69,14 +68,10 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
       min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
       result = storage_control_client.get_anywhere_cache get_request
     end
-    end_time = Time.now
-    duration = end_time - start_time
-    puts "Total waiting time : #{duration.round 2} seconds."
-    message = "Successfully updated anywhereCache - #{result.name}."
+    puts "Successfully updated anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
-    message = "Failed to update AnywhereCache. Error: #{e.message}"
+    puts "Failed to update AnywhereCache. Error: #{e.message}"
   end
-  puts message
 end
 # [END storage_control_update_anywhere_cache]
 update_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__

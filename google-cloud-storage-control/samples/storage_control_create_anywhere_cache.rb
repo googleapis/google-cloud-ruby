@@ -60,7 +60,6 @@ def create_anywhere_cache bucket_name:, zone:
     result = storage_control_client.get_anywhere_cache get_request
     min_delay = 30 # 30 seconds
     max_delay = 900 # 15 minutes
-    start_time = Time.now
     while result.state&.downcase != "running"
       unless ["paused", "disabled", "creating"].include? result.state&.downcase
         raise Google::Cloud::Error,
@@ -71,14 +70,10 @@ def create_anywhere_cache bucket_name:, zone:
       min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
       result = storage_control_client.get_anywhere_cache get_request
     end
-    end_time = Time.now
-    duration = end_time - start_time
-    puts "Total polling time: #{duration.round 2} seconds."
-    message = "Successfully created anywhereCache - #{result.name}."
+    puts "Successfully created anywhereCache - #{result.name}."
   rescue Google::Cloud::Error => e
-    message = "Failed to create AnywhereCache. Error: #{e.message}"
+    puts "Failed to create AnywhereCache. Error: #{e.message}"
   end
-  puts message
 end
 # [END storage_control_create_anywhere_cache]
 create_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
