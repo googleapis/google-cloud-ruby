@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.26.0 (2025-10-08)
+
+#### Features
+
+* Add labels field for Predict API for Imagen use case (v1beta and v1) 
+* add ListOperations partial success flag ([#31574](https://github.com/googleapis/google-cloud-ruby/issues/31574)) 
+* add ListOperations unreachable resources 
+
 ### 1.25.0 (2025-10-06)
 
 #### Features
