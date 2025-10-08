@@ -33,6 +33,7 @@
     "proto_docs/google/api/client.rb",
     "proto_docs/google/api/documentation.rb",
     "proto_docs/google/api/endpoint.rb",
+    "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/label.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/monitored_resource.rb",
