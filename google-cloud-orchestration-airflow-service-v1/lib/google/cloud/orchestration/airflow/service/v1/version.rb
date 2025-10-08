@@ -23,7 +23,7 @@ module Google
       module Airflow
         module Service
           module V1
-            VERSION = "1.5.0"
+            VERSION = "1.6.0"
           end
         end
       end
