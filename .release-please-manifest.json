@@ -813,7 +813,7 @@
   "google-cloud-text_to_speech+FILLER": "0.0.0",
   "google-cloud-text_to_speech-v1": "1.13.0",
   "google-cloud-text_to_speech-v1+FILLER": "0.0.0",
-  "google-cloud-text_to_speech-v1beta1": "0.25.0",
+  "google-cloud-text_to_speech-v1beta1": "0.26.0",
   "google-cloud-text_to_speech-v1beta1+FILLER": "0.0.0",
   "google-cloud-tpu": "1.4.2",
   "google-cloud-tpu+FILLER": "0.0.0",
