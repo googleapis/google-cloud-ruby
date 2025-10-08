@@ -76,6 +76,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::OperationsTest < Mi
     filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_operations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_operations, name
@@ -84,6 +85,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::OperationsTest < Mi
       assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -94,35 +96,35 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::OperationsTest < Mi
       end
 
       # Use hash object
-      client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_operations name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_operations name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
