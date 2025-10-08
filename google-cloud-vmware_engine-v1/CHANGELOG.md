@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.3.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31582](https://github.com/googleapis/google-cloud-ruby/issues/31582)) 
+* add ListOperations unreachable resources 
+
 ### 1.2.0 (2025-09-11)
 
 #### Features
