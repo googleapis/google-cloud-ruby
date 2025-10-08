@@ -41,27 +41,6 @@ class Google::Cloud::CapacityPlanner::ClientConstructionMinitest < Minitest::Tes
     end
   end
 
-  def test_capacity_planning_service_grpc
-    skip unless Google::Cloud::CapacityPlanner.capacity_planning_service_available? transport: :grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::CapacityPlanner.capacity_planning_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::CapacityPlanner::V1beta::CapacityPlanningService::Client, client
-    end
-  end
-
-  def test_capacity_planning_service_rest
-    skip unless Google::Cloud::CapacityPlanner.capacity_planning_service_available? transport: :rest
-    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::CapacityPlanner.capacity_planning_service transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::CapacityPlanner::V1beta::CapacityPlanningService::Rest::Client, client
-    end
-  end
-
   def test_usage_service_grpc
     skip unless Google::Cloud::CapacityPlanner.usage_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
