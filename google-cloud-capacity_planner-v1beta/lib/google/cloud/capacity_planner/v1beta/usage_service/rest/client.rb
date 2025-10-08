@@ -248,10 +248,10 @@ module Google
               #     Optional. The TPU type for the `UsageHistory` values to return. Empty
               #     tpu_type will return results matching all TPUs.
               #   @param cloud_resource_type [::String]
-              #     The resource for the `UsageHistory` values to return. Possible values
-              #     include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
-              #     "gce-gpu" and "gce-tpu".
-              #     Empty cloud_resource_type will return results matching all resources.
+              #     Required. The resource for the `UsageHistory` values to return. Possible
+              #     values include "gce-vcpus", "gce-ram", "gce-local-ssd",
+              #     "gce-persistent-disk", "gce-gpu" and "gce-tpu". Empty cloud_resource_type
+              #     will return results matching all resources.
               #   @param usage_aggregation_method [::Google::Cloud::CapacityPlanner::V1beta::UsageHistory::AggregationMethod]
               #     The method that should be used to convert sampled usage data to daily
               #     usage values.
@@ -366,10 +366,10 @@ module Google
               #     Optional. The TPU type for the `Forecast` values to return. Empty tpu_type
               #     will return results matching all TPUs.
               #   @param cloud_resource_type [::String]
-              #     The resource for the `Forecast` values to return. Possible values include
-              #     "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk", "gce-gpu"
-              #     and "gce-tpu".
-              #     Empty cloud_resource_type will return results matching all resources.
+              #     Required. The resource for the `Forecast` values to return. Possible values
+              #     include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
+              #     "gce-gpu" and "gce-tpu". Empty cloud_resource_type will return results
+              #     matching all resources.
               #   @param forecast_type [::Google::Cloud::CapacityPlanner::V1beta::Forecast::ForecastType]
               #     The type of forecast to use to select the `Forecast` values to return.
               #     FORECAST_TYPE_UNSPECIFIED will return results matching all the forecast
@@ -479,10 +479,10 @@ module Google
               #     https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
               #     will return results matching all GPUs.
               #   @param cloud_resource_type [::String]
-              #     Optional. The resource for the reserved values to return. Possible values
+              #     Required. The resource for the reserved values to return. Possible values
               #     include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-gpu" and "gce-vm".
               #   @param reservation_type [::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest::ReservationType]
-              #     Optional. The Reservation type for example, future reservation request and
+              #     Required. The Reservation type for example, future reservation request and
               #     allocation. If unspecified, all types are
               #     included.
               #   @param share_type [::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest::ShareType]
@@ -494,7 +494,7 @@ module Google
               #     parent project/folder/organization. If unspecified, all types are
               #     included.
               #   @param reservation_data_level [::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest::ReservationDataLevel]
-              #     Optional. Reservations output data format.
+              #     Required. Reservations output data format.
               #   @param include_unapproved_reservations [::Boolean]
               #     Optional. Whether to include pending for approval reservations in the
               #     response. This field is only applicable for future reservations.
