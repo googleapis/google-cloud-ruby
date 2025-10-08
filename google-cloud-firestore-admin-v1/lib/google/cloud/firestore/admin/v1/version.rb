@@ -22,7 +22,7 @@ module Google
     module Firestore
       module Admin
         module V1
-          VERSION = "1.8.0"
+          VERSION = "1.9.0"
         end
       end
     end
