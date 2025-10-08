@@ -4,6 +4,13 @@
 
 * Clarify Finding#event_time description
 
+### 0.19.0 (2025-10-08)
+
+#### Features
+
+* add ListOperations partial success flag ([#31581](https://github.com/googleapis/google-cloud-ruby/issues/31581)) 
+* add ListOperations unreachable resources 
+
 ### 0.18.0 (2025-09-11)
 
 #### Features
