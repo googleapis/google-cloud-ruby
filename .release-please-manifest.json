@@ -877,7 +877,7 @@
   "google-cloud-vmware_engine-v1+FILLER": "0.0.0",
   "google-cloud-vpc_access": "1.5.2",
   "google-cloud-vpc_access+FILLER": "0.0.0",
-  "google-cloud-vpc_access-v1": "1.4.0",
+  "google-cloud-vpc_access-v1": "1.5.0",
   "google-cloud-vpc_access-v1+FILLER": "0.0.0",
   "google-cloud-web_risk": "2.0.3",
   "google-cloud-web_risk+FILLER": "0.0.0",
