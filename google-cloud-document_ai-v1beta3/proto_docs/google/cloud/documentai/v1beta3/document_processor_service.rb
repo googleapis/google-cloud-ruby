@@ -866,7 +866,7 @@ module Google
           # Processor.
           # @!attribute [rw] training_method
           #   @return [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::CustomDocumentExtractionOptions::TrainingMethod]
-          #     Training method to use for CDE training.
+          #     Optional. Training method to use for CDE training.
           class CustomDocumentExtractionOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1170,8 +1170,6 @@ module Google
         #   @return [::String]
         #     The source processor version to import from. The source processor version
         #     and destination processor need to be in the same environment and region.
-        #     Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
-        #     supported.
         #
         #     Note: The following fields are mutually exclusive: `processor_version_source`, `external_processor_version_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] external_processor_version_source

@@ -2269,8 +2269,6 @@ module Google
               #   @param processor_version_source [::String]
               #     The source processor version to import from. The source processor version
               #     and destination processor need to be in the same environment and region.
-              #     Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
-              #     supported.
               #
               #     Note: The following parameters are mutually exclusive: `processor_version_source`, `external_processor_version_source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param external_processor_version_source [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource, ::Hash]
