@@ -338,6 +338,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.AddAssociation. See the method description for details.
+        # @!attribute [rw] replace_existing_association
+        #   @return [::Boolean]
+        #     Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        # @!attribute [rw] security_policy_association_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicyAssociation]
+        #     The body resource for this request
+        class AddAssociationOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkFirewallPolicies.AddAssociation. See the method description for details.
         # @!attribute [rw] firewall_policy
         #   @return [::String]
@@ -607,6 +625,21 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class AddRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for OrganizationSecurityPolicies.AddRule. See the method description for details.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        # @!attribute [rw] security_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRule]
+        #     The body resource for this request
+        class AddRuleOrganizationSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -5568,6 +5601,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.CopyRules. See the method description for details.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        # @!attribute [rw] source_security_policy
+        #   @return [::String]
+        #     The security policy from which to copy rules.
+        class CopyRulesOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The specification for allowing client-side cross-origin requests. For more information about the W3C recommendation for cross-origin resource sharing (CORS), see Fetch API Living Standard.
         # @!attribute [rw] allow_credentials
         #   @return [::Boolean]
@@ -5765,6 +5813,21 @@ module Google
         #   @return [::String]
         #     [Output Only] A warning data value corresponding to the key.
         class Data
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+        # @!attribute [rw] day
+        #   @return [::Integer]
+        #     Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+        # @!attribute [rw] month
+        #   @return [::Integer]
+        #     Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+        # @!attribute [rw] year
+        #   @return [::Integer]
+        #     Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+        class Date
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6464,6 +6527,18 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class DeleteNodesNodeGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for OrganizationSecurityPolicies.Delete. See the method description for details.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to delete.
+        class DeleteOrganizationSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -9352,6 +9427,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.GetAssociation. See the method description for details.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the association to get from the security policy.
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to which the queried rule belongs.
+        class GetAssociationOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkFirewallPolicies.GetAssociation. See the method description for details.
         # @!attribute [rw] firewall_policy
         #   @return [::String]
@@ -9492,6 +9579,24 @@ module Google
         #   @return [::String]
         #     Name of the region scoping this request.
         class GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for BackendServices.GetEffectiveSecurityPolicies. See the method description for details.
+        # @!attribute [rw] backend_service
+        #   @return [::String]
+        #     Name of the Backend Service for this request.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetEffectiveSecurityPoliciesBackendServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response message for BackendServices.GetEffectiveSecurityPolicies. See the method description for details.
+        class GetEffectiveSecurityPoliciesBackendServiceResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -10610,6 +10715,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.Get. See the method description for details.
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to get.
+        class GetOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for PacketMirrorings.Get. See the method description for details.
         # @!attribute [rw] packet_mirroring
         #   @return [::String]
@@ -10636,6 +10750,18 @@ module Google
         #   @return [::String]
         #     Project ID for this request.
         class GetPacketMirroringRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PreviewFeatures.Get. See the method description for details.
+        # @!attribute [rw] preview_feature
+        #   @return [::String]
+        #     Name of the PreviewFeature for this request.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetPreviewFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -11186,6 +11312,18 @@ module Google
         #   @return [::String]
         #     Project ID for this request.
         class GetRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for OrganizationSecurityPolicies.GetRule. See the method description for details.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to get from the security policy.
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to which the queried rule belongs.
+        class GetRuleOrganizationSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -12773,6 +12911,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::ImageParams]
+        #     Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         # @!attribute [rw] raw_disk
         #   @return [::Google::Cloud::Compute::V1::RawDisk]
         #     The parameters of the raw disk image.
@@ -12911,6 +13052,24 @@ module Google
         class ImageList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Additional image params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Resource manager tags to be bound to the image. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
+        class ImageParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Initial State for shielded instance, these are public keys which are safe to store in public
@@ -13509,6 +13668,21 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class InsertNodeTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for OrganizationSecurityPolicies.Insert. See the method description for details.
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicy]
+        #     The body resource for this request
+        class InsertOrganizationSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16614,6 +16788,10 @@ module Google
         #   @return [::String]
         #     [Output Only] The current state of Interconnect functionality, which can take one of the following values: - ACTIVE: The Interconnect is valid, turned up and ready to use. Attachments may be provisioned on this Interconnect. - UNPROVISIONED: The Interconnect has not completed turnup. No attachments may be provisioned on this Interconnect. - UNDER_MAINTENANCE: The Interconnect is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
         #     Check the State enum for the list of possible values.
+        # @!attribute [rw] subzone
+        #   @return [::String]
+        #     Specific subzone in the InterconnectLocation that represents where this connection is to be provisioned.
+        #     Check the Subzone enum for the list of possible values.
         class Interconnect
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16693,6 +16871,18 @@ module Google
 
             # The interconnect has not completed turnup. No attachments may be provisioned on this interconnect.
             UNPROVISIONED = 517_333_979
+          end
+
+          # Specific subzone in the InterconnectLocation that represents where this connection is to be provisioned.
+          module Subzone
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SUBZONE = 0
+
+            # Subzone A.
+            SUBZONE_A = 291_575_438
+
+            # Subzone B.
+            SUBZONE_B = 291_575_439
           end
         end
 
@@ -18951,6 +19141,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.ListAssociations. See the method description for details.
+        # @!attribute [rw] target_resource
+        #   @return [::String]
+        #     The target resource to list associations. It is an organization, or a folder.
+        class ListAssociationsOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Autoscalers.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -20420,6 +20619,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     Parent ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        class ListOrganizationSecurityPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for PacketMirrorings.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -20556,6 +20779,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.ListPreconfiguredExpressionSets. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     Parent ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        class ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for SecurityPolicies.ListPreconfiguredExpressionSets. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -20576,6 +20823,30 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListPreconfiguredExpressionSetsSecurityPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PreviewFeatures.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        class ListPreviewFeaturesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22837,6 +23108,21 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class MoveInstanceProjectRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for OrganizationSecurityPolicies.Move. See the method description for details.
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     The new parent of the security policy.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        class MoveOrganizationSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -25670,6 +25956,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] associations
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyAssociation>]
+        #     A list of associations.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of securityPolicy associations. Always compute#organizationSecurityPoliciesListAssociations for lists of securityPolicy associations.
+        class OrganizationSecurityPoliciesListAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service.
         # @!attribute [rw] base_ejection_time
         #   @return [::Google::Cloud::Compute::V1::Duration]
@@ -26392,6 +26689,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.Patch. See the method description for details.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        # @!attribute [rw] security_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicy]
+        #     The body resource for this request
+        class PatchOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for PacketMirrorings.Patch. See the method description for details.
         # @!attribute [rw] packet_mirroring
         #   @return [::String]
@@ -26829,6 +27141,24 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class PatchRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for OrganizationSecurityPolicies.PatchRule. See the method description for details.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to patch.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        # @!attribute [rw] security_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRule]
+        #     The body resource for this request
+        class PatchRuleOrganizationSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27434,6 +27764,152 @@ module Google
         class PreservedStatePreservedNetworkIpIpAddress
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a single Google Compute Engine preview feature.
+        # @!attribute [rw] activation_status
+        #   @return [::String]
+        #     Specifies whether the feature is enabled or disabled.
+        #     Check the ActivationStatus enum for the list of possible values.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     [Output Only] Description of the feature.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output only] The type of the feature. Always "compute#previewFeature" for preview features.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the feature.
+        # @!attribute [rw] rollout_operation
+        #   @return [::Google::Cloud::Compute::V1::PreviewFeatureRolloutOperation]
+        #     Rollout operation of the feature.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::Compute::V1::PreviewFeatureStatus]
+        #     [Output only] Status of the feature.
+        class PreviewFeature
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies whether the feature is enabled or disabled.
+          module ActivationStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ACTIVATION_STATUS = 0
+
+            ACTIVATION_STATE_UNSPECIFIED = 632_160
+
+            DISABLED = 516_696_700
+
+            ENABLED = 182_130_465
+          end
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::PreviewFeature>]
+        #     A list of PreviewFeature resources.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class PreviewFeatureList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the rollout operation
+        # @!attribute [rw] rollout_input
+        #   @return [::Google::Cloud::Compute::V1::PreviewFeatureRolloutOperationRolloutInput]
+        #     Input only. The input for the rollout operation.
+        class PreviewFeatureRolloutOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the input for the rollout operation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the rollout plan Ex. organizations//locations/global/rolloutPlans/ Ex. folders//locations/global/rolloutPlans/ Ex. projects//locations/global/rolloutPlans/.
+        # @!attribute [rw] predefined_rollout_plan
+        #   @return [::String]
+        #     Predefined rollout plan.
+        #     Check the PredefinedRolloutPlan enum for the list of possible values.
+        class PreviewFeatureRolloutOperationRolloutInput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Predefined rollout plan.
+          module PredefinedRolloutPlan
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PREDEFINED_ROLLOUT_PLAN = 0
+
+            ROLLOUT_PLAN_FAST_ROLLOUT = 167_808_726
+
+            ROLLOUT_PLAN_TWO_DAY_ROLLOUT = 349_866_771
+
+            ROLLOUT_PLAN_UNSPECIFIED = 144_511_983
+          end
+        end
+
+        # [Output Only] The status of the feature.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     [Output Only] The description of the feature.
+        # @!attribute [rw] help_link
+        #   @return [::String]
+        #     [Output Only] Link to the public documentation for the feature.
+        # @!attribute [rw] release_status
+        #   @return [::Google::Cloud::Compute::V1::PreviewFeatureStatusReleaseStatus]
+        class PreviewFeatureStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # [Output Only] The release status of the feature.
+        # @!attribute [rw] stage
+        #   @return [::String]
+        #     [Output Only] The stage of the feature.
+        #     Check the Stage enum for the list of possible values.
+        # @!attribute [rw] update_date
+        #   @return [::Google::Cloud::Compute::V1::Date]
+        #     Output only. The last date when a feature transitioned between ReleaseStatuses.
+        class PreviewFeatureStatusReleaseStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The stage of the feature.
+          module Stage
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STAGE = 0
+
+            DEPRECATED = 463_360_435
+
+            GA = 2266
+
+            PREVIEW = 399_798_184
+
+            STAGE_UNSPECIFIED = 63_695_670
+          end
         end
 
         # A request message for Routers.Preview. See the method description for details.
@@ -29264,6 +29740,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.RemoveAssociation. See the method description for details.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name for the attachment that will be removed.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        class RemoveAssociationOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkFirewallPolicies.RemoveAssociation. See the method description for details.
         # @!attribute [rw] firewall_policy
         #   @return [::String]
@@ -29480,6 +29971,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for OrganizationSecurityPolicies.RemoveRule. See the method description for details.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to remove from the security policy.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        class RemoveRuleOrganizationSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkFirewallPolicies.RemoveRule. See the method description for details.
         # @!attribute [rw] firewall_policy
         #   @return [::String]
@@ -29530,6 +30036,30 @@ module Google
         #   @return [::String]
         #     Name of the security policy to update.
         class RemoveRuleSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ReservationSubBlocks.ReportFaulty. See the method description for details.
+        # @!attribute [rw] parent_name
+        #   @return [::String]
+        #     The name of the parent reservation and parent block. In the format of reservations/\\{reservation_name}/reservationBlocks/\\{reservation_block_name}
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] reservation_sub_block
+        #   @return [::String]
+        #     The name of the reservation subBlock. Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] reservation_sub_blocks_report_faulty_request_resource
+        #   @return [::Google::Cloud::Compute::V1::ReservationSubBlocksReportFaultyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request. Zone name should conform to RFC1035.
+        class ReportFaultyReservationSubBlockRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -30152,6 +30682,77 @@ module Google
         class ReservationSubBlocksListResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] disruption_schedule
+        #   @return [::String]
+        #     The disruption schedule for the subBlock.
+        #     Check the DisruptionSchedule enum for the list of possible values.
+        # @!attribute [rw] failure_component
+        #   @return [::String]
+        #     The component that experienced the fault.
+        #     Check the FailureComponent enum for the list of possible values.
+        # @!attribute [rw] fault_reasons
+        #   @return [::Array<::Google::Cloud::Compute::V1::ReservationSubBlocksReportFaultyRequestFaultReason>]
+        #     The reasons for the fault experienced with the subBlock.
+        class ReservationSubBlocksReportFaultyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The disruption schedule for the subBlock.
+          module DisruptionSchedule
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DISRUPTION_SCHEDULE = 0
+
+            DISRUPTION_SCHEDULE_UNSPECIFIED = 332_543_835
+
+            # All VMs will be disrupted immediately.
+            IMMEDIATE = 152_881_041
+          end
+
+          # The component that experienced the fault.
+          module FailureComponent
+            # A value indicating that the enum field is not set.
+            UNDEFINED_FAILURE_COMPONENT = 0
+
+            FAILURE_COMPONENT_UNSPECIFIED = 332_003_744
+
+            # Multiple hosts experienced the fault.
+            MULTIPLE_FAULTY_HOSTS = 423_545_298
+
+            # The NVLink switch experienced the fault.
+            NVLINK_SWITCH = 239_107_153
+          end
+        end
+
+        # The reason for the fault experienced with the subBlock.
+        # @!attribute [rw] behavior
+        #   @return [::String]
+        #     The behavior of the fault experienced with the subBlock.
+        #     Check the Behavior enum for the list of possible values.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The description of the fault experienced with the subBlock.
+        class ReservationSubBlocksReportFaultyRequestFaultReason
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The behavior of the fault experienced with the subBlock.
+          module Behavior
+            # A value indicating that the enum field is not set.
+            UNDEFINED_BEHAVIOR = 0
+
+            FAULT_BEHAVIOR_UNSPECIFIED = 447_660_743
+
+            # The subBlock experienced a GPU error.
+            GPU_ERROR = 198_817_909
+
+            # The subBlock experienced performance issues.
+            PERFORMANCE = 135_701_520
+
+            # The subBlock experienced a switch failure.
+            SWITCH_FAILURE = 254_909_279
+          end
         end
 
         # @!attribute [rw] maintenance_scope
@@ -32573,6 +33174,9 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyAdaptiveProtectionConfig]
         # @!attribute [rw] advanced_options_config
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyAdvancedOptionsConfig]
+        # @!attribute [rw] associations
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyAssociation>]
+        #     A list of associations that belong to this policy.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -32610,6 +33214,9 @@ module Google
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] short_name
+        #   @return [::String]
+        #     User-provided name of the organization security policy. The name should be unique in the organization in which the security policy is created. This should only be used when SecurityPolicyType is CLOUD_ARMOR. The name must be 1-63 characters long, and comply with https://www.ietf.org/rfc/rfc1035.txt. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] type
         #   @return [::String]
         #     The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE (preview only): Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
@@ -32773,6 +33380,32 @@ module Google
         #   @return [::Array<::String>]
         #     A list of custom Content-Type header values to apply the JSON parsing. As per RFC 1341, a Content-Type header value has the following format: Content-Type := type "/" subtype *[";" parameter] When configuring a custom Content-Type header value, only the type/subtype needs to be specified, and the parameters should be excluded.
         class SecurityPolicyAdvancedOptionsConfigJsonCustomConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] attachment_id
+        #   @return [::String]
+        #     The resource that the security policy is attached to.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     [Output Only] The display name of the security policy of the association.
+        # @!attribute [rw] excluded_folders
+        #   @return [::Array<::String>]
+        #     A list of folders to exclude from the security policy.
+        # @!attribute [rw] excluded_projects
+        #   @return [::Array<::String>]
+        #     A list of projects to exclude from the security policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name for an association.
+        # @!attribute [rw] security_policy_id
+        #   @return [::String]
+        #     [Output Only] The security policy ID of the association.
+        # @!attribute [rw] short_name
+        #   @return [::String]
+        #     [Output Only] The short name of the security policy of the association.
+        class SecurityPolicyAssociation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -35506,7 +36139,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots. LINT.IfChange
+        # Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots.
         # @!attribute [rw] architecture
         #   @return [::String]
         #     [Output Only] The architecture of the snapshot. Valid values are ARM64 or X86_64.
@@ -35565,6 +36198,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::SnapshotParams]
+        #     Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
@@ -35714,6 +36350,24 @@ module Google
         class SnapshotList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Additional snapshot params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Resource manager tags to be bound to the snapshot. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
+        class SnapshotParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # @!attribute [rw] storage_location
@@ -39823,6 +40477,24 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PreviewFeatures.Update. See the method description for details.
+        # @!attribute [rw] preview_feature
+        #   @return [::String]
+        #     Name of the PreviewFeature for this request.
+        # @!attribute [rw] preview_feature_resource
+        #   @return [::Google::Cloud::Compute::V1::PreviewFeature]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class UpdatePreviewFeatureRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

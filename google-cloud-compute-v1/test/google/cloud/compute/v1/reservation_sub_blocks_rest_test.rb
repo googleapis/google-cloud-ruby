@@ -254,6 +254,65 @@ class ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ClientTest < Min
     end
   end
 
+  def test_report_faulty
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent_name = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    reservation_sub_block = "hello world"
+    reservation_sub_blocks_report_faulty_request_resource = {}
+    zone = "hello world"
+
+    report_faulty_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ServiceStub.stub :transcode_report_faulty_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, report_faulty_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.report_faulty({ parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, reservation_sub_blocks_report_faulty_request_resource: reservation_sub_blocks_report_faulty_request_resource, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.report_faulty parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, reservation_sub_blocks_report_faulty_request_resource: reservation_sub_blocks_report_faulty_request_resource, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.report_faulty ::Google::Cloud::Compute::V1::ReportFaultyReservationSubBlockRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, reservation_sub_blocks_report_faulty_request_resource: reservation_sub_blocks_report_faulty_request_resource, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.report_faulty({ parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, reservation_sub_blocks_report_faulty_request_resource: reservation_sub_blocks_report_faulty_request_resource, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.report_faulty(::Google::Cloud::Compute::V1::ReportFaultyReservationSubBlockRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, reservation_sub_blocks_report_faulty_request_resource: reservation_sub_blocks_report_faulty_request_resource, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, report_faulty_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

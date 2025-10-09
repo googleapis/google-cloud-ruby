@@ -87,6 +87,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.get_effective_security_policies.timeout = 600.0
+                  default_config.rpcs.get_effective_security_policies.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.get_health.timeout = 600.0
 
                   default_config.rpcs.get_iam_policy.timeout = 600.0
@@ -681,6 +686,86 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backend_services_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns effective security policies applied to this backend service.
+              #
+              # @overload get_effective_security_policies(request, options = nil)
+              #   Pass arguments to `get_effective_security_policies` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_effective_security_policies(backend_service: nil, project: nil)
+              #   Pass arguments to `get_effective_security_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param backend_service [::String]
+              #     Name of the Backend Service for this request.
+              #   @param project [::String]
+              #     Project ID for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceRequest.new
+              #
+              #   # Call the get_effective_security_policies method.
+              #   result = client.get_effective_security_policies request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceResponse.
+              #   p result
+              #
+              def get_effective_security_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_effective_security_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_effective_security_policies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_effective_security_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backend_services_stub.get_effective_security_policies request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1829,6 +1914,11 @@ module Google
                   #
                   attr_reader :get
                   ##
+                  # RPC-specific configuration for `get_effective_security_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_effective_security_policies
+                  ##
                   # RPC-specific configuration for `get_health`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1896,6 +1986,8 @@ module Google
                     @delete_signed_url_key = ::Gapic::Config::Method.new delete_signed_url_key_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
+                    get_effective_security_policies_config = parent_rpcs.get_effective_security_policies if parent_rpcs.respond_to? :get_effective_security_policies
+                    @get_effective_security_policies = ::Gapic::Config::Method.new get_effective_security_policies_config
                     get_health_config = parent_rpcs.get_health if parent_rpcs.respond_to? :get_health
                     @get_health = ::Gapic::Config::Method.new get_health_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
