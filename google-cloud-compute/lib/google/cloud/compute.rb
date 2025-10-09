@@ -2945,6 +2945,69 @@ module Google
       end
 
       ##
+      # Create a new client object for OrganizationSecurityPolicies.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-OrganizationSecurityPolicies-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the OrganizationSecurityPolicies service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the OrganizationSecurityPolicies service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.organization_security_policies_available?}.
+      #
+      # ## About OrganizationSecurityPolicies
+      #
+      # The OrganizationSecurityPolicies API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.organization_security_policies version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:OrganizationSecurityPolicies)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the OrganizationSecurityPolicies service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.organization_security_policies}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the OrganizationSecurityPolicies service,
+      # or if the versioned client gem needs an update to support the OrganizationSecurityPolicies service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.organization_security_policies_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :OrganizationSecurityPolicies
+        service_module = service_module.const_get :OrganizationSecurityPolicies
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for PacketMirrorings.
       #
       # By default, this returns an instance of
@@ -3000,6 +3063,69 @@ module Google
         service_module = Google::Cloud::Compute.const_get package_name
         return false unless service_module.const_defined? :PacketMirrorings
         service_module = service_module.const_get :PacketMirrorings
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for PreviewFeatures.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::PreviewFeatures::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-PreviewFeatures-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the PreviewFeatures service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the PreviewFeatures service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.preview_features_available?}.
+      #
+      # ## About PreviewFeatures
+      #
+      # The PreviewFeatures API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.preview_features version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:PreviewFeatures)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the PreviewFeatures service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.preview_features}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the PreviewFeatures service,
+      # or if the versioned client gem needs an update to support the PreviewFeatures service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.preview_features_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :PreviewFeatures
+        service_module = service_module.const_get :PreviewFeatures
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
