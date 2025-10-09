@@ -31,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/capacity_planner/v1beta"
 
-client = ::Google::Cloud::CapacityPlanner::V1beta::CapacityPlanningService::Client.new
-request = ::Google::Cloud::CapacityPlanner::V1beta::GetCapacityPlanRequest.new # (request fields as keyword arguments...)
-response = client.get_capacity_plan request
+client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new
+request = ::Google::Cloud::CapacityPlanner::V1beta::QueryUsageHistoriesRequest.new # (request fields as keyword arguments...)
+response = client.query_usage_histories request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-capacity_planner-v1beta/latest)
@@ -74,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/capacity_planner/v1beta"
 require "logger"
 
-client = ::Google::Cloud::CapacityPlanner::V1beta::CapacityPlanningService::Client.new do |config|
+client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
