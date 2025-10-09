@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/capacity_planner"
 
-client = Google::Cloud::CapacityPlanner.capacity_planning_service do |config|
+client = Google::Cloud::CapacityPlanner.usage_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::CapacityPlanner.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::CapacityPlanner.capacity_planning_service
+client = Google::Cloud::CapacityPlanner.usage_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/capacity_planner"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::CapacityPlanner.capacity_planning_service
+client = Google::Cloud::CapacityPlanner.usage_service
 ```
 
 ### Local ADC file

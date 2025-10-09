@@ -36,9 +36,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/capacity_planner"
 
-client = Google::Cloud::CapacityPlanner.capacity_planning_service
-request = ::Google::Cloud::CapacityPlanner::V1beta::GetCapacityPlanRequest.new # (request fields as keyword arguments...)
-response = client.get_capacity_plan request
+client = Google::Cloud::CapacityPlanner.usage_service
+request = ::Google::Cloud::CapacityPlanner::V1beta::QueryUsageHistoriesRequest.new # (request fields as keyword arguments...)
+response = client.query_usage_histories request
 ```
 
 ## Debug Logging
