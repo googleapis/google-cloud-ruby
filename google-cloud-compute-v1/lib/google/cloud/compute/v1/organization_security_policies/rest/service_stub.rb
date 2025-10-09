@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module BackendServices
+        module OrganizationSecurityPolicies
           module Rest
             ##
-            # REST service stub for the BackendServices service.
+            # REST service stub for the OrganizationSecurityPolicies service.
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
@@ -74,9 +74,9 @@ module Google
               end
 
               ##
-              # Baseline implementation for the add_signed_url_key REST call
+              # Baseline implementation for the add_association REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::AddAssociationOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -87,10 +87,10 @@ module Google
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
-              def add_signed_url_key request_pb, options = nil
+              def add_association request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_add_signed_url_key_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_add_association_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -102,7 +102,7 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "add_signed_url_key",
+                  method_name: "add_association",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -114,23 +114,23 @@ module Google
               end
 
               ##
-              # Baseline implementation for the aggregated_list REST call
+              # Baseline implementation for the add_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::AddRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::BackendServiceAggregatedList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::BackendServiceAggregatedList]
+              # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
-              def aggregated_list request_pb, options = nil
+              def add_rule request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_aggregated_list_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_add_rule_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -142,11 +142,51 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "aggregated_list",
+                  method_name: "add_rule",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::BackendServiceAggregatedList.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the copy_rules REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::CopyRulesOrganizationSecurityPolicyRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def copy_rules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_copy_rules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "copy_rules",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -156,7 +196,7 @@ module Google
               ##
               # Baseline implementation for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -194,58 +234,18 @@ module Google
               end
 
               ##
-              # Baseline implementation for the delete_signed_url_key REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def delete_signed_url_key request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_delete_signed_url_key_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "delete_signed_url_key",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::BackendService]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::BackendService]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicy]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -266,7 +266,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::BackendService.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::SecurityPolicy.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -274,23 +274,23 @@ module Google
               end
 
               ##
-              # Baseline implementation for the get_effective_security_policies REST call
+              # Baseline implementation for the get_association REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetAssociationOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceResponse]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicyAssociation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceResponse]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicyAssociation]
               #   A result object deserialized from the server's reply
-              def get_effective_security_policies request_pb, options = nil
+              def get_association request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_effective_security_policies_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_association_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -302,11 +302,11 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "get_effective_security_policies",
+                  method_name: "get_association",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceResponse.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::SecurityPolicyAssociation.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -314,23 +314,23 @@ module Google
               end
 
               ##
-              # Baseline implementation for the get_health REST call
+              # Baseline implementation for the get_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::BackendServiceGroupHealth]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicyRule]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::BackendServiceGroupHealth]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicyRule]
               #   A result object deserialized from the server's reply
-              def get_health request_pb, options = nil
+              def get_rule request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_health_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_rule_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -342,51 +342,11 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "get_health",
+                  method_name: "get_rule",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::BackendServiceGroupHealth.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the get_iam_policy REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Policy]
-              #   A result object deserialized from the server's reply
-              def get_iam_policy request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_get_iam_policy_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get_iam_policy",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::SecurityPolicyRule.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -396,7 +356,7 @@ module Google
               ##
               # Baseline implementation for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -436,16 +396,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListBackendServicesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListOrganizationSecurityPoliciesRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::BackendServiceList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicyList]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::BackendServiceList]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicyList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -466,7 +426,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::BackendServiceList.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::SecurityPolicyList.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -474,23 +434,23 @@ module Google
               end
 
               ##
-              # Baseline implementation for the list_usable REST call
+              # Baseline implementation for the list_associations REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListUsableBackendServicesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListAssociationsOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::BackendServiceListUsable]
+              # @yieldparam result [::Google::Cloud::Compute::V1::OrganizationSecurityPoliciesListAssociationsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::BackendServiceListUsable]
+              # @return [::Google::Cloud::Compute::V1::OrganizationSecurityPoliciesListAssociationsResponse]
               #   A result object deserialized from the server's reply
-              def list_usable request_pb, options = nil
+              def list_associations request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_list_usable_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_associations_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -502,11 +462,91 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "list_usable",
+                  method_name: "list_associations",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::BackendServiceListUsable.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::OrganizationSecurityPoliciesListAssociationsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_preconfigured_expression_sets REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse]
+              #   A result object deserialized from the server's reply
+              def list_preconfigured_expression_sets request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_preconfigured_expression_sets_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_preconfigured_expression_sets",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the move REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::MoveOrganizationSecurityPolicyRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def move request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_move_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "move",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -516,7 +556,7 @@ module Google
               ##
               # Baseline implementation for the patch REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::PatchBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -554,9 +594,9 @@ module Google
               end
 
               ##
-              # Baseline implementation for the set_edge_security_policy REST call
+              # Baseline implementation for the patch_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -567,10 +607,10 @@ module Google
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
-              def set_edge_security_policy request_pb, options = nil
+              def patch_rule request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_set_edge_security_policy_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_patch_rule_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -582,7 +622,7 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "set_edge_security_policy",
+                  method_name: "patch_rule",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -594,49 +634,9 @@ module Google
               end
 
               ##
-              # Baseline implementation for the set_iam_policy REST call
+              # Baseline implementation for the remove_association REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Policy]
-              #   A result object deserialized from the server's reply
-              def set_iam_policy request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_set_iam_policy_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "set_iam_policy",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the set_security_policy REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::RemoveAssociationOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -647,10 +647,10 @@ module Google
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
-              def set_security_policy request_pb, options = nil
+              def remove_association request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_set_security_policy_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_remove_association_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -662,7 +662,7 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "set_security_policy",
+                  method_name: "remove_association",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -674,49 +674,9 @@ module Google
               end
 
               ##
-              # Baseline implementation for the test_iam_permissions REST call
+              # Baseline implementation for the remove_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              #   A result object deserialized from the server's reply
-              def test_iam_permissions request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_test_iam_permissions_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "test_iam_permissions",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the update REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::RemoveRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -727,10 +687,10 @@ module Google
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
-              def update request_pb, options = nil
+              def remove_rule request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_update_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_remove_rule_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -742,7 +702,7 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "update",
+                  method_name: "remove_rule",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -756,21 +716,20 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the add_signed_url_key REST call
+              # GRPC transcoding helper method for the add_association REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::AddAssociationOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_add_signed_url_key_request request_pb
+              def self.transcode_add_association_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/addSignedUrlKey",
-                                                          body: "signed_url_key_resource",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/addAssociation",
+                                                          body: "security_policy_association_resource",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -779,19 +738,41 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the aggregated_list REST call
+              # GRPC transcoding helper method for the add_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::AddRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_aggregated_list_request request_pb
+              def self.transcode_add_rule_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/aggregated/backendServices",
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/addRule",
+                                                          body: "security_policy_rule_resource",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the copy_rules REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::CopyRulesOrganizationSecurityPolicyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_copy_rules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/copyRules",
+                                                          matches: [
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -802,7 +783,7 @@ module Google
               #
               # GRPC transcoding helper method for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -810,32 +791,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the delete_signed_url_key REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_delete_signed_url_key_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/deleteSignedUrlKey",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -846,7 +804,7 @@ module Google
               #
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -854,10 +812,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -866,20 +823,19 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the get_effective_security_policies REST call
+              # GRPC transcoding helper method for the get_association REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveSecurityPoliciesBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetAssociationOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_get_effective_security_policies_request request_pb
+              def self.transcode_get_association_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/getEffectiveSecurityPolicies",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/getAssociation",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -888,43 +844,19 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the get_health REST call
+              # GRPC transcoding helper method for the get_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_get_health_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/getHealth",
-                                                          body: "resource_group_reference_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the get_iam_policy REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_get_iam_policy_request request_pb
+              def self.transcode_get_rule_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{resource}/getIamPolicy",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/getRule",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["resource", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -935,7 +867,7 @@ module Google
               #
               # GRPC transcoding helper method for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -943,11 +875,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices",
-                                                          body: "backend_service_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false]
-                                                          ]
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies",
+                                                          body: "security_policy_resource",
+                                                          matches: []
                                                         )
                 transcoder.transcode request_pb
               end
@@ -957,7 +887,7 @@ module Google
               #
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListBackendServicesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListOrganizationSecurityPoliciesRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -965,10 +895,8 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false]
-                                                          ]
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies",
+                                                          matches: []
                                                         )
                 transcoder.transcode request_pb
               end
@@ -976,19 +904,57 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the list_usable REST call
+              # GRPC transcoding helper method for the list_associations REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListUsableBackendServicesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListAssociationsOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_list_usable_request request_pb
+              def self.transcode_list_associations_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/listUsable",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/listAssociations",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_preconfigured_expression_sets REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_preconfigured_expression_sets_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/listPreconfiguredExpressionSets",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the move REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::MoveOrganizationSecurityPolicyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_move_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/move",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -999,7 +965,7 @@ module Google
               #
               # GRPC transcoding helper method for the patch REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::PatchBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -1007,11 +973,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :patch,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
-                                                          body: "backend_service_resource",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}",
+                                                          body: "security_policy_resource",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1020,21 +985,20 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the set_edge_security_policy REST call
+              # GRPC transcoding helper method for the patch_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_set_edge_security_policy_request request_pb
+              def self.transcode_patch_rule_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/setEdgeSecurityPolicy",
-                                                          body: "security_policy_reference_resource",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/patchRule",
+                                                          body: "security_policy_rule_resource",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1043,21 +1007,19 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the set_iam_policy REST call
+              # GRPC transcoding helper method for the remove_association REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::RemoveAssociationOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_set_iam_policy_request request_pb
+              def self.transcode_remove_association_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{resource}/setIamPolicy",
-                                                          body: "global_set_policy_request_resource",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/removeAssociation",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["resource", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1066,67 +1028,19 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the set_security_policy REST call
+              # GRPC transcoding helper method for the remove_rule REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::RemoveRuleOrganizationSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_set_security_policy_request request_pb
+              def self.transcode_remove_rule_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/setSecurityPolicy",
-                                                          body: "security_policy_reference_resource",
+                                                          uri_template: "/compute/v1/locations/global/securityPolicies/{security_policy}/removeRule",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the test_iam_permissions REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_test_iam_permissions_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{resource}/testIamPermissions",
-                                                          body: "test_permissions_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["resource", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the update REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateBackendServiceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_update_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :put,
-                                                          uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
-                                                          body: "backend_service_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["backend_service", %r{^[^/]+/?$}, false]
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

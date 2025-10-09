@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,19 +18,19 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/projects/rest/service_stub"
-require "google/cloud/compute/v1/global_operations/rest"
+require "google/cloud/compute/v1/organization_security_policies/rest/service_stub"
+require "google/cloud/compute/v1/global_organization_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module Projects
+        module OrganizationSecurityPolicies
           module Rest
             ##
-            # REST client for the Projects service.
+            # REST client for the OrganizationSecurityPolicies service.
             #
-            # The Projects API.
+            # The OrganizationSecurityPolicies API.
             #
             class Client
               # @private
@@ -40,18 +40,18 @@ module Google
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
 
               # @private
-              attr_reader :projects_stub
+              attr_reader :organization_security_policies_stub
 
               ##
-              # Configure the Projects Client class.
+              # Configure the OrganizationSecurityPolicies Client class.
               #
-              # See {::Google::Cloud::Compute::V1::Projects::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all Projects clients
-              #   ::Google::Cloud::Compute::V1::Projects::Rest::Client.configure do |config|
+              #   # Modify the configuration for all OrganizationSecurityPolicies clients
+              #   ::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -71,42 +71,55 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.disable_xpn_host.timeout = 600.0
+                  default_config.rpcs.add_association.timeout = 600.0
 
-                  default_config.rpcs.disable_xpn_resource.timeout = 600.0
+                  default_config.rpcs.add_rule.timeout = 600.0
 
-                  default_config.rpcs.enable_xpn_host.timeout = 600.0
+                  default_config.rpcs.copy_rules.timeout = 600.0
 
-                  default_config.rpcs.enable_xpn_resource.timeout = 600.0
+                  default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
                   default_config.rpcs.get.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_xpn_host.timeout = 600.0
-                  default_config.rpcs.get_xpn_host.retry_policy = {
+                  default_config.rpcs.get_association.timeout = 600.0
+                  default_config.rpcs.get_association.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_xpn_resources.timeout = 600.0
-                  default_config.rpcs.get_xpn_resources.retry_policy = {
+                  default_config.rpcs.get_rule.timeout = 600.0
+                  default_config.rpcs.get_rule.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.list_xpn_hosts.timeout = 600.0
+                  default_config.rpcs.insert.timeout = 600.0
 
-                  default_config.rpcs.move_disk.timeout = 600.0
+                  default_config.rpcs.list.timeout = 600.0
+                  default_config.rpcs.list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
 
-                  default_config.rpcs.move_instance.timeout = 600.0
+                  default_config.rpcs.list_associations.timeout = 600.0
+                  default_config.rpcs.list_associations.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
 
-                  default_config.rpcs.set_cloud_armor_tier.timeout = 600.0
+                  default_config.rpcs.list_preconfigured_expression_sets.timeout = 600.0
+                  default_config.rpcs.list_preconfigured_expression_sets.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
 
-                  default_config.rpcs.set_common_instance_metadata.timeout = 600.0
+                  default_config.rpcs.move.timeout = 600.0
 
-                  default_config.rpcs.set_default_network_tier.timeout = 600.0
+                  default_config.rpcs.patch.timeout = 600.0
 
-                  default_config.rpcs.set_usage_export_bucket.timeout = 600.0
+                  default_config.rpcs.patch_rule.timeout = 600.0
+
+                  default_config.rpcs.remove_association.timeout = 600.0
+
+                  default_config.rpcs.remove_rule.timeout = 600.0
 
                   default_config
                 end
@@ -115,13 +128,13 @@ module Google
               end
 
               ##
-              # Configure the Projects Client instance.
+              # Configure the OrganizationSecurityPolicies Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::Projects::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -140,23 +153,23 @@ module Google
               # @return [String]
               #
               def universe_domain
-                @projects_stub.universe_domain
+                @organization_security_policies_stub.universe_domain
               end
 
               ##
-              # Create a new Projects REST client object.
+              # Create a new OrganizationSecurityPolicies REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the Projects client.
+              # @yield [config] Configure the OrganizationSecurityPolicies client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -182,14 +195,14 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @global_operations = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new do |config|
+                @global_organization_operations = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
                   config.universe_domain = @config.universe_domain
                 end
 
-                @projects_stub = ::Google::Cloud::Compute::V1::Projects::Rest::ServiceStub.new(
+                @organization_security_policies_stub = ::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
@@ -197,7 +210,7 @@ module Google
                   logger: @config.logger
                 )
 
-                @projects_stub.logger(stub: true)&.info do |entry|
+                @organization_security_policies_stub.logger(stub: true)&.info do |entry|
                   entry.set_system_name
                   entry.set_service
                   entry.message = "Created client for #{entry.service}"
@@ -209,11 +222,11 @@ module Google
               end
 
               ##
-              # Get the associated client for long-running operations via GlobalOperations.
+              # Get the associated client for long-running operations via GlobalOrganizationOperations.
               #
-              # @return [::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client]
+              # @return [::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client]
               #
-              attr_reader :global_operations
+              attr_reader :global_organization_operations
 
               ##
               # The logger used for request/response debug logging.
@@ -221,124 +234,37 @@ module Google
               # @return [Logger]
               #
               def logger
-                @projects_stub.logger
+                @organization_security_policies_stub.logger
               end
 
               # Service calls
 
               ##
-              # Disable this project as a shared VPC host project.
+              # Inserts an association for the specified security policy. This has billing implications. Projects in the hierarchy with effective hierarchical security policies will be automatically enrolled into Cloud Armor Enterprise if not already enrolled. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.addAssociation instead if possible.
               #
-              # @overload disable_xpn_host(request, options = nil)
-              #   Pass arguments to `disable_xpn_host` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DisableXpnHostProjectRequest} or an equivalent Hash.
+              # @overload add_association(request, options = nil)
+              #   Pass arguments to `add_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AddAssociationOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DisableXpnHostProjectRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::AddAssociationOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload disable_xpn_host(project: nil, request_id: nil)
-              #   Pass arguments to `disable_xpn_host` via keyword arguments. Note that at
+              # @overload add_association(replace_existing_association: nil, request_id: nil, security_policy: nil, security_policy_association_resource: nil)
+              #   Pass arguments to `add_association` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param project [::String]
-              #     Project ID for this request.
+              #   @param replace_existing_association [::Boolean]
+              #     Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DisableXpnHostProjectRequest.new
-              #
-              #   # Call the disable_xpn_host method.
-              #   result = client.disable_xpn_host request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def disable_xpn_host request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DisableXpnHostProjectRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.disable_xpn_host.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.disable_xpn_host.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.disable_xpn_host.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @projects_stub.disable_xpn_host request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Disable a service resource (also known as service project) associated with this host project.
-              #
-              # @overload disable_xpn_resource(request, options = nil)
-              #   Pass arguments to `disable_xpn_resource` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload disable_xpn_resource(project: nil, projects_disable_xpn_resource_request_resource: nil, request_id: nil)
-              #   Pass arguments to `disable_xpn_resource` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param projects_disable_xpn_resource_request_resource [::Google::Cloud::Compute::V1::ProjectsDisableXpnResourceRequest, ::Hash]
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              #   @param security_policy_association_resource [::Google::Cloud::Compute::V1::SecurityPolicyAssociation, ::Hash]
               #     The body resource for this request
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -351,27 +277,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest.new
+              #   request = Google::Cloud::Compute::V1::AddAssociationOrganizationSecurityPolicyRequest.new
               #
-              #   # Call the disable_xpn_resource method.
-              #   result = client.disable_xpn_resource request
+              #   # Call the add_association method.
+              #   result = client.add_association request
               #
               #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
               #   p result
               #
-              def disable_xpn_resource request, options = nil
+              def add_association request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddAssociationOrganizationSecurityPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.disable_xpn_resource.metadata.to_h
+                call_metadata = @config.rpcs.add_association.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -382,21 +308,19 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.disable_xpn_resource.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_association.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.disable_xpn_resource.retry_policy
+                                       retry_policy: @config.rpcs.add_association.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.disable_xpn_resource request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @organization_security_policies_stub.add_association request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
+                    client: global_organization_operations,
+                    request_values: {},
                     options: options
                   )
                   yield result, response if block_given?
@@ -407,118 +331,29 @@ module Google
               end
 
               ##
-              # Enable this project as a shared VPC host project.
+              # Inserts a rule into a security policy.
               #
-              # @overload enable_xpn_host(request, options = nil)
-              #   Pass arguments to `enable_xpn_host` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::EnableXpnHostProjectRequest} or an equivalent Hash.
+              # @overload add_rule(request, options = nil)
+              #   Pass arguments to `add_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AddRuleOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::EnableXpnHostProjectRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::AddRuleOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload enable_xpn_host(project: nil, request_id: nil)
-              #   Pass arguments to `enable_xpn_host` via keyword arguments. Note that at
+              # @overload add_rule(request_id: nil, security_policy: nil, security_policy_rule_resource: nil)
+              #   Pass arguments to `add_rule` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param project [::String]
-              #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::EnableXpnHostProjectRequest.new
-              #
-              #   # Call the enable_xpn_host method.
-              #   result = client.enable_xpn_host request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def enable_xpn_host request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::EnableXpnHostProjectRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.enable_xpn_host.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.enable_xpn_host.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.enable_xpn_host.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @projects_stub.enable_xpn_host request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Enable service resource (a.k.a service project) for a host project, so that subnets in the host project can be used by instances in the service project.
-              #
-              # @overload enable_xpn_resource(request, options = nil)
-              #   Pass arguments to `enable_xpn_resource` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload enable_xpn_resource(project: nil, projects_enable_xpn_resource_request_resource: nil, request_id: nil)
-              #   Pass arguments to `enable_xpn_resource` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param projects_enable_xpn_resource_request_resource [::Google::Cloud::Compute::V1::ProjectsEnableXpnResourceRequest, ::Hash]
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              #   @param security_policy_rule_resource [::Google::Cloud::Compute::V1::SecurityPolicyRule, ::Hash]
               #     The body resource for this request
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -531,27 +366,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest.new
+              #   request = Google::Cloud::Compute::V1::AddRuleOrganizationSecurityPolicyRequest.new
               #
-              #   # Call the enable_xpn_resource method.
-              #   result = client.enable_xpn_resource request
+              #   # Call the add_rule method.
+              #   result = client.add_rule request
               #
               #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
               #   p result
               #
-              def enable_xpn_resource request, options = nil
+              def add_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddRuleOrganizationSecurityPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.enable_xpn_resource.metadata.to_h
+                call_metadata = @config.rpcs.add_rule.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -562,21 +397,19 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.enable_xpn_resource.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_rule.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.enable_xpn_resource.retry_policy
+                                       retry_policy: @config.rpcs.add_rule.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.enable_xpn_resource request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @organization_security_policies_stub.add_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
+                    client: global_organization_operations,
+                    request_values: {},
                     options: options
                   )
                   yield result, response if block_given?
@@ -587,30 +420,206 @@ module Google
               end
 
               ##
-              # Returns the specified Project resource. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.
+              # Copies rules to the specified security policy. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.copyRules instead.
+              #
+              # @overload copy_rules(request, options = nil)
+              #   Pass arguments to `copy_rules` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CopyRulesOrganizationSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::CopyRulesOrganizationSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload copy_rules(request_id: nil, security_policy: nil, source_security_policy: nil)
+              #   Pass arguments to `copy_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              #   @param source_security_policy [::String]
+              #     The security policy from which to copy rules.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::CopyRulesOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the copy_rules method.
+              #   result = client.copy_rules request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def copy_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CopyRulesOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.copy_rules.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.copy_rules.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.copy_rules.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.copy_rules request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified policy. Use of this API to remove firewall policies is deprecated. Use firewallPolicies.delete instead.
+              #
+              # @overload delete(request, options = nil)
+              #   Pass arguments to `delete` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::DeleteOrganizationSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::DeleteOrganizationSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete(request_id: nil, security_policy: nil)
+              #   Pass arguments to `delete` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy [::String]
+              #     Name of the security policy to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the delete method.
+              #   result = client.delete request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def delete request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all of the ordered rules present in a single specified policy. Use of this API to read firewall policies is deprecated. Use firewallPolicies.get instead.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetProjectRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetProjectRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(project: nil)
+              # @overload get(security_policy: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param project [::String]
-              #     Project ID for this request.
+              #   @param security_policy [::String]
+              #     Name of the security policy to get.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Project]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Project]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -618,21 +627,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetProjectRequest.new
+              #   request = Google::Cloud::Compute::V1::GetOrganizationSecurityPolicyRequest.new
               #
               #   # Call the get method.
               #   result = client.get request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Project.
+              #   # The returned object is of type Google::Cloud::Compute::V1::SecurityPolicy.
               #   p result
               #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetProjectRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetOrganizationSecurityPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -657,7 +666,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.get request, options do |result, operation|
+                @organization_security_policies_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -665,30 +674,32 @@ module Google
               end
 
               ##
-              # Gets the shared VPC host project that this project links to. May be empty if no link exists.
+              # Gets an association with the specified name. Use of this API to read firewall policies is deprecated. Use firewallPolicies.getAssociation instead if possible.
               #
-              # @overload get_xpn_host(request, options = nil)
-              #   Pass arguments to `get_xpn_host` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetXpnHostProjectRequest} or an equivalent Hash.
+              # @overload get_association(request, options = nil)
+              #   Pass arguments to `get_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetAssociationOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetXpnHostProjectRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetAssociationOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_xpn_host(project: nil)
-              #   Pass arguments to `get_xpn_host` via keyword arguments. Note that at
+              # @overload get_association(name: nil, security_policy: nil)
+              #   Pass arguments to `get_association` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param project [::String]
-              #     Project ID for this request.
+              #   @param name [::String]
+              #     The name of the association to get from the security policy.
+              #   @param security_policy [::String]
+              #     Name of the security policy to which the queried rule belongs.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Project]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicyAssociation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Project]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicyAssociation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -696,27 +707,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetXpnHostProjectRequest.new
+              #   request = Google::Cloud::Compute::V1::GetAssociationOrganizationSecurityPolicyRequest.new
               #
-              #   # Call the get_xpn_host method.
-              #   result = client.get_xpn_host request
+              #   # Call the get_association method.
+              #   result = client.get_association request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Project.
+              #   # The returned object is of type Google::Cloud::Compute::V1::SecurityPolicyAssociation.
               #   p result
               #
-              def get_xpn_host request, options = nil
+              def get_association request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetXpnHostProjectRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetAssociationOrganizationSecurityPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.get_xpn_host.metadata.to_h
+                call_metadata = @config.rpcs.get_association.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -727,15 +738,15 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.get_xpn_host.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get_association.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_xpn_host.retry_policy
+                                       retry_policy: @config.rpcs.get_association.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.get_xpn_host request, options do |result, operation|
+                @organization_security_policies_stub.get_association request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -743,20 +754,191 @@ module Google
               end
 
               ##
-              # Gets service resources (a.k.a service project) associated with this host project.
+              # Gets a rule at the specified priority. Use of this API to read firewall policies is deprecated. Use firewallPolicies.getRule instead.
               #
-              # @overload get_xpn_resources(request, options = nil)
-              #   Pass arguments to `get_xpn_resources` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest} or an equivalent Hash.
+              # @overload get_rule(request, options = nil)
+              #   Pass arguments to `get_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetRuleOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetRuleOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_xpn_resources(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
-              #   Pass arguments to `get_xpn_resources` via keyword arguments. Note that at
+              # @overload get_rule(priority: nil, security_policy: nil)
+              #   Pass arguments to `get_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param priority [::Integer]
+              #     The priority of the rule to get from the security policy.
+              #   @param security_policy [::String]
+              #     Name of the security policy to which the queried rule belongs.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicyRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicyRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetRuleOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the get_rule method.
+              #   result = client.get_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::SecurityPolicyRule.
+              #   p result
+              #
+              def get_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetRuleOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.get_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new policy in the specified project using the data included in the request. Use of this API to insert firewall policies is deprecated. Use firewallPolicies.insert instead.
+              #
+              # @overload insert(request, options = nil)
+              #   Pass arguments to `insert` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::InsertOrganizationSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::InsertOrganizationSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload insert(parent_id: nil, request_id: nil, security_policy_resource: nil)
+              #   Pass arguments to `insert` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent_id [::String]
+              #     Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy_resource [::Google::Cloud::Compute::V1::SecurityPolicy, ::Hash]
+              #     The body resource for this request
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::InsertOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the insert method.
+              #   result = client.insert request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def insert request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.insert.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.insert.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.insert.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {
+                      "parent_id" => request.parent_id
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all the policies that have been configured for the specified project. Use of this API to read firewall policies is deprecated. Use firewallPolicies.list instead.
+              #
+              # @overload list(request, options = nil)
+              #   Pass arguments to `list` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ListOrganizationSecurityPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ListOrganizationSecurityPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, parent_id: nil, return_partial_success: nil)
+              #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
@@ -768,15 +950,15 @@ module Google
               #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param project [::String]
-              #     Project ID for this request.
+              #   @param parent_id [::String]
+              #     Parent ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::XpnResourceId>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::SecurityPolicy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::XpnResourceId>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::SecurityPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -784,27 +966,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new
+              #   request = Google::Cloud::Compute::V1::ListOrganizationSecurityPoliciesRequest.new
               #
-              #   # Call the get_xpn_resources method.
-              #   result = client.get_xpn_resources request
+              #   # Call the list method.
+              #   result = client.list request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::ProjectsGetXpnResources.
+              #   # The returned object is of type Google::Cloud::Compute::V1::SecurityPolicyList.
               #   p result
               #
-              def get_xpn_resources request, options = nil
+              def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListOrganizationSecurityPoliciesRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.get_xpn_resources.metadata.to_h
+                call_metadata = @config.rpcs.list.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -815,16 +997,16 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.get_xpn_resources.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_xpn_resources.retry_policy
+                                       retry_policy: @config.rpcs.list.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.get_xpn_resources request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @projects_stub, :get_xpn_resources, "resources", request, result, options
+                @organization_security_policies_stub.list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @organization_security_policies_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -833,20 +1015,98 @@ module Google
               end
 
               ##
-              # Lists all shared VPC host projects visible to the user in an organization.
+              # Lists associations of a specified target, i.e., organization or folder. Use of this API to read firewall policies is deprecated. Use firewallPolicies.listAssociations instead if possible.
               #
-              # @overload list_xpn_hosts(request, options = nil)
-              #   Pass arguments to `list_xpn_hosts` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest} or an equivalent Hash.
+              # @overload list_associations(request, options = nil)
+              #   Pass arguments to `list_associations` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ListAssociationsOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListAssociationsOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_xpn_hosts(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, projects_list_xpn_hosts_request_resource: nil, return_partial_success: nil)
-              #   Pass arguments to `list_xpn_hosts` via keyword arguments. Note that at
+              # @overload list_associations(target_resource: nil)
+              #   Pass arguments to `list_associations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param target_resource [::String]
+              #     The target resource to list associations. It is an organization, or a folder.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::OrganizationSecurityPoliciesListAssociationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::OrganizationSecurityPoliciesListAssociationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListAssociationsOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the list_associations method.
+              #   result = client.list_associations request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::OrganizationSecurityPoliciesListAssociationsResponse.
+              #   p result
+              #
+              def list_associations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListAssociationsOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_associations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_associations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_associations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.list_associations request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
+              #
+              # @overload list_preconfigured_expression_sets(request, options = nil)
+              #   Pass arguments to `list_preconfigured_expression_sets` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_preconfigured_expression_sets(filter: nil, max_results: nil, order_by: nil, page_token: nil, parent_id: nil, return_partial_success: nil)
+              #   Pass arguments to `list_preconfigured_expression_sets` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
@@ -858,17 +1118,15 @@ module Google
               #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param projects_list_xpn_hosts_request_resource [::Google::Cloud::Compute::V1::ProjectsListXpnHostsRequest, ::Hash]
-              #     The body resource for this request
+              #   @param parent_id [::String]
+              #     Parent ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Project>]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Project>]
+              # @return [::Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -876,27 +1134,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new
+              #   request = Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest.new
               #
-              #   # Call the list_xpn_hosts method.
-              #   result = client.list_xpn_hosts request
+              #   # Call the list_preconfigured_expression_sets method.
+              #   result = client.list_preconfigured_expression_sets request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::XpnHostList.
+              #   # The returned object is of type Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse.
               #   p result
               #
-              def list_xpn_hosts request, options = nil
+              def list_preconfigured_expression_sets request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.list_xpn_hosts.metadata.to_h
+                call_metadata = @config.rpcs.list_preconfigured_expression_sets.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -907,47 +1165,45 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.list_xpn_hosts.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list_preconfigured_expression_sets.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.list_xpn_hosts.retry_policy
+                                       retry_policy: @config.rpcs.list_preconfigured_expression_sets.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.list_xpn_hosts request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @projects_stub, :list_xpn_hosts, "items", request, result, options
+                @organization_security_policies_stub.list_preconfigured_expression_sets request, options do |result, operation|
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
-              # Starting September 29, 2025, you can't use the moveDisk API on new projects. To move a disk to a different region or zone, follow the steps in [Change the location of a disk](https://\\{$universe.dns_names.final_documentation_domain}/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd). Projects that already use the moveDisk API can continue usage until September 29, 2026. Starting November 1, 2025, API responses will include a warning message in the response body about the upcoming deprecation. You can skip the message to continue using the service without interruption.
+              # Moves the specified security policy. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.move instead.
               #
-              # @overload move_disk(request, options = nil)
-              #   Pass arguments to `move_disk` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::MoveDiskProjectRequest} or an equivalent Hash.
+              # @overload move(request, options = nil)
+              #   Pass arguments to `move` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::MoveOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::MoveDiskProjectRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::MoveOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload move_disk(disk_move_request_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `move_disk` via keyword arguments. Note that at
+              # @overload move(parent_id: nil, request_id: nil, security_policy: nil)
+              #   Pass arguments to `move` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk_move_request_resource [::Google::Cloud::Compute::V1::DiskMoveRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
+              #   @param parent_id [::String]
+              #     The new parent of the security policy.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -960,27 +1216,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::MoveDiskProjectRequest.new
+              #   request = Google::Cloud::Compute::V1::MoveOrganizationSecurityPolicyRequest.new
               #
-              #   # Call the move_disk method.
-              #   result = client.move_disk request
+              #   # Call the move method.
+              #   result = client.move request
               #
               #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
               #   p result
               #
-              def move_disk request, options = nil
+              def move request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::MoveDiskProjectRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::MoveOrganizationSecurityPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.move_disk.metadata.to_h
+                call_metadata = @config.rpcs.move.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -991,20 +1247,20 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.move_disk.timeout,
+                options.apply_defaults timeout:      @config.rpcs.move.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.move_disk.retry_policy
+                                       retry_policy: @config.rpcs.move.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.move_disk request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @organization_security_policies_stub.move request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
+                    client: global_organization_operations,
                     request_values: {
-                      "project" => request.project
+                      "parent_id" => request.parent_id
                     },
                     options: options
                   )
@@ -1016,392 +1272,28 @@ module Google
               end
 
               ##
-              # Moves an instance and its attached persistent disks from one zone to another. *Note*: Moving VMs or disks by using this method might cause unexpected behavior. For more information, see the [known issue](/compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior). [Deprecated] This method is deprecated. See [moving instance across zones](/compute/docs/instances/moving-instance-across-zones) instead.
+              # Patches the specified policy with the data included in the request. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.patch instead.
               #
-              # @overload move_instance(request, options = nil)
-              #   Pass arguments to `move_instance` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::MoveInstanceProjectRequest} or an equivalent Hash.
+              # @overload patch(request, options = nil)
+              #   Pass arguments to `patch` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchOrganizationSecurityPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::MoveInstanceProjectRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::PatchOrganizationSecurityPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload move_instance(instance_move_request_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `move_instance` via keyword arguments. Note that at
+              # @overload patch(request_id: nil, security_policy: nil, security_policy_resource: nil)
+              #   Pass arguments to `patch` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param instance_move_request_resource [::Google::Cloud::Compute::V1::InstanceMoveRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::MoveInstanceProjectRequest.new
-              #
-              #   # Call the move_instance method.
-              #   result = client.move_instance request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def move_instance request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::MoveInstanceProjectRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.move_instance.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.move_instance.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.move_instance.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @projects_stub.move_instance request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the billing account of the project must be subscribed to Cloud Armor Enterprise. See Subscribing to Cloud Armor Enterprise for more information.
-              #
-              # @overload set_cloud_armor_tier(request, options = nil)
-              #   Pass arguments to `set_cloud_armor_tier` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetCloudArmorTierProjectRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetCloudArmorTierProjectRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload set_cloud_armor_tier(project: nil, projects_set_cloud_armor_tier_request_resource: nil, request_id: nil)
-              #   Pass arguments to `set_cloud_armor_tier` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param projects_set_cloud_armor_tier_request_resource [::Google::Cloud::Compute::V1::ProjectsSetCloudArmorTierRequest, ::Hash]
-              #     The body resource for this request
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetCloudArmorTierProjectRequest.new
-              #
-              #   # Call the set_cloud_armor_tier method.
-              #   result = client.set_cloud_armor_tier request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def set_cloud_armor_tier request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetCloudArmorTierProjectRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_cloud_armor_tier.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.set_cloud_armor_tier.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.set_cloud_armor_tier.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @projects_stub.set_cloud_armor_tier request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Sets metadata common to all instances within the specified project using the data included in the request.
-              #
-              # @overload set_common_instance_metadata(request, options = nil)
-              #   Pass arguments to `set_common_instance_metadata` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload set_common_instance_metadata(metadata_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `set_common_instance_metadata` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param metadata_resource [::Google::Cloud::Compute::V1::Metadata, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest.new
-              #
-              #   # Call the set_common_instance_metadata method.
-              #   result = client.set_common_instance_metadata request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def set_common_instance_metadata request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_common_instance_metadata.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.set_common_instance_metadata.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.set_common_instance_metadata.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @projects_stub.set_common_instance_metadata request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Sets the default network tier of the project. The default network tier is used when an address/forwardingRule/instance is created without specifying the network tier field.
-              #
-              # @overload set_default_network_tier(request, options = nil)
-              #   Pass arguments to `set_default_network_tier` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload set_default_network_tier(project: nil, projects_set_default_network_tier_request_resource: nil, request_id: nil)
-              #   Pass arguments to `set_default_network_tier` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param projects_set_default_network_tier_request_resource [::Google::Cloud::Compute::V1::ProjectsSetDefaultNetworkTierRequest, ::Hash]
-              #     The body resource for this request
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest.new
-              #
-              #   # Call the set_default_network_tier method.
-              #   result = client.set_default_network_tier request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def set_default_network_tier request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_default_network_tier.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.set_default_network_tier.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.set_default_network_tier.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @projects_stub.set_default_network_tier request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Enables the usage export feature and sets the usage export bucket where reports are stored. If you provide an empty request body using this method, the usage export feature will be disabled.
-              #
-              # @overload set_usage_export_bucket(request, options = nil)
-              #   Pass arguments to `set_usage_export_bucket` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload set_usage_export_bucket(project: nil, request_id: nil, usage_export_location_resource: nil)
-              #   Pass arguments to `set_usage_export_bucket` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param usage_export_location_resource [::Google::Cloud::Compute::V1::UsageExportLocation, ::Hash]
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              #   @param security_policy_resource [::Google::Cloud::Compute::V1::SecurityPolicy, ::Hash]
               #     The body resource for this request
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
@@ -1415,27 +1307,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Projects::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest.new
+              #   request = Google::Cloud::Compute::V1::PatchOrganizationSecurityPolicyRequest.new
               #
-              #   # Call the set_usage_export_bucket method.
-              #   result = client.set_usage_export_bucket request
+              #   # Call the patch method.
+              #   result = client.patch request
               #
               #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
               #   p result
               #
-              def set_usage_export_bucket request, options = nil
+              def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchOrganizationSecurityPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.set_usage_export_bucket.metadata.to_h
+                call_metadata = @config.rpcs.patch.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -1446,21 +1338,19 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.set_usage_export_bucket.timeout,
+                options.apply_defaults timeout:      @config.rpcs.patch.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.set_usage_export_bucket.retry_policy
+                                       retry_policy: @config.rpcs.patch.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @projects_stub.set_usage_export_bucket request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @organization_security_policies_stub.patch request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
+                    client: global_organization_operations,
+                    request_values: {},
                     options: options
                   )
                   yield result, response if block_given?
@@ -1471,13 +1361,282 @@ module Google
               end
 
               ##
-              # Configuration class for the Projects REST API.
+              # Patches a rule at the specified priority. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.patchRule instead.
               #
-              # This class represents the configuration for Projects REST,
+              # @overload patch_rule(request, options = nil)
+              #   Pass arguments to `patch_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchRuleOrganizationSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PatchRuleOrganizationSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload patch_rule(priority: nil, request_id: nil, security_policy: nil, security_policy_rule_resource: nil)
+              #   Pass arguments to `patch_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param priority [::Integer]
+              #     The priority of the rule to patch.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              #   @param security_policy_rule_resource [::Google::Cloud::Compute::V1::SecurityPolicyRule, ::Hash]
+              #     The body resource for this request
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchRuleOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the patch_rule method.
+              #   result = client.patch_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def patch_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchRuleOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.patch_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.patch_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.patch_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.patch_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Removes an association for the specified security policy. Use of this API to modify firewall policies is deprecated. Use firewallPolicies.removeAssociation instead if possible.
+              #
+              # @overload remove_association(request, options = nil)
+              #   Pass arguments to `remove_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::RemoveAssociationOrganizationSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::RemoveAssociationOrganizationSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload remove_association(name: nil, request_id: nil, security_policy: nil)
+              #   Pass arguments to `remove_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Name for the attachment that will be removed.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::RemoveAssociationOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the remove_association method.
+              #   result = client.remove_association request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def remove_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RemoveAssociationOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.remove_association.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.remove_association.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.remove_association.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.remove_association request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a rule at the specified priority.
+              #
+              # @overload remove_rule(request, options = nil)
+              #   Pass arguments to `remove_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::RemoveRuleOrganizationSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::RemoveRuleOrganizationSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload remove_rule(priority: nil, request_id: nil, security_policy: nil)
+              #   Pass arguments to `remove_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param priority [::Integer]
+              #     The priority of the rule to remove from the security policy.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param security_policy [::String]
+              #     Name of the security policy to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::RemoveRuleOrganizationSecurityPolicyRequest.new
+              #
+              #   # Call the remove_rule method.
+              #   result = client.remove_rule request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def remove_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RemoveRuleOrganizationSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.remove_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.remove_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.remove_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @organization_security_policies_stub.remove_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Configuration class for the OrganizationSecurityPolicies REST API.
+              #
+              # This class represents the configuration for OrganizationSecurityPolicies REST,
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {::Google::Cloud::Compute::V1::Projects::Rest::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -1486,17 +1645,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # disable_xpn_host to 20 seconds,
+              #   # add_association to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
-              #   ::Google::Cloud::Compute::V1::Projects::Rest::Client.configure do |config|
+              #   ::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.disable_xpn_host.timeout = 20.0
+              #     config.rpcs.add_association.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
-              #   client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.disable_xpn_host.timeout = 20.0
+              #     config.rpcs.add_association.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -1599,7 +1758,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the Projects API.
+                # Configuration RPC class for the OrganizationSecurityPolicies API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -1617,106 +1776,120 @@ module Google
                 #
                 class Rpcs
                   ##
-                  # RPC-specific configuration for `disable_xpn_host`
+                  # RPC-specific configuration for `add_association`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :disable_xpn_host
+                  attr_reader :add_association
                   ##
-                  # RPC-specific configuration for `disable_xpn_resource`
+                  # RPC-specific configuration for `add_rule`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :disable_xpn_resource
+                  attr_reader :add_rule
                   ##
-                  # RPC-specific configuration for `enable_xpn_host`
+                  # RPC-specific configuration for `copy_rules`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :enable_xpn_host
+                  attr_reader :copy_rules
                   ##
-                  # RPC-specific configuration for `enable_xpn_resource`
+                  # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :enable_xpn_resource
+                  attr_reader :delete
                   ##
                   # RPC-specific configuration for `get`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get
                   ##
-                  # RPC-specific configuration for `get_xpn_host`
+                  # RPC-specific configuration for `get_association`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :get_xpn_host
+                  attr_reader :get_association
                   ##
-                  # RPC-specific configuration for `get_xpn_resources`
+                  # RPC-specific configuration for `get_rule`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :get_xpn_resources
+                  attr_reader :get_rule
                   ##
-                  # RPC-specific configuration for `list_xpn_hosts`
+                  # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :list_xpn_hosts
+                  attr_reader :insert
                   ##
-                  # RPC-specific configuration for `move_disk`
+                  # RPC-specific configuration for `list`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :move_disk
+                  attr_reader :list
                   ##
-                  # RPC-specific configuration for `move_instance`
+                  # RPC-specific configuration for `list_associations`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :move_instance
+                  attr_reader :list_associations
                   ##
-                  # RPC-specific configuration for `set_cloud_armor_tier`
+                  # RPC-specific configuration for `list_preconfigured_expression_sets`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :set_cloud_armor_tier
+                  attr_reader :list_preconfigured_expression_sets
                   ##
-                  # RPC-specific configuration for `set_common_instance_metadata`
+                  # RPC-specific configuration for `move`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :set_common_instance_metadata
+                  attr_reader :move
                   ##
-                  # RPC-specific configuration for `set_default_network_tier`
+                  # RPC-specific configuration for `patch`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :set_default_network_tier
+                  attr_reader :patch
                   ##
-                  # RPC-specific configuration for `set_usage_export_bucket`
+                  # RPC-specific configuration for `patch_rule`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :set_usage_export_bucket
+                  attr_reader :patch_rule
+                  ##
+                  # RPC-specific configuration for `remove_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_association
+                  ##
+                  # RPC-specific configuration for `remove_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_rule
 
                   # @private
                   def initialize parent_rpcs = nil
-                    disable_xpn_host_config = parent_rpcs.disable_xpn_host if parent_rpcs.respond_to? :disable_xpn_host
-                    @disable_xpn_host = ::Gapic::Config::Method.new disable_xpn_host_config
-                    disable_xpn_resource_config = parent_rpcs.disable_xpn_resource if parent_rpcs.respond_to? :disable_xpn_resource
-                    @disable_xpn_resource = ::Gapic::Config::Method.new disable_xpn_resource_config
-                    enable_xpn_host_config = parent_rpcs.enable_xpn_host if parent_rpcs.respond_to? :enable_xpn_host
-                    @enable_xpn_host = ::Gapic::Config::Method.new enable_xpn_host_config
-                    enable_xpn_resource_config = parent_rpcs.enable_xpn_resource if parent_rpcs.respond_to? :enable_xpn_resource
-                    @enable_xpn_resource = ::Gapic::Config::Method.new enable_xpn_resource_config
+                    add_association_config = parent_rpcs.add_association if parent_rpcs.respond_to? :add_association
+                    @add_association = ::Gapic::Config::Method.new add_association_config
+                    add_rule_config = parent_rpcs.add_rule if parent_rpcs.respond_to? :add_rule
+                    @add_rule = ::Gapic::Config::Method.new add_rule_config
+                    copy_rules_config = parent_rpcs.copy_rules if parent_rpcs.respond_to? :copy_rules
+                    @copy_rules = ::Gapic::Config::Method.new copy_rules_config
+                    delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
+                    @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
-                    get_xpn_host_config = parent_rpcs.get_xpn_host if parent_rpcs.respond_to? :get_xpn_host
-                    @get_xpn_host = ::Gapic::Config::Method.new get_xpn_host_config
-                    get_xpn_resources_config = parent_rpcs.get_xpn_resources if parent_rpcs.respond_to? :get_xpn_resources
-                    @get_xpn_resources = ::Gapic::Config::Method.new get_xpn_resources_config
-                    list_xpn_hosts_config = parent_rpcs.list_xpn_hosts if parent_rpcs.respond_to? :list_xpn_hosts
-                    @list_xpn_hosts = ::Gapic::Config::Method.new list_xpn_hosts_config
-                    move_disk_config = parent_rpcs.move_disk if parent_rpcs.respond_to? :move_disk
-                    @move_disk = ::Gapic::Config::Method.new move_disk_config
-                    move_instance_config = parent_rpcs.move_instance if parent_rpcs.respond_to? :move_instance
-                    @move_instance = ::Gapic::Config::Method.new move_instance_config
-                    set_cloud_armor_tier_config = parent_rpcs.set_cloud_armor_tier if parent_rpcs.respond_to? :set_cloud_armor_tier
-                    @set_cloud_armor_tier = ::Gapic::Config::Method.new set_cloud_armor_tier_config
-                    set_common_instance_metadata_config = parent_rpcs.set_common_instance_metadata if parent_rpcs.respond_to? :set_common_instance_metadata
-                    @set_common_instance_metadata = ::Gapic::Config::Method.new set_common_instance_metadata_config
-                    set_default_network_tier_config = parent_rpcs.set_default_network_tier if parent_rpcs.respond_to? :set_default_network_tier
-                    @set_default_network_tier = ::Gapic::Config::Method.new set_default_network_tier_config
-                    set_usage_export_bucket_config = parent_rpcs.set_usage_export_bucket if parent_rpcs.respond_to? :set_usage_export_bucket
-                    @set_usage_export_bucket = ::Gapic::Config::Method.new set_usage_export_bucket_config
+                    get_association_config = parent_rpcs.get_association if parent_rpcs.respond_to? :get_association
+                    @get_association = ::Gapic::Config::Method.new get_association_config
+                    get_rule_config = parent_rpcs.get_rule if parent_rpcs.respond_to? :get_rule
+                    @get_rule = ::Gapic::Config::Method.new get_rule_config
+                    insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
+                    @insert = ::Gapic::Config::Method.new insert_config
+                    list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
+                    @list = ::Gapic::Config::Method.new list_config
+                    list_associations_config = parent_rpcs.list_associations if parent_rpcs.respond_to? :list_associations
+                    @list_associations = ::Gapic::Config::Method.new list_associations_config
+                    list_preconfigured_expression_sets_config = parent_rpcs.list_preconfigured_expression_sets if parent_rpcs.respond_to? :list_preconfigured_expression_sets
+                    @list_preconfigured_expression_sets = ::Gapic::Config::Method.new list_preconfigured_expression_sets_config
+                    move_config = parent_rpcs.move if parent_rpcs.respond_to? :move
+                    @move = ::Gapic::Config::Method.new move_config
+                    patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
+                    @patch = ::Gapic::Config::Method.new patch_config
+                    patch_rule_config = parent_rpcs.patch_rule if parent_rpcs.respond_to? :patch_rule
+                    @patch_rule = ::Gapic::Config::Method.new patch_rule_config
+                    remove_association_config = parent_rpcs.remove_association if parent_rpcs.respond_to? :remove_association
+                    @remove_association = ::Gapic::Config::Method.new remove_association_config
+                    remove_rule_config = parent_rpcs.remove_rule if parent_rpcs.respond_to? :remove_rule
+                    @remove_rule = ::Gapic::Config::Method.new remove_rule_config
 
                     yield self if block_given?
                   end

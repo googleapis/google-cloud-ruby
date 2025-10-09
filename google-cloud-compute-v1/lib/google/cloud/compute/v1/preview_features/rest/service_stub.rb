@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module ReservationSubBlocks
+        module PreviewFeatures
           module Rest
             ##
-            # REST service stub for the ReservationSubBlocks service.
+            # REST service stub for the PreviewFeatures service.
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
@@ -76,16 +76,16 @@ module Google
               ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetReservationSubBlockRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetPreviewFeatureRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse]
+              # @yieldparam result [::Google::Cloud::Compute::V1::PreviewFeature]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse]
+              # @return [::Google::Cloud::Compute::V1::PreviewFeature]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -106,7 +106,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::PreviewFeature.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -116,16 +116,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListPreviewFeaturesRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::ReservationSubBlocksListResponse]
+              # @yieldparam result [::Google::Cloud::Compute::V1::PreviewFeatureList]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::ReservationSubBlocksListResponse]
+              # @return [::Google::Cloud::Compute::V1::PreviewFeatureList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -146,7 +146,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::ReservationSubBlocksListResponse.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::PreviewFeatureList.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -154,9 +154,9 @@ module Google
               end
 
               ##
-              # Baseline implementation for the perform_maintenance REST call
+              # Baseline implementation for the update REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdatePreviewFeatureRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -167,10 +167,10 @@ module Google
               #
               # @return [::Google::Cloud::Compute::V1::Operation]
               #   A result object deserialized from the server's reply
-              def perform_maintenance request_pb, options = nil
+              def update request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                verb, uri, query_string_params, body = ServiceStub.transcode_perform_maintenance_request request_pb
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -182,47 +182,7 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
-                  method_name: "perform_maintenance",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the report_faulty REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ReportFaultyReservationSubBlockRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def report_faulty request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_report_faulty_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "report_faulty",
+                  method_name: "update",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -238,7 +198,7 @@ module Google
               #
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetReservationSubBlockRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetPreviewFeatureRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -246,12 +206,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}",
+                                                          uri_template: "/compute/v1/projects/{project}/global/previewFeatures/{preview_feature}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["parent_name", %r{^[^/]+/?$}, false],
-                                                            ["reservation_sub_block", %r{^[^/]+/?$}, false]
+                                                            ["preview_feature", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -262,7 +220,7 @@ module Google
               #
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListPreviewFeaturesRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -270,11 +228,9 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks",
+                                                          uri_template: "/compute/v1/projects/{project}/global/previewFeatures",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["parent_name", %r{^[^/]+/?$}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -283,47 +239,21 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the perform_maintenance REST call
+              # GRPC transcoding helper method for the update REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdatePreviewFeatureRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
-              def self.transcode_perform_maintenance_request request_pb
+              def self.transcode_update_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance",
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/global/previewFeatures/{preview_feature}",
+                                                          body: "preview_feature_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["parent_name", %r{^[^/]+/?$}, false],
-                                                            ["reservation_sub_block", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the report_faulty REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ReportFaultyReservationSubBlockRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_report_faulty_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/reportFaulty",
-                                                          body: "reservation_sub_blocks_report_faulty_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["parent_name", %r{^[^/]+/?$}, false],
-                                                            ["reservation_sub_block", %r{^[^/]+/?$}, false]
+                                                            ["preview_feature", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
