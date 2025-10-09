@@ -783,7 +783,7 @@ module Google
           # Processor.
           # @!attribute [rw] training_method
           #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::CustomDocumentExtractionOptions::TrainingMethod]
-          #     Training method to use for CDE training.
+          #     Optional. Training method to use for CDE training.
           class CustomDocumentExtractionOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
