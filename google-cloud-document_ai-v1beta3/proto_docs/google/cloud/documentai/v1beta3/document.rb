@@ -95,6 +95,22 @@ module Google
         #     Optional. The blob assets in this document. This is used to store the
         #     content of the inline blobs in this document, e.g. image bytes, such that
         #     it can be referenced by other fields in the document via asset id.
+        # @!attribute [rw] entity_validation_output
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput]
+        #     The entity validation output for the document. This is the validation
+        #     output for `document.entities` field.
+        # @!attribute [rw] entities_revisions
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::EntitiesRevision>]
+        #     A list of entity revisions. The entity revisions are appended to the
+        #     document in the processing order. This field can be used for comparing the
+        #     entity extraction results at different stages of the processing.
+        # @!attribute [rw] entities_revision_id
+        #   @return [::String]
+        #     The entity revision id that `document.entities` field is based on.
+        #     If this field is set and `entities_revisions` is not empty, the entities in
+        #     `document.entities` field are the entities in the entity revision with this
+        #     id and `document.entity_validation_output` field is the
+        #     `entity_validation_output` field in this entity revision.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -734,6 +750,9 @@ module Google
           #   @return [::Boolean]
           #     Optional. Whether the entity will be redacted for de-identification
           #     purposes.
+          # @!attribute [rw] method
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Entity::Method]
+          #     Optional. Specifies how the entity's value is obtained.
           class Entity
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -744,41 +763,47 @@ module Google
             #     Money value. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/money.proto
             #
-            #     Note: The following fields are mutually exclusive: `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] date_value
             #   @return [::Google::Type::Date]
             #     Date value. Includes year, month, day. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/date.proto
             #
-            #     Note: The following fields are mutually exclusive: `date_value`, `money_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `date_value`, `money_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] datetime_value
             #   @return [::Google::Type::DateTime]
             #     DateTime value. Includes date, time, and timezone. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
             #
-            #     Note: The following fields are mutually exclusive: `datetime_value`, `money_value`, `date_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `datetime_value`, `money_value`, `date_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] address_value
             #   @return [::Google::Type::PostalAddress]
             #     Postal address. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
             #
-            #     Note: The following fields are mutually exclusive: `address_value`, `money_value`, `date_value`, `datetime_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `address_value`, `money_value`, `date_value`, `datetime_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] boolean_value
             #   @return [::Boolean]
             #     Boolean value. Can be used for entities with binary values, or for
             #     checkboxes.
             #
-            #     Note: The following fields are mutually exclusive: `boolean_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `boolean_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] integer_value
             #   @return [::Integer]
             #     Integer value.
             #
-            #     Note: The following fields are mutually exclusive: `integer_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `integer_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] float_value
             #   @return [::Float]
             #     Float value.
             #
-            #     Note: The following fields are mutually exclusive: `float_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `float_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] signature_value
+            #   @return [::Boolean]
+            #     A signature - a graphical representation of a person's name,
+            #     often used to sign a document.
+            #
+            #     Note: The following fields are mutually exclusive: `signature_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] text
             #   @return [::String]
             #     Optional. An optional field to store a normalized string.
@@ -795,6 +820,20 @@ module Google
             class NormalizedValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies how the entity's value is obtained.
+            module Method
+              # When the method is not specified, it should be treated as `EXTRACT`.
+              METHOD_UNSPECIFIED = 0
+
+              # The entity's value is directly extracted as-is from the document
+              # text.
+              EXTRACT = 1
+
+              # The entity's value is derived through inference and is not
+              # necessarily an exact text extraction from the document.
+              DERIVE = 2
             end
           end
 
@@ -1161,6 +1200,9 @@ module Google
               #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::DocumentLayout::DocumentLayoutBlock>]
               #     A text block could further have child blocks.
               #     Repeated blocks support further hierarchies and nested blocks.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Annotations]
+              #     Annotation of the text block.
               class LayoutTextBlock
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1176,6 +1218,9 @@ module Google
               # @!attribute [rw] caption
               #   @return [::String]
               #     Table caption/title.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Annotations]
+              #     Annotation of the table block.
               class LayoutTableBlock
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1410,6 +1455,71 @@ module Google
           #     An IANA published [media type (MIME
           #     type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
           class BlobAsset
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The output of the validation given the document and the validation rules.
+          # @!attribute [rw] validation_results
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput::ValidationResult>]
+          #     The result of each validation rule.
+          # @!attribute [rw] pass_all_rules
+          #   @return [::Boolean]
+          #     The overall result of the validation, true if all applicable rules are
+          #     valid.
+          class EntityValidationOutput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Validation result for a single validation rule.
+            # @!attribute [rw] rule_name
+            #   @return [::String]
+            #     The name of the validation rule.
+            # @!attribute [rw] rule_description
+            #   @return [::String]
+            #     The description of the validation rule.
+            # @!attribute [rw] validation_result_type
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput::ValidationResult::ValidationResultType]
+            #     The result of the validation rule.
+            # @!attribute [rw] validation_details
+            #   @return [::String]
+            #     The detailed information of the running the validation process using
+            #     the entity from the document based on the validation rule.
+            class ValidationResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The result of the validation rule.
+              module ValidationResultType
+                # The validation result type is unspecified.
+                VALIDATION_RESULT_TYPE_UNSPECIFIED = 0
+
+                # The validation is valid.
+                VALIDATION_RESULT_TYPE_VALID = 1
+
+                # The validation is invalid.
+                VALIDATION_RESULT_TYPE_INVALID = 2
+
+                # The validation is skipped.
+                VALIDATION_RESULT_TYPE_SKIPPED = 3
+
+                # The validation is not applicable.
+                VALIDATION_RESULT_TYPE_NOT_APPLICABLE = 4
+              end
+            end
+          end
+
+          # Entity revision.
+          # @!attribute [rw] revision_id
+          #   @return [::String]
+          #     The revision id.
+          # @!attribute [rw] entities
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Entity>]
+          #     The entities in this revision.
+          # @!attribute [rw] entity_validation_output
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput]
+          #     The entity validation output for this revision.
+          class EntitiesRevision
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
