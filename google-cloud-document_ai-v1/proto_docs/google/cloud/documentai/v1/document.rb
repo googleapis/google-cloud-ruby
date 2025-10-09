@@ -88,6 +88,22 @@ module Google
         # @!attribute [rw] chunked_document
         #   @return [::Google::Cloud::DocumentAI::V1::Document::ChunkedDocument]
         #     Document chunked based on chunking config.
+        # @!attribute [rw] entity_validation_output
+        #   @return [::Google::Cloud::DocumentAI::V1::Document::EntityValidationOutput]
+        #     The entity validation output for the document. This is the validation
+        #     output for `document.entities` field.
+        # @!attribute [rw] entities_revisions
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::EntitiesRevision>]
+        #     A list of entity revisions. The entity revisions are appended to the
+        #     document in the processing order. This field can be used for comparing the
+        #     entity extraction results at different stages of the processing.
+        # @!attribute [rw] entities_revision_id
+        #   @return [::String]
+        #     The entity revision id that `document.entities` field is based on.
+        #     If this field is set and `entities_revisions` is not empty, the entities in
+        #     `document.entities` field are the entities in the entity revision with this
+        #     id and `document.entity_validation_output` field is the
+        #     `entity_validation_output` field in this entity revision.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1293,6 +1309,71 @@ module Google
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
+          end
+
+          # The output of the validation given the document and the validation rules.
+          # @!attribute [rw] validation_results
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::EntityValidationOutput::ValidationResult>]
+          #     The result of each validation rule.
+          # @!attribute [rw] pass_all_rules
+          #   @return [::Boolean]
+          #     The overall result of the validation, true if all applicable rules are
+          #     valid.
+          class EntityValidationOutput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Validation result for a single validation rule.
+            # @!attribute [rw] rule_name
+            #   @return [::String]
+            #     The name of the validation rule.
+            # @!attribute [rw] rule_description
+            #   @return [::String]
+            #     The description of the validation rule.
+            # @!attribute [rw] validation_result_type
+            #   @return [::Google::Cloud::DocumentAI::V1::Document::EntityValidationOutput::ValidationResult::ValidationResultType]
+            #     The result of the validation rule.
+            # @!attribute [rw] validation_details
+            #   @return [::String]
+            #     The detailed information of the running the validation process using
+            #     the entity from the document based on the validation rule.
+            class ValidationResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The result of the validation rule.
+              module ValidationResultType
+                # The validation result type is unspecified.
+                VALIDATION_RESULT_TYPE_UNSPECIFIED = 0
+
+                # The validation is valid.
+                VALIDATION_RESULT_TYPE_VALID = 1
+
+                # The validation is invalid.
+                VALIDATION_RESULT_TYPE_INVALID = 2
+
+                # The validation is skipped.
+                VALIDATION_RESULT_TYPE_SKIPPED = 3
+
+                # The validation is not applicable.
+                VALIDATION_RESULT_TYPE_NOT_APPLICABLE = 4
+              end
+            end
+          end
+
+          # Entity revision.
+          # @!attribute [rw] revision_id
+          #   @return [::String]
+          #     The revision id.
+          # @!attribute [rw] entities
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Entity>]
+          #     The entities in this revision.
+          # @!attribute [rw] entity_validation_output
+          #   @return [::Google::Cloud::DocumentAI::V1::Document::EntityValidationOutput]
+          #     The entity validation output for this revision.
+          class EntitiesRevision
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
