@@ -396,6 +396,30 @@ module Google
           end
         end
 
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#generate_fetch_access_token FeatureOnlineStoreService.GenerateFetchAccessToken}.
+        # @!attribute [rw] feature_view
+        #   @return [::String]
+        #     FeatureView resource format
+        #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+        class GenerateFetchAccessTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#generate_fetch_access_token FeatureOnlineStoreService.GenerateFetchAccessToken}.
+        # @!attribute [rw] access_token
+        #   @return [::String]
+        #     The OAuth 2.0 access token.
+        # @!attribute [rw] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Token expiration time. This is always set
+        class GenerateFetchAccessTokenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Format of the data in the Feature View.
         module FeatureViewDataFormat
           # Not set. Will be treated as the KeyValue format.

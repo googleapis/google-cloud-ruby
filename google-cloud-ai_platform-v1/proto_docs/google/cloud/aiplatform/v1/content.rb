@@ -873,6 +873,9 @@ module Google
           # Deprecated: Election filter is not longer supported.
           # The harm category is civic integrity.
           HARM_CATEGORY_CIVIC_INTEGRITY = 5
+
+          # The harm category is for jailbreak prompts.
+          HARM_CATEGORY_JAILBREAK = 6
         end
 
         # Content Part modality

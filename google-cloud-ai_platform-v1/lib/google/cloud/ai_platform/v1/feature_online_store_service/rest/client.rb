@@ -384,6 +384,86 @@ module Google
               end
 
               ##
+              # RPC to generate an access token for the given feature view. FeatureViews
+              # under the same FeatureOnlineStore share the same access token.
+              #
+              # @overload generate_fetch_access_token(request, options = nil)
+              #   Pass arguments to `generate_fetch_access_token` via a request object, either of type
+              #   {::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload generate_fetch_access_token(feature_view: nil)
+              #   Pass arguments to `generate_fetch_access_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param feature_view [::String]
+              #     FeatureView resource format
+              #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ai_platform/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest.new
+              #
+              #   # Call the generate_fetch_access_token method.
+              #   result = client.generate_fetch_access_token request
+              #
+              #   # The returned object is of type Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse.
+              #   p result
+              #
+              def generate_fetch_access_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.generate_fetch_access_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.generate_fetch_access_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.generate_fetch_access_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @feature_online_store_service_stub.generate_fetch_access_token request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the FeatureOnlineStoreService REST API.
               #
               # This class represents the configuration for FeatureOnlineStoreService REST,
@@ -546,6 +626,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :search_nearest_entities
+                  ##
+                  # RPC-specific configuration for `generate_fetch_access_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :generate_fetch_access_token
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -553,6 +638,8 @@ module Google
                     @fetch_feature_values = ::Gapic::Config::Method.new fetch_feature_values_config
                     search_nearest_entities_config = parent_rpcs.search_nearest_entities if parent_rpcs.respond_to? :search_nearest_entities
                     @search_nearest_entities = ::Gapic::Config::Method.new search_nearest_entities_config
+                    generate_fetch_access_token_config = parent_rpcs.generate_fetch_access_token if parent_rpcs.respond_to? :generate_fetch_access_token
+                    @generate_fetch_access_token = ::Gapic::Config::Method.new generate_fetch_access_token_config
 
                     yield self if block_given?
                   end

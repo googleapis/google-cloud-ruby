@@ -347,6 +347,11 @@
               "methods": [
                 "feature_view_direct_write"
               ]
+            },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generate_fetch_access_token"
+              ]
             }
           }
         }

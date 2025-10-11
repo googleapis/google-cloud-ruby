@@ -43,6 +43,9 @@ module Google
             # feature view. Requests may not have a one-to-one mapping to responses and
             # responses may be returned out-of-order to reduce latency.
             rpc :FeatureViewDirectWrite, stream(::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest), stream(::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse)
+            # RPC to generate an access token for the given feature view. FeatureViews
+            # under the same FeatureOnlineStore share the same access token.
+            rpc :GenerateFetchAccessToken, ::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest, ::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse
           end
 
           Stub = Service.rpc_stub_class

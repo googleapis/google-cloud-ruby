@@ -101,6 +101,9 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] bigtable_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::BigtableMetadata]
+        #     Metadata containing information about the Cloud Bigtable.
         class FeatureView
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -285,6 +288,16 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata for the Cloud Bigtable that supports directly interacting Bigtable
+          # instances.
+          # @!attribute [r] read_app_profile
+          #   @return [::String]
+          #     The Bigtable App Profile to use for reading from Bigtable.
+          class BigtableMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
