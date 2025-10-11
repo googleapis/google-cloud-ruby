@@ -628,6 +628,9 @@ module Google
 
               # The user prompt was blocked by Model Armor.
               MODEL_ARMOR = 5
+
+              # The user prompt was blocked due to jailbreak.
+              JAILBREAK = 6
             end
           end
 
