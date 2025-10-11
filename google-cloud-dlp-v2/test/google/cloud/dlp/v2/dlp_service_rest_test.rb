@@ -150,6 +150,8 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     image_redaction_configs = [{}]
     include_findings = true
     byte_item = {}
+    inspect_template = "hello world"
+    deidentify_template = "hello world"
 
     redact_image_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -165,27 +167,27 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item }) do |_result, response|
+        client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.redact_image parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item do |_result, response|
+        client.redact_image parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item) do |_result, response|
+        client.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item }, call_options) do |_result, response|
+        client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item), call_options) do |_result, response|
+        client.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
