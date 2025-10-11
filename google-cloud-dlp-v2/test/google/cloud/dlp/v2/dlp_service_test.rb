@@ -143,6 +143,8 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     image_redaction_configs = [{}]
     include_findings = true
     byte_item = {}
+    inspect_template = "hello world"
+    deidentify_template = "hello world"
 
     redact_image_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :redact_image, name
@@ -153,6 +155,8 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, request["image_redaction_configs"].first
       assert_equal true, request["include_findings"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ByteContentItem), request["byte_item"]
+      assert_equal "hello world", request["inspect_template"]
+      assert_equal "hello world", request["deidentify_template"]
       refute_nil options
     end
 
@@ -163,31 +167,31 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item }) do |response, operation|
+      client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.redact_image parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item do |response, operation|
+      client.redact_image parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item) do |response, operation|
+      client.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item }, grpc_options) do |response, operation|
+      client.redact_image({ parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item), grpc_options) do |response, operation|
+      client.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item, inspect_template: inspect_template, deidentify_template: deidentify_template), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
