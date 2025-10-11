@@ -483,6 +483,93 @@ module Google
             end
 
             ##
+            # RPC to generate an access token for the given feature view. FeatureViews
+            # under the same FeatureOnlineStore share the same access token.
+            #
+            # @overload generate_fetch_access_token(request, options = nil)
+            #   Pass arguments to `generate_fetch_access_token` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_fetch_access_token(feature_view: nil)
+            #   Pass arguments to `generate_fetch_access_token` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param feature_view [::String]
+            #     FeatureView resource format
+            #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest.new
+            #
+            #   # Call the generate_fetch_access_token method.
+            #   result = client.generate_fetch_access_token request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenResponse.
+            #   p result
+            #
+            def generate_fetch_access_token request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GenerateFetchAccessTokenRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_fetch_access_token.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.feature_view
+                header_params["feature_view"] = request.feature_view
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_fetch_access_token.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_fetch_access_token.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @feature_online_store_service_stub.call_rpc :generate_fetch_access_token, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the FeatureOnlineStoreService API.
             #
             # This class represents the configuration for FeatureOnlineStoreService,
@@ -663,6 +750,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :feature_view_direct_write
+                ##
+                # RPC-specific configuration for `generate_fetch_access_token`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_fetch_access_token
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -672,6 +764,8 @@ module Google
                   @search_nearest_entities = ::Gapic::Config::Method.new search_nearest_entities_config
                   feature_view_direct_write_config = parent_rpcs.feature_view_direct_write if parent_rpcs.respond_to? :feature_view_direct_write
                   @feature_view_direct_write = ::Gapic::Config::Method.new feature_view_direct_write_config
+                  generate_fetch_access_token_config = parent_rpcs.generate_fetch_access_token if parent_rpcs.respond_to? :generate_fetch_access_token
+                  @generate_fetch_access_token = ::Gapic::Config::Method.new generate_fetch_access_token_config
 
                   yield self if block_given?
                 end
