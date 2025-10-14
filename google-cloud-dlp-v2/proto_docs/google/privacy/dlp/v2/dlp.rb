@@ -738,6 +738,25 @@ module Google
         # @!attribute [rw] byte_item
         #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     The content must be PNG, JPEG, SVG or BMP.
+        # @!attribute [rw] inspect_template
+        #   @return [::String]
+        #     The full resource name of the inspection template to use. Settings in the
+        #     main `inspect_config` field override the corresponding settings in this
+        #     inspection template.
+        #
+        #     The merge behavior is as follows:
+        #
+        #       - Singular field: The main field's value replaces the value of the
+        #       corresponding field in the template.
+        #       - Repeated fields: The field values are appended to the list defined in
+        #       the template.
+        #       - Sub-messages and groups: The fields are recursively merged.
+        # @!attribute [rw] deidentify_template
+        #   @return [::String]
+        #     The full resource name of the de-identification template to use. Settings
+        #     in the main `image_redaction_configs` field override the corresponding
+        #     settings in this de-identification template. The request fails if the
+        #     type of the template's deidentify_config is not image_transformations.
         class RedactImageRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1012,6 +1031,23 @@ module Google
         #     metric and quasi-identifiers. Risk jobs that analyze the same table but
         #     compute a different privacy metric, or use different sets of
         #     quasi-identifiers, cannot store their results in the same table.
+        #
+        #     Note: The following fields are mutually exclusive: `table`, `storage_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] storage_path
+        #   @return [::Google::Cloud::Dlp::V2::CloudStoragePath]
+        #     Store findings in an existing Cloud Storage bucket. Files will be
+        #     generated with the job ID and file part number as the filename and will
+        #     contain findings in textproto format as
+        #     {::Google::Cloud::Dlp::V2::SaveToGcsFindingsOutput SaveToGcsFindingsOutput}.
+        #     The filename will follow the naming convention `<job_id>-<shard_number>`.
+        #     Example: `my-job-id-2`.
+        #
+        #     Supported for {::Google::Cloud::Dlp::V2::InspectJobConfig Inspect jobs}. The
+        #     bucket must not be the same as the bucket being inspected. If storing
+        #     findings to Cloud Storage, the output schema field should not be set. If
+        #     set, it will be ignored.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_path`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] output_schema
         #   @return [::Google::Cloud::Dlp::V2::OutputStorageConfig::OutputSchema]
         #     Schema used for writing the findings for Inspect jobs. This field is only
@@ -3576,39 +3612,44 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::Action::SaveFindings]
         #     Save resulting findings in a provided location.
         #
-        #     Note: The following fields are mutually exclusive: `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pub_sub
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishToPubSub]
         #     Publish a notification to a Pub/Sub topic.
         #
-        #     Note: The following fields are mutually exclusive: `pub_sub`, `save_findings`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `pub_sub`, `save_findings`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_summary_to_cscc
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishSummaryToCscc]
         #     Publish summary to Cloud Security Command Center (Alpha).
         #
-        #     Note: The following fields are mutually exclusive: `publish_summary_to_cscc`, `save_findings`, `pub_sub`, `publish_findings_to_cloud_data_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `publish_summary_to_cscc`, `save_findings`, `pub_sub`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_findings_to_cloud_data_catalog
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
         #     Publish findings to Cloud Datahub.
         #
-        #     Note: The following fields are mutually exclusive: `publish_findings_to_cloud_data_catalog`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `publish_findings_to_cloud_data_catalog`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] publish_findings_to_dataplex_catalog
+        #   @return [::Google::Cloud::Dlp::V2::Action::PublishFindingsToDataplexCatalog]
+        #     Publish findings as an aspect to Dataplex Universal Catalog.
+        #
+        #     Note: The following fields are mutually exclusive: `publish_findings_to_dataplex_catalog`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] deidentify
         #   @return [::Google::Cloud::Dlp::V2::Action::Deidentify]
         #     Create a de-identified copy of the input data.
         #
-        #     Note: The following fields are mutually exclusive: `deidentify`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `deidentify`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] job_notification_emails
         #   @return [::Google::Cloud::Dlp::V2::Action::JobNotificationEmails]
         #     Sends an email when the job completes. The email goes to IAM project
         #     owners and technical [Essential
         #     Contacts](https://cloud.google.com/resource-manager/docs/managing-notification-contacts).
         #
-        #     Note: The following fields are mutually exclusive: `job_notification_emails`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `deidentify`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `job_notification_emails`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_stackdriver
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishToStackdriver]
         #     Enable Stackdriver metric dlp.googleapis.com/finding_count.
         #
-        #     Note: The following fields are mutually exclusive: `publish_to_stackdriver`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `deidentify`, `job_notification_emails`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `publish_to_stackdriver`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Action
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3673,6 +3714,24 @@ module Google
           # allowed only if all resources being scanned are BigQuery tables.
           # Compatible with: Inspect
           class PublishFindingsToCloudDataCatalog
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Publish findings of a DlpJob to Dataplex Universal Catalog as a
+          # `sensitive-data-protection-job-result` aspect. For more information,
+          # see [Send inspection results to Dataplex Universal Catalog as
+          # aspects](https://cloud.google.com/sensitive-data-protection/docs/add-aspects-inspection-job).
+          #
+          # Aspects are stored in Dataplex Universal Catalog storage and are
+          # governed by service-specific policies for Dataplex Universal Catalog. For
+          # more information, see [Service Specific
+          # Terms](https://cloud.google.com/terms/service-terms).
+          #
+          # Only a single instance of this action can be specified. This action is
+          # allowed only if all resources being scanned are BigQuery tables.
+          # Compatible with: Inspect
+          class PublishFindingsToDataplexCatalog
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -4269,6 +4328,8 @@ module Google
         #         - 'error_count' - Number of errors that have occurred while running.
         #     * The operator must be `=` or `!=` for status and inspected_storage.
         #
+        #     The syntax is based on https://google.aip.dev/160.
+        #
         #     Examples:
         #
         #     * inspected_storage = cloud_storage AND status = HEALTHY
@@ -4362,8 +4423,8 @@ module Google
         #     Note: The following fields are mutually exclusive: `tag_resources`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_dataplex_catalog
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PublishToDataplexCatalog]
-        #     Publishes a portion of each profile to Dataplex Catalog with the aspect
-        #     type Sensitive Data Protection Profile.
+        #     Publishes a portion of each profile to Dataplex Universal Catalog with
+        #     the aspect type Sensitive Data Protection Profile.
         #
         #     Note: The following fields are mutually exclusive: `publish_to_dataplex_catalog`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataProfileAction
@@ -4467,16 +4528,17 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Create Dataplex Catalog aspects for profiled resources with the aspect type
-          # Sensitive Data Protection Profile. To learn more about aspects, see
-          # https://cloud.google.com/sensitive-data-protection/docs/add-aspects.
+          # Create Dataplex Universal Catalog aspects for profiled resources with the
+          # aspect type Sensitive Data Protection Profile. To learn more about aspects,
+          # see https://cloud.google.com/sensitive-data-protection/docs/add-aspects.
           # @!attribute [rw] lower_data_risk_to_low
           #   @return [::Boolean]
-          #     Whether creating a Dataplex Catalog aspect for a profiled resource should
-          #     lower the risk of the profile for that resource. This also lowers the
-          #     data risk of resources at the lower levels of the resource hierarchy. For
-          #     example, reducing the data risk of a table data profile also reduces the
-          #     data risk of the constituent column data profiles.
+          #     Whether creating a Dataplex Universal Catalog aspect for a profiled
+          #     resource should lower the risk of the profile for that resource. This
+          #     also lowers the data risk of resources at the lower levels of the
+          #     resource hierarchy. For example, reducing the data risk of a table data
+          #     profile also reduces the data risk of the constituent column data
+          #     profiles.
           class PublishToDataplexCatalog
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4532,7 +4594,8 @@ module Google
             #   @return [::String]
             #     The namespaced name for the tag value to attach to resources. Must be
             #     in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
-            #     example, "123456/environment/prod".
+            #     example, "123456/environment/prod" for an organization parent, or
+            #     "my-project/environment/prod" for a project parent.
             class TagValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5363,6 +5426,18 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::FileStoreRegexes]
         #     Optional. A collection of regular expressions to match a file store
         #     against.
+        # @!attribute [rw] include_tags
+        #   @return [::Google::Cloud::Dlp::V2::TagFilters]
+        #     Optional. To be included in the collection, a resource must meet all of the
+        #     following requirements:
+        #
+        #      - If tag filters are provided, match all provided tag filters.
+        #      - If one or more patterns are specified, match at least one pattern.
+        #
+        #     For a resource to match the tag filters, the resource must have all of the
+        #     provided tags attached. Tags refer to Resource Manager tags bound to the
+        #     resource or its ancestors. For more information, see [Manage
+        #     schedules](https://cloud.google.com/sensitive-data-protection/docs/profile-project-cloud-storage#manage-schedules).
         class FileStoreCollection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6064,6 +6139,8 @@ module Google
         #         - 'start_time` - Corresponds to the time the job finished.
         #     * The operator must be `=` or `!=`.
         #
+        #     The syntax is based on https://google.aip.dev/160.
+        #
         #     Examples:
         #
         #     * inspected_storage = cloud_storage AND state = done
@@ -6686,13 +6763,13 @@ module Google
         #     * `project_id`
         #     * `sensitivity_level desc`
         #
-        #     Supported fields are:
+        #     Supported fields:
         #
         #     - `project_id`: Google Cloud project ID
-        #     - `sensitivity_level`: How sensitive the data in a project is, at most.
-        #     - `data_risk_level`: How much risk is associated with this data.
-        #     - `profile_last_generated`: When the profile was last updated in epoch
-        #     seconds.
+        #     - `sensitivity_level`: How sensitive the data in a project is, at most
+        #     - `data_risk_level`: How much risk is associated with this data
+        #     - `profile_last_generated`: Date and time (in epoch seconds) the profile
+        #       was last generated
         # @!attribute [rw] filter
         #   @return [::String]
         #     Allows filtering.
@@ -6703,17 +6780,24 @@ module Google
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #     sequence of restrictions implicitly uses `AND`.
         #     * A restriction has the form of `{field} {operator} {value}`.
-        #     * Supported fields/values:
-        #         - `sensitivity_level` - HIGH|MODERATE|LOW
-        #         - `data_risk_level` - HIGH|MODERATE|LOW
-        #         - `status_code` - an RPC status code as defined in
+        #     * Supported fields:
+        #         - `project_id`: the Google Cloud project ID
+        #         - `sensitivity_level`: HIGH|MODERATE|LOW
+        #         - `data_risk_level`: HIGH|MODERATE|LOW
+        #         - `status_code`: an RPC status code as defined in
         #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-        #     * The operator must be `=` or `!=`.
+        #         - `profile_last_generated`: Date and time the profile was last
+        #           generated
+        #     * The operator must be `=` or `!=`. The `profile_last_generated` filter
+        #       also supports `<` and `>`.
+        #
+        #     The syntax is based on https://google.aip.dev/160.
         #
         #     Examples:
         #
         #     * `project_id = 12345 AND status_code = 1`
         #     * `project_id = 12345 AND sensitivity_level = HIGH`
+        #     * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
         #
         #     The length of this field should be no more than 500 characters.
         class ListProjectDataProfilesRequest
@@ -6780,23 +6864,29 @@ module Google
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #     sequence of restrictions implicitly uses `AND`.
         #     * A restriction has the form of `{field} {operator} {value}`.
-        #     * Supported fields/values:
-        #         - `project_id` - The Google Cloud project ID.
-        #         - `dataset_id` - The BigQuery dataset ID.
-        #         - `table_id` - The ID of the BigQuery table.
-        #         - `sensitivity_level` - HIGH|MODERATE|LOW
-        #         - `data_risk_level` - HIGH|MODERATE|LOW
+        #     * Supported fields:
+        #         - `project_id`: The Google Cloud project ID
+        #         - `dataset_id`: The BigQuery dataset ID
+        #         - `table_id`: The ID of the BigQuery table
+        #         - `sensitivity_level`: HIGH|MODERATE|LOW
+        #         - `data_risk_level`: HIGH|MODERATE|LOW
         #         - `resource_visibility`: PUBLIC|RESTRICTED
-        #         - `status_code` - an RPC status code as defined in
+        #         - `status_code`: an RPC status code as defined in
         #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #         - `profile_last_generated`: Date and time the profile was last
+        #           generated
         #
-        #     * The operator must be `=` or `!=`.
+        #     * The operator must be `=` or `!=`. The `profile_last_generated` filter
+        #       also supports `<` and `>`.
+        #
+        #     The syntax is based on https://google.aip.dev/160.
         #
         #     Examples:
         #
         #     * `project_id = 12345 AND status_code = 1`
         #     * `project_id = 12345 AND sensitivity_level = HIGH`
         #     * `project_id = 12345 AND resource_visibility = PUBLIC`
+        #     * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
         #
         #     The length of this field should be no more than 500 characters.
         class ListTableDataProfilesRequest
@@ -6861,26 +6951,32 @@ module Google
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #     sequence of restrictions implicitly uses `AND`.
         #     * A restriction has the form of `{field} {operator} {value}`.
-        #     * Supported fields/values:
-        #         - `table_data_profile_name` - The name of the related table data
-        #         profile.
-        #         - `project_id` - The Google Cloud project ID. (REQUIRED)
-        #         - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
-        #         - `table_id` - The BigQuery table ID. (REQUIRED)
-        #         - `field_id` - The ID of the BigQuery field.
-        #         - `info_type` - The infotype detected in the resource.
-        #         - `sensitivity_level` - HIGH|MEDIUM|LOW
-        #         - `data_risk_level`: How much risk is associated with this data.
-        #         - `status_code` - an RPC status code as defined in
+        #     * Supported fields:
+        #         - `table_data_profile_name`: The name of the related table data
+        #         profile
+        #         - `project_id`: The Google Cloud project ID (REQUIRED)
+        #         - `dataset_id`: The BigQuery dataset ID (REQUIRED)
+        #         - `table_id`: The BigQuery table ID (REQUIRED)
+        #         - `field_id`: The ID of the BigQuery field
+        #         - `info_type`: The infotype detected in the resource
+        #         - `sensitivity_level`: HIGH|MEDIUM|LOW
+        #         - `data_risk_level`: How much risk is associated with this data
+        #         - `status_code`: An RPC status code as defined in
         #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #         - `profile_last_generated`: Date and time the profile was last
+        #           generated
         #     * The operator must be `=` for project_id, dataset_id, and table_id. Other
-        #       filters also support `!=`.
+        #       filters also support `!=`. The `profile_last_generated` filter also
+        #       supports `<` and `>`.
+        #
+        #     The syntax is based on https://google.aip.dev/160.
         #
         #     Examples:
         #
         #     * project_id = 12345 AND status_code = 1
         #     * project_id = 12345 AND sensitivity_level = HIGH
         #     * project_id = 12345 AND info_type = STREET_ADDRESS
+        #     * profile_last_generated < "2025-01-01T00:00:00.000Z"
         #
         #     The length of this field should be no more than 500 characters.
         class ListColumnDataProfilesRequest
@@ -7480,8 +7576,9 @@ module Google
         #   @return [::String]
         #     The namespaced name for the tag value to attach to Google Cloud resources.
         #     Must be in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
-        #     example, "123456/environment/prod". This is only set for Google Cloud
-        #     resources.
+        #     example, "123456/environment/prod" for an organization parent, or
+        #     "my-project/environment/prod" for a project parent. This is only set for
+        #     Google Cloud resources.
         # @!attribute [rw] key
         #   @return [::String]
         #     The key of a tag key-value pair. For Google Cloud resources, this is the
@@ -7491,6 +7588,37 @@ module Google
         #     The value of a tag key-value pair. For Google Cloud resources, this is the
         #     resource name of the value, for example, "tagValues/123456".
         class Tag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Tags to match against for filtering.
+        # @!attribute [rw] tag_filters
+        #   @return [::Array<::Google::Cloud::Dlp::V2::TagFilter>]
+        #     Required. A resource must match ALL of the specified tag filters to be
+        #     included in the collection.
+        class TagFilters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A single tag to filter against.
+        # @!attribute [rw] namespaced_tag_value
+        #   @return [::String]
+        #     The namespaced name for the tag value. Must be in the format
+        #     `{parent_id}/{tag_key_short_name}/{short_name}`, for example,
+        #     "123456/environment/prod" for an organization parent, or
+        #     "my-project/environment/prod" for a project parent.
+        #
+        #     Note: The following fields are mutually exclusive: `namespaced_tag_value`, `namespaced_tag_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] namespaced_tag_key
+        #   @return [::String]
+        #     The namespaced name for the tag key. Must be in the format
+        #     `{parent_id}/{tag_key_short_name}`, for example, "123456/sensitive" for
+        #     an organization parent, or "my-project/sensitive" for a project parent.
+        #
+        #     Note: The following fields are mutually exclusive: `namespaced_tag_key`, `namespaced_tag_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class TagFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -7632,21 +7760,26 @@ module Google
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #     sequence of restrictions implicitly uses `AND`.
         #     * A restriction has the form of `{field} {operator} {value}`.
-        #     * Supported fields/values:
-        #         - `project_id` - The Google Cloud project ID.
-        #         - `account_id` - The AWS account ID.
-        #         - `file_store_path` - The path like "gs://bucket".
-        #         - `data_source_type` - The profile's data source type, like
-        #         "google/storage/bucket".
-        #         - `data_storage_location` - The location where the file store's data is
-        #         stored, like "us-central1".
-        #         - `sensitivity_level` - HIGH|MODERATE|LOW
-        #         - `data_risk_level` - HIGH|MODERATE|LOW
+        #     * Supported fields:
+        #         - `project_id`: The Google Cloud project ID
+        #         - `account_id`: The AWS account ID
+        #         - `file_store_path`: The path like "gs://bucket"
+        #         - `data_source_type`: The profile's data source type, like
+        #         "google/storage/bucket"
+        #         - `data_storage_location`: The location where the file store's data is
+        #         stored, like "us-central1"
+        #         - `sensitivity_level`: HIGH|MODERATE|LOW
+        #         - `data_risk_level`: HIGH|MODERATE|LOW
         #         - `resource_visibility`: PUBLIC|RESTRICTED
-        #         - `status_code` - an RPC status code as defined in
+        #         - `status_code`: an RPC status code as defined in
         #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #         - `profile_last_generated`: Date and time the profile was last
+        #           generated
         #
-        #     * The operator must be `=` or `!=`.
+        #     * The operator must be `=` or `!=`. The `profile_last_generated` filter
+        #       also supports `<` and `>`.
+        #
+        #     The syntax is based on https://google.aip.dev/160.
         #
         #     Examples:
         #
@@ -7654,6 +7787,7 @@ module Google
         #     * `project_id = 12345 AND sensitivity_level = HIGH`
         #     * `project_id = 12345 AND resource_visibility = PUBLIC`
         #     * `file_store_path = "gs://mybucket"`
+        #     * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
         #
         #     The length of this field should be no more than 500 characters.
         class ListFileStoreDataProfilesRequest
@@ -7831,6 +7965,8 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+        #
+        #     The syntax is based on https://google.aip.dev/160.
         class ListConnectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7852,6 +7988,8 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+        #
+        #     The syntax is based on https://google.aip.dev/160.
         class SearchConnectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
