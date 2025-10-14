@@ -500,6 +500,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_organization_security_policies_rest
+    skip unless Google::Cloud::Compute.organization_security_policies_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.organization_security_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::OrganizationSecurityPolicies::Rest::Client, client
+    end
+  end
+
   def test_packet_mirrorings_rest
     skip unless Google::Cloud::Compute.packet_mirrorings_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -507,6 +517,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::PacketMirrorings::Rest::Client, client
+    end
+  end
+
+  def test_preview_features_rest
+    skip unless Google::Cloud::Compute.preview_features_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.preview_features do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::PreviewFeatures::Rest::Client, client
     end
   end
 
