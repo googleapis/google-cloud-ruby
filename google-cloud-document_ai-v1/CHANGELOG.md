@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.10.0 (2025-10-14)
+
+#### Features
+
+* Added new fields `entity_validation_output`, `entities_revisions`, and `entities_revision_id` to the `Document` message 
+* Added new messages `EntityValidationOutput` and `EntitiesRevision` ([#31760](https://github.com/googleapis/google-cloud-ruby/issues/31760)) 
+
 ### 1.9.0 (2025-10-08)
 
 #### Features
