@@ -91,6 +91,12 @@ module Google
           # @!attribute [rw] auto_scaling
           #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::Bigtable::AutoScaling]
           #     Required. Autoscaling config applied to Bigtable Instance.
+          # @!attribute [rw] enable_direct_bigtable_access
+          #   @return [::Boolean]
+          #     Optional. Whether direct access to the Bigtable instance is enabled or not.
+          # @!attribute [r] bigtable_metadata
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::Bigtable::BigtableMetadata]
+          #     Output only. Metadata of the Bigtable instance. Output only.
           class Bigtable
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,6 +118,22 @@ module Google
             #     utilization is substantially lower than the target, Bigtable removes
             #     nodes. If not set will default to 50%.
             class AutoScaling
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Metadata of the Bigtable instance. This is used by direct read access to
+            # the Bigtable in tenant project.
+            # @!attribute [rw] tenant_project_id
+            #   @return [::String]
+            #     Tenant project ID.
+            # @!attribute [rw] instance_id
+            #   @return [::String]
+            #     The Cloud Bigtable instance id.
+            # @!attribute [rw] table_id
+            #   @return [::String]
+            #     The Cloud Bigtable table id.
+            class BigtableMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
