@@ -1,5 +1,12 @@
 # Release History
 
+### 0.46.0 (2025-10-14)
+
+#### Features
+
+* A new enum `Method` is added 
+* A new field `signature_value` is added to message `.google.cloud.documentai.v1beta3.Document` ([#31759](https://github.com/googleapis/google-cloud-ruby/issues/31759)) 
+
 ### 0.45.0 (2025-10-08)
 
 #### Features
