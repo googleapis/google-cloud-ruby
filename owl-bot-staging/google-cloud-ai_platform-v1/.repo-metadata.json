@@ -1,0 +1,18 @@
+{
+    "api_id": "aiplatform.googleapis.com",
+    "api_shortname": "aiplatform",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest",
+    "distribution_name": "google-cloud-ai_platform-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "aiplatform",
+    "name_pretty": "Vertex AI V1 API",
+    "product_documentation": "https://cloud.google.com/vertex-ai/docs/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Vertex AI enables data scientists, developers, and AI newcomers to create custom machine learning models specific to their business needs by leveraging Google's state-of-the-art transfer learning and innovative AI research. Note that google-cloud-ai_platform-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-ai_platform instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/vertex-ai/docs/",
+    "ruby-cloud-service-override": "AiPlatform=AIPlatform",
+    "library_type": "GAPIC_AUTO"
+}
