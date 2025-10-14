@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.3.0 (2025-10-14)
+
+### ⚠ BREAKING CHANGES
+
+* An existing service `CapacityPlanningService` is removed ([#31588](https://github.com/googleapis/google-cloud-ruby/issues/31588))
+
+#### Bug Fixes
+
+* An existing service `CapacityPlanningService` is removed ([#31588](https://github.com/googleapis/google-cloud-ruby/issues/31588)) 
+
 ### 0.2.0 (2025-10-08)
 
 #### Features
