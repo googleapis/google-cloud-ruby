@@ -1152,6 +1152,15 @@ module Google
         #     and reorders columns to match the field names in the schema.
         # @param [String] time_zone The time zone used when parsing timestamp
         #   values.
+        # @param [String] reference_file_schema_uri The URI of the reference
+        #   file with the reader schema. This file is only loaded if it is part
+        #   of source URIs, but is not loaded otherwise. It is enabled for the
+        #   following formats: `AVRO`, `PARQUET`, `ORC`.
+        # @param [Boolean] preserve_ascii_control_characters When source_format
+        #   is set to `CSV`, indicates if the embedded ASCII control characters
+        #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
+        #   are preserved. By default, ASCII control characters are not
+        #   preserved.
         #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
@@ -1178,7 +1187,8 @@ module Google
                      skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
                      null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil,
                      date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
-                     null_markers: nil, source_column_match: nil, time_zone: nil, &block
+                     null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
+                     preserve_ascii_control_characters: nil, &block
           ensure_service!
           dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
           session_dataset = dataset dataset_id, skip_lookup: true, project_id: project_id
@@ -1193,7 +1203,8 @@ module Google
                           session_id: session_id, date_format: date_format, datetime_format: datetime_format,
                           time_format: time_format, timestamp_format: timestamp_format,
                           null_markers: null_markers, source_column_match: source_column_match,
-                          time_zone: time_zone, &block
+                          time_zone: time_zone, reference_file_schema_uri: reference_file_schema_uri,
+                          preserve_ascii_control_characters: preserve_ascii_control_characters, &block
         end
 
         ##
@@ -1348,6 +1359,15 @@ module Google
         #     and reorders columns to match the field names in the schema.
         # @param [String] time_zone The time zone used when parsing timestamp
         #   values.
+        # @param [String] reference_file_schema_uri The URI of the reference
+        #   file with the reader schema. This file is only loaded if it is part
+        #   of source URIs, but is not loaded otherwise. It is enabled for the
+        #   following formats: `AVRO`, `PARQUET`, `ORC`.
+        # @param [Boolean] preserve_ascii_control_characters When source_format
+        #   is set to `CSV`, indicates if the embedded ASCII control characters
+        #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
+        #   are preserved. By default, ASCII control characters are not
+        #   preserved.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -1379,7 +1399,8 @@ module Google
                  delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                  skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil,
                  date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
-                 null_markers: nil, source_column_match: nil, time_zone: nil, &block
+                 null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
+                 preserve_ascii_control_characters: nil, &block
           job = load_job table_id, files, dataset_id: dataset_id,
                         format: format, create: create, write: write, projection_fields: projection_fields,
                         jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
@@ -1388,7 +1409,9 @@ module Google
                         null_marker: null_marker, session_id: session_id, date_format: date_format,
                         datetime_format: datetime_format, time_format: time_format,
                         timestamp_format: timestamp_format, null_markers: null_markers,
-                        source_column_match: source_column_match, time_zone: time_zone, &block
+                        source_column_match: source_column_match, time_zone: time_zone,
+                        reference_file_schema_uri: reference_file_schema_uri,
+                        preserve_ascii_control_characters: preserve_ascii_control_characters, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job

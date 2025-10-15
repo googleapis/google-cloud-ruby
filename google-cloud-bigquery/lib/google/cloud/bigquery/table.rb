@@ -2515,6 +2515,15 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #     and reorders columns to match the field names in the schema.
         # @param [String] time_zone The time zone used when parsing timestamp
         #   values.
+        # @param [String] reference_file_schema_uri The URI of the reference
+        #   file with the reader schema. This file is only loaded if it is part
+        #   of source URIs, but is not loaded otherwise. It is enabled for the
+        #   following formats: `AVRO`, `PARQUET`, `ORC`.
+        # @param [Boolean] preserve_ascii_control_characters When source_format
+        #   is set to `CSV`, indicates if the embedded ASCII control characters
+        #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
+        #   are preserved. By default, ASCII control characters are not
+        #   preserved.
         #
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
@@ -2573,7 +2582,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                      quote: nil, skip_leading: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
                      null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: self.schema,
                      date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
-                     null_markers: nil, source_column_match: nil, time_zone: nil
+                     null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
+                     preserve_ascii_control_characters: nil
           ensure_service!
 
           updater = load_job_updater format: format, create: create, write: write, projection_fields: projection_fields,
@@ -2585,7 +2595,9 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                      session_id: session_id, date_format: date_format,
                                      datetime_format: datetime_format, time_format: time_format,
                                      timestamp_format: timestamp_format, null_markers: null_markers,
-                                     source_column_match: source_column_match, time_zone: time_zone
+                                     source_column_match: source_column_match, time_zone: time_zone,
+                                     reference_file_schema_uri: reference_file_schema_uri,
+                                     preserve_ascii_control_characters: preserve_ascii_control_characters
 
           yield updater if block_given?
 
@@ -2734,6 +2746,15 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #     and reorders columns to match the field names in the schema.
         # @param [String] time_zone The time zone used when parsing timestamp
         #   values.
+        # @param [String] reference_file_schema_uri The URI of the reference
+        #   file with the reader schema. This file is only loaded if it is part
+        #   of source URIs, but is not loaded otherwise. It is enabled for the
+        #   following formats: `AVRO`, `PARQUET`, `ORC`.
+        # @param [Boolean] preserve_ascii_control_characters When source_format
+        #   is set to `CSV`, indicates if the embedded ASCII control characters
+        #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
+        #   are preserved. By default, ASCII control characters are not
+        #   preserved.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -2797,7 +2818,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                  quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                  quote: nil, skip_leading: nil, autodetect: nil, null_marker: nil, session_id: nil,
                  schema: self.schema, date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
-                 null_markers: nil, source_column_match: nil, time_zone: nil, &block
+                 null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
+                 preserve_ascii_control_characters: nil, &block
           job = load_job files, format: format, create: create, write: write, projection_fields: projection_fields,
                                 jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                                 delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
@@ -2805,7 +2827,9 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                 null_marker: null_marker, session_id: session_id, schema: schema,
                                 date_format: date_format, datetime_format: datetime_format, time_format: time_format,
                                 timestamp_format: timestamp_format, null_markers: null_markers,
-                                source_column_match: source_column_match, time_zone: time_zone, &block
+                                source_column_match: source_column_match, time_zone: time_zone,
+                                reference_file_schema_uri: reference_file_schema_uri,
+                                preserve_ascii_control_characters: preserve_ascii_control_characters, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -3272,7 +3296,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         end
 
         def load_job_csv_options! job, jagged_rows: nil, quoted_newlines: nil, delimiter: nil, quote: nil,
-                                  skip_leading: nil, null_marker: nil, null_markers: nil, source_column_match: nil
+                                  skip_leading: nil, null_marker: nil, null_markers: nil, source_column_match: nil,
+                                  preserve_ascii_control_characters: nil
           job.jagged_rows = jagged_rows unless jagged_rows.nil?
           job.quoted_newlines = quoted_newlines unless quoted_newlines.nil?
           job.delimiter = delimiter unless delimiter.nil?
@@ -3281,13 +3306,16 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
           job.skip_leading = skip_leading unless skip_leading.nil?
           job.null_markers = null_markers unless null_markers.nil?
           job.source_column_match = source_column_match unless source_column_match.nil?
+          job.preserve_ascii_control_characters = preserve_ascii_control_characters unless
+            preserve_ascii_control_characters.nil?
         end
 
         def load_job_file_options! job, format: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                                    encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                                    skip_leading: nil, null_marker: nil, date_format: nil, datetime_format: nil,
                                    time_format: nil, timestamp_format: nil, null_markers: nil, source_column_match: nil,
-                                   time_zone: nil
+                                   time_zone: nil, reference_file_schema_uri: nil,
+                                   preserve_ascii_control_characters: nil
           job.format = format unless format.nil?
           job.projection_fields = projection_fields unless projection_fields.nil?
           job.encoding = encoding unless encoding.nil?
@@ -3298,6 +3326,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
           job.time_format = time_format unless time_format.nil?
           job.timestamp_format = timestamp_format unless timestamp_format.nil?
           job.time_zone = time_zone unless time_zone.nil?
+          job.reference_file_schema_uri = reference_file_schema_uri unless reference_file_schema_uri.nil?
           load_job_csv_options! job, jagged_rows:     jagged_rows,
                                      quoted_newlines: quoted_newlines,
                                      delimiter:       delimiter,
@@ -3305,7 +3334,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                      skip_leading:    skip_leading,
                                      null_marker:     null_marker,
                                      null_markers:    null_markers,
-                                     source_column_match: source_column_match
+                                     source_column_match: source_column_match,
+                                     preserve_ascii_control_characters: preserve_ascii_control_characters
         end
 
         def load_job_updater format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
@@ -3314,7 +3344,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                              prefix: nil, labels: nil, autodetect: nil, null_marker: nil,
                              create_session: nil, session_id: nil, date_format: nil, datetime_format: nil,
                              time_format: nil, timestamp_format: nil, null_markers: nil, source_column_match: nil,
-                             time_zone: nil
+                             time_zone: nil, reference_file_schema_uri: nil, preserve_ascii_control_characters: nil
           new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
             job.location = location if location # may be table reference
@@ -3342,7 +3372,9 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                         timestamp_format:  timestamp_format,
                                         null_markers:      null_markers,
                                         source_column_match: source_column_match,
-                                        time_zone:         time_zone
+                                        time_zone:         time_zone,
+                                        reference_file_schema_uri: reference_file_schema_uri,
+                                        preserve_ascii_control_characters: preserve_ascii_control_characters
           end
         end
 
