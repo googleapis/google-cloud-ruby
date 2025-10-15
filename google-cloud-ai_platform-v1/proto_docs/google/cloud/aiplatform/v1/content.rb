@@ -143,6 +143,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Config for image generation features.
+        # @!attribute [rw] aspect_ratio
+        #   @return [::String]
+        #     Optional. The desired aspect ratio for the generated images. The following
+        #     aspect ratios are supported:
+        #
+        #     "1:1"
+        #     "2:3", "3:2"
+        #     "3:4", "4:3"
+        #     "4:5", "5:4"
+        #     "9:16", "16:9"
+        #     "21:9"
+        class ImageConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Generation config.
         # @!attribute [rw] temperature
         #   @return [::Float]
@@ -241,6 +258,9 @@ module Google
         #     Optional. Config for thinking features.
         #     An error will be returned if this field is set for models that don't
         #     support thinking.
+        # @!attribute [rw] image_config
+        #   @return [::Google::Cloud::AIPlatform::V1::ImageConfig]
+        #     Optional. Config for image generation features.
         class GenerationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
