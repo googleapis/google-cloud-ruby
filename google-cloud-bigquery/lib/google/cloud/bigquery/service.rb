@@ -133,7 +133,7 @@ dataset_view: dataset_view
         ##
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
-        def patch_dataset dataset_id, patched_dataset_gapi, access_policy_version: nil
+        def patch_dataset dataset_id, patched_dataset_gapi, access_policy_version: nil, update_mode: nil
           patch_with_backoff = false
           options = {}
           if patched_dataset_gapi.etag
@@ -143,7 +143,7 @@ dataset_view: dataset_view
           end
           execute backoff: patch_with_backoff do
             service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options,
-access_policy_version: access_policy_version
+access_policy_version: access_policy_version, update_mode: update_mode
           end
         end
 

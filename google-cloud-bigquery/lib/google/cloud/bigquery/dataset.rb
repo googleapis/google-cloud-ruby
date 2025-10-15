@@ -2947,10 +2947,25 @@ module Google
         def patch_gapi! *attributes
           return if attributes.empty?
           ensure_service!
+
           patch_args = attributes.to_h { |attr| [attr, @gapi.send(attr)] }
+
+          update_mode = nil
+          has_access_key = patch_args.key? :access
+          other_keys_exist = (patch_args.keys - [:access]).any?
+
+          if has_access_key && !other_keys_exist
+            update_mode = "UPDATE_ACL"
+          elsif !has_access_key && other_keys_exist
+            update_mode = "UPDATE_METADATA"
+          elsif has_access_key && other_keys_exist
+            update_mode = "UPDATE_FULL"
+          end
+
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)
           patch_gapi.etag = etag if etag
-          @gapi = service.patch_dataset dataset_id, patch_gapi, access_policy_version: @access_policy_version
+          @gapi = service.patch_dataset dataset_id, patch_gapi, access_policy_version: @access_policy_version,
+update_mode: update_mode
         end
 
         ##
