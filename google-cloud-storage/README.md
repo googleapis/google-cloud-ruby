@@ -21,11 +21,17 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
+require "googleauth"
 require "google/cloud/storage"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json"),
+  scope: "https://www.googleapis.com/auth/devstorage.full_control"
+)
 
 storage = Google::Cloud::Storage.new(
   project_id: "my-project",
-  credentials: "/path/to/keyfile.json"
+  credentials: credentials
 )
 
 bucket = storage.bucket "task-attachments"

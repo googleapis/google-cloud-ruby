@@ -28,6 +28,11 @@ providing **Project ID** and **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
+@note Warning: Passing a `String` to a keyfile path or a `Hash` of
+  credentials is deprecated. Providing an unvalidated credential
+  configuration to Google APIs can compromise the security of your
+  systems and data.
+
 1. Specify credentials in method arguments
 2. Specify credentials in configuration
 3. Discover credentials path in environment variables
@@ -67,12 +72,15 @@ The environment variables that Storage checks for credentials are configured on 
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
+require "googleauth"
 require "google/cloud/storage"
 
-ENV["STORAGE_PROJECT"]     = "my-project-id"
-ENV["STORAGE_CREDENTIALS"] = "path/to/keyfile.json"
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json"),
+  scope: "https://www.googleapis.com/auth/devstorage.full_control"
+)
 
-storage = Google::Cloud::Storage.new
+storage = Google::Cloud::Storage.new project_id: "my-project-id", credentials: credentials
 ```
 
 ### Configuration
@@ -81,11 +89,17 @@ The **Project ID** and the path to the **Credentials JSON** file can be configur
 instead of placing them in environment variables or providing them as arguments.
 
 ```ruby
+require "googleauth"
 require "google/cloud/storage"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json"),
+  scope: "https://www.googleapis.com/auth/devstorage.full_control"
+)
 
 Google::Cloud::Storage.configure do |config|
   config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
+  config.credentials = credentials
 end
 
 storage = Google::Cloud::Storage.new
