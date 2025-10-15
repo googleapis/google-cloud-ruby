@@ -109,16 +109,18 @@ module Google
 
         ##
         # Returns the dataset specified by datasetID.
-        def get_dataset dataset_id, access_policy_version: nil
-          get_project_dataset @project, dataset_id, access_policy_version: access_policy_version
+        def get_dataset dataset_id, access_policy_version: nil, dataset_view: nil
+          get_project_dataset @project, dataset_id, access_policy_version: access_policy_version,
+dataset_view: dataset_view
         end
 
         ##
         # Gets the specified dataset resource by full dataset reference.
-        def get_project_dataset project_id, dataset_id, access_policy_version: nil
+        def get_project_dataset project_id, dataset_id, access_policy_version: nil, dataset_view: nil
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_dataset project_id, dataset_id, access_policy_version: access_policy_version
+            service.get_dataset project_id, dataset_id, access_policy_version: access_policy_version,
+dataset_view: dataset_view
           end
         end
 

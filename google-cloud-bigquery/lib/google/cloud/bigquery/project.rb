@@ -1472,6 +1472,26 @@ module Google
         #   mapped to
         #   [IAM Policy version](https://cloud.google.com/iam/docs/policies#versions)
         #   and will be used to set policy in IAM.
+        # @param [String] dataset_view The dataset_view parameter is an optional
+        #   field in the GetDatasetRequest used to specify which information
+        #   about a BigQuery dataset should be returned in the response. By
+        #   controlling this parameter, users can request a partial or full
+        #   response, which helps enforce fine-grained access control based on
+        #   their permissions.
+        #
+        #   Here are the possible values:
+        #
+        #   | Value                      | Description        | Permissions                 |
+        #   | -------------------------- | ------------------ | --------------------------- |
+        #   | `DATASET_VIEW_UNSPECIFIED` | Default, `FULL`    | `datasets.get` &            |
+        #   |                            | view               | `datasets.getIamPolicy`     |
+        #   | `METADATA`                 | Metadata only      | `datasets.get`              |
+        #   | `ACL`                      | ACLs only          | `datasets.getIamPolicy`     |
+        #   | `FULL`                     | Metadata & ACLs    | `datasets.get` &            |
+        #   |                            |                    | `datasets.getIamPolicy`     |
+        #
+        #   Using any other value than what's listed here will result in
+        #   Google::Cloud::InvalidArgumentError.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -1499,12 +1519,13 @@ module Google
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
-        def dataset dataset_id, skip_lookup: nil, project_id: nil, access_policy_version: nil
+        def dataset dataset_id, skip_lookup: nil, project_id: nil, access_policy_version: nil, dataset_view: nil
           ensure_service!
           project_id ||= project
           return Dataset.new_reference project_id, dataset_id, service if skip_lookup
-          gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: access_policy_version
-          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version
+          gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: access_policy_version,
+dataset_view: dataset_view
+          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version, dataset_view: dataset_view
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -1537,6 +1558,27 @@ module Google
         #   mapped to
         #   [IAM Policy version](https://cloud.google.com/iam/docs/policies#versions)
         #   and will be used to set policy in IAM.
+        # @param [String] dataset_view The dataset_view parameter is an optional
+        #   field in the GetDatasetRequest used to specify which information
+        #   about a BigQuery dataset should be returned in the response. By
+        #   controlling this parameter, users can request a partial or full
+        #   response, which helps enforce fine-grained access control based on
+        #   their permissions.
+        #
+        #   Here are the possible values:
+        #
+        #   | Value                      | Description        | Permissions                 |
+        #   | -------------------------- | ------------------ | --------------------------- |
+        #   | `DATASET_VIEW_UNSPECIFIED` | Default, `FULL`    | `datasets.get` &            |
+        #   |                            | view               | `datasets.getIamPolicy`     |
+        #   | `METADATA`                 | Metadata only      | `datasets.get`              |
+        #   | `ACL`                      | ACLs only          | `datasets.getIamPolicy`     |
+        #   | `FULL`                     | Metadata & ACLs    | `datasets.get` &            |
+        #   |                            |                    | `datasets.getIamPolicy`     |
+        #
+        #   Using any other value than what's listed here will result in
+        #   Google::Cloud::InvalidArgumentError.
+        #
         # @yield [access] a block for setting rules
         # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object
         #   accepting rules
@@ -1569,7 +1611,8 @@ module Google
         #   end
         #
         def create_dataset dataset_id, name: nil, description: nil,
-                           expiration: nil, location: nil, access_policy_version: nil
+                           expiration: nil, location: nil, access_policy_version: nil,
+                           dataset_view: nil
           ensure_service!
 
           new_ds = Google::Apis::BigqueryV2::Dataset.new(
@@ -1593,7 +1636,7 @@ module Google
           end
 
           gapi = service.insert_dataset new_ds, access_policy_version: access_policy_version
-          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version
+          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version, dataset_view: dataset_view
         end
 
         ##

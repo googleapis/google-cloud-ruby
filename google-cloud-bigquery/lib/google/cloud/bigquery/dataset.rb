@@ -64,12 +64,20 @@ module Google
         attr_accessor :access_policy_version
 
         ##
+        # @private The dataset_view parameter is an optional field in the GetDatasetRequest used to specify which
+        # information about a BigQuery dataset should be returned in the response. By controlling this parameter, users
+        # can request a partial or full response, which helps enforce fine-grained access control based on their
+        # permissions.
+        attr_accessor :dataset_view
+
+        ##
         # @private Create an empty Dataset object.
         def initialize
           @service = nil
           @gapi = nil
           @reference = nil
           @access_policy_version = nil
+          @dataset_view = nil
         end
 
         ##
@@ -2483,7 +2491,8 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: @access_policy_version
+          @gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: @access_policy_version,
+            dataset_view: @dataset_view
           @reference = nil
           @exists = nil
           self
@@ -2612,11 +2621,12 @@ module Google
 
         ##
         # @private New Dataset from a Google API Client object.
-        def self.from_gapi gapi, conn, access_policy_version: nil
+        def self.from_gapi gapi, conn, access_policy_version: nil, dataset_view: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = conn
             f.access_policy_version = access_policy_version
+            f.dataset_view = dataset_view
           end
         end
 

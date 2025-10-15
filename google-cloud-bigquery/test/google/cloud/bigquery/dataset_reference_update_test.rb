@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil, dataset_view: nil
     updated_gapi = dataset_gapi.dup
     updated_gapi.friendly_name = new_dataset_name
     patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name, etag: dataset_gapi.etag
@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil, dataset_view: nil
     updated_gapi = dataset_gapi.dup
     updated_gapi.description = new_description
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description, etag: dataset_gapi.etag
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil, dataset_view: nil
     updated_gapi = dataset_gapi.dup
     updated_gapi.default_table_expiration_ms = new_default_expiration
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration, etag: dataset_gapi.etag
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil, dataset_view: nil
     updated_gapi = dataset_gapi.dup
     updated_gapi.labels = new_labels
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new labels: new_labels, etag: dataset_gapi.etag
@@ -108,7 +108,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil, dataset_view: nil
     updated_gapi = dataset_gapi.dup
     updated_gapi.default_encryption_configuration = Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: kms_key
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_encryption_configuration: updated_gapi.default_encryption_configuration, etag: dataset_gapi.etag
@@ -129,7 +129,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil, dataset_view: nil
     updated_gapi = dataset_gapi.dup
     updated_gapi.storage_billing_model = storage_billing_model
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new storage_billing_model: storage_billing_model, etag: dataset_gapi.etag
