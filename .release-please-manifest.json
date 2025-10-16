@@ -483,6 +483,8 @@
   "google-cloud-life_sciences-v2beta+FILLER": "0.0.0",
   "google-cloud-location": "1.2.0",
   "google-cloud-location+FILLER": "0.0.0",
+  "google-cloud-location_finder-v1": "0.0.1",
+  "google-cloud-location_finder-v1+FILLER": "0.0.0",
   "google-cloud-logging": "2.6.0",
   "google-cloud-logging+FILLER": "0.0.0",
   "google-cloud-logging-v2": "1.5.0",
