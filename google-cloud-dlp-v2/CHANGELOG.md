@@ -1,5 +1,11 @@
 # Release History
 
+### 1.15.0 (2025-10-16)
+
+#### Features
+
+* inspect and deid templates in RedactImage ([#31768](https://github.com/googleapis/google-cloud-ruby/issues/31768)) 
+
 ### 1.14.0 (2025-09-11)
 
 #### Features
