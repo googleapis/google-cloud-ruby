@@ -29,6 +29,48 @@ require "google/apis/bigquery_v2"
 module Google
   module Cloud
     module Bigquery
+      module DatasetView
+        # Provides constants for the dataset_view parameter, an optional field
+        # in the GetDatasetRequest used to specify which information about a
+        # BigQuery dataset should be returned in the response. By controlling
+        # this parameter, users can request a partial or full response, which
+        # helps enforce fine-grained access control based on their permissions.
+
+        # Default. Equivalent to `FULL`. `datasets.get` and `datasets.getIamPolicy` permissions required.
+        DATASET_VIEW_UNSPECIFIED = "DATASET_VIEW_UNSPECIFIED".freeze
+
+        # Returns metadata only. `datasets.get` permission required.
+        METADATA = "METADATA".freeze
+
+        # Returns ACLs only. `datasets.getIamPolicy` permission required.
+        ACL = "ACL".freeze
+
+        # Returns metadata and ACLs. `datasets.get` and `datasets.getIamPolicy` permissions required.
+        FULL = "FULL".freeze
+      end
+
+      module UpdateMode
+        # Provides constants for the update_mode parameter, an optional field
+        # in the PatchDatasetRequest and UpdateDatasetRequest used to specify
+        # whether the resource is being updated with full or partial semantics
+        # (metadata, ACLs, or both).
+        # By controlling this parameter, users can request full or partial
+        # update semantics, which helps enforce fine-grained access control
+        # based on their permissions.
+
+        # Default. Equivalent to `UPDATE_FULL`. `datasets.update` and `datasets.setIamPolicy` permissions required.
+        UPDATE_MODE_UNSPECIFIED = "UPDATE_MODE_UNSPECIFIED".freeze
+
+        # Updates both metadata and ACLs. `datasets.update` and `datasets.setIamPolicy` permissions required.
+        UPDATE_FULL = "UPDATE_FULL".freeze
+
+        # Updates only metadata. `datasets.update` permission required.
+        UPDATE_METADATA = "UPDATE_METADATA".freeze
+
+        # Updates only ACLs. `datasets.setIamPolicy` permission required.
+        UPDATE_ACL = "UPDATE_ACL".freeze
+      end
+
       ##
       # # Dataset
       #
@@ -2955,11 +2997,11 @@ module Google
           other_keys_exist = (patch_args.keys - [:access]).any?
 
           if has_access_key && !other_keys_exist
-            update_mode = "UPDATE_ACL"
+            update_mode = UpdateMode::UPDATE_ACL
           elsif !has_access_key && other_keys_exist
-            update_mode = "UPDATE_METADATA"
+            update_mode = UpdateMode::UPDATE_METADATA
           elsif has_access_key && other_keys_exist
-            update_mode = "UPDATE_FULL"
+            update_mode = UpdateMode::FULL
           end
 
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)

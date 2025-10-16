@@ -1477,21 +1477,8 @@ module Google
         #   about a BigQuery dataset should be returned in the response. By
         #   controlling this parameter, users can request a partial or full
         #   response, which helps enforce fine-grained access control based on
-        #   their permissions.
-        #
-        #   Here are the possible values:
-        #
-        #   | Value                      | Description        | Permissions                 |
-        #   | -------------------------- | ------------------ | --------------------------- |
-        #   | `DATASET_VIEW_UNSPECIFIED` | Default, `FULL`    | `datasets.get` &            |
-        #   |                            | view               | `datasets.getIamPolicy`     |
-        #   | `METADATA`                 | Metadata only      | `datasets.get`              |
-        #   | `ACL`                      | ACLs only          | `datasets.getIamPolicy`     |
-        #   | `FULL`                     | Metadata & ACLs    | `datasets.get` &            |
-        #   |                            |                    | `datasets.getIamPolicy`     |
-        #
-        #   Using any other value than what's listed here will result in
-        #   Google::Cloud::InvalidArgumentError.
+        #   their permissions. {Google::Cloud::Bigquery::DatasetView} provides
+        #   constants for this parameter.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -1563,21 +1550,8 @@ dataset_view: dataset_view
         #   about a BigQuery dataset should be returned in the response. By
         #   controlling this parameter, users can request a partial or full
         #   response, which helps enforce fine-grained access control based on
-        #   their permissions.
-        #
-        #   Here are the possible values:
-        #
-        #   | Value                      | Description        | Permissions                 |
-        #   | -------------------------- | ------------------ | --------------------------- |
-        #   | `DATASET_VIEW_UNSPECIFIED` | Default, `FULL`    | `datasets.get` &            |
-        #   |                            | view               | `datasets.getIamPolicy`     |
-        #   | `METADATA`                 | Metadata only      | `datasets.get`              |
-        #   | `ACL`                      | ACLs only          | `datasets.getIamPolicy`     |
-        #   | `FULL`                     | Metadata & ACLs    | `datasets.get` &            |
-        #   |                            |                    | `datasets.getIamPolicy`     |
-        #
-        #   Using any other value than what's listed here will result in
-        #   Google::Cloud::InvalidArgumentError.
+        #   their permissions. {Google::Cloud::Bigquery::DatasetView} provides
+        #   constants for this parameter.
         #
         # @yield [access] a block for setting rules
         # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object

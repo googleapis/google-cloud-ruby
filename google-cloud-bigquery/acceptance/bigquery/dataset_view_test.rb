@@ -22,7 +22,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "gets dataset with DATASET_VIEW_UNSPECIFIED" do
-    fresh = bigquery.dataset dataset_id, dataset_view: "DATASET_VIEW_UNSPECIFIED"
+    fresh = bigquery.dataset dataset_id, dataset_view: Google::Cloud::Bigquery::DatasetView::DATASET_VIEW_UNSPECIFIED
     _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
     _(fresh.name).must_equal dataset_name
     _(fresh.description).must_equal dataset_description
@@ -31,7 +31,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "gets dataset with METADATA" do
-    fresh = bigquery.dataset dataset_id, dataset_view: "METADATA"
+    fresh = bigquery.dataset dataset_id, dataset_view: Google::Cloud::Bigquery::DatasetView::METADATA
     _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
     _(fresh.name).must_equal dataset_name
     _(fresh.description).must_equal dataset_description
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "gets dataset with ACL" do
-    fresh = bigquery.dataset dataset_id, dataset_view: "ACL"
+    fresh = bigquery.dataset dataset_id, dataset_view: Google::Cloud::Bigquery::DatasetView::ACL
     _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
     # ACL view should not include metadata
     _(fresh.name).must_be_nil
@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "gets dataset with FULL" do
-    fresh = bigquery.dataset dataset_id, dataset_view: "FULL"
+    fresh = bigquery.dataset dataset_id, dataset_view: Google::Cloud::Bigquery::DatasetView::FULL
     _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
     _(fresh.name).must_equal dataset_name
     _(fresh.description).must_equal dataset_description
