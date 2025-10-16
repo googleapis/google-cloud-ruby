@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the SubscriptionAdmin API.
           module Paths
             ##
+            # Create a fully-qualified Listing resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dataExchanges/{data_exchange}/listings/{listing}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param data_exchange [String]
+            # @param listing [String]
+            #
+            # @return [::String]
+            def listing_path project:, location:, data_exchange:, listing:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "data_exchange cannot contain /" if data_exchange.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dataExchanges/#{data_exchange}/listings/#{listing}"
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:

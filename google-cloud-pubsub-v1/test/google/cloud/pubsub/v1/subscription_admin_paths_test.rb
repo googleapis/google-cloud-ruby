@@ -41,6 +41,18 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientPathsTest < Minitest
     end
   end
 
+  def test_listing_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.listing_path project: "value0", location: "value1", data_exchange: "value2", listing: "value3"
+      assert_equal "projects/value0/locations/value1/dataExchanges/value2/listings/value3", path
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
