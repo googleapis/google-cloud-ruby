@@ -2800,6 +2800,18 @@ module Google
             @gapi.configuration.load.update! preserve_ascii_control_characters: val
           end
 
+          ##
+          # Sets the reservation that job would use. User can specify a reservation
+          # to execute the job. If reservation is not set, reservation is determined
+          # based on the rules defined by the reservation assignments. The expected
+          # format is `projects/`project`/locations/`location`/reservations/`reservation``.
+          # @param [String] value The reservation name.
+          #
+          # @!group Attributes
+          def reservation= value
+            @gapi.configuration.update! reservation: value
+          end
+
           def cancel
             raise "not implemented in #{self.class}"
           end

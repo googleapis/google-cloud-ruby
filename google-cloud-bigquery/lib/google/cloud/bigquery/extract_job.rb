@@ -280,7 +280,8 @@ module Google
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 extract: extract_config,
-                dry_run: options[:dryrun]
+                dry_run: options[:dryrun],
+                reservation: options[:reservation]
               )
             )
 
@@ -436,6 +437,18 @@ module Google
           # @!group Attributes
           def use_avro_logical_types= value
             @gapi.configuration.extract.use_avro_logical_types = value
+          end
+
+          ##
+          # Sets the reservation that job would use. User can specify a reservation
+          # to execute the job. If reservation is not set, reservation is determined
+          # based on the rules defined by the reservation assignments. The expected
+          # format is `projects/`project`/locations/`location`/reservations/`reservation``.
+          # @param [String] value The reservation name.
+          #
+          # @!group Attributes
+          def reservation= value
+            @gapi.configuration.update! reservation: value
           end
 
           def cancel

@@ -1848,6 +1848,12 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
         #   is undefined however for non-query jobs and may result in an error.
         #   Deprecated.
+        # @param [String] operation_type The type of operation for this job.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
@@ -1880,7 +1886,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         # @!group Data
         #
         def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil,
-                     operation_type: nil
+                     operation_type: nil, reservation: nil
           ensure_service!
           options = { create: create,
                       write: write,
@@ -1888,7 +1894,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                       labels: labels,
                       job_id: job_id,
                       prefix: prefix,
-                      operation_type: operation_type }
+                      operation_type: operation_type,
+                      reservation: reservation }
           updater = CopyJob::Updater.from_options(
             service,
             table_ref,
@@ -1941,6 +1948,12 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1968,11 +1981,12 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #
         # @!group Data
         #
-        def copy destination_table, create: nil, write: nil, &block
+        def copy destination_table, create: nil, write: nil, reservation: nil, &block
           copy_job_with_operation_type destination_table,
                                        create: create,
                                        write: write,
                                        operation_type: OperationType::COPY,
+                                       reservation: reservation,
                                        &block
         end
 
@@ -1998,6 +2012,11 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
@@ -2026,9 +2045,10 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #
         # @!group Data
         #
-        def clone destination_table, &block
+        def clone destination_table, reservation: nil, &block
           copy_job_with_operation_type destination_table,
                                        operation_type: OperationType::CLONE,
+                                       reservation: reservation,
                                        &block
         end
 
@@ -2053,6 +2073,11 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
@@ -2081,9 +2106,10 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #
         # @!group Data
         #
-        def snapshot destination_table, &block
+        def snapshot destination_table, reservation: nil, &block
           copy_job_with_operation_type destination_table,
                                        operation_type: OperationType::SNAPSHOT,
+                                       reservation: reservation,
                                        &block
         end
 
@@ -2125,6 +2151,12 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -2152,11 +2184,12 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #
         # @!group Data
         #
-        def restore destination_table, create: nil, write: nil, &block
+        def restore destination_table, create: nil, write: nil, reservation: nil, &block
           copy_job_with_operation_type destination_table,
                                        create: create,
                                        write: write,
                                        operation_type: OperationType::RESTORE,
+                                       reservation: reservation,
                                        &block
         end
 
@@ -2229,6 +2262,11 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
         #   is undefined however for non-query jobs and may result in an error.
         #   Deprecated.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
@@ -2251,10 +2289,10 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         # @!group Data
         #
         def extract_job extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil,
-                        prefix: nil, labels: nil, dryrun: nil
+                        prefix: nil, labels: nil, dryrun: nil, reservation: nil
           ensure_service!
           options = { format: format, compression: compression, delimiter: delimiter, header: header, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels }
+                      job_id: job_id, prefix: prefix, labels: labels, reservation: reservation }
           updater = ExtractJob::Updater.from_options service, table_ref, extract_url, options
           updater.location = location if location # may be table reference
 
@@ -2298,6 +2336,12 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -2326,12 +2370,13 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #
         # @!group Data
         #
-        def extract extract_url, format: nil, compression: nil, delimiter: nil, header: nil, &block
+        def extract extract_url, format: nil, compression: nil, delimiter: nil, header: nil, reservation: nil, &block
           job = extract_job extract_url,
                             format:      format,
                             compression: compression,
                             delimiter:   delimiter,
                             header:      header,
+                            reservation: reservation,
                             &block
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -2524,6 +2569,11 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
         #   are preserved. By default, ASCII control characters are not
         #   preserved.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
@@ -2583,7 +2633,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                      null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: self.schema,
                      date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
                      null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
-                     preserve_ascii_control_characters: nil
+                     preserve_ascii_control_characters: nil, reservation: nil
           ensure_service!
 
           updater = load_job_updater format: format, create: create, write: write, projection_fields: projection_fields,
@@ -2597,7 +2647,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                      timestamp_format: timestamp_format, null_markers: null_markers,
                                      source_column_match: source_column_match, time_zone: time_zone,
                                      reference_file_schema_uri: reference_file_schema_uri,
-                                     preserve_ascii_control_characters: preserve_ascii_control_characters
+                                     preserve_ascii_control_characters: preserve_ascii_control_characters,
+                                     reservation: reservation
 
           yield updater if block_given?
 
@@ -2755,6 +2806,11 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
         #   are preserved. By default, ASCII control characters are not
         #   preserved.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -2819,7 +2875,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                  quote: nil, skip_leading: nil, autodetect: nil, null_marker: nil, session_id: nil,
                  schema: self.schema, date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
                  null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
-                 preserve_ascii_control_characters: nil, &block
+                 preserve_ascii_control_characters: nil, reservation: nil, &block
           job = load_job files, format: format, create: create, write: write, projection_fields: projection_fields,
                                 jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                                 delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
@@ -2829,7 +2885,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                 timestamp_format: timestamp_format, null_markers: null_markers,
                                 source_column_match: source_column_match, time_zone: time_zone,
                                 reference_file_schema_uri: reference_file_schema_uri,
-                                preserve_ascii_control_characters: preserve_ascii_control_characters, &block
+                                preserve_ascii_control_characters: preserve_ascii_control_characters,
+                                reservation: reservation, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -3223,11 +3280,13 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
 
         protected
 
-        def copy_job_with_operation_type destination_table, create: nil, write: nil, operation_type: nil, &block
+        def copy_job_with_operation_type destination_table, create: nil, write: nil, operation_type: nil,
+                                         reservation: nil, &block
           job = copy_job destination_table,
                          create: create,
                          write: write,
                          operation_type: operation_type,
+                         reservation: reservation,
                          &block
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -3278,7 +3337,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
           end
         end
 
-        def load_job_gapi table_id, dryrun, job_id: nil, prefix: nil
+        def load_job_gapi table_id, dryrun, job_id: nil, prefix: nil, reservation: nil
           job_ref = service.job_ref_from job_id, prefix
           Google::Apis::BigqueryV2::Job.new(
             job_reference: job_ref,
@@ -3290,7 +3349,8 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                   table_id:   table_id
                 )
               ),
-              dry_run: dryrun
+              dry_run: dryrun,
+              reservation: reservation
             )
           )
         end
@@ -3344,8 +3404,9 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                              prefix: nil, labels: nil, autodetect: nil, null_marker: nil,
                              create_session: nil, session_id: nil, date_format: nil, datetime_format: nil,
                              time_format: nil, timestamp_format: nil, null_markers: nil, source_column_match: nil,
-                             time_zone: nil, reference_file_schema_uri: nil, preserve_ascii_control_characters: nil
-          new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
+                             time_zone: nil, reference_file_schema_uri: nil, preserve_ascii_control_characters: nil,
+                             reservation: nil
+          new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix, reservation: reservation
           LoadJob::Updater.new(new_job).tap do |job|
             job.location = location if location # may be table reference
             job.create = create unless create.nil?
