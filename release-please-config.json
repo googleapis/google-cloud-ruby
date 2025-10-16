@@ -979,6 +979,10 @@
       "component": "google-cloud-location",
       "version_file": "lib/google/cloud/location/version.rb"
     },
+    "google-cloud-location_finder": {
+      "component": "google-cloud-location_finder",
+      "version_file": "lib/google/cloud/location_finder/version.rb"
+    },
     "google-cloud-location_finder-v1": {
       "component": "google-cloud-location_finder-v1",
       "version_file": "lib/google/cloud/location_finder/v1/version.rb"
