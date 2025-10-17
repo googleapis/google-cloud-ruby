@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.27.0 (2025-10-16)
+
+#### Features
+
+* add additional proto fields and GenerateFetchAccessToken API ([#31767](https://github.com/googleapis/google-cloud-ruby/issues/31767)) 
+
 ### 1.26.0 (2025-10-08)
 
 #### Features
