@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2025-10-17)
+
+#### Features
+
+* Add tags to Subscription, Topic, and CreateSnapshotRequest messages for use in CreateSubscription, CreateTopic, and CreateSnapshot requests respectively ([#31778](https://github.com/googleapis/google-cloud-ruby/issues/31778)) 
+
 ### 1.13.0 (2025-10-01)
 
 #### Features
