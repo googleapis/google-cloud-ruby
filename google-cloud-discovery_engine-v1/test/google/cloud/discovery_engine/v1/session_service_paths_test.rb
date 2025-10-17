@@ -59,6 +59,18 @@ class ::Google::Cloud::DiscoveryEngine::V1::SessionService::ClientPathsTest < Mi
     end
   end
 
+  def test_assist_answer_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1::SessionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.assist_answer_path project: "value0", location: "value1", collection: "value2", engine: "value3", session: "value4", assist_answer: "value5"
+      assert_equal "projects/value0/locations/value1/collections/value2/engines/value3/sessions/value4/assistAnswers/value5", path
+    end
+  end
+
   def test_chunk_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
