@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.28.0 (2025-10-17)
+
+#### Features
+
+* add aspect_ratio and image_config for v1 version ([#31770](https://github.com/googleapis/google-cloud-ruby/issues/31770)) 
+
 ### 1.27.0 (2025-10-16)
 
 #### Features
