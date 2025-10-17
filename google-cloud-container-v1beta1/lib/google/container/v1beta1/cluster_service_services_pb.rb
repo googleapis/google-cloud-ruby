@@ -24,6 +24,8 @@ module Google
     module Container
       module V1beta1
         module ClusterManager
+          # LINT: LEGACY_NAMES
+          #
           # Google Kubernetes Engine Cluster Manager v1beta1
           class Service
 
