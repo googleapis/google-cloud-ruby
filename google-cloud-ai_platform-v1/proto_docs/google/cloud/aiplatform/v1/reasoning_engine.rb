@@ -22,6 +22,9 @@ module Google
     module AIPlatform
       module V1
         # ReasoningEngine configurations
+        # @!attribute [rw] source_code_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec]
+        #     Deploy from source code files with a defined entrypoint.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account that the Reasoning Engine artifact runs as.
@@ -35,6 +38,8 @@ module Google
         #     Ignored when users directly specify a deployment image through
         #     `deployment_spec.first_party_image_override`, but keeping the
         #     field_behavior to avoid introducing breaking changes.
+        #     The `deployment_source` field should not be set if `package_spec` is
+        #     specified.
         # @!attribute [rw] deployment_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::DeploymentSpec]
         #     Optional. The specification of a Reasoning Engine deployment.
@@ -51,7 +56,8 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # User provided package spec like pickled object and package requirements.
+          # User-provided package specification, containing pickled object and package
+          # requirements.
           # @!attribute [rw] pickle_object_gcs_uri
           #   @return [::String]
           #     Optional. The Cloud Storage URI of the pickled python object.
@@ -124,6 +130,57 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
+
+          # Specification for deploying from source code.
+          # @!attribute [rw] inline_source
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::InlineSource]
+          #     Source code is provided directly in the request.
+          # @!attribute [rw] python_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::PythonSpec]
+          #     Configuration for a Python application.
+          class SourceCodeSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Specifies source code provided as a byte stream.
+            # @!attribute [rw] source_archive
+            #   @return [::String]
+            #     Required. Input only. The application source code archive, provided as
+            #     a compressed tarball
+            #     (.tar.gz) file.
+            class InlineSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specification for running a Python application from source.
+            # @!attribute [rw] version
+            #   @return [::String]
+            #     Optional. The version of Python to use. Support version
+            #     includes 3.9, 3.10, 3.11, 3.12, 3.13.
+            #     If not specified, default value is 3.10.
+            # @!attribute [rw] entrypoint_module
+            #   @return [::String]
+            #     Optional. The Python module to load as the entrypoint, specified as a
+            #     fully qualified module name. For example: path.to.agent.
+            #     If not specified, defaults to "agent".
+            #
+            #     The project root will be added to Python sys.path, allowing imports
+            #     to be specified relative to the root.
+            # @!attribute [rw] entrypoint_object
+            #   @return [::String]
+            #     Optional. The name of the callable object within the
+            #     `entrypoint_module` to use as the application If not specified,
+            #     defaults to "root_agent".
+            # @!attribute [rw] requirements_file
+            #   @return [::String]
+            #     Optional. The path to the requirements file, relative to the source
+            #     root. If not specified, defaults to "requirements.txt".
+            class PythonSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # ReasoningEngine provides a customizable runtime for models to determine
@@ -157,9 +214,21 @@ module Google
         #     Customer-managed encryption key spec for a ReasoningEngine. If set, this
         #     ReasoningEngine and all sub-resources of this ReasoningEngine will be
         #     secured by this key.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for the ReasoningEngine.
         class ReasoningEngine
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
