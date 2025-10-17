@@ -99,6 +99,31 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AssistAnswer resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param collection [String]
+            # @param engine [String]
+            # @param session [String]
+            # @param assist_answer [String]
+            #
+            # @return [::String]
+            def assist_answer_path project:, location:, collection:, engine:, session:, assist_answer:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+              raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+              raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/sessions/#{session}/assistAnswers/#{assist_answer}"
+            end
+
+            ##
             # Create a fully-qualified Chunk resource string.
             #
             # @overload chunk_path(project:, location:, data_store:, branch:, document:, chunk:)
