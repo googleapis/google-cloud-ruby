@@ -545,6 +545,11 @@ module Google
         #   * The key portion of a label must be unique. However, you can use the
         #     same key with multiple resources.
         #   * Keys must start with a lowercase letter or international character.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
@@ -566,9 +571,9 @@ module Google
         #
         # @!group Data
         #
-        def extract_job extract_url, format: nil, job_id: nil, prefix: nil, labels: nil
+        def extract_job extract_url, format: nil, job_id: nil, prefix: nil, labels: nil, reservation: nil
           ensure_service!
-          options = { format: format, job_id: job_id, prefix: prefix, labels: labels }
+          options = { format: format, job_id: job_id, prefix: prefix, labels: labels, reservation: reservation }
           updater = ExtractJob::Updater.from_options service, model_ref, extract_url, options
           updater.location = location if location # may be model reference
 
@@ -603,6 +608,12 @@ module Google
         #
         #   * `ml_tf_saved_model` - TensorFlow SavedModel
         #   * `ml_xgboost_booster` - XGBoost Booster
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -620,8 +631,8 @@ module Google
         #
         # @!group Data
         #
-        def extract extract_url, format: nil, &block
-          job = extract_job extract_url, format: format, &block
+        def extract extract_url, format: nil, reservation: nil, &block
+          job = extract_job extract_url, format: format, reservation: reservation, &block
           job.wait_until_done!
           ensure_job_succeeded! job
           true

@@ -792,7 +792,8 @@ module Google
                   query: query,
                   default_dataset: dataset_config,
                   maximum_billing_tier: options[:maximum_billing_tier]
-                )
+                ),
+                reservation: options[:reservation]
               )
             )
 
@@ -1594,6 +1595,18 @@ module Google
           def clustering_fields= fields
             @gapi.configuration.query.clustering ||= Google::Apis::BigqueryV2::Clustering.new
             @gapi.configuration.query.clustering.fields = fields
+          end
+
+          ##
+          # Sets the reservation that job would use. User can specify a reservation
+          # to execute the job. If reservation is not set, reservation is determined
+          # based on the rules defined by the reservation assignments. The expected
+          # format is `projects/`project`/locations/`location`/reservations/`reservation``.
+          # @param [String] value The reservation name.
+          #
+          # @!group Attributes
+          def reservation= value
+            @gapi.configuration.update! reservation: value
           end
 
           def cancel
