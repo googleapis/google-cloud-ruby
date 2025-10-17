@@ -21,7 +21,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
   it "finds a dataset without any retry or backoff" do
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id),
-      [project, dataset_id], access_policy_version: nil
+      [project, dataset_id], access_policy_version: nil, dataset_view: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id, access_policy_version: nil
