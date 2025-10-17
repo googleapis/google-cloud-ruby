@@ -304,7 +304,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil, tags: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -424,6 +424,11 @@ module Google
             #   @param message_transforms [::Array<::Google::Cloud::PubSub::V1::MessageTransform, ::Hash>]
             #     Optional. Transforms to be applied to messages before they are delivered to
             #     subscribers. Transforms are applied in the order specified.
+            #   @param tags [::Hash{::String => ::String}]
+            #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+            #     resource. For example:
+            #       "123/environment": "production",
+            #       "123/costCenter": "marketing"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -1551,7 +1556,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_snapshot(name: nil, subscription: nil, labels: nil)
+            # @overload create_snapshot(name: nil, subscription: nil, labels: nil, tags: nil)
             #   Pass arguments to `create_snapshot` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1576,6 +1581,11 @@ module Google
             #   @param labels [::Hash{::String => ::String}]
             #     Optional. See [Creating and managing
             #     labels](https://cloud.google.com/pubsub/docs/labels).
+            #   @param tags [::Hash{::String => ::String}]
+            #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+            #     resource. For example:
+            #       "123/environment": "production",
+            #       "123/costCenter": "marketing"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]

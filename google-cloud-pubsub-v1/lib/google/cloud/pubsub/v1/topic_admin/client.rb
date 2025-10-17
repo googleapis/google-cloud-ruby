@@ -259,7 +259,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil, message_retention_duration: nil, ingestion_data_source_settings: nil, message_transforms: nil)
+            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil, message_retention_duration: nil, ingestion_data_source_settings: nil, message_transforms: nil, tags: nil)
             #   Pass arguments to `create_topic` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -303,6 +303,11 @@ module Google
             #   @param message_transforms [::Array<::Google::Cloud::PubSub::V1::MessageTransform, ::Hash>]
             #     Optional. Transforms to be applied to messages published to the topic.
             #     Transforms are applied in the order specified.
+            #   @param tags [::Hash{::String => ::String}]
+            #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+            #     resource. For example:
+            #       "123/environment": "production",
+            #       "123/costCenter": "marketing"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]

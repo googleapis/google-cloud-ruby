@@ -690,13 +690,20 @@ module Google
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
           #     Optional. The Pub/Sub message failed schema validation.
           #
-          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `message_transformation_failure_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] message_transformation_failure_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
           #     Optional. Failure encountered when applying a message transformation to
           #     the Pub/Sub message.
           #
-          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `schema_violation_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] api_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
+          #     Optional. The message failed to be published due to an API violation.
+          #     This is only set when the size of the data field of the Kinesis record
+          #     is zero.
+          #
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AwsKinesisFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -817,6 +824,12 @@ module Google
         #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
         #     Optional. Transforms to be applied to messages published to the topic.
         #     Transforms are applied in the order specified.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -826,6 +839,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1221,6 +1243,12 @@ module Google
         #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
         #     Optional. Transforms to be applied to messages before they are delivered to
         #     subscribers. Transforms are applied in the order specified.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1247,6 +1275,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1908,7 +1945,7 @@ module Google
         # messages from the server to the client.
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
-        #     Optional. Received Pub/Sub messages. This will not be empty.
+        #     Optional. Received Pub/Sub messages.
         # @!attribute [rw] acknowledge_confirmation
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
         #     Optional. This field will only be set if `enable_exactly_once_delivery` is
@@ -2001,6 +2038,12 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See [Creating and managing
         #     labels](https://cloud.google.com/pubsub/docs/labels).
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
         class CreateSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2010,6 +2053,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
