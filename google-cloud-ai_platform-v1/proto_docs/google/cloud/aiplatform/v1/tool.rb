@@ -107,6 +107,14 @@ module Google
           # @!attribute [rw] environment
           #   @return [::Google::Cloud::AIPlatform::V1::Tool::ComputerUse::Environment]
           #     Required. The environment being operated.
+          # @!attribute [rw] excluded_predefined_functions
+          #   @return [::Array<::String>]
+          #     Optional. By default, [predefined
+          #     functions](https://cloud.google.com/vertex-ai/generative-ai/docs/computer-use#supported-actions)
+          #     are included in the final model call. Some of them can be explicitly
+          #     excluded from being automatically included. This can serve two purposes:
+          #     1. Using a more restricted / different action space.
+          #     2. Improving the definitions / instructions of predefined functions.
           class ComputerUse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -238,6 +246,74 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A datatype containing media that is part of a `FunctionResponse` message.
+        #
+        # A `FunctionResponsePart` consists of data which has an associated datatype. A
+        # `FunctionResponsePart` can only contain one of the accepted types in
+        # `FunctionResponsePart.data`.
+        #
+        # A `FunctionResponsePart` must have a fixed IANA MIME type identifying the
+        # type and subtype of the media if the `inline_data` field is filled with raw
+        # bytes.
+        # @!attribute [rw] inline_data
+        #   @return [::Google::Cloud::AIPlatform::V1::FunctionResponseBlob]
+        #     Inline media bytes.
+        #
+        #     Note: The following fields are mutually exclusive: `inline_data`, `file_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] file_data
+        #   @return [::Google::Cloud::AIPlatform::V1::FunctionResponseFileData]
+        #     URI based data.
+        #
+        #     Note: The following fields are mutually exclusive: `file_data`, `inline_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class FunctionResponsePart
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Raw media bytes for function response.
+        #
+        # Text should not be sent as raw bytes, use the 'text' field.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     Required. The IANA standard MIME type of the source data.
+        # @!attribute [rw] data
+        #   @return [::String]
+        #     Required. Raw bytes.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name of the blob.
+        #
+        #     Used to provide a label or filename to distinguish blobs.
+        #
+        #     This field is only returned in PromptMessage for prompt management.
+        #     It is currently used in the Gemini GenerateContent calls only when server
+        #     side tools (code_execution, google_search, and url_context) are enabled.
+        class FunctionResponseBlob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # URI based data for function response.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     Required. The IANA standard MIME type of the source data.
+        # @!attribute [rw] file_uri
+        #   @return [::String]
+        #     Required. URI.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name of the file data.
+        #
+        #     Used to provide a label or filename to distinguish file datas.
+        #
+        #     This field is only returned in PromptMessage for prompt management.
+        #     It is currently used in the Gemini GenerateContent calls only when server
+        #     side tools (code_execution, google_search, and url_context) are enabled.
+        class FunctionResponseFileData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The result output from a [FunctionCall] that contains a string representing
         # the [FunctionDeclaration.name] and a structured JSON object containing any
         # output from the function is used as context to the model. This should contain
@@ -252,6 +328,10 @@ module Google
         #     Use "output" key to specify function output and "error" key to specify
         #     error details (if any). If "output" and "error" keys are not specified,
         #     then whole "response" is treated as function output.
+        # @!attribute [rw] parts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::FunctionResponsePart>]
+        #     Optional. Ordered `Parts` that constitute a function response. Parts may
+        #     have different IANA MIME types.
         class FunctionResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
