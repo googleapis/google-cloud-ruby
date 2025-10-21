@@ -34,6 +34,12 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. An expression for ordering the results of the request.
         class ListCloudExadataInfrastructuresRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -279,6 +285,7 @@ module Google
         #   @return [::String]
         #     Required. The parent value for database node in the following format:
         #     projects/\\{project}/locations/\\{location}/cloudVmClusters/\\{cloudVmCluster}.
+        #     .
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of items to return.
@@ -318,6 +325,11 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request. Only the
+        #     shape, gcp_oracle_zone and gi_version fields are supported in this format:
+        #     `shape="{shape}"`.
         class ListGiVersionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -348,6 +360,11 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request. Only the
+        #     gcp_oracle_zone_id field is supported in this format:
+        #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
         class ListDbSystemShapesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -475,6 +492,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request for `AutonomousDatabase.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     Exadata resource by the update. The fields specified in the update_mask are
+        #     relative to the resource, not the full request. A field will be overwritten
+        #     if it is in the mask. If the user does not provide a mask then all fields
+        #     will be overwritten.
+        # @!attribute [rw] autonomous_database
+        #   @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabase]
+        #     Required. The resource being updated
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request for `AutonomousDatabase.Delete`.
         # @!attribute [rw] name
         #   @return [::String]
@@ -534,6 +577,32 @@ module Google
         #     Required. The name of the Autonomous Database in the following format:
         #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
         class RestartAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `OracleDatabase.SwitchoverAutonomousDatabase`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Autonomous Database in the following format:
+        #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+        # @!attribute [rw] peer_autonomous_database
+        #   @return [::String]
+        #     Required. The peer database name to switch over to.
+        class SwitchoverAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `OracleDatabase.FailoverAutonomousDatabase`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Autonomous Database in the following format:
+        #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+        # @!attribute [rw] peer_autonomous_database
+        #   @return [::String]
+        #     Required. The peer database name to fail over to.
+        class FailoverAutonomousDatabaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -670,6 +739,156 @@ module Google
         #   @return [::String]
         #     A token identifying a page of results the server should return.
         class ListAutonomousDatabaseBackupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.Create`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The value for parent of the ExadbVmCluster in the following
+        #     format: projects/\\{project}/locations/\\{location}.
+        # @!attribute [rw] exadb_vm_cluster_id
+        #   @return [::String]
+        #     Required. The ID of the ExadbVmCluster to create. This value is
+        #     restricted to (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$) and must be a maximum of
+        #     63 characters in length. The value must start with a letter and end with a
+        #     letter or a number.
+        # @!attribute [rw] exadb_vm_cluster
+        #   @return [::Google::Cloud::OracleDatabase::V1::ExadbVmCluster]
+        #     Required. The resource being created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateExadbVmClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.Delete`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ExadbVmCluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteExadbVmClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.Get`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ExadbVmCluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}.
+        class GetExadbVmClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.List`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent value for ExadbVmClusters in the following format:
+        #     projects/\\{project}/locations/\\{location}.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return.
+        #     If unspecified, at most 50 ExadbVmClusters will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. An expression for ordering the results of the request.
+        class ListExadbVmClustersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for `ExadbVmCluster.List`.
+        # @!attribute [rw] exadb_vm_clusters
+        #   @return [::Array<::Google::Cloud::OracleDatabase::V1::ExadbVmCluster>]
+        #     The list of ExadbVmClusters.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListExadbVmClustersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.Update`. We only support adding the
+        # Virtual Machine to the ExadbVmCluster. Rest of the fields in ExadbVmCluster
+        # are immutable.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in th VM Cluster should be
+        #     updated. A field specified in the mask is overwritten. If a mask isn't
+        #     provided then all the fields in the VM Cluster are overwritten.
+        # @!attribute [rw] exadb_vm_cluster
+        #   @return [::Google::Cloud::OracleDatabase::V1::ExadbVmCluster]
+        #     Required. The resource being updated.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateExadbVmClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `ExadbVmCluster.RemoveVirtualMachine`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ExadbVmCluster in the following format:
+        #     projects/\\{project}/locations/\\{location}/exadbVmClusters/\\{exadb_vm_cluster}.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] hostnames
+        #   @return [::Array<::String>]
+        #     Required. The list of host names of db nodes to be removed from the
+        #     ExadbVmCluster.
+        class RemoveVirtualMachineExadbVmClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
