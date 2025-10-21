@@ -35,10 +35,6 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. User friendly name for this resource.
-        # @!attribute [r] gcp_oracle_zone
-        #   @return [::String]
-        #     Output only. Google Cloud Platform location where Oracle Exadata is hosted.
-        #     It is same as Google Cloud Platform Oracle zone of Exadata infrastructure.
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties]
         #     Optional. Various properties of the VM Cluster.
@@ -50,14 +46,40 @@ module Google
         #     Output only. The date and time that the VM cluster was created.
         # @!attribute [rw] cidr
         #   @return [::String]
-        #     Required. Network settings. CIDR to use for cluster IP allocation.
+        #     Optional. Network settings. CIDR to use for cluster IP allocation.
         # @!attribute [rw] backup_subnet_cidr
         #   @return [::String]
-        #     Required. CIDR range of the backup subnet.
+        #     Optional. CIDR range of the backup subnet.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Required. The name of the VPC network.
+        #     Optional. The name of the VPC network.
         #     Format: projects/\\{project}/global/networks/\\{network}
+        # @!attribute [r] gcp_oracle_zone
+        #   @return [::String]
+        #     Output only. The GCP Oracle zone where Oracle CloudVmCluster is hosted.
+        #     This will be the same as the gcp_oracle_zone of the
+        #     CloudExadataInfrastructure. Example: us-east4-b-r2.
+        # @!attribute [rw] odb_network
+        #   @return [::String]
+        #     Optional. The name of the OdbNetwork associated with the VM Cluster.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}
+        #     It is optional but if specified, this should match the parent ODBNetwork of
+        #     the odb_subnet and backup_odb_subnet.
+        # @!attribute [rw] odb_subnet
+        #   @return [::String]
+        #     Optional. The name of the OdbSubnet associated with the VM Cluster for
+        #     IP allocation. Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
+        # @!attribute [rw] backup_odb_subnet
+        #   @return [::String]
+        #     Optional. The name of the backup OdbSubnet associated with the VM Cluster.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
+        # @!attribute [r] identity_connector
+        #   @return [::Google::Cloud::OracleDatabase::V1::IdentityConnector]
+        #     Output only. The identity connector details which will allow OCI to
+        #     securely access the resources in the customer project.
         class CloudVmCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -173,6 +195,9 @@ module Google
         # @!attribute [rw] cluster_name
         #   @return [::String]
         #     Optional. OCI Cluster name.
+        # @!attribute [r] compute_model
+        #   @return [::Google::Cloud::OracleDatabase::V1::ComputeModel]
+        #     Output only. The compute model of the VM Cluster.
         class CloudVmClusterProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

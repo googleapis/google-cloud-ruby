@@ -33,7 +33,9 @@ module Google
         #     Optional. User friendly name for this resource.
         # @!attribute [rw] gcp_oracle_zone
         #   @return [::String]
-        #     Optional. Google Cloud Platform location where Oracle Exadata is hosted.
+        #     Optional. The GCP Oracle zone where Oracle Exadata Infrastructure is
+        #     hosted. Example: us-east4-b-r2. If not specified, the system will pick a
+        #     zone based on availability.
         # @!attribute [r] entitlement_id
         #   @return [::String]
         #     Output only. Entitlement ID of the private offer against which this
@@ -154,6 +156,15 @@ module Google
         #   @return [::String]
         #     Output only. The monthly software version of the database servers (dom0)
         #     in the Exadata Infrastructure. Example: 20.1.15
+        # @!attribute [r] compute_model
+        #   @return [::Google::Cloud::OracleDatabase::V1::ComputeModel]
+        #     Output only. The compute model of the Exadata Infrastructure.
+        # @!attribute [r] database_server_type
+        #   @return [::String]
+        #     Output only. The database server type of the Exadata Infrastructure.
+        # @!attribute [r] storage_server_type
+        #   @return [::String]
+        #     Output only. The storage server type of the Exadata Infrastructure.
         class CloudExadataInfrastructureProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
