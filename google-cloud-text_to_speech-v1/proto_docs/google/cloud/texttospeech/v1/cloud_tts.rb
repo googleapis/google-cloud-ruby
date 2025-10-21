@@ -71,6 +71,12 @@ module Google
         #   @return [::Boolean]
         #     Only for Journey voices. If false, the synthesis is context aware
         #     and has a higher latency.
+        # @!attribute [rw] relax_safety_filters
+        #   @return [::Boolean]
+        #     Optional. Input only. If true, relaxes safety filters for Gemini TTS. Only
+        #     supported for accounts linked to Invoiced (Offline) Cloud billing accounts.
+        #     Otherwise, will return result
+        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
         class AdvancedVoiceOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
