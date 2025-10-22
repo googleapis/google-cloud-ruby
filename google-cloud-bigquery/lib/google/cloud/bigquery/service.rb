@@ -109,16 +109,18 @@ module Google
 
         ##
         # Returns the dataset specified by datasetID.
-        def get_dataset dataset_id, access_policy_version: nil
-          get_project_dataset @project, dataset_id, access_policy_version: access_policy_version
+        def get_dataset dataset_id, access_policy_version: nil, dataset_view: nil
+          get_project_dataset @project, dataset_id, access_policy_version: access_policy_version,
+dataset_view: dataset_view
         end
 
         ##
         # Gets the specified dataset resource by full dataset reference.
-        def get_project_dataset project_id, dataset_id, access_policy_version: nil
+        def get_project_dataset project_id, dataset_id, access_policy_version: nil, dataset_view: nil
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_dataset project_id, dataset_id, access_policy_version: access_policy_version
+            service.get_dataset project_id, dataset_id, access_policy_version: access_policy_version,
+dataset_view: dataset_view
           end
         end
 
@@ -131,7 +133,7 @@ module Google
         ##
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
-        def patch_dataset dataset_id, patched_dataset_gapi, access_policy_version: nil
+        def patch_dataset dataset_id, patched_dataset_gapi, access_policy_version: nil, update_mode: nil
           patch_with_backoff = false
           options = {}
           if patched_dataset_gapi.etag
@@ -141,7 +143,7 @@ module Google
           end
           execute backoff: patch_with_backoff do
             service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options,
-access_policy_version: access_policy_version
+access_policy_version: access_policy_version, update_mode: update_mode
           end
         end
 
