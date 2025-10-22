@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.11.0 (2025-10-22)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exadata Exascale (`ExadbVmCluster`, `ExascaleDbStorageVault`), Base Database (`DbSystem`, `Database`, `PluggableDatabase`), and Networking (`OdbNetwork`, `OdbSubnet`). ([#31792](https://github.com/googleapis/google-cloud-ruby/issues/31792)) 
+#### Documentation
+
+* Updated comments for clarity and fixed typos 
+
 ### 0.10.0 (2025-10-08)
 
 #### Features
