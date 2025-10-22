@@ -40,8 +40,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of `CustomFields` to return. The service may
         #     return fewer than this value. If unspecified, at most 50 `CustomFields`
-        #     will be returned. The maximum value is 1000; values above 1000 will be
-        #     coerced to 1000.
+        #     will be returned. The maximum value is 1000; values greater than 1000 will
+        #     be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListCustomFields` call.
@@ -82,7 +82,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -90,6 +90,121 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListCustomFieldsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateCustomField` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `CustomField` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] custom_field
+        #   @return [::Google::Ads::AdManager::V1::CustomField]
+        #     Required. The `CustomField` to create.
+        class CreateCustomFieldRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateCustomFields` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `CustomFields` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateCustomFieldRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateCustomFieldRequest>]
+        #     Required. The `CustomField` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateCustomFieldsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateCustomFields` method.
+        # @!attribute [rw] custom_fields
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomField>]
+        #     The `CustomField` objects created.
+        class BatchCreateCustomFieldsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateCustomField` method.
+        # @!attribute [rw] custom_field
+        #   @return [::Google::Ads::AdManager::V1::CustomField]
+        #     Required. The `CustomField` to update.
+        #
+        #     The `CustomField`'s `name` is used to identify the `CustomField` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        class UpdateCustomFieldRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateCustomFields` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `CustomFields` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateCustomFieldRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateCustomFieldRequest>]
+        #     Required. The `CustomField` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateCustomFieldsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateCustomFields` method.
+        # @!attribute [rw] custom_fields
+        #   @return [::Array<::Google::Ads::AdManager::V1::CustomField>]
+        #     The `CustomField` objects updated.
+        class BatchUpdateCustomFieldsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchActivateCustomFields` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `CustomField` objects to activate.
+        #     Format: `networks/{network_code}/customFields/{custom_field_id}`
+        class BatchActivateCustomFieldsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateCustomFields` method.
+        class BatchActivateCustomFieldsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateCustomFields` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `CustomField` objects to deactivate.
+        #     Format: `networks/{network_code}/customFields/{custom_field_id}`
+        class BatchDeactivateCustomFieldsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateCustomFields` method.
+        class BatchDeactivateCustomFieldsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

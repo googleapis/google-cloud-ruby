@@ -279,8 +279,8 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of AdUnits to return. The service may return
               #     fewer than this value. If unspecified, at most 50 ad units will be
-              #     returned. The maximum value is 1000; values above 1000 will be coerced to
-              #     1000.
+              #     returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListAdUnits` call.
               #     Provide this to retrieve the subsequent page.
@@ -385,8 +385,8 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of AdUnitSizes to return. The service may
               #     return fewer than this value. If unspecified, at most 50 ad unit sizes will
-              #     be returned. The maximum value is 1000; values above 1000 will be coerced
-              #     to 1000.
+              #     be returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListAdUnitSizes` call.
               #     Provide this to retrieve the subsequent page.

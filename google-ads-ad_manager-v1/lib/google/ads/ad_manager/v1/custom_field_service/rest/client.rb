@@ -279,8 +279,8 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of `CustomFields` to return. The service may
               #     return fewer than this value. If unspecified, at most 50 `CustomFields`
-              #     will be returned. The maximum value is 1000; values above 1000 will be
-              #     coerced to 1000.
+              #     will be returned. The maximum value is 1000; values greater than 1000 will
+              #     be coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListCustomFields` call.
               #     Provide this to retrieve the subsequent page.
@@ -356,6 +356,499 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @custom_field_service_stub, :list_custom_fields, "custom_fields", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to create a `CustomField` object.
+              #
+              # @overload create_custom_field(request, options = nil)
+              #   Pass arguments to `create_custom_field` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateCustomFieldRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateCustomFieldRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_custom_field(parent: nil, custom_field: nil)
+              #   Pass arguments to `create_custom_field` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `CustomField` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param custom_field [::Google::Ads::AdManager::V1::CustomField, ::Hash]
+              #     Required. The `CustomField` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::CustomField]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::CustomField]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateCustomFieldRequest.new
+              #
+              #   # Call the create_custom_field method.
+              #   result = client.create_custom_field request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::CustomField.
+              #   p result
+              #
+              def create_custom_field request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateCustomFieldRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_custom_field.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_custom_field.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_custom_field.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_field_service_stub.create_custom_field request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch create `CustomField` objects.
+              #
+              # @overload batch_create_custom_fields(request, options = nil)
+              #   Pass arguments to `batch_create_custom_fields` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_custom_fields(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_custom_fields` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `CustomFields` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateCustomFieldRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateCustomFieldRequest, ::Hash>]
+              #     Required. The `CustomField` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateCustomFieldsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateCustomFieldsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest.new
+              #
+              #   # Call the batch_create_custom_fields method.
+              #   result = client.batch_create_custom_fields request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateCustomFieldsResponse.
+              #   p result
+              #
+              def batch_create_custom_fields request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_custom_fields.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_custom_fields.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_custom_fields.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_field_service_stub.batch_create_custom_fields request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to update a `CustomField` object.
+              #
+              # @overload update_custom_field(request, options = nil)
+              #   Pass arguments to `update_custom_field` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateCustomFieldRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateCustomFieldRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_custom_field(custom_field: nil, update_mask: nil)
+              #   Pass arguments to `update_custom_field` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param custom_field [::Google::Ads::AdManager::V1::CustomField, ::Hash]
+              #     Required. The `CustomField` to update.
+              #
+              #     The `CustomField`'s `name` is used to identify the `CustomField` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::CustomField]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::CustomField]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateCustomFieldRequest.new
+              #
+              #   # Call the update_custom_field method.
+              #   result = client.update_custom_field request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::CustomField.
+              #   p result
+              #
+              def update_custom_field request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateCustomFieldRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_custom_field.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_custom_field.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_custom_field.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_field_service_stub.update_custom_field request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch update `CustomField` objects.
+              #
+              # @overload batch_update_custom_fields(request, options = nil)
+              #   Pass arguments to `batch_update_custom_fields` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_custom_fields(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_custom_fields` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `CustomFields` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateCustomFieldRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateCustomFieldRequest, ::Hash>]
+              #     Required. The `CustomField` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest.new
+              #
+              #   # Call the batch_update_custom_fields method.
+              #   result = client.batch_update_custom_fields request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateCustomFieldsResponse.
+              #   p result
+              #
+              def batch_update_custom_fields request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_custom_fields.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_custom_fields.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_custom_fields.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_field_service_stub.batch_update_custom_fields request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Activates a list of `CustomField` objects.
+              #
+              # @overload batch_activate_custom_fields(request, options = nil)
+              #   Pass arguments to `batch_activate_custom_fields` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_custom_fields(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_custom_fields` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `CustomField` objects to activate.
+              #     Format: `networks/{network_code}/customFields/{custom_field_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateCustomFieldsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateCustomFieldsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest.new
+              #
+              #   # Call the batch_activate_custom_fields method.
+              #   result = client.batch_activate_custom_fields request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateCustomFieldsResponse.
+              #   p result
+              #
+              def batch_activate_custom_fields request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_custom_fields.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_custom_fields.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_custom_fields.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_field_service_stub.batch_activate_custom_fields request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `CustomField` objects.
+              #
+              # @overload batch_deactivate_custom_fields(request, options = nil)
+              #   Pass arguments to `batch_deactivate_custom_fields` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_custom_fields(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_custom_fields` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `CustomField` objects to deactivate.
+              #     Format: `networks/{network_code}/customFields/{custom_field_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest.new
+              #
+              #   # Call the batch_deactivate_custom_fields method.
+              #   result = client.batch_deactivate_custom_fields request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsResponse.
+              #   p result
+              #
+              def batch_deactivate_custom_fields request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_custom_fields.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_custom_fields.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_custom_fields.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_field_service_stub.batch_deactivate_custom_fields request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -517,6 +1010,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_custom_fields
+                  ##
+                  # RPC-specific configuration for `create_custom_field`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_custom_field
+                  ##
+                  # RPC-specific configuration for `batch_create_custom_fields`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_custom_fields
+                  ##
+                  # RPC-specific configuration for `update_custom_field`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_custom_field
+                  ##
+                  # RPC-specific configuration for `batch_update_custom_fields`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_custom_fields
+                  ##
+                  # RPC-specific configuration for `batch_activate_custom_fields`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_custom_fields
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_custom_fields`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_custom_fields
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -524,6 +1047,18 @@ module Google
                     @get_custom_field = ::Gapic::Config::Method.new get_custom_field_config
                     list_custom_fields_config = parent_rpcs.list_custom_fields if parent_rpcs.respond_to? :list_custom_fields
                     @list_custom_fields = ::Gapic::Config::Method.new list_custom_fields_config
+                    create_custom_field_config = parent_rpcs.create_custom_field if parent_rpcs.respond_to? :create_custom_field
+                    @create_custom_field = ::Gapic::Config::Method.new create_custom_field_config
+                    batch_create_custom_fields_config = parent_rpcs.batch_create_custom_fields if parent_rpcs.respond_to? :batch_create_custom_fields
+                    @batch_create_custom_fields = ::Gapic::Config::Method.new batch_create_custom_fields_config
+                    update_custom_field_config = parent_rpcs.update_custom_field if parent_rpcs.respond_to? :update_custom_field
+                    @update_custom_field = ::Gapic::Config::Method.new update_custom_field_config
+                    batch_update_custom_fields_config = parent_rpcs.batch_update_custom_fields if parent_rpcs.respond_to? :batch_update_custom_fields
+                    @batch_update_custom_fields = ::Gapic::Config::Method.new batch_update_custom_fields_config
+                    batch_activate_custom_fields_config = parent_rpcs.batch_activate_custom_fields if parent_rpcs.respond_to? :batch_activate_custom_fields
+                    @batch_activate_custom_fields = ::Gapic::Config::Method.new batch_activate_custom_fields_config
+                    batch_deactivate_custom_fields_config = parent_rpcs.batch_deactivate_custom_fields if parent_rpcs.respond_to? :batch_deactivate_custom_fields
+                    @batch_deactivate_custom_fields = ::Gapic::Config::Method.new batch_deactivate_custom_fields_config
 
                     yield self if block_given?
                   end

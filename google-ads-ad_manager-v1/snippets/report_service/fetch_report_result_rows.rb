@@ -44,7 +44,7 @@ def fetch_report_result_rows
   # The returned object is of type Gapic::PagedEnumerable. You can iterate
   # over elements, and API calls will be issued to fetch pages as needed.
   result.each do |item|
-    # Each element is of type ::Google::Ads::AdManager::V1::Report::DataTable::Row.
+    # Each element is of type ::Google::Ads::AdManager::V1::ReportDataTable::Row.
     p item
   end
 end

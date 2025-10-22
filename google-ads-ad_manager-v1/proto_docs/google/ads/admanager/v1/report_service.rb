@@ -73,8 +73,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of `Reports` to return. The service may return
         #     fewer than this value. If unspecified, at most 50 `Reports` will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
-        #     1000.
+        #     returned. The maximum value is 1000; values greater than 1000 will be
+        #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListReports` call.
@@ -115,7 +115,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -162,7 +162,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of rows to return. The service may return
         #     fewer than this value. If unspecified, at most 1,000 rows will be returned.
-        #     The maximum value is 10,000; values above 10,000 will be reduced to 10,000.
+        #     The maximum value is 10,000; values greater than 10,000 will be reduced to
+        #     10,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `FetchReportResultRows`
@@ -174,19 +175,19 @@ module Google
 
         # The response message for the fetch report result rows endpoint.
         # @!attribute [rw] rows
-        #   @return [::Array<::Google::Ads::AdManager::V1::Report::DataTable::Row>]
+        #   @return [::Array<::Google::Ads::AdManager::V1::ReportDataTable::Row>]
         #     Up to `page_size` rows of report data.
         # @!attribute [rw] run_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the report was scheduled to run. For non-scheduled
         #     reports, this is the time at which the report was requested to be run.
         # @!attribute [rw] date_ranges
-        #   @return [::Array<::Google::Ads::AdManager::V1::Report::DateRange::FixedDateRange>]
+        #   @return [::Array<::Google::Ads::AdManager::V1::ReportDefinition::DateRange::FixedDateRange>]
         #     The computed fixed date ranges this report includes.
         #     Only returned with the first page of results (when page_token is not
         #     included in the request).
         # @!attribute [rw] comparison_date_ranges
-        #   @return [::Array<::Google::Ads::AdManager::V1::Report::DateRange::FixedDateRange>]
+        #   @return [::Array<::Google::Ads::AdManager::V1::ReportDefinition::DateRange::FixedDateRange>]
         #     The computed comparison fixed date ranges this report includes.
         #     Only returned with the first page of results (when page_token is not
         #     included in the request).
