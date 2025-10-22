@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.0 (2025-10-22)
+
+#### Features
+
+* add `relax_safety_filters` proto field for Gemini TTS ([#31787](https://github.com/googleapis/google-cloud-ruby/issues/31787)) 
+
 ### 0.26.0 (2025-10-08)
 
 #### Features
