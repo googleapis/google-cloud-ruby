@@ -1066,7 +1066,7 @@ module Google
             path = StringIO.new
             path.set_encoding "ASCII-8BIT"
           else
-            safe_path_for_download path
+            path = safe_path_for_download path
           end
           file, resp =
             service.download_file bucket, name, path,
@@ -2300,35 +2300,38 @@ module Google
         #
 
         def safe_path_for_download user_supplied_path
-          # binding.pry
 
-          # Allow StringIO and Tempfile (in test env) to pass through
-          if user_supplied_path.is_a?(StringIO) ||
-            (ENV['TEST'] && user_supplied_path.is_a?(Tempfile)) ||
-            (ENV['TEST'] && user_supplied_path.is_a?(String) && user_supplied_path.start_with?("/tmp"))
-            
+          # Allow StringIO to pass through
+          return user_supplied_path if user_supplied_path.is_a? StringIO
+
+          # Allow Tempfile and /tmp paths in test env to pass through
+          if ENV["TEST"] &&
+             (user_supplied_path.is_a?(Tempfile) ||
+              (user_supplied_path.is_a?(String) && user_supplied_path.start_with?("/tmp/")))
             return user_supplied_path
           end
 
-          # Ensure the input is a String.
-          unless user_supplied_path.is_a?(String)
-            raise ArgumentError, "Path must be a String: #{user_supplied_path.class}"
-          end
-
           # Disallow if path is absolute.
-          # binding.pry
-          if user_supplied_path.start_with?('/', ::File::SEPARATOR) || user_supplied_path =~ /^[a-zA-Z]:/
+          path_obj = Pathname.new user_supplied_path
+          if path_obj.absolute?
             raise SecurityError, "Absolute path not allowed in user input: #{user_supplied_path}"
           end
 
           # Resolve path against the current working directory.
-          base_dir = Dir.pwd
-          download_path = ::File.expand_path user_supplied_path, base_dir
+          base_dir_path = Pathname.new Dir.pwd
+          download_path_obj = (base_dir_path + path_obj).cleanpath
 
-          # Prevent directory traversal outside the base directory
-          unless download_path.start_with? base_dir
+         # Prevent directory traversal outside the base directory
+          begin
+            relative = download_path_obj.relative_path_from base_dir_path
+            if relative.to_s.start_with?("..")
+              raise SecurityError, "Directory traversal attempt detected."
+            end
+          rescue ArgumentError
+            # This can happen on Windows with different drives, which means it's outside.
             raise SecurityError, "Directory traversal attempt detected."
           end
+          download_path = download_path_obj.to_s
 
           download_path
         end
