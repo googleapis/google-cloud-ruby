@@ -2301,13 +2301,18 @@ module Google
 
         def safe_path_for_download user_supplied_path
 
+          temp_regex = /\A#{Regexp.escape(Dir.tmpdir)}/
+
           # Allow StringIO to pass through
           return user_supplied_path if user_supplied_path.is_a? StringIO
 
           # Allow Tempfile and /tmp paths in test env to pass through
-          if (user_supplied_path.is_a?(Tempfile) ||
-              (user_supplied_path.is_a?(String) && user_supplied_path.start_with?("/tmp/")))
-            return user_supplied_path
+          # if user_supplied_path.is_a?(Tempfile) ||
+          #     (user_supplied_path.is_a?(String) && user_supplied_path.start_with?("/tmp/"))
+          #   return user_supplied_path
+          # end
+          if user_supplied_path.is_a?(Tempfile) || user_supplied_path =~ temp_regex
+              return user_supplied_path
           end
 
           # Disallow if path is absolute.
@@ -2322,7 +2327,7 @@ module Google
 
           # Prevent directory traversal outside the base directory
           begin
-            relative = download_path_obj.relative_path_from  base_dir_path
+            relative = download_path_obj.relative_path_from base_dir_path
             if relative.to_s.start_with? ".."
               raise SecurityError, "Directory traversal attempt detected."
             end
