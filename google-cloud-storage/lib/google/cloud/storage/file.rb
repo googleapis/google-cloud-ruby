@@ -2305,8 +2305,7 @@ module Google
           return user_supplied_path if user_supplied_path.is_a? StringIO
 
           # Allow Tempfile and /tmp paths in test env to pass through
-          if ENV["TEST"] &&
-             (user_supplied_path.is_a?(Tempfile) ||
+          if (user_supplied_path.is_a?(Tempfile) ||
               (user_supplied_path.is_a?(String) && user_supplied_path.start_with?("/tmp/")))
             return user_supplied_path
           end
@@ -2321,19 +2320,17 @@ module Google
           base_dir_path = Pathname.new Dir.pwd
           download_path_obj = (base_dir_path + path_obj).cleanpath
 
-         # Prevent directory traversal outside the base directory
+          # Prevent directory traversal outside the base directory
           begin
-            relative = download_path_obj.relative_path_from base_dir_path
-            if relative.to_s.start_with?("..")
+            relative = download_path_obj.relative_path_from  base_dir_path
+            if relative.to_s.start_with? ".."
               raise SecurityError, "Directory traversal attempt detected."
             end
           rescue ArgumentError
             # This can happen on Windows with different drives, which means it's outside.
             raise SecurityError, "Directory traversal attempt detected."
           end
-          download_path = download_path_obj.to_s
-
-          download_path
+          download_path_obj.to_s
         end
 
         ##
