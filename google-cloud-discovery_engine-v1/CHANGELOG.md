@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.6.1 (2025-10-22)
+
+#### Bug Fixes
+
+* Add labels for additional Sessions identification 
+* Include AssistAnswer as a part of the Session ([#31789](https://github.com/googleapis/google-cloud-ruby/issues/31789)) 
+
 ### 2.6.0 (2025-10-08)
 
 #### Features
