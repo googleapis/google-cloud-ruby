@@ -737,7 +737,7 @@ module Google
         end
 
         ##
-        # The URI of thereference file with the reader schema. This file is only
+        # The URI of the reference file with the reader schema. This file is only
         # loaded if it is part of source URIs, but is not loaded otherwise.
         # It is enabled for the following formats: `AVRO`, `PARQUET`, `ORC`.
         #
@@ -2779,7 +2779,7 @@ module Google
 
           ##
 
-          # Sets the URI of thereference file with the reader schema. This file
+          # Sets the URI of the reference file with the reader schema. This file
           # is only loaded if it is part of source URIs, but is not loaded
           # otherwise. It is enabled for the following formats: `AVRO`,
           # `PARQUET`, `ORC`.
@@ -2798,6 +2798,18 @@ module Google
           #   are preserved. `nil` to unset.
           def preserve_ascii_control_characters= val
             @gapi.configuration.load.update! preserve_ascii_control_characters: val
+          end
+
+          ##
+          # Sets the reservation that job would use. User can specify a reservation
+          # to execute the job. If reservation is not set, reservation is determined
+          # based on the rules defined by the reservation assignments. The expected
+          # format is `projects/`project`/locations/`location`/reservations/`reservation``.
+          # @param [String] value The reservation name.
+          #
+          # @!group Attributes
+          def reservation= value
+            @gapi.configuration.update! reservation: value
           end
 
           def cancel
