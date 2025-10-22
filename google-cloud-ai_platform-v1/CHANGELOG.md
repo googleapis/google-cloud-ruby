@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.29.0 (2025-10-22)
+
+#### Features
+
+* add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#31790](https://github.com/googleapis/google-cloud-ruby/issues/31790)) 
+* Continuous Tuning 
+
 ### 1.28.0 (2025-10-17)
 
 #### Features
