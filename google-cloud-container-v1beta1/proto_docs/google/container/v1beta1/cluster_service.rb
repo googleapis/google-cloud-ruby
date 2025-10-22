@@ -725,8 +725,7 @@ module Google
         #     persistent storage on your nodes.
         #     * `https://www.googleapis.com/auth/devstorage.read_only` is required for
         #     communicating with **gcr.io**
-        #     (the [Google Container
-        #     Registry](https://cloud.google.com/container-registry/)).
+        #     (the [Artifact Registry](https://cloud.google.com/artifact-registry/)).
         #
         #     If unspecified, no scopes are added, unless Cloud Logging or Cloud
         #     Monitoring are enabled, in which case their required scopes will be added.
@@ -1462,8 +1461,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # GCPSecretManagerCertificateConfig configures a secret from
-              # [Google Secret
-              # Manager](https://cloud.google.com/secret-manager).
+              # [Secret Manager](https://cloud.google.com/secret-manager).
               # @!attribute [rw] secret_uri
               #   @return [::String]
               #     Secret URI, in the form
@@ -1605,7 +1603,7 @@ module Google
           end
         end
 
-        # Collection of [GCP
+        # Collection of [Resource Manager
         # labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels).
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -3603,6 +3601,9 @@ module Google
         # @!attribute [rw] desired_network_tier_config
         #   @return [::Google::Cloud::Container::V1beta1::NetworkTierConfig]
         #     The desired network tier configuration for the cluster.
+        # @!attribute [rw] desired_secret_sync_config
+        #   @return [::Google::Cloud::Container::V1beta1::SecretSyncConfig]
+        #     Configuration for sync Secret Manager secrets as k8s secrets.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5669,8 +5670,7 @@ module Google
         #     persistent storage on your nodes.
         #     * `https://www.googleapis.com/auth/devstorage.read_only` is required for
         #     communicating with **gcr.io**
-        #     (the [Google Container
-        #     Registry](https://cloud.google.com/container-registry/)).
+        #     (the [Artifact Registry](https://cloud.google.com/artifact-registry/)).
         #
         #     If unspecified, no scopes are added, unless Cloud Logging or Cloud
         #     Monitoring are enabled, in which case their required scopes will be added.
