@@ -49,6 +49,9 @@ module Google
         # @!attribute [r] failure_details
         #   @return [::Google::Cloud::Dataplex::V1::EncryptionConfig::FailureDetails]
         #     Output only. Details of the failure if anything related to Cmek db fails.
+        # @!attribute [rw] enable_metastore_encryption
+        #   @return [::Boolean]
+        #     Optional. Represent the state of CMEK opt-in for metastore.
         class EncryptionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
