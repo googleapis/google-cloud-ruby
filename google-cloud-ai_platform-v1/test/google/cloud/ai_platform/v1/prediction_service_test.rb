@@ -1066,6 +1066,80 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     end
   end
 
+  def test_embed_content
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::EmbedContentResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    model = "hello world"
+    content = {}
+    title = "hello world"
+    task_type = :UNSPECIFIED
+    output_dimensionality = 42
+    auto_truncate = true
+
+    embed_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :embed_content, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::EmbedContentRequest, request
+      assert_equal "hello world", request["model"]
+      assert request.has_model?
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Content), request["content"]
+      assert request.has_content?
+      assert_equal "hello world", request["title"]
+      assert request.has_title?
+      assert_equal :UNSPECIFIED, request["task_type"]
+      assert request.has_task_type?
+      assert_equal 42, request["output_dimensionality"]
+      assert request.has_output_dimensionality?
+      assert_equal true, request["auto_truncate"]
+      assert request.has_auto_truncate?
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, embed_content_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, embed_content_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -668,6 +668,90 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#embed_content PredictionService.EmbedContent}.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The name of the publisher model requested to serve the
+        #     prediction. Format:
+        #     `projects/{project}/locations/{location}/publishers/*/models/*`
+        # @!attribute [rw] content
+        #   @return [::Google::Cloud::AIPlatform::V1::Content]
+        #     Required. Input content to be embedded. Required.
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Optional. An optional title for the text.
+        # @!attribute [rw] task_type
+        #   @return [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbeddingTaskType]
+        #     Optional. The task type of the embedding.
+        # @!attribute [rw] output_dimensionality
+        #   @return [::Integer]
+        #     Optional. Optional reduced dimension for the output embedding. If set,
+        #     excessive values in the output embedding are truncated from the end.
+        # @!attribute [rw] auto_truncate
+        #   @return [::Boolean]
+        #     Optional. Whether to silently truncate the input content if it's longer
+        #     than the maximum sequence length.
+        class EmbedContentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a downstream task the embeddings will be used for.
+          module EmbeddingTaskType
+            # Unset value, which will default to one of the other enum values.
+            UNSPECIFIED = 0
+
+            # Specifies the given text is a query in a search/retrieval setting.
+            RETRIEVAL_QUERY = 2
+
+            # Specifies the given text is a document from the corpus being searched.
+            RETRIEVAL_DOCUMENT = 3
+
+            # Specifies the given text will be used for STS.
+            SEMANTIC_SIMILARITY = 4
+
+            # Specifies that the given text will be classified.
+            CLASSIFICATION = 5
+
+            # Specifies that the embeddings will be used for clustering.
+            CLUSTERING = 6
+
+            # Specifies that the embeddings will be used for question answering.
+            QUESTION_ANSWERING = 7
+
+            # Specifies that the embeddings will be used for fact verification.
+            FACT_VERIFICATION = 8
+
+            # Specifies that the embeddings will be used for code retrieval.
+            CODE_RETRIEVAL_QUERY = 9
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::PredictionService::Client#embed_content PredictionService.EmbedContent}.
+        # @!attribute [rw] embedding
+        #   @return [::Google::Cloud::AIPlatform::V1::EmbedContentResponse::Embedding]
+        #     The embedding generated from the input content.
+        # @!attribute [rw] usage_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::UsageMetadata]
+        #     Metadata about the response(s).
+        # @!attribute [rw] truncated
+        #   @return [::Boolean]
+        #     Whether the input content was truncated before generating the embedding.
+        class EmbedContentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A list of floats representing an embedding.
+          # @!attribute [rw] values
+          #   @return [::Array<::Float>]
+          #     Embedding vector values.
+          class Embedding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
       end
     end
   end
