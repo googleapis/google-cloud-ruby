@@ -1,5 +1,11 @@
 # Release History
 
+### 1.60.0 (2025-10-24)
+
+#### Features
+
+* Exposing reservation field in JobConfiguration ([#31777](https://github.com/googleapis/google-cloud-ruby/issues/31777)) 
+
 ### 1.59.0 (2025-09-17)
 
 #### Features
