@@ -91,6 +91,69 @@ module Google
       end
 
       ##
+      # Create a new client object for AdReviewCenterAdService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/AdReviewCenterAdService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the AdReviewCenterAdService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the AdReviewCenterAdService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.ad_review_center_ad_service_available?}.
+      #
+      # ## About AdReviewCenterAdService
+      #
+      # Provides methods for handling AdReviewCenterAd objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.ad_review_center_ad_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:AdReviewCenterAdService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the AdReviewCenterAdService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.ad_review_center_ad_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AdReviewCenterAdService service,
+      # or if the versioned client gem needs an update to support the AdReviewCenterAdService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.ad_review_center_ad_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :AdReviewCenterAdService
+        service_module = service_module.const_get :AdReviewCenterAdService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for AdUnitService.
       #
       # By default, this returns an instance of
@@ -146,6 +209,132 @@ module Google
         service_module = Google::Ads::AdManager.const_get package_name
         return false unless service_module.const_defined? :AdUnitService
         service_module = service_module.const_get :AdUnitService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ApplicationService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::ApplicationService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/ApplicationService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ApplicationService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApplicationService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.application_service_available?}.
+      #
+      # ## About ApplicationService
+      #
+      # Provides methods for handling `Application` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.application_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:ApplicationService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ApplicationService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.application_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApplicationService service,
+      # or if the versioned client gem needs an update to support the ApplicationService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.application_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :ApplicationService
+        service_module = service_module.const_get :ApplicationService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for AudienceSegmentService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/AudienceSegmentService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the AudienceSegmentService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the AudienceSegmentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.audience_segment_service_available?}.
+      #
+      # ## About AudienceSegmentService
+      #
+      # Provides methods for handling `AudienceSegment` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.audience_segment_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:AudienceSegmentService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the AudienceSegmentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.audience_segment_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AudienceSegmentService service,
+      # or if the versioned client gem needs an update to support the AudienceSegmentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.audience_segment_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :AudienceSegmentService
+        service_module = service_module.const_get :AudienceSegmentService
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -217,6 +406,258 @@ module Google
       end
 
       ##
+      # Create a new client object for BrowserLanguageService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::BrowserLanguageService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/BrowserLanguageService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the BrowserLanguageService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the BrowserLanguageService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.browser_language_service_available?}.
+      #
+      # ## About BrowserLanguageService
+      #
+      # Provides methods for handling `BrowserLanguage` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.browser_language_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:BrowserLanguageService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the BrowserLanguageService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.browser_language_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the BrowserLanguageService service,
+      # or if the versioned client gem needs an update to support the BrowserLanguageService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.browser_language_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :BrowserLanguageService
+        service_module = service_module.const_get :BrowserLanguageService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for BrowserService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::BrowserService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/BrowserService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the BrowserService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the BrowserService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.browser_service_available?}.
+      #
+      # ## About BrowserService
+      #
+      # Provides methods for handling `Browser` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.browser_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:BrowserService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the BrowserService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.browser_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the BrowserService service,
+      # or if the versioned client gem needs an update to support the BrowserService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.browser_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :BrowserService
+        service_module = service_module.const_get :BrowserService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for CmsMetadataKeyService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/CmsMetadataKeyService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CmsMetadataKeyService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the CmsMetadataKeyService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.cms_metadata_key_service_available?}.
+      #
+      # ## About CmsMetadataKeyService
+      #
+      # Provides methods for handling `CmsMetadataKey` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.cms_metadata_key_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:CmsMetadataKeyService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the CmsMetadataKeyService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.cms_metadata_key_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CmsMetadataKeyService service,
+      # or if the versioned client gem needs an update to support the CmsMetadataKeyService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.cms_metadata_key_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :CmsMetadataKeyService
+        service_module = service_module.const_get :CmsMetadataKeyService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for CmsMetadataValueService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/CmsMetadataValueService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CmsMetadataValueService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the CmsMetadataValueService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.cms_metadata_value_service_available?}.
+      #
+      # ## About CmsMetadataValueService
+      #
+      # Provides methods for handling `CmsMetadataValue` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.cms_metadata_value_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:CmsMetadataValueService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the CmsMetadataValueService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.cms_metadata_value_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CmsMetadataValueService service,
+      # or if the versioned client gem needs an update to support the CmsMetadataValueService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.cms_metadata_value_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :CmsMetadataValueService
+        service_module = service_module.const_get :CmsMetadataValueService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for CompanyService.
       #
       # By default, this returns an instance of
@@ -272,6 +713,321 @@ module Google
         service_module = Google::Ads::AdManager.const_get package_name
         return false unless service_module.const_defined? :CompanyService
         service_module = service_module.const_get :CompanyService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ContactService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::ContactService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/ContactService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ContactService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ContactService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.contact_service_available?}.
+      #
+      # ## About ContactService
+      #
+      # Provides methods for handling `Contact` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.contact_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:ContactService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ContactService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.contact_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ContactService service,
+      # or if the versioned client gem needs an update to support the ContactService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.contact_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :ContactService
+        service_module = service_module.const_get :ContactService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ContentBundleService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::ContentBundleService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/ContentBundleService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ContentBundleService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ContentBundleService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.content_bundle_service_available?}.
+      #
+      # ## About ContentBundleService
+      #
+      # Provides methods for handling `ContentBundle` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.content_bundle_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:ContentBundleService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ContentBundleService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.content_bundle_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ContentBundleService service,
+      # or if the versioned client gem needs an update to support the ContentBundleService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.content_bundle_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :ContentBundleService
+        service_module = service_module.const_get :ContentBundleService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ContentLabelService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::ContentLabelService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/ContentLabelService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ContentLabelService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ContentLabelService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.content_label_service_available?}.
+      #
+      # ## About ContentLabelService
+      #
+      # Provides methods for handling `ContentLabel` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.content_label_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:ContentLabelService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ContentLabelService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.content_label_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ContentLabelService service,
+      # or if the versioned client gem needs an update to support the ContentLabelService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.content_label_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :ContentLabelService
+        service_module = service_module.const_get :ContentLabelService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ContentService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::ContentService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/ContentService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ContentService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ContentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.content_service_available?}.
+      #
+      # ## About ContentService
+      #
+      # Provides methods for handling `Content` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.content_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:ContentService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ContentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.content_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ContentService service,
+      # or if the versioned client gem needs an update to support the ContentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.content_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :ContentService
+        service_module = service_module.const_get :ContentService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for CreativeTemplateService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::CreativeTemplateService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/CreativeTemplateService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CreativeTemplateService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the CreativeTemplateService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.creative_template_service_available?}.
+      #
+      # ## About CreativeTemplateService
+      #
+      # Provides methods for handling `CreativeTemplate` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.creative_template_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:CreativeTemplateService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the CreativeTemplateService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.creative_template_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CreativeTemplateService service,
+      # or if the versioned client gem needs an update to support the CreativeTemplateService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.creative_template_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :CreativeTemplateService
+        service_module = service_module.const_get :CreativeTemplateService
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -469,6 +1225,69 @@ module Google
       end
 
       ##
+      # Create a new client object for DeviceCapabilityService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::DeviceCapabilityService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/DeviceCapabilityService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the DeviceCapabilityService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the DeviceCapabilityService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.device_capability_service_available?}.
+      #
+      # ## About DeviceCapabilityService
+      #
+      # Provides methods for handling `DeviceCapability` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.device_capability_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:DeviceCapabilityService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the DeviceCapabilityService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.device_capability_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DeviceCapabilityService service,
+      # or if the versioned client gem needs an update to support the DeviceCapabilityService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.device_capability_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :DeviceCapabilityService
+        service_module = service_module.const_get :DeviceCapabilityService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for DeviceCategoryService.
       #
       # By default, this returns an instance of
@@ -524,6 +1343,69 @@ module Google
         service_module = Google::Ads::AdManager.const_get package_name
         return false unless service_module.const_defined? :DeviceCategoryService
         service_module = service_module.const_get :DeviceCategoryService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for DeviceManufacturerService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/DeviceManufacturerService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the DeviceManufacturerService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the DeviceManufacturerService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.device_manufacturer_service_available?}.
+      #
+      # ## About DeviceManufacturerService
+      #
+      # Provides methods for handling `DeviceManufacturer` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.device_manufacturer_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:DeviceManufacturerService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the DeviceManufacturerService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.device_manufacturer_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DeviceManufacturerService service,
+      # or if the versioned client gem needs an update to support the DeviceManufacturerService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.device_manufacturer_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :DeviceManufacturerService
+        service_module = service_module.const_get :DeviceManufacturerService
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -650,6 +1532,195 @@ module Google
         service_module = Google::Ads::AdManager.const_get package_name
         return false unless service_module.const_defined? :GeoTargetService
         service_module = service_module.const_get :GeoTargetService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for MobileCarrierService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::MobileCarrierService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/MobileCarrierService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the MobileCarrierService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the MobileCarrierService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.mobile_carrier_service_available?}.
+      #
+      # ## About MobileCarrierService
+      #
+      # Provides methods for handling `MobileCarrier` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.mobile_carrier_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:MobileCarrierService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the MobileCarrierService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.mobile_carrier_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the MobileCarrierService service,
+      # or if the versioned client gem needs an update to support the MobileCarrierService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.mobile_carrier_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :MobileCarrierService
+        service_module = service_module.const_get :MobileCarrierService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for MobileDeviceService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::MobileDeviceService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/MobileDeviceService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the MobileDeviceService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the MobileDeviceService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.mobile_device_service_available?}.
+      #
+      # ## About MobileDeviceService
+      #
+      # Provides methods for handling `MobileDevice` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.mobile_device_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:MobileDeviceService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the MobileDeviceService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.mobile_device_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the MobileDeviceService service,
+      # or if the versioned client gem needs an update to support the MobileDeviceService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.mobile_device_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :MobileDeviceService
+        service_module = service_module.const_get :MobileDeviceService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for MobileDeviceSubmodelService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::MobileDeviceSubmodelService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/MobileDeviceSubmodelService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the MobileDeviceSubmodelService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the MobileDeviceSubmodelService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.mobile_device_submodel_service_available?}.
+      #
+      # ## About MobileDeviceSubmodelService
+      #
+      # Provides methods for handling `MobileDeviceSubmodel` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.mobile_device_submodel_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:MobileDeviceSubmodelService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the MobileDeviceSubmodelService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.mobile_device_submodel_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the MobileDeviceSubmodelService service,
+      # or if the versioned client gem needs an update to support the MobileDeviceSubmodelService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.mobile_device_submodel_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :MobileDeviceSubmodelService
+        service_module = service_module.const_get :MobileDeviceSubmodelService
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -1288,6 +2359,69 @@ module Google
       end
 
       ##
+      # Create a new client object for SiteService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::SiteService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/SiteService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the SiteService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the SiteService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.site_service_available?}.
+      #
+      # ## About SiteService
+      #
+      # Provides methods for handling `Site` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.site_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:SiteService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the SiteService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.site_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the SiteService service,
+      # or if the versioned client gem needs an update to support the SiteService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.site_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :SiteService
+        service_module = service_module.const_get :SiteService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for TaxonomyCategoryService.
       #
       # By default, this returns an instance of
@@ -1343,6 +2477,69 @@ module Google
         service_module = Google::Ads::AdManager.const_get package_name
         return false unless service_module.const_defined? :TaxonomyCategoryService
         service_module = service_module.const_get :TaxonomyCategoryService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for TeamService.
+      #
+      # By default, this returns an instance of
+      # [Google::Ads::AdManager::V1::TeamService::Rest::Client](https://rubydoc.info/gems/google-ads-ad_manager-v1/Google/Ads/AdManager/V1/TeamService/Rest/Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the TeamService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the TeamService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Ads::AdManager.team_service_available?}.
+      #
+      # ## About TeamService
+      #
+      # Provides methods for handling `Team` objects.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.team_service version: :v1, &block
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Ads::AdManager.const_get(package_name).const_get(:TeamService)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the TeamService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Ads::AdManager.team_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the TeamService service,
+      # or if the versioned client gem needs an update to support the TeamService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.team_service_available? version: :v1
+        require "google/ads/ad_manager/#{version.to_s.downcase}"
+        package_name = Google::Ads::AdManager
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Ads::AdManager.const_get package_name
+        return false unless service_module.const_defined? :TeamService
+        service_module = service_module.const_get :TeamService
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client

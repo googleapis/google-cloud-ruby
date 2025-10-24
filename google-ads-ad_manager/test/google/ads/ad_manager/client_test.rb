@@ -50,6 +50,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_ad_review_center_ad_service_rest
+    skip unless Google::Ads::AdManager.ad_review_center_ad_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.ad_review_center_ad_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client, client
+    end
+  end
+
   def test_ad_unit_service_rest
     skip unless Google::Ads::AdManager.ad_unit_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -57,6 +67,26 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::AdUnitService::Rest::Client, client
+    end
+  end
+
+  def test_application_service_rest
+    skip unless Google::Ads::AdManager.application_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.application_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::ApplicationService::Rest::Client, client
+    end
+  end
+
+  def test_audience_segment_service_rest
+    skip unless Google::Ads::AdManager.audience_segment_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.audience_segment_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::AudienceSegmentService::Rest::Client, client
     end
   end
 
@@ -70,6 +100,46 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_browser_language_service_rest
+    skip unless Google::Ads::AdManager.browser_language_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.browser_language_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::BrowserLanguageService::Rest::Client, client
+    end
+  end
+
+  def test_browser_service_rest
+    skip unless Google::Ads::AdManager.browser_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.browser_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::BrowserService::Rest::Client, client
+    end
+  end
+
+  def test_cms_metadata_key_service_rest
+    skip unless Google::Ads::AdManager.cms_metadata_key_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.cms_metadata_key_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client, client
+    end
+  end
+
+  def test_cms_metadata_value_service_rest
+    skip unless Google::Ads::AdManager.cms_metadata_value_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.cms_metadata_value_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::CmsMetadataValueService::Rest::Client, client
+    end
+  end
+
   def test_company_service_rest
     skip unless Google::Ads::AdManager.company_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -77,6 +147,56 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::CompanyService::Rest::Client, client
+    end
+  end
+
+  def test_contact_service_rest
+    skip unless Google::Ads::AdManager.contact_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.contact_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::ContactService::Rest::Client, client
+    end
+  end
+
+  def test_content_bundle_service_rest
+    skip unless Google::Ads::AdManager.content_bundle_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.content_bundle_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::ContentBundleService::Rest::Client, client
+    end
+  end
+
+  def test_content_label_service_rest
+    skip unless Google::Ads::AdManager.content_label_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.content_label_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::ContentLabelService::Rest::Client, client
+    end
+  end
+
+  def test_content_service_rest
+    skip unless Google::Ads::AdManager.content_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.content_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::ContentService::Rest::Client, client
+    end
+  end
+
+  def test_creative_template_service_rest
+    skip unless Google::Ads::AdManager.creative_template_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.creative_template_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::CreativeTemplateService::Rest::Client, client
     end
   end
 
@@ -110,6 +230,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_device_capability_service_rest
+    skip unless Google::Ads::AdManager.device_capability_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.device_capability_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::DeviceCapabilityService::Rest::Client, client
+    end
+  end
+
   def test_device_category_service_rest
     skip unless Google::Ads::AdManager.device_category_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -117,6 +247,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client, client
+    end
+  end
+
+  def test_device_manufacturer_service_rest
+    skip unless Google::Ads::AdManager.device_manufacturer_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.device_manufacturer_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::Client, client
     end
   end
 
@@ -137,6 +277,36 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::GeoTargetService::Rest::Client, client
+    end
+  end
+
+  def test_mobile_carrier_service_rest
+    skip unless Google::Ads::AdManager.mobile_carrier_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.mobile_carrier_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::MobileCarrierService::Rest::Client, client
+    end
+  end
+
+  def test_mobile_device_service_rest
+    skip unless Google::Ads::AdManager.mobile_device_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.mobile_device_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::MobileDeviceService::Rest::Client, client
+    end
+  end
+
+  def test_mobile_device_submodel_service_rest
+    skip unless Google::Ads::AdManager.mobile_device_submodel_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.mobile_device_submodel_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::MobileDeviceSubmodelService::Rest::Client, client
     end
   end
 
@@ -240,6 +410,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_site_service_rest
+    skip unless Google::Ads::AdManager.site_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.site_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::SiteService::Rest::Client, client
+    end
+  end
+
   def test_taxonomy_category_service_rest
     skip unless Google::Ads::AdManager.taxonomy_category_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -247,6 +427,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::Client, client
+    end
+  end
+
+  def test_team_service_rest
+    skip unless Google::Ads::AdManager.team_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.team_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::TeamService::Rest::Client, client
     end
   end
 
