@@ -1990,6 +1990,11 @@ module Google
 
               ##
               # Lists Entries within an EntryGroup.
+              # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+              # Metastore metadata that is stored in Dataplex Universal Catalog is
+              # changing. For more information, see [Changes to metadata stored in
+              # Dataplex Universal
+              # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
               #
               # @overload list_entries(request, options = nil)
               #   Pass arguments to `list_entries` via a request object, either of type
@@ -2105,6 +2110,11 @@ module Google
 
               ##
               # Gets an Entry.
+              # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+              # Metastore metadata that is stored in Dataplex Universal Catalog is
+              # changing. For more information, see [Changes to metadata stored in
+              # Dataplex Universal
+              # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
               #
               # @overload get_entry(request, options = nil)
               #   Pass arguments to `get_entry` via a request object, either of type
@@ -2193,6 +2203,11 @@ module Google
 
               ##
               # Looks up an entry by name using the permission on the source system.
+              # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+              # Metastore metadata that is stored in Dataplex Universal Catalog is
+              # changing. For more information, see [Changes to metadata stored in
+              # Dataplex Universal
+              # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
               #
               # @overload lookup_entry(request, options = nil)
               #   Pass arguments to `lookup_entry` via a request object, either of type

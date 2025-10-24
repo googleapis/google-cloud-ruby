@@ -51,6 +51,9 @@ module Google
         #   @return [::String]
         #     The service computes this checksum. The client may send it on update and
         #     delete requests to ensure it has an up-to-date value before proceeding.
+        # @!attribute [rw] data_classification
+        #   @return [::Google::Cloud::Dataplex::V1::AspectType::DataClassification]
+        #     Optional. Immutable. Stores data classification of the aspect.
         # @!attribute [rw] authorization
         #   @return [::Google::Cloud::Dataplex::V1::AspectType::Authorization]
         #     Immutable. Defines the Authorization for this type.
@@ -216,6 +219,15 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Classifies the data stored by the aspect.
+          module DataClassification
+            # Denotes that the aspect contains only metadata.
+            DATA_CLASSIFICATION_UNSPECIFIED = 0
+
+            # Metadata and data classification.
+            METADATA_AND_DATA = 1
           end
         end
 
@@ -1455,14 +1467,13 @@ module Google
             # A boundary on the scope of impact that the metadata import job can have.
             # @!attribute [rw] entry_groups
             #   @return [::Array<::String>]
-            #     Required. The entry group that is in scope for the import job,
-            #     specified as a relative resource name in the format
+            #     Required. The entry groups that are in scope for the import job,
+            #     specified as relative resource names in the format
             #     `projects/{project_number_or_id}/locations/{location_id}/entryGroups/{entry_group_id}`.
-            #     Only entries and aspects that belong to the specified entry group are
+            #     Only entries and aspects that belong to the specified entry groups are
             #     affected by the job.
             #
-            #     Must contain exactly one element. The entry group and the job
-            #     must be in the same location.
+            #     The entry groups and the job must be in the same location.
             # @!attribute [rw] entry_types
             #   @return [::Array<::String>]
             #     Required. The entry types that are in scope for the import job,
@@ -1852,8 +1863,6 @@ module Google
           # aspects exceeds 100, the first 100 will be returned.
           CUSTOM = 3
 
-          # Returns all aspects. If the number of aspects exceeds 100, the first
-          # 100 will be returned.
           ALL = 4
         end
 

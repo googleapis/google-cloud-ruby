@@ -78,8 +78,8 @@ module Google
         #     Storage bucket for DataDiscoveryScan Format:
         #     //storage.googleapis.com/projects/PROJECT_ID/buckets/BUCKET_ID
         #     or
-        #     BigQuery table of type "TABLE" for DataProfileScan/DataQualityScan
-        #     Format:
+        #     BigQuery table of type "TABLE" for
+        #     DataProfileScan/DataQualityScan/DataDocumentationScan Format:
         #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
         #
         #     Note: The following fields are mutually exclusive: `resource`, `entity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
