@@ -26,6 +26,31 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `Team`.
         #     Format: `networks/{network_code}/teams/{team_id}`
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. The name of the Team. This value has a maximum length of 127
+        #     characters.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. The description of the Team. This value has a maximum length of
+        #     255 characters.
+        # @!attribute [r] status
+        #   @return [::Google::Ads::AdManager::V1::TeamStatusEnum::TeamStatus]
+        #     Output only. The status of the Team. This value determines the visibility
+        #     of the team in the UI.
+        # @!attribute [rw] all_companies_access
+        #   @return [::Boolean]
+        #     Optional. Whether or not users on this team have access to all companies.
+        #     If this value is true, then an error will be thrown if an attempt is made
+        #     to associate this team with a Company.
+        # @!attribute [rw] all_inventory_access
+        #   @return [::Boolean]
+        #     Optional. Whether or not users on this team have access to all inventory.
+        #     If this value is true, then an error will be thrown if an attempt is made
+        #     to associate this team with an AdUnit.
+        # @!attribute [rw] access_type
+        #   @return [::Google::Ads::AdManager::V1::TeamAccessTypeEnum::TeamAccessType]
+        #     Optional. The default access to orders for users on this team.
         class Team
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
