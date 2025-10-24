@@ -597,6 +597,65 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     end
   end
 
+  def test_embed_content
+    # Create test objects.
+    client_result = ::Google::Cloud::AIPlatform::V1::EmbedContentResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    model = "hello world"
+    content = {}
+    title = "hello world"
+    task_type = :UNSPECIFIED
+    output_dimensionality = 42
+    auto_truncate = true
+
+    embed_content_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_embed_content_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, embed_content_client_stub do
+        # Create client
+        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, embed_content_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

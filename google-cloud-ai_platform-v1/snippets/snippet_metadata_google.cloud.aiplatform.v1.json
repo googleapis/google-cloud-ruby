@@ -6452,6 +6452,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_PredictionService_EmbedContent_sync",
+      "title": "Snippet for the embed_content call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::PredictionService::Client#embed_content.",
+      "file": "prediction_service/embed_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "embed_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client#embed_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::EmbedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::EmbedContentResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "EmbedContent",
+          "full_name": "google.cloud.aiplatform.v1.PredictionService.EmbedContent",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_LlmUtilityService_CountTokens_sync",
       "title": "Snippet for the count_tokens call in the LlmUtilityService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::LlmUtilityService::Client#count_tokens.",

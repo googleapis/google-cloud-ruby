@@ -949,6 +949,11 @@
               "methods": [
                 "stream_generate_content"
               ]
+            },
+            "EmbedContent": {
+              "methods": [
+                "embed_content"
+              ]
             }
           }
         }
