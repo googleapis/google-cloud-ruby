@@ -1,5 +1,14 @@
 # Release History
 
+### 0.51.0 (2025-10-24)
+
+#### Features
+
+* add desired_secret_sync_config to ClusterUpdate ([#31793](https://github.com/googleapis/google-cloud-ruby/issues/31793)) 
+#### Documentation
+
+* various documentation fixes 
+
 ### 0.50.0 (2025-10-17)
 
 #### Features
