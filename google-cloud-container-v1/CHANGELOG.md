@@ -1,5 +1,12 @@
 # Release History
 
+### 1.11.0 (2025-10-24)
+
+#### Features
+
+* add network_tier_config field to NodeNetworkConfig 
+* add node_kernel_module_loading field to LinuxNodeConfig ([#31794](https://github.com/googleapis/google-cloud-ruby/issues/31794)) 
+
 ### 1.10.1 (2025-09-24)
 
 #### Documentation
