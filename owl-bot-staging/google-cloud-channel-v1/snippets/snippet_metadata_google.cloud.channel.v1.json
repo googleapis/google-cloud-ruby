@@ -1,0 +1,2095 @@
+{
+  "client_library": {
+    "name": "google-cloud-channel-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.channel.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_RunReportJob_sync",
+      "title": "Snippet for the run_report_job call in the CloudChannelReportsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job.",
+      "file": "cloud_channel_reports_service/run_report_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_report_job",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::RunReportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelReportsService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client"
+        },
+        "method": {
+          "short_name": "RunReportJob",
+          "full_name": "google.cloud.channel.v1.CloudChannelReportsService.RunReportJob",
+          "service": {
+            "short_name": "CloudChannelReportsService",
+            "full_name": "google.cloud.channel.v1.CloudChannelReportsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_FetchReportResults_sync",
+      "title": "Snippet for the fetch_report_results call in the CloudChannelReportsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results.",
+      "file": "cloud_channel_reports_service/fetch_report_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_report_results",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::FetchReportResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::FetchReportResultsResponse",
+        "client": {
+          "short_name": "CloudChannelReportsService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client"
+        },
+        "method": {
+          "short_name": "FetchReportResults",
+          "full_name": "google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults",
+          "service": {
+            "short_name": "CloudChannelReportsService",
+            "full_name": "google.cloud.channel.v1.CloudChannelReportsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_ListReports_sync",
+      "title": "Snippet for the list_reports call in the CloudChannelReportsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports.",
+      "file": "cloud_channel_reports_service/list_reports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reports",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListReportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListReportsResponse",
+        "client": {
+          "short_name": "CloudChannelReportsService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client"
+        },
+        "method": {
+          "short_name": "ListReports",
+          "full_name": "google.cloud.channel.v1.CloudChannelReportsService.ListReports",
+          "service": {
+            "short_name": "CloudChannelReportsService",
+            "full_name": "google.cloud.channel.v1.CloudChannelReportsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListCustomers_sync",
+      "title": "Snippet for the list_customers call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers.",
+      "file": "cloud_channel_service/list_customers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_customers",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListCustomersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListCustomersResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListCustomers",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListCustomers",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetCustomer_sync",
+      "title": "Snippet for the get_customer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer.",
+      "file": "cloud_channel_service/get_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_customer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::GetCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::Customer",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetCustomer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.GetCustomer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CheckCloudIdentityAccountsExist_sync",
+      "title": "Snippet for the check_cloud_identity_accounts_exist call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist.",
+      "file": "cloud_channel_service/check_cloud_identity_accounts_exist.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_cloud_identity_accounts_exist",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CheckCloudIdentityAccountsExist",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CheckCloudIdentityAccountsExist",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomer_sync",
+      "title": "Snippet for the create_customer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer.",
+      "file": "cloud_channel_service/create_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_customer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CreateCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::Customer",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CreateCustomer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_sync",
+      "title": "Snippet for the update_customer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer.",
+      "file": "cloud_channel_service/update_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_customer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::UpdateCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::Customer",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.UpdateCustomer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_sync",
+      "title": "Snippet for the delete_customer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer.",
+      "file": "cloud_channel_service/delete_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_customer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::DeleteCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.DeleteCustomer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ImportCustomer_sync",
+      "title": "Snippet for the import_customer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#import_customer.",
+      "file": "cloud_channel_service/import_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_customer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#import_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ImportCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::Customer",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ImportCustomer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ImportCustomer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_sync",
+      "title": "Snippet for the provision_cloud_identity call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity.",
+      "file": "cloud_channel_service/provision_cloud_identity.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "provision_cloud_identity",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ProvisionCloudIdentity",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ProvisionCloudIdentity",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListEntitlements_sync",
+      "title": "Snippet for the list_entitlements call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements.",
+      "file": "cloud_channel_service/list_entitlements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_entitlements",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListEntitlementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListEntitlementsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListEntitlements",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListEntitlements",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableSkus_sync",
+      "title": "Snippet for the list_transferable_skus call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus.",
+      "file": "cloud_channel_service/list_transferable_skus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transferable_skus",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListTransferableSkusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListTransferableSkusResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListTransferableSkus",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListTransferableSkus",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_sync",
+      "title": "Snippet for the list_transferable_offers call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers.",
+      "file": "cloud_channel_service/list_transferable_offers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transferable_offers",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListTransferableOffersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListTransferableOffersResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListTransferableOffers",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListTransferableOffers",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetEntitlement_sync",
+      "title": "Snippet for the get_entitlement call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_entitlement.",
+      "file": "cloud_channel_service/get_entitlement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_entitlement",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#get_entitlement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::GetEntitlementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::Entitlement",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetEntitlement",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.GetEntitlement",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_sync",
+      "title": "Snippet for the create_entitlement call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement.",
+      "file": "cloud_channel_service/create_entitlement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_entitlement",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CreateEntitlementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CreateEntitlement",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CreateEntitlement",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ChangeParameters_sync",
+      "title": "Snippet for the change_parameters call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_parameters.",
+      "file": "cloud_channel_service/change_parameters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "change_parameters",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#change_parameters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ChangeParametersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ChangeParameters",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ChangeParameters",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_sync",
+      "title": "Snippet for the change_renewal_settings call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_renewal_settings.",
+      "file": "cloud_channel_service/change_renewal_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "change_renewal_settings",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#change_renewal_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ChangeRenewalSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ChangeRenewalSettings",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ChangeRenewalSettings",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ChangeOffer_sync",
+      "title": "Snippet for the change_offer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer.",
+      "file": "cloud_channel_service/change_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "change_offer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ChangeOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ChangeOffer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ChangeOffer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_StartPaidService_sync",
+      "title": "Snippet for the start_paid_service call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#start_paid_service.",
+      "file": "cloud_channel_service/start_paid_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_paid_service",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#start_paid_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::StartPaidServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "StartPaidService",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.StartPaidService",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_sync",
+      "title": "Snippet for the suspend_entitlement call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#suspend_entitlement.",
+      "file": "cloud_channel_service/suspend_entitlement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "suspend_entitlement",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#suspend_entitlement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::SuspendEntitlementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "SuspendEntitlement",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.SuspendEntitlement",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_sync",
+      "title": "Snippet for the cancel_entitlement call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#cancel_entitlement.",
+      "file": "cloud_channel_service/cancel_entitlement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_entitlement",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#cancel_entitlement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CancelEntitlementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CancelEntitlement",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CancelEntitlement",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_sync",
+      "title": "Snippet for the activate_entitlement call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#activate_entitlement.",
+      "file": "cloud_channel_service/activate_entitlement.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "activate_entitlement",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#activate_entitlement",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ActivateEntitlementRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ActivateEntitlement",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ActivateEntitlement",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_sync",
+      "title": "Snippet for the transfer_entitlements call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements.",
+      "file": "cloud_channel_service/transfer_entitlements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "transfer_entitlements",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::TransferEntitlementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "TransferEntitlements",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.TransferEntitlements",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_sync",
+      "title": "Snippet for the transfer_entitlements_to_google call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements_to_google.",
+      "file": "cloud_channel_service/transfer_entitlements_to_google.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "transfer_entitlements_to_google",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements_to_google",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::TransferEntitlementsToGoogleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "TransferEntitlementsToGoogle",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.TransferEntitlementsToGoogle",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerLinks_sync",
+      "title": "Snippet for the list_channel_partner_links call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links.",
+      "file": "cloud_channel_service/list_channel_partner_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_channel_partner_links",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListChannelPartnerLinks",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListChannelPartnerLinks",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerLink_sync",
+      "title": "Snippet for the get_channel_partner_link call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_link.",
+      "file": "cloud_channel_service/get_channel_partner_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_channel_partner_link",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::GetChannelPartnerLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ChannelPartnerLink",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetChannelPartnerLink",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.GetChannelPartnerLink",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerLink_sync",
+      "title": "Snippet for the create_channel_partner_link call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link.",
+      "file": "cloud_channel_service/create_channel_partner_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_channel_partner_link",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ChannelPartnerLink",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CreateChannelPartnerLink",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerLink",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_sync",
+      "title": "Snippet for the update_channel_partner_link call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link.",
+      "file": "cloud_channel_service/update_channel_partner_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_channel_partner_link",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ChannelPartnerLink",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "UpdateChannelPartnerLink",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.UpdateChannelPartnerLink",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetCustomerRepricingConfig_sync",
+      "title": "Snippet for the get_customer_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config.",
+      "file": "cloud_channel_service/get_customer_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_customer_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::GetCustomerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::CustomerRepricingConfig",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetCustomerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.GetCustomerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListCustomerRepricingConfigs_sync",
+      "title": "Snippet for the list_customer_repricing_configs call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs.",
+      "file": "cloud_channel_service/list_customer_repricing_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_customer_repricing_configs",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListCustomerRepricingConfigs",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListCustomerRepricingConfigs",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomerRepricingConfig_sync",
+      "title": "Snippet for the create_customer_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config.",
+      "file": "cloud_channel_service/create_customer_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_customer_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CreateCustomerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::CustomerRepricingConfig",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateCustomerRepricingConfig_sync",
+      "title": "Snippet for the update_customer_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer_repricing_config.",
+      "file": "cloud_channel_service/update_customer_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_customer_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::UpdateCustomerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::CustomerRepricingConfig",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.UpdateCustomerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_DeleteCustomerRepricingConfig_sync",
+      "title": "Snippet for the delete_customer_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer_repricing_config.",
+      "file": "cloud_channel_service/delete_customer_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_customer_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::DeleteCustomerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.DeleteCustomerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerRepricingConfig_sync",
+      "title": "Snippet for the get_channel_partner_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_repricing_config.",
+      "file": "cloud_channel_service/get_channel_partner_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_channel_partner_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::GetChannelPartnerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetChannelPartnerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.GetChannelPartnerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerRepricingConfigs_sync",
+      "title": "Snippet for the list_channel_partner_repricing_configs call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs.",
+      "file": "cloud_channel_service/list_channel_partner_repricing_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_channel_partner_repricing_configs",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListChannelPartnerRepricingConfigs",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListChannelPartnerRepricingConfigs",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_sync",
+      "title": "Snippet for the create_channel_partner_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config.",
+      "file": "cloud_channel_service/create_channel_partner_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_channel_partner_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::CreateChannelPartnerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "CreateChannelPartnerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerRepricingConfig_sync",
+      "title": "Snippet for the update_channel_partner_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config.",
+      "file": "cloud_channel_service/update_channel_partner_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_channel_partner_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::UpdateChannelPartnerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "UpdateChannelPartnerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.UpdateChannelPartnerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_DeleteChannelPartnerRepricingConfig_sync",
+      "title": "Snippet for the delete_channel_partner_repricing_config call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#delete_channel_partner_repricing_config.",
+      "file": "cloud_channel_service/delete_channel_partner_repricing_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_channel_partner_repricing_config",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_channel_partner_repricing_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::DeleteChannelPartnerRepricingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "DeleteChannelPartnerRepricingConfig",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.DeleteChannelPartnerRepricingConfig",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSkuGroups_sync",
+      "title": "Snippet for the list_sku_groups call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups.",
+      "file": "cloud_channel_service/list_sku_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sku_groups",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListSkuGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListSkuGroupsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListSkuGroups",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListSkuGroups",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSkuGroupBillableSkus_sync",
+      "title": "Snippet for the list_sku_group_billable_skus call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus.",
+      "file": "cloud_channel_service/list_sku_group_billable_skus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sku_group_billable_skus",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListSkuGroupBillableSkus",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListSkuGroupBillableSkus",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_LookupOffer_sync",
+      "title": "Snippet for the lookup_offer call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#lookup_offer.",
+      "file": "cloud_channel_service/lookup_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_offer",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#lookup_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::LookupOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::Offer",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "LookupOffer",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.LookupOffer",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListProducts_sync",
+      "title": "Snippet for the list_products call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_products.",
+      "file": "cloud_channel_service/list_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_products",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListProductsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListProducts",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListProducts",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSkus_sync",
+      "title": "Snippet for the list_skus call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_skus.",
+      "file": "cloud_channel_service/list_skus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_skus",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_skus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListSkusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListSkusResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListSkus",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListSkus",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListOffers_sync",
+      "title": "Snippet for the list_offers call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_offers.",
+      "file": "cloud_channel_service/list_offers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_offers",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_offers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListOffersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListOffersResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListOffers",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListOffers",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableSkus_sync",
+      "title": "Snippet for the list_purchasable_skus call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_skus.",
+      "file": "cloud_channel_service/list_purchasable_skus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_purchasable_skus",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_skus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListPurchasableSkusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListPurchasableSkusResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListPurchasableSkus",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListPurchasableSkus",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableOffers_sync",
+      "title": "Snippet for the list_purchasable_offers call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_offers.",
+      "file": "cloud_channel_service/list_purchasable_offers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_purchasable_offers",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_purchasable_offers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListPurchasableOffersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListPurchasableOffersResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListPurchasableOffers",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListPurchasableOffers",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_QueryEligibleBillingAccounts_sync",
+      "title": "Snippet for the query_eligible_billing_accounts call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#query_eligible_billing_accounts.",
+      "file": "cloud_channel_service/query_eligible_billing_accounts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_eligible_billing_accounts",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#query_eligible_billing_accounts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "QueryEligibleBillingAccounts",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.QueryEligibleBillingAccounts",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_sync",
+      "title": "Snippet for the register_subscriber call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#register_subscriber.",
+      "file": "cloud_channel_service/register_subscriber.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "register_subscriber",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#register_subscriber",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::RegisterSubscriberRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::RegisterSubscriberResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "RegisterSubscriber",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.RegisterSubscriber",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_sync",
+      "title": "Snippet for the unregister_subscriber call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#unregister_subscriber.",
+      "file": "cloud_channel_service/unregister_subscriber.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unregister_subscriber",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#unregister_subscriber",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::UnregisterSubscriberRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::UnregisterSubscriberResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "UnregisterSubscriber",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.UnregisterSubscriber",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListSubscribers_sync",
+      "title": "Snippet for the list_subscribers call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_subscribers.",
+      "file": "cloud_channel_service/list_subscribers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subscribers",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_subscribers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListSubscribersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListSubscribersResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListSubscribers",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListSubscribers",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListEntitlementChanges_sync",
+      "title": "Snippet for the list_entitlement_changes call in the CloudChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes.",
+      "file": "cloud_channel_service/list_entitlement_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_entitlement_changes",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListEntitlementChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListEntitlementChangesResponse",
+        "client": {
+          "short_name": "CloudChannelService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListEntitlementChanges",
+          "full_name": "google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges",
+          "service": {
+            "short_name": "CloudChannelService",
+            "full_name": "google.cloud.channel.v1.CloudChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
