@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.servicehealth.v1",
+  "libraryPackage": "::Google::Cloud::ServiceHealth::V1",
+  "services": {
+    "ServiceHealth": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client",
+          "rpcs": {
+            "ListEvents": {
+              "methods": [
+                "list_events"
+              ]
+            },
+            "GetEvent": {
+              "methods": [
+                "get_event"
+              ]
+            },
+            "ListOrganizationEvents": {
+              "methods": [
+                "list_organization_events"
+              ]
+            },
+            "GetOrganizationEvent": {
+              "methods": [
+                "get_organization_event"
+              ]
+            },
+            "ListOrganizationImpacts": {
+              "methods": [
+                "list_organization_impacts"
+              ]
+            },
+            "GetOrganizationImpact": {
+              "methods": [
+                "get_organization_impact"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
