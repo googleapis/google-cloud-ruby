@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.quota.v1beta",
+  "libraryPackage": "::Google::Shopping::Merchant::Quota::V1beta",
+  "services": {
+    "QuotaService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Quota::V1beta::QuotaService::Client",
+          "rpcs": {
+            "ListQuotaGroups": {
+              "methods": [
+                "list_quota_groups"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
