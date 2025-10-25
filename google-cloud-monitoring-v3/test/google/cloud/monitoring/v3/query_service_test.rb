@@ -150,4 +150,24 @@ class ::Google::Cloud::Monitoring::V3::QueryService::ClientTest < Minitest::Test
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Monitoring::V3::QueryService::Client::Configuration, config
   end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Monitoring::V3::QueryService::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::Monitoring::V3::QueryService::Client, client
+      assert_equal creds, client.configure.credentials
+    end
+  end
 end
