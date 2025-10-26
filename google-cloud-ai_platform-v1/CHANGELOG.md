@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.30.0 (2025-10-26)
+
+#### Features
+
+* Add EmbedContent method v1 ([#31807](https://github.com/googleapis/google-cloud-ruby/issues/31807)) 
+
 ### 1.29.0 (2025-10-22)
 
 #### Features
