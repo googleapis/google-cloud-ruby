@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.8.0 (2025-10-26)
+
+#### Features
+
+* A new message `DataDocumentationSpec` is added representing Data Documentation Spec ([#31803](https://github.com/googleapis/google-cloud-ruby/issues/31803)) 
+
 ### 2.7.0 (2025-10-08)
 
 #### Features
