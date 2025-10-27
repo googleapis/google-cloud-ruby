@@ -21,7 +21,7 @@ module Google
   module Cloud
     module NetworkServices
       module V1
-        VERSION = "2.6.0"
+        VERSION = "2.6.1"
       end
     end
   end
