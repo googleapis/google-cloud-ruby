@@ -653,6 +653,32 @@ describe Google::Cloud::Storage::File, :mock_storage do
         mock.verify
       end
     end
+
+    describe "restricting downloading files to current working directory" do
+
+      def assert_security_error(path, expected_message)
+        error = expect do
+          file.download path
+        end.must_raise SecurityError
+        _(error.message).must_match expected_message
+      end
+
+      it "raises error when downloading to an absolute path" do
+        assert_security_error "/absolute/path/to/file.png", /Absolute path not allowed in user input/
+      end
+
+      it "raises error when downloading to a path with parent directory traversal" do
+        assert_security_error "../parent/directory/traversal/file.png", /Directory traversal attempt detected./
+      end
+
+      it "raises error when downloading to a nested path with parent directory traversal" do
+        assert_security_error "test/../../parent/directory/traversal/file.png", /Directory traversal attempt detected./
+      end
+
+      it "raises error when downloading to a nested path with parent directory traversal" do
+        assert_security_error "test/../../parent/directory/traversal/file.png", /Directory traversal attempt detected./
+      end
+    end
   end
 
   describe "File#copy" do

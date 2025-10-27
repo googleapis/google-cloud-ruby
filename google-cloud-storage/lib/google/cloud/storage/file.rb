@@ -2280,9 +2280,6 @@ module Google
         # @param [String] user_supplied_path The local path where the file will be
         #   downloaded. This path must be relative to the current working
         #   directory.
-        #
-        # @raise [ArgumentError] If the provided `user_supplied_path` is not a
-        #   String.
         # @raise [SecurityError] If the `user_supplied_path` is an absolute path
         #   or if it resolves to a location outside of the current working
         #   directory.
@@ -2301,18 +2298,14 @@ module Google
 
         def safe_path_for_download user_supplied_path
 
-          temp_regex = /\A#{Regexp.escape(Dir.tmpdir)}/
+          temp_regex = /\A#{Regexp.escape Dir.tmpdir }/
 
           # Allow StringIO to pass through
           return user_supplied_path if user_supplied_path.is_a? StringIO
 
           # Allow Tempfile and /tmp paths in test env to pass through
-          # if user_supplied_path.is_a?(Tempfile) ||
-          #     (user_supplied_path.is_a?(String) && user_supplied_path.start_with?("/tmp/"))
-          #   return user_supplied_path
-          # end
           if user_supplied_path.is_a?(Tempfile) || user_supplied_path =~ temp_regex
-              return user_supplied_path
+            return user_supplied_path
           end
 
           # Disallow if path is absolute.
