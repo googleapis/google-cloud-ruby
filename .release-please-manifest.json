@@ -711,7 +711,7 @@
   "google-cloud-security-private_ca+FILLER": "0.0.0",
   "google-cloud-security-private_ca-v1": "2.4.0",
   "google-cloud-security-private_ca-v1+FILLER": "0.0.0",
-  "google-cloud-security-private_ca-v1beta1": "0.15.0",
+  "google-cloud-security-private_ca-v1beta1": "0.15.1",
   "google-cloud-security-private_ca-v1beta1+FILLER": "0.0.0",
   "google-cloud-security-public_ca": "2.0.2",
   "google-cloud-security-public_ca+FILLER": "0.0.0",
