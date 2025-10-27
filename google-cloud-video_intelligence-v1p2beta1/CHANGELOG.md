@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 0.16.0 (2025-10-08)
 
 #### Features
