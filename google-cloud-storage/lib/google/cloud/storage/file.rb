@@ -2297,7 +2297,6 @@ module Google
         #
 
         def safe_path_for_download user_supplied_path
-
           temp_regex = /\A#{Regexp.escape Dir.tmpdir}/
 
           # Allow StringIO to pass through
