@@ -22,7 +22,7 @@ module Google
     module BeyondCorp
       module AppConnections
         module V1
-          VERSION = "0.10.0"
+          VERSION = "0.10.1"
         end
       end
     end
