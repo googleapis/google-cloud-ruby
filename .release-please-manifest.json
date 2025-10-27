@@ -925,7 +925,7 @@
   "google-iam-v2+FILLER": "0.0.0",
   "google-iam-v3": "0.3.0",
   "google-iam-v3+FILLER": "0.0.0",
-  "google-iam-v3beta": "0.3.0",
+  "google-iam-v3beta": "0.3.1",
   "google-iam-v3beta+FILLER": "0.0.0",
   "google-identity-access_context_manager": "1.5.2",
   "google-identity-access_context_manager+FILLER": "0.0.0",
