@@ -674,10 +674,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
       it "raises error when downloading to a nested path with parent directory traversal" do
         assert_security_error "test/../../parent/directory/traversal/file.png", /Directory traversal attempt detected./
       end
-
-      it "raises error when downloading to a nested path with parent directory traversal" do
-        assert_security_error "test/../../parent/directory/traversal/file.png", /Directory traversal attempt detected./
-      end
     end
   end
 
