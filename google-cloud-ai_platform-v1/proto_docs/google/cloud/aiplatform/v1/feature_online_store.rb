@@ -93,7 +93,8 @@ module Google
           #     Required. Autoscaling config applied to Bigtable Instance.
           # @!attribute [rw] enable_direct_bigtable_access
           #   @return [::Boolean]
-          #     Optional. Whether direct access to the Bigtable instance is enabled or not.
+          #     Optional. Whether direct access to the Bigtable instance is enabled or
+          #     not.
           # @!attribute [r] bigtable_metadata
           #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::Bigtable::BigtableMetadata]
           #     Output only. Metadata of the Bigtable instance. Output only.
