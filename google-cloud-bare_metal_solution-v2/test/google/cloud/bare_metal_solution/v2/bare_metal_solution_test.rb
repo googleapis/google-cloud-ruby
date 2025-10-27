@@ -2845,6 +2845,26 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
     assert_kind_of ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client::Configuration, config
   end
 
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client, client
+      assert_equal creds, client.configure.credentials
+    end
+  end
+
   def test_operations_client
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
