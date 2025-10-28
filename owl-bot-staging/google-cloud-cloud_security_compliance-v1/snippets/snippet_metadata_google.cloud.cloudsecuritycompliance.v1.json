@@ -1,0 +1,895 @@
+{
+  "client_library": {
+    "name": "google-cloud-cloud_security_compliance-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.cloudsecuritycompliance.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Audit_GenerateFrameworkAuditScopeReport_sync",
+      "title": "Snippet for the generate_framework_audit_scope_report call in the Audit service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#generate_framework_audit_scope_report.",
+      "file": "audit/generate_framework_audit_scope_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_framework_audit_scope_report",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#generate_framework_audit_scope_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportResponse",
+        "client": {
+          "short_name": "Audit::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client"
+        },
+        "method": {
+          "short_name": "GenerateFrameworkAuditScopeReport",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit.GenerateFrameworkAuditScopeReport",
+          "service": {
+            "short_name": "Audit",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Audit_CreateFrameworkAudit_sync",
+      "title": "Snippet for the create_framework_audit call in the Audit service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#create_framework_audit.",
+      "file": "audit/create_framework_audit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_framework_audit",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#create_framework_audit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Audit::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client"
+        },
+        "method": {
+          "short_name": "CreateFrameworkAudit",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit.CreateFrameworkAudit",
+          "service": {
+            "short_name": "Audit",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Audit_ListFrameworkAudits_sync",
+      "title": "Snippet for the list_framework_audits call in the Audit service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#list_framework_audits.",
+      "file": "audit/list_framework_audits.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_framework_audits",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#list_framework_audits",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsResponse",
+        "client": {
+          "short_name": "Audit::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client"
+        },
+        "method": {
+          "short_name": "ListFrameworkAudits",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit.ListFrameworkAudits",
+          "service": {
+            "short_name": "Audit",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Audit_GetFrameworkAudit_sync",
+      "title": "Snippet for the get_framework_audit call in the Audit service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#get_framework_audit.",
+      "file": "audit/get_framework_audit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_framework_audit",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client#get_framework_audit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::FrameworkAudit",
+        "client": {
+          "short_name": "Audit::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client"
+        },
+        "method": {
+          "short_name": "GetFrameworkAudit",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit.GetFrameworkAudit",
+          "service": {
+            "short_name": "Audit",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Audit"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_CmEnrollmentService_UpdateCmEnrollment_sync",
+      "title": "Snippet for the update_cm_enrollment call in the CmEnrollmentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client#update_cm_enrollment.",
+      "file": "cm_enrollment_service/update_cm_enrollment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cm_enrollment",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client#update_cm_enrollment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::UpdateCmEnrollmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollment",
+        "client": {
+          "short_name": "CmEnrollmentService::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCmEnrollment",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService.UpdateCmEnrollment",
+          "service": {
+            "short_name": "CmEnrollmentService",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_CmEnrollmentService_CalculateEffectiveCmEnrollment_sync",
+      "title": "Snippet for the calculate_effective_cm_enrollment call in the CmEnrollmentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client#calculate_effective_cm_enrollment.",
+      "file": "cm_enrollment_service/calculate_effective_cm_enrollment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "calculate_effective_cm_enrollment",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client#calculate_effective_cm_enrollment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::CalculateEffectiveCmEnrollmentResponse",
+        "client": {
+          "short_name": "CmEnrollmentService::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client"
+        },
+        "method": {
+          "short_name": "CalculateEffectiveCmEnrollment",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService.CalculateEffectiveCmEnrollment",
+          "service": {
+            "short_name": "CmEnrollmentService",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_ListFrameworks_sync",
+      "title": "Snippet for the list_frameworks call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#list_frameworks.",
+      "file": "config/list_frameworks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_frameworks",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#list_frameworks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListFrameworks",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.ListFrameworks",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_GetFramework_sync",
+      "title": "Snippet for the get_framework call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#get_framework.",
+      "file": "config/get_framework.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_framework",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#get_framework",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::Framework",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetFramework",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.GetFramework",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_CreateFramework_sync",
+      "title": "Snippet for the create_framework call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#create_framework.",
+      "file": "config/create_framework.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_framework",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#create_framework",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::Framework",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "CreateFramework",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.CreateFramework",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_UpdateFramework_sync",
+      "title": "Snippet for the update_framework call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#update_framework.",
+      "file": "config/update_framework.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_framework",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#update_framework",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::UpdateFrameworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::Framework",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "UpdateFramework",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateFramework",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_DeleteFramework_sync",
+      "title": "Snippet for the delete_framework call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#delete_framework.",
+      "file": "config/delete_framework.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_framework",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#delete_framework",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "DeleteFramework",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteFramework",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_ListCloudControls_sync",
+      "title": "Snippet for the list_cloud_controls call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#list_cloud_controls.",
+      "file": "config/list_cloud_controls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cloud_controls",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#list_cloud_controls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlsResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListCloudControls",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_GetCloudControl_sync",
+      "title": "Snippet for the get_cloud_control call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#get_cloud_control.",
+      "file": "config/get_cloud_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cloud_control",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#get_cloud_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::CloudControl",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetCloudControl",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.GetCloudControl",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_CreateCloudControl_sync",
+      "title": "Snippet for the create_cloud_control call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#create_cloud_control.",
+      "file": "config/create_cloud_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cloud_control",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#create_cloud_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::CreateCloudControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::CloudControl",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "CreateCloudControl",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.CreateCloudControl",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_UpdateCloudControl_sync",
+      "title": "Snippet for the update_cloud_control call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#update_cloud_control.",
+      "file": "config/update_cloud_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cloud_control",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#update_cloud_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::UpdateCloudControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::CloudControl",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "UpdateCloudControl",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateCloudControl",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Config_DeleteCloudControl_sync",
+      "title": "Snippet for the delete_cloud_control call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Config::Client#delete_cloud_control.",
+      "file": "config/delete_cloud_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cloud_control",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#delete_cloud_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::DeleteCloudControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "DeleteCloudControl",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteCloudControl",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Deployment_CreateFrameworkDeployment_sync",
+      "title": "Snippet for the create_framework_deployment call in the Deployment service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#create_framework_deployment.",
+      "file": "deployment/create_framework_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_framework_deployment",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#create_framework_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Deployment::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client"
+        },
+        "method": {
+          "short_name": "CreateFrameworkDeployment",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment.CreateFrameworkDeployment",
+          "service": {
+            "short_name": "Deployment",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Deployment_DeleteFrameworkDeployment_sync",
+      "title": "Snippet for the delete_framework_deployment call in the Deployment service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#delete_framework_deployment.",
+      "file": "deployment/delete_framework_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_framework_deployment",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#delete_framework_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Deployment::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client"
+        },
+        "method": {
+          "short_name": "DeleteFrameworkDeployment",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment.DeleteFrameworkDeployment",
+          "service": {
+            "short_name": "Deployment",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Deployment_GetFrameworkDeployment_sync",
+      "title": "Snippet for the get_framework_deployment call in the Deployment service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#get_framework_deployment.",
+      "file": "deployment/get_framework_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_framework_deployment",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#get_framework_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment",
+        "client": {
+          "short_name": "Deployment::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client"
+        },
+        "method": {
+          "short_name": "GetFrameworkDeployment",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetFrameworkDeployment",
+          "service": {
+            "short_name": "Deployment",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Deployment_ListFrameworkDeployments_sync",
+      "title": "Snippet for the list_framework_deployments call in the Deployment service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#list_framework_deployments.",
+      "file": "deployment/list_framework_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_framework_deployments",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#list_framework_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsResponse",
+        "client": {
+          "short_name": "Deployment::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client"
+        },
+        "method": {
+          "short_name": "ListFrameworkDeployments",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListFrameworkDeployments",
+          "service": {
+            "short_name": "Deployment",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Deployment_GetCloudControlDeployment_sync",
+      "title": "Snippet for the get_cloud_control_deployment call in the Deployment service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#get_cloud_control_deployment.",
+      "file": "deployment/get_cloud_control_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cloud_control_deployment",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#get_cloud_control_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeployment",
+        "client": {
+          "short_name": "Deployment::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client"
+        },
+        "method": {
+          "short_name": "GetCloudControlDeployment",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetCloudControlDeployment",
+          "service": {
+            "short_name": "Deployment",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsecuritycompliance_v1_generated_Deployment_ListCloudControlDeployments_sync",
+      "title": "Snippet for the list_cloud_control_deployments call in the Deployment service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#list_cloud_control_deployments.",
+      "file": "deployment/list_cloud_control_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cloud_control_deployments",
+        "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client#list_cloud_control_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsResponse",
+        "client": {
+          "short_name": "Deployment::Client",
+          "full_name": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client"
+        },
+        "method": {
+          "short_name": "ListCloudControlDeployments",
+          "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListCloudControlDeployments",
+          "service": {
+            "short_name": "Deployment",
+            "full_name": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

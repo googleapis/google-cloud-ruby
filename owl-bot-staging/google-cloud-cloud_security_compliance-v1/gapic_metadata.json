@@ -1,0 +1,155 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.cloudsecuritycompliance.v1",
+  "libraryPackage": "::Google::Cloud::CloudSecurityCompliance::V1",
+  "services": {
+    "Audit": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client",
+          "rpcs": {
+            "GenerateFrameworkAuditScopeReport": {
+              "methods": [
+                "generate_framework_audit_scope_report"
+              ]
+            },
+            "CreateFrameworkAudit": {
+              "methods": [
+                "create_framework_audit"
+              ]
+            },
+            "ListFrameworkAudits": {
+              "methods": [
+                "list_framework_audits"
+              ]
+            },
+            "GetFrameworkAudit": {
+              "methods": [
+                "get_framework_audit"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmEnrollmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client",
+          "rpcs": {
+            "UpdateCmEnrollment": {
+              "methods": [
+                "update_cm_enrollment"
+              ]
+            },
+            "CalculateEffectiveCmEnrollment": {
+              "methods": [
+                "calculate_effective_cm_enrollment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Config": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::Config::Client",
+          "rpcs": {
+            "ListFrameworks": {
+              "methods": [
+                "list_frameworks"
+              ]
+            },
+            "GetFramework": {
+              "methods": [
+                "get_framework"
+              ]
+            },
+            "CreateFramework": {
+              "methods": [
+                "create_framework"
+              ]
+            },
+            "UpdateFramework": {
+              "methods": [
+                "update_framework"
+              ]
+            },
+            "DeleteFramework": {
+              "methods": [
+                "delete_framework"
+              ]
+            },
+            "ListCloudControls": {
+              "methods": [
+                "list_cloud_controls"
+              ]
+            },
+            "GetCloudControl": {
+              "methods": [
+                "get_cloud_control"
+              ]
+            },
+            "CreateCloudControl": {
+              "methods": [
+                "create_cloud_control"
+              ]
+            },
+            "UpdateCloudControl": {
+              "methods": [
+                "update_cloud_control"
+              ]
+            },
+            "DeleteCloudControl": {
+              "methods": [
+                "delete_cloud_control"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Deployment": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Client",
+          "rpcs": {
+            "CreateFrameworkDeployment": {
+              "methods": [
+                "create_framework_deployment"
+              ]
+            },
+            "DeleteFrameworkDeployment": {
+              "methods": [
+                "delete_framework_deployment"
+              ]
+            },
+            "GetFrameworkDeployment": {
+              "methods": [
+                "get_framework_deployment"
+              ]
+            },
+            "ListFrameworkDeployments": {
+              "methods": [
+                "list_framework_deployments"
+              ]
+            },
+            "GetCloudControlDeployment": {
+              "methods": [
+                "get_cloud_control_deployment"
+              ]
+            },
+            "ListCloudControlDeployments": {
+              "methods": [
+                "list_cloud_control_deployments"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
