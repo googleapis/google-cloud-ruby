@@ -27,8 +27,8 @@ module Google
     # provides a cost-effective way to make your applications and services
     # available to your users. This programmable, authoritative DNS service can
     # be used to easily publish and manage DNS records using the same
-    # infrastructure relied upon by Google. To learn more, read [What is Google
-    # Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
+    # infrastructure relied upon by Google. To learn more, read [Cloud
+    # DNS Overview](https://cloud.google.com/dns/docs/overview).
     #
     # See {file:OVERVIEW.md Google Cloud DNS Overview}.
     #

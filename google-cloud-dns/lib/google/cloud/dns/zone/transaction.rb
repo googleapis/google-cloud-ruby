@@ -57,7 +57,7 @@ module Google
           # @param [String] name The owner of the record. For example:
           #   `example.com.`.
           # @param [String] type The identifier of a [supported record
-          #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+          #   type](https://cloud.google.com/dns/docs/records-overview).
           #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
           # @param [Integer] ttl The number of seconds that the record can be
           #   cached by resolvers.
@@ -88,7 +88,7 @@ module Google
           # @param [String] name The owner of the record. For example:
           #   `example.com.`.
           # @param [String] type The identifier of a [supported record
-          #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+          #   type](https://cloud.google.com/dns/docs/records-overview).
           #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
           #
           # @example
@@ -111,7 +111,7 @@ module Google
           # @param [String] name The owner of the record. For example:
           #   `example.com.`.
           # @param [String] type The identifier of a [supported record
-          #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+          #   type](https://cloud.google.com/dns/docs/records-overview).
           #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
           # @param [Integer] ttl The number of seconds that the record can be
           #   cached by resolvers.
@@ -146,7 +146,7 @@ module Google
           # @param [String] name The owner of the record. For example:
           #   `example.com.`.
           # @param [String] type The identifier of a [supported record
-          #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+          #   type](https://cloud.google.com/dns/docs/records-overview).
           #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
           # @yield [record] a block yielding each matching record
           # @yieldparam [Record] record the record to be modified
