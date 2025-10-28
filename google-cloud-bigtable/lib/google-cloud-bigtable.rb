@@ -40,29 +40,31 @@ module Google
     #   updater_proc is supplied.
     # @param timeout [Integer]
     #   The default timeout, in seconds, for calls made through this client.
-    # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
+    # @param credentials [Google::Auth::Credentials, GRPC::Core::Channel,
     #   GRPC::Core::ChannelCredentials, Proc]
-    #   Provides the means for authenticating requests made by the client. This parameter can
+    #   The means for authenticating requests made by the client. This parameter can
     #   be one of the following types.
     #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
     #   authenticating requests made by this client.
-    #   `String` will be treated as the path to the keyfile to use to construct
-    #   credentials for this client.
-    #   `Hash` will be treated as the contents of a keyfile to use to construct
-    #   credentials for this client.
     #   `GRPC::Core::Channel` will be used to make calls through.
     #   `GRPC::Core::ChannelCredentials` will be used to set up the gRPC client. The channel credentials
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
     #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
-    # @return [Google::Cloud::Bigtable::Project]
+    #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+    #     is deprecated. Providing an unvalidated credential configuration to
+    #     Google APIs can compromise the security of your systems and data.
     #
-    # @example
-    #   require "google/cloud/bigtable"
+    #   @example
     #
-    #   gcloud  = Google::Cloud.new
+    #     # The recommended way to provide credentials is to use the `make_creds` method
+    #     # on the appropriate credentials class for your environment.
     #
-    #   bigtable = gcloud.bigtable
+    #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+    #       json_key_io: ::File.open("/path/to/keyfile.json")
+    #     )
+    #
+    #     client = Google::Cloud.bigtable credentials: credentials
     #
     def bigtable scope: nil, timeout: nil, credentials: nil
       credentials ||= @keyfile
@@ -83,21 +85,32 @@ module Google
     #   Project identifier for the Bigtable service you
     #   are connecting to. If not present, the default project for the
     #   credentials is used.
-    # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel,
+    # @param credentials [Google::Auth::Credentials, GRPC::Core::Channel,
     #   GRPC::Core::ChannelCredentials, Proc]
     #   The means for authenticating requests made by the client. This parameter can
     #   be one of the following types.
     #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
     #   authenticating requests made by this client.
-    #   `String` will be treated as the path to the keyfile to use to construct
-    #   credentials for this client.
-    #   `Hash` will be treated as the contents of a keyfile to use to construct
-    #   credentials for this client.
     #   `GRPC::Core::Channel` will be used to make calls through.
     #   `GRPC::Core::ChannelCredentials` will be used to set up the gRPC client. The channel credentials
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
     #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
+    #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+    #     is deprecated. Providing an unvalidated credential configuration to
+    #     Google APIs can compromise the security of your systems and data.
+    #
+    #   @example
+    #
+    #     # The recommended way to provide credentials is to use the `make_creds` method
+    #     # on the appropriate credentials class for your environment.
+    #
+    #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+    #       json_key_io: ::File.open("/path/to/keyfile.json")
+    #     )
+    #
+    #     client = Google::Cloud.bigtable credentials: credentials
+    #
     # @param scope [Array<String>]
     #   The OAuth 2.0 scopes controlling the set of resources and operations
     #   that the connection can access. See [Using OAuth 2.0 to Access Google

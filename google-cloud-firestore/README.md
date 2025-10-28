@@ -29,11 +29,16 @@ $ gem install google-cloud-firestore
 ## Example
 
 ```ruby
+require "googleauth"
 require "google/cloud/firestore"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
 firestore = Google::Cloud::Firestore.new(
   project_id: "my-project",
-  credentials: "/path/to/keyfile.json"
+  credentials: credentials
 )
 
 city = firestore.col("cities").doc("SF")

@@ -77,22 +77,43 @@ you would have used previously. To create a V3 (or later) client, use the
 `translation_service` class method and set options in a configuration block.
 
 Old (V3):
-```
-client = Google::Cloud::Translate.new credentials: "/path/to/credentials.json"
+```ruby
+require "googleauth"
+require "google/cloud/translate"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
+client = Google::Cloud::Translate.new credentials: credentials
 ```
 
 Old (V2):
-```
+```ruby
+require "googleauth"
+require "google/cloud/translate"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
 client = Google::Cloud::Translate.new version: :v2,
-                                      credentials: "/path/to/credentials.json"
+                                      credentials: credentials
 ```
 
 New (V3):
-```
+```ruby
+require "googleauth"
+require "google/cloud/translate"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
 # Call the translation_service method to create a V3 client,
 # and pass a block to configure the client.
 client = Google::Cloud::Translate.translation_service do |config|
-  config.credentials = "/path/to/credentials.json"
+  config.credentials = credentials
 end
 
 # You can omit the block if you're keeping the default configuration
@@ -100,11 +121,18 @@ default_client = Google::Cloud::Translate.translation_service
 ```
 
 New (V2):
-```
+```ruby
+require "googleauth"
+require "google/cloud/translate"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
 # Call the separate translation_v2_service method to create a legacy V2 client,
 # and pass configuration as keyword arguments.
 client = Google::Cloud::Translate.translation_v2_service(
-  credentials: "/path/to/credentials.json")
+  credentials: credentials)
 ```
 
 ### Passing Arguments

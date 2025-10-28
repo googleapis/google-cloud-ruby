@@ -68,12 +68,14 @@ The environment variables that DNS checks for credentials are configured on
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
+require "googleauth"
 require "google/cloud/dns"
 
-ENV["DNS_PROJECT"]     = "my-project-id"
-ENV["DNS_CREDENTIALS"] = "path/to/keyfile.json"
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
-dns = Google::Cloud::Dns.new
+dns = Google::Cloud::Dns.new project_id: "my-project-id", credentials: credentials
 ```
 
 ### Configuration
@@ -82,11 +84,16 @@ The **Project ID** and **Credentials JSON** can be configured instead of placing
 them in environment variables or providing them as arguments.
 
 ```ruby
+require "googleauth"
 require "google/cloud/dns"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
 Google::Cloud::Dns.configure do |config|
   config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
+  config.credentials = credentials
 end
 
 dns = Google::Cloud::Dns.new

@@ -50,9 +50,27 @@ module Google
       # @param [String] project_id Project identifier for the Stackdriver
       #   Logging service you are connecting to. If not present, the default
       #   project for the credentials is used.
-      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
-      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Logging::Credentials})
+      # @param [Google::Auth::Credentials] credentials A Google::Auth::Credentials
+      #   object. (See {Logging::Credentials})
+      #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+      #     is deprecated. Providing an unvalidated credential configuration to
+      #     Google APIs can compromise the security of your systems and data.
+      #
+      #   @example
+      #
+      #     # The recommended way to provide credentials is to use the `make_creds` method
+      #     # on the appropriate credentials class for your environment.
+      #
+      #     require "googleauth"
+      #
+      #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+      #       json_key_io: ::File.open("/path/to/keyfile.json")
+      #     )
+      #
+      #     logging = Google::Cloud::Logging.new(
+      #       project_id: "my-project-id",
+      #       credentials: credentials
+      #     )
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google

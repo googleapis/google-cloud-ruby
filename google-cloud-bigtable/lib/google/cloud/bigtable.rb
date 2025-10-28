@@ -43,15 +43,14 @@ module Google
       #   be one of the following types:
       #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
       #   authenticating requests made by this client.
-      #   `String` will be treated as the path to the keyfile to use to construct
-      #   credentials for this client.
-      #   `Hash` will be treated as the contents of a keyfile to use to construct
-      #   credentials for this client.
       #   `GRPC::Core::Channel` will be used to make calls through.
       #   `GRPC::Core::ChannelCredentials` for the setting up the gRPC client. The channel credentials
       #   should already be composed with a `GRPC::Core::CallCredentials` object.
       #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
       #   metadata for requests, generally, to give OAuth credentials.
+      #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+      #     is deprecated. Providing an unvalidated credential configuration to
+      #     Google APIs can compromise the security of your systems and data.
       # @param universe_domain [String] Override of the universe domain. Optional.
       # @param endpoint [String] Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.

@@ -54,20 +54,30 @@ whenever possible.
 To configure a credentials file for an individual client initialization:
 
 ```ruby
+require "googleauth"
 require "google/cloud/resource_manager"
 
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
 client = Google::Cloud::ResourceManager.folders do |config|
-  config.credentials = "path/to/credentialfile.json"
+  config.credentials = credentials
 end
 ```
 
 To configure a credentials file globally for all clients:
 
 ```ruby
+require "googleauth"
 require "google/cloud/resource_manager"
 
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
 Google::Cloud::ResourceManager.configure do |config|
-  config.credentials = "path/to/credentialfile.json"
+  config.credentials = credentials
 end
 
 client = Google::Cloud::ResourceManager.folders

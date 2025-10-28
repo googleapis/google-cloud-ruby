@@ -86,12 +86,14 @@ are configured on {Google::Cloud::PubSub::Credentials}:
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
+require "googleauth"
 require "google/cloud/pubsub"
 
-ENV["PUBSUB_PROJECT"]     = "my-project-id"
-ENV["PUBSUB_CREDENTIALS"] = "path/to/keyfile.json"
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
-client = Google::Cloud::PubSub.new
+client = Google::Cloud::PubSub.new project_id: "my-project-id", credentials: credentials
 ```
 
 ### Configuration
@@ -100,11 +102,16 @@ The **Project ID** and the path to the **Credentials JSON** file can be configur
 instead of placing them in environment variables or providing them as arguments.
 
 ```ruby
+require "googleauth"
 require "google/cloud/pubsub"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
 Google::Cloud::PubSub.configure do |config|
   config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
+  config.credentials = credentials
 end
 
 client = Google::Cloud::PubSub.new
