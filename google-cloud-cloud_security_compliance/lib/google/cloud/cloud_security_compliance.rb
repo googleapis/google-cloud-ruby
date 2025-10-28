@@ -46,6 +46,147 @@ module Google
   module Cloud
     module CloudSecurityCompliance
       ##
+      # Create a new client object for Audit.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::CloudSecurityCompliance::V1::Audit::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_security_compliance-v1/latest/Google-Cloud-CloudSecurityCompliance-V1-Audit-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the Audit service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Audit service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::CloudSecurityCompliance.audit_available?}.
+      #
+      # ## About Audit
+      #
+      # Service describing handlers for resources
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.audit version: :v1, transport: :grpc, &block
+        require "google/cloud/cloud_security_compliance/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::CloudSecurityCompliance
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::CloudSecurityCompliance.const_get(package_name).const_get(:Audit)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the Audit service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::CloudSecurityCompliance.audit}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Audit service,
+      # or if the versioned client gem needs an update to support the Audit service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.audit_available? version: :v1, transport: :grpc
+        require "google/cloud/cloud_security_compliance/#{version.to_s.downcase}"
+        package_name = Google::Cloud::CloudSecurityCompliance
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::CloudSecurityCompliance.const_get package_name
+        return false unless service_module.const_defined? :Audit
+        service_module = service_module.const_get :Audit
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for CmEnrollmentService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_security_compliance-v1/latest/Google-Cloud-CloudSecurityCompliance-V1-CmEnrollmentService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CmEnrollmentService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the CmEnrollmentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::CloudSecurityCompliance.cm_enrollment_service_available?}.
+      #
+      # ## About CmEnrollmentService
+      #
+      # Service describing CmEnrollment related RPCs for
+      # complianceManager.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.cm_enrollment_service version: :v1, transport: :grpc, &block
+        require "google/cloud/cloud_security_compliance/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::CloudSecurityCompliance
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::CloudSecurityCompliance.const_get(package_name).const_get(:CmEnrollmentService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the CmEnrollmentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::CloudSecurityCompliance.cm_enrollment_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CmEnrollmentService service,
+      # or if the versioned client gem needs an update to support the CmEnrollmentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.cm_enrollment_service_available? version: :v1, transport: :grpc
+        require "google/cloud/cloud_security_compliance/#{version.to_s.downcase}"
+        package_name = Google::Cloud::CloudSecurityCompliance
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::CloudSecurityCompliance.const_get package_name
+        return false unless service_module.const_defined? :CmEnrollmentService
+        service_module = service_module.const_get :CmEnrollmentService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Config.
       #
       # By default, this returns an instance of

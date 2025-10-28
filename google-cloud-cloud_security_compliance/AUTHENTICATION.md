@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/cloud_security_compliance"
 
-client = Google::Cloud::CloudSecurityCompliance.config do |config|
+client = Google::Cloud::CloudSecurityCompliance.audit do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::CloudSecurityCompliance.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::CloudSecurityCompliance.config
+client = Google::Cloud::CloudSecurityCompliance.audit
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/cloud_security_compliance"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::CloudSecurityCompliance.config
+client = Google::Cloud::CloudSecurityCompliance.audit
 ```
 
 ### Local ADC file
