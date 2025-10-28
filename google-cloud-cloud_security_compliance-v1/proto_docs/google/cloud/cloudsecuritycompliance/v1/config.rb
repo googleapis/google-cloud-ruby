@@ -21,12 +21,12 @@ module Google
   module Cloud
     module CloudSecurityCompliance
       module V1
-        # Request message for listing Frameworks.
+        # Request message for [ListFrameworks][].
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, in the format
         #     `organizations/{organization}/locations/{location}`.
-        #     Only global location is supported.
+        #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of frameworks to return. The default value is
@@ -43,11 +43,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing Frameworks.
-        # Contains a paginated list of Framework resources.
+        # The response message for [ListFrameworks][].
+        # Returns a paginated list of Framework resources.
         # @!attribute [rw] frameworks
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::Framework>]
-        #     The list of Framework resources.
+        #     The list of framework resources.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A pagination token. To retrieve the next page of results, call the method
@@ -57,51 +57,50 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for getting a Framework.
+        # The request message for [GetFramework][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the framework to retrieve.
-        #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/frameworks/\\{framework_id}
+        #     Required. The name of the framework to retrieve, in the format
+        #     `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
+        #     The only supported location is `global`.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
-        #     Optional. The Framework major version to retrieve. If not specified, the
-        #     most recently updated revision_id is retrieved.
+        #     Optional. The framework major version to retrieve. If not specified, the
+        #     most recently updated `revision_id` is retrieved.
         class GetFrameworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for creating a Framework
+        # The request message for [CreateFramework][].
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, in the format
         #     `organizations/{organization}/locations/{location}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] framework_id
         #   @return [::String]
-        #     Required. ID of the framework.
-        #     This is not the full name of the framework.
-        #     This is the last part of the full name of the framework.
+        #     Required. The identifier (ID) of the framework. The ID is not the full name
+        #     of the framework; it's the last part of the full name of the framework.
         # @!attribute [rw] framework
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Framework]
-        #     Required. The resource being created
+        #     Required. The resource being created.
         class CreateFrameworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for updating a Framework.
+        # The request message for [UpdateFramework][].
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. Field mask is used to specify the fields to be overwritten in the
-        #     Framework resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it is in the mask. If the
-        #     user does not provide a mask then all fields present in the request will be
-        #     overwritten.
+        #     Optional. A field mask is used to specify the fields to be overwritten in
+        #     the framework resource by the update. The fields specified in the
+        #     `update_mask` are relative to the resource, not the full request. A field
+        #     is overwritten if it is in the mask. If you don't provide a mask then all
+        #     fields present in the request will be overwritten.
         # @!attribute [rw] framework
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Framework]
-        #     Required. The resource being updated
+        #     Required. The resource that is being updated.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
         #     Optional. The major version ID of the framework to update.
@@ -110,42 +109,45 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for deleting a Framework.
+        # Request message for [DeleteFramework][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the resource, in the format
+        #     Required. The name of the resource, in the format
         #     `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+        #     The only supported location is `global`.
         class DeleteFrameworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing CloudControls.
+        # Request message for [ListCloudControls][].
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, in the format
         #     `organizations/{organization}/locations/{location}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of CloudControls to return. The default value
+        #     Optional. The maximum number of cloud controls to return. The default value
         #     is `500`.
         #
         #     If you exceed the maximum value of `1000`, then the service uses the
         #     maximum value.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous request to list
-        #     CloudControls. Provide this token to retrieve the next page of results.
+        #     Optional. A pagination token that's returned from a previous request to
+        #     list cloud controls. Provide this token to retrieve the next page of
+        #     results.
         #
-        #     When paginating, parent provided to
-        #     ListCloudControls request must match the call that provided the page
-        #     token.
+        #     When paginating, the parent that you provide to the
+        #     {::Google::Cloud::CloudSecurityCompliance::V1::Config::Client#list_cloud_controls ListCloudControls}
+        #     request must match the call that provided the page token.
         class ListCloudControlsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for ListCloudControls.
+        # The response message for [ListCloudControls][].
         # @!attribute [rw] cloud_controls
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudControl>]
         #     The list of CloudControl resources.
@@ -158,61 +160,71 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for getting a CloudControl.
+        # The request message for [GetCloudControl][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the cloudcontrol to retrieve in the format:
-        #     organizations/\\{organization}/locations/\\{location}/cloudControls/\\{cloud_control}
+        #     Required. The name of the cloud control to retrieve, in the format
+        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
+        #     The only supported location is `global`.
+        # @!attribute [rw] major_revision_id
+        #   @return [::Integer]
+        #     Optional. The major version of the cloud control to retrieve. If not
+        #     specified, the most recently updated `revision_id` is retrieved.
         class GetCloudControlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for creating a CloudControl
+        # The request message for [CreateCloudControl][].
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, in the format
         #     `organizations/{organization}/locations/{location}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] cloud_control_id
         #   @return [::String]
-        #     Required. ID of the CloudControl.
-        #     This is the last segment of the CloudControl resource name.
-        #     Format: `^[a-zA-Z][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$`.
+        #     Required. The identifier for the cloud control, which is the last segment
+        #     of the cloud control name. The format is
+        #     `^[a-zA-Z][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$`.
         # @!attribute [rw] cloud_control
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl]
-        #     Required. The resource being created
+        #     Required. The cloud control that's being created.
         class CreateCloudControlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for UpdateCloudControl.
+        # The request message for [UpdateCloudControl][].
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. Field mask is used to specify the fields to be overwritten in the
-        #     CloudControl resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it is in the mask. If the
-        #     user does not provide a mask then all fields present in the request will be
-        #     overwritten. The fields that can be updated are:
-        #     1. Display_name
-        #     2. Description
-        #     3. Parameters
-        #     4. Rules
-        #     5. ParameterSpec.
+        #     Optional. Use a field mask to specify the fields to be overwritten in the
+        #     cloud control during the update.
+        #     The fields that you specify in the `update_mask` are relative to the
+        #     cloud control, not the full request. A field is overwritten if it is in
+        #     the mask. If you don't provide a mask, all fields in the request
+        #     are updated.
+        #
+        #     You can update the following fields:
+        #
+        #     - Display name
+        #     - Description
+        #     - Parameters
+        #     - Rules
+        #     - Parameter specification
         # @!attribute [rw] cloud_control
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl]
-        #     Required. The resource being updated
+        #     Required. The cloud control that you're updating.
         class UpdateCloudControlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for deleting a CloudControl.
+        # The request message for [DeleteCloudControl][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the resource, in the format
+        #     Required. The name of the cloud control to delete, in the format
         #     `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`.
+        #     The only supported location is `global`.
         class DeleteCloudControlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

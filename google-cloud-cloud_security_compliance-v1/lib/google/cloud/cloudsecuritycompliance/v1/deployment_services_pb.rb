@@ -34,17 +34,20 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.cloudsecuritycompliance.v1.Deployment'
 
-            # Creates a new FrameworkDeployment in a given parent resource.
+            # Creates a framework deployment in a given parent resource. A
+            # framework deployment lets you assign a particular framework version to an
+            # organization, folder, or project so that you can control and monitor
+            # those resources using the framework's cloud controls.
             rpc :CreateFrameworkDeployment, ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkDeploymentRequest, ::Google::Longrunning::Operation
-            # Deletes a single FrameworkDeployment.
+            # Deletes a framework deployment.
             rpc :DeleteFrameworkDeployment, ::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkDeploymentRequest, ::Google::Longrunning::Operation
-            # Gets details of a single FrameworkDeployment.
+            # Gets details about a framework deployment.
             rpc :GetFrameworkDeployment, ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkDeploymentRequest, ::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment
-            # Lists FrameworkDeployments in a given parent resource.
+            # Lists the framework deployments in a given parent resource.
             rpc :ListFrameworkDeployments, ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsRequest, ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsResponse
-            # Gets details of a single CloudControlDeployment.
+            # Gets details about a cloud control deployment.
             rpc :GetCloudControlDeployment, ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlDeploymentRequest, ::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeployment
-            # Lists CloudControlDeployments in a given parent resource.
+            # Lists the cloud conrol deployments in a given parent resource.
             rpc :ListCloudControlDeployments, ::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsRequest, ::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsResponse
           end
 

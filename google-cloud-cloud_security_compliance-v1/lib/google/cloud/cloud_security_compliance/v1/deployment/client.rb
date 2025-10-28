@@ -239,7 +239,10 @@ module Google
             # Service calls
 
             ##
-            # Creates a new FrameworkDeployment in a given parent resource.
+            # Creates a framework deployment in a given parent resource. A
+            # framework deployment lets you assign a particular framework version to an
+            # organization, folder, or project so that you can control and monitor
+            # those resources using the framework's cloud controls.
             #
             # @overload create_framework_deployment(request, options = nil)
             #   Pass arguments to `create_framework_deployment` via a request object, either of type
@@ -257,15 +260,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the FrameworkDeployment in the format:
-            #     organizations/\\{organization}/locations/\\{location}
-            #     Only global location is supported.
+            #     Required. The parent resource of the framework deployment in the format
+            #     `organizations/{organization}/locations/{location}`.
+            #     Only the global location is supported.
             #   @param framework_deployment_id [::String]
-            #     Optional. User provided identifier. It should be unique in scope of a
-            #     parent. This is optional and if not provided, a random UUID will be
+            #     Optional. An identifier for the framework deployment that's unique in scope
+            #     of the parent. If you don't specify a value, then a random UUID is
             #     generated.
             #   @param framework_deployment [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment, ::Hash]
-            #     Required. The FrameworkDeployment to be created.
+            #     Required. The framework deployment that you're creating.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -341,7 +344,7 @@ module Google
             end
 
             ##
-            # Deletes a single FrameworkDeployment.
+            # Deletes a framework deployment.
             #
             # @overload delete_framework_deployment(request, options = nil)
             #   Pass arguments to `delete_framework_deployment` via a request object, either of type
@@ -359,15 +362,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. name of the FrameworkDeployment to be deleted in the following
-            #     format:
-            #     organizations/\\{organization}/locations/\\{location}/frameworkDeployments/\\{framework_deployment_id}
+            #     Required. The name of the framework deployment that you want to delete,
+            #     in the format
+            #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+            #     The only supported location is `global`.
             #   @param etag [::String]
             #     Optional. An opaque identifier for the current version of the resource.
             #
             #     If you provide this value, then it must match the existing value. If the
             #     values don't match, then the request fails with an
-            #     [ABORTED][google.rpc.Code.ABORTED] error.
+            #     [`ABORTED`][google.rpc.Code.ABORTED] error.
             #
             #     If you omit this value, then the resource is deleted regardless of its
             #     current `etag` value.
@@ -446,7 +450,7 @@ module Google
             end
 
             ##
-            # Gets details of a single FrameworkDeployment.
+            # Gets details about a framework deployment.
             #
             # @overload get_framework_deployment(request, options = nil)
             #   Pass arguments to `get_framework_deployment` via a request object, either of type
@@ -464,8 +468,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. FrameworkDeployment name in the following format:
-            #     organizations/\\{organization}/locations/\\{location}/frameworkDeployments/\\{framework_deployment_id}
+            #     Required. The name of the framework deployment, in the format
+            #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+            #     The only supported location is `global`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment]
@@ -532,7 +537,7 @@ module Google
             end
 
             ##
-            # Lists FrameworkDeployments in a given parent resource.
+            # Lists the framework deployments in a given parent resource.
             #
             # @overload list_framework_deployments(request, options = nil)
             #   Pass arguments to `list_framework_deployments` via a request object, either of type
@@ -550,19 +555,27 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. parent resource of the FrameworkDeployment in the format:
-            #     organizations/\\{organization}/locations/\\{location}
-            #     Only global location is supported.
+            #     Required. The parent resource of the framework deployment, in the format
+            #     `organizations/{organization}/locations/{location}`.
+            #     The only supported location is `global`.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. The requested page size. The server might return fewer items than
+            #     requested.
+            #     If unspecified, the server picks an appropriate default.
             #   @param page_token [::String]
-            #     Optional. A token identifying a page of results the server should return.
+            #     Optional. A token that identifies a page of results the server should
+            #     return.
             #   @param filter [::String]
-            #     Optional. Filter to be applied on the resource, defined by EBNF grammar
-            #     https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+            #     Optional. The filter to be applied on the resource, as defined by
+            #     [AIP-160: Filtering](https://google.aip.dev/160).
             #   @param order_by [::String]
-            #     Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+            #     Optional. The sort order for the results. The following values are
+            #     supported:
+            #
+            #     * `name`
+            #     * `name desc`
+            #
+            #     If you do not specify a value, then the results are not sorted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment>]
@@ -635,7 +648,7 @@ module Google
             end
 
             ##
-            # Gets details of a single CloudControlDeployment.
+            # Gets details about a cloud control deployment.
             #
             # @overload get_cloud_control_deployment(request, options = nil)
             #   Pass arguments to `get_cloud_control_deployment` via a request object, either of type
@@ -653,8 +666,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. CloudControlDeployment name in the following format:
-            #     organizations/\\{organization}/locations/\\{location}/cloudControlDeployments/\\{cloud_control_deployment_id}
+            #     Required. The name for the cloud control deployment, in the format
+            #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+            #     The only supported location is `global`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeployment]
@@ -721,7 +735,7 @@ module Google
             end
 
             ##
-            # Lists CloudControlDeployments in a given parent resource.
+            # Lists the cloud conrol deployments in a given parent resource.
             #
             # @overload list_cloud_control_deployments(request, options = nil)
             #   Pass arguments to `list_cloud_control_deployments` via a request object, either of type
@@ -739,19 +753,27 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. parent resource of the CloudControlDeployment in the format:
-            #     organizations/\\{organization}/locations/\\{location}
-            #     Only global location is supported.
+            #     Required. The parent resource for the cloud control deployment, in the
+            #     format `organizations/{organization}/locations/{location}`. The only
+            #     supported location is `global`.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. The requested page size. The server might return fewer items than
+            #     you requested.
+            #     If unspecified, the server picks an appropriate default.
             #   @param page_token [::String]
-            #     Optional. A token identifying a page of results the server should return.
+            #     Optional. A token that identifies the page of results that the server
+            #     should return.
             #   @param filter [::String]
-            #     Optional. Filter to be applied on the resource, defined by EBNF grammar
-            #     https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+            #     Optional. The filter to apply on the resource, as defined by
+            #     [AIP-160: Filtering](https://google.aip.dev/160).
             #   @param order_by [::String]
-            #     Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+            #     Optional. The sort order for the results. The following values are
+            #     supported:
+            #
+            #     * `name`
+            #     * `name desc`
+            #
+            #     If you do not specify a value, then the results are not sorted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeployment>]
