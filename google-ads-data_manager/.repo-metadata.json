@@ -8,7 +8,7 @@
     "name": "datamanager",
     "name_pretty": "Data Manager API",
     "product_documentation": "https://developers.google.com/data-manager",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.",
