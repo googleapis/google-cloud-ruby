@@ -453,7 +453,7 @@
   "google-cloud-gsuite_add_ons+FILLER": "0.0.0",
   "google-cloud-gsuite_add_ons-v1": "1.4.1",
   "google-cloud-gsuite_add_ons-v1+FILLER": "0.0.0",
-  "google-cloud-hypercompute_cluster": "0.0.1",
+  "google-cloud-hypercompute_cluster": "0.1.0",
   "google-cloud-hypercompute_cluster+FILLER": "0.0.0",
   "google-cloud-hypercompute_cluster-v1beta": "0.1.0",
   "google-cloud-hypercompute_cluster-v1beta+FILLER": "0.0.0",
