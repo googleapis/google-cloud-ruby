@@ -518,7 +518,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
-      [project, dataset_id], access_policy_version: nil
+      [project, dataset_id], access_policy_version: nil, dataset_view: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id
@@ -549,7 +549,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
-      [project, dataset_id], access_policy_version: nil
+      [project, dataset_id], access_policy_version: nil, dataset_view: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
@@ -577,7 +577,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
-      [project, dataset_id], access_policy_version: nil
+      [project, dataset_id], access_policy_version: nil, dataset_view: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
