@@ -19,6 +19,10 @@
       "component": "google-ads-ad_manager-v1",
       "version_file": "lib/google/ads/ad_manager/v1/version.rb"
     },
+    "google-ads-data_manager-v1": {
+      "component": "google-ads-data_manager-v1",
+      "version_file": "lib/google/ads/data_manager/v1/version.rb"
+    },
     "google-ads-marketing_platform-admin": {
       "component": "google-ads-marketing_platform-admin",
       "version_file": "lib/google/ads/marketing_platform/admin/version.rb"
