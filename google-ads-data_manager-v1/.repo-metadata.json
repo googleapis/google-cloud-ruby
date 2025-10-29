@@ -8,7 +8,7 @@
     "name": "datamanager",
     "name_pretty": "Data Manager V1 API",
     "product_documentation": "https://developers.google.com/data-manager",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products. Note that google-ads-data_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-ads-data_manager instead. See the readme for more details.",
