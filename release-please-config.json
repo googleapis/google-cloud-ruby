@@ -919,6 +919,10 @@
       "component": "google-cloud-gsuite_add_ons-v1",
       "version_file": "lib/google/cloud/gsuite_add_ons/v1/version.rb"
     },
+    "google-cloud-hypercompute_cluster": {
+      "component": "google-cloud-hypercompute_cluster",
+      "version_file": "lib/google/cloud/hypercompute_cluster/version.rb"
+    },
     "google-cloud-hypercompute_cluster-v1beta": {
       "component": "google-cloud-hypercompute_cluster-v1beta",
       "version_file": "lib/google/cloud/hypercompute_cluster/v1beta/version.rb"
