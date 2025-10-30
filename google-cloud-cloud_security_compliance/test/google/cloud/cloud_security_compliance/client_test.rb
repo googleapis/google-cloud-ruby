@@ -124,4 +124,25 @@ class Google::Cloud::CloudSecurityCompliance::ClientConstructionMinitest < Minit
       assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client, client
     end
   end
+
+  def test_monitoring_grpc
+    skip unless Google::Cloud::CloudSecurityCompliance.monitoring_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::CloudSecurityCompliance.monitoring transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client, client
+    end
+  end
+
+  def test_monitoring_rest
+    skip unless Google::Cloud::CloudSecurityCompliance.monitoring_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::CloudSecurityCompliance.monitoring transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client, client
+    end
+  end
 end
