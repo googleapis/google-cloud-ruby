@@ -21,11 +21,16 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
+require "googleauth"
 require "google/cloud/pubsub"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
 pubsub = Google::Cloud::PubSub.new(
   project_id: "my-project",
-  credentials: "/path/to/keyfile.json"
+  credentials: credentials
 )
 
 # Get a publisher for a topic
