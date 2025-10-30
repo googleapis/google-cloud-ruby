@@ -36,6 +36,13 @@ module Google
 
               # Lookup for a single organization.
               rpc :GetOrganization, ::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest, ::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization
+              # Returns a list of organizations that the user has access to.
+              rpc :ListOrganizations, ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest, ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsResponse
+              # Returns a list of clients managed by the sales partner organization.
+              #
+              # User needs to be an OrgAdmin/BillingAdmin on the sales partner organization
+              # in order to view the end clients.
+              rpc :FindSalesPartnerManagedClients, ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest, ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse
               # Lists the Google Analytics accounts link to the specified Google Marketing
               # Platform organization.
               rpc :ListAnalyticsAccountLinks, ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest, ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksResponse
@@ -54,6 +61,17 @@ module Google
               rpc :DeleteAnalyticsAccountLink, ::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest, ::Google::Protobuf::Empty
               # Updates the service level for an Analytics property.
               rpc :SetPropertyServiceLevel, ::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest, ::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelResponse
+              # Get the usage and billing data for properties within the organization for
+              # the specified month.
+              #
+              # Per direct client org, user needs to be OrgAdmin/BillingAdmin on the
+              # organization in order to view the billing and usage data.
+              #
+              # Per sales partner client org, user needs to be OrgAdmin/BillingAdmin on
+              # the sales partner org in order to view the billing and usage data, or
+              # OrgAdmin/BillingAdmin on the sales partner client org in order to view the
+              # usage data only.
+              rpc :ReportPropertyUsage, ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest, ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse
             end
 
             Stub = Service.rpc_stub_class

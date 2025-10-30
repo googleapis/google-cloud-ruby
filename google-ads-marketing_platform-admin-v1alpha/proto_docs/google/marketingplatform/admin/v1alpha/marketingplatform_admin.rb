@@ -32,6 +32,78 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for ListOrganizations RPC.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of organizations to return in one call. The
+          #     service may return fewer than this value.
+          #
+          #     If unspecified, at most 50 organizations will be returned. The
+          #     maximum value is 1000; values above 1000 will be coerced to 1000.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous ListOrganizations call.
+          #     Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `ListOrganizations` must match the call that provided the page
+          #     token.
+          class ListOrganizationsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListOrganizations RPC.
+          # @!attribute [rw] organizations
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization>]
+          #     The Organization resource that the user has access to, which includes the
+          #     org id and display name.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListOrganizationsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for FindSalesPartnerManagedClients RPC.
+          # @!attribute [rw] organization
+          #   @return [::String]
+          #     Required. The name of the sales partner organization.
+          #     Format: organizations/\\{org_id}
+          # @!attribute [rw] is_active
+          #   @return [::Boolean]
+          #     Optional. If set, only active and just ended clients will be returned.
+          class FindSalesPartnerManagedClientsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for FindSalesPartnerManagedClients RPC.
+          # @!attribute [rw] client_data
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse::ClientData>]
+          #     The clients managed by the sales org.
+          class FindSalesPartnerManagedClientsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Contains the client data.
+            # @!attribute [rw] organization
+            #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization]
+            #     The end client that has/had contract with the requested sales org.
+            # @!attribute [rw] start_date
+            #   @return [::Google::Type::Date]
+            #     The start date of the contract between the sales org and the end client.
+            # @!attribute [rw] end_date
+            #   @return [::Google::Type::Date]
+            #     The end date of the contract between the sales org and the end client.
+            class ClientData
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Request message for ListAnalyticsAccountLinks RPC.
           # @!attribute [rw] parent
           #   @return [::String]
@@ -120,16 +192,85 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Various levels of service for Google Analytics.
-          module AnalyticsServiceLevel
-            # Service level unspecified.
-            ANALYTICS_SERVICE_LEVEL_UNSPECIFIED = 0
+          # Request message for ReportPropertyUsage RPC.
+          # @!attribute [rw] organization
+          #   @return [::String]
+          #     Required. Specifies the organization whose property usage will be listed.
+          #
+          #     Format: organizations/\\{org_id}
+          # @!attribute [rw] month
+          #   @return [::String]
+          #     Required. The target month to list property usages.
+          #
+          #     Format: YYYY-MM. For example, "2025-05"
+          class ReportPropertyUsageRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
-            # The standard version of Google Analytics.
-            ANALYTICS_SERVICE_LEVEL_STANDARD = 1
+          # Response message for ReportPropertyUsage RPC.
+          # @!attribute [rw] property_usages
+          #   @return [::Array<::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse::PropertyUsage>]
+          #     Usage data for all properties in the specified organization and month.
+          # @!attribute [rw] bill_info
+          #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse::BillInfo]
+          #     Bill amount in the specified organization and month.
+          #
+          #     Will be empty if user only has access to usage data.
+          class ReportPropertyUsageResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The premium version of Google Analytics.
-            ANALYTICS_SERVICE_LEVEL_360 = 2
+            # Contains the count of events received by the property, along with metadata
+            # that influences the volume of `billable` events.
+            # @!attribute [rw] property
+            #   @return [::String]
+            #     The name of the Google Analytics Admin API property resource.
+            #
+            #     Format: analyticsadmin.googleapis.com/properties/\\{property_id}
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     The display name of the property.
+            # @!attribute [rw] account_id
+            #   @return [::Integer]
+            #     The ID of the property's parent account.
+            # @!attribute [rw] service_level
+            #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AnalyticsServiceLevel]
+            #     The service level of the property.
+            # @!attribute [rw] property_type
+            #   @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::AnalyticsPropertyType]
+            #     The subtype of the analytics property. This affects the billable event
+            #     count.
+            # @!attribute [rw] total_event_count
+            #   @return [::Integer]
+            #     Total event count that the property received during the requested month.
+            # @!attribute [rw] billable_event_count
+            #   @return [::Integer]
+            #     The number of events for which the property is billed in the requested
+            #     month.
+            class PropertyUsage
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Contains the bill amount.
+            # @!attribute [rw] base_fee
+            #   @return [::Google::Type::Money]
+            #     The amount of the monthly base fee.
+            # @!attribute [rw] event_fee
+            #   @return [::Google::Type::Money]
+            #     The amount of the event fee.
+            # @!attribute [rw] price_protection_credit
+            #   @return [::Google::Type::Money]
+            #     The amount of the price protection credit, this is only available for
+            #     eligible customers.
+            # @!attribute [rw] total
+            #   @return [::Google::Type::Money]
+            #     The total amount of the bill.
+            class BillInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end

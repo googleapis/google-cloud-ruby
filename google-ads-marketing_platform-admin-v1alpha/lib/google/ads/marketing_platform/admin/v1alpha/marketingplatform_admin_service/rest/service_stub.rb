@@ -115,6 +115,86 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the list_organizations REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsResponse]
+                #   A result object deserialized from the server's reply
+                def list_organizations request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_organizations_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_organizations",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the find_sales_partner_managed_clients REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse]
+                #   A result object deserialized from the server's reply
+                def find_sales_partner_managed_clients request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_find_sales_partner_managed_clients_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "find_sales_partner_managed_clients",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # Baseline implementation for the list_analytics_account_links REST call
                 #
                 # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest]
@@ -275,6 +355,46 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the report_property_usage REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse]
+                #   A result object deserialized from the server's reply
+                def report_property_usage request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_report_property_usage_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "report_property_usage",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # @private
                 #
                 # GRPC transcoding helper method for the get_organization REST call
@@ -290,6 +410,47 @@ module Google
                                                             uri_template: "/v1alpha/{name}",
                                                             matches: [
                                                               ["name", %r{^organizations/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_organizations REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_organizations_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1alpha/organizations",
+                                                            matches: []
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the find_sales_partner_managed_clients REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_find_sales_partner_managed_clients_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1alpha/{organization}:findSalesPartnerManagedClients",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["organization", %r{^organizations/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -376,6 +537,28 @@ module Google
                                                             body: "*",
                                                             matches: [
                                                               ["analytics_account_link", %r{^organizations/[^/]+/analyticsAccountLinks/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the report_property_usage REST call
+                #
+                # @param request_pb [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_report_property_usage_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1alpha/{organization}:reportPropertyUsage",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["organization", %r{^organizations/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
