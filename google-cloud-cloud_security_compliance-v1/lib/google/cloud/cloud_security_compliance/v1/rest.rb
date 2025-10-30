@@ -20,6 +20,7 @@ require "google/cloud/cloud_security_compliance/v1/audit/rest"
 require "google/cloud/cloud_security_compliance/v1/cm_enrollment_service/rest"
 require "google/cloud/cloud_security_compliance/v1/config/rest"
 require "google/cloud/cloud_security_compliance/v1/deployment/rest"
+require "google/cloud/cloud_security_compliance/v1/monitoring/rest"
 require "google/cloud/cloud_security_compliance/v1/bindings_override"
 require "google/cloud/cloud_security_compliance/v1/version"
 

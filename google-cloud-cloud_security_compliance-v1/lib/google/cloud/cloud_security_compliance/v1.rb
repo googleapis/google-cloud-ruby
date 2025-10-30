@@ -20,6 +20,7 @@ require "google/cloud/cloud_security_compliance/v1/audit"
 require "google/cloud/cloud_security_compliance/v1/cm_enrollment_service"
 require "google/cloud/cloud_security_compliance/v1/config"
 require "google/cloud/cloud_security_compliance/v1/deployment"
+require "google/cloud/cloud_security_compliance/v1/monitoring"
 require "google/cloud/cloud_security_compliance/v1/version"
 
 module Google
