@@ -18,6 +18,7 @@
 
 require "google/cloud/network_management/v1/reachability_service"
 require "google/cloud/network_management/v1/vpc_flow_logs_service"
+require "google/cloud/network_management/v1/organization_vpc_flow_logs_service"
 require "google/cloud/network_management/v1/version"
 
 module Google

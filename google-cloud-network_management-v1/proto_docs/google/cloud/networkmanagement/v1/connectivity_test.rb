@@ -125,8 +125,8 @@ module Google
         #     used for protocol forwarding, Private Service Connect and other network
         #     services to provide forwarding information in the control plane. Applicable
         #     only to destination endpoint. Format:
-        #      `projects/{project}/global/forwardingRules/{id}` or
-        #      `projects/{project}/regions/{region}/forwardingRules/{id}`
+        #     `projects/{project}/global/forwardingRules/{id}` or
+        #     `projects/{project}/regions/{region}/forwardingRules/{id}`
         # @!attribute [r] forwarding_rule_target
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::ForwardingRuleTarget]
         #     Output only. Specifies the type of the target of the forwarding rule.
@@ -221,12 +221,12 @@ module Google
           #     A [Cloud Run](https://cloud.google.com/run)
           #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
           #     URI. The format is:
-          #     `projects/{project}/locations/{location}/revisions/{revision}`
+          #     projects/\\{project}/locations/\\{location}/revisions/\\{revision}
           # @!attribute [r] service_uri
           #   @return [::String]
           #     Output only. The URI of the Cloud Run service that the revision belongs
           #     to. The format is:
-          #     `projects/{project}/locations/{location}/services/{service}`
+          #     projects/\\{project}/locations/\\{location}/services/\\{service}
           class CloudRunRevisionEndpoint
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -377,12 +377,18 @@ module Google
         #     from the source to the destination endpoint.
         # @!attribute [rw] destination_egress_location
         #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails::EdgeLocation]
-        #     The EdgeLocation from which a packet destined for/originating from the
-        #     internet will egress/ingress the Google network.
+        #     The EdgeLocation from which a packet, destined to the internet, will egress
+        #     the Google network.
         #     This will only be populated for a connectivity test which has an internet
-        #     destination/source address.
+        #     destination address.
         #     The absence of this field *must not* be used as an indication that the
-        #     destination/source is part of the Google network.
+        #     destination is part of the Google network.
+        # @!attribute [rw] edge_responses
+        #   @return [::Array<::Google::Cloud::NetworkManagement::V1::ProbingDetails::SingleEdgeResponse>]
+        #     Probing results for all edge devices.
+        # @!attribute [rw] probed_all_devices
+        #   @return [::Boolean]
+        #     Whether all relevant edge devices were probed.
         class ProbingDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -393,6 +399,37 @@ module Google
           #   @return [::String]
           #     Name of the metropolitan area.
           class EdgeLocation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Probing results for a single edge device.
+          # @!attribute [rw] result
+          #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails::ProbingResult]
+          #     The overall result of active probing for this egress device.
+          # @!attribute [rw] sent_probe_count
+          #   @return [::Integer]
+          #     Number of probes sent.
+          # @!attribute [rw] successful_probe_count
+          #   @return [::Integer]
+          #     Number of probes that reached the destination.
+          # @!attribute [rw] probing_latency
+          #   @return [::Google::Cloud::NetworkManagement::V1::LatencyDistribution]
+          #     Latency as measured by active probing in one direction: from the source
+          #     to the destination endpoint.
+          # @!attribute [rw] destination_egress_location
+          #   @return [::Google::Cloud::NetworkManagement::V1::ProbingDetails::EdgeLocation]
+          #     The EdgeLocation from which a packet, destined to the internet, will
+          #     egress the Google network.
+          #     This will only be populated for a connectivity test which has an internet
+          #     destination address.
+          #     The absence of this field *must not* be used as an indication that the
+          #     destination is part of the Google network.
+          # @!attribute [rw] destination_router
+          #   @return [::String]
+          #     Router name in the format '\\{router}.\\{metroshard}'. For example:
+          #     pf01.aaa01, pr02.aaa01.
+          class SingleEdgeResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
