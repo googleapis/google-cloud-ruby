@@ -195,6 +195,79 @@ module Google
       end
 
       ##
+      # Create a new client object for OrganizationVpcFlowLogsService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-network_management-v1/latest/Google-Cloud-NetworkManagement-V1-OrganizationVpcFlowLogsService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the OrganizationVpcFlowLogsService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the OrganizationVpcFlowLogsService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::NetworkManagement.organization_vpc_flow_logs_service_available?}.
+      #
+      # ## About OrganizationVpcFlowLogsService
+      #
+      # The VPC Flow Logs organization service in the Google Cloud Network Management
+      # API provides organization level configurations that generate Flow Logs. The
+      # service and the configuration resources created using this service are
+      # global.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.organization_vpc_flow_logs_service version: :v1, transport: :grpc, &block
+        require "google/cloud/network_management/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::NetworkManagement
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::NetworkManagement.const_get(package_name).const_get(:OrganizationVpcFlowLogsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the OrganizationVpcFlowLogsService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::NetworkManagement.organization_vpc_flow_logs_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the OrganizationVpcFlowLogsService service,
+      # or if the versioned client gem needs an update to support the OrganizationVpcFlowLogsService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.organization_vpc_flow_logs_service_available? version: :v1, transport: :grpc
+        require "google/cloud/network_management/#{version.to_s.downcase}"
+        package_name = Google::Cloud::NetworkManagement
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::NetworkManagement.const_get package_name
+        return false unless service_module.const_defined? :OrganizationVpcFlowLogsService
+        service_module = service_module.const_get :OrganizationVpcFlowLogsService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Configure the google-cloud-network_management library.
       #
       # The following configuration parameters are supported:
