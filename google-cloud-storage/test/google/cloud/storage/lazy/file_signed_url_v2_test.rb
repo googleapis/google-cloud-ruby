@@ -34,9 +34,9 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
 
       signed_url = file.signed_url
 
-      signed_url_params = CGI::parse(URI(signed_url).query)
-      _(signed_url_params["GoogleAccessId"]).must_equal ["native_client_email"]
-      _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+      signed_url_params = URI.decode_www_form(URI(signed_url).query).to_h
+      _(signed_url_params["GoogleAccessId"]).must_equal "native_client_email"
+      _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("native-signature").delete("\n")
 
       signing_key_mock.verify
     end
@@ -54,9 +54,9 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
       signed_url = file.signed_url issuer: "option_issuer",
                                    signing_key: signing_key_mock
 
-      signed_url_params = CGI::parse(URI(signed_url).query)
-      _(signed_url_params["GoogleAccessId"]).must_equal ["option_issuer"]
-      _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("option-signature").delete("\n")]
+      signed_url_params = URI.decode_www_form(URI(signed_url).query).to_h
+      _(signed_url_params["GoogleAccessId"]).must_equal "option_issuer"
+      _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("option-signature").delete("\n")
 
       signing_key_mock.verify
     end
@@ -75,9 +75,9 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
         signed_url = file.signed_url client_email: "option_client_email",
                                      private_key: "option_private_key"
 
-        signed_url_params = CGI::parse(URI(signed_url).query)
-        _(signed_url_params["GoogleAccessId"]).must_equal ["option_client_email"]
-        _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("option-signature").delete("\n")]
+        signed_url_params = URI.decode_www_form(URI(signed_url).query).to_h
+        _(signed_url_params["GoogleAccessId"]).must_equal "option_client_email"
+        _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("option-signature").delete("\n")
 
       end
 
@@ -96,9 +96,9 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
       signed_url = file.signed_url headers: { "X-Goog-Meta-FOO" => "bar,baz",
                                               "X-Goog-ACL" => "public-read" }
 
-      signed_url_params = CGI::parse(URI(signed_url).query)
-      _(signed_url_params["GoogleAccessId"]).must_equal ["native_client_email"]
-      _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+      signed_url_params = URI.decode_www_form(URI(signed_url).query).to_h
+      _(signed_url_params["GoogleAccessId"]).must_equal "native_client_email"
+      _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("native-signature").delete("\n")
 
       signing_key_mock.verify
     end
@@ -114,10 +114,10 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
 
       signed_url = file.signed_url query: { "response-content-disposition" => "attachment; filename=\"test.png\"" }
 
-      signed_url_params = CGI::parse(URI(signed_url).query)
-      _(signed_url_params["GoogleAccessId"]).must_equal ["native_client_email"]
-      _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("native-signature").delete("\n")]
-      _(signed_url_params["response-content-disposition"]).must_equal ["attachment; filename=\"test.png\""]
+      signed_url_params = URI.decode_www_form(URI(signed_url).query).to_h
+      _(signed_url_params["GoogleAccessId"]).must_equal "native_client_email"
+      _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("native-signature").delete("\n")
+      _(signed_url_params["response-content-disposition"]).must_equal "attachment; filename=\"test.png\""
 
       signing_key_mock.verify
     end
@@ -157,9 +157,9 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
         signed_uri = URI signed_url
         _(signed_uri.path).must_equal "/bucket/hello%20world.txt"
 
-        signed_url_params = CGI::parse signed_uri.query
-        _(signed_url_params["GoogleAccessId"]).must_equal ["native_client_email"]
-        _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("native-signature").delete("\n")]
+        signed_url_params = URI.decode_www_form(signed_uri.query).to_h
+        _(signed_url_params["GoogleAccessId"]).must_equal "native_client_email"
+        _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("native-signature").delete("\n")
 
         signing_key_mock.verify
       end
@@ -176,10 +176,10 @@ describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
 
       signed_url = file.signed_url query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }
 
-      signed_url_params = CGI::parse(URI(signed_url).query)
-      _(signed_url_params["GoogleAccessId"]).must_equal ["native_client_email"]
-      _(signed_url_params["Signature"]).must_equal [Base64.strict_encode64("native-signature").delete("\n")]
-      _(signed_url_params["response-content-disposition"]).must_equal ["attachment; filename=\"google-cloud.png\""]
+      signed_url_params = URI.decode_www_form(URI(signed_url).query).to_h
+      _(signed_url_params["GoogleAccessId"]).must_equal "native_client_email"
+      _(signed_url_params["Signature"]).must_equal Base64.strict_encode64("native-signature").delete("\n")
+      _(signed_url_params["response-content-disposition"]).must_equal "attachment; filename=\"google-cloud.png\""
 
       signing_key_mock.verify
     end
