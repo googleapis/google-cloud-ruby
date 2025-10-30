@@ -25,17 +25,28 @@ module Google
       # Storage API.
       #
       # @example
+      #   # The recommended way to provide credentials is to use the `make_creds` method
+      #   # on the appropriate credentials class for your environment.
+      #
+      #   require "googleauth"
       #   require "google/cloud/storage"
       #
-      #   keyfile = "/path/to/keyfile.json"
-      #   creds = Google::Cloud::Storage::Credentials.new keyfile
+      #   credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+      #     json_key_io: ::File.open("/path/to/keyfile.json"),
+      #     scope: "https://www.googleapis.com/auth/devstorage.full_control"
+      #   )
       #
       #   storage = Google::Cloud::Storage.new(
       #     project_id: "my-project",
-      #     credentials: creds
+      #     credentials: credentials
       #   )
       #
       #   storage.project_id #=> "my-project"
+      #
+      # @note Warning: If you accept a credential configuration (JSON file or Hash) from an
+      #   external source for authentication to Google Cloud, you must validate it before
+      #   providing it to a Google API client library. Providing an unvalidated credential
+      #   configuration to Google APIs can compromise the security of your systems and data.
       #
       class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"].freeze

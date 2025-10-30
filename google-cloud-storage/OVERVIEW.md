@@ -14,11 +14,17 @@ your code or via environment variables. Read more about the options for
 connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ```ruby
+require "googleauth"
 require "google/cloud/storage"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json"),
+  scope: "https://www.googleapis.com/auth/devstorage.full_control"
+)
 
 storage = Google::Cloud::Storage.new(
   project_id: "my-project",
-  credentials: "/path/to/keyfile.json"
+  credentials: credentials
 )
 
 bucket = storage.bucket "my-bucket"
