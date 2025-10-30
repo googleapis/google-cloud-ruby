@@ -28,6 +28,12 @@ providing **Project ID** and **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
+> [!WARNING]
+> If you accept a credential configuration (JSON file or Hash) from an
+> external source for authentication to Google Cloud, you must validate it before
+> providing it to a Google API client library. Providing an unvalidated credential
+> configuration to Google APIs can compromise the security of your systems and data.
+
 1. Specify credentials in method arguments
 2. Specify credentials in configuration
 3. Discover credentials path in environment variables
@@ -67,14 +73,12 @@ The environment variables that BigQuery checks for credentials are configured on
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "googleauth"
 require "google/cloud/bigquery"
 
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
+ENV["BIGQUERY_PROJECT"]     = "my-project-id"
+ENV["BIGQUERY_CREDENTIALS"] = "path/to/keyfile.json"
 
-bigquery = Google::Cloud::Bigquery.new project_id: "my-project-id", credentials: credentials
+bigquery = Google::Cloud::Bigquery.new
 ```
 
 ### Configuration

@@ -33,6 +33,12 @@ credentials, there are several methods available to you.
 
 Credentials are accepted in the following ways, in the following order or precedence:
 
+> [!WARNING]
+> If you accept a credential configuration (JSON file or Hash) from an
+> external source for authentication to Google Cloud, you must validate it before
+> providing it to a Google API client library. Providing an unvalidated credential
+> configuration to Google APIs can compromise the security of your systems and data.
+
 1. Credentials specified in method arguments
 2. Credentials specified in configuration
 3. Credentials pointed to or included in environment variables

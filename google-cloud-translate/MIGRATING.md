@@ -77,28 +77,14 @@ you would have used previously. To create a V3 (or later) client, use the
 `translation_service` class method and set options in a configuration block.
 
 Old (V3):
-```ruby
-require "googleauth"
-require "google/cloud/translate"
-
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
-
-client = Google::Cloud::Translate.new credentials: credentials
+```
+client = Google::Cloud::Translate.new credentials: "/path/to/credentials.json"
 ```
 
 Old (V2):
-```ruby
-require "googleauth"
-require "google/cloud/translate"
-
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
-
+```
 client = Google::Cloud::Translate.new version: :v2,
-                                      credentials: credentials
+                                      credentials: "/path/to/credentials.json"
 ```
 
 New (V3):
@@ -121,18 +107,11 @@ default_client = Google::Cloud::Translate.translation_service
 ```
 
 New (V2):
-```ruby
-require "googleauth"
-require "google/cloud/translate"
-
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
-
+```
 # Call the separate translation_v2_service method to create a legacy V2 client,
 # and pass configuration as keyword arguments.
 client = Google::Cloud::Translate.translation_v2_service(
-  credentials: credentials)
+  credentials: "/path/to/credentials.json")
 ```
 
 ### Passing Arguments

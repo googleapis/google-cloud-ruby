@@ -64,7 +64,9 @@ module Google
     #       json_key_io: ::File.open("/path/to/keyfile.json")
     #     )
     #
-    #     client = Google::Cloud.bigtable credentials: credentials
+    #     gcloud = Google::Cloud.new
+    #
+    #     bigtable = gcloud.bigtable credentials: credentials
     #
     def bigtable scope: nil, timeout: nil, credentials: nil
       credentials ||= @keyfile

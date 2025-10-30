@@ -46,6 +46,12 @@ code.
 
 **Credentials** are discovered in the following order:
 
+> [!WARNING]
+> If you accept a credential configuration (JSON file or Hash) from an
+> external source for authentication to Google Cloud, you must validate it before
+> providing it to a Google API client library. Providing an unvalidated credential
+> configuration to Google APIs can compromise the security of your systems and data.
+
 1. Specify credentials in method arguments
 2. Specify credentials in configuration
 3. Discover credentials path in environment variables
@@ -86,14 +92,12 @@ configured on `Google::Cloud::Logging::V2::LoggingService::Credentials`:
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "googleauth"
 require "google/cloud/logging"
 
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
+ENV["LOGGING_PROJECT"]     = "my-project-id"
+ENV["LOGGING_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Logging.new project_id: "my-project-id", credentials: credentials
+client = Google::Cloud::Logging.new
 ```
 
 ### Configuration
