@@ -1116,6 +1116,12 @@ module Google
             #     yet in the `READY` state.
             #
             #     Note: The following fields are mutually exclusive: `processing_units`, `node_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] autoscaling_config
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig]
+            #     Optional. The autoscaling configuration. Autoscaling is enabled if this
+            #     field is set. When autoscaling is enabled, fields in compute_capacity are
+            #     treated as OUTPUT_ONLY fields and reflect the current compute capacity
+            #     allocated to the instance partition.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition::State]
             #     Output only. The current instance partition state.
