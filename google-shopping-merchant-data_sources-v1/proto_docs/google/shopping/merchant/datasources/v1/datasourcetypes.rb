@@ -67,11 +67,6 @@ module Google
           #   @return [::Google::Shopping::Merchant::DataSources::V1::PrimaryProductDataSource::DefaultRule]
           #     Optional. Default rule management of the data source. If set, the linked
           #     data sources will be replaced.
-          # @!attribute [r] contains_custom_rules
-          #   @return [::Boolean]
-          #     Output only. The existing data source setup contains at least one custom
-          #     (non-default) rule and therefore its management through the
-          #     `default_rule_data_sources` field should be treated with caution.
           # @!attribute [rw] destinations
           #   @return [::Array<::Google::Shopping::Merchant::DataSources::V1::PrimaryProductDataSource::Destination>]
           #     Optional. A list of destinations describing where products of the data
