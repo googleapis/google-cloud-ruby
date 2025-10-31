@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+require "google/cloud/pubsub/logger_helper"
 require "google/cloud/pubsub/message_listener/sequencer"
 require "google/cloud/pubsub/message_listener/enumerator_queue"
 require "google/cloud/pubsub/message_listener/inventory"
@@ -29,6 +29,7 @@ module Google
         # @private
         class Stream
           include MonitorMixin
+          include LoggerHelper
 
           ##
           # @private Implementation attributes.
@@ -73,7 +74,12 @@ module Google
               execution_interval: 30
             ) do
               # push empty request every 30 seconds to keep stream alive
-              push Google::Cloud::PubSub::V1::StreamingPullRequest.new unless inventory.empty?
+              unless inventory.empty?
+                Google::Cloud::PubSub.logger("subscriber-streams").info(
+                  "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
+                )
+                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
+              end
             end.execute
           end
 
@@ -93,6 +99,9 @@ module Google
             synchronize do
               break if @stopped
 
+              Google::Cloud::PubSub.logger("subscriber-streams").info(
+                "stopping stream for subscription #{@subscriber.subscription_name}"
+              )
               # Close the stream by pushing the sentinel value.
               # The unary pusher does not use the stream, so it can close here.
               @request_queue&.push self
@@ -138,10 +147,13 @@ module Google
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
+            removed_items = {}
             synchronize do
-              @inventory.remove ack_ids
+              removed_items = @inventory.remove ack_ids
               @subscriber.buffer.acknowledge ack_ids, callback
             end
+
+            log_slow_ack @subscriber, removed_items, "ack"
 
             true
           end
@@ -152,10 +164,13 @@ module Google
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
+            removed_items = {}
             synchronize do
-              @inventory.remove mod_ack_ids
+              removed_items = @inventory.remove mod_ack_ids
               @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
+
+            log_slow_ack @subscriber, removed_items, "nack" if deadline.zero?
 
             true
           end
@@ -215,7 +230,13 @@ module Google
           def background_run
             synchronize do
               # Don't allow a stream to restart if already stopped
-              return if @stopped
+              if @stopped
+                Google::Cloud::PubSub.logger("subscriber-streams").debug(
+                  "not filling stream for subscription #{@subscriber.subscription_name} because stream is already" \
+                  " stopped"
+                )
+                return
+              end
 
               @stopped = false
               @paused  = false
@@ -233,6 +254,9 @@ module Google
             # Call the StreamingPull API to get the response enumerator
             options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
             enum = @subscriber.service.streaming_pull @request_queue.each, options
+            Google::Cloud::PubSub.logger("subscriber-streams").info(
+              "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
+            )
 
             loop do
               synchronize do
@@ -287,13 +311,23 @@ module Google
             stop
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
-                 GRPC::Unavailable
+                 GRPC::Unavailable => e
+            status_code = e.respond_to?(:code) ? e.code : e.class.name
+            Google::Cloud::PubSub.logger("subscriber-streams").error(
+              "Subscriber stream for subscription #{@subscriber.subscription_name} has ended with status " \
+              "#{status_code}; will be retried."
+            )
             # Restart the stream with an incremental back for a retriable error.
-
             retry
           rescue RestartStream
+            Google::Cloud::PubSub.logger("subscriber-streams").info(
+              "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
+            )
             retry
           rescue StandardError => e
+            Google::Cloud::PubSub.logger("subscriber-streams").error(
+              "error on stream for subscription #{@subscriber.subscription_name}: #{e.inspect}"
+            )
             @subscriber.error! e
 
             retry
@@ -336,13 +370,22 @@ module Google
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, rec_msg, &method(:perform_callback_sync)
+              callback_thread_pool,
+              rec_msg,
+              &method(:perform_callback_sync)
             )
           end
 
           def perform_callback_sync rec_msg
+            Google::Cloud::PubSub.logger("callback-delivery").info(
+              "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
+            )
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
+            Google::Cloud::PubSub.logger("callback-exceptions").info(
+              "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
+              "#{e.inspect}"
+            )
             @subscriber.error! e
           ensure
             release rec_msg
@@ -369,6 +412,9 @@ module Google
             return unless pause_streaming?
 
             @paused = true
+            Google::Cloud::PubSub.logger("subscriber-flow-control").info(
+              "subscriber for #{@subscriber.subscription_name} is client-side flow control blocked"
+            )
           end
 
           def pause_streaming?
@@ -382,6 +428,9 @@ module Google
             return unless unpause_streaming?
 
             @paused = nil
+            Google::Cloud::PubSub.logger("subscriber-flow-control").info(
+              "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
+            )
             # signal to the background thread that we are unpaused
             @pause_cond.broadcast
           end
