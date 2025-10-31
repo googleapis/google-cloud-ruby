@@ -54,6 +54,72 @@ module Google
       #   listener.start
       #   sleep
       class Subscriber
+        # @private
+        # A simple, non-pre-bucketed histogram for tracking numeric values
+        # and calculating percentiles. This is used internally to track message
+        # processing latencies for features like slow-ack logging.
+        class Histogram
+          # @private
+          # Creates a new Histogram.
+          #
+          # @param min_seconds [Numeric] The minimum value in seconds to record.
+          #   Values below this will be clamped to this minimum. Defaults to 0.
+          # @param max_seconds [Numeric] The maximum value in seconds to record.
+          #   Values above this will be clamped to this maximum. Defaults to
+          #   `Float::INFINITY`.
+          # @param multiplier [Numeric] A multiplier to convert the seconds
+          #   value to the desired internal unit. Defaults to 1,000,000,000.0
+          #   for nanoseconds.
+          def initialize min_seconds: 0, max_seconds: Float::INFINITY, multiplier: 1_000_000_000.0
+            @min = min_seconds * multiplier
+            @max = max_seconds * multiplier
+            @multiplier = multiplier
+            @data = {} # Using a Hash as a Map
+            @length = 0
+            @mutex = Mutex.new
+          end
+
+          # Adds a value to the histogram.
+          #
+          # @param value_seconds [Numeric] The value to record, in seconds.
+          def add value_seconds
+            value = value_seconds * @multiplier
+            @mutex.synchronize do
+              value = value.ceil
+              value = [@min, value].max
+              value = [@max, value].min
+
+              @data[value] ||= 0
+              @data[value] += 1
+              @length += 1
+            end
+          end
+
+          # Calculates a percentile from the values in the histogram.
+          #
+          # @param percent [Numeric] The percentile to calculate, from 0 to 100.
+          #
+          # @return [Numeric] The value at the given percentile, in seconds.
+          def percentile percent
+            @mutex.synchronize do
+              return @min / @multiplier if @length.zero?
+
+              percent = [percent, 100].min
+              target = @length - (@length * (percent / 100.0))
+
+              keys = @data.keys.sort
+
+              keys.reverse_each do |key|
+                target -= @data[key]
+                return key / @multiplier if target <= 0
+              end
+
+              @min / @multiplier
+            end
+          end
+        end
+        private_constant :Histogram
+
         ##
         # @private The Service object.
         attr_accessor :service
@@ -63,12 +129,17 @@ module Google
         attr_accessor :grpc
 
         ##
+        # @private The histograms for this subscriber.
+        attr_reader :histograms
+
+        ##
         # @private Create an empty {Subscriber} object.
         def initialize
           @service = nil
           @grpc = nil
           @resource_name = nil
           @exists = nil
+          @histograms = { "ack" => Histogram.new, "nack" => Histogram.new }
         end
 
         ##
@@ -414,7 +485,8 @@ module Google
           message_ordering = message_ordering? if message_ordering.nil?
 
           MessageListener.new name, block, deadline: deadline, streams: streams, inventory: inventory,
-                                      message_ordering: message_ordering, threads: threads, service: service
+                                      message_ordering: message_ordering, threads: threads, service: service,
+                                      histograms: histograms
         end
 
         ##
