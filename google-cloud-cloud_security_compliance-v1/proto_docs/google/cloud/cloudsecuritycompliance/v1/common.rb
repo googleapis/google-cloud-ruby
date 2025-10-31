@@ -21,23 +21,21 @@ module Google
   module Cloud
     module CloudSecurityCompliance
       module V1
-        # A Framework is a collection of CloudControls to address security and
-        # compliance requirements. Frameworks can be used for prevention, detection,
-        # and auditing. They can be either built-in, industry-standard frameworks
-        # provided by GCP/AZURE/AWS (e.g., NIST, FedRAMP) or custom frameworks created
-        # by users.
+        # A framework is a collection of cloud controls and regulatory controls
+        # that represent security best practices or industry-defined standards such as
+        # FedRAMP or NIST.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Identifier. The name of the framework.
-        #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/frameworks/\\{framework_id}
+        #     Required. Identifier. The name of the framework, in the format
+        #     `organizations/{organization}/locations/{location}/frameworks/{framework_id}`.
+        #     The only supported location is `global`.
         # @!attribute [r] major_revision_id
         #   @return [::Integer]
-        #     Output only. Major revision of the framework incremented in ascending
-        #     order.
+        #     Output only. The major version of the framework, which is incremented in
+        #     ascending order.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. Display name of the framework. The maximum length is 200
+        #     Optional. The friendly name of the framework. The maximum length is 200
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
@@ -45,20 +43,20 @@ module Google
         #     characters.
         # @!attribute [r] type
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Framework::FrameworkType]
-        #     Output only. The type of the framework. The default is TYPE_CUSTOM.
+        #     Output only. The type of framework.
         # @!attribute [rw] cloud_control_details
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDetails>]
-        #     Optional. The details of the cloud controls directly added without any
+        #     Optional. The cloud control details that are directly added without any
         #     grouping in the framework.
         # @!attribute [rw] category
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::FrameworkCategory>]
         #     Optional. The category of the framework.
         # @!attribute [r] supported_cloud_providers
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudProvider>]
-        #     Output only. cloud providers supported
+        #     Output only. The cloud providers that are supported by the framework.
         # @!attribute [r] supported_target_resource_types
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceType>]
-        #     Output only. target resource types supported by the Framework.
+        #     Output only. The target resource types that are supported by the framework.
         # @!attribute [r] supported_enforcement_modes
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::EnforcementMode>]
         #     Output only. The supported enforcement modes of the framework.
@@ -66,140 +64,152 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The type of the framework.
+          # The type of framework.
           module FrameworkType
             # Default value. This value is unused.
             FRAMEWORK_TYPE_UNSPECIFIED = 0
 
-            # The framework is a built-in framework if it is created and managed by
-            # GCP.
+            # A framework that's provided and managed by Google.
             BUILT_IN = 1
 
-            # The framework is a custom framework if it is created and managed by the
-            # user.
+            # A framework that's created and managed by you.
             CUSTOM = 2
           end
         end
 
-        # CloudControlDetails contains the details of a CloudControl.
+        # The details of a cloud control.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the CloudControl in the format:
-        #     “organizations/\\{organization}/locations/\\{location}/
-        #     cloudControls/\\{cloud-control}”
+        #     Required. The name of the cloud control, in the format
+        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud-control}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
-        #     Required. Major revision of cloudcontrol
+        #     Required. The major version of the cloud control.
         # @!attribute [rw] parameters
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::Parameter>]
-        #     Optional. Parameters is a key-value pair that is required by the
-        #     CloudControl. The specification of these parameters will be present in
-        #     cloudcontrol.Eg: { "name": "location","value": "us-west-1"}.
+        #     Optional. Parameters are key-value pairs that let you provide your custom
+        #     location requirements, environment requirements, or other settings that are
+        #     relevant to the cloud control. An example parameter is
+        #     `{"name": "location","value": "us-west-1"}`.
         class CloudControlDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # FrameworkReference contains the reference of a framework.
+        # The reference of a framework, in the format
+        # `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+        # The only supported location is `global`.
         # @!attribute [rw] framework
         #   @return [::String]
-        #     Required. In the format:
-        #     organizations/\\{org}/locations/\\{location}/frameworks/\\{framework}
+        #     Required. The major version of the framework. If not specified, the version
+        #     corresponds to the latest version of the framework.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
-        #     Optional. Major revision id of the framework. If not specified, corresponds
-        #     to the latest revision of the framework.
+        #     Optional. The major version of the framework. If not specified, the version
+        #     corresponds to the latest version of the framework.
         class FrameworkReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Parameters is a key-value pair.
+        # Parameters are key-value pairs that let you provide your custom location
+        # requirements, environment requirements, or other settings that are
+        # relevant to the cloud control.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the parameter.
+        #     Required. The name or key of the parameter.
         # @!attribute [rw] parameter_value
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::ParamValue]
-        #     Required. The value of the parameter
+        #     Required. The value of the parameter.
         class Parameter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A CloudControl is the fundamental unit encapsulating the rules
-        # to meet a specific security or compliance intent. It can contain
-        # various rule types (like Organization Policies, CEL expressions, etc.)
-        # enabling different enforcement modes (Preventive, Detective, Audit).
-        # CloudControls are often parameterized for reusability and can be either
-        # BUILT_IN (provided by Google) or CUSTOM (defined by the user).
+        # A cloud control is a set of rules and associated metadata that you can
+        # use to define your organization's security or compliance intent.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Identifier. The resource name of the cloud control.
-        #     Format:
-        #     organizations/\\{organization}/locations/\\{location}/cloudControls/\\{cloud_control_id}
+        #     Required. Identifier. The name of the cloud control, in the format
+        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control_id}`.
+        #     The only supported location is `global`.
         # @!attribute [r] major_revision_id
         #   @return [::Integer]
-        #     Output only. Major revision of the cloud control incremented in ascending
-        #     order.
+        #     Output only. The major version of the cloud control, which is incremented
+        #     in ascending order.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A description of the cloud control. The maximum length is 2000
         #     characters.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. The display name of the cloud control. The maximum length is 200
+        #     Optional. The friendly name of the cloud control. The maximum length is 200
         #     characters.
         # @!attribute [r] supported_enforcement_modes
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::EnforcementMode>]
-        #     Output only. The supported enforcement mode of the cloud control. Default
-        #     is DETECTIVE.
+        #     Output only. The supported enforcement modes for the cloud control.
         # @!attribute [rw] parameter_spec
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::ParameterSpec>]
-        #     Optional. The parameter spec of the cloud control.
+        #     Optional. The parameter specifications for the cloud control.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::Rule>]
-        #     Optional. The Policy to be enforced to prevent/detect resource
-        #     non-compliance.
+        #     Optional. The rules that you can enforce to meet your security or
+        #     compliance intent.
         # @!attribute [rw] severity
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Severity]
-        #     Optional. The severity of findings generated by the cloud control.
+        #     Optional. The severity of the findings that are generated by the cloud
+        #     control.
         # @!attribute [rw] finding_category
         #   @return [::String]
-        #     Optional. The finding_category of the cloud control. The maximum length is
-        #     255 characters.
+        #     Optional. The finding category for the cloud control findings. The maximum
+        #     length is 255 characters.
         # @!attribute [rw] supported_cloud_providers
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudProvider>]
-        #     Optional. cloud providers supported
+        #     Optional. The supported cloud providers.
         # @!attribute [r] related_frameworks
         #   @return [::Array<::String>]
-        #     Output only. The Frameworks that include this CloudControl
+        #     Output only. The frameworks that include this cloud control.
         # @!attribute [rw] remediation_steps
         #   @return [::String]
-        #     Optional. The remediation steps for the findings generated by the cloud
-        #     control. The maximum length is 400 characters.
+        #     Optional. The remediation steps for the cloud control findings. The
+        #     maximum length is 400 characters.
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudControlCategory>]
-        #     Optional. The categories of the cloud control.
+        #     Optional. The categories for the cloud control.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The last updated time of the cloud control.
-        #     The create_time is used because a new CC is created whenever we update an
-        #     existing CC.
+        #     Output only. The time that the cloud control was last updated.
+        #     `create_time` is used because a new cloud control is created
+        #     whenever an existing cloud control is updated.
         # @!attribute [rw] supported_target_resource_types
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceType>]
-        #     Optional. target resource types supported by the CloudControl.
+        #     Optional. The target resource types that are supported by the cloud
+        #     control.
         class CloudControl
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of cloud control.
+          module Type
+            # Default value. This value is unused.
+            TYPE_UNSPECIFIED = 0
+
+            # A cloud control that's created and managed by you.
+            CUSTOM = 1
+
+            # A cloud control that's provided and managed by Google.
+            BUILT_IN = 2
+          end
         end
 
-        # A parameter spec of the cloud control.
+        # The parameter specification for the cloud control.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the parameter.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. The display name of the parameter. The maximum length is 200
+        #     Optional. The friendly name of the parameter. The maximum length is 200
         #     characters.
         # @!attribute [rw] description
         #   @return [::String]
@@ -207,62 +217,62 @@ module Google
         #     characters.
         # @!attribute [rw] is_required
         #   @return [::Boolean]
-        #     Required. if the parameter is required
+        #     Required. Whether the parameter is required.
         # @!attribute [rw] value_type
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::ParameterSpec::ValueType]
-        #     Required. Parameter value type.
+        #     Required. The parameter value type.
         # @!attribute [rw] default_value
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::ParamValue]
         #     Optional. The default value of the parameter.
         # @!attribute [rw] substitution_rules
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::ParameterSubstitutionRule>]
-        #     Optional. List of parameter substitutions.
+        #     Optional. The list of parameter substitutions.
         # @!attribute [rw] sub_parameters
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::ParameterSpec>]
-        #     Optional. ParameterSpec for oneof attributes.
+        #     Optional. The parameter specification for `oneOf` attributes.
         # @!attribute [rw] validation
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Validation]
-        #     Optional. The allowed set of values for the parameter.
+        #     Optional. The permitted set of values for the parameter.
         class ParameterSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The type of the parameter value.
+          # The type of parameter value.
           module ValueType
             # Default value. This value is unused.
             VALUE_TYPE_UNSPECIFIED = 0
 
-            # String value.
+            # A string value.
             STRING = 3
 
-            # Boolean value.
+            # A boolean value.
             BOOLEAN = 4
 
-            # String list value.
+            # A string list value.
             STRINGLIST = 5
 
-            # Numeric value.
+            # A numeric value.
             NUMBER = 6
 
-            # OneOf value.
+            # A oneOf value.
             ONEOF = 7
           end
         end
 
-        # Validation of the parameter.
+        # The validation of the parameter.
         # @!attribute [rw] allowed_values
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::AllowedValues]
-        #     Allowed set of values for the parameter.
+        #     The permitted set of values for the parameter.
         #
         #     Note: The following fields are mutually exclusive: `allowed_values`, `int_range`, `regexp_pattern`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int_range
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::IntRange]
-        #     Allowed range for numeric parameters.
+        #     The permitted range for numeric parameters.
         #
         #     Note: The following fields are mutually exclusive: `int_range`, `allowed_values`, `regexp_pattern`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regexp_pattern
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::RegexpPattern]
-        #     Regular expression for string parameters.
+        #     The regular expression for string parameters.
         #
         #     Note: The following fields are mutually exclusive: `regexp_pattern`, `allowed_values`, `int_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Validation
@@ -270,37 +280,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Allowed set of values for the parameter.
+        # The allowed set of values for the parameter.
         # @!attribute [rw] values
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::ParamValue>]
-        #     Required. List of allowed values for the parameter.
+        #     Required. The list of allowed values for the parameter.
         class AllowedValues
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Regular Expression Validator for parameter values.
+        # The regular expression (regex) validator for parameter values.
         # @!attribute [rw] pattern
         #   @return [::String]
-        #     Required. Regex Pattern to match the value(s) of parameter.
+        #     Required. The regex pattern to match the values of the parameter with.
         class RegexpPattern
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Number range for number parameters.
+        # The number range for number parameters.
         # @!attribute [rw] min
         #   @return [::Integer]
-        #     Required. Minimum allowed value for the numeric parameter (inclusive).
+        #     Required. The minimum permitted value for the numeric parameter
+        #     (inclusive).
         # @!attribute [rw] max
         #   @return [::Integer]
-        #     Required. Maximum allowed value for the numeric parameter (inclusive).
+        #     Required. The maximum permitted value for the numeric parameter
+        #     (inclusive).
         class IntRange
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A list of strings.
+        # A list of strings for the parameter value.
         # @!attribute [rw] values
         #   @return [::Array<::String>]
         #     Required. The strings in the list.
@@ -309,30 +321,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Possible parameter value types.
+        # The possible parameter value types.
         # @!attribute [rw] string_value
         #   @return [::String]
-        #     Represents a string value.
+        #     A string value.
         #
         #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `string_list_value`, `number_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
-        #     Represents a boolean value.
+        #     A boolean value.
         #
         #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `string_list_value`, `number_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_list_value
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::StringList]
-        #     Represents a repeated string.
+        #     A repeated string.
         #
         #     Note: The following fields are mutually exclusive: `string_list_value`, `string_value`, `bool_value`, `number_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] number_value
         #   @return [::Float]
-        #     Represents a double value.
+        #     A double value.
         #
         #     Note: The following fields are mutually exclusive: `number_value`, `string_value`, `bool_value`, `string_list_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oneof_value
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Parameter]
-        #     Represents sub-parameter values.
+        #     Sub-parameter values.
         #
         #     Note: The following fields are mutually exclusive: `oneof_value`, `string_value`, `bool_value`, `string_list_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ParamValue
@@ -340,15 +352,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Parameter substitution rules.
+        # The parameter substitution rules.
         # @!attribute [rw] placeholder_substitution_rule
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::PlaceholderSubstitutionRule]
-        #     Placeholder substitution rule.
+        #     The placeholder substitution rule.
         #
         #     Note: The following fields are mutually exclusive: `placeholder_substitution_rule`, `attribute_substitution_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] attribute_substitution_rule
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::AttributeSubstitutionRule]
-        #     Attribute substitution rule.
+        #     The attribute substitution rule.
         #
         #     Note: The following fields are mutually exclusive: `attribute_substitution_rule`, `placeholder_substitution_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ParameterSubstitutionRule
@@ -356,57 +368,57 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Attribute at the given path is substituted entirely.
+        # The attribute at the given path that's substituted entirely.
         # @!attribute [rw] attribute
         #   @return [::String]
-        #     Fully qualified proto attribute path (in dot notation).
-        #     Example: rules[0].cel_expression.resource_types_values
+        #     The fully qualified proto attribute path, in dot notation.
+        #     For example: `rules[0].cel_expression.resource_types_values`
         class AttributeSubstitutionRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Placeholder is substituted in the rendered string.
+        # The placeholder that's substituted in the rendered string.
         # @!attribute [rw] attribute
         #   @return [::String]
-        #     Fully qualified proto attribute path (e.g., dot notation)
+        #     The fully qualified proto attribute path, in dot notation.
         class PlaceholderSubstitutionRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A rule of the cloud control.
+        # A rule in the cloud control.
         # @!attribute [rw] cel_expression
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::CELExpression]
-        #     Logic expression in CEL language.
+        #     The rule's logic expression in Common Expression Language (CEL).
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. Description of the Rule. The maximum length is 2000 characters.
+        #     Optional. The rule description. The maximum length is 2000 characters.
         # @!attribute [rw] rule_action_types
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::RuleActionType>]
-        #     Required. The functionality enabled by the Rule.
+        #     Required. The functionality that's enabled by the rule.
         class Rule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A [CEL
-        # expression](https://cloud.google.com/certificate-authority-service/docs/using-cel).
+        # A Common Expression Language (CEL) expression that's used to create a rule.
         # @!attribute [rw] resource_types_values
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::StringList]
         #     The resource instance types on which this expression is defined.
-        #     Format will be of the form : `<canonical service name>/<type>`
-        #     Example: `compute.googleapis.com/Instance`.
+        #     The format is `<SERVICE_NAME>/<type>`.
+        #     For example: `compute.googleapis.com/Instance`
         # @!attribute [rw] expression
         #   @return [::String]
-        #     Required. Logic expression in CEL language.
-        #     The max length of the condition is 1000 characters.
+        #     Required. The logical expression in CEL. The maximum length of the
+        #     condition is 1000 characters. For more information, see [CEL
+        #     expression](https://cloud.google.com/security-command-center/docs/compliance-manager-write-cel-expressions).
         class CELExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the metadata of the long-running operation.
+        # The metadata for the long-running operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -415,116 +427,143 @@ module Google
         #     Output only. The time the operation finished running.
         # @!attribute [r] target
         #   @return [::String]
-        #     Output only. Server-defined resource path for the target of the operation.
+        #     Output only. The server-defined resource path for the target of the
+        #     operation.
         # @!attribute [r] verb
         #   @return [::String]
-        #     Output only. Name of the verb executed by the operation.
+        #     Output only. The name of the verb that was executed by the operation.
         # @!attribute [r] status_message
         #   @return [::String]
-        #     Output only. Human-readable status of the operation, if any.
+        #     Output only. The human-readable status of the operation, if any.
         # @!attribute [r] requested_cancellation
         #   @return [::Boolean]
-        #     Output only. Identifies whether the user has requested cancellation
-        #     of the operation. Operations that have been cancelled successfully
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     Output only. Identifies whether the user has requested that the operation
+        #     be cancelled. If an operation was cancelled successfully, then the field
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     contains the value [google.rpc.Code.CANCELLED][google.rpc.Code.CANCELLED].
         # @!attribute [r] api_version
         #   @return [::String]
-        #     Output only. API version used to start the operation.
+        #     Output only. The API version that was used to start the operation.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The enforcement mode of the cloud control.
+        # The regulatory family of the control.
+        # @!attribute [rw] family_id
+        #   @return [::String]
+        #     The identifier for the regulatory control family.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The friendly name for the regulatory control family.
+        class ControlFamily
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The responsibility type for the regulatory control.
+        module RegulatoryControlResponsibilityType
+          # Default value. This value is unused.
+          REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED = 0
+
+          # Google's responsibility.
+          GOOGLE = 1
+
+          # Your responsibility.
+          CUSTOMER = 2
+
+          # Shared responsibility.
+          SHARED = 3
+        end
+
+        # The enforcement mode for the cloud control.
         module EnforcementMode
           # Default value. This value is unused.
           ENFORCEMENT_MODE_UNSPECIFIED = 0
 
-          # The cloud control is enforced to prevent resource non-compliance.
+          # The cloud control is enforced to prevent non-compliance.
           PREVENTIVE = 1
 
-          # The cloud control is enforced to detect resource non-compliance.
+          # The cloud control is enforced to detect non-compliance.
           DETECTIVE = 2
 
-          # The cloud control is enforced to audit resource non-compliance.
+          # The cloud control is enforced to audit for non-compliance.
           AUDIT = 3
         end
 
-        # The category of the framework.
+        # The category for the framework.
         module FrameworkCategory
           # Default value. This value is unused.
           FRAMEWORK_CATEGORY_UNSPECIFIED = 0
 
-          # Standard framework
+          # An industry-defined framework.
           INDUSTRY_DEFINED_STANDARD = 1
 
-          # Assured Workloads framework
+          # An Assured Workloads framework.
           ASSURED_WORKLOADS = 2
 
-          # Data Security framework
+          # A data security posture framework.
           DATA_SECURITY = 3
 
-          # Google Best Practices framework
+          # A Google's best practices framework.
           GOOGLE_BEST_PRACTICES = 4
 
-          # User created framework.
+          # A user-created framework.
           CUSTOM_FRAMEWORK = 5
         end
 
-        # The category of the cloud control.
+        # The category for the cloud control.
         module CloudControlCategory
           # Default value. This value is unused.
           CLOUD_CONTROL_CATEGORY_UNSPECIFIED = 0
 
-          # Infrastructure
+          # The infrastructure security category.
           CC_CATEGORY_INFRASTRUCTURE = 1
 
-          # Artificial Intelligence
+          # The artificial intelligence category.
           CC_CATEGORY_ARTIFICIAL_INTELLIGENCE = 2
 
-          # Physical Security
+          # The physical security category.
           CC_CATEGORY_PHYSICAL_SECURITY = 3
 
-          # Data Security
+          # The data security category.
           CC_CATEGORY_DATA_SECURITY = 4
 
-          # Network Security
+          # The network security category.
           CC_CATEGORY_NETWORK_SECURITY = 5
 
-          # Incident Management
+          # The incident management category.
           CC_CATEGORY_INCIDENT_MANAGEMENT = 6
 
-          # Identity & Access Management
+          # The identity and access management category.
           CC_CATEGORY_IDENTITY_AND_ACCESS_MANAGEMENT = 7
 
-          # Encryption
+          # The encryption category.
           CC_CATEGORY_ENCRYPTION = 8
 
-          # Logs Management & Infrastructure
+          # The logs management and infrastructure category.
           CC_CATEGORY_LOGS_MANAGEMENT_AND_INFRASTRUCTURE = 9
 
-          # HR, Admin & Processes
+          # The HR, admin, and processes category.
           CC_CATEGORY_HR_ADMIN_AND_PROCESSES = 10
 
-          # Third Party & Sub-Processor Management
+          # The third-party and sub-processor management category.
           CC_CATEGORY_THIRD_PARTY_AND_SUB_PROCESSOR_MANAGEMENT = 11
 
-          # Legal & Disclosures
+          # The legal and disclosures category.
           CC_CATEGORY_LEGAL_AND_DISCLOSURES = 12
 
-          # Vulnerability Management
+          # The vulnerability management category.
           CC_CATEGORY_VULNERABILITY_MANAGEMENT = 13
 
-          # Privacy
+          # The privacy category.
           CC_CATEGORY_PRIVACY = 14
 
-          # BCDR (Business Continuity and Disaster Recovery)
+          # The business continuity and disaster recovery (BCDR) category.
           CC_CATEGORY_BCDR = 15
         end
 
-        # The cloud platform.
+        # The cloud provider that's associated with the cloud control.
         module CloudProvider
           # Default value. This value is unused.
           CLOUD_PROVIDER_UNSPECIFIED = 0
@@ -541,11 +580,9 @@ module Google
 
         # The severity of the finding.
         module Severity
-          # This value is used for findings when a source doesn't write a severity
-          # value.
+          # Default value. This value is unused.
           SEVERITY_UNSPECIFIED = 0
 
-          # Vulnerability:
           # A critical vulnerability is easily discoverable by an external actor,
           # exploitable, and results in the direct ability to execute arbitrary code,
           # exfiltrate data, and otherwise gain additional access and privileges to
@@ -553,28 +590,24 @@ module Google
           # unprotected user data and public SSH access with weak or no
           # passwords.
           #
-          # Threat:
-          # Indicates a threat that is able to access, modify, or delete data or
+          # A critical threat is a threat that can access, modify, or delete data or
           # execute unauthorized code within existing resources.
           CRITICAL = 1
 
-          # Vulnerability:
-          # A high risk vulnerability can be easily discovered and exploited in
-          # combination with other vulnerabilities in order to gain direct access and
+          # A high-risk vulnerability can be easily discovered and exploited in
+          # combination with other vulnerabilities to gain direct access and
           # the ability to execute arbitrary code, exfiltrate data, and otherwise
           # gain additional access and privileges to cloud resources and workloads.
           # An example is a database with weak or no passwords that is only
           # accessible internally. This database could easily be compromised by an
           # actor that had access to the internal network.
           #
-          # Threat:
-          # Indicates a threat that is able to create new computational resources in
-          # an environment but not able to access data or execute code in existing
-          # resources.
+          # A high-risk threat is a threat that can create new computational
+          # resources in an environment but can't access data or execute code in
+          # existing resources.
           HIGH = 2
 
-          # Vulnerability:
-          # A medium risk vulnerability could be used by an actor to gain access to
+          # A medium-risk vulnerability can be used by an actor to gain access to
           # resources or privileges that enable them to eventually (through multiple
           # steps or a complex exploit) gain access and the ability to execute
           # arbitrary code or exfiltrate data. An example is a service account with
@@ -582,20 +615,17 @@ module Google
           # the service account, they could potentially use that access to manipulate
           # a project the service account was not intended to.
           #
-          # Threat:
-          # Indicates a threat that is able to cause operational impact but may not
+          # A medium-risk threat can cause operational impact but might not
           # access data or execute unauthorized code.
           MEDIUM = 3
 
-          # Vulnerability:
-          # A low risk vulnerability hampers a security organization's ability to
+          # A low-risk vulnerability hampers a security organization's ability to
           # detect vulnerabilities or active threats in their deployment, or prevents
           # the root cause investigation of security issues. An example is monitoring
           # and logs being disabled for resource configurations and access.
           #
-          # Threat:
-          # Indicates a threat that has obtained minimal access to an environment but
-          # is not able to access data, execute code, or create resources.
+          # A low-risk threat is a threat that has obtained minimal access to an
+          # environment but can't access data, execute code, or create resources.
           LOW = 4
         end
 
@@ -604,32 +634,31 @@ module Google
           # Default value. This value is unused.
           RULE_ACTION_TYPE_UNSPECIFIED = 0
 
-          # Preventative action type.
+          # The rule is intended to prevent non-compliance.
           RULE_ACTION_TYPE_PREVENTIVE = 1
 
-          # Detective action type.
+          # The rule is intended to detect non-compliance.
           RULE_ACTION_TYPE_DETECTIVE = 2
 
-          # Audit action type.
+          # The rule is intended to audit non-compliance.
           RULE_ACTION_TYPE_AUDIT = 3
         end
 
-        # TargetResourceType represents the type of resource that a control or
-        # framework can be applied to.
+        # The type of resource that a control or framework can be applied to.
         module TargetResourceType
           # Default value. This value is unused.
           TARGET_RESOURCE_TYPE_UNSPECIFIED = 0
 
-          # Target resource is an Organization.
+          # The target resource is a Google Cloud organization.
           TARGET_RESOURCE_CRM_TYPE_ORG = 1
 
-          # Target resource is a Folder.
+          # The target resource is a folder.
           TARGET_RESOURCE_CRM_TYPE_FOLDER = 2
 
-          # Target resource is a Project.
+          # The target resource is a project.
           TARGET_RESOURCE_CRM_TYPE_PROJECT = 3
 
-          # Target resource is an Application.
+          # The target resource is an application in App Hub.
           TARGET_RESOURCE_TYPE_APPLICATION = 4
         end
       end

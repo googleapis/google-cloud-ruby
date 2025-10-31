@@ -227,9 +227,10 @@ module Google
               # Service calls
 
               ##
-              # Lists all Frameworks (both Built-in and Custom) available within a given
-              # parent resource. This method supports pagination.
-              # The latest major version of each Framework is returned.
+              # Lists the frameworks (both built-in and custom) that are available within
+              # the parent resource. The latest major version of each framework is
+              # returned.
+              # This method supports pagination.
               #
               # @overload list_frameworks(request, options = nil)
               #   Pass arguments to `list_frameworks` via a request object, either of type
@@ -249,7 +250,7 @@ module Google
               #   @param parent [::String]
               #     Required. The parent resource name, in the format
               #     `organizations/{organization}/locations/{location}`.
-              #     Only global location is supported.
+              #     The only supported location is `global`.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of frameworks to return. The default value is
               #     `500`.
@@ -324,13 +325,11 @@ module Google
               end
 
               ##
-              # Gets details of a single Framework.
-              # This method retrieves a Framework resource, which can be either Built-in or
-              # Custom, identified by its name.
+              # Gets details about a framework.
+              # This method retrieves the latest major version of the framework.
               #
-              # By default, the latest major version of the Framework is returned.
-              # A specific major version can be retrieved by specifying the
-              # `major_revision_id` in the request.
+              # To retrieve a specific major version, include `major_revision_id` in
+              # the request.
               #
               # @overload get_framework(request, options = nil)
               #   Pass arguments to `get_framework` via a request object, either of type
@@ -348,12 +347,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the framework to retrieve.
-              #     Format:
-              #     organizations/\\{organization}/locations/\\{location}/frameworks/\\{framework_id}
+              #     Required. The name of the framework to retrieve, in the format
+              #     `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
+              #     The only supported location is `global`.
               #   @param major_revision_id [::Integer]
-              #     Optional. The Framework major version to retrieve. If not specified, the
-              #     most recently updated revision_id is retrieved.
+              #     Optional. The framework major version to retrieve. If not specified, the
+              #     most recently updated `revision_id` is retrieved.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::Framework]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -413,9 +412,9 @@ module Google
               end
 
               ##
-              # Creates a new Framework with type `Custom` under a given parent resource.
-              # Frameworks with type `Built-in` are managed by Google and cannot be created
-              # through this API.
+              # Creates a custom framework in a given parent resource.
+              # You can't create built-in frameworks because those are managed by
+              # Google.
               #
               # @overload create_framework(request, options = nil)
               #   Pass arguments to `create_framework` via a request object, either of type
@@ -435,12 +434,12 @@ module Google
               #   @param parent [::String]
               #     Required. The parent resource name, in the format
               #     `organizations/{organization}/locations/{location}`.
+              #     The only supported location is `global`.
               #   @param framework_id [::String]
-              #     Required. ID of the framework.
-              #     This is not the full name of the framework.
-              #     This is the last part of the full name of the framework.
+              #     Required. The identifier (ID) of the framework. The ID is not the full name
+              #     of the framework; it's the last part of the full name of the framework.
               #   @param framework [::Google::Cloud::CloudSecurityCompliance::V1::Framework, ::Hash]
-              #     Required. The resource being created
+              #     Required. The resource being created.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::Framework]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -500,17 +499,18 @@ module Google
               end
 
               ##
-              # Updates a single Framework.
-              # This method allows for partial updates of a Framework resource. The fields
-              # to be updated are specified using the `update_mask`.
+              # Updates a custom framework.
+              # This method allows for partial updates of a framework. Use the
+              # `update_mask` to specify which fields to update. Consider the following:
               #
-              # - If an `update_mask` is provided, only the fields specified in the mask
-              # will be updated.
-              # - If no `update_mask` is provided, all fields present in the request's
-              # `framework` body will be used to overwrite the existing resource.
+              # - If you provide an `update_mask`, only the fields that are specified
+              # in the mask are updated.
+              # - If you don't provide an `update_mask`, all the fields that are present
+              # in the request's `framework` body are used to overwrite the existing
+              # resource.
               #
-              # This operation can only be performed on Frameworks with type `CUSTOM`.
-              # A successful update will result in a new version of the Framework.
+              # You can only update frameworks with the `CUSTOM` type.
+              # A successful update creates a new version of the framework.
               #
               # @overload update_framework(request, options = nil)
               #   Pass arguments to `update_framework` via a request object, either of type
@@ -528,14 +528,13 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Optional. Field mask is used to specify the fields to be overwritten in the
-              #     Framework resource by the update.
-              #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request. A field will be overwritten if it is in the mask. If the
-              #     user does not provide a mask then all fields present in the request will be
-              #     overwritten.
+              #     Optional. A field mask is used to specify the fields to be overwritten in
+              #     the framework resource by the update. The fields specified in the
+              #     `update_mask` are relative to the resource, not the full request. A field
+              #     is overwritten if it is in the mask. If you don't provide a mask then all
+              #     fields present in the request will be overwritten.
               #   @param framework [::Google::Cloud::CloudSecurityCompliance::V1::Framework, ::Hash]
-              #     Required. The resource being updated
+              #     Required. The resource that is being updated.
               #   @param major_revision_id [::Integer]
               #     Optional. The major version ID of the framework to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -597,14 +596,13 @@ module Google
               end
 
               ##
-              # Deletes a single Custom Framework, including all its minor and
-              # minor revisions.
+              # Deletes a custom framework, including all its major and
+              # minor revisions. Consider the following:
               #
-              # - This operation can only be performed on Frameworks with type `CUSTOM`.
-              #   Built-in Frameworks cannot be deleted.
-              # - The Framework cannot be deleted if it is currently deployed on any
-              #   resource.
-              # - This action is permanent and cannot be undone.
+              # - You can't delete built-in frameworks. You can only delete frameworks
+              #   with type `CUSTOM`.
+              # - You can't delete frameworks that are deployed to a resource.
+              # - You can't restore a deleted framework. This action is permanent.
               #
               # @overload delete_framework(request, options = nil)
               #   Pass arguments to `delete_framework` via a request object, either of type
@@ -622,8 +620,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Name of the resource, in the format
+              #     Required. The name of the resource, in the format
               #     `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+              #     The only supported location is `global`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -683,9 +682,10 @@ module Google
               end
 
               ##
-              # Lists all CloudControls (both Built-in and Custom) available within a given
-              # parent resource. This method supports pagination.
-              # The latest major version of each CloudControl is returned.
+              # Lists the cloud controls (both built-in and custom) that are available
+              # in a given parent resource. The latest major version of each cloud control
+              # is returned.
+              # This method supports pagination.
               #
               # @overload list_cloud_controls(request, options = nil)
               #   Pass arguments to `list_cloud_controls` via a request object, either of type
@@ -705,19 +705,21 @@ module Google
               #   @param parent [::String]
               #     Required. The parent resource name, in the format
               #     `organizations/{organization}/locations/{location}`.
+              #     The only supported location is `global`.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of CloudControls to return. The default value
+              #     Optional. The maximum number of cloud controls to return. The default value
               #     is `500`.
               #
               #     If you exceed the maximum value of `1000`, then the service uses the
               #     maximum value.
               #   @param page_token [::String]
-              #     Optional. A pagination token returned from a previous request to list
-              #     CloudControls. Provide this token to retrieve the next page of results.
+              #     Optional. A pagination token that's returned from a previous request to
+              #     list cloud controls. Provide this token to retrieve the next page of
+              #     results.
               #
-              #     When paginating, parent provided to
-              #     ListCloudControls request must match the call that provided the page
-              #     token.
+              #     When paginating, the parent that you provide to the
+              #     {::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client#list_cloud_controls ListCloudControls}
+              #     request must match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudSecurityCompliance::V1::CloudControl>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -783,13 +785,13 @@ module Google
               end
 
               ##
-              # Gets details of a single CloudControl.
-              # This method retrieves a CloudControl resource, which can be either Built-in
-              # or Custom, identified by its name.
+              # Gets details about a cloud control.
+              # This method retrieves the latest major version of a cloud control that
+              # you identify by name.
               #
-              # By default, the latest major version of the CloudControl is returned.
-              # A specific major version can be retrieved by specifying the
-              # `major_revision_id` in the request.
+              # By default, the latest major version of the cloud control is returned.
+              # To retrieve a specific major version, include `major_revision_id` in
+              # the request.
               #
               # @overload get_cloud_control(request, options = nil)
               #   Pass arguments to `get_cloud_control` via a request object, either of type
@@ -801,14 +803,18 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_cloud_control(name: nil)
+              # @overload get_cloud_control(name: nil, major_revision_id: nil)
               #   Pass arguments to `get_cloud_control` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the cloudcontrol to retrieve in the format:
-              #     organizations/\\{organization}/locations/\\{location}/cloudControls/\\{cloud_control}
+              #     Required. The name of the cloud control to retrieve, in the format
+              #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
+              #     The only supported location is `global`.
+              #   @param major_revision_id [::Integer]
+              #     Optional. The major version of the cloud control to retrieve. If not
+              #     specified, the most recently updated `revision_id` is retrieved.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -868,9 +874,10 @@ module Google
               end
 
               ##
-              # Creates a new CloudControl with type `Custom` under a given parent
-              # resource. `Built-in` CloudControls are managed by Google and cannot be
-              # created through this API.
+              # Creates a custom cloud control in a given parent
+              # resource.
+              # You can't create built-in cloud controls because those are managed by
+              # Google.
               #
               # @overload create_cloud_control(request, options = nil)
               #   Pass arguments to `create_cloud_control` via a request object, either of type
@@ -890,12 +897,13 @@ module Google
               #   @param parent [::String]
               #     Required. The parent resource name, in the format
               #     `organizations/{organization}/locations/{location}`.
+              #     The only supported location is `global`.
               #   @param cloud_control_id [::String]
-              #     Required. ID of the CloudControl.
-              #     This is the last segment of the CloudControl resource name.
-              #     Format: `^[a-zA-Z][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$`.
+              #     Required. The identifier for the cloud control, which is the last segment
+              #     of the cloud control name. The format is
+              #     `^[a-zA-Z][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]$`.
               #   @param cloud_control [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl, ::Hash]
-              #     Required. The resource being created
+              #     Required. The cloud control that's being created.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -955,16 +963,18 @@ module Google
               end
 
               ##
-              # Updates a single CloudControl.
-              # This method allows for partial updates of a Custom CloudControl resource.
-              # Built-in CloudControls cannot be updated.
+              # Updates a custom cloud control.
+              # This method allows for partial updates of a cloud control. Use the
+              # `update_mask` to specify which fields to update. Consider the following:
               #
-              # - If an `update_mask` is provided, only the fields specified in the mask
-              # will be updated.
-              # - If no `update_mask` is provided, all fields present in the request's
-              # `cloud_control` body will be used to overwrite the existing resource.
+              # - If you provide an `update_mask`, only the fields that are specified
+              # in the mask are updated.
+              # - If you don't provide an `update_mask`, all the fields that are present
+              # in the request's `cloud_control` body are used to overwrite the existing
+              # resource.
               #
-              # A successful update will result in a new version of the CloudControl.
+              # You can only update cloud controls with the `CUSTOM` type.
+              # A successful update creates a new version of the cloud control.
               #
               # @overload update_cloud_control(request, options = nil)
               #   Pass arguments to `update_cloud_control` via a request object, either of type
@@ -982,19 +992,22 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Optional. Field mask is used to specify the fields to be overwritten in the
-              #     CloudControl resource by the update.
-              #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request. A field will be overwritten if it is in the mask. If the
-              #     user does not provide a mask then all fields present in the request will be
-              #     overwritten. The fields that can be updated are:
-              #     1. Display_name
-              #     2. Description
-              #     3. Parameters
-              #     4. Rules
-              #     5. ParameterSpec.
+              #     Optional. Use a field mask to specify the fields to be overwritten in the
+              #     cloud control during the update.
+              #     The fields that you specify in the `update_mask` are relative to the
+              #     cloud control, not the full request. A field is overwritten if it is in
+              #     the mask. If you don't provide a mask, all fields in the request
+              #     are updated.
+              #
+              #     You can update the following fields:
+              #
+              #     - Display name
+              #     - Description
+              #     - Parameters
+              #     - Rules
+              #     - Parameter specification
               #   @param cloud_control [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl, ::Hash]
-              #     Required. The resource being updated
+              #     Required. The cloud control that you're updating.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1054,14 +1067,14 @@ module Google
               end
 
               ##
-              # Deletes a single Custom CloudControl, including all its
-              # major and minor revisions.
+              # Deletes a custom cloud control, including all its
+              # major and minor revisions. Consider the following:
               #
-              # - This operation can only be performed on CloudControls with type `CUSTOM`.
-              #   Built-in CloudControls cannot be deleted.
-              # - The CloudControl cannot be deleted if any of its revisions are currently
-              #   referenced by any Framework.
-              # - This action is permanent and cannot be undone.
+              # - You can't delete built-in cloud controls. You can only delete cloud
+              #   controls with type `CUSTOM`.
+              # - You can't delete cloud controls if any of the versions are referenced
+              #   by a framework.
+              # - You can't restore a deleted cloud control. This action is permanent.
               #
               # @overload delete_cloud_control(request, options = nil)
               #   Pass arguments to `delete_cloud_control` via a request object, either of type
@@ -1079,8 +1092,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Name of the resource, in the format
+              #     Required. The name of the cloud control to delete, in the format
               #     `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`.
+              #     The only supported location is `global`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
