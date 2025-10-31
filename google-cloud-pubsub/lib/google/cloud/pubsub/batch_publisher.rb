@@ -14,6 +14,7 @@
 
 
 require "google/cloud/pubsub/convert"
+require "google/cloud/pubsub/logger_helper"
 
 module Google
   module Cloud
@@ -35,6 +36,8 @@ module Google
       #   end
       #
       class BatchPublisher
+        include Google::Cloud::PubSub::LoggerHelper
+
         ##
         # @private The messages to publish
         attr_reader :messages
@@ -117,10 +120,11 @@ module Google
 
         ##
         # @private  Call the publish API with arrays of data and attrs.
-        def publish_batch_messages topic_name, service
+        def publish_batch_messages topic_name, service, reason: "unknown"
           grpc = service.publish topic_name,
                                  messages,
                                  compress: compress && total_message_bytes >= compression_bytes_threshold
+          log_batch "publish-batch", reason, "publish", messages.count, @total_message_bytes
           to_gcloud_messages Array(grpc.message_ids)
         end
       end

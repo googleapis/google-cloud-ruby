@@ -19,6 +19,7 @@ require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "google/cloud/pubsub/admin_clients"
+require "google/cloud/pubsub/logger_helper"
 require "securerandom"
 
 module Google
@@ -141,6 +142,9 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
+          ack_ids.each do |ack_id|
+            Google::Cloud::PubSub.logger("ack-nack").info "message (ackID #{ack_id}) ack"
+          end
           subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
                                                   ack_ids: ack_ids
         end
@@ -148,6 +152,11 @@ module Google
         ##
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
+          if deadline.zero?
+            Array(ids).each do |ack_id|
+              Google::Cloud::PubSub.logger("ack-nack").info "message (ackID #{ack_id}) nack"
+            end
+          end
           subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
                                                           ack_ids: Array(ids),
                                                           ack_deadline_seconds: deadline
