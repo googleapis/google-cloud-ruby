@@ -37,9 +37,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/cloud_security_compliance"
 
-client = Google::Cloud::CloudSecurityCompliance.config
-request = ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest.new # (request fields as keyword arguments...)
-response = client.list_frameworks request
+client = Google::Cloud::CloudSecurityCompliance.audit
+request = ::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new # (request fields as keyword arguments...)
+response = client.generate_framework_audit_scope_report request
 ```
 
 ## Debug Logging

@@ -41,6 +41,48 @@ class Google::Cloud::CloudSecurityCompliance::ClientConstructionMinitest < Minit
     end
   end
 
+  def test_audit_grpc
+    skip unless Google::Cloud::CloudSecurityCompliance.audit_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::CloudSecurityCompliance.audit transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Audit::Client, client
+    end
+  end
+
+  def test_audit_rest
+    skip unless Google::Cloud::CloudSecurityCompliance.audit_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::CloudSecurityCompliance.audit transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client, client
+    end
+  end
+
+  def test_cm_enrollment_service_grpc
+    skip unless Google::Cloud::CloudSecurityCompliance.cm_enrollment_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::CloudSecurityCompliance.cm_enrollment_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client, client
+    end
+  end
+
+  def test_cm_enrollment_service_rest
+    skip unless Google::Cloud::CloudSecurityCompliance.cm_enrollment_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::CloudSecurityCompliance.cm_enrollment_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Rest::Client, client
+    end
+  end
+
   def test_config_grpc
     skip unless Google::Cloud::CloudSecurityCompliance.config_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -80,6 +122,27 @@ class Google::Cloud::CloudSecurityCompliance::ClientConstructionMinitest < Minit
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client, client
+    end
+  end
+
+  def test_monitoring_grpc
+    skip unless Google::Cloud::CloudSecurityCompliance.monitoring_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::CloudSecurityCompliance.monitoring transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client, client
+    end
+  end
+
+  def test_monitoring_rest
+    skip unless Google::Cloud::CloudSecurityCompliance.monitoring_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::CloudSecurityCompliance.monitoring transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Rest::Client, client
     end
   end
 end
