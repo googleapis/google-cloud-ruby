@@ -132,6 +132,116 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
     end
   end
 
+  def test_list_organizations
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    page_size = 42
+    page_token = "hello world"
+
+    list_organizations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_list_organizations_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_organizations_client_stub do
+        # Create client
+        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_organizations({ page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_organizations page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_organizations ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_organizations({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_organizations(::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_organizations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_find_sales_partner_managed_clients
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    organization = "hello world"
+    is_active = true
+
+    find_sales_partner_managed_clients_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_find_sales_partner_managed_clients_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, find_sales_partner_managed_clients_client_stub do
+        # Create client
+        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.find_sales_partner_managed_clients organization: organization, is_active: is_active do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.find_sales_partner_managed_clients ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.find_sales_partner_managed_clients({ organization: organization, is_active: is_active }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.find_sales_partner_managed_clients(::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new(organization: organization, is_active: is_active), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, find_sales_partner_managed_clients_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_analytics_account_links
     # Create test objects.
     client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksResponse.new
@@ -349,6 +459,61 @@ class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminSe
 
         # Verify method calls
         assert_equal 5, set_property_service_level_client_stub.call_count
+      end
+    end
+  end
+
+  def test_report_property_usage
+    # Create test objects.
+    client_result = ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    organization = "hello world"
+    month = "hello world"
+
+    report_property_usage_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::ServiceStub.stub :transcode_report_property_usage_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, report_property_usage_client_stub do
+        # Create client
+        client = ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.report_property_usage({ organization: organization, month: month }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.report_property_usage organization: organization, month: month do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.report_property_usage ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.report_property_usage({ organization: organization, month: month }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.report_property_usage(::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new(organization: organization, month: month), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, report_property_usage_client_stub.call_count
       end
     end
   end
