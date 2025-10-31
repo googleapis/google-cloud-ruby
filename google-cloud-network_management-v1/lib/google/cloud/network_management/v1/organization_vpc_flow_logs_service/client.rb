@@ -25,13 +25,14 @@ module Google
   module Cloud
     module NetworkManagement
       module V1
-        module VpcFlowLogsService
+        module OrganizationVpcFlowLogsService
           ##
-          # Client for the VpcFlowLogsService service.
+          # Client for the OrganizationVpcFlowLogsService service.
           #
-          # The VPC Flow Logs service in the Google Cloud Network Management API provides
-          # configurations that generate Flow Logs. The service and the configuration
-          # resources created using this service are global.
+          # The VPC Flow Logs organization service in the Google Cloud Network Management
+          # API provides organization level configurations that generate Flow Logs. The
+          # service and the configuration resources created using this service are
+          # global.
           #
           class Client
             # @private
@@ -43,18 +44,18 @@ module Google
             include Paths
 
             # @private
-            attr_reader :vpc_flow_logs_service_stub
+            attr_reader :organization_vpc_flow_logs_service_stub
 
             ##
-            # Configure the VpcFlowLogsService Client class.
+            # Configure the OrganizationVpcFlowLogsService Client class.
             #
-            # See {::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client::Configuration}
+            # See {::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @example
             #
-            #   # Modify the configuration for all VpcFlowLogsService clients
-            #   ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.configure do |config|
+            #   # Modify the configuration for all OrganizationVpcFlowLogsService clients
+            #   ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.configure do |config|
             #     config.timeout = 10.0
             #   end
             #
@@ -81,13 +82,13 @@ module Google
             end
 
             ##
-            # Configure the VpcFlowLogsService Client instance.
+            # Configure the OrganizationVpcFlowLogsService Client instance.
             #
             # The configuration is set to the derived mode, meaning that values can be changed,
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client::Configuration}
+            # See {::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -106,23 +107,23 @@ module Google
             # @return [String]
             #
             def universe_domain
-              @vpc_flow_logs_service_stub.universe_domain
+              @organization_vpc_flow_logs_service_stub.universe_domain
             end
 
             ##
-            # Create a new VpcFlowLogsService client object.
+            # Create a new OrganizationVpcFlowLogsService client object.
             #
             # @example
             #
             #   # Create a client using the default configuration
-            #   client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
+            #   client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new
             #
             #   # Create a client using a custom configuration
-            #   client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+            #   client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new do |config|
             #     config.timeout = 10.0
             #   end
             #
-            # @yield [config] Configure the VpcFlowLogsService client.
+            # @yield [config] Configure the OrganizationVpcFlowLogsService client.
             # @yieldparam config [Client::Configuration]
             #
             def initialize
@@ -160,8 +161,8 @@ module Google
                 config.universe_domain = @config.universe_domain
               end
 
-              @vpc_flow_logs_service_stub = ::Gapic::ServiceStub.new(
-                ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Stub,
+              @organization_vpc_flow_logs_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Stub,
                 credentials: credentials,
                 endpoint: @config.endpoint,
                 endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -172,7 +173,7 @@ module Google
                 logger: @config.logger
               )
 
-              @vpc_flow_logs_service_stub.stub_logger&.info do |entry|
+              @organization_vpc_flow_logs_service_stub.stub_logger&.info do |entry|
                 entry.set_system_name
                 entry.set_service
                 entry.message = "Created client for #{entry.service}"
@@ -185,24 +186,24 @@ module Google
               @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
-                config.endpoint = @vpc_flow_logs_service_stub.endpoint
-                config.universe_domain = @vpc_flow_logs_service_stub.universe_domain
-                config.logger = @vpc_flow_logs_service_stub.logger if config.respond_to? :logger=
+                config.endpoint = @organization_vpc_flow_logs_service_stub.endpoint
+                config.universe_domain = @organization_vpc_flow_logs_service_stub.universe_domain
+                config.logger = @organization_vpc_flow_logs_service_stub.logger if config.respond_to? :logger=
               end
 
               @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
-                config.endpoint = @vpc_flow_logs_service_stub.endpoint
-                config.universe_domain = @vpc_flow_logs_service_stub.universe_domain
-                config.logger = @vpc_flow_logs_service_stub.logger if config.respond_to? :logger=
+                config.endpoint = @organization_vpc_flow_logs_service_stub.endpoint
+                config.universe_domain = @organization_vpc_flow_logs_service_stub.universe_domain
+                config.logger = @organization_vpc_flow_logs_service_stub.logger if config.respond_to? :logger=
               end
             end
 
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Operations]
+            # @return [::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Operations]
             #
             attr_reader :operations_client
 
@@ -226,13 +227,13 @@ module Google
             # @return [Logger]
             #
             def logger
-              @vpc_flow_logs_service_stub.logger
+              @organization_vpc_flow_logs_service_stub.logger
             end
 
             # Service calls
 
             ##
-            # Lists all `VpcFlowLogsConfigs` in a given project.
+            # Lists all `VpcFlowLogsConfigs` in a given organization.
             #
             # @overload list_vpc_flow_logs_configs(request, options = nil)
             #   Pass arguments to `list_vpc_flow_logs_configs` via a request object, either of type
@@ -281,7 +282,7 @@ module Google
             #   require "google/cloud/network_management/v1"
             #
             #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
+            #   client = Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new
             #
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsRequest.new
@@ -330,8 +331,8 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @vpc_flow_logs_service_stub.call_rpc :list_vpc_flow_logs_configs, request, options: options do |response, operation|
-                response = ::Gapic::PagedEnumerable.new @vpc_flow_logs_service_stub, :list_vpc_flow_logs_configs, request, response, operation, options
+              @organization_vpc_flow_logs_service_stub.call_rpc :list_vpc_flow_logs_configs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @organization_vpc_flow_logs_service_stub, :list_vpc_flow_logs_configs, request, response, operation, options
                 yield response, operation if block_given?
                 throw :response, response
               end
@@ -379,7 +380,7 @@ module Google
             #   require "google/cloud/network_management/v1"
             #
             #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
+            #   client = Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new
             #
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::NetworkManagement::V1::GetVpcFlowLogsConfigRequest.new
@@ -424,7 +425,7 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @vpc_flow_logs_service_stub.call_rpc :get_vpc_flow_logs_config, request, options: options do |response, operation|
+              @organization_vpc_flow_logs_service_stub.call_rpc :get_vpc_flow_logs_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -488,7 +489,7 @@ module Google
             #   require "google/cloud/network_management/v1"
             #
             #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
+            #   client = Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new
             #
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::NetworkManagement::V1::CreateVpcFlowLogsConfigRequest.new
@@ -540,7 +541,7 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @vpc_flow_logs_service_stub.call_rpc :create_vpc_flow_logs_config, request, options: options do |response, operation|
+              @organization_vpc_flow_logs_service_stub.call_rpc :create_vpc_flow_logs_config, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -555,7 +556,7 @@ module Google
             # ID is different), the creation fails.
             # Notes:
             #
-            #   1. Updating a configuration with `state=DISABLED` will fail.
+            #   1. Updating a configuration with `state=DISABLED` will fail
             #   2. The following fields are not considered as settings for the purpose
             #   of the check mentioned above, therefore - updating another configuration
             #   with the same fields but different values for the following fields will
@@ -605,7 +606,7 @@ module Google
             #   require "google/cloud/network_management/v1"
             #
             #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
+            #   client = Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new
             #
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::NetworkManagement::V1::UpdateVpcFlowLogsConfigRequest.new
@@ -657,7 +658,7 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @vpc_flow_logs_service_stub.call_rpc :update_vpc_flow_logs_config, request, options: options do |response, operation|
+              @organization_vpc_flow_logs_service_stub.call_rpc :update_vpc_flow_logs_config, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -706,7 +707,7 @@ module Google
             #   require "google/cloud/network_management/v1"
             #
             #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
+            #   client = Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new
             #
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::NetworkManagement::V1::DeleteVpcFlowLogsConfigRequest.new
@@ -758,7 +759,7 @@ module Google
                                      metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @vpc_flow_logs_service_stub.call_rpc :delete_vpc_flow_logs_config, request, options: options do |response, operation|
+              @organization_vpc_flow_logs_service_stub.call_rpc :delete_vpc_flow_logs_config, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -768,223 +769,13 @@ module Google
             end
 
             ##
-            # QueryOrgVpcFlowLogsConfigs returns a list of all organization-level VPC
-            # Flow Logs configurations applicable to the specified project.
+            # Configuration class for the OrganizationVpcFlowLogsService API.
             #
-            # @overload query_org_vpc_flow_logs_configs(request, options = nil)
-            #   Pass arguments to `query_org_vpc_flow_logs_configs` via a request object, either of type
-            #   {::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload query_org_vpc_flow_logs_configs(parent: nil, page_size: nil, page_token: nil, filter: nil)
-            #   Pass arguments to `query_org_vpc_flow_logs_configs` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param parent [::String]
-            #     Required. The parent resource of the VpcFlowLogsConfig, specified in
-            #     the following format: `projects/{project_id}/locations/global`
-            #   @param page_size [::Integer]
-            #     Optional. Number of `VpcFlowLogsConfigs` to return.
-            #   @param page_token [::String]
-            #     Optional. Page token from an earlier query, as returned in
-            #     `next_page_token`.
-            #   @param filter [::String]
-            #     Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
-            #     A filter expression must use the supported [CEL logic operators]
-            #     (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig>]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig>]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/network_management/v1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new
-            #
-            #   # Call the query_org_vpc_flow_logs_configs method.
-            #   result = client.query_org_vpc_flow_logs_configs request
-            #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
-            #   # over elements, and API calls will be issued to fetch pages as needed.
-            #   result.each do |item|
-            #     # Each element is of type ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig.
-            #     p item
-            #   end
-            #
-            def query_org_vpc_flow_logs_configs request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.query_org_vpc_flow_logs_configs.metadata.to_h
-
-              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
-              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.parent
-                header_params["parent"] = request.parent
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.query_org_vpc_flow_logs_configs.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.query_org_vpc_flow_logs_configs.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @vpc_flow_logs_service_stub.call_rpc :query_org_vpc_flow_logs_configs, request, options: options do |response, operation|
-                response = ::Gapic::PagedEnumerable.new @vpc_flow_logs_service_stub, :query_org_vpc_flow_logs_configs, request, response, operation, options
-                yield response, operation if block_given?
-                throw :response, response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # ShowEffectiveFlowLogsConfigs returns a list of all VPC Flow Logs
-            # configurations applicable to a specified resource.
-            #
-            # @overload show_effective_flow_logs_configs(request, options = nil)
-            #   Pass arguments to `show_effective_flow_logs_configs` via a request object, either of type
-            #   {::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload show_effective_flow_logs_configs(parent: nil, resource: nil, page_size: nil, page_token: nil, filter: nil)
-            #   Pass arguments to `show_effective_flow_logs_configs` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param parent [::String]
-            #     Required. The parent resource of the VpcFlowLogsConfig, specified in
-            #     the following format: `projects/{project_id}/locations/global`
-            #   @param resource [::String]
-            #     Required. The resource to get the effective VPC Flow Logs configuration
-            #     for. The resource must belong to the same project as the parent. The
-            #     resource must be a network, subnetwork, interconnect attachment, VPN
-            #     tunnel, or a project.
-            #   @param page_size [::Integer]
-            #     Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
-            #   @param page_token [::String]
-            #     Optional. Page token from an earlier query, as returned in
-            #     `next_page_token`.
-            #   @param filter [::String]
-            #     Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
-            #     expression. A filter expression must use the supported [CEL logic
-            #     operators]
-            #     (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkManagement::V1::EffectiveVpcFlowLogsConfig>]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkManagement::V1::EffectiveVpcFlowLogsConfig>]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/network_management/v1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new
-            #
-            #   # Call the show_effective_flow_logs_configs method.
-            #   result = client.show_effective_flow_logs_configs request
-            #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
-            #   # over elements, and API calls will be issued to fetch pages as needed.
-            #   result.each do |item|
-            #     # Each element is of type ::Google::Cloud::NetworkManagement::V1::EffectiveVpcFlowLogsConfig.
-            #     p item
-            #   end
-            #
-            def show_effective_flow_logs_configs request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.show_effective_flow_logs_configs.metadata.to_h
-
-              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
-              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.parent
-                header_params["parent"] = request.parent
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.show_effective_flow_logs_configs.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.show_effective_flow_logs_configs.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @vpc_flow_logs_service_stub.call_rpc :show_effective_flow_logs_configs, request, options: options do |response, operation|
-                response = ::Gapic::PagedEnumerable.new @vpc_flow_logs_service_stub, :show_effective_flow_logs_configs, request, response, operation, options
-                yield response, operation if block_given?
-                throw :response, response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Configuration class for the VpcFlowLogsService API.
-            #
-            # This class represents the configuration for VpcFlowLogsService,
+            # This class represents the configuration for OrganizationVpcFlowLogsService,
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -995,13 +786,13 @@ module Google
             #   # Modify the global config, setting the timeout for
             #   # list_vpc_flow_logs_configs to 20 seconds,
             #   # and all remaining timeouts to 10 seconds.
-            #   ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.configure do |config|
+            #   ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.configure do |config|
             #     config.timeout = 10.0
             #     config.rpcs.list_vpc_flow_logs_configs.timeout = 20.0
             #   end
             #
             #   # Apply the above configuration only to a new client.
-            #   client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+            #   client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new do |config|
             #     config.timeout = 10.0
             #     config.rpcs.list_vpc_flow_logs_configs.timeout = 20.0
             #   end
@@ -1035,7 +826,7 @@ module Google
             #       json_key_io: ::File.open("/path/to/keyfile.json")
             #     )
             #
-            #     client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+            #     client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new do |config|
             #       config.credentials = credentials
             #     end
             #
@@ -1143,7 +934,7 @@ module Google
               end
 
               ##
-              # Configuration RPC class for the VpcFlowLogsService API.
+              # Configuration RPC class for the OrganizationVpcFlowLogsService API.
               #
               # Includes fields providing the configuration for each RPC in this service.
               # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -1185,16 +976,6 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_vpc_flow_logs_config
-                ##
-                # RPC-specific configuration for `query_org_vpc_flow_logs_configs`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :query_org_vpc_flow_logs_configs
-                ##
-                # RPC-specific configuration for `show_effective_flow_logs_configs`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :show_effective_flow_logs_configs
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1208,10 +989,6 @@ module Google
                   @update_vpc_flow_logs_config = ::Gapic::Config::Method.new update_vpc_flow_logs_config_config
                   delete_vpc_flow_logs_config_config = parent_rpcs.delete_vpc_flow_logs_config if parent_rpcs.respond_to? :delete_vpc_flow_logs_config
                   @delete_vpc_flow_logs_config = ::Gapic::Config::Method.new delete_vpc_flow_logs_config_config
-                  query_org_vpc_flow_logs_configs_config = parent_rpcs.query_org_vpc_flow_logs_configs if parent_rpcs.respond_to? :query_org_vpc_flow_logs_configs
-                  @query_org_vpc_flow_logs_configs = ::Gapic::Config::Method.new query_org_vpc_flow_logs_configs_config
-                  show_effective_flow_logs_configs_config = parent_rpcs.show_effective_flow_logs_configs if parent_rpcs.respond_to? :show_effective_flow_logs_configs
-                  @show_effective_flow_logs_configs = ::Gapic::Config::Method.new show_effective_flow_logs_configs_config
 
                   yield self if block_given?
                 end

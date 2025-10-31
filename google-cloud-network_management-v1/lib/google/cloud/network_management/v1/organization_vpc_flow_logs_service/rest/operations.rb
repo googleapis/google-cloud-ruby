@@ -22,7 +22,7 @@ module Google
   module Cloud
     module NetworkManagement
       module V1
-        module VpcFlowLogsService
+        module OrganizationVpcFlowLogsService
           module Rest
             # Service that implements Longrunning Operations API.
             class Operations
@@ -36,7 +36,7 @@ module Google
               attr_reader :operations_stub
 
               ##
-              # Configuration for the VpcFlowLogsService Operations API.
+              # Configuration for the OrganizationVpcFlowLogsService Operations API.
               #
               # @yield [config] Configure the Operations client.
               # @yieldparam config [Operations::Configuration]
@@ -50,7 +50,7 @@ module Google
               end
 
               ##
-              # Configure the VpcFlowLogsService Operations instance.
+              # Configure the OrganizationVpcFlowLogsService Operations instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes

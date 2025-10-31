@@ -21,8 +21,8 @@ module Google
   module Cloud
     module NetworkManagement
       module V1
-        module VpcFlowLogsService
-          # Path helper methods for the VpcFlowLogsService API.
+        module OrganizationVpcFlowLogsService
+          # Path helper methods for the OrganizationVpcFlowLogsService API.
           module Paths
             ##
             # Create a fully-qualified Location resource string.

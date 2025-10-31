@@ -24,8 +24,13 @@ module Google
         # Request for the `ListVpcFlowLogsConfigs` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the VpcFlowLogsConfig:
-        #         `projects/{project_id}/locations/global`
+        #     Required. The parent resource of the VpcFlowLogsConfig,
+        #     in one of the following formats:
+        #
+        #     - For project-level resourcs: `projects/{project_id}/locations/global`
+        #
+        #     - For organization-level resources:
+        #     `organizations/{organization_id}/locations/global`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Number of `VpcFlowLogsConfigs` to return.
@@ -64,8 +69,14 @@ module Google
         # Request for the `GetVpcFlowLogsConfig` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. `VpcFlowLogsConfig` resource name using the form:
-        #         `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+        #     Required. The resource name of the VpcFlowLogsConfig,
+        #     in one of the following formats:
+        #
+        #     - For project-level resources:
+        #     `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+        #
+        #     - For organization-level resources:
+        #     `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
         class GetVpcFlowLogsConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,8 +85,13 @@ module Google
         # Request for the `CreateVpcFlowLogsConfig` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the VPC Flow Logs configuration to create:
-        #         `projects/{project_id}/locations/global`
+        #     Required. The parent resource of the VpcFlowLogsConfig to create,
+        #     in one of the following formats:
+        #
+        #     - For project-level resources: `projects/{project_id}/locations/global`
+        #
+        #     - For organization-level resources:
+        #     `organizations/{organization_id}/locations/global`
         # @!attribute [rw] vpc_flow_logs_config_id
         #   @return [::String]
         #     Required. ID of the `VpcFlowLogsConfig`.
@@ -92,6 +108,12 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
         #     this field.
+        #     For example, to change the state of the configuration to ENABLED, specify
+        #       `update_mask` = `"state"`, and the `vpc_flow_logs_config` would be:
+        #       `vpc_flow_logs_config = {
+        #         name =
+        #         "projects/my-project/locations/global/vpcFlowLogsConfigs/my-config"
+        #         state = "ENABLED" }`
         # @!attribute [rw] vpc_flow_logs_config
         #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig]
         #     Required. Only fields specified in update_mask are updated.
@@ -103,9 +125,96 @@ module Google
         # Request for the `DeleteVpcFlowLogsConfig` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. `VpcFlowLogsConfig` resource name using the form:
-        #         `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+        #     Required. The resource name of the VpcFlowLogsConfig,
+        #     in one of the following formats:
+        #
+        #     - For a project-level resource:
+        #     `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+        #
+        #     - For an organization-level resource:
+        #     `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
         class DeleteVpcFlowLogsConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `QueryOrgVpcFlowLogsConfigs` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the VpcFlowLogsConfig, specified in
+        #     the following format: `projects/{project_id}/locations/global`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of `VpcFlowLogsConfigs` to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token from an earlier query, as returned in
+        #     `next_page_token`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+        #     A filter expression must use the supported [CEL logic operators]
+        #     (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+        class QueryOrgVpcFlowLogsConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the `QueryVpcFlowLogsConfigs` method.
+        # @!attribute [rw] vpc_flow_logs_configs
+        #   @return [::Array<::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig>]
+        #     List of VPC Flow Log configurations.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Page token to fetch the next set of configurations.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached (when querying all locations with `-`).
+        class QueryOrgVpcFlowLogsConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `ShowEffectiveFlowLogsConfigs` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the VpcFlowLogsConfig, specified in
+        #     the following format: `projects/{project_id}/locations/global`
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Required. The resource to get the effective VPC Flow Logs configuration
+        #     for. The resource must belong to the same project as the parent. The
+        #     resource must be a network, subnetwork, interconnect attachment, VPN
+        #     tunnel, or a project.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Number of `EffectiveVpcFlowLogsConfigs` to return. Default is 30.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token from an earlier query, as returned in
+        #     `next_page_token`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the `EffectiveVpcFlowLogsConfigs` that match the filter
+        #     expression. A filter expression must use the supported [CEL logic
+        #     operators]
+        #     (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+        class ShowEffectiveFlowLogsConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the `ShowEffectiveFlowLogsConfigs` method.
+        # @!attribute [rw] effective_flow_logs_configs
+        #   @return [::Array<::Google::Cloud::NetworkManagement::V1::EffectiveVpcFlowLogsConfig>]
+        #     List of Effective Vpc Flow Logs configurations.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Page token to fetch the next set of configurations.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached (when querying all locations with `-`).
+        class ShowEffectiveFlowLogsConfigsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -20,9 +20,9 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/network_management/v1/vpc_flow_logs_service"
+require "google/cloud/network_management/v1/organization_vpc_flow_logs_service"
 
-class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::ClientPathsTest < Minitest::Test
   class DummyStub
     def endpoint
       "endpoint.example.com"
@@ -44,7 +44,7 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientPathsTes
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -56,7 +56,7 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientPathsTes
   def test_organization_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -68,7 +68,7 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientPathsTes
   def test_vpc_flow_logs_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+      client = ::Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
