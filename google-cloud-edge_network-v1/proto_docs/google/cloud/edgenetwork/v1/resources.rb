@@ -192,6 +192,10 @@ module Google
         #   @return [::Array<::String>]
         #     Output only. Physical ports (e.g., TenGigE0/0/0/1) that form the
         #     interconnect.
+        # @!attribute [rw] remote_peering_network_type
+        #   @return [::Google::Cloud::EdgeNetwork::V1::RemotePeeringNetworkType]
+        #     Optional. The remote peering network type of the interconnect. It is
+        #     required when peering separation is enabled.
         class Interconnect
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -252,6 +256,10 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::EdgeNetwork::V1::ResourceState]
         #     Output only. Current stage of the resource to the device by config push.
+        # @!attribute [rw] peering_type
+        #   @return [::Google::Cloud::EdgeNetwork::V1::RemotePeeringNetworkType]
+        #     Optional. The remote peering network type of the underlying interconnect.
+        #     It is required when peering separation is enabled.
         class InterconnectAttachment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -657,6 +665,19 @@ module Google
 
           # The resource is under deletion.
           STATE_DELETING = 5
+        end
+
+        # Defines the remote peering destination for the interface. It is required
+        # when peering separation is enabled.
+        module RemotePeeringNetworkType
+          # Unspecified.
+          REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED = 0
+
+          # Customer's trusted internal network.
+          REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL = 1
+
+          # Customer's untrust network that has internet access.
+          REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET = 2
         end
       end
     end
