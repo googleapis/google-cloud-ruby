@@ -60,9 +60,9 @@ module Google
         end
 
         # An option for a drop-down `CustomField`.
-        # @!attribute [r] custom_field_option_id
+        # @!attribute [rw] custom_field_option_id
         #   @return [::Integer]
-        #     Output only. `CustomFieldOption` ID.
+        #     Optional. Non-empty default. `CustomFieldOption` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the `CustomFieldOption`.

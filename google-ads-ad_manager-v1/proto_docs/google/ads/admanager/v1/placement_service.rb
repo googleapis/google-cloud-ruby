@@ -40,8 +40,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of `Placements` to return. The service may
         #     return fewer than this value. If unspecified, at most 50 `Placements` will
-        #     be returned. The maximum value is 1000; values above 1000 will be coerced
-        #     to 1000.
+        #     be returned. The maximum value is 1000; values greater than 1000 will be
+        #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListPlacements` call.
@@ -82,7 +82,7 @@ module Google
         #     If a filter was included in the request, this reflects the total number
         #     after the filtering is applied.
         #
-        #     `total_size` will not be calculated in the response unless it has been
+        #     `total_size` won't be calculated in the response unless it has been
         #     included in a response field mask. The response field mask can be provided
         #     to the method by using the URL parameter `$fields` or `fields`, or by using
         #     the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -90,6 +90,142 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListPlacementsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreatePlacement` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `Placement` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] placement
+        #   @return [::Google::Ads::AdManager::V1::Placement]
+        #     Required. The `Placement` to create.
+        class CreatePlacementRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreatePlacements` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where the `Placement`s will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreatePlacementRequest messages match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreatePlacementRequest>]
+        #     Required. The `Placement` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreatePlacementsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreatePlacements` method.
+        # @!attribute [rw] placements
+        #   @return [::Array<::Google::Ads::AdManager::V1::Placement>]
+        #     The `Placement` objects created.
+        class BatchCreatePlacementsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdatePlacement` method.
+        # @!attribute [rw] placement
+        #   @return [::Google::Ads::AdManager::V1::Placement]
+        #     Required. The `Placement` to update.
+        #
+        #     The `Placement`'s name is used to identify the `Placement` to
+        #     update. Format:
+        #     `networks/{network_code}/placements/{placement_id}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        class UpdatePlacementRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdatePlacements` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Placements` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdatePlacementsRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdatePlacementRequest>]
+        #     Required. The `Placement` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdatePlacementsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdatePlacements` method.
+        # @!attribute [rw] placements
+        #   @return [::Array<::Google::Ads::AdManager::V1::Placement>]
+        #     The `Placement` objects updated.
+        class BatchUpdatePlacementsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchActivatePlacements` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `Placement` objects to activate.
+        #     Format: `networks/{network_code}/placements/{placement_id}`
+        class BatchActivatePlacementsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivatePlacements` method.
+        class BatchActivatePlacementsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivatePlacements` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `Placement` objects to deactivate.
+        #     Format: `networks/{network_code}/placements/{placement_id}`
+        class BatchDeactivatePlacementsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivatePlacements` method.
+        class BatchDeactivatePlacementsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchArchivePlacements` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `Placement` objects to archive.
+        #     Format: `networks/{network_code}/placements/{placement_id}`
+        class BatchArchivePlacementsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchArchivePlacements` method.
+        class BatchArchivePlacementsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
