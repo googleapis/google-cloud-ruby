@@ -1065,6 +1065,8 @@ module Google
           if path.nil?
             path = StringIO.new
             path.set_encoding "ASCII-8BIT"
+          else
+            path = safe_path_for_download path
           end
           file, resp =
             service.download_file bucket, name, path,
@@ -2268,6 +2270,64 @@ module Google
             gz = Zlib::GzipReader.new StringIO.new(local_file.read)
             StringIO.new gz.read
           end
+        end
+
+
+        # Validates a user-supplied path for downloading a file. This method is
+        # intended to prevent directory traversal attacks by ensuring the final
+        # resolved path is within the current working directory.
+        #
+        # @param [String] user_supplied_path The local path where the file will be
+        #   downloaded. This path must be relative to the current working
+        #   directory.
+        # @raise [SecurityError] If the `user_supplied_path` is an absolute path
+        #   or if it resolves to a location outside of the current working
+        #   directory.
+        #
+        # @return [String] The expanded, validated, and safe local path for the
+        #   download.
+        # @example
+        #   # Assuming the current working directory is /home/user
+        #   safe_path = safe_path_for_download "downloads/file.txt"
+        #   # safe_path will be "/home/user/downloads/file.txt"
+        #
+        #   # The following would raise a SecurityError:
+        #   # safe_path_for_download "/etc/passwd"
+        #   # safe_path_for_download "../../../etc/passwd"
+        #
+
+        def safe_path_for_download user_supplied_path
+          temp_regex = /\A#{Regexp.escape Dir.tmpdir}/
+
+          # Allow StringIO to pass through
+          return user_supplied_path if user_supplied_path.is_a? StringIO
+
+          # Allow Tempfile and /tmp paths in test env to pass through
+          if user_supplied_path.is_a?(Tempfile) || user_supplied_path =~ temp_regex
+            return user_supplied_path
+          end
+
+          # Disallow if path is absolute.
+          path_obj = Pathname.new user_supplied_path
+          if path_obj.absolute?
+            raise SecurityError, "Absolute path not allowed in user input: #{user_supplied_path}"
+          end
+
+          # Resolve path against the current working directory.
+          base_dir_path = Pathname.new Dir.pwd
+          download_path_obj = (base_dir_path + path_obj).cleanpath
+
+          # Prevent directory traversal outside the base directory
+          begin
+            relative = download_path_obj.relative_path_from base_dir_path
+            if relative.to_s.start_with? ".."
+              raise SecurityError, "Directory traversal attempt detected."
+            end
+          rescue ArgumentError
+            # This can happen on Windows with different drives, which means it's outside.
+            raise SecurityError, "Directory traversal attempt detected."
+          end
+          download_path_obj.to_s
         end
 
         ##

@@ -1040,4 +1040,35 @@ describe Google::Cloud::Storage::File, :storage do
       expect { uploaded_file.retention = retention }.must_raise Google::Cloud::PermissionDeniedError
     end
   end
+
+  describe "restricting downloading files to current working directory" do
+    let(:original) { File.new(files[:logo][:path]) }
+
+    def upload_logo
+      bucket.create_file(original, "CloudLogo.png")
+    end
+
+    def assert_security_error(path, expected_message)
+      uploaded = upload_logo
+
+      error = expect do
+        uploaded.download(path)
+      end.must_raise SecurityError
+
+      _(error.message).must_match expected_message
+      uploaded.delete
+    end
+
+    it "raises error when downloading to an absolute path" do
+      assert_security_error "/absolute/path/to/file.png", /Absolute path not allowed in user input/
+    end
+
+    it "raises error when downloading to a path with parent directory traversal" do
+      assert_security_error "../parent/directory/traversal/file.png", /Directory traversal attempt detected./
+    end
+
+    it "raises error when downloading to a nested path with parent directory traversal" do
+      assert_security_error "test/../../parent/directory/traversal/file.png", /Directory traversal attempt detected./
+    end
+  end
 end
