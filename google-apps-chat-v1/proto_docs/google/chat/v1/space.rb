@@ -322,10 +322,19 @@ module Google
           # Represents a space permission setting.
           # @!attribute [rw] managers_allowed
           #   @return [::Boolean]
-          #     Optional. Whether spaces managers have this permission.
+          #     Optional. Whether space owners
+          #     ({::Google::Apps::Chat::V1::Membership::MembershipRole::ROLE_MANAGER `ROLE_MANAGER`})
+          #     have this permission.
+          # @!attribute [rw] assistant_managers_allowed
+          #   @return [::Boolean]
+          #     Optional. Whether space managers
+          #     {::Google::Apps::Chat::V1::Membership::MembershipRole::ROLE_ASSISTANT_MANAGER `ROLE_ASSISTANT_MANAGER`})
+          #     have this permission.
           # @!attribute [rw] members_allowed
           #   @return [::Boolean]
-          #     Optional. Whether non-manager members have this permission.
+          #     Optional. Whether basic space members
+          #     ({::Google::Apps::Chat::V1::Membership::MembershipRole::ROLE_MEMBER `ROLE_MEMBER`})
+          #     have this permission.
           class PermissionSetting
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

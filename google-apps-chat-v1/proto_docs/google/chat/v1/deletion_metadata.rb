@@ -41,7 +41,7 @@ module Google
             # User deleted their own message.
             CREATOR = 1
 
-            # A space manager deleted the message.
+            # An owner or manager deleted the message.
             SPACE_OWNER = 2
 
             # A Google Workspace administrator deleted the message. Administrators can
