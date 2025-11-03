@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.0 (2025-11-03)
+
+#### Features
+
+* add the `ListOrganizations`, `FindSalesPartnerManagedClients`, and `ReportPropertyUsage` methods ([#32135](https://github.com/googleapis/google-cloud-ruby/issues/32135)) 
+* define AnalyticsServiceLevel and AnalyticsPropertyType enums in resources.proto 
+
 ### 0.2.1 (2025-10-27)
 
 #### Documentation
