@@ -1,5 +1,11 @@
 # Release History
 
+### 2.4.0 (2025-11-03)
+
+#### Features
+
+* Exposing AutoscalingConfig in InstancePartition ([#32122](https://github.com/googleapis/google-cloud-ruby/issues/32122)) 
+
 ### 2.3.1 (2025-10-27)
 
 #### Documentation
