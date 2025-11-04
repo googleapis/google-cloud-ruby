@@ -1697,6 +1697,119 @@ module Google
               end
 
               ##
+              # Fetch Backups for a given resource type.
+              #
+              # @overload fetch_backups_for_resource_type(request, options = nil)
+              #   Pass arguments to `fetch_backups_for_resource_type` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_backups_for_resource_type(parent: nil, resource_type: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, view: nil)
+              #   Pass arguments to `fetch_backups_for_resource_type` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Datasources are the parent resource for the backups.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backupVaultId}/dataSources/\\{datasourceId}
+              #   @param resource_type [::String]
+              #     Required. The type of the GCP resource.
+              #     Ex: sqladmin.googleapis.com/Instance
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of Backups to return. The service may
+              #     return fewer than this value. If unspecified, at most 50
+              #     Backups will be returned. The maximum value is 100; values
+              #     above 100 will be coerced to 100.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous call of
+              #     `FetchBackupsForResourceType`.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `FetchBackupsForResourceType` must match
+              #     the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. A filter expression that filters the results fetched in the
+              #     response. The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering. Supported
+              #     fields:
+              #   @param order_by [::String]
+              #     Optional. A comma-separated list of fields to order by, sorted in ascending
+              #     order. Use "desc" after a field name for descending.
+              #   @param view [::Google::Cloud::BackupDR::V1::BackupView]
+              #     Optional. This parameter is used to specify the view of the backup.
+              #     If not specified, the default view is BASIC.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::Backup>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::Backup>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new
+              #
+              #   # Call the fetch_backups_for_resource_type method.
+              #   result = client.fetch_backups_for_resource_type request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::Backup.
+              #     p item
+              #   end
+              #
+              def fetch_backups_for_resource_type request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_backups_for_resource_type.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_backups_for_resource_type.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_backups_for_resource_type.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.fetch_backups_for_resource_type request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :fetch_backups_for_resource_type, "backups", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets details of a Backup.
               #
               # @overload get_backup(request, options = nil)
@@ -3595,6 +3708,120 @@ module Google
               end
 
               ##
+              # Lists DataSourceReferences for a given project and location.
+              #
+              # @overload list_data_source_references(request, options = nil)
+              #   Pass arguments to `list_data_source_references` via a request object, either of type
+              #   {::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_data_source_references(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_data_source_references` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource name.
+              #     Format: projects/\\{project}/locations/\\{location}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of DataSourceReferences to return. The service
+              #     may return fewer than this value. If unspecified, at most 50
+              #     DataSourceReferences will be returned. The maximum value is 100; values
+              #     above 100 will be coerced to 100.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListDataSourceReferences`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListDataSourceReferences` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. A filter expression that filters the results listed in the
+              #     response. The expression must specify the field name, a comparison
+              #     operator, and the value that you want to use for filtering.
+              #
+              #     The following field and operator combinations are supported:
+              #
+              #     * data_source_gcp_resource_info.gcp_resourcename with `=`, `!=`
+              #     * data_source_gcp_resource_info.type with `=`, `!=`
+              #   @param order_by [::String]
+              #     Optional. A comma-separated list of fields to order by, sorted in ascending
+              #     order. Use "desc" after a field name for descending.
+              #
+              #     Supported fields:
+              #
+              #     * data_source
+              #     * data_source_gcp_resource_info.gcp_resourcename
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::DataSourceReference>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::DataSourceReference>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/backupdr/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new
+              #
+              #   # Call the list_data_source_references method.
+              #   result = client.list_data_source_references request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::BackupDR::V1::DataSourceReference.
+              #     p item
+              #   end
+              #
+              def list_data_source_references request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_data_source_references.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::BackupDR::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_data_source_references.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_data_source_references.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_dr_stub.list_data_source_references request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_data_source_references, "data_source_references", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Fetch DataSourceReferences for a given project, location and resource type.
               #
               # @overload fetch_data_source_references_for_resource_type(request, options = nil)
@@ -4048,6 +4275,11 @@ module Google
                   #
                   attr_reader :list_backups
                   ##
+                  # RPC-specific configuration for `fetch_backups_for_resource_type`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_backups_for_resource_type
+                  ##
                   # RPC-specific configuration for `get_backup`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4143,6 +4375,11 @@ module Google
                   #
                   attr_reader :get_data_source_reference
                   ##
+                  # RPC-specific configuration for `list_data_source_references`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_data_source_references
+                  ##
                   # RPC-specific configuration for `fetch_data_source_references_for_resource_type`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4183,6 +4420,8 @@ module Google
                     @update_data_source = ::Gapic::Config::Method.new update_data_source_config
                     list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
                     @list_backups = ::Gapic::Config::Method.new list_backups_config
+                    fetch_backups_for_resource_type_config = parent_rpcs.fetch_backups_for_resource_type if parent_rpcs.respond_to? :fetch_backups_for_resource_type
+                    @fetch_backups_for_resource_type = ::Gapic::Config::Method.new fetch_backups_for_resource_type_config
                     get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
                     @get_backup = ::Gapic::Config::Method.new get_backup_config
                     update_backup_config = parent_rpcs.update_backup if parent_rpcs.respond_to? :update_backup
@@ -4221,6 +4460,8 @@ module Google
                     @trigger_backup = ::Gapic::Config::Method.new trigger_backup_config
                     get_data_source_reference_config = parent_rpcs.get_data_source_reference if parent_rpcs.respond_to? :get_data_source_reference
                     @get_data_source_reference = ::Gapic::Config::Method.new get_data_source_reference_config
+                    list_data_source_references_config = parent_rpcs.list_data_source_references if parent_rpcs.respond_to? :list_data_source_references
+                    @list_data_source_references = ::Gapic::Config::Method.new list_data_source_references_config
                     fetch_data_source_references_for_resource_type_config = parent_rpcs.fetch_data_source_references_for_resource_type if parent_rpcs.respond_to? :fetch_data_source_references_for_resource_type
                     @fetch_data_source_references_for_resource_type = ::Gapic::Config::Method.new fetch_data_source_references_for_resource_type_config
                     initialize_service_config = parent_rpcs.initialize_service if parent_rpcs.respond_to? :initialize_service

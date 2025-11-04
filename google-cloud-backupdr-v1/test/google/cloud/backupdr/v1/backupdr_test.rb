@@ -1022,6 +1022,81 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
     end
   end
 
+  def test_fetch_backups_for_resource_type
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    resource_type = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+    view = :BACKUP_VIEW_UNSPECIFIED
+
+    fetch_backups_for_resource_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_backups_for_resource_type, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["resource_type"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal :BACKUP_VIEW_UNSPECIFIED, request["view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_backups_for_resource_type_client_stub do
+      # Create client
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_backups_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_backups_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_backups_for_resource_type ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_backups_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_backups_for_resource_type(::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_backups_for_resource_type_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_backup
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::BackupDR::V1::Backup.new
@@ -2263,6 +2338,77 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, get_data_source_reference_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_data_source_references
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_data_source_references_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_data_source_references, name
+      assert_kind_of ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_data_source_references_client_stub do
+      # Create client
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_data_source_references({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_data_source_references parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_data_source_references ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_data_source_references({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_data_source_references(::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_data_source_references_client_stub.call_rpc_count
     end
   end
 

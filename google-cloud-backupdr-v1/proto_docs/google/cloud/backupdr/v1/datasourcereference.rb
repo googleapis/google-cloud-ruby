@@ -47,6 +47,10 @@ module Google
         # @!attribute [r] data_source_gcp_resource_info
         #   @return [::Google::Cloud::BackupDR::V1::DataSourceGcpResourceInfo]
         #     Output only. The GCP resource that the DataSource is associated with.
+        # @!attribute [r] total_stored_bytes
+        #   @return [::Integer]
+        #     Output only. Total size of the storage used by all backup resources for the
+        #     referenced datasource.
         class DataSourceReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -92,6 +96,62 @@ module Google
         #     Format:
         #     projects/\\{project}/locations/\\{location}/dataSourceReferences/\\{data_source_reference}
         class GetDataSourceReferenceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the ListDataSourceReferences method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource name.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of DataSourceReferences to return. The service
+        #     may return fewer than this value. If unspecified, at most 50
+        #     DataSourceReferences will be returned. The maximum value is 100; values
+        #     above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListDataSourceReferences`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListDataSourceReferences` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter expression that filters the results listed in the
+        #     response. The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering.
+        #
+        #     The following field and operator combinations are supported:
+        #
+        #     * data_source_gcp_resource_info.gcp_resourcename with `=`, `!=`
+        #     * data_source_gcp_resource_info.type with `=`, `!=`
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields to order by, sorted in ascending
+        #     order. Use "desc" after a field name for descending.
+        #
+        #     Supported fields:
+        #
+        #     * data_source
+        #     * data_source_gcp_resource_info.gcp_resourcename
+        class ListDataSourceReferencesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the ListDataSourceReferences method.
+        # @!attribute [rw] data_source_references
+        #   @return [::Array<::Google::Cloud::BackupDR::V1::DataSourceReference>]
+        #     The DataSourceReferences from the specified parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDataSourceReferencesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

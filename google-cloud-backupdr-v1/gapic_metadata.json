@@ -80,6 +80,11 @@
                 "list_backups"
               ]
             },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetch_backups_for_resource_type"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "get_backup"
@@ -173,6 +178,11 @@
             "GetDataSourceReference": {
               "methods": [
                 "get_data_source_reference"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "list_data_source_references"
               ]
             },
             "FetchDataSourceReferencesForResourceType": {
