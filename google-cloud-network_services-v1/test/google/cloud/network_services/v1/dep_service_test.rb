@@ -723,6 +723,336 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
     end
   end
 
+  def test_list_lb_edge_extensions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_lb_edge_extensions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_lb_edge_extensions, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_lb_edge_extensions_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_lb_edge_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_lb_edge_extensions ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_lb_edge_extensions(::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_lb_edge_extensions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_lb_edge_extension
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::LbEdgeExtension.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_lb_edge_extension_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_lb_edge_extension, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_lb_edge_extension_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_lb_edge_extension({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_lb_edge_extension name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_lb_edge_extension ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_lb_edge_extension({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_lb_edge_extension(::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_lb_edge_extension_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_lb_edge_extension
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    lb_edge_extension_id = "hello world"
+    lb_edge_extension = {}
+    request_id = "hello world"
+
+    create_lb_edge_extension_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_lb_edge_extension, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["lb_edge_extension_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::LbEdgeExtension), request["lb_edge_extension"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_lb_edge_extension_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_lb_edge_extension parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_lb_edge_extension ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_lb_edge_extension(::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_lb_edge_extension_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_lb_edge_extension
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    lb_edge_extension = {}
+    request_id = "hello world"
+
+    update_lb_edge_extension_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_lb_edge_extension, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::LbEdgeExtension), request["lb_edge_extension"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_lb_edge_extension_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_lb_edge_extension update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_lb_edge_extension ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_lb_edge_extension(::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_lb_edge_extension_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_lb_edge_extension
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_lb_edge_extension_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_lb_edge_extension, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_lb_edge_extension_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_lb_edge_extension({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_lb_edge_extension name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_lb_edge_extension ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_lb_edge_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_lb_edge_extension(::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_lb_edge_extension_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_authz_extensions
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsResponse.new

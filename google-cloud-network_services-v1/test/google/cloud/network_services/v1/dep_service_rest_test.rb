@@ -638,6 +638,286 @@ class ::Google::Cloud::NetworkServices::V1::DepService::Rest::ClientTest < Minit
     end
   end
 
+  def test_list_lb_edge_extensions
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_lb_edge_extensions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::DepService::Rest::ServiceStub.stub :transcode_list_lb_edge_extensions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_lb_edge_extensions_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_lb_edge_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_lb_edge_extensions ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_lb_edge_extensions(::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_lb_edge_extensions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_lb_edge_extension
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::LbEdgeExtension.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_lb_edge_extension_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::DepService::Rest::ServiceStub.stub :transcode_get_lb_edge_extension_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_lb_edge_extension_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_lb_edge_extension({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_lb_edge_extension name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_lb_edge_extension ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_lb_edge_extension({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_lb_edge_extension(::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_lb_edge_extension_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_lb_edge_extension
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    lb_edge_extension_id = "hello world"
+    lb_edge_extension = {}
+    request_id = "hello world"
+
+    create_lb_edge_extension_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::DepService::Rest::ServiceStub.stub :transcode_create_lb_edge_extension_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_lb_edge_extension_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_lb_edge_extension parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_lb_edge_extension ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_lb_edge_extension(::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_lb_edge_extension_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_lb_edge_extension
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    lb_edge_extension = {}
+    request_id = "hello world"
+
+    update_lb_edge_extension_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::DepService::Rest::ServiceStub.stub :transcode_update_lb_edge_extension_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_lb_edge_extension_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_lb_edge_extension update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_lb_edge_extension ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_lb_edge_extension(::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_lb_edge_extension_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_lb_edge_extension
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_lb_edge_extension_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::DepService::Rest::ServiceStub.stub :transcode_delete_lb_edge_extension_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_lb_edge_extension_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_lb_edge_extension({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_lb_edge_extension name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_lb_edge_extension ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_lb_edge_extension({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_lb_edge_extension(::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_lb_edge_extension_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_authz_extensions
     # Create test objects.
     client_result = ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsResponse.new

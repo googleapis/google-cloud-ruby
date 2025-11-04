@@ -54,6 +54,16 @@ module Google
             rpc :UpdateLbRouteExtension, ::Google::Cloud::NetworkServices::V1::UpdateLbRouteExtensionRequest, ::Google::Longrunning::Operation
             # Deletes the specified `LbRouteExtension` resource.
             rpc :DeleteLbRouteExtension, ::Google::Cloud::NetworkServices::V1::DeleteLbRouteExtensionRequest, ::Google::Longrunning::Operation
+            # Lists `LbEdgeExtension` resources in a given project and location.
+            rpc :ListLbEdgeExtensions, ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest, ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsResponse
+            # Gets details of the specified `LbEdgeExtension` resource.
+            rpc :GetLbEdgeExtension, ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest, ::Google::Cloud::NetworkServices::V1::LbEdgeExtension
+            # Creates a new `LbEdgeExtension` resource in a given project and location.
+            rpc :CreateLbEdgeExtension, ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of the specified `LbEdgeExtension` resource.
+            rpc :UpdateLbEdgeExtension, ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest, ::Google::Longrunning::Operation
+            # Deletes the specified `LbEdgeExtension` resource.
+            rpc :DeleteLbEdgeExtension, ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest, ::Google::Longrunning::Operation
             # Lists `AuthzExtension` resources in a given project and location.
             rpc :ListAuthzExtensions, ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest, ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsResponse
             # Gets details of the specified `AuthzExtension` resource.
