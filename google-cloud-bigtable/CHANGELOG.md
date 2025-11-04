@@ -1,5 +1,11 @@
 # Release History
 
+### 2.12.2 (2025-11-04)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#32121](https://github.com/googleapis/google-cloud-ruby/issues/32121)) 
+
 ### 2.12.1 (2025-08-12)
 
 #### Bug Fixes
