@@ -468,6 +468,10 @@ module Google
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::RestrictedExportConfig]
           #     Optional. If set, restricted export configuration will be propagated and
           #     enforced on the linked dataset.
+          # @!attribute [rw] stored_procedure_config
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::StoredProcedureConfig]
+          #     Optional. If set, stored procedure configuration will be propagated and
+          #     enforced on the linked dataset.
           # @!attribute [rw] discovery_type
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DiscoveryType]
           #     Optional. Type of discovery of the listing on the discovery page.
@@ -730,6 +734,28 @@ module Google
               CATEGORY_TRAVEL_AND_TOURISM = 19
 
               CATEGORY_GOOGLE_EARTH_ENGINE = 20
+            end
+          end
+
+          # Stored procedure configuration, used to configure stored procedure sharing
+          # on linked dataset.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Optional. If true, enable sharing of stored procedure.
+          # @!attribute [r] allowed_stored_procedure_types
+          #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::StoredProcedureConfig::StoredProcedureType>]
+          #     Output only. Types of stored procedure supported to share.
+          class StoredProcedureConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum to specify the type of stored procedure to share.
+            module StoredProcedureType
+              # Default value. This value is unused.
+              STORED_PROCEDURE_TYPE_UNSPECIFIED = 0
+
+              # SQL stored procedure.
+              SQL_PROCEDURE = 1
             end
           end
 
