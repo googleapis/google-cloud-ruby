@@ -553,6 +553,10 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Optional. Output only. Reserved for future use.
+        # @!attribute [r] gcp_resource
+        #   @return [::Google::Cloud::BackupDR::V1::BackupGcpResource]
+        #     Output only. Unique identifier of the GCP resource that is being backed
+        #     up.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -764,6 +768,63 @@ module Google
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
         class FetchUsableBackupVaultsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the FetchBackupsForResourceType method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Datasources are the parent resource for the backups.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backupVaultId}/dataSources/\\{datasourceId}
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     Required. The type of the GCP resource.
+        #     Ex: sqladmin.googleapis.com/Instance
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of Backups to return. The service may
+        #     return fewer than this value. If unspecified, at most 50
+        #     Backups will be returned. The maximum value is 100; values
+        #     above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous call of
+        #     `FetchBackupsForResourceType`.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `FetchBackupsForResourceType` must match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter expression that filters the results fetched in the
+        #     response. The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. Supported
+        #     fields:
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields to order by, sorted in ascending
+        #     order. Use "desc" after a field name for descending.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::BackupDR::V1::BackupView]
+        #     Optional. This parameter is used to specify the view of the backup.
+        #     If not specified, the default view is BASIC.
+        class FetchBackupsForResourceTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the FetchBackupsForResourceType method.
+        # @!attribute [rw] backups
+        #   @return [::Array<::Google::Cloud::BackupDR::V1::Backup>]
+        #     The Backups from the specified parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchBackupsForResourceTypeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1165,6 +1226,22 @@ module Google
         #     Type of the resource. Use the Unified Resource Type,
         #     eg. compute.googleapis.com/Instance.
         class GcpResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Minimum details to identify a Google Cloud resource for a backup.
+        # @!attribute [rw] gcp_resourcename
+        #   @return [::String]
+        #     Name of the Google Cloud resource.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Location of the resource: <region>/<zone>/"global"/"unspecified".
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Type of the resource. Use the Unified Resource Type,
+        #     eg. compute.googleapis.com/Instance.
+        class BackupGcpResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

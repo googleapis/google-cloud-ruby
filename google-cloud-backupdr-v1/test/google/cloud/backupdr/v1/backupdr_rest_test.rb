@@ -879,6 +879,66 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_fetch_backups_for_resource_type
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    resource_type = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+    view = :BACKUP_VIEW_UNSPECIFIED
+
+    fetch_backups_for_resource_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_fetch_backups_for_resource_type_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_backups_for_resource_type_client_stub do
+        # Create client
+        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_backups_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_backups_for_resource_type parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_backups_for_resource_type ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_backups_for_resource_type({ parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_backups_for_resource_type(::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest.new(parent: parent, resource_type: resource_type, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_backups_for_resource_type_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_backup
     # Create test objects.
     client_result = ::Google::Cloud::BackupDR::V1::Backup.new
@@ -1936,6 +1996,64 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, get_data_source_reference_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_data_source_references
+    # Create test objects.
+    client_result = ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_data_source_references_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_list_data_source_references_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_data_source_references_client_stub do
+        # Create client
+        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_data_source_references({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_data_source_references parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_data_source_references ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_data_source_references({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_data_source_references(::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_data_source_references_client_stub.call_count
       end
     end
   end
