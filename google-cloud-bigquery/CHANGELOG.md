@@ -1,5 +1,14 @@
 # Release History
 
+### 1.61.0 (2025-11-04)
+
+#### Features
+
+* Support fine grained ACLs ([#31772](https://github.com/googleapis/google-cloud-ruby/issues/31772)) 
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#32121](https://github.com/googleapis/google-cloud-ruby/issues/32121)) 
+
 ### 1.60.0 (2025-10-24)
 
 #### Features
