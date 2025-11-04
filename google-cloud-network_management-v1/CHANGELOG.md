@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.6.0 (2025-11-03)
+
+#### Features
+
+* Enable organization-level support for VPC Flow Logs 
+#### Documentation
+
+* Various documentation and comment improvements, Enable organization-level support for VPC Flow Logs ([#32134](https://github.com/googleapis/google-cloud-ruby/issues/32134)) 
+
 ### 2.5.1 (2025-10-27)
 
 #### Documentation
