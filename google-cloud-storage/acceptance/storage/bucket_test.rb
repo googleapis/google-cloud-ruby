@@ -385,13 +385,12 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(storage.bucket(hns_bucket_name)).must_be :nil?
   end
-    
+
   describe "storage move file" do
     let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
     let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
     let :create_source_file do
-      file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
-      file = StringIO.new file_content
+      file = StringIO.new ""
       bucket.create_file file, source_file
     end
     it "moves a file for bucket" do

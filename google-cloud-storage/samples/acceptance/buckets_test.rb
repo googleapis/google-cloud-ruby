@@ -587,8 +587,7 @@ describe "Buckets Snippets" do
     let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
     let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
     let :create_source_file do
-      file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
-      file = StringIO.new file_content
+      file = StringIO.new ""
       bucket.create_file file, source_file
     end
     it "file is moved and old file is deleted" do
