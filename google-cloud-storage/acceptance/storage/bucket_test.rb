@@ -390,7 +390,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
     let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
     let :create_source_file do
-      file = StringIO.new ""
+      file = StringIO.new "test"
       bucket.create_file file, source_file
     end
     it "moves a file for bucket" do
