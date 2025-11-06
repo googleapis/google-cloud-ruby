@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.17.0 (2025-11-06)
+
+#### Features
+
+* add Stored Procedure Sharing support for analyticshub listings ([#32155](https://github.com/googleapis/google-cloud-ruby/issues/32155)) 
+* add tags support for Pub/Sub subscriptions 
+
 ### 0.16.1 (2025-10-27)
 
 #### Documentation
