@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.7.0 (2025-11-06)
+
+#### Features
+
+* Add support for LbEdgeExtension resource in NetworkServices API ([#32153](https://github.com/googleapis/google-cloud-ruby/issues/32153)) 
+
 ### 2.6.1 (2025-10-27)
 
 #### Documentation
