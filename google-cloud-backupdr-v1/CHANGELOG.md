@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.5.0 (2025-11-06)
+
+#### Features
+
+* Adding `FetchBackupsForResourceType` API ([#32154](https://github.com/googleapis/google-cloud-ruby/issues/32154)) 
+* Adding `ListDataSourceReferences` API 
+
 ### 1.4.1 (2025-10-27)
 
 #### Documentation
