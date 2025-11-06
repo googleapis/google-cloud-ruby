@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-ads-data_manager-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.ads.datamanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "datamanager_v1_generated_IngestionService_IngestAudienceMembers_sync",
+      "title": "Snippet for the ingest_audience_members call in the IngestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::IngestionService::Client#ingest_audience_members.",
+      "file": "ingestion_service/ingest_audience_members.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ingest_audience_members",
+        "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client#ingest_audience_members",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::IngestAudienceMembersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::IngestAudienceMembersResponse",
+        "client": {
+          "short_name": "IngestionService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client"
+        },
+        "method": {
+          "short_name": "IngestAudienceMembers",
+          "full_name": "google.ads.datamanager.v1.IngestionService.IngestAudienceMembers",
+          "service": {
+            "short_name": "IngestionService",
+            "full_name": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_IngestionService_RemoveAudienceMembers_sync",
+      "title": "Snippet for the remove_audience_members call in the IngestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::IngestionService::Client#remove_audience_members.",
+      "file": "ingestion_service/remove_audience_members.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_audience_members",
+        "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client#remove_audience_members",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::RemoveAudienceMembersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::RemoveAudienceMembersResponse",
+        "client": {
+          "short_name": "IngestionService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client"
+        },
+        "method": {
+          "short_name": "RemoveAudienceMembers",
+          "full_name": "google.ads.datamanager.v1.IngestionService.RemoveAudienceMembers",
+          "service": {
+            "short_name": "IngestionService",
+            "full_name": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_IngestionService_IngestEvents_sync",
+      "title": "Snippet for the ingest_events call in the IngestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::IngestionService::Client#ingest_events.",
+      "file": "ingestion_service/ingest_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ingest_events",
+        "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client#ingest_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::IngestEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::IngestEventsResponse",
+        "client": {
+          "short_name": "IngestionService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client"
+        },
+        "method": {
+          "short_name": "IngestEvents",
+          "full_name": "google.ads.datamanager.v1.IngestionService.IngestEvents",
+          "service": {
+            "short_name": "IngestionService",
+            "full_name": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_IngestionService_RetrieveRequestStatus_sync",
+      "title": "Snippet for the retrieve_request_status call in the IngestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::IngestionService::Client#retrieve_request_status.",
+      "file": "ingestion_service/retrieve_request_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_request_status",
+        "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client#retrieve_request_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::RetrieveRequestStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::RetrieveRequestStatusResponse",
+        "client": {
+          "short_name": "IngestionService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::IngestionService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveRequestStatus",
+          "full_name": "google.ads.datamanager.v1.IngestionService.RetrieveRequestStatus",
+          "service": {
+            "short_name": "IngestionService",
+            "full_name": "google.ads.datamanager.v1.IngestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
