@@ -151,6 +151,9 @@ module Google
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
         class ListDataSourceReferencesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
