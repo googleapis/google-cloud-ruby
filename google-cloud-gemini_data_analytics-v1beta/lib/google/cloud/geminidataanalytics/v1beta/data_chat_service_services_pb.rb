@@ -41,6 +41,8 @@ module Google
             # Creates a new conversation to persist the conversation history. Each
             # conversation will have multiple messages associated with it.
             rpc :CreateConversation, ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateConversationRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::Conversation
+            # Deletes a conversation.
+            rpc :DeleteConversation, ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest, ::Google::Protobuf::Empty
             # Gets details of a single conversation by using conversation id and parent.
             rpc :GetConversation, ::Google::Cloud::GeminiDataAnalytics::V1beta::GetConversationRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::Conversation
             # Lists all conversations for a given parent.

@@ -79,19 +79,27 @@ module Google
         #     statelessly (without managed conversation persistence and without an
         #     Agent) by passing all context inline.
         #
-        #     Note: The following fields are mutually exclusive: `inline_context`, `conversation_reference`, `data_agent_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `inline_context`, `conversation_reference`, `data_agent_context`, `client_managed_resource_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conversation_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ConversationReference]
         #     Optional. Reference to a persisted conversation and agent context.
         #     Use this to chat with an Agent using managed conversation persistence.
         #
-        #     Note: The following fields are mutually exclusive: `conversation_reference`, `inline_context`, `data_agent_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `conversation_reference`, `inline_context`, `data_agent_context`, `client_managed_resource_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_agent_context
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentContext]
         #     Optional. Context for the chat request. Use this to chat with an Agent
         #     statelessly, without managed conversation persistence.
         #
-        #     Note: The following fields are mutually exclusive: `data_agent_context`, `inline_context`, `conversation_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data_agent_context`, `inline_context`, `conversation_reference`, `client_managed_resource_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] client_managed_resource_context
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClientManagedResourceContext]
+        #     Optional. Context with client managed resources.
+        #     Some clients may not use GDA managed resources including
+        #     conversations and agents, instead they create and manage their own
+        #     conversations and agents resources.
+        #
+        #     Note: The following fields are mutually exclusive: `client_managed_resource_context`, `inline_context`, `conversation_reference`, `data_agent_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] project
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -158,6 +166,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Context with client managed resources.
+        # Some clients may not use GDA managed resources including
+        # conversations and agents, instead they create and manage their own
+        # conversations and agents resources.
+        # @!attribute [rw] inline_context
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Context]
+        #     Required. Context for the chat request. Use this to chat without GDA API
+        #     managed conversation and agent persistence by passing all context inline.
+        # @!attribute [rw] conversation_id
+        #   @return [::String]
+        #     Optional. The client managed conversation id.
+        # @!attribute [rw] agent_id
+        #   @return [::String]
+        #     Optional. The client managed agent id.
+        class ClientManagedResourceContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A message from an interaction between the user and the system.
         # @!attribute [rw] user_message
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::UserMessage]
@@ -198,32 +225,37 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TextMessage]
         #     A direct natural language response to the user message.
         #
-        #     Note: The following fields are mutually exclusive: `text`, `schema`, `data`, `analysis`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SchemaMessage]
         #     A message produced during schema resolution.
         #
-        #     Note: The following fields are mutually exclusive: `schema`, `text`, `data`, `analysis`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `schema`, `text`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataMessage]
         #     A message produced during data retrieval.
         #
-        #     Note: The following fields are mutually exclusive: `data`, `text`, `schema`, `analysis`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data`, `text`, `schema`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] analysis
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AnalysisMessage]
         #     A message produced during analysis.
         #
-        #     Note: The following fields are mutually exclusive: `analysis`, `text`, `schema`, `data`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `analysis`, `text`, `schema`, `data`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] chart
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ChartMessage]
         #     A message produced during chart generation.
         #
-        #     Note: The following fields are mutually exclusive: `chart`, `text`, `schema`, `data`, `analysis`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chart`, `text`, `schema`, `data`, `analysis`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] error
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ErrorMessage]
         #     An error message.
         #
-        #     Note: The following fields are mutually exclusive: `error`, `text`, `schema`, `data`, `analysis`, `chart`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `error`, `text`, `schema`, `data`, `analysis`, `chart`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] example_queries
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ExampleQueries]
+        #     Optional. A message containing example queries.
+        #
+        #     Note: The following fields are mutually exclusive: `example_queries`, `text`, `schema`, `data`, `analysis`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] group_id
         #   @return [::Integer]
         #     Identifies the group that the event belongs to. Similar events are deemed
@@ -238,9 +270,31 @@ module Google
         # @!attribute [rw] parts
         #   @return [::Array<::String>]
         #     Optional. The parts of the message.
+        # @!attribute [rw] text_type
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TextMessage::TextType]
+        #     Optional. The type of the text message.
         class TextMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the text message.
+          module TextType
+            # The default text type.
+            TEXT_TYPE_UNSPECIFIED = 0
+
+            # The text is a final response to the user question.
+            FINAL_RESPONSE = 1
+
+            # The text is a thinking plan generated by the thinking tool.
+            THOUGHT = 2
+
+            # The text is an informational message about the agent's progress, such as
+            # a tool being invoked. This is distinct from the agent's internal thought
+            # process (`THOUGHT`) and the final answer to the user
+            # (`FINAL_RESPONSE`). These messages provide insight into the agent's
+            # actions.
+            PROGRESS = 3
+          end
         end
 
         # A message produced during schema resolution.
@@ -294,8 +348,10 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `result`, `query`, `generated_sql`, `generated_looker_query`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generated_looker_query
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery]
         #     Looker Query generated by the system to retrieve data.
+        #     DEPRECATED: generated looker query is now under DataQuery.looker.
         #
         #     Note: The following fields are mutually exclusive: `generated_looker_query`, `query`, `generated_sql`, `result`, `big_query_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] big_query_job
@@ -347,6 +403,9 @@ module Google
         end
 
         # A query for retrieving data.
+        # @!attribute [rw] looker
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery]
+        #     Optional. A query for retrieving data from a Looker explore.
         # @!attribute [rw] question
         #   @return [::String]
         #     Optional. A natural language question to answer.
@@ -550,11 +609,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An error message.
+        # An error message from a tool call.
+        # This message is used to represent an error that occurred while an agent was
+        # trying to use a tool. It's important to note that not all errors are
+        # terminal. Many are recoverable, and the agent may use the information from
+        # this error message to self-correct and retry the tool call or try a
+        # different approach.
+        #
+        # For example, if a data query fails, the agent might receive an
+        # `ErrorMessage`, analyze it, and then generate a corrected query.
+        #
+        # Clients should be cautious about interpreting this message as a definitive
+        # failure. It can be part of the agent's normal, iterative process of
+        # completing a task. Surfacing these errors directly to end-users without
+        # context (e.g., as a "hard failure") may be misleading.
         # @!attribute [r] text
         #   @return [::String]
         #     Output only. The text of the error.
         class ErrorMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message containing derived and authored example queries.
+        # @!attribute [rw] example_queries
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ExampleQuery>]
+        #     Optional. A list of derived and authored example queries, providing
+        #     examples of relevant and commonly used SQL queries and their corresponding
+        #     natural language queries optionally present. Currently only used for
+        #     BigQuery data sources.
+        class ExampleQueries
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
