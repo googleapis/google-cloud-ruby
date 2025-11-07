@@ -4,10 +4,11 @@
 
 require 'google/protobuf'
 
+require 'google/ads/datamanager/v1/item_parameter_pb'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n)google/ads/datamanager/v1/cart_data.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\"\xc8\x01\n\x08\x43\x61rtData\x12\x18\n\x0bmerchant_id\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12 \n\x13merchant_feed_label\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12(\n\x1bmerchant_feed_language_code\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14transaction_discount\x18\x04 \x01(\x01\x42\x03\xe0\x41\x01\x12\x33\n\x05items\x18\x05 \x03(\x0b\x32\x1f.google.ads.datamanager.v1.ItemB\x03\xe0\x41\x01\"X\n\x04Item\x12 \n\x13merchant_product_id\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08quantity\x18\x02 \x01(\x03\x42\x03\xe0\x41\x01\x12\x17\n\nunit_price\x18\x03 \x01(\x01\x42\x03\xe0\x41\x01\x42\xcd\x01\n\x1d\x63om.google.ads.datamanager.v1B\rCartDataProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
+descriptor_data = "\n)google/ads/datamanager/v1/cart_data.proto\x12\x19google.ads.datamanager.v1\x1a.google/ads/datamanager/v1/item_parameter.proto\x1a\x1fgoogle/api/field_behavior.proto\"\xc8\x01\n\x08\x43\x61rtData\x12\x18\n\x0bmerchant_id\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12 \n\x13merchant_feed_label\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12(\n\x1bmerchant_feed_language_code\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14transaction_discount\x18\x04 \x01(\x01\x42\x03\xe0\x41\x01\x12\x33\n\x05items\x18\x05 \x03(\x0b\x32\x1f.google.ads.datamanager.v1.ItemB\x03\xe0\x41\x01\"\xc1\x01\n\x04Item\x12 \n\x13merchant_product_id\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08quantity\x18\x02 \x01(\x03\x42\x03\xe0\x41\x01\x12\x17\n\nunit_price\x18\x03 \x01(\x01\x42\x03\xe0\x41\x01\x12\x14\n\x07item_id\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12Q\n\x1a\x61\x64\x64itional_item_parameters\x18\x05 \x03(\x0b\x32(.google.ads.datamanager.v1.ItemParameterB\x03\xe0\x41\x01\x42\xcd\x01\n\x1d\x63om.google.ads.datamanager.v1B\rCartDataProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -22,6 +23,7 @@ rescue TypeError
   file = pool.add_serialized_file(serialized)
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
+    ["google.ads.datamanager.v1.ItemParameter", "google/ads/datamanager/v1/item_parameter.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor

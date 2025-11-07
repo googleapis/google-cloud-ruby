@@ -55,6 +55,15 @@ module Google
         #   @return [::Float]
         #     Optional. The unit price excluding tax, shipping, and any transaction level
         #     discounts.
+        # @!attribute [rw] item_id
+        #   @return [::String]
+        #     Optional. A unique identifier to reference the item.
+        # @!attribute [rw] additional_item_parameters
+        #   @return [::Array<::Google::Ads::DataManager::V1::ItemParameter>]
+        #     Optional. A bucket of any [event parameters related to an
+        #     item](https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference/events)
+        #     to be included within the event that were not already specified using other
+        #     structured fields.
         class Item
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

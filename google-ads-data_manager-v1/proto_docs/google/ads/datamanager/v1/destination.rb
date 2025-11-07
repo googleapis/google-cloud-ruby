@@ -95,6 +95,9 @@ module Google
 
             # Data Partner.
             DATA_PARTNER = 4
+
+            # Google Analytics.
+            GOOGLE_ANALYTICS_PROPERTY = 5
           end
         end
 

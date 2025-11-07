@@ -147,6 +147,9 @@ module Google
           # The system did not have the permissions needed to access the KEK.
           PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED = 24
 
+          # The system failed to authenticate with AWS.
+          PROCESSING_ERROR_REASON_AWS_AUTH_FAILED = 27
+
           # Failed to decrypt the
           # {::Google::Ads::DataManager::V1::UserIdentifier UserIdentifier} data using the
           # DEK.
@@ -189,6 +192,9 @@ module Google
 
           # Internal error.
           PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8
+
+          # The system failed to authenticate with AWS.
+          PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
         end
       end
     end

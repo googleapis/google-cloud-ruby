@@ -81,6 +81,22 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::UserProperties]
         #     Optional. Advertiser-assessed information about the user at the time that
         #     the event happened.
+        # @!attribute [rw] event_name
+        #   @return [::String]
+        #     Optional. The name of the event. Required for GA4 events.
+        # @!attribute [rw] client_id
+        #   @return [::String]
+        #     Optional. A unique identifier for the user instance of a web client for
+        #     this GA4 web stream.
+        # @!attribute [rw] user_id
+        #   @return [::String]
+        #     Optional. A unique identifier for a user, as defined by the advertiser.
+        # @!attribute [rw] additional_event_parameters
+        #   @return [::Array<::Google::Ads::DataManager::V1::EventParameter>]
+        #     Optional. A bucket of any [event
+        #     parameters](https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference/events)
+        #     to be included within the event that were not already specified using other
+        #     structured fields.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -127,6 +143,18 @@ module Google
         #     {::Google::Ads::DataManager::V1::Event#destination_references Event.destination_references}
         #     will be used.
         class CustomVariable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Event parameter for GA4 events.
+        # @!attribute [rw] parameter_name
+        #   @return [::String]
+        #     Required. The name of the parameter to use.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Required. The string representation of the value of the parameter to set.
+        class EventParameter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

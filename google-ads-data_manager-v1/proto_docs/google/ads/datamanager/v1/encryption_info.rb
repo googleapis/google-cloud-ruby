@@ -25,6 +25,13 @@ module Google
         # @!attribute [rw] gcp_wrapped_key_info
         #   @return [::Google::Ads::DataManager::V1::GcpWrappedKeyInfo]
         #     Google Cloud Platform wrapped key information.
+        #
+        #     Note: The following fields are mutually exclusive: `gcp_wrapped_key_info`, `aws_wrapped_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] aws_wrapped_key_info
+        #   @return [::Google::Ads::DataManager::V1::AwsWrappedKeyInfo]
+        #     Amazon Web Services wrapped key information.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_wrapped_key_info`, `gcp_wrapped_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EncryptionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -50,6 +57,36 @@ module Google
         #   @return [::String]
         #     Required. The base64 encoded encrypted data encryption key.
         class GcpWrappedKeyInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of algorithm used to encrypt the data.
+          module KeyType
+            # Unspecified key type. Should never be used.
+            KEY_TYPE_UNSPECIFIED = 0
+
+            # Algorithm XChaCha20-Poly1305
+            XCHACHA20_POLY1305 = 1
+          end
+        end
+
+        # A data encryption key wrapped by an AWS KMS key.
+        # @!attribute [rw] key_type
+        #   @return [::Google::Ads::DataManager::V1::AwsWrappedKeyInfo::KeyType]
+        #     Required. The type of algorithm used to encrypt the data.
+        # @!attribute [rw] role_arn
+        #   @return [::String]
+        #     Required. The Amazon Resource Name of the IAM Role to assume for KMS
+        #     decryption access. Should be in the format of
+        #     "arn:\\{partition}:iam::\\{account_id}:role/\\{role_name}"
+        # @!attribute [rw] kek_uri
+        #   @return [::String]
+        #     Required. The URI of the AWS KMS key used to decrypt the DEK. Should be in
+        #     the format of "arn:\\{partition}:kms:\\{region}:\\{account_id}:key/\\{key_id}"
+        # @!attribute [rw] encrypted_dek
+        #   @return [::String]
+        #     Required. The base64 encoded encrypted data encryption key.
+        class AwsWrappedKeyInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
