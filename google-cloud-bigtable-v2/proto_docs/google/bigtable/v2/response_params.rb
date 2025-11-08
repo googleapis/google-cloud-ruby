@@ -29,6 +29,9 @@ module Google
         #   @return [::String]
         #     Identifier for a cluster that represents set of
         #     bigtable resources.
+        # @!attribute [rw] afe_id
+        #   @return [::Integer]
+        #     The AFE ID for the AFE that is served this request.
         class ResponseParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
