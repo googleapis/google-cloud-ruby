@@ -22,7 +22,7 @@ jobs:
     - name: Install Ruby 3.4
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.4"
+        ruby-version: "3.4.7"
     - name: Install tools
       run: |
         gem install --no-document toys

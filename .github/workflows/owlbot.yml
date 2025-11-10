@@ -22,7 +22,7 @@ jobs:
     - name: Install Ruby 3.3
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.3"
+        ruby-version: "3.4.7"
     - name: Install Bazel
       uses: bazel-contrib/setup-bazel@0.15.0
     - name: Install tools
