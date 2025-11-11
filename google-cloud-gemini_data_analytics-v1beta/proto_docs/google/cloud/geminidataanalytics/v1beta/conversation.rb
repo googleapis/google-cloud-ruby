@@ -31,7 +31,7 @@ module Google
         #     https://google.aip.dev/122#resource-id-segments
         #
         #     Example:
-        #     `projects/1234567890/locations/us-central1/conversations/my-conversation`.
+        #     `projects/1234567890/locations/global/conversations/my-conversation`.
         #
         #     It is recommended to skip setting this field during conversation creation
         #     as it will be inferred automatically and overwritten with the
@@ -120,7 +120,7 @@ module Google
         #   @return [::String]
         #     Optional. Returned conversations will match criteria specified within the
         #     filter. ListConversations allows filtering by:
-        #      * agent_id
+        #      * agents
         #      * labels
         class ListConversationsRequest
           include ::Google::Protobuf::MessageExts
@@ -135,6 +135,17 @@ module Google
         #   @return [::String]
         #     A token identifying a page of results the server should return.
         class ListConversationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for deleting a conversation based on parent and conversation id.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/conversations/{conversation}`
+        class DeleteConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

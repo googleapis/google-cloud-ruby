@@ -167,6 +167,14 @@ module Google
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Schema]
         #     Optional. The schema of the datasource.
+        # @!attribute [rw] struct_schema
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. A struct representation of the schema.
+        #     This is populated for datasources with schemas that cannot be
+        #     fully represented by the strongly-typed `schema` field.
+        #
+        #     For Looker datasources, this maps to the LookmlModelExplore type:
+        #     https://cloud.google.com/looker/docs/reference/looker-api/latest/types/LookmlModelExplore
         class Datasource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -180,15 +188,17 @@ module Google
         #   @return [::String]
         #     Optional. A textual description of the table's content and purpose.
         #     For example: "Contains information about customer orders in our e-commerce
-        #     store."
+        #     store." Currently only used for BigQuery data sources.
         # @!attribute [rw] synonyms
         #   @return [::Array<::String>]
         #     Optional. A list of alternative names or synonyms that can be used to refer
-        #     to the table. For example: ["sales", "orders", "purchases"]
+        #     to the table. For example: ["sales", "orders", "purchases"]. Currently only
+        #     used for BigQuery data sources.
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
         #     Optional. A list of tags or keywords associated with the table, used for
-        #     categorization. For example: ["transaction", "revenue", "customer_data"]
+        #     categorization. For example: ["transaction", "revenue", "customer_data"].
+        #     Currently only used for BigQuery data sources.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Table display_name (same as label in
@@ -219,11 +229,13 @@ module Google
         # @!attribute [rw] synonyms
         #   @return [::Array<::String>]
         #     Optional. A list of alternative names or synonyms that can be used to refer
-        #     to this field. For example: ["id", "customerid", "cust_id"]
+        #     to this field. For example: ["id", "customerid", "cust_id"]. Currently only
+        #     used for BigQuery data sources.
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
         #     Optional. A list of tags or keywords associated with the field, used for
-        #     categorization. For example: ["identifier", "customer", "pii"]
+        #     categorization. For example: ["identifier", "customer", "pii"]. Currently
+        #     only used for BigQuery data sources.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Field display_name (same as label in

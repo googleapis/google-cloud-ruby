@@ -75,7 +75,7 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.timeout = 60.0
+                  default_config.timeout = 600.0
                   default_config.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
@@ -214,7 +214,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload chat(inline_context: nil, conversation_reference: nil, data_agent_context: nil, project: nil, parent: nil, messages: nil)
+              # @overload chat(inline_context: nil, conversation_reference: nil, data_agent_context: nil, client_managed_resource_context: nil, project: nil, parent: nil, messages: nil)
               #   Pass arguments to `chat` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -224,17 +224,24 @@ module Google
               #     statelessly (without managed conversation persistence and without an
               #     Agent) by passing all context inline.
               #
-              #     Note: The following parameters are mutually exclusive: `inline_context`, `conversation_reference`, `data_agent_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `inline_context`, `conversation_reference`, `data_agent_context`, `client_managed_resource_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param conversation_reference [::Google::Cloud::GeminiDataAnalytics::V1beta::ConversationReference, ::Hash]
               #     Optional. Reference to a persisted conversation and agent context.
               #     Use this to chat with an Agent using managed conversation persistence.
               #
-              #     Note: The following parameters are mutually exclusive: `conversation_reference`, `inline_context`, `data_agent_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `conversation_reference`, `inline_context`, `data_agent_context`, `client_managed_resource_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param data_agent_context [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentContext, ::Hash]
               #     Optional. Context for the chat request. Use this to chat with an Agent
               #     statelessly, without managed conversation persistence.
               #
-              #     Note: The following parameters are mutually exclusive: `data_agent_context`, `inline_context`, `conversation_reference`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `data_agent_context`, `inline_context`, `conversation_reference`, `client_managed_resource_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param client_managed_resource_context [::Google::Cloud::GeminiDataAnalytics::V1beta::ClientManagedResourceContext, ::Hash]
+              #     Optional. Context with client managed resources.
+              #     Some clients may not use GDA managed resources including
+              #     conversations and agents, instead they create and manage their own
+              #     conversations and agents resources.
+              #
+              #     Note: The following parameters are mutually exclusive: `client_managed_resource_context`, `inline_context`, `conversation_reference`, `data_agent_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param project [::String]
               #     Optional. The Google Cloud project to be used for quota and billing.
               #   @param parent [::String]
@@ -398,6 +405,86 @@ module Google
               end
 
               ##
+              # Deletes a conversation.
+              #
+              # @overload delete_conversation(request, options = nil)
+              #   Pass arguments to `delete_conversation` via a request object, either of type
+              #   {::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_conversation(name: nil)
+              #   Pass arguments to `delete_conversation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource.
+              #     Format:
+              #     `projects/{project}/locations/{location}/conversations/{conversation}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gemini_data_analytics/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new
+              #
+              #   # Call the delete_conversation method.
+              #   result = client.delete_conversation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_conversation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_conversation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_conversation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_conversation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_chat_service_stub.delete_conversation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets details of a single conversation by using conversation id and parent.
               #
               # @overload get_conversation(request, options = nil)
@@ -507,7 +594,7 @@ module Google
               #   @param filter [::String]
               #     Optional. Returned conversations will match criteria specified within the
               #     filter. ListConversations allows filtering by:
-              #      * agent_id
+              #      * agents
               #      * labels
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GeminiDataAnalytics::V1beta::Conversation>]
@@ -836,6 +923,11 @@ module Google
                   #
                   attr_reader :create_conversation
                   ##
+                  # RPC-specific configuration for `delete_conversation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_conversation
+                  ##
                   # RPC-specific configuration for `get_conversation`
                   # @return [::Gapic::Config::Method]
                   #
@@ -857,6 +949,8 @@ module Google
                     @chat = ::Gapic::Config::Method.new chat_config
                     create_conversation_config = parent_rpcs.create_conversation if parent_rpcs.respond_to? :create_conversation
                     @create_conversation = ::Gapic::Config::Method.new create_conversation_config
+                    delete_conversation_config = parent_rpcs.delete_conversation if parent_rpcs.respond_to? :delete_conversation
+                    @delete_conversation = ::Gapic::Config::Method.new delete_conversation_config
                     get_conversation_config = parent_rpcs.get_conversation if parent_rpcs.respond_to? :get_conversation
                     @get_conversation = ::Gapic::Config::Method.new get_conversation_config
                     list_conversations_config = parent_rpcs.list_conversations if parent_rpcs.respond_to? :list_conversations

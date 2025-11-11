@@ -69,6 +69,11 @@
                 "create_conversation"
               ]
             },
+            "DeleteConversation": {
+              "methods": [
+                "delete_conversation"
+              ]
+            },
             "GetConversation": {
               "methods": [
                 "get_conversation"

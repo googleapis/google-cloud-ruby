@@ -412,6 +412,46 @@
       ]
     },
     {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_sync",
+      "title": "Snippet for the delete_conversation call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#delete_conversation.",
+      "file": "data_chat_service/delete_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversation",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#delete_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversation",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.DeleteConversation",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_GetConversation_sync",
       "title": "Snippet for the get_conversation call in the DataChatService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#get_conversation.",
