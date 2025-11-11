@@ -89,6 +89,7 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    product_id_base64_url_encoded = true
 
     list_local_inventories_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +105,27 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest
         end
 
         # Use hash object
-        client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_local_inventories parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_local_inventories parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -144,6 +145,7 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest
     # Create request parameters for a unary method.
     parent = "hello world"
     local_inventory = {}
+    product_id_base64_url_encoded = true
 
     insert_local_inventory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -159,27 +161,27 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest
         end
 
         # Use hash object
-        client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }) do |_result, response|
+        client.insert_local_inventory({ parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert_local_inventory parent: parent, local_inventory: local_inventory do |_result, response|
+        client.insert_local_inventory parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory) do |_result, response|
+        client.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }, call_options) do |_result, response|
+        client.insert_local_inventory({ parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory), call_options) do |_result, response|
+        client.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -198,6 +200,7 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest
 
     # Create request parameters for a unary method.
     name = "hello world"
+    product_id_base64_url_encoded = true
 
     delete_local_inventory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -213,27 +216,27 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest
         end
 
         # Use hash object
-        client.delete_local_inventory({ name: name }) do |_result, response|
+        client.delete_local_inventory({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_local_inventory name: name do |_result, response|
+        client.delete_local_inventory name: name, product_id_base64_url_encoded: product_id_base64_url_encoded do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name) do |_result, response|
+        client.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_local_inventory({ name: name }, call_options) do |_result, response|
+        client.delete_local_inventory({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name), call_options) do |_result, response|
+        client.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
