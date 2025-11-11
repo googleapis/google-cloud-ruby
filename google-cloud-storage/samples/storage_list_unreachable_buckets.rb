@@ -16,7 +16,7 @@
 def list_unreachable_buckets
   require "google/cloud/storage"
 
-  storage = Google::Cloud::Storage.new  
+  storage = Google::Cloud::Storage.new
   bucket_list = storage.buckets(return_partial_success: true)
   bucket_list.unreachable.each do |bucket|
     puts bucket

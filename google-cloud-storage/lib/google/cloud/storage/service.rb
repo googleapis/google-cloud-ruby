@@ -102,7 +102,8 @@ module Google
               @project, prefix: prefix, page_token: token, max_results: max,
                         user_project: user_project(user_project),
                         soft_deleted: soft_deleted,
-                        return_partial_success: return_partial_success, options: options
+                        return_partial_success: return_partial_success,
+                        options: options
           end
         end
 

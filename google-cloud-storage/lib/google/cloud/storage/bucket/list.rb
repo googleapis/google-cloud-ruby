@@ -27,6 +27,13 @@ module Google
           # that match the request and this value should be passed to
           # the next {Google::Cloud::Storage::Project#buckets} to continue.
           attr_accessor :token
+          ##
+          # The list of buckets that could not be reached.
+          #
+          # This is only populated when `return_partial_success` is set to `true`
+          # in the call to {Google::Cloud::Storage::Project#buckets}.
+          #
+          # @return [Array<String>]
           attr_reader :unreachable
 
           ##
