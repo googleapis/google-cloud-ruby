@@ -31,7 +31,6 @@ module Google
               # REST client for the ProductInputsService service.
               #
               # Service to use ProductInput resource.
-              # This service works for products with online channel only.
               #
               class Client
                 # @private
@@ -185,13 +184,15 @@ module Google
 
                 ##
                 # [Uploads a product input to your Merchant Center
-                # account](/merchant/api/guides/products/overview#upload-product-input). You
-                # must have a products data source to be able to insert a product. The unique
-                # identifier of the data source is passed as a query parameter in the request
-                # URL.
+                # account](/merchant/api/guides/products/add-manage#add_a_product). You
+                # must have a products [data
+                # source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source)
+                # to be able to insert a product. The unique identifier of the data source is
+                # passed as a query parameter in the request URL.
                 #
-                # If an input with the same contentLanguage, offerId, and dataSource already
-                # exists, this method replaces that entry.
+                # If a product input with the same contentLanguage, offerId, and dataSource
+                # already exists, then the product input inserted by this method replaces
+                # that entry.
                 #
                 # After inserting, updating, or deleting a product input, it may take several
                 # minutes before the processed product can be retrieved.
@@ -220,8 +221,8 @@ module Google
                 #     Required. The primary or supplemental product data source name. If the
                 #     product already exists and data source provided is different, then the
                 #     product will be moved to a new data source. For more information, see
-                #     [Overview of Data sources
-                #     sub-API](/merchant/api/guides/data-sources/overview).
+                #     [Create a primary data
+                #     source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source).
                 #
                 #     Only API data sources are supported.
                 #
@@ -301,7 +302,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload update_product_input(product_input: nil, update_mask: nil, data_source: nil)
+                # @overload update_product_input(product_input: nil, update_mask: nil, data_source: nil, product_id_base64_url_encoded: nil)
                 #   Pass arguments to `update_product_input` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -333,6 +334,18 @@ module Google
                 #
                 #     Format: `accounts/{account}/dataSources/{datasource}`. For example,
                 #     `accounts/123456/dataSources/104628`.
+                #   @param product_id_base64_url_encoded [::Boolean]
+                #     Optional. If true, the `{productInput}` in the `name` field of the request
+                #     will be interpreted as unpadded base64url-encoded and decoded during
+                #     request processing to match the decoded value. Default value is `false`.
+                #     Use this if your `{productInput}` contains special characters, such as
+                #     forward slash
+                #     `/` or other characters that are unpadded base64url-encoded (as per RFC
+                #     7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+                #
+                #     Note that future versions of the API will only accept unpadded
+                #     base64url-encoded product ids, so we strongly recommend proactively setting
+                #     this to `true` and encoding the product ids.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -407,7 +420,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload delete_product_input(name: nil, data_source: nil)
+                # @overload delete_product_input(name: nil, data_source: nil, product_id_base64_url_encoded: nil)
                 #   Pass arguments to `delete_product_input` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -415,15 +428,27 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the product input resource to delete.
                 #     Format: `accounts/{account}/productInputs/{product}`
-                #     where the last section `product` consists of 4 parts:
-                #     `channel~content_language~feed_label~offer_id`
+                #     where the last section `product` consists of:
+                #     `content_language~feed_label~offer_id`
                 #     example for product name is
-                #     `accounts/123/productInputs/online~en~US~sku123`.
+                #     `accounts/123/productInputs/en~US~sku123`.
                 #   @param data_source [::String]
                 #     Required. The primary or supplemental data source from which the product
                 #     input should be deleted. Format:
                 #     `accounts/{account}/dataSources/{datasource}`. For example,
                 #     `accounts/123456/dataSources/104628`.
+                #   @param product_id_base64_url_encoded [::Boolean]
+                #     Optional. If true, the `{productInput}` in the `name` field of the request
+                #     will be interpreted as unpadded base64url-encoded and decoded during
+                #     request processing to match the decoded value. Default value is `false`.
+                #     Use this if your `{productInput}` contains special characters, such as
+                #     forward slash
+                #     `/` or other characters that are unpadded base64url-encoded (as per RFC
+                #     7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+                #
+                #     Note that future versions of the API will only accept unpadded
+                #     base64url-encoded product ids, so we strongly recommend proactively setting
+                #     this to `true` and encoding the product ids.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

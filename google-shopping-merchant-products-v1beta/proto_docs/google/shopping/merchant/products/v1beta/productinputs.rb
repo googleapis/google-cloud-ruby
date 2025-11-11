@@ -52,10 +52,14 @@ module Google
           #   @return [::String]
           #     Identifier. The name of the product input.
           #     Format: `accounts/{account}/productInputs/{productinput}`
-          #     where the last section `productinput` consists of 4 parts:
-          #     `channel~content_language~feed_label~offer_id`
+          #     where the last section `productinput` consists of:
+          #     `content_language~feed_label~offer_id`
           #     example for product input name is
-          #     `accounts/123/productInputs/online~en~US~sku123`
+          #     `accounts/123/productInputs/en~US~sku123`. A legacy local product input
+          #     name would be `accounts/123/productInputs/local~en~US~sku123`.
+          #     Note: For calls to the v1beta version, the `productInput` section consists
+          #     of: `channel~content_language~feed_label~offer_id`, for example:
+          #     `accounts/123/productInputs/online~en~US~sku123`.
           # @!attribute [r] product
           #   @return [::String]
           #     Output only. The name of the processed product.
@@ -80,8 +84,8 @@ module Google
           #     product.
           # @!attribute [rw] feed_label
           #   @return [::String]
-          #     Required. Immutable. The label that lets you categorize and identify your
-          #     products. The maximum allowed characters are 20, and the supported
+          #     Required. Immutable. The feed label that lets you categorize and identify
+          #     your products. The maximum allowed characters are 20, and the supported
           #     characters are `A-Z`, `0-9`, hyphen, and underscore. The feed label must
           #     not include any spaces. For more information, see [Using feed
           #     labels](//support.google.com/merchants/answer/14994087).
@@ -136,8 +140,8 @@ module Google
           #     Required. The primary or supplemental product data source name. If the
           #     product already exists and data source provided is different, then the
           #     product will be moved to a new data source. For more information, see
-          #     [Overview of Data sources
-          #     sub-API](/merchant/api/guides/data-sources/overview).
+          #     [Create a primary data
+          #     source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source).
           #
           #     Only API data sources are supported.
           #
@@ -182,6 +186,19 @@ module Google
           #
           #     Format: `accounts/{account}/dataSources/{datasource}`. For example,
           #     `accounts/123456/dataSources/104628`.
+          # @!attribute [rw] product_id_base64_url_encoded
+          #   @return [::Boolean]
+          #     Optional. If true, the `{productInput}` in the `name` field of the request
+          #     will be interpreted as unpadded base64url-encoded and decoded during
+          #     request processing to match the decoded value. Default value is `false`.
+          #     Use this if your `{productInput}` contains special characters, such as
+          #     forward slash
+          #     `/` or other characters that are unpadded base64url-encoded (as per RFC
+          #     7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+          #
+          #     Note that future versions of the API will only accept unpadded
+          #     base64url-encoded product ids, so we strongly recommend proactively setting
+          #     this to `true` and encoding the product ids.
           class UpdateProductInputRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -192,16 +209,29 @@ module Google
           #   @return [::String]
           #     Required. The name of the product input resource to delete.
           #     Format: `accounts/{account}/productInputs/{product}`
-          #     where the last section `product` consists of 4 parts:
-          #     `channel~content_language~feed_label~offer_id`
+          #     where the last section `product` consists of:
+          #     `content_language~feed_label~offer_id`
           #     example for product name is
-          #     `accounts/123/productInputs/online~en~US~sku123`.
+          #     `accounts/123/productInputs/en~US~sku123`.
           # @!attribute [rw] data_source
           #   @return [::String]
           #     Required. The primary or supplemental data source from which the product
           #     input should be deleted. Format:
           #     `accounts/{account}/dataSources/{datasource}`. For example,
           #     `accounts/123456/dataSources/104628`.
+          # @!attribute [rw] product_id_base64_url_encoded
+          #   @return [::Boolean]
+          #     Optional. If true, the `{productInput}` in the `name` field of the request
+          #     will be interpreted as unpadded base64url-encoded and decoded during
+          #     request processing to match the decoded value. Default value is `false`.
+          #     Use this if your `{productInput}` contains special characters, such as
+          #     forward slash
+          #     `/` or other characters that are unpadded base64url-encoded (as per RFC
+          #     7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+          #
+          #     Note that future versions of the API will only accept unpadded
+          #     base64url-encoded product ids, so we strongly recommend proactively setting
+          #     this to `true` and encoding the product ids.
           class DeleteProductInputRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
