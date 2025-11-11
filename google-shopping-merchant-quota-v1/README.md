@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/shopping/merchant/quota/v1"
 
-client = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new
-request = ::Google::Shopping::Merchant::Quota::V1::ListQuotaGroupsRequest.new # (request fields as keyword arguments...)
-response = client.list_quota_groups request
+client = ::Google::Shopping::Merchant::Quota::V1::AccountLimitsService::Client.new
+request = ::Google::Shopping::Merchant::Quota::V1::GetAccountLimitRequest.new # (request fields as keyword arguments...)
+response = client.get_account_limit request
 ```
 
 View the [Client Library Documentation](https://rubydoc.info/gems/google-shopping-merchant-quota-v1)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/shopping/merchant/quota/v1"
 require "logger"
 
-client = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new do |config|
+client = ::Google::Shopping::Merchant::Quota::V1::AccountLimitsService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
