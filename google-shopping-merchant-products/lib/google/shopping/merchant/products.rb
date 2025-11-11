@@ -49,7 +49,6 @@ module Google
         # ## About ProductInputsService
         #
         # Service to use ProductInput resource.
-        # This service works for products with online channel only.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1beta`.
