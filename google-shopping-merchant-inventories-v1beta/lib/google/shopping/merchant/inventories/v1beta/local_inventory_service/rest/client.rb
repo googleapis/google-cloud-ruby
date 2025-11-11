@@ -200,7 +200,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload list_local_inventories(parent: nil, page_size: nil, page_token: nil)
+                # @overload list_local_inventories(parent: nil, page_size: nil, page_token: nil, product_id_base64_url_encoded: nil)
                 #   Pass arguments to `list_local_inventories` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -223,6 +223,17 @@ module Google
                 #     must match the call that provided the page token. The token returned as
                 #     {::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesResponse#next_page_token nextPageToken}
                 #     in the response to the previous request.
+                #   @param product_id_base64_url_encoded [::Boolean]
+                #     Optional. If true, the `{product}` in the `parent` field of the request
+                #     will be interpreted as unpadded base64url-encoded and decoded during
+                #     request processing to match the decoded value. Default value is `false`.
+                #     Use this if your `{product}` contains special characters, such as forward
+                #     slash `/` or other characters that are unpadded base64url-encoded (as per
+                #     RFC 7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+                #
+                #     Note that future versions of the API will only accept unpadded
+                #     base64url-encoded product ids, so we strongly recommend proactively setting
+                #     this to `true` and encoding the product ids.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Shopping::Merchant::Inventories::V1beta::LocalInventory>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -308,7 +319,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload insert_local_inventory(parent: nil, local_inventory: nil)
+                # @overload insert_local_inventory(parent: nil, local_inventory: nil, product_id_base64_url_encoded: nil)
                 #   Pass arguments to `insert_local_inventory` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -320,6 +331,17 @@ module Google
                 #     Required. Local inventory information of the product. If the product
                 #     already has a `LocalInventory` resource for the same `storeCode`, full
                 #     replacement of the `LocalInventory` resource is performed.
+                #   @param product_id_base64_url_encoded [::Boolean]
+                #     Optional. If true, the `{product}` in the `parent` field of the request
+                #     will be interpreted as unpadded base64url-encoded and decoded during
+                #     request processing to match the decoded value. Default value is `false`.
+                #     Use this if your `{product}` contains special characters, such as forward
+                #     slash `/` or other characters that are unpadded base64url-encoded (as per
+                #     RFC 7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+                #
+                #     Note that future versions of the API will only accept unpadded
+                #     base64url-encoded product ids, so we strongly recommend proactively setting
+                #     this to `true` and encoding the product ids.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Shopping::Merchant::Inventories::V1beta::LocalInventory]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -395,7 +417,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload delete_local_inventory(name: nil)
+                # @overload delete_local_inventory(name: nil, product_id_base64_url_encoded: nil)
                 #   Pass arguments to `delete_local_inventory` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -404,6 +426,17 @@ module Google
                 #     Required. The name of the local inventory for the given product to delete.
                 #     Format:
                 #     `accounts/{account}/products/{product}/localInventories/{store_code}`
+                #   @param product_id_base64_url_encoded [::Boolean]
+                #     Optional. If true, the `{product}` in the `name` field of the request will
+                #     be interpreted as unpadded base64url-encoded and decoded during request
+                #     processing to match the decoded value. Default value is `false`. Use this
+                #     if your `{product}` contains special characters, such as forward slash `/`
+                #     or other characters that are unpadded base64url-encoded (as per RFC 7515:
+                #     https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+                #
+                #     Note that future versions of the API will only accept unpadded
+                #     base64url-encoded product ids, so we strongly recommend proactively setting
+                #     this to `true` and encoding the product ids.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
