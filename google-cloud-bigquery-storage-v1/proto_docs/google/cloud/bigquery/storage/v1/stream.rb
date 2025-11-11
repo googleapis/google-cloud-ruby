@@ -248,10 +248,10 @@ module Google
           # @!attribute [rw] write_mode
           #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::WriteMode]
           #     Immutable. Mode of the stream.
-          # @!attribute [rw] location
+          # @!attribute [r] location
           #   @return [::String]
-          #     Immutable. The geographic location where the stream's dataset resides. See
-          #     https://cloud.google.com/bigquery/docs/locations for supported
+          #     Output only. The geographic location where the stream's dataset resides.
+          #     See https://cloud.google.com/bigquery/docs/locations for supported
           #     locations.
           class WriteStream
             include ::Google::Protobuf::MessageExts

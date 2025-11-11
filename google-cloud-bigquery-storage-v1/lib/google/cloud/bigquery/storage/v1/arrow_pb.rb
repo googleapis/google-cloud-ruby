@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n,google/cloud/bigquery/storage/v1/arrow.proto\x12 google.cloud.bigquery.storage.v1\"(\n\x0b\x41rrowSchema\x12\x19\n\x11serialized_schema\x18\x01 \x01(\x0c\"J\n\x10\x41rrowRecordBatch\x12\x1f\n\x17serialized_record_batch\x18\x01 \x01(\x0c\x12\x15\n\trow_count\x18\x02 \x01(\x03\x42\x02\x18\x01\"\xcf\x01\n\x19\x41rrowSerializationOptions\x12h\n\x12\x62uffer_compression\x18\x02 \x01(\x0e\x32L.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec\"H\n\x10\x43ompressionCodec\x12\x1b\n\x17\x43OMPRESSION_UNSPECIFIED\x10\x00\x12\r\n\tLZ4_FRAME\x10\x01\x12\x08\n\x04ZSTD\x10\x02\x42\xba\x01\n$com.google.cloud.bigquery.storage.v1B\nArrowProtoP\x01Z>cloud.google.com/go/bigquery/storage/apiv1/storagepb;storagepb\xaa\x02 Google.Cloud.BigQuery.Storage.V1\xca\x02 Google\\Cloud\\BigQuery\\Storage\\V1b\x06proto3"
+descriptor_data = "\n,google/cloud/bigquery/storage/v1/arrow.proto\x12 google.cloud.bigquery.storage.v1\"(\n\x0b\x41rrowSchema\x12\x19\n\x11serialized_schema\x18\x01 \x01(\x0c\"J\n\x10\x41rrowRecordBatch\x12\x1f\n\x17serialized_record_batch\x18\x01 \x01(\x0c\x12\x15\n\trow_count\x18\x02 \x01(\x03\x42\x02\x18\x01\"\xec\x03\n\x19\x41rrowSerializationOptions\x12h\n\x12\x62uffer_compression\x18\x02 \x01(\x0e\x32L.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec\x12v\n\x19picos_timestamp_precision\x18\x03 \x01(\x0e\x32S.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.PicosTimestampPrecision\"H\n\x10\x43ompressionCodec\x12\x1b\n\x17\x43OMPRESSION_UNSPECIFIED\x10\x00\x12\r\n\tLZ4_FRAME\x10\x01\x12\x08\n\x04ZSTD\x10\x02\"\xa2\x01\n\x17PicosTimestampPrecision\x12)\n%PICOS_TIMESTAMP_PRECISION_UNSPECIFIED\x10\x00\x12\x1e\n\x1aTIMESTAMP_PRECISION_MICROS\x10\x01\x12\x1d\n\x19TIMESTAMP_PRECISION_NANOS\x10\x02\x12\x1d\n\x19TIMESTAMP_PRECISION_PICOS\x10\x03\x42\xba\x01\n$com.google.cloud.bigquery.storage.v1B\nArrowProtoP\x01Z>cloud.google.com/go/bigquery/storage/apiv1/storagepb;storagepb\xaa\x02 Google.Cloud.BigQuery.Storage.V1\xca\x02 Google\\Cloud\\BigQuery\\Storage\\V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -40,6 +40,7 @@ module Google
           ArrowRecordBatch = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowRecordBatch").msgclass
           ArrowSerializationOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowSerializationOptions").msgclass
           ArrowSerializationOptions::CompressionCodec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec").enummodule
+          ArrowSerializationOptions::PicosTimestampPrecision = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowSerializationOptions.PicosTimestampPrecision").enummodule
         end
       end
     end

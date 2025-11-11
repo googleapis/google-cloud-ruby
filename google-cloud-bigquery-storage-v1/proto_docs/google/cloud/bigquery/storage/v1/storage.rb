@@ -268,8 +268,7 @@ module Google
           #     Note: The following fields are mutually exclusive: `proto_rows`, `arrow_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] arrow_rows
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ArrowData]
-          #     Rows in arrow format. This is an experimental feature only selected for
-          #     allowlisted customers.
+          #     Rows in arrow format.
           #
           #     Note: The following fields are mutually exclusive: `arrow_rows`, `proto_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trace_id
@@ -300,8 +299,8 @@ module Google
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::MissingValueInterpretation]
           #     Optional. Default missing value interpretation for all columns in the
           #     table. When a value is specified on an `AppendRowsRequest`, it is applied
-          #     to all requests on the connection from that point forward, until a
-          #     subsequent `AppendRowsRequest` sets it to a different value.
+          #     to all requests from that point forward, until a subsequent
+          #     `AppendRowsRequest` sets it to a different value.
           #     `missing_value_interpretation` can override
           #     `default_missing_value_interpretation`. For example, if you want to write
           #     `NULL` instead of using default values for some columns, you can set
@@ -312,8 +311,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Arrow schema and data.
-            # Arrow format is an experimental feature only selected for allowlisted
-            # customers.
             # @!attribute [rw] writer_schema
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSchema]
             #     Optional. Arrow Schema used to serialize the data.
@@ -329,8 +326,8 @@ module Google
             # requests.
             # @!attribute [rw] writer_schema
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ProtoSchema]
-            #     The protocol buffer schema used to serialize the data. Provide this value
-            #     whenever:
+            #     Optional. The protocol buffer schema used to serialize the data. Provide
+            #     this value whenever:
             #
             #     * You send the first request of an RPC connection.
             #
@@ -339,7 +336,7 @@ module Google
             #     * You specify a new destination table.
             # @!attribute [rw] rows
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ProtoRows]
-            #     Serialized row data in protobuf message format.
+            #     Required. Serialized row data in protobuf message format.
             #     Currently, the backend expects the serialized rows to adhere to
             #     proto2 semantics when appending rows, particularly with respect to
             #     how default values are encoded.
