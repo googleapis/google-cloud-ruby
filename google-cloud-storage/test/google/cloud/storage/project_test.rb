@@ -615,7 +615,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     num_buckets = 3
 
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(num_buckets), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(num_buckets), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -633,7 +633,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     num_buckets = 3
 
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(num_buckets), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(num_buckets), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil,return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -650,7 +650,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :list_buckets, list_buckets_gapi(num_buckets,"next_page_token",soft_deleted), [project], prefix: nil, page_token: nil,
-max_results: nil, user_project: nil, soft_deleted: true, options: {}
+    max_results: nil, user_project: nil, soft_deleted: true,
+    return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
     buckets = storage.buckets soft_deleted: true
@@ -667,8 +668,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "paginates buckets" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -687,8 +688,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "paginates buckets with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: 3, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: 3, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: 3, user_project: nil, soft_deleted: nil,return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: 3, user_project: nil, soft_deleted: nil,return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -709,7 +710,7 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     num_buckets = 3
 
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -726,8 +727,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "paginates buckets with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -745,8 +746,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "paginates buckets with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: 3, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: 3, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: 3, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: 3, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -764,8 +765,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "paginates buckets with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -778,8 +779,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "paginates buckets with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: 3, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: 3, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: 3, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: "next_page_token", max_results: 3, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -792,8 +793,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "iterates buckets with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -806,8 +807,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "iterates buckets with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil,soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: nil,soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -820,8 +821,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "iterates buckets with all and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: "test", soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: "test", soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: "test", soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: "test", soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -835,8 +836,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
   it "iterates buckets with all and user_project set to another project ID" do
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: "my-other-project", soft_deleted: nil, options: {}
-    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: "my-other-project", soft_deleted: nil, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "next_page_token"), [project], prefix: nil, page_token: nil, max_results: nil, user_project: "my-other-project", soft_deleted: nil, return_partial_success: false, options: {}
+    mock.expect :list_buckets, list_buckets_gapi(3, "second_page_token"), [project], prefix: nil, page_token: "next_page_token", max_results: nil, user_project: "my-other-project", soft_deleted: nil, return_partial_success: false, options: {}
 
     storage.service.mocked_service = mock
 
@@ -1041,6 +1042,54 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     _(bucket).must_be :lazy?
   end
 
+  it "Lists the unreachable buckets if return_partial_success is true" do
+    unreachable_buckets = ["projects/_/buckets/bucket1",
+    "projects/_/buckets/bucket2",
+    "projects/_/buckets/bucket3"]
+
+    mock = Minitest::Mock.new
+  
+    mock.expect :list_buckets, list_unreachable_buckets_gapi(2,nil,nil,unreachable_buckets), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil,return_partial_success: true, options: {}
+
+    storage.service.mocked_service = mock
+
+    buckets = storage.buckets(return_partial_success: true)
+
+    mock.verify
+
+    _(buckets.unreachable).must_equal unreachable_buckets
+  end
+
+  it "returns empty array for unreachable buckets if return_partial_success is true and unreachable bucket list is empty" do
+    unreachable_buckets = []
+
+    mock = Minitest::Mock.new
+  
+    mock.expect :list_buckets, list_unreachable_buckets_gapi(2,nil,nil,unreachable_buckets), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil,return_partial_success: true, options: {}
+
+    storage.service.mocked_service = mock
+
+    buckets = storage.buckets(return_partial_success: true)
+
+    mock.verify
+
+    _(buckets.unreachable).must_equal unreachable_buckets
+  end
+
+  it "returns nil array for unreachable buckets if return_partial_success is not passed" do
+
+    mock = Minitest::Mock.new
+    mock.expect :list_buckets, list_buckets_gapi(2), [project], prefix: nil, page_token: nil, max_results: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+
+    storage.service.mocked_service = mock
+
+    buckets = storage.buckets
+
+    mock.verify
+
+    _(buckets.unreachable).must_be :nil?
+  end
+
   def bucket_with_location created_bucket,
                            location_type: bucket_location_type
     resp_bucket = created_bucket.dup
@@ -1079,6 +1128,14 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     Google::Apis::StorageV1::Buckets.new(
       kind: "storage#buckets", items: buckets, next_page_token: token
     )
+  end
+
+  def list_unreachable_buckets_gapi count = 2, token = nil,  soft_deleted = nil, unreachable = []
+    buckets = count.times.map { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(soft_deleted: soft_deleted).to_json }
+    buckets_obj = Google::Apis::StorageV1::Buckets.new(
+      kind: "storage#buckets", items: buckets, next_page_token: token, unreachable: unreachable
+    )
+    buckets_obj
   end
 
   def restored_bucket_gapi name
