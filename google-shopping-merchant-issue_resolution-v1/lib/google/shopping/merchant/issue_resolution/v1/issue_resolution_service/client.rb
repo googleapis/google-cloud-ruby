@@ -303,7 +303,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload render_product_issues(name: nil, language_code: nil, time_zone: nil, payload: nil)
+              # @overload render_product_issues(name: nil, language_code: nil, time_zone: nil, payload: nil, product_id_base64_url_encoded: nil)
               #   Pass arguments to `render_product_issues` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -321,6 +321,17 @@ module Google
               #     'America/Los_Angeles'. If not set, results will use as a default UTC.
               #   @param payload [::Google::Shopping::Merchant::IssueResolution::V1::RenderIssuesRequestPayload, ::Hash]
               #     Optional. The payload for configuring how the content should be rendered.
+              #   @param product_id_base64_url_encoded [::Boolean]
+              #     Optional. If true, the `{product}` in the `name` field of the request will
+              #     be interpreted as unpadded base64url-encoded and decoded during request
+              #     processing to match the decoded value. Default value is `false`. Use this
+              #     if your `{product}` contains special characters, such as forward slash `/`
+              #     or other characters that are unpadded base64url-encoded (as per RFC 7515:
+              #     https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+              #
+              #     Note that future versions of the API will only accept unpadded
+              #     base64url-encoded product ids, so we strongly recommend proactively setting
+              #     this to `true` and encoding the product ids.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::IssueResolution::V1::RenderProductIssuesResponse]
