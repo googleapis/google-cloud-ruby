@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2025-11-12)
+
+#### Features
+
+* Added several fields to enhance shipping configurations: 
+* Added the `product_id_base64_url_encoded` field to `InsertProductInputRequest`, `DeleteProductInputRequest`, and `GetProductRequest`. This allows for product IDs containing special characters to be correctly handled when unpadded base64url-encoded ([#32177](https://github.com/googleapis/google-cloud-ruby/issues/32177)) 
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation
