@@ -17,15 +17,23 @@ module Google
   module Cloud
     module PubSub
       def self.logger name = ""
-        unless name.nil? || name.empty?
-          name = "pubsub:#{name}"
-        end
         @loggers ||= {}
         @loggers[name] ||= begin
-          logger = Logger.new $stdout
-          logger.progname = name
-          logger
+          if is_logging_enabled
+            logger = Logger.new $stdout
+            prog_name = "pubsub"
+            prog_name = "#{prog_name}:#{name}" unless name.nil? || name.empty?
+            logger.progname = prog_name
+            logger
+          else
+            Logger.new nil
+          end
         end
+      end
+
+      def self.is_logging_enabled
+        packages = ENV["GOOGLE_SDK_RUBY_LOGGING"]&.split(",") || []
+        packages.include?("pubsub") || packages.include?("all")
       end
 
       ##
