@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.9.0 (2025-11-12)
+
+#### Features
+
+* Add GetIamPolicy method for DataProduct resources 
+* Allow publishing Data Profile scan results to the Dataplex Catalog ([#32156](https://github.com/googleapis/google-cloud-ruby/issues/32156)) 
+#### Documentation
+
+* Update documentation for Catalog SearchEntries filter options, including `parent_entry` and wildcard usage 
+
 ### 2.8.1 (2025-10-27)
 
 #### Documentation
