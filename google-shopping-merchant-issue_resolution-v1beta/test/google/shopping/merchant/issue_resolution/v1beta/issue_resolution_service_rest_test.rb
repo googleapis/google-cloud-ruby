@@ -147,6 +147,7 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
     language_code = "hello world"
     time_zone = "hello world"
     payload = {}
+    product_id_base64_url_encoded = true
 
     render_product_issues_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -162,27 +163,27 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
         end
 
         # Use hash object
-        client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }) do |_result, response|
+        client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.render_product_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload do |_result, response|
+        client.render_product_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.render_product_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload) do |_result, response|
+        client.render_product_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }, call_options) do |_result, response|
+        client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.render_product_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload), call_options) do |_result, response|
+        client.render_product_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
