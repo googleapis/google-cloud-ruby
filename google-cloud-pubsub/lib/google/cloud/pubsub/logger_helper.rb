@@ -46,7 +46,17 @@ module Google
             "#{reason} triggered #{type} batch of #{num_messages} messages, a total of #{total_bytes} bytes"
           )
         end
-        
+
+        def log_ack_nack_safely ack_ids, type
+          return unless Google::Cloud::PubSub.is_logging_enabled
+          begin
+            ack_ids.each do |ack_id|
+              Google::Cloud::PubSub.logger("ack-nack").info "message (ackID #{ack_id}) #{type}"
+            end
+          rescue StandardError
+            # Ignore all logging errors.
+          end
+        end
       end
     end
   end
