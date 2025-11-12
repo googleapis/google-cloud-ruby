@@ -31,7 +31,7 @@ module Google
         #   @return [::String]
         #     Required. registry_location, project_id, repository_name and image id forms
         #     a unique image
-        #     name:`projects/<project_id>/locations/<location>/repository/<repository_name>/dockerImages/<docker_image>`.
+        #     name:`projects/<project_id>/locations/<location>/repositories/<repository_name>/dockerImages/<docker_image>`.
         #     For example,
         #     "projects/test-project/locations/us-west4/repositories/test-repo/dockerImages/
         #     nginx@sha256:e9954c1fc875017be1c3e36eca16be2d9e9bccc4bf072163515467d6a823c7cf",
@@ -71,7 +71,53 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the docker image was last updated.
+        # @!attribute [rw] artifact_type
+        #   @return [::String]
+        #     ArtifactType of this image, e.g. "application/vnd.example+type".
+        #     If the `subject_digest` is set and no `artifact_type` is given, the
+        #     `media_type` will be considered as the `artifact_type`. This field is
+        #     returned as the `metadata.artifactType` field in the Version resource.
+        # @!attribute [rw] image_manifests
+        #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::ImageManifest>]
+        #     Optional. For multi-arch images (manifest lists), this field contains the
+        #     list of image manifests.
         class DockerImage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of a single image manifest within a multi-arch image.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     Optional. The CPU architecture of the image.
+        #     Values are provided by the Docker client and are not validated by Artifact
+        #     Registry. Example values include "amd64", "arm64", "ppc64le", "s390x",
+        #     "riscv64", "mips64le", etc.
+        # @!attribute [rw] os
+        #   @return [::String]
+        #     Optional. The operating system of the image.
+        #     Values are provided by the Docker client and are not validated by Artifact
+        #     Registry. Example values include "linux", "windows", "darwin", "aix", etc.
+        # @!attribute [rw] digest
+        #   @return [::String]
+        #     Optional. The manifest digest, in the format "sha256:<sha256_hex_digest>".
+        # @!attribute [rw] media_type
+        #   @return [::String]
+        #     Optional. The media type of the manifest, e.g.,
+        #     "application/vnd.docker.distribution.manifest.v2+json"
+        # @!attribute [rw] os_version
+        #   @return [::String]
+        #     Optional. The OS version of the image, for example on Windows
+        #     `10.0.14393.1066`.
+        # @!attribute [rw] os_features
+        #   @return [::Array<::String>]
+        #     Optional. The required OS features for the image, for example on Windows
+        #     `win32k`.
+        # @!attribute [rw] variant
+        #   @return [::String]
+        #     Optional. The variant of the CPU in the image, for example `v7` to specify
+        #     ARMv7 when architecture is `arm`.
+        class ImageManifest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

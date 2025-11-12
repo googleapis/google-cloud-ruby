@@ -554,7 +554,7 @@ module Google
         #      use this to calculate storage costs.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
-        #     Output only. If set, the repository satisfies physical zone separation.
+        #     Output only. Whether or not this repository satisfies PZS.
         # @!attribute [rw] cleanup_policy_dry_run
         #   @return [::Boolean]
         #     Optional. If true, the cleanup pipeline is prevented from deleting versions
@@ -569,7 +569,7 @@ module Google
         #     error rather than defaulting to standard.
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
-        #     Output only. If set, the repository satisfies physical zone isolation.
+        #     Output only. Whether or not this repository satisfies PZI.
         # @!attribute [r] registry_uri
         #   @return [::String]
         #     Output only. The repository endpoint, for example:
@@ -642,7 +642,8 @@ module Google
 
             # Config for vulnerability scanning of resources in this repository.
             module EnablementConfig
-              # Not set. This will be treated as INHERITED.
+              # Not set. This will be treated as INHERITED for Docker repositories and
+              # DISABLED for non-Docker repositories.
               ENABLEMENT_CONFIG_UNSPECIFIED = 0
 
               # Scanning is Enabled, but dependent on API enablement.
@@ -719,6 +720,9 @@ module Google
 
             # Generic package format.
             GENERIC = 11
+
+            # Ruby package format.
+            RUBY = 12
           end
 
           # The mode configures the repository to serve artifacts from different
