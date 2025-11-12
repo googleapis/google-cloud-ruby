@@ -42,7 +42,7 @@ module Google
             # API to update a `Report` object.
             rpc :UpdateReport, ::Google::Ads::AdManager::V1::UpdateReportRequest, ::Google::Ads::AdManager::V1::Report
             # Initiates the execution of an existing report asynchronously. Users can
-            # get the report by polling this operation via
+            # get the report by polling this operation using
             # `OperationsService.GetOperation`.
             # Poll every 5 seconds initially, with an exponential
             # backoff. Once a report is complete, the operation will contain a

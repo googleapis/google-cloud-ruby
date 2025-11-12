@@ -4,11 +4,12 @@
 
 require 'google/protobuf'
 
+require 'google/ads/admanager/v1/contact_enums_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n.google/ads/admanager/v1/contact_messages.proto\x12\x17google.ads.admanager.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc3\x01\n\x07\x43ontact\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12&\n\x14\x63ompany_display_name\x18\x13 \x01(\tB\x03\xe0\x41\x03H\x00\x88\x01\x01:d\xea\x41\x61\n admanager.googleapis.com/Contact\x12*networks/{network_code}/contacts/{contact}*\x08\x63ontacts2\x07\x63ontactB\x17\n\x15_company_display_nameB\xc8\x01\n\x1b\x63om.google.ads.admanager.v1B\x14\x43ontactMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n.google/ads/admanager/v1/contact_messages.proto\x12\x17google.ads.admanager.v1\x1a+google/ads/admanager/v1/contact_enums.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xee\x04\n\x07\x43ontact\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x1e\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x02H\x00\x88\x01\x01\x12\x41\n\x07\x63ompany\x18\x05 \x01(\tB+\xe0\x41\x02\xe0\x41\x05\xfa\x41\"\n admanager.googleapis.com/CompanyH\x01\x88\x01\x01\x12R\n\x06status\x18\x06 \x01(\x0e\x32\x38.google.ads.admanager.v1.ContactStatusEnum.ContactStatusB\x03\xe0\x41\x03H\x02\x88\x01\x01\x12\x19\n\x07\x61\x64\x64ress\x18\x07 \x01(\tB\x03\xe0\x41\x01H\x03\x88\x01\x01\x12\x1c\n\ncell_phone\x18\x08 \x01(\tB\x03\xe0\x41\x01H\x04\x88\x01\x01\x12\x19\n\x07\x63omment\x18\t \x01(\tB\x03\xe0\x41\x01H\x05\x88\x01\x01\x12\x17\n\x05\x65mail\x18\n \x01(\tB\x03\xe0\x41\x01H\x06\x88\x01\x01\x12\x15\n\x03\x66\x61x\x18\x0b \x01(\tB\x03\xe0\x41\x01H\x07\x88\x01\x01\x12\x17\n\x05title\x18\x0c \x01(\tB\x03\xe0\x41\x01H\x08\x88\x01\x01\x12\x1c\n\nwork_phone\x18\r \x01(\tB\x03\xe0\x41\x01H\t\x88\x01\x01:d\xea\x41\x61\n admanager.googleapis.com/Contact\x12*networks/{network_code}/contacts/{contact}*\x08\x63ontacts2\x07\x63ontactB\x0f\n\r_display_nameB\n\n\x08_companyB\t\n\x07_statusB\n\n\x08_addressB\r\n\x0b_cell_phoneB\n\n\x08_commentB\x08\n\x06_emailB\x06\n\x04_faxB\x08\n\x06_titleB\r\n\x0b_work_phoneB\xc8\x01\n\x1b\x63om.google.ads.admanager.v1B\x14\x43ontactMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

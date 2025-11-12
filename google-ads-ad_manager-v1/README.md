@@ -2,7 +2,7 @@
 
 Manage your Ad Manager inventory, run reports and more.
 
-The Ad Manager API enables an app to integrate with Google Ad Manager. You can read Ad Manager data and run reports using the API.
+The Ad Manager API enables an app to integrate with Google Ad Manager. You can read and write Ad Manager data and run reports using the API.
 
 https://github.com/googleapis/google-cloud-ruby
 
