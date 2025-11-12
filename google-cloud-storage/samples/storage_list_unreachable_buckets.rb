@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_list_unreachable_buckets]
+# [START storage_list_buckets_partial_success]
 # Lists and prints buckets that were reported as unreachable when requesting
 # a (possibly partial) list of buckets from Google Cloud Storage.
 #
@@ -41,6 +41,6 @@ def list_unreachable_buckets
     puts bucket
   end
 end
-# [END storage_list_unreachable_buckets]
+# [END storage_list_buckets_partial_success]
 
 list_unreachable_buckets if $PROGRAM_NAME == __FILE__
