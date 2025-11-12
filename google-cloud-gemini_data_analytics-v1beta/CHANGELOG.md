@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2025-11-12)
+
+#### Features
+
+* Adding a new SchemaRelationship message to define relationships between table schema ([#32165](https://github.com/googleapis/google-cloud-ruby/issues/32165)) 
+* Adding a new TextType PROGRESS to provide informational messages about an agent's progress for supporting more granular Agent RAG tools 
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation
