@@ -1,5 +1,14 @@
 # Release History
 
+### 1.6.0 (2025-11-12)
+
+#### Features
+
+* Support picosecond timestamp precision in BigQuery Storage API ([#32166](https://github.com/googleapis/google-cloud-ruby/issues/32166)) 
+#### Documentation
+
+* A comment for method `ReadRows` in service `BigQueryRead` is changed 
+
 ### 1.5.1 (2025-10-27)
 
 #### Documentation
