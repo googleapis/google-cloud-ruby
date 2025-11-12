@@ -213,7 +213,7 @@ module Google
         #     puts bucket
         #   end
         #  
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: false
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil
           gapi = service.list_buckets \
             prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
           Bucket::List.from_gapi \

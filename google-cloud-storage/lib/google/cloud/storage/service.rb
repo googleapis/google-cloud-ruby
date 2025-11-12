@@ -96,7 +96,7 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: false, options: {}
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil, options: {}
           execute do
             service.list_buckets \
               @project, prefix: prefix, page_token: token, max_results: max,
