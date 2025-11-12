@@ -118,7 +118,7 @@ module Google
           #     Deprecated: Use `gtins` instead.
           # @!attribute [rw] gtins
           #   @return [::Array<::String>]
-          #     Global Trade Item Numbers
+          #     A list of Global Trade Item Numbers
           #     ([GTIN](https://support.google.com/merchants/answer/188494#gtin)) of the
           #     item.
           #     You can provide up to 10 GTINs.
@@ -270,7 +270,7 @@ module Google
           #     The number of identical products in a business-defined multipack.
           # @!attribute [rw] ads_grouping
           #   @return [::String]
-          #     Used to group items in an arbitrary way. Only for CPA%, discouraged
+          #     Used to group items in an arbitrary way. Only for CPA, discouraged
           #     otherwise. For more information, see
           #     [Display ads
           #     attribute](https://support.google.com/merchants/answer/6069387).
@@ -353,6 +353,9 @@ module Google
           #     custom grouping of items in a Shopping campaign.
           # @!attribute [rw] included_destinations
           #   @return [::Array<::String>]
+          #     Destinations also known as [Marketing
+          #     methods](https://support.google.com/merchants/answer/15130232) selections.
+          #
           #     The list of destinations to include for this target (corresponds to
           #     checked check boxes in Merchant Center). Default destinations are always
           #     included unless provided in `excludedDestinations`.
@@ -365,6 +368,9 @@ module Google
           #     cases. Use this field within products to only setup exceptions.
           # @!attribute [rw] excluded_destinations
           #   @return [::Array<::String>]
+          #     Destinations also known as [Marketing
+          #     methods](https://support.google.com/merchants/answer/15130232) selections.
+          #
           #     The list of destinations to exclude for this target (corresponds to
           #     unchecked check boxes in Merchant Center).
           #
@@ -420,10 +426,10 @@ module Google
           #   @return [::Google::Shopping::Type::Price]
           #     A safeguard in the [automated discounts]
           #     (https://support.google.com/merchants/answer/10295759) and
-          #     "Dynamic Promotions"
-          #     (https://support.google.com/merchants/answer/13949249) projects,
-          #     ensuring that discounts on business offers do not fall below this value,
-          #     thereby preserving the offer's value and profitability.
+          #     ["dynamic
+          #     promotions"](https://support.google.com/merchants/answer/13949249)
+          #     projects, ensuring that discounts on business offers do not fall below this
+          #     value, thereby preserving the offer's value and profitability.
           # @!attribute [rw] sustainability_incentives
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1beta::ProductSustainabilityIncentive>]
           #     The list of sustainability incentive programs.
@@ -687,6 +693,20 @@ module Google
           #     is optional if
           #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_transit_time maxTransitTime}
           #     is present.
+          # @!attribute [rw] handling_cutoff_time
+          #   @return [::String]
+          #     The handling cutoff time until which an order has to be placed to be
+          #     processed in the same day. This is a string in format of HHMM (e.g.
+          #     `1530`) for 3:30 PM. If not configured, the cutoff time will be defaulted
+          #     to 8AM PST and `handling_cutoff_timezone` will be ignored.
+          # @!attribute [rw] handling_cutoff_timezone
+          #   @return [::String]
+          #     [Timezone
+          #     identifier](https://developers.google.com/adwords/api/docs/appendix/codes-formats#timezone-ids)
+          #     For example `Europe/Zurich`. This field only applies if
+          #     `handling_cutoff_time` is set. If `handling_cutoff_time` is set but this
+          #     field is not set, the shipping destination timezone will be used. If both
+          #     fields are not set, the handling cutoff time will default to 8AM PST.
           class Shipping
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -87,6 +87,7 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductsService::Rest::Cli
 
     # Create request parameters for a unary method.
     name = "hello world"
+    product_id_base64_url_encoded = true
 
     get_product_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -102,27 +103,27 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductsService::Rest::Cli
         end
 
         # Use hash object
-        client.get_product({ name: name }) do |_result, response|
+        client.get_product({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_product name: name do |_result, response|
+        client.get_product name: name, product_id_base64_url_encoded: product_id_base64_url_encoded do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_product ::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name) do |_result, response|
+        client.get_product ::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_product({ name: name }, call_options) do |_result, response|
+        client.get_product({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_product(::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name), call_options) do |_result, response|
+        client.get_product(::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
