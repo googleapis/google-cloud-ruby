@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.4.0 (2025-11-12)
+
+#### Features
+
+* A new field `peering_type` is added to message `google.cloud.edgenetwork.v1.InterconnectAttachment` 
+* A new field `remote_peering_network_type` is added to message `google.cloud.edgenetwork.v1.Interconnect` ([#32117](https://github.com/googleapis/google-cloud-ruby/issues/32117)) 
+
 ### 2.3.1 (2025-10-27)
 
 #### Documentation
