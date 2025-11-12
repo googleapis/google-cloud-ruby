@@ -74,6 +74,7 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    product_id_base64_url_encoded = true
 
     list_local_inventories_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_local_inventories, name
@@ -81,6 +82,7 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -91,35 +93,35 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
       end
 
       # Use hash object
-      client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_local_inventories parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_local_inventories parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -140,12 +142,14 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
     # Create request parameters for a unary method.
     parent = "hello world"
     local_inventory = {}
+    product_id_base64_url_encoded = true
 
     insert_local_inventory_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :insert_local_inventory, name
       assert_kind_of ::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Inventories::V1::LocalInventory), request["local_inventory"]
+      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -156,31 +160,31 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
       end
 
       # Use hash object
-      client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }) do |response, operation|
+      client.insert_local_inventory({ parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_local_inventory parent: parent, local_inventory: local_inventory do |response, operation|
+      client.insert_local_inventory parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory) do |response, operation|
+      client.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }, grpc_options) do |response, operation|
+      client.insert_local_inventory({ parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory), grpc_options) do |response, operation|
+      client.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -199,11 +203,13 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
 
     # Create request parameters for a unary method.
     name = "hello world"
+    product_id_base64_url_encoded = true
 
     delete_local_inventory_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_local_inventory, name
       assert_kind_of ::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -214,31 +220,31 @@ class ::Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Clie
       end
 
       # Use hash object
-      client.delete_local_inventory({ name: name }) do |response, operation|
+      client.delete_local_inventory({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_local_inventory name: name do |response, operation|
+      client.delete_local_inventory name: name, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name) do |response, operation|
+      client.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_local_inventory({ name: name }, grpc_options) do |response, operation|
+      client.delete_local_inventory({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1::DeleteLocalInventoryRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
