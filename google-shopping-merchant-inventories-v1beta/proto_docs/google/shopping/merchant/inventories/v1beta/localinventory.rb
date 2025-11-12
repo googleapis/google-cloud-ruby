@@ -45,15 +45,15 @@ module Google
           #     more information.
           # @!attribute [rw] price
           #   @return [::Google::Shopping::Type::Price]
-          #     Price of the product at this store.
+          #     Optional. Price of the product at this store.
           # @!attribute [rw] sale_price
           #   @return [::Google::Shopping::Type::Price]
-          #     Sale price of the product at this store. Mandatory if
+          #     Optional. Sale price of the product at this store. Mandatory if
           #     {::Google::Shopping::Merchant::Inventories::V1beta::LocalInventory#sale_price_effective_date `salePriceEffectiveDate`}
           #     is defined.
           # @!attribute [rw] sale_price_effective_date
           #   @return [::Google::Type::Interval]
-          #     The `TimePeriod` of the
+          #     Optional. The `TimePeriod` of the
           #     sale at this store.
           # @!attribute [rw] availability
           #   @return [::String]
@@ -82,6 +82,7 @@ module Google
           #   @return [::String]
           #     Location of the product inside the store. Maximum length is 20 bytes.
           # @!attribute [rw] custom_attributes
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::Google::Shopping::Type::CustomAttribute>]
           #     A list of custom (merchant-provided) attributes. You can also use
           #     `CustomAttribute` to submit any attribute of the data specification in its
@@ -113,6 +114,18 @@ module Google
           #     must match the call that provided the page token. The token returned as
           #     {::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesResponse#next_page_token nextPageToken}
           #     in the response to the previous request.
+          # @!attribute [rw] product_id_base64_url_encoded
+          #   @return [::Boolean]
+          #     Optional. If true, the `{product}` in the `parent` field of the request
+          #     will be interpreted as unpadded base64url-encoded and decoded during
+          #     request processing to match the decoded value. Default value is `false`.
+          #     Use this if your `{product}` contains special characters, such as forward
+          #     slash `/` or other characters that are unpadded base64url-encoded (as per
+          #     RFC 7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+          #
+          #     Note that future versions of the API will only accept unpadded
+          #     base64url-encoded product ids, so we strongly recommend proactively setting
+          #     this to `true` and encoding the product ids.
           class ListLocalInventoriesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,6 +155,18 @@ module Google
           #     Required. Local inventory information of the product. If the product
           #     already has a `LocalInventory` resource for the same `storeCode`, full
           #     replacement of the `LocalInventory` resource is performed.
+          # @!attribute [rw] product_id_base64_url_encoded
+          #   @return [::Boolean]
+          #     Optional. If true, the `{product}` in the `parent` field of the request
+          #     will be interpreted as unpadded base64url-encoded and decoded during
+          #     request processing to match the decoded value. Default value is `false`.
+          #     Use this if your `{product}` contains special characters, such as forward
+          #     slash `/` or other characters that are unpadded base64url-encoded (as per
+          #     RFC 7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+          #
+          #     Note that future versions of the API will only accept unpadded
+          #     base64url-encoded product ids, so we strongly recommend proactively setting
+          #     this to `true` and encoding the product ids.
           class InsertLocalInventoryRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,6 +178,18 @@ module Google
           #     Required. The name of the local inventory for the given product to delete.
           #     Format:
           #     `accounts/{account}/products/{product}/localInventories/{store_code}`
+          # @!attribute [rw] product_id_base64_url_encoded
+          #   @return [::Boolean]
+          #     Optional. If true, the `{product}` in the `name` field of the request will
+          #     be interpreted as unpadded base64url-encoded and decoded during request
+          #     processing to match the decoded value. Default value is `false`. Use this
+          #     if your `{product}` contains special characters, such as forward slash `/`
+          #     or other characters that are unpadded base64url-encoded (as per RFC 7515:
+          #     https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+          #
+          #     Note that future versions of the API will only accept unpadded
+          #     base64url-encoded product ids, so we strongly recommend proactively setting
+          #     this to `true` and encoding the product ids.
           class DeleteLocalInventoryRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
