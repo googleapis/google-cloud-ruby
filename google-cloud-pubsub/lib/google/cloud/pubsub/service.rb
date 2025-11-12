@@ -28,6 +28,8 @@ module Google
       ##
       # @private Represents the Pub/Sub service API, including IAM mixins.
       class Service
+        include LoggerHelper
+
         attr_accessor :project
         attr_accessor :credentials
         attr_accessor :host
@@ -142,9 +144,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
-          ack_ids.each do |ack_id|
-            Google::Cloud::PubSub.logger("ack-nack").info "message (ackID #{ack_id}) ack"
-          end
+          log_ack_nack_safely ack_ids, "ack"
           subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
                                                   ack_ids: ack_ids
         end
@@ -153,9 +153,7 @@ module Google
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
           if deadline.zero?
-            Array(ids).each do |ack_id|
-              Google::Cloud::PubSub.logger("ack-nack").info "message (ackID #{ack_id}) nack"
-            end
+            log_ack_nack_safely Array(ids), "nack"
           end
           subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
                                                           ack_ids: Array(ids),
