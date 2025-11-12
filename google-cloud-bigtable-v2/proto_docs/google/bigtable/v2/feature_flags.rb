@@ -64,6 +64,9 @@ module Google
         # @!attribute [rw] direct_access_requested
         #   @return [::Boolean]
         #     Notify the server that the client explicitly opted in for Direct Access.
+        # @!attribute [rw] peer_info
+        #   @return [::Boolean]
+        #     If the client can support using BigtablePeerInfo.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

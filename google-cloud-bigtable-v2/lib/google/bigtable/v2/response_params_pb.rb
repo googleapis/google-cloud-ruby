@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n(google/bigtable/v2/response_params.proto\x12\x12google.bigtable.v2\"Z\n\x0eResponseParams\x12\x14\n\x07zone_id\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x17\n\ncluster_id\x18\x02 \x01(\tH\x01\x88\x01\x01\x42\n\n\x08_zone_idB\r\n\x0b_cluster_idB\xbd\x01\n\x16\x63om.google.bigtable.v2B\x13ResponseParamsProtoP\x01Z8cloud.google.com/go/bigtable/apiv2/bigtablepb;bigtablepb\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
+descriptor_data = "\n(google/bigtable/v2/response_params.proto\x12\x12google.bigtable.v2\"z\n\x0eResponseParams\x12\x14\n\x07zone_id\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x17\n\ncluster_id\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x13\n\x06\x61\x66\x65_id\x18\x03 \x01(\x03H\x02\x88\x01\x01\x42\n\n\x08_zone_idB\r\n\x0b_cluster_idB\t\n\x07_afe_idB\xbd\x01\n\x16\x63om.google.bigtable.v2B\x13ResponseParamsProtoP\x01Z8cloud.google.com/go/bigtable/apiv2/bigtablepb;bigtablepb\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
