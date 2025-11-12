@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2025-11-12)
+
+#### Features
+
+* Add the AccountLimit resource and its service to the quota bundle ([#32174](https://github.com/googleapis/google-cloud-ruby/issues/32174)) 
+
 ### 0.2.1 (2025-10-27)
 
 #### Documentation
