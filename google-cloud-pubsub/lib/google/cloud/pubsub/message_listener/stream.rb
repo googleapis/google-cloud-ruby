@@ -153,8 +153,6 @@ module Google
               @subscriber.buffer.acknowledge ack_ids, callback
             end
 
-            log_slow_ack @subscriber, removed_items, "ack"
-
             true
           end
 
@@ -169,8 +167,6 @@ module Google
               removed_items = @inventory.remove mod_ack_ids
               @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
-
-            log_slow_ack @subscriber, removed_items, "nack" if deadline.zero?
 
             true
           end

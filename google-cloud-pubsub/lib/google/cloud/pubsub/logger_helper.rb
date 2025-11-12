@@ -38,22 +38,7 @@ module Google
             "#{reason} triggered #{type} batch of #{num_messages} messages, a total of #{total_bytes} bytes"
           )
         end
-
-        def log_slow_ack subscriber, removed_items, type
-          return if subscriber.histograms.nil? || subscriber.histograms[type].nil?
-          time_now = Time.now
-          histogram = subscriber.histograms[type]
-          removed_items.each do |ack_id, item|
-            duration_s = time_now - item.pulled_at
-            percentile_s = histogram.percentile 99
-            histogram.add duration_s
-            next unless duration_s > percentile_s
-            Google::Cloud::PubSub.logger("slow-ack").info(
-              "message (ID #{item.message_id}, ackID #{ack_id}) #{type} took longer than the 99th percentile of " \
-              "message processing time (#{type} duration: #{duration_s} s, 99th percentile: #{percentile_s} s)"
-            )
-          end
-        end
+        
       end
     end
   end

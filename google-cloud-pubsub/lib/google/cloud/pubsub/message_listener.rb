@@ -72,7 +72,6 @@ module Google
         attr_reader :message_ordering
         attr_reader :callback_threads
         attr_reader :push_threads
-        attr_reader :histograms
 
         ##
         # @private Implementation attributes.
@@ -85,7 +84,7 @@ module Google
         ##
         # @private Create an empty {MessageListener} object.
         def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
-                       threads: {}, service: nil, histograms: nil
+                       threads: {}, service: nil
           super() # to init MonitorMixin
 
           @callback = callback
@@ -98,7 +97,6 @@ module Google
           @callback_threads = Integer(threads[:callback] || 8)
           @push_threads = Integer(threads[:push] || 4)
           @exactly_once_delivery_enabled = nil
-          @histograms = histograms
 
           @service = service
 
