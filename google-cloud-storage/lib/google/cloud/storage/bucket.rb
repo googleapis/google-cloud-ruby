@@ -718,6 +718,30 @@ module Google
         end
 
         ##
+        # Restart resumable upload
+        # @param [String, ::File] file Path of the file on the filesystem to
+        #   upload. Can be a File object, or File-like object such as StringIO.
+        # @param [String] upload_id Unique Id of a resumable upload
+        #
+        # @return [Google::Apis::StorageV1::Object, Boolean]
+        #   The object metadata on success, or 'false' request is not completed.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.restart_resumable_upload file, upload_id
+
+        def restart_resumable_upload file, upload_id
+          ensure_service!
+          ensure_io_or_file_exists! file
+          raise ArgumentError, "Upload Id missing" unless upload_id
+          service.restart_resumable_upload name, file, upload_id
+        end
+
+        ##
         # The period of time (in seconds) that files in the bucket must be
         # retained, and cannot be deleted, overwritten, or archived.
         # The value must be between 0 and 100 years (in seconds.)
@@ -1408,6 +1432,27 @@ module Google
                                 if_metageneration_match: if_metageneration_match,
                                 if_metageneration_not_match: if_metageneration_not_match,
                                 user_project: user_project
+        end
+
+        ##
+        # Delete resumable upload
+        # @param [String] upload_id Unique Id of a resumable upload
+        #
+        # @return [Boolean] Returns `true` if the resumable upload was deleted,
+        #  'false' if the request is not completed.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.delete_resumable_upload upload_id
+
+        def delete_resumable_upload upload_id
+          ensure_service!
+          raise ArgumentError, "Upload Id missing" unless upload_id
+          service.delete_resumable_upload name, upload_id
         end
 
         ##
