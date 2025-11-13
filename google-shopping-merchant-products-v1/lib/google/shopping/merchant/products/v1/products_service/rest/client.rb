@@ -198,7 +198,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload get_product(name: nil, product_id_base64_url_encoded: nil)
+                # @overload get_product(name: nil)
                 #   Pass arguments to `get_product` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -214,17 +214,6 @@ module Google
                 #     Note: For calls to the v1beta version, the `product` section consists
                 #     of: `channel~content_language~feed_label~offer_id`, for example:
                 #     `accounts/123/products/online~en~US~sku123`.
-                #   @param product_id_base64_url_encoded [::Boolean]
-                #     Optional. If true, the `{product}` in the `name` field of the request will
-                #     be interpreted as unpadded base64url-encoded and decoded during request
-                #     processing to match the decoded value. Default value is `false`. Use this
-                #     if your `{product}` contains special characters, such as forward slash `/`
-                #     or other characters that are unpadded base64url-encoded (as per RFC 7515:
-                #     https://datatracker.ietf.org/doc/html/rfc7515#section-2).
-                #
-                #     Note that future versions of the API will only accept unpadded
-                #     base64url-encoded product ids, so we strongly recommend proactively setting
-                #     this to `true` and encoding the product ids.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Shopping::Merchant::Products::V1::Product]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
