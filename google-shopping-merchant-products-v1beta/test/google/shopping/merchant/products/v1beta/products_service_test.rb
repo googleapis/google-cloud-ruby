@@ -72,13 +72,11 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductsService::ClientTes
 
     # Create request parameters for a unary method.
     name = "hello world"
-    product_id_base64_url_encoded = true
 
     get_product_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_product, name
       assert_kind_of ::Google::Shopping::Merchant::Products::V1beta::GetProductRequest, request
       assert_equal "hello world", request["name"]
-      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -89,31 +87,31 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductsService::ClientTes
       end
 
       # Use hash object
-      client.get_product({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
+      client.get_product({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_product name: name, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
+      client.get_product name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_product ::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
+      client.get_product ::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_product({ name: name, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
+      client.get_product({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_product(::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
+      client.get_product(::Google::Shopping::Merchant::Products::V1beta::GetProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

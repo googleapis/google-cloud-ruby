@@ -136,7 +136,6 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Clie
     product_input = {}
     update_mask = {}
     data_source = "hello world"
-    product_id_base64_url_encoded = true
 
     update_product_input_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_product_input, name
@@ -144,7 +143,6 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Clie
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Products::V1beta::ProductInput), request["product_input"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       assert_equal "hello world", request["data_source"]
-      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -155,31 +153,31 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Clie
       end
 
       # Use hash object
-      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
+      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
+      client.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_product_input ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
+      client.update_product_input ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
+      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_product_input(::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
+      client.update_product_input(::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -199,14 +197,12 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Clie
     # Create request parameters for a unary method.
     name = "hello world"
     data_source = "hello world"
-    product_id_base64_url_encoded = true
 
     delete_product_input_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_product_input, name
       assert_kind_of ::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["data_source"]
-      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -217,31 +213,31 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Clie
       end
 
       # Use hash object
-      client.delete_product_input({ name: name, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
+      client.delete_product_input({ name: name, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_product_input name: name, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
+      client.delete_product_input name: name, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_product_input ::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
+      client.delete_product_input ::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_product_input({ name: name, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
+      client.delete_product_input({ name: name, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_product_input(::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
+      client.delete_product_input(::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

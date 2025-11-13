@@ -33,6 +33,7 @@ module Google
         module V1beta
           ##
           # Service to use ProductInput resource.
+          # This service works for products with online channel only.
           #
           # To load this service and instantiate a REST client:
           #
