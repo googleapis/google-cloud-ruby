@@ -388,10 +388,10 @@ module Google
             #   @param session_template [::Google::Cloud::Spanner::V1::Session, ::Hash]
             #     Parameters to apply to each created session.
             #   @param session_count [::Integer]
-            #     Required. The number of sessions to be created in this batch call.
-            #     The API can return fewer than the requested number of sessions. If a
-            #     specific number of sessions are desired, the client can make additional
-            #     calls to `BatchCreateSessions` (adjusting
+            #     Required. The number of sessions to be created in this batch call. At least
+            #     one session is created. The API can return fewer than the requested number
+            #     of sessions. If a specific number of sessions are desired, the client can
+            #     make additional calls to `BatchCreateSessions` (adjusting
             #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
             #     as necessary).
             #

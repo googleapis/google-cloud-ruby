@@ -43,10 +43,10 @@ module Google
         #     Parameters to apply to each created session.
         # @!attribute [rw] session_count
         #   @return [::Integer]
-        #     Required. The number of sessions to be created in this batch call.
-        #     The API can return fewer than the requested number of sessions. If a
-        #     specific number of sessions are desired, the client can make additional
-        #     calls to `BatchCreateSessions` (adjusting
+        #     Required. The number of sessions to be created in this batch call. At least
+        #     one session is created. The API can return fewer than the requested number
+        #     of sessions. If a specific number of sessions are desired, the client can
+        #     make additional calls to `BatchCreateSessions` (adjusting
         #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
         #     as necessary).
         class BatchCreateSessionsRequest
@@ -92,8 +92,8 @@ module Google
         # @!attribute [rw] multiplexed
         #   @return [::Boolean]
         #     Optional. If `true`, specifies a multiplexed session. Use a multiplexed
-        #     session for multiple, concurrent read-only operations. Don't use them for
-        #     read-write transactions, partitioned reads, or partitioned queries. Use
+        #     session for multiple, concurrent operations including any combination of
+        #     read-only and read-write transactions. Use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#create_session `sessions.create`} to create
         #     multiplexed sessions. Don't use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions} to
