@@ -28,7 +28,7 @@ module Google
           # the next {Google::Cloud::Storage::Project#buckets} to continue.
           attr_accessor :token
           ##
-          # The list of buckets that could not be reached.
+          # Provides a list of bucket names that are unreachable.
           #
           # This is only populated when `return_partial_success` is set to `true`
           # in the call to {Google::Cloud::Storage::Project#buckets}.

@@ -160,6 +160,7 @@ module Google
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         # @param [Boolean] return_partial_success If true, retrieves the list of
         #   buckets that could not be reached.
+        # @param [Boolean] return_partial_success If false, returns unreachable as nil
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})
@@ -209,8 +210,8 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   buckets = storage.buckets return_partial_success: true
-        #   buckets.unreachable.each do |bucket|
-        #     puts bucket
+        #   buckets.unreachable.each do |bucket_name|
+        #     puts bucket_name
         #   end
         #  
         def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil

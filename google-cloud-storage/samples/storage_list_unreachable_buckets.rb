@@ -30,17 +30,26 @@
 #
 # Example:
 #   # Ensure credentials and project are configured, then call:
-#   list_unreachable_buckets
+#   list_buckets_with_partial_success
 
-def list_unreachable_buckets
+def list_buckets_with_partial_success
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket_list = storage.buckets(return_partial_success: true)
-  bucket_list.unreachable.each do |bucket|
-    puts bucket
+  bucket_list = storage.buckets return_partial_success: true
+
+  puts "Bucket Names:"
+
+  bucket_list.each do |bucket|
+    puts bucket.name
   end
+
+    puts "Unreachable bucket names:" 
+
+    bucket_list.unreachable.each do |bucket_name|
+      puts bucket_name
+    end
 end
 # [END storage_list_buckets_partial_success]
 
-list_unreachable_buckets if $PROGRAM_NAME == __FILE__
+list_buckets_with_partial_success if $PROGRAM_NAME == __FILE__
