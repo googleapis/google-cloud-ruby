@@ -39,16 +39,14 @@ def list_buckets_with_partial_success
   bucket_list = storage.buckets return_partial_success: true
 
   puts "Bucket Names:"
-
   bucket_list.each do |bucket|
     puts bucket.name
   end
 
-    puts "Unreachable bucket names:" 
-
-    bucket_list.unreachable.each do |unreachable_bucket_name|
-      puts unreachable_bucket_name
-    end
+  puts "Unreachable bucket names:" 
+  bucket_list.unreachable.each do |unreachable_bucket_name|
+    puts unreachable_bucket_name
+  end
 end
 # [END storage_list_buckets_partial_success]
 
