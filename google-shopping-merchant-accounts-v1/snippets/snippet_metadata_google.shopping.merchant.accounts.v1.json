@@ -572,6 +572,46 @@
       ]
     },
     {
+      "region_tag": "merchantapi_v1_generated_UserService_VerifySelf_sync",
+      "title": "Snippet for the verify_self call in the UserService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::UserService::Client#verify_self.",
+      "file": "user_service/verify_self.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_self",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client#verify_self",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::User",
+        "client": {
+          "short_name": "UserService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client"
+        },
+        "method": {
+          "short_name": "VerifySelf",
+          "full_name": "google.shopping.merchant.accounts.v1.UserService.VerifySelf",
+          "service": {
+            "short_name": "UserService",
+            "full_name": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "merchantapi_v1_generated_AccountsService_GetAccount_sync",
       "title": "Snippet for the get_account call in the AccountsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#get_account.",
@@ -1395,6 +1435,46 @@
         "method": {
           "short_name": "UnregisterGcp",
           "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.UnregisterGcp",
+          "service": {
+            "short_name": "DeveloperRegistrationService",
+            "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_DeveloperRegistrationService_GetAccountForGcpRegistration_sync",
+      "title": "Snippet for the get_account_for_gcp_registration call in the DeveloperRegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#get_account_for_gcp_registration.",
+      "file": "developer_registration_service/get_account_for_gcp_registration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_account_for_gcp_registration",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#get_account_for_gcp_registration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Protobuf::Empty",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse",
+        "client": {
+          "short_name": "DeveloperRegistrationService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client"
+        },
+        "method": {
+          "short_name": "GetAccountForGcpRegistration",
+          "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.GetAccountForGcpRegistration",
           "service": {
             "short_name": "DeveloperRegistrationService",
             "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"

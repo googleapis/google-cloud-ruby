@@ -239,6 +239,56 @@ class ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::
     end
   end
 
+  def test_get_account_for_gcp_registration
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+
+    get_account_for_gcp_registration_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_account_for_gcp_registration, name
+      assert_kind_of ::Google::Protobuf::Empty, request
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_account_for_gcp_registration_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_account_for_gcp_registration({  }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_account_for_gcp_registration ::Google::Protobuf::Empty.new() do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_account_for_gcp_registration({  }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_account_for_gcp_registration(::Google::Protobuf::Empty.new(), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 4, get_account_for_gcp_registration_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

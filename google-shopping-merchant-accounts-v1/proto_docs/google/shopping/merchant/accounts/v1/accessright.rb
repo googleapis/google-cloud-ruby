@@ -22,7 +22,8 @@ module Google
     module Merchant
       module Accounts
         module V1
-          # The access right.
+          # The access right defines the level of permission a
+          # user has within a Merchant Center account.
           module AccessRight
             # Default value. This value is unused.
             ACCESS_RIGHT_UNSPECIFIED = 0
@@ -41,7 +42,8 @@ module Google
             PERFORMANCE_REPORTING = 3
 
             # Users with this right have access to Merchant API and its notifications.
-            # This role is only accessible to accounts that has a developer registration.
+            # This role is only accessible to accounts that have a developer
+            # registration.
             API_DEVELOPER = 5
           end
         end

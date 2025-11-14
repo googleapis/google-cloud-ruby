@@ -143,6 +143,7 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Rest::ClientT
     account = {}
     user = [{}]
     service = [{}]
+    set_alias = [{}]
 
     create_and_configure_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -158,27 +159,27 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Rest::ClientT
         end
 
         # Use hash object
-        client.create_and_configure_account({ account: account, user: user, service: service }) do |_result, response|
+        client.create_and_configure_account({ account: account, user: user, service: service, set_alias: set_alias }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_and_configure_account account: account, user: user, service: service do |_result, response|
+        client.create_and_configure_account account: account, user: user, service: service, set_alias: set_alias do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_and_configure_account ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service) do |_result, response|
+        client.create_and_configure_account ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service, set_alias: set_alias) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_and_configure_account({ account: account, user: user, service: service }, call_options) do |_result, response|
+        client.create_and_configure_account({ account: account, user: user, service: service, set_alias: set_alias }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_and_configure_account(::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service), call_options) do |_result, response|
+        client.create_and_configure_account(::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service, set_alias: set_alias), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
