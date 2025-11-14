@@ -221,7 +221,9 @@ module Google
               #     updated to have the new "API notifications" preference. If the developer
               #     email provided is not associated with any user we will just add it as a
               #     contact. The email preference corresponding to that contact will have the
-              #     new "API notifications" preference
+              #     new "API notifications" preference. Make sure the email used is associated
+              #     with a Google Account (Google Workspace account or Gmail account)
+              #     and is not a service account as service accounts can't receive emails.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistration]
@@ -462,6 +464,75 @@ module Google
               end
 
               ##
+              # Retrieves the merchant account that the calling GCP is registered with.
+              #
+              # @overload get_account_for_gcp_registration(request, options = nil)
+              #   Pass arguments to `get_account_for_gcp_registration` via a request object, either of type
+              #   {::Google::Protobuf::Empty} or an equivalent Hash.
+              #
+              #   @param request [::Google::Protobuf::Empty, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Protobuf::Empty.new
+              #
+              #   # Call the get_account_for_gcp_registration method.
+              #   result = client.get_account_for_gcp_registration request
+              #
+              #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse.
+              #   p result
+              #
+              def get_account_for_gcp_registration request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Protobuf::Empty
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_account_for_gcp_registration.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_account_for_gcp_registration.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_account_for_gcp_registration.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @developer_registration_service_stub.call_rpc :get_account_for_gcp_registration, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the DeveloperRegistrationService API.
               #
               # This class represents the configuration for DeveloperRegistrationService,
@@ -659,6 +730,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :unregister_gcp
+                  ##
+                  # RPC-specific configuration for `get_account_for_gcp_registration`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_account_for_gcp_registration
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -668,6 +744,8 @@ module Google
                     @get_developer_registration = ::Gapic::Config::Method.new get_developer_registration_config
                     unregister_gcp_config = parent_rpcs.unregister_gcp if parent_rpcs.respond_to? :unregister_gcp
                     @unregister_gcp = ::Gapic::Config::Method.new unregister_gcp_config
+                    get_account_for_gcp_registration_config = parent_rpcs.get_account_for_gcp_registration if parent_rpcs.respond_to? :get_account_for_gcp_registration
+                    @get_account_for_gcp_registration = ::Gapic::Config::Method.new get_account_for_gcp_registration_config
 
                     yield self if block_given?
                   end

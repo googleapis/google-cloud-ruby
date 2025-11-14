@@ -49,6 +49,9 @@ module Google
               rpc :UpdateUser, ::Google::Shopping::Merchant::Accounts::V1::UpdateUserRequest, ::Google::Shopping::Merchant::Accounts::V1::User
               # Lists all users of a Merchant Center account.
               rpc :ListUsers, ::Google::Shopping::Merchant::Accounts::V1::ListUsersRequest, ::Google::Shopping::Merchant::Accounts::V1::ListUsersResponse
+              # Updates the user that is represented by the caller from pending to
+              # verified.
+              rpc :VerifySelf, ::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest, ::Google::Shopping::Merchant::Accounts::V1::User
             end
 
             Stub = Service.rpc_stub_class

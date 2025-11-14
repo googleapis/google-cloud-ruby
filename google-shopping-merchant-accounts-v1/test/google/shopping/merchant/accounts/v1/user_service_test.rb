@@ -368,6 +368,64 @@ class ::Google::Shopping::Merchant::Accounts::V1::UserService::ClientTest < Mini
     end
   end
 
+  def test_verify_self
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1::User.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    account = "hello world"
+
+    verify_self_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :verify_self, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest, request
+      assert_equal "hello world", request["account"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, verify_self_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1::UserService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.verify_self({ account: account }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.verify_self account: account do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.verify_self ::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest.new(account: account) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.verify_self({ account: account }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.verify_self(::Google::Shopping::Merchant::Accounts::V1::VerifySelfRequest.new(account: account), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, verify_self_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
