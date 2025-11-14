@@ -210,8 +210,8 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   buckets = storage.buckets return_partial_success: true
-        #   buckets.unreachable.each do |bucket_name|
-        #     puts bucket_name
+        #   buckets.unreachable.each do |unreachable_bucket_name|
+        #     puts unreachable_bucket_name
         #   end
         #  
         def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil

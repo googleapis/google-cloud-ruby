@@ -46,8 +46,8 @@ def list_buckets_with_partial_success
 
     puts "Unreachable bucket names:" 
 
-    bucket_list.unreachable.each do |bucket_name|
-      puts bucket_name
+    bucket_list.unreachable.each do |unreachable_bucket_name|
+      puts unreachable_bucket_name
     end
 end
 # [END storage_list_buckets_partial_success]
