@@ -144,7 +144,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
-          log_ack_nack_safely ack_ids, "ack"
+          log_ack_nack ack_ids, "ack"
           subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
                                                   ack_ids: ack_ids
         end
@@ -153,7 +153,7 @@ module Google
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
           if deadline.zero?
-            log_ack_nack_safely Array(ids), "nack"
+            log_ack_nack Array(ids), "nack"
           end
           subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
                                                           ack_ids: Array(ids),
