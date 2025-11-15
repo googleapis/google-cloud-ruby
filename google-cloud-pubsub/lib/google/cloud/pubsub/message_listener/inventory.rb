@@ -29,6 +29,7 @@ module Google
           end
 
           include MonitorMixin
+          include LoggerHelper
 
           attr_reader :stream
           attr_reader :limit
@@ -87,11 +88,7 @@ module Google
               extension_time = Time.new - extension
               expired, keep = @inventory.partition { |_ack_id, item| item.pulled_at < extension_time }
               @inventory = keep.to_h
-              expired.each do |ack_id, item|
-                Google::Cloud::PubSub.logger("expiry").info(
-                  "message (ID #{item.message_id}, ackID #{ack_id}) has been dropped from leasing due to a timeout"
-                )
-              end
+              log_expiry expired
               @wait_cond.broadcast
             end
           end
