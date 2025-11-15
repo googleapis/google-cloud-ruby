@@ -19,10 +19,16 @@ module Google
       LOG_NAME = "pubsub".freeze
       private_constant :LOG_NAME
 
+      ##
+      # The logger for the Pub/Sub library.
+      # @return [Logger]
       def self.logger
         is_logging_enabled ? configure.logger : Logger.new(nil)
       end
 
+      ##
+      # Checks if logging is enabled for the Pub/Sub library.
+      # @return [Boolean]
       def self.is_logging_enabled
         begin
           env_var = ENV["GOOGLE_SDK_RUBY_LOGGING_GEMS"]
