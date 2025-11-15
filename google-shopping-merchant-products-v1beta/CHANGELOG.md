@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.9.0 (2025-11-15)
+
+#### Features
+
+* Added `handling_cutoff_time` and `handling_cutoff_timezone` fields to the `Shipping` message within `Attributes` 
+* Added the `product_id_base64_url_encoded` field to `InsertProductInputRequest`, `DeleteProductInputRequest`, and `GetProductRequest`. This allows for product IDs containing special characters to be correctly handled when unpadded base64url-encoded ([#32176](https://github.com/googleapis/google-cloud-ruby/issues/32176)) 
+
 ### 0.8.1 (2025-10-27)
 
 #### Documentation
