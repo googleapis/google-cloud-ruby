@@ -75,9 +75,9 @@ module Google
             ) do
               # push empty request every 30 seconds to keep stream alive
               unless inventory.empty?
-                Google::Cloud::PubSub.logger("subscriber-streams").info(
+                log_safely :info, "subscriber-streams" do
                   "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
-                )
+                end
                 push Google::Cloud::PubSub::V1::StreamingPullRequest.new
               end
             end.execute
@@ -99,9 +99,9 @@ module Google
             synchronize do
               break if @stopped
 
-              Google::Cloud::PubSub.logger("subscriber-streams").info(
+              log_safely :info, "subscriber-streams" do
                 "stopping stream for subscription #{@subscriber.subscription_name}"
-              )
+              end
               # Close the stream by pushing the sentinel value.
               # The unary pusher does not use the stream, so it can close here.
               @request_queue&.push self
@@ -227,10 +227,10 @@ module Google
             synchronize do
               # Don't allow a stream to restart if already stopped
               if @stopped
-                Google::Cloud::PubSub.logger("subscriber-streams").debug(
+                log_safely :debug, "subscriber-streams" do
                   "not filling stream for subscription #{@subscriber.subscription_name} because stream is already" \
                   " stopped"
-                )
+                end
                 return
               end
 
@@ -250,9 +250,9 @@ module Google
             # Call the StreamingPull API to get the response enumerator
             options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
             enum = @subscriber.service.streaming_pull @request_queue.each, options
-            Google::Cloud::PubSub.logger("subscriber-streams").info(
+            log_safely :info, "subscriber-streams" do
               "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
-            )
+            end
 
             loop do
               synchronize do
@@ -309,21 +309,21 @@ module Google
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable => e
             status_code = e.respond_to?(:code) ? e.code : e.class.name
-            Google::Cloud::PubSub.logger("subscriber-streams").error(
+            log_safely :error, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended with status " \
               "#{status_code}; will be retried."
-            )
+            end
             # Restart the stream with an incremental back for a retriable error.
             retry
           rescue RestartStream
-            Google::Cloud::PubSub.logger("subscriber-streams").info(
+            log_safely :info, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
-            )
+            end
             retry
           rescue StandardError => e
-            Google::Cloud::PubSub.logger("subscriber-streams").error(
+            log_safely :error, "subscriber-streams" do
               "error on stream for subscription #{@subscriber.subscription_name}: #{e.inspect}"
-            )
+            end
             @subscriber.error! e
 
             retry
@@ -373,15 +373,15 @@ module Google
           end
 
           def perform_callback_sync rec_msg
-            Google::Cloud::PubSub.logger("callback-delivery").info(
+            log_safely :info, "callback-delivery" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
-            )
+            end
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
-            Google::Cloud::PubSub.logger("callback-exceptions").info(
+            log_safely :info, "callback-exceptions" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
-              "#{e.inspect}"
-            )
+                "#{e.inspect}"
+            end
             @subscriber.error! e
           ensure
             release rec_msg
@@ -408,9 +408,9 @@ module Google
             return unless pause_streaming?
 
             @paused = true
-            Google::Cloud::PubSub.logger("subscriber-flow-control").info(
+            log_safely :info, "subscriber-flow-control" do
               "subscriber for #{@subscriber.subscription_name} is client-side flow control blocked"
-            )
+            end
           end
 
           def pause_streaming?
@@ -424,9 +424,9 @@ module Google
             return unless unpause_streaming?
 
             @paused = nil
-            Google::Cloud::PubSub.logger("subscriber-flow-control").info(
+            log_safely :info, "subscriber-flow-control" do
               "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
-            )
+            end
             # signal to the background thread that we are unpaused
             @pause_cond.broadcast
           end
