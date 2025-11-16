@@ -5359,7 +5359,7 @@ module Google
               end
 
               ##
-              # Initiates the cancellation of a running clone job.
+              # Initiates the cancellation of a running ImageImportJob.
               #
               # @overload cancel_image_import_job(request, options = nil)
               #   Pass arguments to `cancel_image_import_job` via a request object, either of type
