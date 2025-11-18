@@ -143,6 +143,85 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for a prebuilt voice.
+        # @!attribute [rw] voice_name
+        #   @return [::String]
+        #     The name of the prebuilt voice to use.
+        class PrebuiltVoiceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The configuration for the replicated voice to use.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     Optional. The mimetype of the voice sample. Currently only
+        #     mime_type=audio/pcm is supported, which is raw mono 16-bit signed
+        #     little-endian pcm data, with 24k sampling rate.
+        # @!attribute [rw] voice_sample_audio
+        #   @return [::String]
+        #     Optional. The sample of the custom voice.
+        class ReplicatedVoiceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a voice.
+        # @!attribute [rw] prebuilt_voice_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PrebuiltVoiceConfig]
+        #     The configuration for a prebuilt voice.
+        #
+        #     Note: The following fields are mutually exclusive: `prebuilt_voice_config`, `replicated_voice_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] replicated_voice_config
+        #   @return [::Google::Cloud::AIPlatform::V1::ReplicatedVoiceConfig]
+        #     Optional. The configuration for a replicated voice. This enables users to
+        #     replicate a voice from an audio sample.
+        #
+        #     Note: The following fields are mutually exclusive: `replicated_voice_config`, `prebuilt_voice_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class VoiceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a single speaker in a multi-speaker setup.
+        # @!attribute [rw] speaker
+        #   @return [::String]
+        #     Required. The name of the speaker. This should be the same as the speaker
+        #     name used in the prompt.
+        # @!attribute [rw] voice_config
+        #   @return [::Google::Cloud::AIPlatform::V1::VoiceConfig]
+        #     Required. The configuration for the voice of this speaker.
+        class SpeakerVoiceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a multi-speaker text-to-speech request.
+        # @!attribute [rw] speaker_voice_configs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::SpeakerVoiceConfig>]
+        #     Required. A list of configurations for the voices of the speakers. Exactly
+        #     two speaker voice configurations must be provided.
+        class MultiSpeakerVoiceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for speech generation.
+        # @!attribute [rw] voice_config
+        #   @return [::Google::Cloud::AIPlatform::V1::VoiceConfig]
+        #     The configuration for the voice to use.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Optional. The language code (ISO 639-1) for the speech synthesis.
+        # @!attribute [rw] multi_speaker_voice_config
+        #   @return [::Google::Cloud::AIPlatform::V1::MultiSpeakerVoiceConfig]
+        #     The configuration for a multi-speaker text-to-speech request.
+        #     This field is mutually exclusive with `voice_config`.
+        class SpeechConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Config for image generation features.
         # @!attribute [rw] aspect_ratio
         #   @return [::String]
@@ -253,6 +332,9 @@ module Google
         # @!attribute [rw] routing_config
         #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig]
         #     Optional. Routing configuration.
+        # @!attribute [rw] speech_config
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeechConfig]
+        #     Optional. The speech generation config.
         # @!attribute [rw] thinking_config
         #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::ThinkingConfig]
         #     Optional. Config for thinking features.
