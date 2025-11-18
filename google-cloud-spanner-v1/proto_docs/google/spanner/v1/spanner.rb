@@ -439,6 +439,14 @@ module Google
         #     be deferred until commit time (for example, validation of unique
         #     constraints). Given this, successful execution of a DML statement shouldn't
         #     be assumed until a subsequent `Commit` call completes successfully.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. If present, it makes the Spanner requests location-aware.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -927,6 +935,14 @@ module Google
         #   @return [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
         #     Optional. Lock Hint for the request, it can only be used with read-write
         #     transactions.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. If present, it makes the Spanner requests location-aware.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class ReadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

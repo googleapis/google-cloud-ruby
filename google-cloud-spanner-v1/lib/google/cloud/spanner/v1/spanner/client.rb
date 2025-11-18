@@ -771,7 +771,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil)
+            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil, routing_hint: nil)
             #   Pass arguments to `execute_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -867,6 +867,13 @@ module Google
             #     be deferred until commit time (for example, validation of unique
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -952,7 +959,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil)
+            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil, routing_hint: nil)
             #   Pass arguments to `execute_streaming_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1048,6 +1055,13 @@ module Google
             #     be deferred until commit time (for example, validation of unique
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1272,7 +1286,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil)
+            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil, routing_hint: nil)
             #   Pass arguments to `read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1349,6 +1363,13 @@ module Google
             #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -1431,7 +1452,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil)
+            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil, routing_hint: nil)
             #   Pass arguments to `streaming_read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1508,6 +1529,13 @@ module Google
             #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
