@@ -47,6 +47,10 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Required. The default and minimum enforced retention for each backup within
         #     the backup vault.  The enforced retention for each backup can be extended.
+        # @!attribute [rw] backup_retention_inheritance
+        #   @return [::Google::Cloud::BackupDR::V1::BackupVault::BackupRetentionInheritance]
+        #     Optional. Setting for how a backup's enforced retention end time is
+        #     inherited.
         # @!attribute [r] deletable
         #   @return [::Boolean]
         #     Output only. Set to true when there are no backups nested under this
@@ -86,9 +90,25 @@ module Google
         #
         #     Access restriction for the backup vault.
         #     Default value is WITHIN_ORGANIZATION if not provided during creation.
+        # @!attribute [rw] encryption_config
+        #   @return [::Google::Cloud::BackupDR::V1::BackupVault::EncryptionConfig]
+        #     Optional. The encryption config of the backup vault.
         class BackupVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message describing the EncryptionConfig of backup vault.
+          # This determines how data within the vault is encrypted at rest.
+          # @!attribute [rw] kms_key_name
+          #   @return [::String]
+          #     Optional. The Cloud KMS key name to encrypt backups in this backup vault.
+          #     Must be in the same region as the vault. Some workload backups like
+          #     compute disk backups may use their inherited source key instead. Format:
+          #     projects/\\{project}/locations/\\{location}/keyRings/\\{ring}/cryptoKeys/\\{key}
+          class EncryptionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -106,6 +126,28 @@ module Google
           class AnnotationsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # How a backup's enforced retention end time is inherited.
+          module BackupRetentionInheritance
+            # Inheritance behavior not set. This will default to
+            # `INHERIT_VAULT_RETENTION`.
+            BACKUP_RETENTION_INHERITANCE_UNSPECIFIED = 0
+
+            # The enforced retention end time of a backup will be inherited from the
+            # backup vault's `backup_minimum_enforced_retention_duration` field.
+            #
+            # This is the default behavior.
+            INHERIT_VAULT_RETENTION = 1
+
+            # The enforced retention end time of a backup will always match the expire
+            # time of the backup.
+            #
+            # If this is set, the backup's enforced retention end time will be set to
+            # match the expire time during creation of the backup. When updating, the
+            # ERET and expire time must be updated together and have the same value.
+            # Invalid update requests will be rejected by the server.
+            MATCH_BACKUP_EXPIRE_TIME = 2
           end
 
           # Holds the state of the backup vault resource.
@@ -497,6 +539,10 @@ module Google
         # @!attribute [rw] enforced_retention_end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The backup can not be deleted before this time.
+        # @!attribute [r] backup_retention_inheritance
+        #   @return [::Google::Cloud::BackupDR::V1::BackupVault::BackupRetentionInheritance]
+        #     Output only. Setting for how the enforced retention end time is inherited.
+        #     This value is copied from this backup's BackupVault.
         # @!attribute [rw] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. When this backup is automatically expired.
@@ -557,6 +603,10 @@ module Google
         #   @return [::Google::Cloud::BackupDR::V1::BackupGcpResource]
         #     Output only. Unique identifier of the GCP resource that is being backed
         #     up.
+        # @!attribute [r] kms_key_versions
+        #   @return [::Array<::String>]
+        #     Optional. Output only. The list of KMS key versions used to encrypt the
+        #     backup.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1191,6 +1241,20 @@ module Google
         #     Disk properties to be overridden during restore.
         #
         #     Note: The following fields are mutually exclusive: `disk_restore_properties`, `compute_instance_restore_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] clear_overrides_field_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A field mask used to clear server-side default values
+        #     for fields within the `instance_properties` oneof.
+        #
+        #     When a field in this mask is cleared, the server will not apply its
+        #     default logic (like inheriting a value from the source) for that field.
+        #
+        #     The most common current use case is clearing default encryption keys.
+        #
+        #     Examples of field mask paths:
+        #     - Compute Instance Disks:
+        #     `compute_instance_restore_properties.disks.*.disk_encryption_key`
+        #     - Single Disk: `disk_restore_properties.disk_encryption_key`
         class RestoreBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

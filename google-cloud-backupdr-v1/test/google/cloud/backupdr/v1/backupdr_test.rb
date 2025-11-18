@@ -1301,6 +1301,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
     request_id = "hello world"
     compute_instance_target_environment = {}
     compute_instance_restore_properties = {}
+    clear_overrides_field_mask = {}
 
     restore_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_backup, name
@@ -1311,6 +1312,8 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
       assert_equal :compute_instance_target_environment, request.target_environment
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BackupDR::V1::ComputeInstanceRestoreProperties), request["compute_instance_restore_properties"]
       assert_equal :compute_instance_restore_properties, request.instance_properties
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["clear_overrides_field_mask"]
+      assert request.has_clear_overrides_field_mask?
       refute_nil options
     end
 
@@ -1321,35 +1324,35 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties }) do |response, operation|
+      client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_backup name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties do |response, operation|
+      client.restore_backup name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_backup ::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties) do |response, operation|
+      client.restore_backup ::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties }, grpc_options) do |response, operation|
+      client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_backup(::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties), grpc_options) do |response, operation|
+      client.restore_backup(::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
