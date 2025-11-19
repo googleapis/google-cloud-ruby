@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.9.0 (2025-11-19)
+
+#### Features
+
+* Added the `product_id_base64_url_encoded`. This allows for product IDs containing special characters to be correctly handled when base64url-encoded ([#32172](https://github.com/googleapis/google-cloud-ruby/issues/32172)) 
+#### Bug Fixes
+
+* removing parameters before stable release ([#32197](https://github.com/googleapis/google-cloud-ruby/issues/32197)) 
+#### Documentation
+
+* Updated the API summary and overview in the service configuration 
+
 ### 0.8.1 (2025-10-27)
 
 #### Documentation
