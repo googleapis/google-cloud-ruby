@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2025-11-19)
+
+#### Bug Fixes
+
+* removing parameters before stable release ([#32200](https://github.com/googleapis/google-cloud-ruby/issues/32200)) 
+
 ### 0.4.0 (2025-11-12)
 
 #### Features
