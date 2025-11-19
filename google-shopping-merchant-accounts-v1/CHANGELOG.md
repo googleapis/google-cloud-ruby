@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.2 (2025-11-19)
+
+#### Documentation
+
+* A comment for enum `AccessRight` is changed ([#32203](https://github.com/googleapis/google-cloud-ruby/issues/32203)) 
+* A comment for enum value `API_DEVELOPER` in enum `AccessRight` is changed 
+
 ### 0.3.1 (2025-10-27)
 
 #### Documentation
