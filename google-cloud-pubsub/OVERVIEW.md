@@ -36,7 +36,7 @@ into Admin Operations and Data Plane Operations.
 * **Data Plane Operations**: For the core functionality of publishing and receiving messages.
 
 To learn more about Pub/Sub, read the [Google Cloud Pub/Sub Overview
-](https://cloud.google.com/pubsub/overview).
+](https://docs.cloud.google.com/pubsub/docs/overview).
 
 ## Admin Operations
 
