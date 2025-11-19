@@ -14,7 +14,7 @@ connecting in the {file:AUTHENTICATION.md Authentication Guide}.
 
 To help you get started quickly, the first few examples below use a public
 dataset provided by Google. As soon as you have [signed
-up](https://cloud.google.com/bigquery/sign-up) to use BigQuery, and provided
+up](https://cloud.google.com/bigquery) to use BigQuery, and provided
 that you stay in the free tier for queries, you should be able to run these
 first examples without the need to set up billing or to load data (although
 we'll show you how to do that too.)
@@ -249,8 +249,8 @@ dataset = bigquery.create_dataset "my_dataset"
 Now that you have a dataset, you can use it to create a table. Every table is
 defined by a schema that may contain nested and repeated fields. The example
 below shows a schema with a repeated record field named `cities_lived`. (For
-more information about nested and repeated fields, see [Preparing Data for
-Loading](https://cloud.google.com/bigquery/preparing-data-for-loading).)
+more information about nested and repeated fields, see 
+[Using Nested and Repeated Fields](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested).)
 
 ```ruby
 require "google/cloud/bigquery"
@@ -455,7 +455,7 @@ bigquery = Google::Cloud::Bigquery.new retries: 10, timeout: 120
 ```
 
 See the [BigQuery error
-table](https://cloud.google.com/bigquery/troubleshooting-errors#errortable) for
+table](https://docs.cloud.google.com/bigquery/docs/error-messages) for
 a list of error conditions.
 
 ## Additional information
