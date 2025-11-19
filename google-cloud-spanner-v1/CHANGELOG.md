@@ -1,5 +1,12 @@
 # Release History
 
+### 1.12.0 (2025-11-19)
+
+#### Features
+
+* Add Send and Ack mutations for Queues 
+* Add Spanner location API ([#32204](https://github.com/googleapis/google-cloud-ruby/issues/32204)) 
+
 ### 1.11.1 (2025-10-27)
 
 #### Documentation
