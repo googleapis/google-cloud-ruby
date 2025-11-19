@@ -43,10 +43,10 @@ module Google
         #     Parameters to apply to each created session.
         # @!attribute [rw] session_count
         #   @return [::Integer]
-        #     Required. The number of sessions to be created in this batch call.
-        #     The API can return fewer than the requested number of sessions. If a
-        #     specific number of sessions are desired, the client can make additional
-        #     calls to `BatchCreateSessions` (adjusting
+        #     Required. The number of sessions to be created in this batch call. At least
+        #     one session is created. The API can return fewer than the requested number
+        #     of sessions. If a specific number of sessions are desired, the client can
+        #     make additional calls to `BatchCreateSessions` (adjusting
         #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
         #     as necessary).
         class BatchCreateSessionsRequest
@@ -92,8 +92,8 @@ module Google
         # @!attribute [rw] multiplexed
         #   @return [::Boolean]
         #     Optional. If `true`, specifies a multiplexed session. Use a multiplexed
-        #     session for multiple, concurrent read-only operations. Don't use them for
-        #     read-write transactions, partitioned reads, or partitioned queries. Use
+        #     session for multiple, concurrent operations including any combination of
+        #     read-only and read-write transactions. Use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#create_session `sessions.create`} to create
         #     multiplexed sessions. Don't use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions} to
@@ -439,6 +439,14 @@ module Google
         #     be deferred until commit time (for example, validation of unique
         #     constraints). Given this, successful execution of a DML statement shouldn't
         #     be assumed until a subsequent `Commit` call completes successfully.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. If present, it makes the Spanner requests location-aware.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -927,6 +935,14 @@ module Google
         #   @return [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
         #     Optional. Lock Hint for the request, it can only be used with read-write
         #     transactions.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. If present, it makes the Spanner requests location-aware.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class ReadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

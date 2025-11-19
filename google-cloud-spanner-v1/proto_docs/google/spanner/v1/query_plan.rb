@@ -135,12 +135,41 @@ module Google
           end
         end
 
+        # Output of query advisor analysis.
+        # @!attribute [rw] index_advice
+        #   @return [::Array<::Google::Cloud::Spanner::V1::QueryAdvisorResult::IndexAdvice>]
+        #     Optional. Index Recommendation for a query. This is an optional field and
+        #     the recommendation will only be available when the recommendation
+        #     guarantees significant improvement in query performance.
+        class QueryAdvisorResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Recommendation to add new indexes to run queries more efficiently.
+          # @!attribute [rw] ddl
+          #   @return [::Array<::String>]
+          #     Optional. DDL statements to add new indexes that will improve the query.
+          # @!attribute [rw] improvement_factor
+          #   @return [::Float]
+          #     Optional. Estimated latency improvement factor. For example if the query
+          #     currently takes 500 ms to run and the estimated latency with new indexes
+          #     is 100 ms this field will be 5.
+          class IndexAdvice
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Contains an ordered list of nodes appearing in the query plan.
         # @!attribute [rw] plan_nodes
         #   @return [::Array<::Google::Cloud::Spanner::V1::PlanNode>]
         #     The nodes in the query plan. Plan nodes are returned in pre-order starting
         #     with the plan root. Each {::Google::Cloud::Spanner::V1::PlanNode PlanNode}'s `id`
         #     corresponds to its index in `plan_nodes`.
+        # @!attribute [rw] query_advice
+        #   @return [::Google::Cloud::Spanner::V1::QueryAdvisorResult]
+        #     Optional. The advise/recommendations for a query. Currently this field will
+        #     be serving index recommendations for a query.
         class QueryPlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

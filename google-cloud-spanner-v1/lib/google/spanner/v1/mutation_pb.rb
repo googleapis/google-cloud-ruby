@@ -6,10 +6,11 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/protobuf/struct_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/spanner/v1/keys_pb'
 
 
-descriptor_data = "\n google/spanner/v1/mutation.proto\x12\x11google.spanner.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1cgoogle/spanner/v1/keys.proto\"\xd5\x03\n\x08Mutation\x12\x33\n\x06insert\x18\x01 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12\x33\n\x06update\x18\x02 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12=\n\x10insert_or_update\x18\x03 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12\x34\n\x07replace\x18\x04 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12\x34\n\x06\x64\x65lete\x18\x05 \x01(\x0b\x32\".google.spanner.v1.Mutation.DeleteH\x00\x1aX\n\x05Write\x12\x12\n\x05table\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x0f\n\x07\x63olumns\x18\x02 \x03(\t\x12*\n\x06values\x18\x03 \x03(\x0b\x32\x1a.google.protobuf.ListValue\x1aM\n\x06\x44\x65lete\x12\x12\n\x05table\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12/\n\x07key_set\x18\x02 \x01(\x0b\x32\x19.google.spanner.v1.KeySetB\x03\xe0\x41\x02\x42\x0b\n\toperationB\xb0\x01\n\x15\x63om.google.spanner.v1B\rMutationProtoP\x01Z5cloud.google.com/go/spanner/apiv1/spannerpb;spannerpb\xaa\x02\x17Google.Cloud.Spanner.V1\xca\x02\x17Google\\Cloud\\Spanner\\V1\xea\x02\x1aGoogle::Cloud::Spanner::V1b\x06proto3"
+descriptor_data = "\n google/spanner/v1/mutation.proto\x12\x11google.spanner.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/spanner/v1/keys.proto\"\xc0\x06\n\x08Mutation\x12\x33\n\x06insert\x18\x01 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12\x33\n\x06update\x18\x02 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12=\n\x10insert_or_update\x18\x03 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12\x34\n\x07replace\x18\x04 \x01(\x0b\x32!.google.spanner.v1.Mutation.WriteH\x00\x12\x34\n\x06\x64\x65lete\x18\x05 \x01(\x0b\x32\".google.spanner.v1.Mutation.DeleteH\x00\x12\x30\n\x04send\x18\x06 \x01(\x0b\x32 .google.spanner.v1.Mutation.SendH\x00\x12.\n\x03\x61\x63k\x18\x07 \x01(\x0b\x32\x1f.google.spanner.v1.Mutation.AckH\x00\x1aX\n\x05Write\x12\x12\n\x05table\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x0f\n\x07\x63olumns\x18\x02 \x03(\t\x12*\n\x06values\x18\x03 \x03(\x0b\x32\x1a.google.protobuf.ListValue\x1aM\n\x06\x44\x65lete\x12\x12\n\x05table\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12/\n\x07key_set\x18\x02 \x01(\x0b\x32\x19.google.spanner.v1.KeySetB\x03\xe0\x41\x02\x1a\xa3\x01\n\x04Send\x12\x12\n\x05queue\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12,\n\x03key\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.ListValueB\x03\xe0\x41\x02\x12\x30\n\x0c\x64\x65liver_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\'\n\x07payload\x18\x04 \x01(\x0b\x32\x16.google.protobuf.Value\x1a\x61\n\x03\x41\x63k\x12\x12\n\x05queue\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12,\n\x03key\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.ListValueB\x03\xe0\x41\x02\x12\x18\n\x10ignore_not_found\x18\x03 \x01(\x08\x42\x0b\n\toperationB\xb0\x01\n\x15\x63om.google.spanner.v1B\rMutationProtoP\x01Z5cloud.google.com/go/spanner/apiv1/spannerpb;spannerpb\xaa\x02\x17Google.Cloud.Spanner.V1\xca\x02\x17Google\\Cloud\\Spanner\\V1\xea\x02\x1aGoogle::Cloud::Spanner::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -26,6 +27,7 @@ rescue TypeError
   imports = [
     ["google.protobuf.ListValue", "google/protobuf/struct.proto"],
     ["google.spanner.v1.KeySet", "google/spanner/v1/keys.proto"],
+    ["google.protobuf.Timestamp", "google/protobuf/timestamp.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor
@@ -44,6 +46,8 @@ module Google
         Mutation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation").msgclass
         Mutation::Write = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Write").msgclass
         Mutation::Delete = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Delete").msgclass
+        Mutation::Send = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Send").msgclass
+        Mutation::Ack = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Ack").msgclass
       end
     end
   end
