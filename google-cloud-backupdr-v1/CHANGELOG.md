@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.6.0 (2025-11-19)
+
+#### Features
+
+* Adding new fields for CMEK and Retention Inheritance features ([#32206](https://github.com/googleapis/google-cloud-ruby/issues/32206)) 
+
 ### 1.5.0 (2025-11-06)
 
 #### Features
