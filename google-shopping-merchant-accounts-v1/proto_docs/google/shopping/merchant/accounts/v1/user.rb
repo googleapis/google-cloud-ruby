@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Accounts
         module V1
-          # The `User` message represents a user associated with a Merchant Center
+          # The `User` resource represents a user associated with a Merchant Center
           # account. It is used to manage user permissions and access rights within the
           # account. For more information, see [Frequently asked questions about people
           # and access levels](//support.google.com/merchants/answer/12160472).
@@ -45,7 +45,9 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The possible states of a user.
+            # The state represents the possible statuses of a user. It is an output-only
+            # field that is set to `PENDING` when a user is invited to an account and
+            # changes to `VERIFIED` once the user accepts the invitation.
             module State
               # Default value. This value is unused.
               STATE_UNSPECIFIED = 0
@@ -154,6 +156,16 @@ module Google
           #     A token, which can be sent as `page_token` to retrieve the next page.
           #     If this field is omitted, there are no subsequent pages.
           class ListUsersResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `VerifySelf` method.
+          # @!attribute [rw] account
+          #   @return [::String]
+          #     Required. The name of the account under which the caller is a user.
+          #     Format: `accounts/{account}`
+          class VerifySelfRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

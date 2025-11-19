@@ -48,14 +48,14 @@ module Google
           #     management or catalog synchronization services to keep the business's
           #     product information up-to-date across platforms.
           #
-          #     Note: The following fields are mutually exclusive: `products_management`, `campaigns_management`, `account_management`, `account_aggregation`, `local_listing_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `products_management`, `campaigns_management`, `account_management`, `account_aggregation`, `local_listing_management`, `comparison_shopping`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] campaigns_management
           #   @return [::Google::Shopping::Merchant::Accounts::V1::CampaignsManagement]
           #     Service type for managing advertising campaigns. Grants the provider
           #     access to create and manage the business's ad campaigns, including
           #     setting up campaigns, adjusting bids, and optimizing performance.
           #
-          #     Note: The following fields are mutually exclusive: `campaigns_management`, `products_management`, `account_management`, `account_aggregation`, `local_listing_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `campaigns_management`, `products_management`, `account_management`, `account_aggregation`, `local_listing_management`, `comparison_shopping`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] account_management
           #   @return [::Google::Shopping::Merchant::Accounts::V1::AccountManagement]
           #     Service type for account management. Enables the provider to perform
@@ -63,7 +63,7 @@ module Google
           #     configuring account settings, managing users, or updating business
           #     information.
           #
-          #     Note: The following fields are mutually exclusive: `account_management`, `products_management`, `campaigns_management`, `account_aggregation`, `local_listing_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `account_management`, `products_management`, `campaigns_management`, `account_aggregation`, `local_listing_management`, `comparison_shopping`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] account_aggregation
           #   @return [::Google::Shopping::Merchant::Accounts::V1::AccountAggregation]
           #     Service type for account aggregation. This enables the provider, which is
@@ -75,14 +75,21 @@ module Google
           #     This is useful for agencies, aggregators, or large retailers that need
           #     centralized control over many Merchant Center accounts.
           #
-          #     Note: The following fields are mutually exclusive: `account_aggregation`, `products_management`, `campaigns_management`, `account_management`, `local_listing_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `account_aggregation`, `products_management`, `campaigns_management`, `account_management`, `local_listing_management`, `comparison_shopping`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] local_listing_management
           #   @return [::Google::Shopping::Merchant::Accounts::V1::LocalListingManagement]
           #     Service type for local listings management. The business group associated
           #     with the external account id will be used to provide local inventory to
           #     this Merchant Center account.
           #
-          #     Note: The following fields are mutually exclusive: `local_listing_management`, `products_management`, `campaigns_management`, `account_management`, `account_aggregation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `local_listing_management`, `products_management`, `campaigns_management`, `account_management`, `account_aggregation`, `comparison_shopping`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] comparison_shopping
+          #   @return [::Google::Shopping::Merchant::Accounts::V1::ComparisonShopping]
+          #     Service type for comparison shopping. The provider is a CSS (Comparison
+          #     Shopping Service) managing the account. See
+          #     https://support.google.com/merchants/answer/12653197
+          #
+          #     Note: The following fields are mutually exclusive: `comparison_shopping`, `products_management`, `campaigns_management`, `account_management`, `account_aggregation`, `local_listing_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Identifier. The resource name of the account service.
@@ -237,6 +244,12 @@ module Google
 
           # `LocalListingManagement` payload.
           class LocalListingManagement
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # `ComparisonShopping` payload.
+          class ComparisonShopping
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -33,6 +33,7 @@ module Google
           # The following list is the available set of program resource IDs accessible
           # through the API:
           #
+          # * `checkout`
           # * `free-listings`
           # * `shopping-ads`
           # * `youtube-shopping-checkout`
