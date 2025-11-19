@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.6.0 (2025-11-19)
+
+#### Features
+
+* add adaptation modifiers and guest OS features to ImageImport target details 
+* add adaptation modifiers and storage pools to MigratingVM target defaults ([#32205](https://github.com/googleapis/google-cloud-ruby/issues/32205)) 
+
 ### 2.5.1 (2025-10-27)
 
 #### Documentation
