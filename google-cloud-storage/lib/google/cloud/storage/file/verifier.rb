@@ -78,27 +78,18 @@ module Google
           # @return [String] The base64-encoded digest of the file's content.
           #
           def self._digest_for local_file, digest_class
-            if local_file.respond_to? :to_path
-              # Case 1: Input is a file path (or Pathname). Use the safe block form.
+
+            if local_file.respond_to?(:to_path) || local_file.is_a?(String)
+              # Case 1: Input is a file path (String, Pathname, or object that responds to :to_path).
               ::File.open Pathname(local_file).to_path, "rb" do |f|
                 digest_class.file(f).base64digest
               end
             else
-              # Case 2: Input is an open stream (like File or StringIO).
-              file_to_close = nil
-              unless local_file.respond_to? :rewind
-                file_to_close = local_file = ::File.open Pathname(local_file).to_path,
-                                                         "rb"
-              end
-              begin
-                local_file.rewind
-                digest = digest_class.base64digest local_file.read
-                local_file.rewind
-                digest
-              ensure
-                # Only close the stream if we explicitly opened it
-                file_to_close.close if file_to_close.respond_to?(:close) && !file_to_close.closed?
-              end
+              # Case 2: Input is an open stream (File or StringIO).
+              local_file.rewind
+              digest = digest_class.base64digest local_file.read
+              local_file.rewind
+              digest
             end
           end
         end
