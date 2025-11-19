@@ -686,6 +686,13 @@ module Google
             # and has been migrated to use the SPOT model as the underlying technology.
             # This old model will still be supported.
             PREEMPTIBLE = 3
+
+            # Bound to the lifecycle of the reservation in which it is provisioned.
+            RESERVATION_BOUND = 4
+
+            # Instance is provisioned with DWS Flex Start and has limited max run
+            # duration.
+            FLEX_START = 5
           end
         end
 
