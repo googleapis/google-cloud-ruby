@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.8.0 (2025-11-18)
+
+#### Features
+
+* add artifact_type field in DockerImage 
+* add image_manifest field in DockerImage ([#32178](https://github.com/googleapis/google-cloud-ruby/issues/32178)) 
+
 ### 1.7.1 (2025-10-27)
 
 #### Documentation
