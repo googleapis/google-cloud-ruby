@@ -127,18 +127,6 @@ module Google
           #     Note: For calls to the v1beta version, the `product` section consists
           #     of: `channel~content_language~feed_label~offer_id`, for example:
           #     `accounts/123/products/online~en~US~sku123`.
-          # @!attribute [rw] product_id_base64_url_encoded
-          #   @return [::Boolean]
-          #     Optional. If true, the `{product}` in the `name` field of the request will
-          #     be interpreted as unpadded base64url-encoded and decoded during request
-          #     processing to match the decoded value. Default value is `false`. Use this
-          #     if your `{product}` contains special characters, such as forward slash `/`
-          #     or other characters that are unpadded base64url-encoded (as per RFC 7515:
-          #     https://datatracker.ietf.org/doc/html/rfc7515#section-2).
-          #
-          #     Note that future versions of the API will only accept unpadded
-          #     base64url-encoded product ids, so we strongly recommend proactively setting
-          #     this to `true` and encoding the product ids.
           class GetProductRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
