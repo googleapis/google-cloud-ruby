@@ -2112,7 +2112,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload restore_backup(name: nil, request_id: nil, compute_instance_target_environment: nil, disk_target_environment: nil, region_disk_target_environment: nil, compute_instance_restore_properties: nil, disk_restore_properties: nil)
+              # @overload restore_backup(name: nil, request_id: nil, compute_instance_target_environment: nil, disk_target_environment: nil, region_disk_target_environment: nil, compute_instance_restore_properties: nil, disk_restore_properties: nil, clear_overrides_field_mask: nil)
               #   Pass arguments to `restore_backup` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2154,6 +2154,19 @@ module Google
               #     Disk properties to be overridden during restore.
               #
               #     Note: The following parameters are mutually exclusive: `disk_restore_properties`, `compute_instance_restore_properties`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param clear_overrides_field_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. A field mask used to clear server-side default values
+              #     for fields within the `instance_properties` oneof.
+              #
+              #     When a field in this mask is cleared, the server will not apply its
+              #     default logic (like inheriting a value from the source) for that field.
+              #
+              #     The most common current use case is clearing default encryption keys.
+              #
+              #     Examples of field mask paths:
+              #     - Compute Instance Disks:
+              #     `compute_instance_restore_properties.disks.*.disk_encryption_key`
+              #     - Single Disk: `disk_restore_properties.disk_encryption_key`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

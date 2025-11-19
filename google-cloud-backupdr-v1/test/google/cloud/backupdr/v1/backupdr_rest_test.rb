@@ -1117,6 +1117,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     request_id = "hello world"
     compute_instance_target_environment = {}
     compute_instance_restore_properties = {}
+    clear_overrides_field_mask = {}
 
     restore_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1132,27 +1133,27 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties }) do |_result, response|
+        client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_backup name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties do |_result, response|
+        client.restore_backup name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_backup ::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties) do |_result, response|
+        client.restore_backup ::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties }, call_options) do |_result, response|
+        client.restore_backup({ name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_backup(::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties), call_options) do |_result, response|
+        client.restore_backup(::Google::Cloud::BackupDR::V1::RestoreBackupRequest.new(name: name, request_id: request_id, compute_instance_target_environment: compute_instance_target_environment, compute_instance_restore_properties: compute_instance_restore_properties, clear_overrides_field_mask: clear_overrides_field_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

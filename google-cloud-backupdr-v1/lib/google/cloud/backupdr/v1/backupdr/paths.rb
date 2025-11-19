@@ -126,6 +126,50 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{ring}/cryptoKeys/{key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ring [String]
+            # @param key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, ring:, key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "ring cannot contain /" if ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{ring}/cryptoKeys/#{key}"
+            end
+
+            ##
+            # Create a fully-qualified CryptoKeyVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            # @param crypto_key_version [String]
+            #
+            # @return [::String]
+            def crypto_key_version_path project:, location:, key_ring:, crypto_key:, crypto_key_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
+            end
+
+            ##
             # Create a fully-qualified DataSource resource string.
             #
             # The resource will be in the following format:
