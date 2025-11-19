@@ -139,7 +139,6 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
     language_code = "hello world"
     time_zone = "hello world"
     payload = {}
-    product_id_base64_url_encoded = true
 
     render_product_issues_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :render_product_issues, name
@@ -148,7 +147,6 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
       assert_equal "hello world", request["language_code"]
       assert_equal "hello world", request["time_zone"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderIssuesRequestPayload), request["payload"]
-      assert_equal true, request["product_id_base64_url_encoded"]
       refute_nil options
     end
 
@@ -159,31 +157,31 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
       end
 
       # Use hash object
-      client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded }) do |response, operation|
+      client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.render_product_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded do |response, operation|
+      client.render_product_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.render_product_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded) do |response, operation|
+      client.render_product_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded }, grpc_options) do |response, operation|
+      client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.render_product_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload, product_id_base64_url_encoded: product_id_base64_url_encoded), grpc_options) do |response, operation|
+      client.render_product_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
