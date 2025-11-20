@@ -595,9 +595,9 @@ describe "Buckets Snippets" do
       out, _err = capture_io do
         move_object bucket_name: bucket.name, source_file_name: source_file, destination_file_name: destination_file
       end
-    #   assert_includes out, "New File #{destination_file} created\n"
-    #   refute_nil(bucket.file(destination_file))
-    #   assert_nil(bucket.file(source_file))
+      assert_includes out, "New File #{destination_file} created\n"
+      refute_nil(bucket.file(destination_file))
+      assert_nil(bucket.file(source_file))
     end
 
     it "raises error if source and destination are having same filename" do

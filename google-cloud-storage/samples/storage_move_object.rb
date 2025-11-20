@@ -27,9 +27,6 @@ def move_object bucket_name:, source_file_name:, destination_file_name:
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name, skip_lookup: true
-  permissions = ["storage.objects.move"]
-  puts "check permissions"
-  puts bucket.test_permissions permissions
   bucket.move_file source_file_name, destination_file_name
   fetch_file = bucket.file destination_file_name
   puts "New File #{fetch_file.name} created\n"
