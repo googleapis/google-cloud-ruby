@@ -372,9 +372,37 @@ module Google
         #     matching the 'allowedClients' specification. It enables nfs clients to
         #     mount using 'privacy' kerberos security mode. The 'kerberos5pReadOnly'
         #     value be ignored if this is enabled.
+        # @!attribute [rw] squash_mode
+        #   @return [::Google::Cloud::NetApp::V1::SimpleExportPolicyRule::SquashMode]
+        #     Optional. Defines how user identity squashing is applied for this export
+        #     rule. This field is the preferred way to configure squashing behavior and
+        #     takes precedence over `has_root_access` if both are provided.
+        # @!attribute [rw] anon_uid
+        #   @return [::Integer]
+        #     Optional. An integer representing the anonymous user ID. Range is 0 to
+        #     4294967295. Required when squash_mode is ROOT_SQUASH or ALL_SQUASH.
         class SimpleExportPolicyRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # SquashMode defines how remote user privileges are restricted when accessing
+          # an NFS export. It controls how user identities (like root) are mapped to
+          # anonymous users to limit access and enforce security.
+          module SquashMode
+            # Defaults to NO_ROOT_SQUASH.
+            SQUASH_MODE_UNSPECIFIED = 0
+
+            # The root user (UID 0) retains full access. Other users are
+            # unaffected.
+            NO_ROOT_SQUASH = 1
+
+            # The root user (UID 0) is squashed to anonymous user ID. Other users are
+            # unaffected.
+            ROOT_SQUASH = 2
+
+            # All users are squashed to anonymous user ID.
+            ALL_SQUASH = 3
+          end
         end
 
         # Snapshot Policy for a volume.
