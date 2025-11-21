@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.3.0 (2025-11-21)
+
+#### Features
+
+* Added Application resource ([#31802](https://github.com/googleapis/google-cloud-ruby/issues/31802)) 
+
 ### 2.2.0 (2025-10-08)
 
 #### Features
