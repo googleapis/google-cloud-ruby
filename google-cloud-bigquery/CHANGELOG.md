@@ -1,5 +1,14 @@
 # Release History
 
+### 1.61.1 (2025-11-21)
+
+#### Bug Fixes
+
+* Fix broken links 
+#### Documentation
+
+* Clarify comments on job error status 
+
 ### 1.61.0 (2025-11-04)
 
 #### Features
