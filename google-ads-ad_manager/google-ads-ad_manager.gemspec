@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Ad Manager API enables an app to integrate with Google Ad Manager. You can read Ad Manager data and run reports using the API."
+  gem.description   = "The Ad Manager API enables an app to integrate with Google Ad Manager. You can read and write Ad Manager data and run reports using the API."
   gem.summary       = "Manage your Ad Manager inventory, run reports and more."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
