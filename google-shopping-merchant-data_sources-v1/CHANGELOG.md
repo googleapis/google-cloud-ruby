@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.3.0 (2025-11-20)
+
+### ⚠ BREAKING CHANGES
+
+* An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource` ([#32137](https://github.com/googleapis/google-cloud-ruby/issues/32137))
+
+#### Bug Fixes
+
+* An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource` ([#32137](https://github.com/googleapis/google-cloud-ruby/issues/32137)) 
+#### Documentation
+
+* update documentation for datasources 
+
 ### 0.2.1 (2025-10-27)
 
 #### Documentation
