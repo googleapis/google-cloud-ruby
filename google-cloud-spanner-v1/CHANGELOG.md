@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.1 (2025-11-21)
+
+#### Documentation
+
+* minor update for Spanner Location API ([#32220](https://github.com/googleapis/google-cloud-ruby/issues/32220)) 
+
 ### 1.12.0 (2025-11-19)
 
 #### Features
