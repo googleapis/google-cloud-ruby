@@ -191,6 +191,391 @@ class ::Google::Ads::AdManager::V1::PlacementService::Rest::ClientTest < Minites
     end
   end
 
+  def test_create_placement
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Placement.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    placement = {}
+
+    create_placement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_create_placement_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_placement_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_placement({ parent: parent, placement: placement }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_placement parent: parent, placement: placement do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_placement ::Google::Ads::AdManager::V1::CreatePlacementRequest.new(parent: parent, placement: placement) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_placement({ parent: parent, placement: placement }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_placement(::Google::Ads::AdManager::V1::CreatePlacementRequest.new(parent: parent, placement: placement), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_placement_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_placement
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Placement.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    placement = {}
+    update_mask = {}
+
+    update_placement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_update_placement_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_placement_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_placement({ placement: placement, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_placement placement: placement, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_placement ::Google::Ads::AdManager::V1::UpdatePlacementRequest.new(placement: placement, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_placement({ placement: placement, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_placement(::Google::Ads::AdManager::V1::UpdatePlacementRequest.new(placement: placement, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_placement_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_placements
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreatePlacementsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_placements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_batch_create_placements_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_placements_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_create_placements({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_create_placements parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_create_placements ::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_create_placements({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_create_placements(::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_placements_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_placements
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdatePlacementsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_placements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_batch_update_placements_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_placements_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_update_placements({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_update_placements parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_update_placements ::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_update_placements({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_update_placements(::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_placements_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_placements
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivatePlacementsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_placements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_batch_activate_placements_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_placements_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_activate_placements({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_activate_placements parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_activate_placements ::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_activate_placements({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_activate_placements(::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_placements_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_placements
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivatePlacementsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_placements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_batch_deactivate_placements_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_placements_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_deactivate_placements({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_deactivate_placements parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_deactivate_placements ::Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_deactivate_placements({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_deactivate_placements(::Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_placements_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_archive_placements
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchArchivePlacementsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_archive_placements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::PlacementService::Rest::ServiceStub.stub :transcode_batch_archive_placements_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_archive_placements_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::PlacementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_archive_placements({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_archive_placements parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_archive_placements ::Google::Ads::AdManager::V1::BatchArchivePlacementsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_archive_placements({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_archive_placements(::Google::Ads::AdManager::V1::BatchArchivePlacementsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_archive_placements_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

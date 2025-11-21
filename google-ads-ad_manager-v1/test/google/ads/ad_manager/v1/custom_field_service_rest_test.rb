@@ -191,6 +191,336 @@ class ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ClientTest < Minit
     end
   end
 
+  def test_create_custom_field
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::CustomField.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    custom_field = {}
+
+    create_custom_field_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ServiceStub.stub :transcode_create_custom_field_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_custom_field_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_custom_field({ parent: parent, custom_field: custom_field }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_custom_field parent: parent, custom_field: custom_field do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_custom_field ::Google::Ads::AdManager::V1::CreateCustomFieldRequest.new(parent: parent, custom_field: custom_field) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_custom_field({ parent: parent, custom_field: custom_field }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_custom_field(::Google::Ads::AdManager::V1::CreateCustomFieldRequest.new(parent: parent, custom_field: custom_field), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_custom_field_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_custom_fields
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_custom_fields_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ServiceStub.stub :transcode_batch_create_custom_fields_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_custom_fields_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_create_custom_fields({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_create_custom_fields parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_create_custom_fields ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_create_custom_fields({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_create_custom_fields(::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_custom_fields_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_custom_field
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::CustomField.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    custom_field = {}
+    update_mask = {}
+
+    update_custom_field_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ServiceStub.stub :transcode_update_custom_field_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_custom_field_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_custom_field({ custom_field: custom_field, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_custom_field custom_field: custom_field, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_custom_field ::Google::Ads::AdManager::V1::UpdateCustomFieldRequest.new(custom_field: custom_field, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_custom_field({ custom_field: custom_field, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_custom_field(::Google::Ads::AdManager::V1::UpdateCustomFieldRequest.new(custom_field: custom_field, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_custom_field_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_custom_fields
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_custom_fields_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ServiceStub.stub :transcode_batch_update_custom_fields_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_custom_fields_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_update_custom_fields({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_update_custom_fields parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_update_custom_fields ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_update_custom_fields({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_update_custom_fields(::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_custom_fields_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_custom_fields
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_custom_fields_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ServiceStub.stub :transcode_batch_activate_custom_fields_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_custom_fields_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_activate_custom_fields({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_activate_custom_fields parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_activate_custom_fields ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_activate_custom_fields({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_activate_custom_fields(::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_custom_fields_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_custom_fields
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_custom_fields_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ServiceStub.stub :transcode_batch_deactivate_custom_fields_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_custom_fields_client_stub do
+        # Create client
+        client = ::Google::Ads::AdManager::V1::CustomFieldService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_deactivate_custom_fields({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_deactivate_custom_fields parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_deactivate_custom_fields ::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_deactivate_custom_fields({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_deactivate_custom_fields(::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_custom_fields_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

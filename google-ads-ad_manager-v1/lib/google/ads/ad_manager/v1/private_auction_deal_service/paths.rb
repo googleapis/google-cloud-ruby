@@ -42,6 +42,40 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Application resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/applications/{application}`
+            #
+            # @param network_code [String]
+            # @param application [String]
+            #
+            # @return [::String]
+            def application_path network_code:, application:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/applications/#{application}"
+            end
+
+            ##
+            # Create a fully-qualified AudienceSegment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/audienceSegments/{audience_segment}`
+            #
+            # @param network_code [String]
+            # @param audience_segment [String]
+            #
+            # @return [::String]
+            def audience_segment_path network_code:, audience_segment:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/audienceSegments/#{audience_segment}"
+            end
+
+            ##
             # Create a fully-qualified BandwidthGroup resource string.
             #
             # The resource will be in the following format:
@@ -56,6 +90,91 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/bandwidthGroups/#{bandwidth_group}"
+            end
+
+            ##
+            # Create a fully-qualified Browser resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/browsers/{browser}`
+            #
+            # @param network_code [String]
+            # @param browser [String]
+            #
+            # @return [::String]
+            def browser_path network_code:, browser:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/browsers/#{browser}"
+            end
+
+            ##
+            # Create a fully-qualified BrowserLanguage resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/browserLanguages/{browser_language}`
+            #
+            # @param network_code [String]
+            # @param browser_language [String]
+            #
+            # @return [::String]
+            def browser_language_path network_code:, browser_language:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/browserLanguages/#{browser_language}"
+            end
+
+            ##
+            # Create a fully-qualified CmsMetadataValue resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/cmsMetadataValues/{cms_metadata_value}`
+            #
+            # @param network_code [String]
+            # @param cms_metadata_value [String]
+            #
+            # @return [::String]
+            def cms_metadata_value_path network_code:, cms_metadata_value:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/cmsMetadataValues/#{cms_metadata_value}"
+            end
+
+            ##
+            # Create a fully-qualified Content resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/content/{content}`
+            #
+            # @param network_code [String]
+            # @param content [String]
+            #
+            # @return [::String]
+            def content_path network_code:, content:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/content/#{content}"
+            end
+
+            ##
+            # Create a fully-qualified ContentBundle resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/contentBundles/{content_bundle}`
+            #
+            # @param network_code [String]
+            # @param content_bundle [String]
+            #
+            # @return [::String]
+            def content_bundle_path network_code:, content_bundle:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/contentBundles/#{content_bundle}"
             end
 
             ##
@@ -93,6 +212,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DeviceCapability resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/deviceCapabilities/{device_capability}`
+            #
+            # @param network_code [String]
+            # @param device_capability [String]
+            #
+            # @return [::String]
+            def device_capability_path network_code:, device_capability:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/deviceCapabilities/#{device_capability}"
+            end
+
+            ##
             # Create a fully-qualified DeviceCategory resource string.
             #
             # The resource will be in the following format:
@@ -110,6 +246,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DeviceManufacturer resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/deviceManufacturers/{device_manufacturer}`
+            #
+            # @param network_code [String]
+            # @param device_manufacturer [String]
+            #
+            # @return [::String]
+            def device_manufacturer_path network_code:, device_manufacturer:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/deviceManufacturers/#{device_manufacturer}"
+            end
+
+            ##
             # Create a fully-qualified GeoTarget resource string.
             #
             # The resource will be in the following format:
@@ -124,6 +277,57 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/geoTargets/#{geo_target}"
+            end
+
+            ##
+            # Create a fully-qualified MobileCarrier resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/mobileCarriers/{mobile_carrier}`
+            #
+            # @param network_code [String]
+            # @param mobile_carrier [String]
+            #
+            # @return [::String]
+            def mobile_carrier_path network_code:, mobile_carrier:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/mobileCarriers/#{mobile_carrier}"
+            end
+
+            ##
+            # Create a fully-qualified MobileDevice resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/mobileDevices/{mobile_device}`
+            #
+            # @param network_code [String]
+            # @param mobile_device [String]
+            #
+            # @return [::String]
+            def mobile_device_path network_code:, mobile_device:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/mobileDevices/#{mobile_device}"
+            end
+
+            ##
+            # Create a fully-qualified MobileDeviceSubmodel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}`
+            #
+            # @param network_code [String]
+            # @param mobile_device_submodel [String]
+            #
+            # @return [::String]
+            def mobile_device_submodel_path network_code:, mobile_device_submodel:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/mobileDeviceSubmodels/#{mobile_device_submodel}"
             end
 
             ##

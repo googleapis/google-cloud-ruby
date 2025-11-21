@@ -279,8 +279,8 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of `Placements` to return. The service may
               #     return fewer than this value. If unspecified, at most 50 `Placements` will
-              #     be returned. The maximum value is 1000; values above 1000 will be coerced
-              #     to 1000.
+              #     be returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListPlacements` call.
               #     Provide this to retrieve the subsequent page.
@@ -356,6 +356,582 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @placement_service_stub, :list_placements, "placements", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to create an `Placement` object.
+              #
+              # @overload create_placement(request, options = nil)
+              #   Pass arguments to `create_placement` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreatePlacementRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreatePlacementRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_placement(parent: nil, placement: nil)
+              #   Pass arguments to `create_placement` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `Placement` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param placement [::Google::Ads::AdManager::V1::Placement, ::Hash]
+              #     Required. The `Placement` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Placement]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Placement]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreatePlacementRequest.new
+              #
+              #   # Call the create_placement method.
+              #   result = client.create_placement request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Placement.
+              #   p result
+              #
+              def create_placement request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreatePlacementRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_placement.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_placement.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_placement.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.create_placement request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to update an `Placement` object.
+              #
+              # @overload update_placement(request, options = nil)
+              #   Pass arguments to `update_placement` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdatePlacementRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdatePlacementRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_placement(placement: nil, update_mask: nil)
+              #   Pass arguments to `update_placement` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param placement [::Google::Ads::AdManager::V1::Placement, ::Hash]
+              #     Required. The `Placement` to update.
+              #
+              #     The `Placement`'s name is used to identify the `Placement` to
+              #     update. Format:
+              #     `networks/{network_code}/placements/{placement_id}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Placement]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Placement]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdatePlacementRequest.new
+              #
+              #   # Call the update_placement method.
+              #   result = client.update_placement request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Placement.
+              #   p result
+              #
+              def update_placement request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdatePlacementRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_placement.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_placement.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_placement.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.update_placement request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch create `Placement` objects.
+              #
+              # @overload batch_create_placements(request, options = nil)
+              #   Pass arguments to `batch_create_placements` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_placements(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_placements` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where the `Placement`s will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreatePlacementRequest messages match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreatePlacementRequest, ::Hash>]
+              #     Required. The `Placement` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreatePlacementsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreatePlacementsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreatePlacementsRequest.new
+              #
+              #   # Call the batch_create_placements method.
+              #   result = client.batch_create_placements request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreatePlacementsResponse.
+              #   p result
+              #
+              def batch_create_placements request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_placements.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_placements.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_placements.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.batch_create_placements request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch update `Placement` objects.
+              #
+              # @overload batch_update_placements(request, options = nil)
+              #   Pass arguments to `batch_update_placements` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_placements(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_placements` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Placements` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdatePlacementsRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdatePlacementRequest, ::Hash>]
+              #     Required. The `Placement` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdatePlacementsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdatePlacementsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest.new
+              #
+              #   # Call the batch_update_placements method.
+              #   result = client.batch_update_placements request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdatePlacementsResponse.
+              #   p result
+              #
+              def batch_update_placements request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_placements.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_placements.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_placements.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.batch_update_placements request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Activates a list of `Placement` objects.
+              #
+              # @overload batch_activate_placements(request, options = nil)
+              #   Pass arguments to `batch_activate_placements` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_placements(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_placements` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `Placement` objects to activate.
+              #     Format: `networks/{network_code}/placements/{placement_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivatePlacementsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivatePlacementsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivatePlacementsRequest.new
+              #
+              #   # Call the batch_activate_placements method.
+              #   result = client.batch_activate_placements request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivatePlacementsResponse.
+              #   p result
+              #
+              def batch_activate_placements request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_placements.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_placements.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_placements.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.batch_activate_placements request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `Placement` objects.
+              #
+              # @overload batch_deactivate_placements(request, options = nil)
+              #   Pass arguments to `batch_deactivate_placements` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_placements(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_placements` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `Placement` objects to deactivate.
+              #     Format: `networks/{network_code}/placements/{placement_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivatePlacementsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivatePlacementsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest.new
+              #
+              #   # Call the batch_deactivate_placements method.
+              #   result = client.batch_deactivate_placements request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivatePlacementsResponse.
+              #   p result
+              #
+              def batch_deactivate_placements request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_placements.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_placements.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_placements.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.batch_deactivate_placements request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Archives a list of `Placement` objects.
+              #
+              # @overload batch_archive_placements(request, options = nil)
+              #   Pass arguments to `batch_archive_placements` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchArchivePlacementsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchArchivePlacementsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_archive_placements(parent: nil, names: nil)
+              #   Pass arguments to `batch_archive_placements` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the `Placement` objects to archive.
+              #     Format: `networks/{network_code}/placements/{placement_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchArchivePlacementsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchArchivePlacementsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::PlacementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchArchivePlacementsRequest.new
+              #
+              #   # Call the batch_archive_placements method.
+              #   result = client.batch_archive_placements request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchArchivePlacementsResponse.
+              #   p result
+              #
+              def batch_archive_placements request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchArchivePlacementsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_archive_placements.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_archive_placements.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_archive_placements.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @placement_service_stub.batch_archive_placements request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -517,6 +1093,41 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_placements
+                  ##
+                  # RPC-specific configuration for `create_placement`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_placement
+                  ##
+                  # RPC-specific configuration for `update_placement`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_placement
+                  ##
+                  # RPC-specific configuration for `batch_create_placements`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_placements
+                  ##
+                  # RPC-specific configuration for `batch_update_placements`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_placements
+                  ##
+                  # RPC-specific configuration for `batch_activate_placements`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_placements
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_placements`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_placements
+                  ##
+                  # RPC-specific configuration for `batch_archive_placements`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_archive_placements
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -524,6 +1135,20 @@ module Google
                     @get_placement = ::Gapic::Config::Method.new get_placement_config
                     list_placements_config = parent_rpcs.list_placements if parent_rpcs.respond_to? :list_placements
                     @list_placements = ::Gapic::Config::Method.new list_placements_config
+                    create_placement_config = parent_rpcs.create_placement if parent_rpcs.respond_to? :create_placement
+                    @create_placement = ::Gapic::Config::Method.new create_placement_config
+                    update_placement_config = parent_rpcs.update_placement if parent_rpcs.respond_to? :update_placement
+                    @update_placement = ::Gapic::Config::Method.new update_placement_config
+                    batch_create_placements_config = parent_rpcs.batch_create_placements if parent_rpcs.respond_to? :batch_create_placements
+                    @batch_create_placements = ::Gapic::Config::Method.new batch_create_placements_config
+                    batch_update_placements_config = parent_rpcs.batch_update_placements if parent_rpcs.respond_to? :batch_update_placements
+                    @batch_update_placements = ::Gapic::Config::Method.new batch_update_placements_config
+                    batch_activate_placements_config = parent_rpcs.batch_activate_placements if parent_rpcs.respond_to? :batch_activate_placements
+                    @batch_activate_placements = ::Gapic::Config::Method.new batch_activate_placements_config
+                    batch_deactivate_placements_config = parent_rpcs.batch_deactivate_placements if parent_rpcs.respond_to? :batch_deactivate_placements
+                    @batch_deactivate_placements = ::Gapic::Config::Method.new batch_deactivate_placements_config
+                    batch_archive_placements_config = parent_rpcs.batch_archive_placements if parent_rpcs.respond_to? :batch_archive_placements
+                    @batch_archive_placements = ::Gapic::Config::Method.new batch_archive_placements_config
 
                     yield self if block_given?
                   end

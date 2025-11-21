@@ -37,6 +37,20 @@ module Google
             rpc :GetPlacement, ::Google::Ads::AdManager::V1::GetPlacementRequest, ::Google::Ads::AdManager::V1::Placement
             # API to retrieve a list of `Placement` objects.
             rpc :ListPlacements, ::Google::Ads::AdManager::V1::ListPlacementsRequest, ::Google::Ads::AdManager::V1::ListPlacementsResponse
+            # API to create an `Placement` object.
+            rpc :CreatePlacement, ::Google::Ads::AdManager::V1::CreatePlacementRequest, ::Google::Ads::AdManager::V1::Placement
+            # API to update an `Placement` object.
+            rpc :UpdatePlacement, ::Google::Ads::AdManager::V1::UpdatePlacementRequest, ::Google::Ads::AdManager::V1::Placement
+            # API to batch create `Placement` objects.
+            rpc :BatchCreatePlacements, ::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchCreatePlacementsResponse
+            # API to batch update `Placement` objects.
+            rpc :BatchUpdatePlacements, ::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchUpdatePlacementsResponse
+            # Activates a list of `Placement` objects.
+            rpc :BatchActivatePlacements, ::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchActivatePlacementsResponse
+            # Deactivates a list of `Placement` objects.
+            rpc :BatchDeactivatePlacements, ::Google::Ads::AdManager::V1::BatchDeactivatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchDeactivatePlacementsResponse
+            # Archives a list of `Placement` objects.
+            rpc :BatchArchivePlacements, ::Google::Ads::AdManager::V1::BatchArchivePlacementsRequest, ::Google::Ads::AdManager::V1::BatchArchivePlacementsResponse
           end
 
           Stub = Service.rpc_stub_class

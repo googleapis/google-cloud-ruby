@@ -289,8 +289,8 @@ module Google
               #   @param page_size [::Integer]
               #     Optional. The maximum number of `Orders` to return. The service may return
               #     fewer than this value. If unspecified, at most 50 `Orders` will be
-              #     returned. The maximum value is 1000; values above 1000 will be coerced to
-              #     1000.
+              #     returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListOrders` call.
               #     Provide this to retrieve the subsequent page.

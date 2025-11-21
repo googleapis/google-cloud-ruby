@@ -37,6 +37,18 @@ module Google
             rpc :GetCustomField, ::Google::Ads::AdManager::V1::GetCustomFieldRequest, ::Google::Ads::AdManager::V1::CustomField
             # API to retrieve a list of `CustomField` objects.
             rpc :ListCustomFields, ::Google::Ads::AdManager::V1::ListCustomFieldsRequest, ::Google::Ads::AdManager::V1::ListCustomFieldsResponse
+            # API to create a `CustomField` object.
+            rpc :CreateCustomField, ::Google::Ads::AdManager::V1::CreateCustomFieldRequest, ::Google::Ads::AdManager::V1::CustomField
+            # API to batch create `CustomField` objects.
+            rpc :BatchCreateCustomFields, ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsResponse
+            # API to update a `CustomField` object.
+            rpc :UpdateCustomField, ::Google::Ads::AdManager::V1::UpdateCustomFieldRequest, ::Google::Ads::AdManager::V1::CustomField
+            # API to batch update `CustomField` objects.
+            rpc :BatchUpdateCustomFields, ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsResponse
+            # Activates a list of `CustomField` objects.
+            rpc :BatchActivateCustomFields, ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsResponse
+            # Deactivates a list of `CustomField` objects.
+            rpc :BatchDeactivateCustomFields, ::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchDeactivateCustomFieldsResponse
           end
 
           Stub = Service.rpc_stub_class

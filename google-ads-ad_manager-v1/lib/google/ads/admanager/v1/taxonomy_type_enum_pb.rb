@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n0google/ads/admanager/v1/taxonomy_type_enum.proto\x12\x17google.ads.admanager.v1\"\xe5\x01\n\x10TaxonomyTypeEnum\"\xd0\x01\n\x0cTaxonomyType\x12\x1d\n\x19TAXONOMY_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n\x19TAXONOMY_IAB_AUDIENCE_1_1\x10\x03\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_2_1\x10\x04\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_2_2\x10\x06\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_3_0\x10\x05\x12(\n$TAXONOMY_GOOGLE_STRUCTURED_VIDEO_1_0\x10\x07\x42\xc9\x01\n\x1b\x63om.google.ads.admanager.v1B\x15TaxonomyTypeEnumProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n0google/ads/admanager/v1/taxonomy_type_enum.proto\x12\x17google.ads.admanager.v1\"\x83\x02\n\x10TaxonomyTypeEnum\"\xee\x01\n\x0cTaxonomyType\x12\x1d\n\x19TAXONOMY_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n\x19TAXONOMY_IAB_AUDIENCE_1_1\x10\x03\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_1_0\x10\x08\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_2_1\x10\x04\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_2_2\x10\x06\x12\x1c\n\x18TAXONOMY_IAB_CONTENT_3_0\x10\x05\x12(\n$TAXONOMY_GOOGLE_STRUCTURED_VIDEO_1_0\x10\x07\x42\xc9\x01\n\x1b\x63om.google.ads.admanager.v1B\x15TaxonomyTypeEnumProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

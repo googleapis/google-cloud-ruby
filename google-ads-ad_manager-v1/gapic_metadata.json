@@ -39,6 +39,30 @@
         }
       }
     },
+    "AdReviewCenterAdService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::AdReviewCenterAdService::Client",
+          "rpcs": {
+            "SearchAdReviewCenterAds": {
+              "methods": [
+                "search_ad_review_center_ads"
+              ]
+            },
+            "BatchAllowAdReviewCenterAds": {
+              "methods": [
+                "batch_allow_ad_review_center_ads"
+              ]
+            },
+            "BatchBlockAdReviewCenterAds": {
+              "methods": [
+                "batch_block_ad_review_center_ads"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AdUnitService": {
       "clients": {
         "grpc": {
@@ -57,6 +81,44 @@
             "ListAdUnitSizes": {
               "methods": [
                 "list_ad_unit_sizes"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApplicationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ApplicationService::Client",
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "get_application"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "list_applications"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AudienceSegmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::AudienceSegmentService::Client",
+          "rpcs": {
+            "GetAudienceSegment": {
+              "methods": [
+                "get_audience_segment"
+              ]
+            },
+            "ListAudienceSegments": {
+              "methods": [
+                "list_audience_segments"
               ]
             }
           }
@@ -82,6 +144,82 @@
         }
       }
     },
+    "BrowserLanguageService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::BrowserLanguageService::Client",
+          "rpcs": {
+            "GetBrowserLanguage": {
+              "methods": [
+                "get_browser_language"
+              ]
+            },
+            "ListBrowserLanguages": {
+              "methods": [
+                "list_browser_languages"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BrowserService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::BrowserService::Client",
+          "rpcs": {
+            "GetBrowser": {
+              "methods": [
+                "get_browser"
+              ]
+            },
+            "ListBrowsers": {
+              "methods": [
+                "list_browsers"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmsMetadataKeyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CmsMetadataKeyService::Client",
+          "rpcs": {
+            "GetCmsMetadataKey": {
+              "methods": [
+                "get_cms_metadata_key"
+              ]
+            },
+            "ListCmsMetadataKeys": {
+              "methods": [
+                "list_cms_metadata_keys"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmsMetadataValueService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CmsMetadataValueService::Client",
+          "rpcs": {
+            "GetCmsMetadataValue": {
+              "methods": [
+                "get_cms_metadata_value"
+              ]
+            },
+            "ListCmsMetadataValues": {
+              "methods": [
+                "list_cms_metadata_values"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CompanyService": {
       "clients": {
         "grpc": {
@@ -101,6 +239,121 @@
         }
       }
     },
+    "ContactService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ContactService::Client",
+          "rpcs": {
+            "GetContact": {
+              "methods": [
+                "get_contact"
+              ]
+            },
+            "ListContacts": {
+              "methods": [
+                "list_contacts"
+              ]
+            },
+            "CreateContact": {
+              "methods": [
+                "create_contact"
+              ]
+            },
+            "BatchCreateContacts": {
+              "methods": [
+                "batch_create_contacts"
+              ]
+            },
+            "UpdateContact": {
+              "methods": [
+                "update_contact"
+              ]
+            },
+            "BatchUpdateContacts": {
+              "methods": [
+                "batch_update_contacts"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ContentBundleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ContentBundleService::Client",
+          "rpcs": {
+            "GetContentBundle": {
+              "methods": [
+                "get_content_bundle"
+              ]
+            },
+            "ListContentBundles": {
+              "methods": [
+                "list_content_bundles"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ContentLabelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ContentLabelService::Client",
+          "rpcs": {
+            "GetContentLabel": {
+              "methods": [
+                "get_content_label"
+              ]
+            },
+            "ListContentLabels": {
+              "methods": [
+                "list_content_labels"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ContentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ContentService::Client",
+          "rpcs": {
+            "GetContent": {
+              "methods": [
+                "get_content"
+              ]
+            },
+            "ListContent": {
+              "methods": [
+                "list_content"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CreativeTemplateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CreativeTemplateService::Client",
+          "rpcs": {
+            "GetCreativeTemplate": {
+              "methods": [
+                "get_creative_template"
+              ]
+            },
+            "ListCreativeTemplates": {
+              "methods": [
+                "list_creative_templates"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CustomFieldService": {
       "clients": {
         "grpc": {
@@ -114,6 +367,36 @@
             "ListCustomFields": {
               "methods": [
                 "list_custom_fields"
+              ]
+            },
+            "CreateCustomField": {
+              "methods": [
+                "create_custom_field"
+              ]
+            },
+            "BatchCreateCustomFields": {
+              "methods": [
+                "batch_create_custom_fields"
+              ]
+            },
+            "UpdateCustomField": {
+              "methods": [
+                "update_custom_field"
+              ]
+            },
+            "BatchUpdateCustomFields": {
+              "methods": [
+                "batch_update_custom_fields"
+              ]
+            },
+            "BatchActivateCustomFields": {
+              "methods": [
+                "batch_activate_custom_fields"
+              ]
+            },
+            "BatchDeactivateCustomFields": {
+              "methods": [
+                "batch_deactivate_custom_fields"
               ]
             }
           }
@@ -158,6 +441,25 @@
         }
       }
     },
+    "DeviceCapabilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::DeviceCapabilityService::Client",
+          "rpcs": {
+            "GetDeviceCapability": {
+              "methods": [
+                "get_device_capability"
+              ]
+            },
+            "ListDeviceCapabilities": {
+              "methods": [
+                "list_device_capabilities"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DeviceCategoryService": {
       "clients": {
         "grpc": {
@@ -171,6 +473,25 @@
             "ListDeviceCategories": {
               "methods": [
                 "list_device_categories"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DeviceManufacturerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::DeviceManufacturerService::Client",
+          "rpcs": {
+            "GetDeviceManufacturer": {
+              "methods": [
+                "get_device_manufacturer"
+              ]
+            },
+            "ListDeviceManufacturers": {
+              "methods": [
+                "list_device_manufacturers"
               ]
             }
           }
@@ -229,6 +550,63 @@
             "ListGeoTargets": {
               "methods": [
                 "list_geo_targets"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MobileCarrierService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::MobileCarrierService::Client",
+          "rpcs": {
+            "GetMobileCarrier": {
+              "methods": [
+                "get_mobile_carrier"
+              ]
+            },
+            "ListMobileCarriers": {
+              "methods": [
+                "list_mobile_carriers"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MobileDeviceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::MobileDeviceService::Client",
+          "rpcs": {
+            "GetMobileDevice": {
+              "methods": [
+                "get_mobile_device"
+              ]
+            },
+            "ListMobileDevices": {
+              "methods": [
+                "list_mobile_devices"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MobileDeviceSubmodelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::MobileDeviceSubmodelService::Client",
+          "rpcs": {
+            "GetMobileDeviceSubmodel": {
+              "methods": [
+                "get_mobile_device_submodel"
+              ]
+            },
+            "ListMobileDeviceSubmodels": {
+              "methods": [
+                "list_mobile_device_submodels"
               ]
             }
           }
@@ -324,6 +702,41 @@
             "ListPlacements": {
               "methods": [
                 "list_placements"
+              ]
+            },
+            "CreatePlacement": {
+              "methods": [
+                "create_placement"
+              ]
+            },
+            "UpdatePlacement": {
+              "methods": [
+                "update_placement"
+              ]
+            },
+            "BatchCreatePlacements": {
+              "methods": [
+                "batch_create_placements"
+              ]
+            },
+            "BatchUpdatePlacements": {
+              "methods": [
+                "batch_update_placements"
+              ]
+            },
+            "BatchActivatePlacements": {
+              "methods": [
+                "batch_activate_placements"
+              ]
+            },
+            "BatchDeactivatePlacements": {
+              "methods": [
+                "batch_deactivate_placements"
+              ]
+            },
+            "BatchArchivePlacements": {
+              "methods": [
+                "batch_archive_placements"
               ]
             }
           }
@@ -465,6 +878,55 @@
         }
       }
     },
+    "SiteService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::SiteService::Client",
+          "rpcs": {
+            "GetSite": {
+              "methods": [
+                "get_site"
+              ]
+            },
+            "ListSites": {
+              "methods": [
+                "list_sites"
+              ]
+            },
+            "CreateSite": {
+              "methods": [
+                "create_site"
+              ]
+            },
+            "BatchCreateSites": {
+              "methods": [
+                "batch_create_sites"
+              ]
+            },
+            "UpdateSite": {
+              "methods": [
+                "update_site"
+              ]
+            },
+            "BatchUpdateSites": {
+              "methods": [
+                "batch_update_sites"
+              ]
+            },
+            "BatchDeactivateSites": {
+              "methods": [
+                "batch_deactivate_sites"
+              ]
+            },
+            "BatchSubmitSitesForApproval": {
+              "methods": [
+                "batch_submit_sites_for_approval"
+              ]
+            }
+          }
+        }
+      }
+    },
     "TaxonomyCategoryService": {
       "clients": {
         "grpc": {
@@ -478,6 +940,55 @@
             "ListTaxonomyCategories": {
               "methods": [
                 "list_taxonomy_categories"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TeamService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::TeamService::Client",
+          "rpcs": {
+            "GetTeam": {
+              "methods": [
+                "get_team"
+              ]
+            },
+            "ListTeams": {
+              "methods": [
+                "list_teams"
+              ]
+            },
+            "CreateTeam": {
+              "methods": [
+                "create_team"
+              ]
+            },
+            "BatchCreateTeams": {
+              "methods": [
+                "batch_create_teams"
+              ]
+            },
+            "UpdateTeam": {
+              "methods": [
+                "update_team"
+              ]
+            },
+            "BatchUpdateTeams": {
+              "methods": [
+                "batch_update_teams"
+              ]
+            },
+            "BatchActivateTeams": {
+              "methods": [
+                "batch_activate_teams"
+              ]
+            },
+            "BatchDeactivateTeams": {
+              "methods": [
+                "batch_deactivate_teams"
               ]
             }
           }

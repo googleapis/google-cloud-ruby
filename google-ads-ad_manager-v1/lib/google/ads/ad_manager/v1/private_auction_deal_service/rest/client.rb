@@ -282,7 +282,7 @@ module Google
               #     Optional. The maximum number of `PrivateAuctionDeals` to return. The
               #     service may return fewer than this value. If unspecified, at most 50
               #     `PrivateAuctionDeals` will be returned. The maximum value is 1000;
-              #     values above 1000 will be coerced to 1000.
+              #     values greater than 1000 will be coerced to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous `ListPrivateAuctionDeals`
               #     call. Provide this to retrieve the subsequent page.

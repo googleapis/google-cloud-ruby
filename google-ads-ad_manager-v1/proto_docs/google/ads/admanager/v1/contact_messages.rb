@@ -29,9 +29,45 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `Contact`.
         #     Format: `networks/{network_code}/contacts/{contact_id}`
-        # @!attribute [r] company_display_name
+        # @!attribute [rw] display_name
         #   @return [::String]
-        #     Output only. The display name of the Company.
+        #     Required. The name of the contact. This attribute has a maximum length of
+        #     127 characters.
+        # @!attribute [rw] company
+        #   @return [::String]
+        #     Required. Immutable. The resource name of the Company.
+        #     Format: "networks/\\{network_code}/companies/\\{company_id}"
+        # @!attribute [r] status
+        #   @return [::Google::Ads::AdManager::V1::ContactStatusEnum::ContactStatus]
+        #     Output only. The status of the contact. This attribute is assigned by
+        #     Google.
+        # @!attribute [rw] address
+        #   @return [::String]
+        #     Optional. The address of the contact. This attribute has a maximum length
+        #     of 1024 characters.
+        # @!attribute [rw] cell_phone
+        #   @return [::String]
+        #     Optional. The cell phone number where the contact can be reached.
+        # @!attribute [rw] comment
+        #   @return [::String]
+        #     Optional. A free-form text comment for the contact. This attribute has a
+        #     maximum length of 1024 characters.
+        # @!attribute [rw] email
+        #   @return [::String]
+        #     Optional. The e-mail address where the contact can be reached. This
+        #     attribute has a maximum length of 128 characters.
+        # @!attribute [rw] fax
+        #   @return [::String]
+        #     Optional. The fax number where the contact can be reached. This attribute
+        #     has a maximum length of 1024 characters.
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Optional. The job title of the contact. This attribute has a maximum length
+        #     of 1024 characters.
+        # @!attribute [rw] work_phone
+        #   @return [::String]
+        #     Optional. The work phone number where the contact can be reached. This
+        #     attribute has a maximum length of 1024 characters.
         class Contact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
