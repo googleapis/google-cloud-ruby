@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.7.0 (2025-11-21)
+
+#### Features
+
+* Add Squash Mode to Export Policy ([#32216](https://github.com/googleapis/google-cloud-ruby/issues/32216)) 
+
 ### 2.6.1 (2025-10-27)
 
 #### Documentation
