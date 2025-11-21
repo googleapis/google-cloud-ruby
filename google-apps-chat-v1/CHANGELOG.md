@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.17.0 (2025-11-21)
+
+#### Features
+
+* Add `Carousel` widget 
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#31779](https://github.com/googleapis/google-cloud-ruby/issues/31779)) 
+
 ### 0.16.0 (2025-09-11)
 
 #### Features
