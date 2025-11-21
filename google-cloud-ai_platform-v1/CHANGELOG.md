@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.31.0 (2025-11-21)
+
+#### Features
+
+* Add support for developer connect based deployment ([#32116](https://github.com/googleapis/google-cloud-ruby/issues/32116)) 
+
 ### 1.30.1 (2025-10-27)
 
 #### Documentation
