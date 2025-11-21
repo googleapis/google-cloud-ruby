@@ -158,6 +158,9 @@ module Google
         #   bucket instances and their files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
+        # @param [Boolean] return_partial_success 
+        #   If true, returns unreachable attribute as the list of buckets with partial success enabled.
+        #   If false, returns unreachable attribute as nil
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})
@@ -201,11 +204,22 @@ module Google
         #   soft_deleted_buckets.each do |bucket|
         #     puts bucket.name
         #   end
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil
+        # @example Retrieve list of unreachable buckets
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   buckets = storage.buckets return_partial_success: true
+        #   buckets.unreachable.each do |unreachable_bucket_name|
+        #     puts unreachable_bucket_name
+        #   end
+        #  
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted
+            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
           Bucket::List.from_gapi \
-            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted
+            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
+          
         end
         alias find_buckets buckets
 
