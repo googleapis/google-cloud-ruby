@@ -19,6 +19,7 @@ require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "google/cloud/pubsub/admin_clients"
+require "google/cloud/pubsub/logger_helper"
 require "securerandom"
 
 module Google
@@ -27,6 +28,8 @@ module Google
       ##
       # @private Represents the Pub/Sub service API, including IAM mixins.
       class Service
+        include LoggerHelper
+
         attr_accessor :project
         attr_accessor :credentials
         attr_accessor :host
@@ -141,6 +144,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
+          log_ack_nack ack_ids, "ack"
           subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
                                                   ack_ids: ack_ids
         end
@@ -148,6 +152,9 @@ module Google
         ##
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
+          if deadline.zero?
+            log_ack_nack Array(ids), "nack"
+          end
           subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
                                                           ack_ids: Array(ids),
                                                           ack_deadline_seconds: deadline
