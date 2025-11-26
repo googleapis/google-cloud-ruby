@@ -730,6 +730,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "cloudbuild_v1_generated_CloudBuild_GetDefaultServiceAccount_sync",
+      "title": "Snippet for the get_default_service_account call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#get_default_service_account.",
+      "file": "cloud_build/get_default_service_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_default_service_account",
+        "full_name": "::Google::Cloud::Build::V1::CloudBuild::Client#get_default_service_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Build::V1::DefaultServiceAccount",
+        "client": {
+          "short_name": "CloudBuild::Client",
+          "full_name": "::Google::Cloud::Build::V1::CloudBuild::Client"
+        },
+        "method": {
+          "short_name": "GetDefaultServiceAccount",
+          "full_name": "google.devtools.cloudbuild.v1.CloudBuild.GetDefaultServiceAccount",
+          "service": {
+            "short_name": "CloudBuild",
+            "full_name": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

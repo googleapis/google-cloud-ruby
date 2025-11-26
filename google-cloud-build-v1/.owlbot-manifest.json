@@ -53,6 +53,7 @@
     "snippets/cloud_build/delete_worker_pool.rb",
     "snippets/cloud_build/get_build.rb",
     "snippets/cloud_build/get_build_trigger.rb",
+    "snippets/cloud_build/get_default_service_account.rb",
     "snippets/cloud_build/get_worker_pool.rb",
     "snippets/cloud_build/list_build_triggers.rb",
     "snippets/cloud_build/list_builds.rb",

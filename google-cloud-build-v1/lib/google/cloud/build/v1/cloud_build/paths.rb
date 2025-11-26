@@ -128,6 +128,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DefaultServiceAccount resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/defaultServiceAccount`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def default_service_account_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/defaultServiceAccount"
+            end
+
+            ##
             # Create a fully-qualified GitRepositoryLink resource string.
             #
             # The resource will be in the following format:
