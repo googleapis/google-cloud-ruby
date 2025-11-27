@@ -13,30 +13,29 @@
 # limitations under the License.
 
 # [START storage_list_buckets_partial_success]
-# Demonstrates listing buckets from Google Cloud Storage with partial success enabled.
+# Demonstrates listing Google Cloud Storage buckets with support for partial success.
 #
-# Behavior:
-# - Initializes a Storage client.
-# - Uses `Storage#buckets(return_partial_success: true)` to request buckets.
-# - Prints one unreachable bucket name per line to standard output.
+# This method initializes a Google Cloud Storage client and requests a list of buckets
+# which are present in unreachable locations.
+# If `return_partial_success_flag` is true, the Storage API will return a list of buckets which are
+# unreachable in the `unreachable` field of the response.
+#
+# If `return_partial_success_flag` is false the method will return nil.
+#
+# @param return_partial_success_flag [Boolean] Whether to allow partial success from the API.
+#   - true: returns the available buckets and populates `unreachable` with bucket names.
+#   - false: the method returns nil.
 
-
-def list_buckets_with_partial_success
+def list_buckets_with_partial_success return_partial_success_flag:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket_list = storage.buckets return_partial_success: true
+  bucket_list = storage.buckets return_partial_success: return_partial_success_flag
 
-  puts "Bucket Names:"
-  bucket_list.each do |bucket|
-    puts bucket.name
-  end
-
-  puts "Unreachable bucket names:" 
-  bucket_list.unreachable.each do |unreachable_bucket_name|
+  bucket_list.unreachable&.each do |unreachable_bucket_name|
     puts unreachable_bucket_name
   end
 end
 # [END storage_list_buckets_partial_success]
 
-list_buckets_with_partial_success if $PROGRAM_NAME == __FILE__
+list_buckets_with_partial_success return_partial_success_flag: ARGV.shift if $PROGRAM_NAME == __FILE__

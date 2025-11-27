@@ -42,6 +42,7 @@ require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
+require_relative "../storage_list_buckets_with_partial_success"
 require_relative "../storage_lock_retention_policy"
 require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
@@ -614,6 +615,19 @@ describe "Buckets Snippets" do
         move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: source_file
       end
       assert_equal "invalid: Source and destination object names must be different.", exception.message
+    end
+  end
+
+  describe "list buckets with partial success" do
+    it 'returns a list of bucket names if return_partial_success_flag is true' do
+      result = list_buckets_with_partial_success return_partial_success_flag: true
+      assert_kind_of Array, result
+      assert result.all? { |n| n.is_a? String }, "expected all items to be String"
+    end
+
+    it 'returns nil if return_partial_success_flag is false' do
+      result = list_buckets_with_partial_success return_partial_success_flag: false
+      assert_nil result
     end
   end
 end
