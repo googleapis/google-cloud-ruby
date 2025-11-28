@@ -158,10 +158,9 @@ module Google
         #   bucket instances and their files.
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
-        # @param [Boolean] return_partial_success 
-        #   If true, returns unreachable attribute as the list of buckets with partial success enabled.
-        #   if false, ListBuckets will throw an error if there are any unreachable buckets 
-        #      and unreachable attribute is returned nil
+        # @param [Boolean] return_partial_success
+        # If true, the response will contain a list of unreachable buckets.
+        # If false, ListBuckets will throw an error if there are any unreachable buckets.
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})

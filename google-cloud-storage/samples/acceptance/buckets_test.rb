@@ -625,8 +625,13 @@ describe "Buckets Snippets" do
       assert result.all? { |n| n.is_a? String }, "expected all items to be String"
     end
 
-    it 'returns nil if return_partial_success_flag is false' do
+    it 'returns nil for unreachable if return_partial_success_flag is false' do
       result = list_buckets_with_partial_success return_partial_success_flag: false
+      assert_nil result
+    end
+
+    it 'returns nil for unreachable if return_partial_success_flag is not passed' do
+      result = list_buckets_with_partial_success return_partial_success_flag: nil
       assert_nil result
     end
   end
