@@ -49,7 +49,8 @@ module Google
         # @!attribute [rw] owned
         #   @return [::Boolean]
         #     Returns true if the Cloud Identity account is associated with a customer
-        #     of the Channel Services partner.
+        #     of the Channel Services partner (with active subscriptions or purchase
+        #     consents).
         # @!attribute [rw] customer_name
         #   @return [::String]
         #     If owned = true, the name of the customer that owns the Cloud Identity
@@ -423,6 +424,11 @@ module Google
         # @!attribute [rw] offer
         #   @return [::Google::Cloud::Channel::V1::Offer]
         #     Offer with parameter constraints updated to allow the Transfer.
+        # @!attribute [rw] price_reference_id
+        #   @return [::String]
+        #     Optional. Price reference ID for the offer. Only for offers that require
+        #     additional price information. Used to guarantee that the pricing is
+        #     consistent between quoting the offer and placing the order.
         class TransferableOffer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -753,7 +759,8 @@ module Google
         #   @return [::String]
         #     Optional. A token identifying a page of results beyond the first page.
         #     Obtained through
-        #     [ListSkuGroups.next_page_token][] of the previous
+        #     {::Google::Cloud::Channel::V1::ListSkuGroupsResponse#next_page_token ListSkuGroupsResponse.next_page_token}
+        #     of the previous
         #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_groups CloudChannelService.ListSkuGroups}
         #     call.
         class ListSkuGroupsRequest
@@ -775,7 +782,8 @@ module Google
         #   @return [::String]
         #     Optional. A token identifying a page of results beyond the first page.
         #     Obtained through
-        #     [ListSkuGroupBillableSkus.next_page_token][] of the previous
+        #     {::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusResponse#next_page_token ListSkuGroupBillableSkusResponse.next_page_token}
+        #     of the previous
         #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_sku_group_billable_skus CloudChannelService.ListSkuGroupBillableSkus}
         #     call.
         class ListSkuGroupBillableSkusRequest
@@ -790,8 +798,9 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to [ListSkuGroups.page_token][] to obtain that
-        #     page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListSkuGroupsRequest#page_token ListSkuGroupsRequest.page_token}
+        #     to obtain that page.
         class ListSkuGroupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -804,8 +813,9 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to [ListSkuGroupBillableSkus.page_token][] to obtain that
-        #     page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest#page_token ListSkuGroupBillableSkusRequest.page_token}
+        #     to obtain that page.
         class ListSkuGroupBillableSkusResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -954,7 +964,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [CloudChannelService.ChangeParametersRequest][].
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_parameters CloudChannelService.ChangeParameters}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the entitlement to update.
@@ -1060,6 +1071,11 @@ module Google
         #
         #     This field is only relevant for multi-currency accounts. It should be
         #     left empty for single currency accounts.
+        # @!attribute [rw] price_reference_id
+        #   @return [::String]
+        #     Optional. Price reference ID for the offer. Only for offers that require
+        #     additional price information. Used to guarantee that the pricing is
+        #     consistent between quoting the offer and placing the order.
         class ChangeOfferRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1296,6 +1312,9 @@ module Google
         # @!attribute [rw] offers
         #   @return [::Array<::Google::Cloud::Channel::V1::Offer>]
         #     The list of Offers requested.
+        #
+        #     The pricing information for each Offer only includes the base price.
+        #     Effective prices and discounts aren't populated.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
@@ -1487,6 +1506,11 @@ module Google
         # @!attribute [rw] offer
         #   @return [::Google::Cloud::Channel::V1::Offer]
         #     Offer.
+        # @!attribute [rw] price_reference_id
+        #   @return [::String]
+        #     Optional. Price reference ID for the offer. Only for offers that require
+        #     additional price information. Used to guarantee that the pricing is
+        #     consistent between quoting the offer and placing the order.
         class PurchasableOffer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1544,11 +1568,16 @@ module Google
         # Request Message for RegisterSubscriber.
         # @!attribute [rw] account
         #   @return [::String]
-        #     Required. Resource name of the account.
+        #     Optional. Resource name of the account. Required if integrator is not
+        #     provided. Otherwise, leave this field empty/unset.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Required. Service account that provides subscriber access to the registered
         #     topic.
+        # @!attribute [rw] integrator
+        #   @return [::String]
+        #     Optional. Resource name of the integrator. Required if account is not
+        #     provided. Otherwise, leave this field empty/unset.
         class RegisterSubscriberRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1566,11 +1595,16 @@ module Google
         # Request Message for UnregisterSubscriber.
         # @!attribute [rw] account
         #   @return [::String]
-        #     Required. Resource name of the account.
+        #     Optional. Resource name of the account. Required if integrator is not
+        #     provided. Otherwise, leave this field empty/unset.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Required. Service account to unregister from subscriber access to the
         #     topic.
+        # @!attribute [rw] integrator
+        #   @return [::String]
+        #     Optional. Resource name of the integrator. Required if account is not
+        #     provided. Otherwise, leave this field empty/unset.
         class UnregisterSubscriberRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1588,7 +1622,8 @@ module Google
         # Request Message for ListSubscribers.
         # @!attribute [rw] account
         #   @return [::String]
-        #     Required. Resource name of the account.
+        #     Optional. Resource name of the account. Required if integrator is not
+        #     provided. Otherwise, leave this field empty/unset.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of service accounts to return. The service may
@@ -1602,6 +1637,10 @@ module Google
         #
         #     When paginating, all other parameters provided to `ListSubscribers` must
         #     match the call that provided the page token.
+        # @!attribute [rw] integrator
+        #   @return [::String]
+        #     Optional. Resource name of the integrator. Required if account is not
+        #     provided. Otherwise, leave this field empty/unset.
         class ListSubscribersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
