@@ -259,6 +259,7 @@
     "proto_docs/google/shopping/type/types.rb",
     "proto_docs/google/type/date.rb",
     "proto_docs/google/type/datetime.rb",
+    "proto_docs/google/type/latlng.rb",
     "proto_docs/google/type/phone_number.rb",
     "proto_docs/google/type/postal_address.rb",
     "snippets/Gemfile",
