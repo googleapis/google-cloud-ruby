@@ -37,9 +37,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/network_security"
 
-client = Google::Cloud::NetworkSecurity.network_security
-request = ::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRequest.new # (request fields as keyword arguments...)
-response = client.list_authorization_policies request
+client = Google::Cloud::NetworkSecurity.dns_threat_detector_service
+request = ::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest.new # (request fields as keyword arguments...)
+response = client.list_dns_threat_detectors request
 ```
 
 ## Debug Logging
