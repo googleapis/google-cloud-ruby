@@ -48,6 +48,8 @@ module Google
             # See {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client::Configuration}
             # for a description of the configuration fields.
             #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
+            #
             # @example
             #
             #   # Modify the configuration for all AwsClusters clients
@@ -265,6 +267,8 @@ module Google
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_aws_cluster(request, options = nil)
             #   Pass arguments to `create_aws_cluster` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::CreateAwsClusterRequest} or an equivalent Hash.
@@ -380,6 +384,8 @@ module Google
 
             ##
             # Updates an {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_aws_cluster(request, options = nil)
             #   Pass arguments to `update_aws_cluster` via a request object, either of type
@@ -511,6 +517,8 @@ module Google
             # Describes a specific {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
             # resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_aws_cluster(request, options = nil)
             #   Pass arguments to `get_aws_cluster` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAwsClusterRequest} or an equivalent Hash.
@@ -604,6 +612,8 @@ module Google
             ##
             # Lists all {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources
             # on a given Google Cloud project and region.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_aws_clusters(request, options = nil)
             #   Pass arguments to `list_aws_clusters` via a request object, either of type
@@ -721,6 +731,8 @@ module Google
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload delete_aws_cluster(request, options = nil)
             #   Pass arguments to `delete_aws_cluster` via a request object, either of type
@@ -845,6 +857,8 @@ module Google
             ##
             # Generates an access token for a cluster agent.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload generate_aws_cluster_agent_token(request, options = nil)
             #   Pass arguments to `generate_aws_cluster_agent_token` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAwsClusterAgentTokenRequest} or an equivalent Hash.
@@ -949,6 +963,8 @@ module Google
             # Generates a short-lived access token to authenticate to a given
             # {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload generate_aws_access_token(request, options = nil)
             #   Pass arguments to `generate_aws_access_token` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GenerateAwsAccessTokenRequest} or an equivalent Hash.
@@ -1046,6 +1062,8 @@ module Google
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload create_aws_node_pool(request, options = nil)
             #   Pass arguments to `create_aws_node_pool` via a request object, either of type
@@ -1163,6 +1181,8 @@ module Google
 
             ##
             # Updates an {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_aws_node_pool(request, options = nil)
             #   Pass arguments to `update_aws_node_pool` via a request object, either of type
@@ -1301,6 +1321,8 @@ module Google
             # You must first cancel or let it finish unsuccessfully before you can
             # rollback.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload rollback_aws_node_pool_update(request, options = nil)
             #   Pass arguments to `rollback_aws_node_pool_update` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::RollbackAwsNodePoolUpdateRequest} or an equivalent Hash.
@@ -1407,6 +1429,8 @@ module Google
             # Describes a specific
             # {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool} resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_aws_node_pool(request, options = nil)
             #   Pass arguments to `get_aws_node_pool` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAwsNodePoolRequest} or an equivalent Hash.
@@ -1501,6 +1525,8 @@ module Google
             # Lists all {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
             # resources on a given
             # {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_aws_node_pools(request, options = nil)
             #   Pass arguments to `list_aws_node_pools` via a request object, either of type
@@ -1616,6 +1642,8 @@ module Google
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
             # described to track the status of the operation.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload delete_aws_node_pool(request, options = nil)
             #   Pass arguments to `delete_aws_node_pool` via a request object, either of type
@@ -1745,6 +1773,8 @@ module Google
             # specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
             # for details.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_aws_open_id_config(request, options = nil)
             #   Pass arguments to `get_aws_open_id_config` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAwsOpenIdConfigRequest} or an equivalent Hash.
@@ -1833,6 +1863,8 @@ module Google
             # Gets the public component of the cluster signing keys in
             # JSON Web Key format.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_aws_json_web_keys(request, options = nil)
             #   Pass arguments to `get_aws_json_web_keys` via a request object, either of type
             #   {::Google::Cloud::GkeMultiCloud::V1::GetAwsJsonWebKeysRequest} or an equivalent Hash.
@@ -1920,6 +1952,8 @@ module Google
             ##
             # Returns information, such as supported AWS regions and Kubernetes
             # versions, on a given Google Cloud location.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload get_aws_server_config(request, options = nil)
             #   Pass arguments to `get_aws_server_config` via a request object, either of type
