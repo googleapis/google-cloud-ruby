@@ -22,6 +22,7 @@ module Google
     module GkeMultiCloud
       module V1
         # An Anthos cluster running on Azure.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this resource.
@@ -179,6 +180,7 @@ module Google
         end
 
         # ClusterNetworking contains cluster-wide networking configuration.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] virtual_network_id
         #   @return [::String]
         #     Required. The Azure Resource Manager (ARM) ID of the VNet associated with
@@ -223,6 +225,7 @@ module Google
         end
 
         # AzureControlPlane represents the control plane configurations.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] version
         #   @return [::String]
         #     Required. The Kubernetes version to run on control plane replicas
@@ -310,6 +313,7 @@ module Google
         end
 
         # Configuration for the placement of a control plane replica.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] subnet_id
         #   @return [::String]
         #     Required. For a given replica, the ARM ID of the subnet where the control
@@ -325,6 +329,7 @@ module Google
         end
 
         # Details of a proxy config stored in Azure Key Vault.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] resource_group_id
         #   @return [::String]
         #     The ARM ID the of the resource group containing proxy keyvault.
@@ -350,6 +355,7 @@ module Google
         #
         # Anthos clusters on Azure encrypts your Kubernetes data at rest
         # in etcd using Azure Key Vault.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] key_id
         #   @return [::String]
         #     Required. The ARM ID of the Azure Key Vault key to encrypt / decrypt data.
@@ -367,6 +373,7 @@ module Google
         #
         # Azure VM bootstrap secret is envelope encrypted with the provided key vault
         # key.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] key_id
         #   @return [::String]
         #     Required. The ARM ID of the Azure Key Vault key to encrypt / decrypt config
@@ -388,6 +395,7 @@ module Google
         end
 
         # Configuration for Azure Disks.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] size_gib
         #   @return [::Integer]
         #     Optional. The size of the disk, in GiBs.
@@ -411,6 +419,7 @@ module Google
         #
         # Each `AzureClient` resource is bound to a single Azure Active Directory
         # Application and tenant.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this resource.
@@ -467,6 +476,7 @@ module Google
         end
 
         # Configuration related to the cluster RBAC settings.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] admin_users
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureClusterUser>]
         #     Optional. Users that can perform operations as a cluster admin. A managed
@@ -489,6 +499,7 @@ module Google
         end
 
         # Authentication configuration for the management of Azure resources.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] tenant_id
         #   @return [::String]
         #     Required. The Azure Active Directory Tenant ID.
@@ -501,6 +512,7 @@ module Google
         end
 
         # Identities of a user-type subject for Azure clusters.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] username
         #   @return [::String]
         #     Required. The name of the user, e.g. `my-gcp-id@gmail.com`.
@@ -510,6 +522,7 @@ module Google
         end
 
         # Identities of a group-type subject for Azure clusters.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] group
         #   @return [::String]
         #     Required. The name of the group, e.g. `my-group@domain.com`.
@@ -519,6 +532,7 @@ module Google
         end
 
         # An Anthos node pool running on Azure.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this resource.
@@ -634,6 +648,7 @@ module Google
 
         # AzureNodeManagement defines the set of node management features turned on for
         # an Azure node pool.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] auto_repair
         #   @return [::Boolean]
         #     Optional. Whether or not the nodes will be automatically repaired. When set
@@ -647,6 +662,7 @@ module Google
 
         # Parameters that describe the configuration of all node machines
         # on a given node pool.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] vm_size
         #   @return [::String]
         #     Optional. The Azure VM size name. Example: `Standard_DS2_v2`.
@@ -719,6 +735,7 @@ module Google
         #
         # The Kubernetes cluster autoscaler will automatically adjust the
         # size of the node pool based on the cluster load.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] min_node_count
         #   @return [::Integer]
         #     Required. Minimum number of nodes in the node pool. Must be greater than or
@@ -734,6 +751,7 @@ module Google
 
         # AzureOpenIdConfig is an OIDC discovery document for the cluster.
         # See the OpenID Connect Discovery 1.0 specification for details.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] issuer
         #   @return [::String]
         #     OIDC Issuer.
@@ -761,6 +779,7 @@ module Google
         end
 
         # AzureJsonWebKeys is a valid JSON Web Key Set as specififed in RFC 7517.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::Jwk>]
         #     The public component of the keys used by the cluster to sign token
@@ -772,6 +791,7 @@ module Google
 
         # AzureServerConfig contains information about a Google Cloud location, such as
         # supported Azure regions and Kubernetes versions.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The `AzureServerConfig` resource name.
@@ -796,6 +816,7 @@ module Google
         end
 
         # Kubernetes version information of GKE cluster on Azure.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] version
         #   @return [::String]
         #     Kubernetes version name (for example, `1.19.10-gke.1000`)
@@ -825,6 +846,7 @@ module Google
         end
 
         # SSH configuration for Azure resources.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] authorized_key
         #   @return [::String]
         #     Required. The SSH public key data for VMs managed by Anthos. This accepts
@@ -838,6 +860,7 @@ module Google
         # Managed Azure resources for the cluster.
         #
         # The values could change and be empty, depending on the state of the cluster.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] network_security_group_id
         #   @return [::String]
         #     Output only. The ARM ID of the cluster network security group.
@@ -850,6 +873,7 @@ module Google
         end
 
         # AzureClusterError describes errors found on Azure clusters.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] message
         #   @return [::String]
         #     Human-friendly description of the error.
@@ -859,6 +883,7 @@ module Google
         end
 
         # AzureNodePoolError describes errors found on Azure node pools.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] message
         #   @return [::String]
         #     Human-friendly description of the error.
