@@ -12,6 +12,206 @@
   },
   "snippets": [
     {
+      "region_tag": "networksecurity_v1beta1_generated_DnsThreatDetectorService_ListDnsThreatDetectors_sync",
+      "title": "Snippet for the list_dns_threat_detectors call in the DnsThreatDetectorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#list_dns_threat_detectors.",
+      "file": "dns_threat_detector_service/list_dns_threat_detectors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dns_threat_detectors",
+        "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#list_dns_threat_detectors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsResponse",
+        "client": {
+          "short_name": "DnsThreatDetectorService::Client",
+          "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client"
+        },
+        "method": {
+          "short_name": "ListDnsThreatDetectors",
+          "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.ListDnsThreatDetectors",
+          "service": {
+            "short_name": "DnsThreatDetectorService",
+            "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networksecurity_v1beta1_generated_DnsThreatDetectorService_GetDnsThreatDetector_sync",
+      "title": "Snippet for the get_dns_threat_detector call in the DnsThreatDetectorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#get_dns_threat_detector.",
+      "file": "dns_threat_detector_service/get_dns_threat_detector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dns_threat_detector",
+        "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#get_dns_threat_detector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkSecurity::V1beta1::GetDnsThreatDetectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetector",
+        "client": {
+          "short_name": "DnsThreatDetectorService::Client",
+          "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client"
+        },
+        "method": {
+          "short_name": "GetDnsThreatDetector",
+          "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.GetDnsThreatDetector",
+          "service": {
+            "short_name": "DnsThreatDetectorService",
+            "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networksecurity_v1beta1_generated_DnsThreatDetectorService_CreateDnsThreatDetector_sync",
+      "title": "Snippet for the create_dns_threat_detector call in the DnsThreatDetectorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#create_dns_threat_detector.",
+      "file": "dns_threat_detector_service/create_dns_threat_detector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dns_threat_detector",
+        "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#create_dns_threat_detector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkSecurity::V1beta1::CreateDnsThreatDetectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetector",
+        "client": {
+          "short_name": "DnsThreatDetectorService::Client",
+          "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client"
+        },
+        "method": {
+          "short_name": "CreateDnsThreatDetector",
+          "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.CreateDnsThreatDetector",
+          "service": {
+            "short_name": "DnsThreatDetectorService",
+            "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networksecurity_v1beta1_generated_DnsThreatDetectorService_UpdateDnsThreatDetector_sync",
+      "title": "Snippet for the update_dns_threat_detector call in the DnsThreatDetectorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#update_dns_threat_detector.",
+      "file": "dns_threat_detector_service/update_dns_threat_detector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dns_threat_detector",
+        "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#update_dns_threat_detector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkSecurity::V1beta1::UpdateDnsThreatDetectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetector",
+        "client": {
+          "short_name": "DnsThreatDetectorService::Client",
+          "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDnsThreatDetector",
+          "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.UpdateDnsThreatDetector",
+          "service": {
+            "short_name": "DnsThreatDetectorService",
+            "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networksecurity_v1beta1_generated_DnsThreatDetectorService_DeleteDnsThreatDetector_sync",
+      "title": "Snippet for the delete_dns_threat_detector call in the DnsThreatDetectorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#delete_dns_threat_detector.",
+      "file": "dns_threat_detector_service/delete_dns_threat_detector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dns_threat_detector",
+        "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client#delete_dns_threat_detector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkSecurity::V1beta1::DeleteDnsThreatDetectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DnsThreatDetectorService::Client",
+          "full_name": "::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDnsThreatDetector",
+          "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService.DeleteDnsThreatDetector",
+          "service": {
+            "short_name": "DnsThreatDetectorService",
+            "full_name": "google.cloud.networksecurity.v1beta1.DnsThreatDetectorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_sync",
       "title": "Snippet for the list_authorization_policies call in the NetworkSecurity service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_authorization_policies.",

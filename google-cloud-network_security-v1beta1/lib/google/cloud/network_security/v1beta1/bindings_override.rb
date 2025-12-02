@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/network_security/v1beta1/rest"
-      #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new
+      #     client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Rest::Client.new
       #
       module V1beta1
         ##
