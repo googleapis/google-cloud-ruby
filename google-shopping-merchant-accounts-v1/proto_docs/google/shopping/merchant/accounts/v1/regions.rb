@@ -196,6 +196,9 @@ module Google
           #   @return [::Google::Protobuf::BoolValue]
           #     Output only. Indicates if the region is eligible for use in the Shipping
           #     Services configuration.
+          # @!attribute [rw] radius_area
+          #   @return [::Google::Shopping::Merchant::Accounts::V1::Region::RadiusArea]
+          #     Optional. A radius area that defines the region area.
           class Region
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -246,6 +249,39 @@ module Google
             class GeoTargetArea
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A radius area that defines the region area.
+            # @!attribute [rw] region_code
+            #   @return [::String]
+            #     Required. [CLDR territory
+            #     code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml)
+            #     or the country the radius area applies to.
+            # @!attribute [rw] lat_lng
+            #   @return [::Google::Type::LatLng]
+            #     Required. The center of the radius area. It represents a
+            #     latitude/longitude pair in decimal degrees format.
+            # @!attribute [rw] radius
+            #   @return [::Float]
+            #     Required. The radius distance of the area.
+            # @!attribute [rw] radius_units
+            #   @return [::Google::Shopping::Merchant::Accounts::V1::Region::RadiusArea::RadiusUnits]
+            #     Optional. The unit of the radius.
+            class RadiusArea
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The unit of measurement of the radius. Default is KILOMETERS.
+              module RadiusUnits
+                # Unused default value
+                RADIUS_UNITS_UNSPECIFIED = 0
+
+                # The distance is measured in miles.
+                MILES = 1
+
+                # The distance is measured in kilometers.
+                KILOMETERS = 2
+              end
             end
           end
         end
