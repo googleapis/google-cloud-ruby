@@ -83,6 +83,12 @@ module Google
         #   @return [::Boolean]
         #     Output only. Whether or not this Trigger satisfies the requirements of
         #     physical zone separation
+        # @!attribute [rw] retry_policy
+        #   @return [::Google::Cloud::Eventarc::V1::Trigger::RetryPolicy]
+        #     Optional. The retry policy to use in the Trigger.
+        #
+        #     If unset, event delivery will be retried for up to 24 hours by default:
+        #     https://cloud.google.com/eventarc/docs/retry-events
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. This checksum is computed by the server based on the value of
@@ -91,6 +97,18 @@ module Google
         class Trigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The retry policy configuration for the Trigger.
+          #
+          # Can only be set with Cloud Run destinations.
+          # @!attribute [rw] max_attempts
+          #   @return [::Integer]
+          #     Optional. The maximum number of delivery attempts for any message. The
+          #     only valid value is 1.
+          class RetryPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
