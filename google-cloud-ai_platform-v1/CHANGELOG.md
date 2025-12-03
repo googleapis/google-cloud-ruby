@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.32.0 (2025-12-03)
+
+#### Features
+
+* Expose zone when creating a FeatureOnlineStore 
+#### Documentation
+
+* update `ReplicatedVoiceConfig.mime_type` comment ([#32229](https://github.com/googleapis/google-cloud-ruby/issues/32229)) 
+
 ### 1.31.0 (2025-11-21)
 
 #### Features
