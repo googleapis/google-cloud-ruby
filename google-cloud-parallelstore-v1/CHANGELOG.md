@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.0 (2025-12-03)
+
+#### Features
+
+* add transfer metadata options proto definition ([#32234](https://github.com/googleapis/google-cloud-ruby/issues/32234)) 
+
 ### 1.4.1 (2025-10-27)
 
 #### Documentation
