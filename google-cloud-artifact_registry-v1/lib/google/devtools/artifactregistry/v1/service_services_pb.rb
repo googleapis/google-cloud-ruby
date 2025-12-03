@@ -160,6 +160,8 @@ module Google
             # finish once the attachments has been deleted. It will not have any
             # Operation metadata and will return a `google.protobuf.Empty` response.
             rpc :DeleteAttachment, ::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest, ::Google::Longrunning::Operation
+            # Exports an artifact.
+            rpc :ExportArtifact, ::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

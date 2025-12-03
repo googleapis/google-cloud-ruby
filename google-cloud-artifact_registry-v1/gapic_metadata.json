@@ -254,6 +254,11 @@
               "methods": [
                 "delete_attachment"
               ]
+            },
+            "ExportArtifact": {
+              "methods": [
+                "export_artifact"
+              ]
             }
           }
         }

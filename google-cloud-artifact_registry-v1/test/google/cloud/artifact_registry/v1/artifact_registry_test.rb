@@ -3132,6 +3132,75 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     end
   end
 
+  def test_export_artifact
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    source_version = "hello world"
+    gcs_path = "hello world"
+    repository = "hello world"
+
+    export_artifact_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_artifact, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest, request
+      assert_equal "hello world", request["source_version"]
+      assert_equal :source_version, request.source_artifact
+      assert_equal "hello world", request["gcs_path"]
+      assert_equal :gcs_path, request.destination
+      assert_equal "hello world", request["repository"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_artifact_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_artifact({ source_version: source_version, gcs_path: gcs_path, repository: repository }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_artifact source_version: source_version, gcs_path: gcs_path, repository: repository do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_artifact ::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest.new(source_version: source_version, gcs_path: gcs_path, repository: repository) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_artifact({ source_version: source_version, gcs_path: gcs_path, repository: repository }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_artifact(::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest.new(source_version: source_version, gcs_path: gcs_path, repository: repository), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_artifact_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
