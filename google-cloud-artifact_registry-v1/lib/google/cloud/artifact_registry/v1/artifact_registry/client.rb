@@ -4913,6 +4913,117 @@ module Google
             end
 
             ##
+            # Exports an artifact.
+            #
+            # @overload export_artifact(request, options = nil)
+            #   Pass arguments to `export_artifact` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload export_artifact(source_version: nil, source_tag: nil, gcs_path: nil, repository: nil)
+            #   Pass arguments to `export_artifact` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param source_version [::String]
+            #     The artifact version to export.
+            #     Format:
+            #     projects/\\{project}/locations/\\{location}/repositories/\\{repository}/packages/\\{package}/versions/\\{version}
+            #
+            #     Note: The following parameters are mutually exclusive: `source_version`, `source_tag`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param source_tag [::String]
+            #     The artifact tag to export.
+            #     Format:projects/\\{project}/locations/\\{location}/repositories/\\{repository}/packages/\\{package}/tags/\\{tag}
+            #
+            #     Note: The following parameters are mutually exclusive: `source_tag`, `source_version`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param gcs_path [::String]
+            #     The Cloud Storage path to export the artifact to. Should start with the
+            #     bucket name, and optionally have a directory path. Examples:
+            #     `dst_bucket`, `dst_bucket/sub_dir`.
+            #     Existing objects with the same path will be overwritten.
+            #   @param repository [::String]
+            #     Required. The repository of the artifact to export.
+            #     Format: projects/\\{project}/locations/\\{location}/repositories/\\{repository}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest.new
+            #
+            #   # Call the export_artifact method.
+            #   result = client.export_artifact request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def export_artifact request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.export_artifact.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.repository
+                header_params["repository"] = request.repository
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.export_artifact.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.export_artifact.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :export_artifact, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ArtifactRegistry API.
             #
             # This class represents the configuration for ArtifactRegistry,
@@ -5340,6 +5451,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_attachment
+                ##
+                # RPC-specific configuration for `export_artifact`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :export_artifact
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5441,6 +5557,8 @@ module Google
                   @create_attachment = ::Gapic::Config::Method.new create_attachment_config
                   delete_attachment_config = parent_rpcs.delete_attachment if parent_rpcs.respond_to? :delete_attachment
                   @delete_attachment = ::Gapic::Config::Method.new delete_attachment_config
+                  export_artifact_config = parent_rpcs.export_artifact if parent_rpcs.respond_to? :export_artifact
+                  @export_artifact = ::Gapic::Config::Method.new export_artifact_config
 
                   yield self if block_given?
                 end

@@ -1970,6 +1970,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ExportArtifact_sync",
+      "title": "Snippet for the export_artifact call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#export_artifact.",
+      "file": "artifact_registry/export_artifact.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_artifact",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#export_artifact",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::ExportArtifactRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "ExportArtifact",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.ExportArtifact",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
