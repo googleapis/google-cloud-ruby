@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.5.0 (2025-12-03)
+
+#### Features
+
+* add Eventarc Trigger RetryPolicy 
+* add wide-scope Eventarc GoogleApiSource flags ([#32227](https://github.com/googleapis/google-cloud-ruby/issues/32227)) 
+
 ### 2.4.1 (2025-10-27)
 
 #### Documentation
