@@ -217,8 +217,13 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
   end
 
   it "removes expired items" do
-    subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new subscriber_mock,
+    logging_mock = Minitest::Mock.new
+    logging_mock.expect :log_expiry, nil, [Array]
+    service_mock = OpenStruct.new logging: logging_mock
+    listener_mock = OpenStruct.new service: service_mock
+    stream_mock = OpenStruct.new subscriber: listener_mock
+
+    inventory = Google::Cloud::PubSub::MessageListener::Inventory.new stream_mock,
                                                                  limit: 1000,
                                                                  bytesize: 100_000,
                                                                  extension: 3600,
@@ -237,6 +242,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
     inventory.remove_expired!
 
     _(inventory.ack_ids).must_equal ["ack-id-1112", "ack-id-1113"]
+
+    logging_mock.verify
   end
 
   it "knows its max_duration_per_lease_extension limit" do

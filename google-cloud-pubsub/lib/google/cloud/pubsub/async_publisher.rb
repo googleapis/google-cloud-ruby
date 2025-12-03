@@ -21,7 +21,6 @@ require "google/cloud/pubsub/async_publisher/batch"
 require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/convert"
-require "google/cloud/pubsub/logger_helper"
 
 module Google
   module Cloud
@@ -60,7 +59,6 @@ module Google
       #
       class AsyncPublisher
         include MonitorMixin
-        include Google::Cloud::PubSub::LoggerHelper
 
         attr_reader :topic_name
         attr_reader :max_bytes
@@ -381,7 +379,7 @@ module Google
               grpc = @service.publish topic_name,
                                       items.map(&:msg),
                                       compress: compress && batch.total_message_bytes >= compression_bytes_threshold
-              log_batch "publish-batch", reason, "publish", items.count, items.sum(&:bytesize)
+              service.logging.log_batch "publish-batch", reason, "publish", items.count, items.sum(&:bytesize)
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 next unless item.callback

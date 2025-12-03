@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/pubsub/logger_helper"
 require "google/cloud/pubsub/message_listener/sequencer"
 require "google/cloud/pubsub/message_listener/enumerator_queue"
 require "google/cloud/pubsub/message_listener/inventory"
@@ -29,7 +28,6 @@ module Google
         # @private
         class Stream
           include MonitorMixin
-          include LoggerHelper
 
           ##
           # @private Implementation attributes.
@@ -75,7 +73,7 @@ module Google
             ) do
               # push empty request every 30 seconds to keep stream alive
               unless inventory.empty?
-                log_safely :info, "subscriber-streams" do
+                subscriber.service.logging.log :info, "subscriber-streams" do
                   "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
                 end
                 push Google::Cloud::PubSub::V1::StreamingPullRequest.new
@@ -99,7 +97,7 @@ module Google
             synchronize do
               break if @stopped
 
-              log_safely :info, "subscriber-streams" do
+              subscriber.service.logging.log :info, "subscriber-streams" do
                 "stopping stream for subscription #{@subscriber.subscription_name}"
               end
               # Close the stream by pushing the sentinel value.
@@ -227,7 +225,7 @@ module Google
             synchronize do
               # Don't allow a stream to restart if already stopped
               if @stopped
-                log_safely :debug, "subscriber-streams" do
+                subscriber.service.logging.log :debug, "subscriber-streams" do
                   "not filling stream for subscription #{@subscriber.subscription_name} because stream is already" \
                   " stopped"
                 end
@@ -250,7 +248,7 @@ module Google
             # Call the StreamingPull API to get the response enumerator
             options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
             enum = @subscriber.service.streaming_pull @request_queue.each, options
-            log_safely :info, "subscriber-streams" do
+            subscriber.service.logging.log :info, "subscriber-streams" do
               "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
             end
 
@@ -309,19 +307,19 @@ module Google
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable => e
             status_code = e.respond_to?(:code) ? e.code : e.class.name
-            log_safely :error, "subscriber-streams" do
+            subscriber.service.logging.log :error, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended with status " \
               "#{status_code}; will be retried."
             end
             # Restart the stream with an incremental back for a retriable error.
             retry
           rescue RestartStream
-            log_safely :info, "subscriber-streams" do
+            subscriber.service.logging.log :info, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
             end
             retry
           rescue StandardError => e
-            log_safely :error, "subscriber-streams" do
+            subscriber.service.logging.log :error, "subscriber-streams" do
               "error on stream for subscription #{@subscriber.subscription_name}: #{e.inspect}"
             end
             @subscriber.error! e
@@ -373,12 +371,12 @@ module Google
           end
 
           def perform_callback_sync rec_msg
-            log_safely :info, "callback-delivery" do
+            subscriber.service.logging.log :info, "callback-delivery" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
             end
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
-            log_safely :info, "callback-exceptions" do
+            subscriber.service.logging.log :info, "callback-exceptions" do
               "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
                 "#{e.inspect}"
             end
@@ -408,7 +406,7 @@ module Google
             return unless pause_streaming?
 
             @paused = true
-            log_safely :info, "subscriber-flow-control" do
+            subscriber.service.logging.log :info, "subscriber-flow-control" do
               "subscriber for #{@subscriber.subscription_name} is client-side flow control blocked"
             end
           end
@@ -424,7 +422,7 @@ module Google
             return unless unpause_streaming?
 
             @paused = nil
-            log_safely :info, "subscriber-flow-control" do
+            subscriber.service.logging.log :info, "subscriber-flow-control" do
               "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
             end
             # signal to the background thread that we are unpaused

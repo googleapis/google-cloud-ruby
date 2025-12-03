@@ -107,7 +107,12 @@ end
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
-  let(:pubsub) { Google::Cloud::PubSub::Project.new(Google::Cloud::PubSub::Service.new(project, credentials)) }
+  let(:pubsub) do
+    logger = Google::Cloud.configure.pubsub.logger || Logger.new(STDOUT)
+    logging = Google::Cloud::PubSub::Logging.create logger
+    service = Google::Cloud::PubSub::Service.new project, credentials, logging: logging
+    Google::Cloud::PubSub::Project.new service
+  end
 
   def topics_hash num_topics, token = ""
     topics = num_topics.times.map do
