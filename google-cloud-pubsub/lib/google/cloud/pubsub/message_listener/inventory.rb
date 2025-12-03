@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/pubsub/logger_helper"
 require "monitor"
 
 module Google
@@ -29,7 +28,6 @@ module Google
           end
 
           include MonitorMixin
-          include LoggerHelper
 
           attr_reader :stream
           attr_reader :limit
@@ -88,7 +86,7 @@ module Google
               extension_time = Time.new - extension
               expired, keep = @inventory.partition { |_ack_id, item| item.pulled_at < extension_time }
               @inventory = keep.to_h
-              log_expiry expired
+              stream.subscriber.service.logging.log_expiry expired
               @wait_cond.broadcast
             end
           end

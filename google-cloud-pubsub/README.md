@@ -117,17 +117,30 @@ To disable logging across all of Google Cloud Ruby SDK Gems, set the `GOOGLE_SDK
 export GOOGLE_SDK_RUBY_LOGGING_GEMS=pubsub
 ```
 
-You can programmatically configure a custom logger:
+You can programmatically configure a custom logger. The logger can be set globally for the Pub/Sub library, or provided on a per-client basis.
+
+To set a logger globally, configure it on the `Google::Cloud` configuration object:
 
 ```ruby
 require "google/cloud/pubsub"
 require "logger"
 
-# Configure a logger for the pubsub library
+# Configure a global logger for the pubsub library
 Google::Cloud.configure.pubsub.logger = Logger.new "my-app.log"
 ```
 
-If the custom logger is not configured, it will default to a standard stdout logger.
+Alternatively, you can provide a logger directly to the `PubSub` client initializer. If a logger instance is provided, it will override any globally configured logger.
+
+```ruby
+require "google/cloud/pubsub"
+require "logger"
+
+# Provide a logger directly to the client
+custom_logger = Logger.new "pubsub-client.log"
+pubsub = Google::Cloud::PubSub.new logger: custom_logger
+```
+
+If no custom logger is configured, a default logger that writes to standard output will be used.
 
 
 ## Supported Ruby Versions
