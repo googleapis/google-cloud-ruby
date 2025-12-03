@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.18.0 (2025-12-03)
+
+#### Features
+
+* added custom tolerations and labels support for Attached Clusters ([#32235](https://github.com/googleapis/google-cloud-ruby/issues/32235)) 
+* mark GKE-on-AWS and GKE-on-Azure protos as being deprecated to discourage any new usage as these services turn down 
+
 ### 0.17.1 (2025-10-27)
 
 #### Documentation
