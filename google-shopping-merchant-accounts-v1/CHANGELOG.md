@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2025-12-03)
+
+#### Features
+
+* A new field `radius_area` is added to message `.google.shopping.merchant.accounts.v1.Region` ([#32230](https://github.com/googleapis/google-cloud-ruby/issues/32230)) 
+
 ### 0.3.2 (2025-11-19)
 
 #### Documentation
