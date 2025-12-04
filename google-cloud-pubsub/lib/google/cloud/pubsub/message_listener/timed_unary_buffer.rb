@@ -64,7 +64,7 @@ module Google
             @retry_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
             @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
             @task = Concurrent::TimerTask.new execution_interval: interval do
-              flush!
+              flush! reason: "interval timeout"
             end
           end
 
@@ -108,9 +108,9 @@ module Google
             true
           end
 
-          def flush!
+          def flush! reason: "manual flush"
             # Grab requests from the buffer and release synchronize ASAP
-            requests = flush_requests!
+            requests = flush_requests! reason
             return if requests.empty?
 
             # Perform the RCP calls concurrently
@@ -167,7 +167,7 @@ module Google
             @task.shutdown
             @retry_thread_pool.shutdown
             @callback_thread_pool.shutdown
-            flush!
+            flush! reason: "shutdown"
             self
           end
 
@@ -296,7 +296,9 @@ module Google
             end
           end
 
-          def flush_requests!
+          # rubocop:disable Metrics/AbcSize
+
+          def flush_requests! reason
             prev_reg =
               synchronize do
                 return {} if @register.empty?
@@ -308,15 +310,33 @@ module Google
             groups = prev_reg.each_pair.group_by { |_ack_id, delay| delay }
             req_hash = groups.transform_values { |v| v.map(&:first) }
 
-            requests = { acknowledge: [] }
+            requests = { acknowledge: [], modify_ack_deadline: [] }
             ack_ids = Array(req_hash.delete(:ack)) # ack has no deadline set
-            requests[:acknowledge] = create_acknowledge_requests ack_ids if ack_ids.any?
+            if ack_ids.any?
+              requests[:acknowledge] = create_acknowledge_requests ack_ids
+              new_reason = if requests[:acknowledge].length > 1
+                             "#{reason} and partitioned for exceeding max bytes"
+                           else
+                             reason
+                           end
+              requests[:acknowledge].each do |req|
+                @subscriber.service.logging.log_batch "ack-batch", new_reason, "ack", req.ack_ids.length, req.to_proto.bytesize
+              end
+            end
             requests[:modify_ack_deadline] =
               req_hash.map do |mod_deadline, mod_ack_ids|
-                create_modify_ack_deadline_requests mod_deadline, mod_ack_ids
+                mod_ack_reqs = create_modify_ack_deadline_requests mod_deadline, mod_ack_ids
+                type = mod_deadline.zero? ? "nack" : "modack"
+                new_reason = mod_ack_reqs.length > 1 ? "#{reason} and partitioned for exceeding max bytes" : reason
+                mod_ack_reqs.each do |req|
+                  @subscriber.service.logging.log_batch "ack-batch", new_reason, type, req.ack_ids.length, req.to_proto.bytesize
+                end
+                mod_ack_reqs
               end.flatten
             requests
           end
+
+          # rubocop:enable Metrics/AbcSize
 
           def create_acknowledge_requests ack_ids
             req = Google::Cloud::PubSub::V1::AcknowledgeRequest.new(

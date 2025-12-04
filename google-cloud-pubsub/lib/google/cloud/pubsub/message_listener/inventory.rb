@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 require "monitor"
 
 module Google
@@ -22,9 +21,9 @@ module Google
         ##
         # @private
         class Inventory
-          InventoryItem = Struct.new :bytesize, :pulled_at do
+          InventoryItem = Struct.new :message_id, :bytesize, :pulled_at do
             def self.from rec_msg
-              new rec_msg.to_proto.bytesize, Time.now
+              new rec_msg.message.message_id, rec_msg.to_proto.bytesize, Time.now
             end
           end
 
@@ -70,18 +69,24 @@ module Google
           def remove *ack_ids
             ack_ids.flatten!
             ack_ids.compact!
-            return if ack_ids.empty?
+            return {} if ack_ids.empty?
 
+            removed_items = {}
             synchronize do
-              @inventory.delete_if { |ack_id, _| ack_ids.include? ack_id }
+              removed, keep = @inventory.partition { |ack_id, _| ack_ids.include? ack_id }
+              @inventory = keep.to_h
+              removed_items = removed.to_h
               @wait_cond.broadcast
             end
+            removed_items
           end
 
           def remove_expired!
             synchronize do
               extension_time = Time.new - extension
-              @inventory.delete_if { |_ack_id, item| item.pulled_at < extension_time }
+              expired, keep = @inventory.partition { |_ack_id, item| item.pulled_at < extension_time }
+              @inventory = keep.to_h
+              stream.subscriber.service.logging.log_expiry expired
               @wait_cond.broadcast
             end
           end

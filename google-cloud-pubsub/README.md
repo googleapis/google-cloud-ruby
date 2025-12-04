@@ -92,6 +92,57 @@ module GRPC
 end
 ```
 
+### Enabling library level logging
+
+This library includes an opt-in logging mechanism that provides detailed information about high-level operations. These logs are useful for troubleshooting and monitoring the client's behavior. When enabled, logs are tagged with subtags to indicate the operation type.
+
+The following subtags are used:
+
+*   `callback-delivery`: Logs when a message is delivered to the user-provided callback.
+*   `callback-exceptions`: Logs any exceptions raised from the user callback.
+*   `ack-nack`: Logs when a message is acknowledged (`ack`) or negatively acknowledged (`nack`).
+*   `ack-batch`: Logs the reason and size of acknowledgement batches sent to the server.
+*   `publish-batch`: Logs the reason and size of message batches sent to the server for publishing.
+*   `expiry`: Logs when a message's lease expires and it is dropped from client-side lease management.
+*   `subscriber-streams`: Logs key events in the subscriber's streaming connection, such as opening, closing, and errors.
+*   `subscriber-flow-control`: Logs when the subscriber's client-side flow control is paused or resumed.
+
+**WARNING:** These logs may contain message data in plaintext, which could include sensitive information. Ensure you are practicing good data hygiene with your application logs. It is recommended to enable this logging only for debugging purposes and not permanently in production.
+
+To enable logging across all of Google Cloud Ruby SDK Gems, set the `GOOGLE_SDK_RUBY_LOGGING_GEMS` environment variable to `all`.
+To enable logging for just the google-cloud-pubsub gem, set the `GOOGLE_SDK_RUBY_LOGGING_GEMS` environment variable to a comma separated string that contains `pubsub`
+To disable logging across all of Google Cloud Ruby SDK Gems, set the `GOOGLE_SDK_RUBY_LOGGING_GEMS` to `none`
+
+```sh
+export GOOGLE_SDK_RUBY_LOGGING_GEMS=pubsub
+```
+
+You can programmatically configure a custom logger. The logger can be set globally for the Pub/Sub library, or provided on a per-client basis.
+
+To set a logger globally, configure it on the `Google::Cloud` configuration object:
+
+```ruby
+require "google/cloud/pubsub"
+require "logger"
+
+# Configure a global logger for the pubsub library
+Google::Cloud.configure.pubsub.logger = Logger.new "my-app.log"
+```
+
+Alternatively, you can provide a logger directly to the `PubSub` client initializer. If a logger instance is provided, it will override any globally configured logger.
+
+```ruby
+require "google/cloud/pubsub"
+require "logger"
+
+# Provide a logger directly to the client
+custom_logger = Logger.new "pubsub-client.log"
+pubsub = Google::Cloud::PubSub.new logger: custom_logger
+```
+
+If no custom logger is configured, a default logger that writes to standard output will be used.
+
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 3.1+.
