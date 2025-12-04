@@ -87,6 +87,7 @@ module Google
         #   `projects/{project_id}/topics/{topic_id}`.
         #
         def name
+          return @resource_name if reference?
           @grpc.name
         end
 
@@ -342,12 +343,40 @@ module Google
         end
 
         ##
+        # Determines whether the topic object was created without retrieving the
+        # resource representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the topic was created without a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic", skip_lookup: true
+        #   topic.reference? #=> true
+        #
+        def reference?
+          @grpc.nil?
+        end
+
+        ##
         # @private New Publisher from a Google::Cloud::PubSub::V1::Topic object.
         def self.from_grpc grpc, service, async: nil
           new.tap do |t|
             t.grpc = grpc
             t.service = service
             t.instance_variable_set :@async_opts, async if async
+          end
+        end
+
+        ##
+        # @private New reference {Topic} object without making an HTTP request.
+        def self.from_name name, service, options = {}
+          name = service.topic_path name, options
+          from_grpc(nil, service, async: options[:async]).tap do |t|
+            t.instance_variable_set :@resource_name, name
           end
         end
 

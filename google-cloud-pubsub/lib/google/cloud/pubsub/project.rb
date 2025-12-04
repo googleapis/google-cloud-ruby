@@ -133,12 +133,17 @@ module Google
         # @param [Hash] async A hash of values to configure the topic's
         #   {AsyncPublisher} that is created when {Publisher#publish_async}
         #   is called. Optional.
+        # @param [Boolean] skip_lookup Optionally create a {Publisher} object
+        #   without verifying the topic resource exists on the Pub/Sub service.
+        #   Calls made on this object will raise errors if the topic resource
+        #   does not exist. Default is `false`. Optional.
         #
         # @return [Google::Cloud::PubSub::Publisher]
         #
-        def publisher topic_name, project: nil, async: nil
+        def publisher topic_name, project: nil, async: nil, skip_lookup: false
           ensure_service!
           options = { project: project, async: async }
+          return Publisher.from_name topic_name, service, options if skip_lookup
           grpc = topic_admin.get_topic topic: service.topic_path(topic_name, options)
           Publisher.from_grpc grpc, service, async: async
         end
