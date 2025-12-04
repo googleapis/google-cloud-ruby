@@ -90,6 +90,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_cross_site_networks_rest
+    skip unless Google::Cloud::Compute.cross_site_networks_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.cross_site_networks do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::CrossSiteNetworks::Rest::Client, client
+    end
+  end
+
   def test_disk_types_rest
     skip unless Google::Cloud::Compute.disk_types_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -147,6 +157,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ForwardingRules::Rest::Client, client
+    end
+  end
+
+  def test_future_reservations_rest
+    skip unless Google::Cloud::Compute.future_reservations_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.future_reservations do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::FutureReservations::Rest::Client, client
     end
   end
 
@@ -1067,6 +1087,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::VpnTunnels::Rest::Client, client
+    end
+  end
+
+  def test_wire_groups_rest
+    skip unless Google::Cloud::Compute.wire_groups_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.wire_groups do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::WireGroups::Rest::Client, client
     end
   end
 
