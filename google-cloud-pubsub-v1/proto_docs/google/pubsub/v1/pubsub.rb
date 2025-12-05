@@ -775,7 +775,7 @@ module Google
         # A topic resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the topic. It must have the format
+        #     Required. Identifier. The name of the topic. It must have the format
         #     `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
         #     and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
         #     underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -922,7 +922,7 @@ module Google
         # Request for the GetTopic method.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Required. The name of the topic to get.
+        #     Required. Identifier. The name of the topic to get.
         #     Format is `projects/{project}/topics/{topic}`.
         class GetTopicRequest
           include ::Google::Protobuf::MessageExts
@@ -948,8 +948,8 @@ module Google
         # Request for the Publish method.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Required. The messages in the request will be published on this topic.
-        #     Format is `projects/{project}/topics/{topic}`.
+        #     Required. Identifier. The messages in the request will be published on this
+        #     topic. Format is `projects/{project}/topics/{topic}`.
         # @!attribute [rw] messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::PubsubMessage>]
         #     Required. The messages to publish.
@@ -972,7 +972,7 @@ module Google
         # Request for the `ListTopics` method.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the project in which to list topics.
+        #     Required. Identifier. The name of the project in which to list topics.
         #     Format is `projects/{project-id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -1068,7 +1068,7 @@ module Google
         # Request for the `DeleteTopic` method.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Required. Name of the topic to delete.
+        #     Required. Identifier. Name of the topic to delete.
         #     Format is `projects/{project}/topics/{topic}`.
         class DeleteTopicRequest
           include ::Google::Protobuf::MessageExts
@@ -1097,7 +1097,7 @@ module Google
         # using API methods. At most one of these fields may be set.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the subscription. It must have the format
+        #     Required. Identifier. The name of the subscription. It must have the format
         #     `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
         #     start with a letter, and contain only letters (`[A-Za-z]`), numbers
         #     (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
@@ -1702,7 +1702,7 @@ module Google
         # Request for the GetSubscription method.
         # @!attribute [rw] subscription
         #   @return [::String]
-        #     Required. The name of the subscription to get.
+        #     Required. Identifier. The name of the subscription to get.
         #     Format is `projects/{project}/subscriptions/{sub}`.
         class GetSubscriptionRequest
           include ::Google::Protobuf::MessageExts
@@ -1725,8 +1725,8 @@ module Google
         # Request for the `ListSubscriptions` method.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the project in which to list subscriptions.
-        #     Format is `projects/{project-id}`.
+        #     Required. Identifier. The name of the project in which to list
+        #     subscriptions. Format is `projects/{project-id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of subscriptions to return.
@@ -1757,7 +1757,7 @@ module Google
         # Request for the DeleteSubscription method.
         # @!attribute [rw] subscription
         #   @return [::String]
-        #     Required. The subscription to delete.
+        #     Required. Identifier. The subscription to delete.
         #     Format is `projects/{project}/subscriptions/{sub}`.
         class DeleteSubscriptionRequest
           include ::Google::Protobuf::MessageExts
@@ -2017,10 +2017,10 @@ module Google
         # Request for the `CreateSnapshot` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. User-provided name for this snapshot. If the name is not provided
-        #     in the request, the server will assign a random name for this snapshot on
-        #     the same project as the subscription. Note that for REST API requests, you
-        #     must specify a name.  See the [resource name
+        #     Required. Identifier. User-provided name for this snapshot. If the name is
+        #     not provided in the request, the server will assign a random name for this
+        #     snapshot on the same project as the subscription. Note that for REST API
+        #     requests, you must specify a name.  See the [resource name
         #     rules](https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
         #     Format is `projects/{project}/snapshots/{snap}`.
         # @!attribute [rw] subscription
@@ -2125,7 +2125,7 @@ module Google
         # Request for the GetSnapshot method.
         # @!attribute [rw] snapshot
         #   @return [::String]
-        #     Required. The name of the snapshot to get.
+        #     Required. Identifier. The name of the snapshot to get.
         #     Format is `projects/{project}/snapshots/{snap}`.
         class GetSnapshotRequest
           include ::Google::Protobuf::MessageExts
@@ -2135,7 +2135,7 @@ module Google
         # Request for the `ListSnapshots` method.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the project in which to list snapshots.
+        #     Required. Identifier. The name of the project in which to list snapshots.
         #     Format is `projects/{project-id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -2167,7 +2167,7 @@ module Google
         # Request for the `DeleteSnapshot` method.
         # @!attribute [rw] snapshot
         #   @return [::String]
-        #     Required. The name of the snapshot to delete.
+        #     Required. Identifier. The name of the snapshot to delete.
         #     Format is `projects/{project}/snapshots/{snap}`.
         class DeleteSnapshotRequest
           include ::Google::Protobuf::MessageExts
