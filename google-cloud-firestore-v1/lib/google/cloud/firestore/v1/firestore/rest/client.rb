@@ -123,6 +123,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                   }
 
+                  default_config.rpcs.execute_pipeline.timeout = 300.0
+                  default_config.rpcs.execute_pipeline.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                  }
+
                   default_config.rpcs.run_aggregation_query.timeout = 300.0
                   default_config.rpcs.run_aggregation_query.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
@@ -1161,6 +1166,113 @@ module Google
               end
 
               ##
+              # Executes a pipeline query.
+              #
+              # @overload execute_pipeline(request, options = nil)
+              #   Pass arguments to `execute_pipeline` via a request object, either of type
+              #   {::Google::Cloud::Firestore::V1::ExecutePipelineRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Firestore::V1::ExecutePipelineRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_pipeline(database: nil, structured_pipeline: nil, transaction: nil, new_transaction: nil, read_time: nil)
+              #   Pass arguments to `execute_pipeline` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param database [::String]
+              #     Required. Database identifier, in the form
+              #     `projects/{project}/databases/{database}`.
+              #   @param structured_pipeline [::Google::Cloud::Firestore::V1::StructuredPipeline, ::Hash]
+              #     A pipelined operation.
+              #   @param transaction [::String]
+              #     Run the query within an already active transaction.
+              #
+              #     The value here is the opaque transaction ID to execute the query in.
+              #
+              #     Note: The following parameters are mutually exclusive: `transaction`, `new_transaction`, `read_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
+              #     Execute the pipeline in a new transaction.
+              #
+              #     The identifier of the newly created transaction will be returned in the
+              #     first response on the stream. This defaults to a read-only transaction.
+              #
+              #     Note: The following parameters are mutually exclusive: `new_transaction`, `transaction`, `read_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+              #     Execute the pipeline in a snapshot transaction at the given time.
+              #
+              #     This must be a microsecond precision timestamp within the past one hour,
+              #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+              #     minute timestamp within the past 7 days.
+              #
+              #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`, `new_transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              # @return [::Enumerable<::Google::Cloud::Firestore::V1::ExecutePipelineResponse>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/firestore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::V1::ExecutePipelineRequest.new
+              #
+              #   # Call the execute_pipeline method to start streaming.
+              #   output = client.execute_pipeline request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::Firestore::V1::ExecutePipelineResponse
+              #   output.each do |current_response|
+              #     p current_response
+              #   end
+              #
+              def execute_pipeline request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::V1::ExecutePipelineRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_pipeline.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Firestore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_pipeline.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_pipeline.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                ::Gapic::Rest::ServerStream.new(
+                  ::Google::Cloud::Firestore::V1::ExecutePipelineResponse,
+                  ::Gapic::Rest::ThreadedEnumerator.new do |in_q, out_q|
+                    @firestore_stub.execute_pipeline request, options do |chunk|
+                      in_q.deq
+                      out_q.enq chunk
+                    end
+                  end
+                )
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Runs an aggregation query.
               #
               # Rather than producing {::Google::Cloud::Firestore::V1::Document Document} results like
@@ -1891,6 +2003,11 @@ module Google
                   #
                   attr_reader :run_query
                   ##
+                  # RPC-specific configuration for `execute_pipeline`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_pipeline
+                  ##
                   # RPC-specific configuration for `run_aggregation_query`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1936,6 +2053,8 @@ module Google
                     @rollback = ::Gapic::Config::Method.new rollback_config
                     run_query_config = parent_rpcs.run_query if parent_rpcs.respond_to? :run_query
                     @run_query = ::Gapic::Config::Method.new run_query_config
+                    execute_pipeline_config = parent_rpcs.execute_pipeline if parent_rpcs.respond_to? :execute_pipeline
+                    @execute_pipeline = ::Gapic::Config::Method.new execute_pipeline_config
                     run_aggregation_query_config = parent_rpcs.run_aggregation_query if parent_rpcs.respond_to? :run_aggregation_query
                     @run_aggregation_query = ::Gapic::Config::Method.new run_aggregation_query_config
                     partition_query_config = parent_rpcs.partition_query if parent_rpcs.respond_to? :partition_query

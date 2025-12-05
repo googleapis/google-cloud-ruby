@@ -422,6 +422,40 @@ module Google
               end
 
               ##
+              # Baseline implementation for the execute_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Firestore::V1::ExecutePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yieldparam chunk [::String] The chunk of data received during server streaming.
+              #
+              # @return [::Gapic::Rest::TransportOperation]
+              def execute_pipeline(request_pb, options = nil, &)
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_execute_pipeline_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "execute_pipeline",
+                  options: options,
+                  is_server_streaming: true,
+                  &
+                )
+                ::Gapic::Rest::TransportOperation.new response
+              end
+
+              ##
               # Baseline implementation for the run_aggregation_query REST call
               #
               # @param request_pb [::Google::Cloud::Firestore::V1::RunAggregationQueryRequest]
@@ -822,6 +856,28 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the execute_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Firestore::V1::ExecutePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_execute_pipeline_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{database}/documents:executePipeline",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["database", %r{^projects/[^/]+/databases/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

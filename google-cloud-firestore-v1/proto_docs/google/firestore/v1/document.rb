@@ -87,22 +87,22 @@ module Google
         #   @return [::Google::Protobuf::NullValue]
         #     A null value.
         #
-        #     Note: The following fields are mutually exclusive: `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] boolean_value
         #   @return [::Boolean]
         #     A boolean value.
         #
-        #     Note: The following fields are mutually exclusive: `boolean_value`, `null_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `boolean_value`, `null_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] integer_value
         #   @return [::Integer]
         #     An integer value.
         #
-        #     Note: The following fields are mutually exclusive: `integer_value`, `null_value`, `boolean_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `integer_value`, `null_value`, `boolean_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     A double value.
         #
-        #     Note: The following fields are mutually exclusive: `double_value`, `null_value`, `boolean_value`, `integer_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `double_value`, `null_value`, `boolean_value`, `integer_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value
         #   @return [::Google::Protobuf::Timestamp]
         #     A timestamp value.
@@ -110,7 +110,7 @@ module Google
         #     Precise only to microseconds. When stored, any additional precision is
         #     rounded down.
         #
-        #     Note: The following fields are mutually exclusive: `timestamp_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `timestamp_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A string value.
@@ -119,7 +119,7 @@ module Google
         #     Only the first 1,500 bytes of the UTF-8 representation are considered by
         #     queries.
         #
-        #     Note: The following fields are mutually exclusive: `string_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `string_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bytes_value
         #   @return [::String]
         #     A bytes value.
@@ -127,18 +127,18 @@ module Google
         #     Must not exceed 1 MiB - 89 bytes.
         #     Only the first 1,500 bytes are considered by queries.
         #
-        #     Note: The following fields are mutually exclusive: `bytes_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bytes_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reference_value
         #   @return [::String]
         #     A reference to a document. For example:
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
         #
-        #     Note: The following fields are mutually exclusive: `reference_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `reference_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] geo_point_value
         #   @return [::Google::Type::LatLng]
         #     A geo point value representing a point on the surface of Earth.
         #
-        #     Note: The following fields are mutually exclusive: `geo_point_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `geo_point_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] array_value
         #   @return [::Google::Cloud::Firestore::V1::ArrayValue]
         #     An array value.
@@ -146,12 +146,44 @@ module Google
         #     Cannot directly contain another array value, though can contain a
         #     map which contains another array.
         #
-        #     Note: The following fields are mutually exclusive: `array_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `array_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `map_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] map_value
         #   @return [::Google::Cloud::Firestore::V1::MapValue]
         #     A map value.
         #
-        #     Note: The following fields are mutually exclusive: `map_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `map_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `field_reference_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] field_reference_value
+        #   @return [::String]
+        #     Value which references a field.
+        #
+        #     This is considered relative (vs absolute) since it only refers to a field
+        #     and not a field within a particular document.
+        #
+        #     **Requires:**
+        #
+        #     * Must follow [field reference][FieldReference.field_path] limitations.
+        #
+        #     * Not allowed to be used when writing documents.
+        #
+        #     Note: The following fields are mutually exclusive: `field_reference_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `function_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] function_value
+        #   @return [::Google::Cloud::Firestore::V1::Function]
+        #     A value that represents an unevaluated expression.
+        #
+        #     **Requires:**
+        #
+        #     * Not allowed to be used when writing documents.
+        #
+        #     Note: The following fields are mutually exclusive: `function_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `pipeline_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pipeline_value
+        #   @return [::Google::Cloud::Firestore::V1::Pipeline]
+        #     A value that represents an unevaluated pipeline.
+        #
+        #     **Requires:**
+        #
+        #     * Not allowed to be used when writing documents.
+        #
+        #     Note: The following fields are mutually exclusive: `pipeline_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`, `field_reference_value`, `function_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Value
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,6 +218,97 @@ module Google
           class FieldsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Represents an unevaluated scalar expression.
+        #
+        # For example, the expression `like(user_name, "%alice%")` is represented as:
+        #
+        # ```
+        # name: "like"
+        # args { field_reference: "user_name" }
+        # args { string_value: "%alice%" }
+        # ```
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the function to evaluate.
+        #
+        #     **Requires:**
+        #
+        #     * must be in snake case (lower case with underscore separator).
+        # @!attribute [rw] args
+        #   @return [::Array<::Google::Cloud::Firestore::V1::Value>]
+        #     Optional. Ordered list of arguments the given function expects.
+        # @!attribute [rw] options
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Firestore::V1::Value}]
+        #     Optional. Optional named arguments that certain functions may support.
+        class Function
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Firestore::V1::Value]
+          class OptionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A Firestore query represented as an ordered list of operations / stages.
+        # @!attribute [rw] stages
+        #   @return [::Array<::Google::Cloud::Firestore::V1::Pipeline::Stage>]
+        #     Required. Ordered list of stages to evaluate.
+        class Pipeline
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single operation within a pipeline.
+          #
+          # A stage is made up of a unique name, and a list of arguments. The exact
+          # number of arguments & types is dependent on the stage type.
+          #
+          # To give an example, the stage `filter(state = "MD")` would be encoded as:
+          #
+          # ```
+          # name: "filter"
+          # args {
+          #   function_value {
+          #     name: "eq"
+          #     args { field_reference_value: "state" }
+          #     args { string_value: "MD" }
+          #   }
+          # }
+          # ```
+          #
+          # See public documentation for the full list.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the stage to evaluate.
+          #
+          #     **Requires:**
+          #
+          #     * must be in snake case (lower case with underscore separator).
+          # @!attribute [rw] args
+          #   @return [::Array<::Google::Cloud::Firestore::V1::Value>]
+          #     Optional. Ordered list of arguments the given stage expects.
+          # @!attribute [rw] options
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Firestore::V1::Value}]
+          #     Optional. Optional named arguments that certain functions may support.
+          class Stage
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Firestore::V1::Value]
+            class OptionsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end
