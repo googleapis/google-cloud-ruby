@@ -450,6 +450,92 @@ module Google
         end
 
         # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#execute_pipeline Firestore.ExecutePipeline}.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Database identifier, in the form
+        #     `projects/{project}/databases/{database}`.
+        # @!attribute [rw] structured_pipeline
+        #   @return [::Google::Cloud::Firestore::V1::StructuredPipeline]
+        #     A pipelined operation.
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     Run the query within an already active transaction.
+        #
+        #     The value here is the opaque transaction ID to execute the query in.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] new_transaction
+        #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
+        #     Execute the pipeline in a new transaction.
+        #
+        #     The identifier of the newly created transaction will be returned in the
+        #     first response on the stream. This defaults to a read-only transaction.
+        #
+        #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Execute the pipeline in a snapshot transaction at the given time.
+        #
+        #     This must be a microsecond precision timestamp within the past one hour,
+        #     or if Point-in-Time Recovery is enabled, can additionally be a whole
+        #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ExecutePipelineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for [Firestore.Execute][].
+        # @!attribute [rw] transaction
+        #   @return [::String]
+        #     Newly created transaction identifier.
+        #
+        #     This field is only specified as part of the first response from the server,
+        #     alongside the `results` field when the original request specified
+        #     [ExecuteRequest.new_transaction][].
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Firestore::V1::Document>]
+        #     An ordered batch of results returned executing a pipeline.
+        #
+        #     The batch size is variable, and can even be zero for when only a partial
+        #     progress message is returned.
+        #
+        #     The fields present in the returned documents are only those that were
+        #     explicitly requested in the pipeline, this includes those like
+        #     {::Google::Cloud::Firestore::V1::Document#name `__name__`} and
+        #     {::Google::Cloud::Firestore::V1::Document#update_time `__update_time__`}. This is
+        #     explicitly a divergence from `Firestore.RunQuery` / `Firestore.GetDocument`
+        #     RPCs which always return such fields even when they are not specified in
+        #     the {::Google::Cloud::Firestore::V1::DocumentMask `mask`}.
+        # @!attribute [rw] execution_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the results are valid.
+        #
+        #     This is a (not strictly) monotonically increasing value across multiple
+        #     responses in the same stream. The API guarantees that all previously
+        #     returned results are still valid at the latest `execution_time`. This
+        #     allows the API consumer to treat the query if it ran at the latest
+        #     `execution_time` returned.
+        #
+        #     If the query returns no results, a response with `execution_time` and no
+        #     `results` will be sent, and this represents the time at which the operation
+        #     was run.
+        # @!attribute [rw] explain_stats
+        #   @return [::Google::Cloud::Firestore::V1::ExplainStats]
+        #     Query explain stats.
+        #
+        #     This is present on the **last** response if the request configured explain
+        #     to run in 'analyze' or 'explain' mode in the pipeline options. If the query
+        #     does not return any results, a response with `explain_stats` and no
+        #     `results` will still be sent.
+        class ExecutePipelineResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
         # {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -813,7 +899,7 @@ module Google
         #     will immediately send a response with a `TargetChange::Remove` event.
         #
         #     Note that if the client sends multiple `AddTarget` requests
-        #     without an ID, the order of IDs returned in `TargetChage.target_ids` are
+        #     without an ID, the order of IDs returned in `TargetChange.target_ids` are
         #     undefined. Therefore, clients should provide a target ID instead of relying
         #     on the server to assign one.
         #
