@@ -34,6 +34,9 @@ module Google
         #     Required. Name of the container image in Dockerhub, Google Artifact
         #     Registry, or Google Container Registry. If the host is not provided,
         #     Dockerhub is assumed.
+        # @!attribute [rw] source_code
+        #   @return [::Google::Cloud::Run::V2::SourceCode]
+        #     Optional. Location of the source.
         # @!attribute [rw] command
         #   @return [::Array<::String>]
         #     Entrypoint array. Not executed within a shell.
@@ -92,7 +95,7 @@ module Google
         # ResourceRequirements describes the compute resource requirements.
         # @!attribute [rw] limits
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Only `memory` and `cpu` keys in the map are supported.
+        #     Only `memory`, `cpu` and `nvidia.com/gpu` keys in the map are supported.
         #
         #     <p>Notes:
         #      * The only supported values for CPU are '1', '2', '4', and '8'. Setting 4
@@ -100,6 +103,7 @@ module Google
         #     https://cloud.google.com/run/docs/configuring/cpu.
         #       * For supported 'memory' values and syntax, go to
         #      https://cloud.google.com/run/docs/configuring/memory-limits
+        #      * The only supported 'nvidia.com/gpu' value is '1'.
         # @!attribute [rw] cpu_idle
         #   @return [::Boolean]
         #     Determines whether CPU is only allocated during requests (true by default).
@@ -197,6 +201,10 @@ module Google
         #     otherwise be `/cloudsql`. All instances defined in the Volume will be
         #     available as `/cloudsql/[instance]`. For more information on Cloud SQL
         #     volumes, visit https://cloud.google.com/sql/docs/mysql/connect-run
+        # @!attribute [rw] sub_path
+        #   @return [::String]
+        #     Optional. Path within the volume from which the container's volume should
+        #     be mounted. Defaults to "" (volume's root).
         class VolumeMount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -250,7 +258,7 @@ module Google
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Run::V2::VersionToPath>]
         #     If unspecified, the volume will expose a file whose name is the
-        #     secret, relative to VolumeMount.mount_path.
+        #     secret, relative to VolumeMount.mount_path + VolumeMount.sub_path.
         #     If specified, the key will be used as the version to fetch from Cloud
         #     Secret Manager and the path will be the name of the file exposed in the
         #     volume. When items are defined, they must specify a path and a version.
@@ -505,6 +513,30 @@ module Google
         class BuildInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Source type for the container.
+        # @!attribute [rw] cloud_storage_source
+        #   @return [::Google::Cloud::Run::V2::SourceCode::CloudStorageSource]
+        #     The source is a Cloud Storage bucket.
+        class SourceCode
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Cloud Storage source.
+          # @!attribute [rw] bucket
+          #   @return [::String]
+          #     Required. The Cloud Storage bucket name.
+          # @!attribute [rw] object
+          #   @return [::String]
+          #     Required. The Cloud Storage object name.
+          # @!attribute [rw] generation
+          #   @return [::Integer]
+          #     Optional. The Cloud Storage object generation.
+          class CloudStorageSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
