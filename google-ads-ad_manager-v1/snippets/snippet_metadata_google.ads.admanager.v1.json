@@ -452,6 +452,286 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_AdUnitService_CreateAdUnit_sync",
+      "title": "Snippet for the create_ad_unit call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#create_ad_unit.",
+      "file": "ad_unit_service/create_ad_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ad_unit",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#create_ad_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateAdUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdUnit",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateAdUnit",
+          "full_name": "google.ads.admanager.v1.AdUnitService.CreateAdUnit",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdUnitService_UpdateAdUnit_sync",
+      "title": "Snippet for the update_ad_unit call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#update_ad_unit.",
+      "file": "ad_unit_service/update_ad_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_ad_unit",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#update_ad_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateAdUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdUnit",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateAdUnit",
+          "full_name": "google.ads.admanager.v1.AdUnitService.UpdateAdUnit",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdUnitService_BatchCreateAdUnits_sync",
+      "title": "Snippet for the batch_create_ad_units call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_create_ad_units.",
+      "file": "ad_unit_service/batch_create_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_create_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateAdUnitsResponse",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateAdUnits",
+          "full_name": "google.ads.admanager.v1.AdUnitService.BatchCreateAdUnits",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdUnitService_BatchUpdateAdUnits_sync",
+      "title": "Snippet for the batch_update_ad_units call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_update_ad_units.",
+      "file": "ad_unit_service/batch_update_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_update_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateAdUnitsResponse",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateAdUnits",
+          "full_name": "google.ads.admanager.v1.AdUnitService.BatchUpdateAdUnits",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdUnitService_BatchActivateAdUnits_sync",
+      "title": "Snippet for the batch_activate_ad_units call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_activate_ad_units.",
+      "file": "ad_unit_service/batch_activate_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_activate_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateAdUnitsResponse",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateAdUnits",
+          "full_name": "google.ads.admanager.v1.AdUnitService.BatchActivateAdUnits",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdUnitService_BatchDeactivateAdUnits_sync",
+      "title": "Snippet for the batch_deactivate_ad_units call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_deactivate_ad_units.",
+      "file": "ad_unit_service/batch_deactivate_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_deactivate_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsResponse",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateAdUnits",
+          "full_name": "google.ads.admanager.v1.AdUnitService.BatchDeactivateAdUnits",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdUnitService_BatchArchiveAdUnits_sync",
+      "title": "Snippet for the batch_archive_ad_units call in the AdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_archive_ad_units.",
+      "file": "ad_unit_service/batch_archive_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_archive_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client#batch_archive_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchArchiveAdUnitsResponse",
+        "client": {
+          "short_name": "AdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchArchiveAdUnits",
+          "full_name": "google.ads.admanager.v1.AdUnitService.BatchArchiveAdUnits",
+          "service": {
+            "short_name": "AdUnitService",
+            "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_ApplicationService_GetApplication_sync",
       "title": "Snippet for the get_application call in the ApplicationService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ApplicationService::Rest::Client#get_application.",
@@ -2052,6 +2332,246 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_CustomTargetingKeyService_CreateCustomTargetingKey_sync",
+      "title": "Snippet for the create_custom_targeting_key call in the CustomTargetingKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#create_custom_targeting_key.",
+      "file": "custom_targeting_key_service/create_custom_targeting_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_targeting_key",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#create_custom_targeting_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CustomTargetingKey",
+        "client": {
+          "short_name": "CustomTargetingKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomTargetingKey",
+          "full_name": "google.ads.admanager.v1.CustomTargetingKeyService.CreateCustomTargetingKey",
+          "service": {
+            "short_name": "CustomTargetingKeyService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingKeyService_BatchCreateCustomTargetingKeys_sync",
+      "title": "Snippet for the batch_create_custom_targeting_keys call in the CustomTargetingKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_create_custom_targeting_keys.",
+      "file": "custom_targeting_key_service/batch_create_custom_targeting_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_custom_targeting_keys",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_create_custom_targeting_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysResponse",
+        "client": {
+          "short_name": "CustomTargetingKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateCustomTargetingKeys",
+          "full_name": "google.ads.admanager.v1.CustomTargetingKeyService.BatchCreateCustomTargetingKeys",
+          "service": {
+            "short_name": "CustomTargetingKeyService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingKeyService_UpdateCustomTargetingKey_sync",
+      "title": "Snippet for the update_custom_targeting_key call in the CustomTargetingKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#update_custom_targeting_key.",
+      "file": "custom_targeting_key_service/update_custom_targeting_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_custom_targeting_key",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#update_custom_targeting_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CustomTargetingKey",
+        "client": {
+          "short_name": "CustomTargetingKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomTargetingKey",
+          "full_name": "google.ads.admanager.v1.CustomTargetingKeyService.UpdateCustomTargetingKey",
+          "service": {
+            "short_name": "CustomTargetingKeyService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingKeyService_BatchUpdateCustomTargetingKeys_sync",
+      "title": "Snippet for the batch_update_custom_targeting_keys call in the CustomTargetingKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_update_custom_targeting_keys.",
+      "file": "custom_targeting_key_service/batch_update_custom_targeting_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_custom_targeting_keys",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_update_custom_targeting_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysResponse",
+        "client": {
+          "short_name": "CustomTargetingKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateCustomTargetingKeys",
+          "full_name": "google.ads.admanager.v1.CustomTargetingKeyService.BatchUpdateCustomTargetingKeys",
+          "service": {
+            "short_name": "CustomTargetingKeyService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingKeyService_BatchActivateCustomTargetingKeys_sync",
+      "title": "Snippet for the batch_activate_custom_targeting_keys call in the CustomTargetingKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_activate_custom_targeting_keys.",
+      "file": "custom_targeting_key_service/batch_activate_custom_targeting_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_custom_targeting_keys",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_activate_custom_targeting_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysResponse",
+        "client": {
+          "short_name": "CustomTargetingKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateCustomTargetingKeys",
+          "full_name": "google.ads.admanager.v1.CustomTargetingKeyService.BatchActivateCustomTargetingKeys",
+          "service": {
+            "short_name": "CustomTargetingKeyService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingKeyService_BatchDeactivateCustomTargetingKeys_sync",
+      "title": "Snippet for the batch_deactivate_custom_targeting_keys call in the CustomTargetingKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_deactivate_custom_targeting_keys.",
+      "file": "custom_targeting_key_service/batch_deactivate_custom_targeting_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_custom_targeting_keys",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client#batch_deactivate_custom_targeting_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysResponse",
+        "client": {
+          "short_name": "CustomTargetingKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateCustomTargetingKeys",
+          "full_name": "google.ads.admanager.v1.CustomTargetingKeyService.BatchDeactivateCustomTargetingKeys",
+          "service": {
+            "short_name": "CustomTargetingKeyService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_CustomTargetingValueService_GetCustomTargetingValue_sync",
       "title": "Snippet for the get_custom_targeting_value call in the CustomTargetingValueService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#get_custom_targeting_value.",
@@ -2692,6 +3212,86 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_LineItemService_GetLineItem_sync",
+      "title": "Snippet for the get_line_item call in the LineItemService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LineItemService::Rest::Client#get_line_item.",
+      "file": "line_item_service/get_line_item.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_line_item",
+        "full_name": "::Google::Ads::AdManager::V1::LineItemService::Rest::Client#get_line_item",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetLineItemRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::LineItem",
+        "client": {
+          "short_name": "LineItemService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LineItemService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetLineItem",
+          "full_name": "google.ads.admanager.v1.LineItemService.GetLineItem",
+          "service": {
+            "short_name": "LineItemService",
+            "full_name": "google.ads.admanager.v1.LineItemService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LineItemService_ListLineItems_sync",
+      "title": "Snippet for the list_line_items call in the LineItemService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LineItemService::Rest::Client#list_line_items.",
+      "file": "line_item_service/list_line_items.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_line_items",
+        "full_name": "::Google::Ads::AdManager::V1::LineItemService::Rest::Client#list_line_items",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListLineItemsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListLineItemsResponse",
+        "client": {
+          "short_name": "LineItemService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LineItemService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListLineItems",
+          "full_name": "google.ads.admanager.v1.LineItemService.ListLineItems",
+          "service": {
+            "short_name": "LineItemService",
+            "full_name": "google.ads.admanager.v1.LineItemService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_MobileCarrierService_GetMobileCarrier_sync",
       "title": "Snippet for the get_mobile_carrier call in the MobileCarrierService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::MobileCarrierService::Rest::Client#get_mobile_carrier.",
@@ -3006,7 +3606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 46,
+          "end": 50,
           "type": "FULL"
         }
       ]

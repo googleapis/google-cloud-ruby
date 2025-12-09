@@ -42,8 +42,9 @@ module Google
         #     Order. Format: "networks/\\{network_code}/users/\\{user_id}"
         # @!attribute [rw] advertiser_contacts
         #   @return [::Array<::String>]
-        #     Optional. The resource names of Contacts from the advertiser of this Order.
-        #     Format: "networks/\\{network_code}/contacts/\\{contact_id}"
+        #     Optional. Unordered list. The resource names of Contacts from the
+        #     advertiser of this Order. Format:
+        #     "networks/\\{network_code}/contacts/\\{contact_id}"
         # @!attribute [rw] advertiser
         #   @return [::String]
         #     Required. The resource name of the Company, which is of type

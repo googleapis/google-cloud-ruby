@@ -267,11 +267,30 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_networks(page_size: nil, page_token: nil, skip: nil)
+              #   Pass arguments to `list_networks` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of `Network`s to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 `Network`s will be
+              #     returned. The maximum value is 1000; values greater than 1000 will be
+              #     coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListNetworks` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListNetworks` must match
+              #     the call that provided the page token.
+              #   @param skip [::Integer]
+              #     Optional. Number of individual resources to skip while paginating.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Ads::AdManager::V1::ListNetworksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::Network>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Ads::AdManager::V1::ListNetworksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::Network>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -287,8 +306,12 @@ module Google
               #   # Call the list_networks method.
               #   result = client.list_networks request
               #
-              #   # The returned object is of type Google::Ads::AdManager::V1::ListNetworksResponse.
-              #   p result
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Ads::AdManager::V1::Network.
+              #     p item
+              #   end
               #
               def list_networks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -319,7 +342,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @network_service_stub.list_networks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @network_service_stub, :list_networks, "networks", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

@@ -190,6 +190,10 @@ module Google
               # preceding the calendar week the report is run.
               LAST_WEEK = 7
 
+              # The entire previous calendar week, Sunday to Saturday (inclusive),
+              # preceding the calendar week the report is run.
+              LAST_WEEK_STARTING_SUNDAY = 39
+
               # The entire previous calendar month preceding the calendar month the
               # report is run.
               LAST_MONTH = 8
@@ -213,6 +217,9 @@ module Google
 
               # The 90 days preceding the day the report is run.
               LAST_90_DAYS = 14
+
+              # The 93 days preceding the day the report is run.
+              LAST_93_DAYS = 38
 
               # The 180 days preceding the day the report is run.
               LAST_180_DAYS = 15
@@ -492,6 +499,12 @@ module Google
             # Privacy and messaging.
             PRIVACY_AND_MESSAGING = 6
 
+            # Gross revenue.
+            REVENUE_VERIFICATION = 7
+
+            # Partner finance.
+            PARTNER_FINANCE = 8
+
             # Ad speed.
             AD_SPEED = 13
           end
@@ -537,7 +550,7 @@ module Google
             # Data format: `ENUM`
             ADVERTISER_CREDIT_STATUS = 475
 
-            # Advertiser credit status locallized name
+            # Advertiser credit status localized name
             #
             #
             #
@@ -642,7 +655,7 @@ module Google
             # Data format: `ENUM`
             ADVERTISER_STATUS = 471
 
-            # Advertiser status locallized name
+            # Advertiser status localized name
             #
             #
             #
@@ -666,7 +679,7 @@ module Google
             # Data format: `ENUM`
             ADVERTISER_TYPE = 473
 
-            # Advertiser type locallized name
+            # Advertiser type localized name
             #
             #
             #
@@ -697,7 +710,8 @@ module Google
             # Corresponds to "Ad Exchange product value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `ENUM`
             ADX_PRODUCT = 499
@@ -709,7 +723,8 @@ module Google
             #
             # Corresponds to "Ad Exchange product" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `STRING`
             ADX_PRODUCT_NAME = 500
@@ -761,6 +776,17 @@ module Google
             #
             # Data format: `STRING`
             AD_LOCATION_NAME = 391
+
+            # Multi-size inventory in an ad request.
+            #
+            #
+            #
+            # Corresponds to "Ad request sizes" in the Ad Manager UI.
+            #
+            # Compatible with the following report types:
+            #
+            # Data format: `STRING_LIST`
+            AD_REQUEST_SIZES = 541
 
             # The domain of the ad technology provider associated with the bid.
             #
@@ -1590,6 +1616,28 @@ module Google
             # Data format: `STRING`
             AGE_BRACKET_NAME = 582
 
+            # Property ID in Google Analytics
+            #
+            #
+            #
+            # Corresponds to "Analytics property ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            ANALYTICS_PROPERTY_ID = 733
+
+            # Property name in Google Analytics
+            #
+            #
+            #
+            # Corresponds to "Analytics property" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            ANALYTICS_PROPERTY_NAME = 767
+
             # Enum value for App Tracking Transparency consent status.
             #
             #
@@ -1647,6 +1695,50 @@ module Google
             # Data format: `IDENTIFIER`
             AUCTION_PACKAGE_DEAL_ID = 571
 
+            # Name of billable audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (billable)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            AUDIENCE_SEGMENT_BILLABLE = 594
+
+            # ID of the data provider for the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment data provider ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            AUDIENCE_SEGMENT_DATA_PROVIDER_ID = 613
+
+            # Name of the data provider for the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment data provider" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            AUDIENCE_SEGMENT_DATA_PROVIDER_NAME = 614
+
+            # ID of billable audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment ID (billable)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            AUDIENCE_SEGMENT_ID_BILLABLE = 595
+
             # ID of targeted audience segment, including all first-party and
             #  third-party segments that matched the user on the winning line item.
             #
@@ -1670,6 +1762,172 @@ module Google
             #
             # Data format: `STRING`
             AUDIENCE_SEGMENT_TARGETED = 585
+
+            # Number of AdID identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) AdID size" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE = 605
+
+            # Number of Amazon Fire identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) Amazon Fire size" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE = 606
+
+            # Number of Android TV identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) Android TV size" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE = 607
+
+            # Number of Apple TV identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) Apple TV size" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE = 608
+
+            # Number of IDFA identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) IDFA size" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE = 609
+
+            # Number of mobile web identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) mobile web size" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE = 610
+
+            # Number of PlayStation identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) PlayStation size" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE = 611
+
+            # Number of PPID identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) PPID size" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE = 612
+
+            # Number of Roku identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) Roku size" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE = 615
+
+            # Number of Samsung TV identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) Samsung TV size" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE = 616
+
+            # Number of identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) size" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_SIZE = 618
+
+            # Status of the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) status value" in the Ad
+            # Manager UI (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            AUDIENCE_SEGMENT_TARGETED_STATUS = 628
+
+            # Name of the status of the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) status" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            AUDIENCE_SEGMENT_TARGETED_STATUS_NAME = 617
+
+            # Number of Xbox identifiers in the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment (targeted) Xbox size" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE = 619
 
             # Enum value of Auto refreshed traffic.
             #
@@ -1700,7 +1958,8 @@ module Google
             #
             # Corresponds to "Bidder encrypted ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `STRING`
             BIDDER_ENCRYPTED_ID = 493
@@ -1711,7 +1970,8 @@ module Google
             #
             # Corresponds to "Bidder" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `STRING`
             BIDDER_NAME = 494
@@ -1999,6 +2259,50 @@ module Google
             # Data format: `STRING`
             CLASSIFIED_BRAND_NAME = 244
 
+            # ID of the video content bundle served.
+            #
+            #
+            #
+            # Corresponds to "Content bundle ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            CONTENT_BUNDLE_ID = 460
+
+            # Name of the video content bundle served.
+            #
+            #
+            #
+            # Corresponds to "Content bundle" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            CONTENT_BUNDLE_NAME = 461
+
+            # ID of the video content metadata namespace served.
+            #
+            #
+            #
+            # Corresponds to "CMS metadata key ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            CONTENT_CMS_METADATA_KV_NAMESPACE_ID = 462
+
+            # Name of the video content metadata namespace served.
+            #
+            #
+            #
+            # Corresponds to "CMS metadata key" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            CONTENT_CMS_METADATA_KV_NAMESPACE_NAME = 463
+
             # The display name of the CMS content.
             #
             #
@@ -2205,7 +2509,7 @@ module Google
             # Data format: `STRING`
             CREATIVE_POLICIES_FILTERING_NAME = 712
 
-            # Creative Protections filtering (Publisher Blocks Enforcement).
+            # Creative Protections filtering.
             #
             #
             #
@@ -2265,7 +2569,7 @@ module Google
             # Data format: `ENUM`
             CREATIVE_TECHNOLOGY = 148
 
-            # Creative technology locallized name
+            # Creative technology localized name
             #
             #
             #
@@ -2443,7 +2747,7 @@ module Google
             # Corresponds to "Date" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # `PRIVACY_AND_MESSAGING`, `REVENUE_VERIFICATION`, `AD_SPEED`
             #
             # Data format: `DATE`
             DATE = 3
@@ -2537,7 +2841,7 @@ module Google
             # API fields).
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # `REVENUE_VERIFICATION`, `AD_SPEED`
             #
             # Data format: `ENUM`
             DEMAND_CHANNEL = 9
@@ -2549,7 +2853,7 @@ module Google
             # Corresponds to "Demand channel" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # `REVENUE_VERIFICATION`, `AD_SPEED`
             #
             # Data format: `STRING`
             DEMAND_CHANNEL_NAME = 10
@@ -3259,6 +3563,17 @@ module Google
             # Data format: `STRING`
             KEY_VALUES_NAME = 215
 
+            # The custom criteria key-values specified in ad requests.
+            #
+            #
+            #
+            # Corresponds to "Key-values" in the Ad Manager UI.
+            #
+            # Compatible with the following report types:
+            #
+            # Data format: `STRING_LIST`
+            KEY_VALUES_SET = 713
+
             # The agency of the order associated with the line item.
             #
             #
@@ -3281,7 +3596,7 @@ module Google
             # Data format: `BOOLEAN`
             LINE_ITEM_ARCHIVED = 188
 
-            # Line item comanion delivery option ENUM value.
+            # Line item companion delivery option ENUM value.
             #
             #
             #
@@ -3293,7 +3608,7 @@ module Google
             # Data format: `ENUM`
             LINE_ITEM_COMPANION_DELIVERY_OPTION = 204
 
-            # Localized line item comanion delivery option name.
+            # Localized line item companion delivery option name.
             #
             #
             #
@@ -3695,7 +4010,7 @@ module Google
             # Data format: `MONEY`
             LINE_ITEM_NON_CPD_BOOKED_REVENUE = 98
 
-            # Whether a Line item is eligible for opitimization.
+            # Whether a Line item is eligible for optimization.
             #
             #
             #
@@ -4193,7 +4508,8 @@ module Google
             # Corresponds to "Rendering SDK value" in the Ad Manager UI (when showing
             # API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `ENUM`
             MOBILE_RENDERING_SDK = 646
@@ -4204,7 +4520,8 @@ module Google
             #
             # Corresponds to "Rendering SDK" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `STRING`
             MOBILE_RENDERING_SDK_NAME = 647
@@ -4249,7 +4566,7 @@ module Google
             # Corresponds to "Month and year" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`
+            # `PRIVACY_AND_MESSAGING`, `REVENUE_VERIFICATION`, `PARTNER_FINANCE`
             #
             # Data format: `INTEGER`
             MONTH_YEAR = 6
@@ -4744,6 +5061,54 @@ module Google
             # Data format: `STRING`
             PAGE_TITLE_AND_SCREEN_NAME = 513
 
+            # The ID of a partner management assignment.
+            #
+            #
+            #
+            # Corresponds to "Partner management assignment ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `PARTNER_FINANCE`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_ASSIGNMENT_ID = 657
+
+            # The name of a partner management assignment.
+            #
+            #
+            #
+            # Corresponds to "Partner management assignment" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `PARTNER_FINANCE`
+            #
+            # Data format: `STRING`
+            PARTNER_MANAGEMENT_ASSIGNMENT_NAME = 658
+
+            # The ID of a partner in a partner management assignment.
+            #
+            #
+            #
+            # Corresponds to "Partner management partner ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `PARTNER_FINANCE`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_PARTNER_ID = 655
+
+            # The name of a partner in a partner management assignment.
+            #
+            #
+            #
+            # Corresponds to "Partner management partner" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `PARTNER_FINANCE`
+            #
+            # Data format: `STRING`
+            PARTNER_MANAGEMENT_PARTNER_NAME = 656
+
             # Placement ID
             #
             #
@@ -4958,7 +5323,8 @@ module Google
             # Corresponds to "Programmatic channel value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `ENUM`
             PROGRAMMATIC_CHANNEL = 13
@@ -4970,7 +5336,8 @@ module Google
             #
             # Corresponds to "Programmatic channel" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`, `REACH`,
+            # `REVENUE_VERIFICATION`
             #
             # Data format: `STRING`
             PROGRAMMATIC_CHANNEL_NAME = 14
@@ -5263,7 +5630,7 @@ module Google
             # Data format: `ENUM`
             REQUEST_TYPE = 146
 
-            # Request type locallized name
+            # Request type localized name
             #
             #
             #
@@ -5273,6 +5640,17 @@ module Google
             #
             # Data format: `STRING`
             REQUEST_TYPE_NAME = 147
+
+            # Revenue Verification bidder-provided ID.
+            #
+            #
+            #
+            # Corresponds to "Revenue verification ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REVENUE_VERIFICATION`
+            #
+            # Data format: `IDENTIFIER`
+            REVENUE_VERIFICATION_ID = 645
 
             # Indicates if a request was eligible for server-side unwrapping.
             #
@@ -5494,6 +5872,29 @@ module Google
             #
             # Data format: `IDENTIFIER`
             URL_ID = 507
+
+            # The choice made in a user message.
+            #
+            #
+            #
+            # Corresponds to "User choice value" in the Ad Manager UI (when showing API
+            # fields).
+            #
+            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
+            #
+            # Data format: `ENUM`
+            USER_MESSAGES_CHOICE = 702
+
+            # Localized name of the choice made in a user message.
+            #
+            #
+            #
+            # Corresponds to "User choice" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
+            #
+            # Data format: `STRING`
+            USER_MESSAGES_CHOICE_NAME = 703
 
             # Enum value for the entitlement source.
             #
@@ -5737,6 +6138,73 @@ module Google
             # Data format: `STRING`
             VIDEO_FALLBACK_POSITION = 530
 
+            # The duration of the ad break in seconds for a live stream event.
+            #
+            #
+            #
+            # Corresponds to "Ad break duration (seconds)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_LIVE_STREAM_EVENT_AD_BREAK_DURATION = 547
+
+            # The ID of the ad break in a live stream event.
+            #
+            #
+            #
+            # Corresponds to "Live stream ad break ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID = 548
+
+            # The name of the ad break in a live stream event.
+            #
+            #
+            #
+            # Corresponds to "Live stream ad break" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME = 549
+
+            # The time of the ad break in a live stream event in the format of
+            #  YYYY-MM-DD HH:MM:SS+Timezone.
+            #
+            #
+            #
+            # Corresponds to "Ad break time" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `TIMESTAMP`
+            VIDEO_LIVE_STREAM_EVENT_AD_BREAK_TIME = 550
+
+            # The ID of the live stream event.
+            #
+            #
+            #
+            # Corresponds to "Live stream ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_LIVE_STREAM_EVENT_ID = 551
+
+            # The name of the live stream event.
+            #
+            #
+            #
+            # Corresponds to "Live stream" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            VIDEO_LIVE_STREAM_EVENT_NAME = 552
+
             # The performance of the video ad inventory broken out by source.
             #
             #
@@ -5852,6 +6320,17 @@ module Google
             # Data format: `STRING`
             VIDEO_STITCHER_TYPE_NAME = 753
 
+            # Web property code
+            #
+            #
+            #
+            # Corresponds to "Web property code" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            WEB_PROPERTY_CODE = 730
+
             # Breaks down reporting data by week of the year.
             #
             #
@@ -5945,7 +6424,7 @@ module Google
             # Data format: `ENUM`
             YOUTUBE_AD_TYPE = 399
 
-            # YouTube instream Ad Type locallized name.
+            # YouTube instream Ad Type localized name.
             #
             #
             #
@@ -7790,7 +8269,7 @@ module Google
             # The ratio of matched ad requests served by the Ad Exchange that
             #  resulted in users clicking on an ad. The clickthrough rate (CTR) is
             #  updated nightly. Ad Exchange Matched Request CTR is calculated as:
-            #  (Ad Exchange clicks / Ad Exchange Macthed Ad Requests).
+            #  (Ad Exchange clicks / Ad Exchange Matched Ad Requests).
             #
             #
             #
@@ -8359,6 +8838,32 @@ module Google
             # Data format: `INTEGER`
             AD_SERVER_INACTIVE_BEGIN_TO_RENDER_IMPRESSIONS = 338
 
+            # Total number of ad server VAST errors discounting errors generated from
+            #  video fallback ads.
+            #
+            #
+            #
+            # Corresponds to "Ad Server opportunities from errors" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AD_SERVER_OPPORTUNITIES_FROM_ERRORS = 461
+
+            # Total number of ad server impressions discounting video fallback
+            #  impressions.
+            #
+            #
+            #
+            # Corresponds to "Ad Server opportunities from impressions" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AD_SERVER_OPPORTUNITIES_FROM_IMPRESSIONS = 462
+
             # Ratio of clicks delivered by the Google Ad Manager server in relation to
             #  the total clicks delivered.
             #
@@ -8680,7 +9185,7 @@ module Google
             #
             #
             #
-            # Corresponds to "Header bidding trafficking ad requests with no bids" in
+            # Corresponds to "Ad requests with no header bidding trafficking bids" in
             # the Ad Manager UI.
             #
             # Compatible with the following report types:
@@ -8719,7 +9224,7 @@ module Google
             #
             #
             #
-            # Corresponds to "Header bidding trafficking ad requests with bids" in the
+            # Corresponds to "Ad requests with header bidding trafficking bids" in the
             # Ad Manager UI.
             #
             # Compatible with the following report types:
@@ -8743,7 +9248,8 @@ module Google
             #
             #
             #
-            # Corresponds to "Creative not retrieved" in the Ad Manager UI.
+            # Corresponds to "Line items with no creative retrieved" in the Ad Manager
+            # UI.
             #
             # Compatible with the following report types:
             #
@@ -8779,7 +9285,7 @@ module Google
             #
             #
             #
-            # Corresponds to "Not selected to compete" in the Ad Manager UI.
+            # Corresponds to "Line items not selected to compete" in the Ad Manager UI.
             #
             # Compatible with the following report types:
             #
@@ -8854,8 +9360,8 @@ module Google
             #
             #
             #
-            # Corresponds to "Mediation requests with no partners" in the Ad Manager
-            # UI.
+            # Corresponds to "Ad requests with no targeted mediation partners" in the
+            # Ad Manager UI.
             #
             # Compatible with the following report types:
             #
@@ -9195,7 +9701,8 @@ module Google
             #
             #
             #
-            # Corresponds to "Total ad requests (ATN)" in the Ad Manager UI.
+            # Corresponds to "Total ad requests (Ads traffic navigator)" in the Ad
+            # Manager UI.
             #
             # Compatible with the following report types:
             #
@@ -9247,6 +9754,17 @@ module Google
             # Data format: `INTEGER`
             ATN_YIELD_GROUP_MEDIATION_PASSBACKS = 390
 
+            # Cost of the audience segment.
+            #
+            #
+            #
+            # Corresponds to "Audience segment cost" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            AUDIENCE_SEGMENT_COST = 558
+
             # eCPM averaged across the Google Ad Manager server, AdSense,
             #  and Ad Exchange.
             #
@@ -9266,7 +9784,7 @@ module Google
             #
             # Corresponds to "Total average eCPM w/o CPD" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
             #
             # Data format: `MONEY`
             AVERAGE_ECPM_WITHOUT_CPD = 5
@@ -9378,7 +9896,7 @@ module Google
             #
             # Corresponds to "Total clicks" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
             #
             # Data format: `INTEGER`
             CLICKS = 2
@@ -9491,7 +10009,7 @@ module Google
             #
             # Corresponds to "Total CTR" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
             #
             # Data format: `PERCENT`
             CTR = 3
@@ -9955,7 +10473,7 @@ module Google
             #
             # Corresponds to "Total impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
             #
             # Data format: `INTEGER`
             IMPRESSIONS = 1
@@ -10075,6 +10593,176 @@ module Google
             #
             # Data format: `INTEGER`
             OVERDELIVERED_IMPRESSIONS = 432
+
+            # The gross revenue for partner finance reports.
+            #
+            #
+            #
+            # Corresponds to "Gross revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PARTNER_FINANCE`
+            #
+            # Data format: `MONEY`
+            PARTNER_FINANCE_GROSS_REVENUE = 648
+
+            # Monthly host eCPM for partner finance reports
+            #
+            #
+            #
+            # Corresponds to "Host eCPM" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PARTNER_FINANCE`
+            #
+            # Data format: `MONEY`
+            PARTNER_FINANCE_HOST_ECPM = 649
+
+            # The host impressions for partner finance reports.
+            #
+            #
+            #
+            # Corresponds to "Host impressions" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PARTNER_FINANCE`
+            #
+            # Data format: `INTEGER`
+            PARTNER_FINANCE_HOST_IMPRESSIONS = 650
+
+            # Monthly host revenue for partner finance reports
+            #
+            #
+            #
+            # Corresponds to "Host revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PARTNER_FINANCE`
+            #
+            # Data format: `MONEY`
+            PARTNER_FINANCE_HOST_REVENUE = 651
+
+            # Monthly partner eCPM for partner finance reports
+            #
+            #
+            #
+            # Corresponds to "Partner eCPM" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PARTNER_FINANCE`
+            #
+            # Data format: `MONEY`
+            PARTNER_FINANCE_PARTNER_ECPM = 652
+
+            # Monthly partner revenue for partner finance reports
+            #
+            #
+            #
+            # Corresponds to "Partner revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PARTNER_FINANCE`
+            #
+            # Data format: `MONEY`
+            PARTNER_FINANCE_PARTNER_REVENUE = 653
+
+            # The gross revenue in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management gross revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            PARTNER_MANAGEMENT_GROSS_REVENUE = 533
+
+            # The host clicks in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management host clicks" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_HOST_CLICKS = 534
+
+            # The host CTR in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management host CTR" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            PARTNER_MANAGEMENT_HOST_CTR = 535
+
+            # The host impressions in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management host impressions" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_HOST_IMPRESSIONS = 536
+
+            # The partner clicks in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management partner clicks" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_PARTNER_CLICKS = 537
+
+            # The partner CTR in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management partner CTR" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            PARTNER_MANAGEMENT_PARTNER_CTR = 538
+
+            # The partner impressions in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management partner impressions" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_PARTNER_IMPRESSIONS = 539
+
+            # The total content views in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management total monetizable content views" in
+            # the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_TOTAL_CONTENT_VIEWS = 540
+
+            # The unfilled impressions in the partner management.
+            #
+            #
+            #
+            # Corresponds to "Partner management unfilled impressions" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `PARTNER_FINANCE`
+            #
+            # Data format: `INTEGER`
+            PARTNER_MANAGEMENT_UNFILLED_IMPRESSIONS = 541
 
             # The number of filled pod requests (filled by partner or Google) in
             #  partner sales.
@@ -10266,7 +10954,7 @@ module Google
             #
             # Corresponds to "Total revenue" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
             #
             # Data format: `MONEY`
             REVENUE = 36
@@ -10285,7 +10973,63 @@ module Google
             # Data format: `MONEY`
             REVENUE_PAID_THROUGH_MCM_AUTOPAYMENT = 214
 
-            # Total amount of revenue (excluding CPD) based on the number of units
+            # The total CPD net revenue for Revenue Verification reporting.
+            #
+            #
+            #
+            # Corresponds to "Total CPD revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REVENUE_VERIFICATION`
+            #
+            # Data format: `MONEY`
+            REVENUE_VERIFICATION_CPD_REVENUE = 560
+
+            # The total CPD gross revenue for Revenue Verification reporting.
+            #
+            #
+            #
+            # Corresponds to "Total CPD revenue (gross)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REVENUE_VERIFICATION`
+            #
+            # Data format: `MONEY`
+            REVENUE_VERIFICATION_GROSS_CPD_REVENUE = 559
+
+            # The total gross revenue (excluding CPD) for Revenue Verification
+            #  reporting.
+            #
+            #
+            #
+            # Corresponds to "Total CPM and CPC revenue (gross)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REVENUE_VERIFICATION`
+            #
+            # Data format: `MONEY`
+            REVENUE_VERIFICATION_GROSS_REVENUE_WITHOUT_CPD = 561
+
+            # The total impressions for Revenue Verification reporting.
+            #
+            #
+            #
+            # Corresponds to "Total impressions" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REVENUE_VERIFICATION`
+            #
+            # Data format: `INTEGER`
+            REVENUE_VERIFICATION_IMPRESSIONS = 564
+
+            # The total net revenue (excluding CPD) for Revenue Verification reporting.
+            #
+            #
+            #
+            # Corresponds to "Total CPM and CPC revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REVENUE_VERIFICATION`
+            #
+            # Data format: `MONEY`
+            REVENUE_VERIFICATION_REVENUE_WITHOUT_CPD = 567
+
+            # Total revenue (excluding CPD) based on the number of units
             #  served by the Google Ad Manager server, AdSense, Ad Exchange, and
             #  third-party Mediation networks.
             #
@@ -11022,17 +11766,6 @@ module Google
             # Data format: `INTEGER`
             USER_MESSAGES_ALLOW_ADS_PAGEVIEWS = 489
 
-            # Number of times a US state regulations message was shown to users.
-            #
-            #
-            #
-            # Corresponds to "US states messages shown" in the Ad Manager UI.
-            #
-            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
-            #
-            # Data format: `INTEGER`
-            USER_MESSAGES_CCPA_MESSAGES_SHOWN = 490
-
             # Number of iOS ATT alerts that were triggered by an IDFA message (IDFA
             #  messages can be IDFA explainers or GDPR messages).
             #
@@ -11196,6 +11929,28 @@ module Google
             #
             # Data format: `PERCENT`
             USER_MESSAGES_UPTC_PERSONALIZATION_OPT_OUT_RATIO = 502
+
+            # Number of times a US state regulations message was shown to users.
+            #
+            #
+            #
+            # Corresponds to "US states messages shown" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
+            #
+            # Data format: `INTEGER`
+            USER_MESSAGES_US_STATES_MESSAGES_SHOWN = 490
+
+            # Number of times users selected the opt-out option in a US states message.
+            #
+            #
+            #
+            # Corresponds to "US states opt-out selections" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
+            #
+            # Data format: `INTEGER`
+            USER_MESSAGES_US_STATES_OPT_OUT_SELECTIONS = 586
 
             # The number of errors of type 100 in reporting.
             #
@@ -12090,6 +12845,120 @@ module Google
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_UNMATCHED_QUERIES = 141
+
+            # The total number of breaks completed or fatal errors for the last ad in
+            #  the pod.
+            #
+            #
+            #
+            # Corresponds to "Break end" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END = 279
+
+            # The total number of breaks starts or errors for the first ad in a pod
+            #  that users made it to.
+            #
+            #
+            #
+            # Corresponds to "Break start" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START = 280
+
+            # The number of video ad opportunities reached by a user (rounded down, or
+            #  capped based on your max ads setting, whichever is less).
+            #
+            #
+            #
+            # Corresponds to "Capped opportunities (adbreak)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK = 281
+
+            # The total number of seconds available to be filled.
+            #
+            #
+            #
+            # Corresponds to "Total duration (adbreak)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK = 283
+
+            # The total number of seconds filled.
+            #
+            #
+            #
+            # Corresponds to "Matched duration (adbreak)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK = 285
+
+            # The total matched opportunities in video true opportunities reporting.
+            #
+            #
+            #
+            # Corresponds to "Matched opportunities (adbreak)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK = 287
+
+            # The number of video ad opportunities reached by a user (rounded down).
+            #
+            #
+            #
+            # Corresponds to "Viewed opportunities (adbreak)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK = 289
+
+            # The number of TrueView ad impressions viewed.
+            #
+            #
+            #
+            # Corresponds to "True views" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_VIEWS = 392
+
+            # Measures the percentage of skips.
+            #
+            #
+            #
+            # Corresponds to "True views skip rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            VIDEO_TRUE_VIEW_SKIP_RATE = 393
+
+            # The view-through rate is the percentage of views divided by number of
+            #  impressions
+            #
+            #
+            #
+            # Corresponds to "True views view-through rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE = 394
 
             # Number of times that the publisher specified a video ad played
             #  automatically.
