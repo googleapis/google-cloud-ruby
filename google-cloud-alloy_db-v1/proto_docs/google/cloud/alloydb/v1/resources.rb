@@ -480,7 +480,7 @@ module Google
         #     system actions like failover or maintenance.
         # @!attribute [rw] initial_user
         #   @return [::Google::Cloud::AlloyDB::V1::UserPassword]
-        #     Input only. Initial user to setup during cluster creation. Required.
+        #     Input only. Initial user to setup during cluster creation.
         #     If used in `RestoreCluster` this is ignored.
         # @!attribute [rw] automated_backup_policy
         #   @return [::Google::Cloud::AlloyDB::V1::AutomatedBackupPolicy]
