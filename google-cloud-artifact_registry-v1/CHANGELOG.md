@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.9.0 (2025-12-10)
+
+#### Features
+
+* add ExportArtifact API ([#32236](https://github.com/googleapis/google-cloud-ruby/issues/32236)) 
+
 ### 1.8.0 (2025-11-18)
 
 #### Features
