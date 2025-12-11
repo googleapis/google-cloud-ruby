@@ -88,6 +88,11 @@
               "methods": [
                 "list_messages"
               ]
+            },
+            "QueryData": {
+              "methods": [
+                "query_data"
+              ]
             }
           }
         }
