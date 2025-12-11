@@ -94,6 +94,7 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
     project = "hello world"
     return_partial_success = true
     service_project_number = 42
+    views = "hello world"
 
     aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -109,27 +110,27 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number, views: views }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
+        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number, views: views do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListSubnetworksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
+        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListSubnetworksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number, views: views) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
+        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number, views: views }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListSubnetworksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
+        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListSubnetworksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number, views: views), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,6 +266,7 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
     project = "hello world"
     region = "hello world"
     subnetwork = "hello world"
+    views = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -280,27 +282,27 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.get({ project: project, region: region, subnetwork: subnetwork }) do |_result, response|
+        client.get({ project: project, region: region, subnetwork: subnetwork, views: views }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, region: region, subnetwork: subnetwork do |_result, response|
+        client.get project: project, region: region, subnetwork: subnetwork, views: views do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetSubnetworkRequest.new(project: project, region: region, subnetwork: subnetwork) do |_result, response|
+        client.get ::Google::Cloud::Compute::V1::GetSubnetworkRequest.new(project: project, region: region, subnetwork: subnetwork, views: views) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, region: region, subnetwork: subnetwork }, call_options) do |_result, response|
+        client.get({ project: project, region: region, subnetwork: subnetwork, views: views }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetSubnetworkRequest.new(project: project, region: region, subnetwork: subnetwork), call_options) do |_result, response|
+        client.get(::Google::Cloud::Compute::V1::GetSubnetworkRequest.new(project: project, region: region, subnetwork: subnetwork, views: views), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -439,6 +441,7 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
     project = "hello world"
     region = "hello world"
     return_partial_success = true
+    views = "hello world"
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -454,27 +457,27 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, views: views }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, views: views do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        client.list ::Google::Cloud::Compute::V1::ListSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, views: views) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, views: views }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        client.list(::Google::Cloud::Compute::V1::ListSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, views: views), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
