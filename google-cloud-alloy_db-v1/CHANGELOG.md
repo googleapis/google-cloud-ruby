@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.6.2 (2025-12-11)
+
+#### Documentation
+
+* Clarify that initial_user is not required in Cluster ([#32253](https://github.com/googleapis/google-cloud-ruby/issues/32253)) 
+
 ### 1.6.1 (2025-10-27)
 
 #### Documentation
