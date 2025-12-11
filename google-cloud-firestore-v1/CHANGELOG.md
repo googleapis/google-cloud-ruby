@@ -1,5 +1,14 @@
 # Release History
 
+### 2.3.0 (2025-12-11)
+
+#### Features
+
+* publish the pipelines API to the stable branch ([#32250](https://github.com/googleapis/google-cloud-ruby/issues/32250)) 
+#### Documentation
+
+* minor api documentation changes 
+
 ### 2.2.1 (2025-10-27)
 
 #### Documentation
