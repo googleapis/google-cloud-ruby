@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.33.0 (2025-12-11)
+
+#### Features
+
+* add streaming function call argument API changes ([#32249](https://github.com/googleapis/google-cloud-ruby/issues/32249)) 
+#### Bug Fixes
+
+* fix issue when using UrlContext tool 
+
 ### 1.32.0 (2025-12-03)
 
 #### Features
