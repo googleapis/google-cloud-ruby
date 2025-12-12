@@ -49,6 +49,8 @@ module Google
             rpc :ListConversations, ::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::ListConversationsResponse
             # Lists all messages for a given conversation.
             rpc :ListMessages, ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::ListMessagesResponse
+            # Queries data from a natural language user query.
+            rpc :QueryData, ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataResponse
           end
 
           Stub = Service.rpc_stub_class
