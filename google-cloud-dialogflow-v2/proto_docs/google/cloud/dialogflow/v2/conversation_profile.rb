@@ -281,6 +281,20 @@ module Google
           #   @return [::Boolean]
           #     Optional. Enable query suggestion only.
           #     Supported features: KNOWLEDGE_ASSIST
+          # @!attribute [rw] enable_response_debug_info
+          #   @return [::Boolean]
+          #     Optional. Enable returning detailed reasons for suggestion results.
+          #
+          #     For example, with this field disabled, Knowledge Search feature returns
+          #     NotFound error when no answer is found for the input query. Enabling this
+          #     field will change the behavior to return an OK response with
+          #     detailed information indicating the lack of results.
+          #
+          #     Supported features: KNOWLEDGE_SEARCH, KNOWLEDGE_ASSIST
+          # @!attribute [rw] rai_settings
+          #   @return [::Google::Cloud::Dialogflow::V2::RaiSettings]
+          #     Optional. Settings for Responsible AI checks.
+          #     Supported features:  KNOWLEDGE_ASSIST
           # @!attribute [rw] suggestion_trigger_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionTriggerSettings]
           #     Settings of suggestion trigger.
@@ -330,6 +344,23 @@ module Google
           #     enable_event_based_suggestion must be set to true to receive the
           #     responses from high latency features in Pub/Sub. High latency feature(s):
           #     KNOWLEDGE_ASSIST
+          # @!attribute [rw] skip_empty_event_based_suggestion
+          #   @return [::Boolean]
+          #     Optional. Enable skipping event based suggestion if the suggestion is
+          #     empty.
+          #
+          #     For example, with this field disabled, Knowledge Assist feature sends
+          #     a Pub/Sub message when there are no suggestions. Enabling this field
+          #     will change the behavior to skip the Pub/Sub message in this situation.
+          # @!attribute [rw] use_unredacted_conversation_data
+          #   @return [::Boolean]
+          #     Optional. If true,
+          #     use unredacted transcript data (Supported features: AI_COACH) and
+          #     use unredacted ingested context (Supported features: All Agent Assist
+          #     features)
+          # @!attribute [rw] enable_async_tool_call
+          #   @return [::Boolean]
+          #     Optional. If true, enable asynchronous execution of tools.
           class SuggestionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -524,7 +555,7 @@ module Google
           # Custom conversation models used in agent assist feature.
           #
           # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY,
-          # CONVERSATION_SUMMARIZATION.
+          # CONVERSATION_SUMMARIZATION
           # @!attribute [rw] model
           #   @return [::String]
           #     Conversation model resource name. Format: `projects/<Project
@@ -534,11 +565,12 @@ module Google
           #     Version of current baseline model. It will be ignored if
           #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationModelConfig#model model}
           #     is set. Valid versions are:
-          #       Article Suggestion baseline model:
-          #         - 0.9
-          #         - 1.0 (default)
-          #       Summarization baseline model:
-          #         - 1.0
+          #
+          #     - Article Suggestion baseline model:
+          #       - 0.9
+          #       - 1.0 (default)
+          #     - Summarization baseline model:
+          #       - 1.0
           class ConversationModelConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

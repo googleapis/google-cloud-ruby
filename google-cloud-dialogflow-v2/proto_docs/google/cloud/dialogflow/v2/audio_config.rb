@@ -99,6 +99,8 @@ module Google
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
+        #     If not set, the language is inferred from the
+        #     {::Google::Cloud::Dialogflow::V2::ConversationProfile#stt_config ConversationProfile.stt_config}.
         # @!attribute [rw] enable_word_info
         #   @return [::Boolean]
         #     If `true`, Dialogflow returns
@@ -222,9 +224,44 @@ module Google
         # @!attribute [rw] voice
         #   @return [::Google::Cloud::Dialogflow::V2::VoiceSelectionParams]
         #     Optional. The desired voice of the synthesized audio.
+        # @!attribute [rw] pronunciations
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::CustomPronunciationParams>]
+        #     Optional. The custom pronunciations for the synthesized audio.
         class SynthesizeSpeechConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Pronunciation customization for a phrase.
+        # @!attribute [rw] phrase
+        #   @return [::String]
+        #     The phrase to which the customization is applied.
+        #     The phrase can be multiple words, such as proper nouns, but shouldn't span
+        #     the length of the sentence.
+        # @!attribute [rw] phonetic_encoding
+        #   @return [::Google::Cloud::Dialogflow::V2::CustomPronunciationParams::PhoneticEncoding]
+        #     The phonetic encoding of the phrase.
+        # @!attribute [rw] pronunciation
+        #   @return [::String]
+        #     The pronunciation of the phrase. This must be in the phonetic encoding
+        #     specified above.
+        class CustomPronunciationParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The phonetic encoding of the phrase.
+          module PhoneticEncoding
+            # Not specified.
+            PHONETIC_ENCODING_UNSPECIFIED = 0
+
+            # IPA, such as apple -> ˈæpəl.
+            # https://en.wikipedia.org/wiki/International_Phonetic_Alphabet
+            PHONETIC_ENCODING_IPA = 1
+
+            # X-SAMPA, such as apple -> "{p@l".
+            # https://en.wikipedia.org/wiki/X-SAMPA
+            PHONETIC_ENCODING_X_SAMPA = 2
+          end
         end
 
         # Instructs the speech synthesizer on how to generate the output audio content.
@@ -315,6 +352,9 @@ module Google
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
+        #     If not specified, the default language configured at
+        #     {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile} is
+        #     used.
         # @!attribute [rw] enable_word_info
         #   @return [::Boolean]
         #     If `true`, Dialogflow returns

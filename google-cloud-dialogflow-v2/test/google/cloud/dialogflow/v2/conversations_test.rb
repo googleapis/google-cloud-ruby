@@ -580,6 +580,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     context_references = {}
     conversation_context = {}
     trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
+    security_settings = "hello world"
 
     generate_stateless_suggestion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_stateless_suggestion, name
@@ -590,6 +591,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       assert_equal({}, request["context_references"].to_h)
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::ConversationContext), request["conversation_context"]
       assert_equal [:TRIGGER_EVENT_UNSPECIFIED], request["trigger_events"]
+      assert_equal "hello world", request["security_settings"]
       refute_nil options
     end
 
@@ -600,31 +602,31 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }) do |response, operation|
+      client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_stateless_suggestion parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events do |response, operation|
+      client.generate_stateless_suggestion parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events) do |response, operation|
+      client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }, grpc_options) do |response, operation|
+      client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events), grpc_options) do |response, operation|
+      client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

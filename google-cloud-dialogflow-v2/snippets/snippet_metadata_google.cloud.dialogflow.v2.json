@@ -4252,6 +4252,166 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v2_generated_GeneratorEvaluations_CreateGeneratorEvaluation_sync",
+      "title": "Snippet for the create_generator_evaluation call in the GeneratorEvaluations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#create_generator_evaluation.",
+      "file": "generator_evaluations/create_generator_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_generator_evaluation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#create_generator_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GeneratorEvaluations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client"
+        },
+        "method": {
+          "short_name": "CreateGeneratorEvaluation",
+          "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations.CreateGeneratorEvaluation",
+          "service": {
+            "short_name": "GeneratorEvaluations",
+            "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_GeneratorEvaluations_GetGeneratorEvaluation_sync",
+      "title": "Snippet for the get_generator_evaluation call in the GeneratorEvaluations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#get_generator_evaluation.",
+      "file": "generator_evaluations/get_generator_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_generator_evaluation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#get_generator_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluation",
+        "client": {
+          "short_name": "GeneratorEvaluations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client"
+        },
+        "method": {
+          "short_name": "GetGeneratorEvaluation",
+          "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations.GetGeneratorEvaluation",
+          "service": {
+            "short_name": "GeneratorEvaluations",
+            "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_GeneratorEvaluations_ListGeneratorEvaluations_sync",
+      "title": "Snippet for the list_generator_evaluations call in the GeneratorEvaluations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#list_generator_evaluations.",
+      "file": "generator_evaluations/list_generator_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_generator_evaluations",
+        "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#list_generator_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsResponse",
+        "client": {
+          "short_name": "GeneratorEvaluations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client"
+        },
+        "method": {
+          "short_name": "ListGeneratorEvaluations",
+          "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations.ListGeneratorEvaluations",
+          "service": {
+            "short_name": "GeneratorEvaluations",
+            "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_GeneratorEvaluations_DeleteGeneratorEvaluation_sync",
+      "title": "Snippet for the delete_generator_evaluation call in the GeneratorEvaluations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#delete_generator_evaluation.",
+      "file": "generator_evaluations/delete_generator_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_generator_evaluation",
+        "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client#delete_generator_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GeneratorEvaluations::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client"
+        },
+        "method": {
+          "short_name": "DeleteGeneratorEvaluation",
+          "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations.DeleteGeneratorEvaluation",
+          "service": {
+            "short_name": "GeneratorEvaluations",
+            "full_name": "google.cloud.dialogflow.v2.GeneratorEvaluations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v2_generated_KnowledgeBases_ListKnowledgeBases_sync",
       "title": "Snippet for the list_knowledge_bases call in the KnowledgeBases service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#list_knowledge_bases.",
@@ -4438,6 +4598,406 @@
           "service": {
             "short_name": "KnowledgeBases",
             "full_name": "google.cloud.dialogflow.v2.KnowledgeBases"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_SipTrunks_CreateSipTrunk_sync",
+      "title": "Snippet for the create_sip_trunk call in the SipTrunks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SipTrunks::Client#create_sip_trunk.",
+      "file": "sip_trunks/create_sip_trunk.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sip_trunk",
+        "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client#create_sip_trunk",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SipTrunk",
+        "client": {
+          "short_name": "SipTrunks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client"
+        },
+        "method": {
+          "short_name": "CreateSipTrunk",
+          "full_name": "google.cloud.dialogflow.v2.SipTrunks.CreateSipTrunk",
+          "service": {
+            "short_name": "SipTrunks",
+            "full_name": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_SipTrunks_DeleteSipTrunk_sync",
+      "title": "Snippet for the delete_sip_trunk call in the SipTrunks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SipTrunks::Client#delete_sip_trunk.",
+      "file": "sip_trunks/delete_sip_trunk.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sip_trunk",
+        "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client#delete_sip_trunk",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SipTrunks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client"
+        },
+        "method": {
+          "short_name": "DeleteSipTrunk",
+          "full_name": "google.cloud.dialogflow.v2.SipTrunks.DeleteSipTrunk",
+          "service": {
+            "short_name": "SipTrunks",
+            "full_name": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_SipTrunks_ListSipTrunks_sync",
+      "title": "Snippet for the list_sip_trunks call in the SipTrunks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SipTrunks::Client#list_sip_trunks.",
+      "file": "sip_trunks/list_sip_trunks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sip_trunks",
+        "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client#list_sip_trunks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListSipTrunksResponse",
+        "client": {
+          "short_name": "SipTrunks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client"
+        },
+        "method": {
+          "short_name": "ListSipTrunks",
+          "full_name": "google.cloud.dialogflow.v2.SipTrunks.ListSipTrunks",
+          "service": {
+            "short_name": "SipTrunks",
+            "full_name": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_SipTrunks_GetSipTrunk_sync",
+      "title": "Snippet for the get_sip_trunk call in the SipTrunks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SipTrunks::Client#get_sip_trunk.",
+      "file": "sip_trunks/get_sip_trunk.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sip_trunk",
+        "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client#get_sip_trunk",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SipTrunk",
+        "client": {
+          "short_name": "SipTrunks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client"
+        },
+        "method": {
+          "short_name": "GetSipTrunk",
+          "full_name": "google.cloud.dialogflow.v2.SipTrunks.GetSipTrunk",
+          "service": {
+            "short_name": "SipTrunks",
+            "full_name": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_SipTrunks_UpdateSipTrunk_sync",
+      "title": "Snippet for the update_sip_trunk call in the SipTrunks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::SipTrunks::Client#update_sip_trunk.",
+      "file": "sip_trunks/update_sip_trunk.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_sip_trunk",
+        "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client#update_sip_trunk",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::SipTrunk",
+        "client": {
+          "short_name": "SipTrunks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client"
+        },
+        "method": {
+          "short_name": "UpdateSipTrunk",
+          "full_name": "google.cloud.dialogflow.v2.SipTrunks.UpdateSipTrunk",
+          "service": {
+            "short_name": "SipTrunks",
+            "full_name": "google.cloud.dialogflow.v2.SipTrunks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_CreateTool_sync",
+      "title": "Snippet for the create_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#create_tool.",
+      "file": "tools/create_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#create_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "CreateTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.CreateTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_GetTool_sync",
+      "title": "Snippet for the get_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#get_tool.",
+      "file": "tools/get_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#get_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "GetTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.GetTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_ListTools_sync",
+      "title": "Snippet for the list_tools call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#list_tools.",
+      "file": "tools/list_tools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tools",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#list_tools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListToolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListToolsResponse",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "ListTools",
+          "full_name": "google.cloud.dialogflow.v2.Tools.ListTools",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_DeleteTool_sync",
+      "title": "Snippet for the delete_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#delete_tool.",
+      "file": "tools/delete_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#delete_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "DeleteTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.DeleteTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_UpdateTool_sync",
+      "title": "Snippet for the update_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#update_tool.",
+      "file": "tools/update_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#update_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::UpdateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "UpdateTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.UpdateTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
           }
         }
       },

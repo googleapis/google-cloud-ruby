@@ -90,6 +90,18 @@ module Google
         #       value: "agent"
         #     }
         #     ```
+        # @!attribute [rw] agent_desktop_source
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::AgentDesktopSource]
+        #     Optional. For tracking the utilization of prebuilt Agent Assist integration
+        #     modules. This field is only inscope for Integration type that include UI
+        #     Modules, Backend Modules, and Agent Desktop connector, it is out of scope
+        #     for CCaaS and Direct Integration.
+        #     For each human agent, prebuilt UI Modules needs to trigger the
+        #     UpdateParticipant API to update this field. Both
+        #     {::Google::Cloud::Dialogflow::V2::CreateParticipantRequest#participant CreateParticipantRequest}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::UpdateParticipantRequest#participant UpdateParticipantRequest}
+        #     will be supported.
         class Participant
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -117,6 +129,29 @@ module Google
             # Participant is an end user that has called or chatted with
             # Dialogflow services.
             END_USER = 3
+          end
+
+          # Enumeration of the Agent Desktop Source when using prebuilt Agent
+          # Assist integration modules.
+          module AgentDesktopSource
+            # Agent Desktop Source is not specified.
+            AGENT_DESKTOP_SOURCE_UNSPECIFIED = 0
+
+            # Agent Desktop Source is Live Person.
+            LIVE_PERSON = 1
+
+            # Agent Desktop Source is Genesys Cloud.
+            GENESYS_CLOUD = 2
+
+            # Agent Desktop Source is Twilio.
+            TWILIO = 3
+
+            # Agent Desktop Source is Salesforce.
+            SALESFORCE = 4
+
+            # UI Modules are in use but the desktop is either not currently released or
+            # setting this field to the applicable desktop.
+            OTHER = 8
           end
         end
 
@@ -1074,18 +1109,46 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the selection of a suggestion.
+        # Represents the action to take for a tool call that requires confirmation.
         # @!attribute [rw] answer_record
         #   @return [::String]
-        #     Required. The ID of a suggestion selected by the human agent.
-        #     The suggestion(s) were generated in a previous call to
-        #     request Dialogflow assist.
-        #     The format is:
-        #     `projects/<Project ID>/locations/<Location ID>/answerRecords/<Answer Record
-        #     ID>` where <Answer Record ID> is an alphanumeric string.
+        #     Required. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/answerRecords/<Answer Record ID>`
+        #     The answer record associated with the tool call.
+        # @!attribute [rw] parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Parameters to be used for the tool call.  If not provided, the
+        #     tool will be called without any parameters.
+        # @!attribute [rw] action
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionInput::Action]
+        #     Optional. The type of action to take with the tool.
+        # @!attribute [rw] send_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Time when the current suggest input is sent. For tool calls, this
+        #     timestamp (along with the answer record) will be included in the
+        #     corresponding tool call result so that it can be identified.
         class SuggestionInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicate what type of action to take with the tool call.
+          module Action
+            # Action not specified.
+            ACTION_UNSPECIFIED = 0
+
+            # Indicates the user chooses to not make the tool call. It
+            # is only applicable to tool calls that are waiting for user
+            # confirmation.
+            CANCEL = 1
+
+            # Makes the tool call with provided parameters. This action is intended
+            # for tool calls that only read but not write data.
+            REVISE = 2
+
+            # Makes the tool call with provided parameters. This action is intended
+            # for tool calls that may write data.
+            CONFIRM = 3
+          end
         end
 
         # Represents the parameters of human assist query.
