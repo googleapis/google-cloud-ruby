@@ -27,6 +27,14 @@ module Google
           # that match the request and this value should be passed to
           # the next {Google::Cloud::Storage::Project#buckets} to continue.
           attr_accessor :token
+          ##
+          # Provides a list of bucket names that are unreachable.
+          #
+          # This is only populated when `return_partial_success` is set to `true`
+          # in the call to {Google::Cloud::Storage::Project#buckets}.
+          #
+          # @return [Array<String>]
+          attr_reader :unreachable
 
           ##
           # @private Create a new Bucket::List with an array of values.
@@ -147,7 +155,7 @@ module Google
           # @private New Bucket::List from a Google API Client
           # Google::Apis::StorageV1::Buckets object.
           def self.from_gapi gapi_list, service, prefix = nil, max = nil,
-                             user_project: nil, soft_deleted: nil
+                             user_project: nil, soft_deleted: nil, return_partial_success: nil
             buckets = new(Array(gapi_list.items).map do |gapi_object|
               Bucket.from_gapi gapi_object, service, user_project: user_project
             end)
@@ -157,6 +165,7 @@ module Google
             buckets.instance_variable_set :@max, max
             buckets.instance_variable_set :@user_project, user_project
             buckets.instance_variable_set :@soft_deleted, soft_deleted
+            buckets.instance_variable_set :@unreachable, Array(gapi_list.unreachable) if return_partial_success
             buckets
           end
 
