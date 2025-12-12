@@ -1,5 +1,14 @@
 # Release History
 
+### 3.1.0 (2025-12-12)
+
+#### Features
+
+* Add skip_lookup to Project#publisher to enable lazy loading ([#32263](https://github.com/googleapis/google-cloud-ruby/issues/32263)) 
+#### Documentation
+
+* Fix overview documentation URL 
+
 ### 3.0.3 (2025-11-04)
 
 #### Documentation
