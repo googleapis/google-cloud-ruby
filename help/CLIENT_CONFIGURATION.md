@@ -2,7 +2,7 @@
 
 The Google Cloud Ruby Client Libraries allow you to configure client behavior via keyword arguments passed to the client constructor (or `configure` blocks).
 
-## 1\. Customizing the API Endpoint
+## 1. Customizing the API Endpoint
 
 You can modify the API endpoint to connect to a specific Google Cloud region or to a private endpoint.
 
@@ -17,15 +17,15 @@ pubsub = Google::Cloud::Pubsub.new(
 )
 ```
 
-## 2\. Authenticating
+## 2. Authenticating
 
 ## See [Authentication](https://docs.cloud.google.com/ruby/docs/reference/help/authentication) for a comprehensive guide.
 
-## 3\. Logging
+## 3. Logging
 
 ## See [Troubleshooting](https://docs.cloud.google.com/ruby/docs/reference/help/troubleshooting) for a comprehensive guide.
 
-## 4\. Configuring a Proxy
+## 4. Configuring a Proxy
 
 The configuration method depends on whether the client uses gRPC (most clients) or REST (e.g., Storage, BigQuery partial).
 
@@ -62,7 +62,7 @@ storage = Google::Cloud::Storage.new(
 )
 ```
 
-## 5\. Configuring Retries and Timeouts
+## 5. Configuring Retries and Timeouts
 
 Ruby uses **Seconds** (Float/Integer) for time values, whereas PHP uses Milliseconds.
 
@@ -90,11 +90,12 @@ retry_policy = {
 }
 
 # Make the call
-client.list_secrets(
-  parent: parent,
+request = { parent: parent }
+options = Gapic::CallOptions.new(
   retry_policy: retry_policy,
-  timeout: 15.0          # Max 15s total (Total Timeout)
+  timeout: 15.0
 )
+client.list_secrets request, options
 ```
 
 ### Available `retry_policy` Keys
@@ -119,7 +120,7 @@ pubsub = Google::Cloud::Pubsub.new(
 )
 ```
 
-## 6\. Other Common Configuration Options
+## 6. Other Common Configuration Options
 
 The following options can be passed to the constructor of generated clients (e.g., `Google::Cloud::Pubsub`, `Google::Cloud::Spanner`, `Google::Cloud::Storage`).
 
