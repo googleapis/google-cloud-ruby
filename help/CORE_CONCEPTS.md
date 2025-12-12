@@ -2,7 +2,7 @@
 
 This documentation covers essential patterns and usage for the Google Cloud Ruby Client Library, focusing on performance (gRPC), data handling (Protobuf, Update Masks), and flow control (Pagination, LROs, Streaming).
 
-## 1\. Pagination
+## 1. Pagination
 
 Most list methods in the Google Cloud Ruby library return a `Gapic::PagedEnumerable`. This allows you to iterate over results without manually managing page tokens.
 
@@ -45,7 +45,7 @@ if response.next_page?
 end
 ```
 
-## 2\. Long Running Operations (LROs)
+## 2. Long Running Operations (LROs)
 
 Some operations return a Long Running Operation (LRO). The Ruby library provides a wrapper (often `Gapic::Operation`) to manage these.
 
@@ -56,13 +56,32 @@ The standard pattern is to call `wait_until_done!`.
 ```ruby
 require "google/cloud/compute/v1"
 
-instances_client = Google::Cloud::Compute::V1::Instances::Client.new
+# Your Google Cloud project ID
+project = "your-project-id"
+# The zone in which to create the instance
+zone = "your-zone" # e.g., "us-central1-a"
+
+instances_client = Google::Cloud::Compute::V1::Instances::Rest::Client.new
 
 # Prepare the request arguments
 instance_resource = {
   name: "new-instance",
-  machine_type: "zones/us-central1-a/machineTypes/n1-standard-1"
-  # ... other fields
+  machine_type: "zones/us-central1-a/machineTypes/n1-standard-1",
+  disks: [
+    {
+      auto_delete: true,
+      boot: true,
+      initialize_params: {
+        source_image: "projects/debian-cloud/global/images/debian-11-bullseye-v20230306"
+      }
+    }
+  ],
+  network_interfaces: [
+    {
+      network: "global/networks/default",
+      access_configs: [{ name: "External NAT", type: "ONE_TO_ONE_NAT" }]
+    }
+  ]
 }
 
 # Call the method
@@ -102,7 +121,7 @@ if checked_op.done?
 end
 ```
 
-## 3\. Update Masks
+## 3. Update Masks
 
 When updating resources (PATCH requests), you use a `Google::Protobuf::FieldMask`. Ruby clients often provide helpers, or you can construct the mask explicitly.
 
@@ -129,7 +148,7 @@ update_mask = { paths: ["labels"] }
 client.update_secret secret: secret, update_mask: update_mask
 ```
 
-## 4\. Protobuf and gRPC
+## 4. Protobuf and gRPC
 
 The Google Cloud Ruby library supports two transports: REST (HTTP/1.1) and gRPC.
 
@@ -169,7 +188,7 @@ publisher = Google::Cloud::Pubsub::V1::Publisher::Client.new do |config|
 end
 ```
 
-## 5\. gRPC Streaming
+## 5. gRPC Streaming
 
 gRPC Streaming allows continuous data flow.
 
@@ -184,9 +203,9 @@ gRPC Streaming allows continuous data flow.
 This behaves like a standard Ruby Enumerable.
 
 ```ruby
-require "google/cloud/bigquery/storage"
+require "google/cloud/bigquery/storage/v1"
 
-read_client = Google::Cloud::Bigquery::Storage.bigquery_read_service
+read_client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
 
 # Prepare request
 read_stream_name = "projects/my-proj/locations/us/sessions/id/streams/id"

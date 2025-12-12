@@ -49,11 +49,11 @@ def update_iam_policy_with_occ(project_id, role, member, max_retries = 5)
 
   # --- START OCC LOOP ---
   begin
-    # 2. READ: Get current policy (includes etag)
+    # READ: Get current policy (includes etag)
     puts "Attempt #{retries + 1}: Reading policy for #{project_name}..."
     policy = client.get_iam_policy resource: project_name
 
-    # 3. MODIFY: Apply changes locally
+    # MODIFY: Apply changes locally
     # Find existing binding for the role, or create a new one
     binding = policy.bindings.find { |b| b.role == role }
 
@@ -71,7 +71,7 @@ def update_iam_policy_with_occ(project_id, role, member, max_retries = 5)
       policy.bindings << new_binding
     end
 
-    # 4. WRITE: Attempt to update
+    # WRITE: Attempt to update
     # The policy object contains the 'etag' from the READ step.
     puts "Attempt #{retries + 1}: Writing modified policy..."
     client.set_iam_policy resource: project_name, policy: policy
@@ -80,7 +80,7 @@ def update_iam_policy_with_occ(project_id, role, member, max_retries = 5)
     return policy
 
   rescue Google::Cloud::AbortedError, Google::Cloud::FailedPreconditionError => e
-    # 5. RETRY LOGIC
+    # RETRY LOGIC
     retries += 1
     if retries < max_retries
       puts "Concurrency conflict (etag mismatch). Retrying... (#{retries}/#{max_retries})"
