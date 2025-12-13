@@ -468,6 +468,581 @@ module Google
               end
 
               ##
+              # API to create an `AdUnit` object.
+              #
+              # @overload create_ad_unit(request, options = nil)
+              #   Pass arguments to `create_ad_unit` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateAdUnitRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateAdUnitRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_ad_unit(parent: nil, ad_unit: nil)
+              #   Pass arguments to `create_ad_unit` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `AdUnit` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param ad_unit [::Google::Ads::AdManager::V1::AdUnit, ::Hash]
+              #     Required. The `AdUnit` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::AdUnit]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::AdUnit]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateAdUnitRequest.new
+              #
+              #   # Call the create_ad_unit method.
+              #   result = client.create_ad_unit request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::AdUnit.
+              #   p result
+              #
+              def create_ad_unit request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateAdUnitRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_ad_unit.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_ad_unit.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_ad_unit.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.create_ad_unit request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to update an `AdUnit` object.
+              #
+              # @overload update_ad_unit(request, options = nil)
+              #   Pass arguments to `update_ad_unit` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateAdUnitRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateAdUnitRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_ad_unit(ad_unit: nil, update_mask: nil)
+              #   Pass arguments to `update_ad_unit` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param ad_unit [::Google::Ads::AdManager::V1::AdUnit, ::Hash]
+              #     Required. The `AdUnit` to update.
+              #
+              #     The `AdUnit`'s name is used to identify the `AdUnit` to update. Format:
+              #     `networks/{network_code}/adUnits/{ad_unit_id}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::AdUnit]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::AdUnit]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateAdUnitRequest.new
+              #
+              #   # Call the update_ad_unit method.
+              #   result = client.update_ad_unit request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::AdUnit.
+              #   p result
+              #
+              def update_ad_unit request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateAdUnitRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_ad_unit.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_ad_unit.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_ad_unit.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.update_ad_unit request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch create `AdUnit` objects.
+              #
+              # @overload batch_create_ad_units(request, options = nil)
+              #   Pass arguments to `batch_create_ad_units` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_ad_units(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_ad_units` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `AdUnits` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateAdUnitRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateAdUnitRequest, ::Hash>]
+              #     Required. The `AdUnit` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateAdUnitsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateAdUnitsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest.new
+              #
+              #   # Call the batch_create_ad_units method.
+              #   result = client.batch_create_ad_units request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateAdUnitsResponse.
+              #   p result
+              #
+              def batch_create_ad_units request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_ad_units.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_ad_units.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_ad_units.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.batch_create_ad_units request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch update `AdUnit` objects.
+              #
+              # @overload batch_update_ad_units(request, options = nil)
+              #   Pass arguments to `batch_update_ad_units` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_ad_units(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_ad_units` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `AdUnits` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateAdUnitRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateAdUnitRequest, ::Hash>]
+              #     Required. The `AdUnit` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateAdUnitsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateAdUnitsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest.new
+              #
+              #   # Call the batch_update_ad_units method.
+              #   result = client.batch_update_ad_units request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateAdUnitsResponse.
+              #   p result
+              #
+              def batch_update_ad_units request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_ad_units.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_ad_units.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_ad_units.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.batch_update_ad_units request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch activate `AdUnit` objects.
+              #
+              # @overload batch_activate_ad_units(request, options = nil)
+              #   Pass arguments to `batch_activate_ad_units` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_ad_units(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_ad_units` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `AdUnit`s to activate.
+              #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateAdUnitsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateAdUnitsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest.new
+              #
+              #   # Call the batch_activate_ad_units method.
+              #   result = client.batch_activate_ad_units request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateAdUnitsResponse.
+              #   p result
+              #
+              def batch_activate_ad_units request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_ad_units.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_ad_units.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_ad_units.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.batch_activate_ad_units request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `AdUnit` objects.
+              #
+              # @overload batch_deactivate_ad_units(request, options = nil)
+              #   Pass arguments to `batch_deactivate_ad_units` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_ad_units(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_ad_units` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `AdUnit`s to deactivate.
+              #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest.new
+              #
+              #   # Call the batch_deactivate_ad_units method.
+              #   result = client.batch_deactivate_ad_units request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateAdUnitsResponse.
+              #   p result
+              #
+              def batch_deactivate_ad_units request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_ad_units.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_ad_units.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_ad_units.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.batch_deactivate_ad_units request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Archives a list of `AdUnit` objects.
+              #
+              # @overload batch_archive_ad_units(request, options = nil)
+              #   Pass arguments to `batch_archive_ad_units` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_archive_ad_units(parent: nil, names: nil)
+              #   Pass arguments to `batch_archive_ad_units` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `AdUnit`s to archive.
+              #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchArchiveAdUnitsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchArchiveAdUnitsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest.new
+              #
+              #   # Call the batch_archive_ad_units method.
+              #   result = client.batch_archive_ad_units request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchArchiveAdUnitsResponse.
+              #   p result
+              #
+              def batch_archive_ad_units request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchArchiveAdUnitsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_archive_ad_units.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_archive_ad_units.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_archive_ad_units.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @ad_unit_service_stub.batch_archive_ad_units request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AdUnitService REST API.
               #
               # This class represents the configuration for AdUnitService REST,
@@ -628,6 +1203,41 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_ad_unit_sizes
+                  ##
+                  # RPC-specific configuration for `create_ad_unit`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_ad_unit
+                  ##
+                  # RPC-specific configuration for `update_ad_unit`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_ad_unit
+                  ##
+                  # RPC-specific configuration for `batch_create_ad_units`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_ad_units
+                  ##
+                  # RPC-specific configuration for `batch_update_ad_units`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_ad_units
+                  ##
+                  # RPC-specific configuration for `batch_activate_ad_units`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_ad_units
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_ad_units`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_ad_units
+                  ##
+                  # RPC-specific configuration for `batch_archive_ad_units`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_archive_ad_units
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -637,6 +1247,20 @@ module Google
                     @list_ad_units = ::Gapic::Config::Method.new list_ad_units_config
                     list_ad_unit_sizes_config = parent_rpcs.list_ad_unit_sizes if parent_rpcs.respond_to? :list_ad_unit_sizes
                     @list_ad_unit_sizes = ::Gapic::Config::Method.new list_ad_unit_sizes_config
+                    create_ad_unit_config = parent_rpcs.create_ad_unit if parent_rpcs.respond_to? :create_ad_unit
+                    @create_ad_unit = ::Gapic::Config::Method.new create_ad_unit_config
+                    update_ad_unit_config = parent_rpcs.update_ad_unit if parent_rpcs.respond_to? :update_ad_unit
+                    @update_ad_unit = ::Gapic::Config::Method.new update_ad_unit_config
+                    batch_create_ad_units_config = parent_rpcs.batch_create_ad_units if parent_rpcs.respond_to? :batch_create_ad_units
+                    @batch_create_ad_units = ::Gapic::Config::Method.new batch_create_ad_units_config
+                    batch_update_ad_units_config = parent_rpcs.batch_update_ad_units if parent_rpcs.respond_to? :batch_update_ad_units
+                    @batch_update_ad_units = ::Gapic::Config::Method.new batch_update_ad_units_config
+                    batch_activate_ad_units_config = parent_rpcs.batch_activate_ad_units if parent_rpcs.respond_to? :batch_activate_ad_units
+                    @batch_activate_ad_units = ::Gapic::Config::Method.new batch_activate_ad_units_config
+                    batch_deactivate_ad_units_config = parent_rpcs.batch_deactivate_ad_units if parent_rpcs.respond_to? :batch_deactivate_ad_units
+                    @batch_deactivate_ad_units = ::Gapic::Config::Method.new batch_deactivate_ad_units_config
+                    batch_archive_ad_units_config = parent_rpcs.batch_archive_ad_units if parent_rpcs.respond_to? :batch_archive_ad_units
+                    @batch_archive_ad_units = ::Gapic::Config::Method.new batch_archive_ad_units_config
 
                     yield self if block_given?
                   end

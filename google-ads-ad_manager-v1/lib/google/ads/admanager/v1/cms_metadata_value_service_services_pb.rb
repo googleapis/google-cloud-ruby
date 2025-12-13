@@ -33,7 +33,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.CmsMetadataValueService'
 
-            # API to retrieve a `CmsMetadataKey` object.
+            # API to retrieve a `CmsMetadataValue` object.
             rpc :GetCmsMetadataValue, ::Google::Ads::AdManager::V1::GetCmsMetadataValueRequest, ::Google::Ads::AdManager::V1::CmsMetadataValue
             # API to retrieve a list of `CmsMetadataValue` objects.
             rpc :ListCmsMetadataValues, ::Google::Ads::AdManager::V1::ListCmsMetadataValuesRequest, ::Google::Ads::AdManager::V1::ListCmsMetadataValuesResponse

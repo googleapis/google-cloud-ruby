@@ -363,6 +363,502 @@ module Google
               end
 
               ##
+              # API to create a `CustomTargetingKey` object.
+              #
+              # @overload create_custom_targeting_key(request, options = nil)
+              #   Pass arguments to `create_custom_targeting_key` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_custom_targeting_key(parent: nil, custom_targeting_key: nil)
+              #   Pass arguments to `create_custom_targeting_key` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `CustomTargetingKey` will be
+              #     created. Format: `networks/{network_code}`
+              #   @param custom_targeting_key [::Google::Ads::AdManager::V1::CustomTargetingKey, ::Hash]
+              #     Required. The `CustomTargetingKey` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::CustomTargetingKey]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::CustomTargetingKey]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest.new
+              #
+              #   # Call the create_custom_targeting_key method.
+              #   result = client.create_custom_targeting_key request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::CustomTargetingKey.
+              #   p result
+              #
+              def create_custom_targeting_key request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_custom_targeting_key.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_custom_targeting_key.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_custom_targeting_key.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_targeting_key_service_stub.create_custom_targeting_key request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch create `CustomTargetingKey` objects.
+              #
+              # @overload batch_create_custom_targeting_keys(request, options = nil)
+              #   Pass arguments to `batch_create_custom_targeting_keys` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_custom_targeting_keys(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_custom_targeting_keys` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `CustomTargetingKeys` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateCustomTargetingKeyRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest, ::Hash>]
+              #     Required. The `CustomTargetingKey` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest.new
+              #
+              #   # Call the batch_create_custom_targeting_keys method.
+              #   result = client.batch_create_custom_targeting_keys request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysResponse.
+              #   p result
+              #
+              def batch_create_custom_targeting_keys request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_custom_targeting_keys.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_custom_targeting_keys.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_custom_targeting_keys.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_targeting_key_service_stub.batch_create_custom_targeting_keys request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to update a `CustomTargetingKey` object.
+              #
+              # @overload update_custom_targeting_key(request, options = nil)
+              #   Pass arguments to `update_custom_targeting_key` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_custom_targeting_key(custom_targeting_key: nil, update_mask: nil)
+              #   Pass arguments to `update_custom_targeting_key` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param custom_targeting_key [::Google::Ads::AdManager::V1::CustomTargetingKey, ::Hash]
+              #     Required. The `CustomTargetingKey` to update.
+              #
+              #     The `CustomTargetingKey`'s `name` is used to identify the
+              #     `CustomTargetingKey` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::CustomTargetingKey]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::CustomTargetingKey]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest.new
+              #
+              #   # Call the update_custom_targeting_key method.
+              #   result = client.update_custom_targeting_key request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::CustomTargetingKey.
+              #   p result
+              #
+              def update_custom_targeting_key request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_custom_targeting_key.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_custom_targeting_key.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_custom_targeting_key.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_targeting_key_service_stub.update_custom_targeting_key request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch update `CustomTargetingKey` objects.
+              #
+              # @overload batch_update_custom_targeting_keys(request, options = nil)
+              #   Pass arguments to `batch_update_custom_targeting_keys` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_custom_targeting_keys(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_custom_targeting_keys` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `CustomTargetingKeys` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateCustomTargetingKeyRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest, ::Hash>]
+              #     Required. The `CustomTargetingKey` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest.new
+              #
+              #   # Call the batch_update_custom_targeting_keys method.
+              #   result = client.batch_update_custom_targeting_keys request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysResponse.
+              #   p result
+              #
+              def batch_update_custom_targeting_keys request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_custom_targeting_keys.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_custom_targeting_keys.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_custom_targeting_keys.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_targeting_key_service_stub.batch_update_custom_targeting_keys request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch activate `CustomTargetingKey` objects.
+              #
+              # @overload batch_activate_custom_targeting_keys(request, options = nil)
+              #   Pass arguments to `batch_activate_custom_targeting_keys` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_custom_targeting_keys(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_custom_targeting_keys` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `CustomTargetingKey`s to activate.
+              #     Format:
+              #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest.new
+              #
+              #   # Call the batch_activate_custom_targeting_keys method.
+              #   result = client.batch_activate_custom_targeting_keys request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysResponse.
+              #   p result
+              #
+              def batch_activate_custom_targeting_keys request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_custom_targeting_keys.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_custom_targeting_keys.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_custom_targeting_keys.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_targeting_key_service_stub.batch_activate_custom_targeting_keys request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `CustomTargetingKey` objects.
+              #
+              # @overload batch_deactivate_custom_targeting_keys(request, options = nil)
+              #   Pass arguments to `batch_deactivate_custom_targeting_keys` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_custom_targeting_keys(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_custom_targeting_keys` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `CustomTargetingKey`s to deactivate.
+              #     Format:
+              #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CustomTargetingKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest.new
+              #
+              #   # Call the batch_deactivate_custom_targeting_keys method.
+              #   result = client.batch_deactivate_custom_targeting_keys request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysResponse.
+              #   p result
+              #
+              def batch_deactivate_custom_targeting_keys request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_custom_targeting_keys.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_custom_targeting_keys.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_custom_targeting_keys.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @custom_targeting_key_service_stub.batch_deactivate_custom_targeting_keys request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the CustomTargetingKeyService REST API.
               #
               # This class represents the configuration for CustomTargetingKeyService REST,
@@ -518,6 +1014,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_custom_targeting_keys
+                  ##
+                  # RPC-specific configuration for `create_custom_targeting_key`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_custom_targeting_key
+                  ##
+                  # RPC-specific configuration for `batch_create_custom_targeting_keys`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_custom_targeting_keys
+                  ##
+                  # RPC-specific configuration for `update_custom_targeting_key`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_custom_targeting_key
+                  ##
+                  # RPC-specific configuration for `batch_update_custom_targeting_keys`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_custom_targeting_keys
+                  ##
+                  # RPC-specific configuration for `batch_activate_custom_targeting_keys`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_custom_targeting_keys
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_custom_targeting_keys`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_custom_targeting_keys
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -525,6 +1051,18 @@ module Google
                     @get_custom_targeting_key = ::Gapic::Config::Method.new get_custom_targeting_key_config
                     list_custom_targeting_keys_config = parent_rpcs.list_custom_targeting_keys if parent_rpcs.respond_to? :list_custom_targeting_keys
                     @list_custom_targeting_keys = ::Gapic::Config::Method.new list_custom_targeting_keys_config
+                    create_custom_targeting_key_config = parent_rpcs.create_custom_targeting_key if parent_rpcs.respond_to? :create_custom_targeting_key
+                    @create_custom_targeting_key = ::Gapic::Config::Method.new create_custom_targeting_key_config
+                    batch_create_custom_targeting_keys_config = parent_rpcs.batch_create_custom_targeting_keys if parent_rpcs.respond_to? :batch_create_custom_targeting_keys
+                    @batch_create_custom_targeting_keys = ::Gapic::Config::Method.new batch_create_custom_targeting_keys_config
+                    update_custom_targeting_key_config = parent_rpcs.update_custom_targeting_key if parent_rpcs.respond_to? :update_custom_targeting_key
+                    @update_custom_targeting_key = ::Gapic::Config::Method.new update_custom_targeting_key_config
+                    batch_update_custom_targeting_keys_config = parent_rpcs.batch_update_custom_targeting_keys if parent_rpcs.respond_to? :batch_update_custom_targeting_keys
+                    @batch_update_custom_targeting_keys = ::Gapic::Config::Method.new batch_update_custom_targeting_keys_config
+                    batch_activate_custom_targeting_keys_config = parent_rpcs.batch_activate_custom_targeting_keys if parent_rpcs.respond_to? :batch_activate_custom_targeting_keys
+                    @batch_activate_custom_targeting_keys = ::Gapic::Config::Method.new batch_activate_custom_targeting_keys_config
+                    batch_deactivate_custom_targeting_keys_config = parent_rpcs.batch_deactivate_custom_targeting_keys if parent_rpcs.respond_to? :batch_deactivate_custom_targeting_keys
+                    @batch_deactivate_custom_targeting_keys = ::Gapic::Config::Method.new batch_deactivate_custom_targeting_keys_config
 
                     yield self if block_given?
                   end

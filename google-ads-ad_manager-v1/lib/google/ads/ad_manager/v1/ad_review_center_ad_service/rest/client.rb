@@ -232,9 +232,10 @@ module Google
               #     Optional. The page token to fetch the next page of AdReviewCenterAds. This
               #     is the value returned from a previous Search request, or empty.
               #   @param status [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
-              #     Required. Only return ads with the given status.
+              #     Optional. Only return ads with the given status.
               #   @param ad_review_center_ad_id [::Array<::String>]
-              #     Optional. If provided, only return ads with the given AdReviewCenterAd IDs.
+              #     Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
+              #     no other filter can be set (other than page size and page token).
               #   @param date_time_range [::Google::Type::Interval, ::Hash]
               #     Optional. If provided, only return ads that served within the given date
               #     range (inclusive). The  date range must be within the last 30 days. If not

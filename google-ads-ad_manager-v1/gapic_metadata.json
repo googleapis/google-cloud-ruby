@@ -82,6 +82,41 @@
               "methods": [
                 "list_ad_unit_sizes"
               ]
+            },
+            "CreateAdUnit": {
+              "methods": [
+                "create_ad_unit"
+              ]
+            },
+            "UpdateAdUnit": {
+              "methods": [
+                "update_ad_unit"
+              ]
+            },
+            "BatchCreateAdUnits": {
+              "methods": [
+                "batch_create_ad_units"
+              ]
+            },
+            "BatchUpdateAdUnits": {
+              "methods": [
+                "batch_update_ad_units"
+              ]
+            },
+            "BatchActivateAdUnits": {
+              "methods": [
+                "batch_activate_ad_units"
+              ]
+            },
+            "BatchDeactivateAdUnits": {
+              "methods": [
+                "batch_deactivate_ad_units"
+              ]
+            },
+            "BatchArchiveAdUnits": {
+              "methods": [
+                "batch_archive_ad_units"
+              ]
             }
           }
         }
@@ -417,6 +452,36 @@
               "methods": [
                 "list_custom_targeting_keys"
               ]
+            },
+            "CreateCustomTargetingKey": {
+              "methods": [
+                "create_custom_targeting_key"
+              ]
+            },
+            "BatchCreateCustomTargetingKeys": {
+              "methods": [
+                "batch_create_custom_targeting_keys"
+              ]
+            },
+            "UpdateCustomTargetingKey": {
+              "methods": [
+                "update_custom_targeting_key"
+              ]
+            },
+            "BatchUpdateCustomTargetingKeys": {
+              "methods": [
+                "batch_update_custom_targeting_keys"
+              ]
+            },
+            "BatchActivateCustomTargetingKeys": {
+              "methods": [
+                "batch_activate_custom_targeting_keys"
+              ]
+            },
+            "BatchDeactivateCustomTargetingKeys": {
+              "methods": [
+                "batch_deactivate_custom_targeting_keys"
+              ]
             }
           }
         }
@@ -550,6 +615,25 @@
             "ListGeoTargets": {
               "methods": [
                 "list_geo_targets"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LineItemService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::LineItemService::Client",
+          "rpcs": {
+            "GetLineItem": {
+              "methods": [
+                "get_line_item"
+              ]
+            },
+            "ListLineItems": {
+              "methods": [
+                "list_line_items"
               ]
             }
           }

@@ -93,6 +93,84 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request object for `CreateAdUnit` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `AdUnit` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] ad_unit
+        #   @return [::Google::Ads::AdManager::V1::AdUnit]
+        #     Required. The `AdUnit` to create.
+        class CreateAdUnitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateAdUnit` method.
+        # @!attribute [rw] ad_unit
+        #   @return [::Google::Ads::AdManager::V1::AdUnit]
+        #     Required. The `AdUnit` to update.
+        #
+        #     The `AdUnit`'s name is used to identify the `AdUnit` to update. Format:
+        #     `networks/{network_code}/adUnits/{ad_unit_id}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        class UpdateAdUnitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AdUnits` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateAdUnitRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateAdUnitRequest>]
+        #     Required. The `AdUnit` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateAdUnits` method.
+        # @!attribute [rw] ad_units
+        #   @return [::Array<::Google::Ads::AdManager::V1::AdUnit>]
+        #     The `AdUnit` objects created.
+        class BatchCreateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `AdUnits` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateAdUnitRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateAdUnitRequest>]
+        #     Required. The `AdUnit` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateAdUnits` method.
+        # @!attribute [rw] ad_units
+        #   @return [::Array<::Google::Ads::AdManager::V1::AdUnit>]
+        #     The `AdUnit` objects updated.
+        class BatchUpdateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request object for ListAdUnitSizes method.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -151,6 +229,63 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListAdUnitSizesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchActivateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `AdUnit`s to activate.
+        #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+        class BatchActivateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateAdUnits` method.
+        class BatchActivateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchDeactivateAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `AdUnit`s to deactivate.
+        #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+        class BatchDeactivateAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateAdUnits` method.
+        class BatchDeactivateAdUnitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchArchiveAdUnits` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `AdUnit`s to archive.
+        #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
+        class BatchArchiveAdUnitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchArchiveAdUnits` method.
+        class BatchArchiveAdUnitsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

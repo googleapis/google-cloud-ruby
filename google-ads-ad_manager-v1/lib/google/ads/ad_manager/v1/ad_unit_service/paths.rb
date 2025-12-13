@@ -42,6 +42,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Label resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/labels/{label}`
+            #
+            # @param network_code [String]
+            # @param label [String]
+            #
+            # @return [::String]
+            def label_path network_code:, label:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/labels/#{label}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -53,6 +70,23 @@ module Google
             # @return [::String]
             def network_path network_code:
               "networks/#{network_code}"
+            end
+
+            ##
+            # Create a fully-qualified Team resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/teams/{team}`
+            #
+            # @param network_code [String]
+            # @param team [String]
+            #
+            # @return [::String]
+            def team_path network_code:, team:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/teams/#{team}"
             end
 
             extend self
