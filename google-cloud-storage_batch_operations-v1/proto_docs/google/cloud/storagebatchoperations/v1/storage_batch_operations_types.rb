@@ -79,6 +79,11 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::StorageBatchOperations::V1::Job::State]
         #     Output only. State of the job.
+        # @!attribute [rw] dry_run
+        #   @return [::Boolean]
+        #     Optional. If true, the job will run in dry run mode, returning the total
+        #     object count and, if the object configuration is a prefix list, the bytes
+        #     found from source. No transformations will be performed.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -140,11 +145,9 @@ module Google
         #     a CSV file in a Google Cloud Storage bucket. Each row in the file must
         #     include the object details i.e. BucketId and Name. Generation may
         #     optionally be specified. When it is not specified the live object is acted
-        #     upon.
-        #      `manifest_location` should either be
-        #     1) An absolute path to the object in the format of
-        #     `gs://bucket_name/path/file_name.csv`.
-        #     2) An absolute path with a single wildcard character in the file name, for
+        #     upon. `manifest_location` should either be 1) An absolute path to the
+        #     object in the format of `gs://bucket_name/path/file_name.csv`. 2) An
+        #     absolute path with a single wildcard character in the file name, for
         #     example `gs://bucket_name/path/file_name*.csv`.
         #     If manifest location is specified with a wildcard, objects in all manifest
         #     files matching the pattern will be acted upon.
@@ -227,6 +230,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Describes options for object retention update.
+        # @!attribute [rw] retain_until_time
+        #   @return [::String]
+        #     Required. The time when the object will be retained until. UNSET will clear
+        #     the retention. Must be specified in RFC 3339 format e.g.
+        #     YYYY-MM-DD'T'HH:MM:SS.SS'Z' or YYYY-MM-DD'T'HH:MM:SS'Z'.
+        # @!attribute [rw] retention_mode
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::ObjectRetention::RetentionMode]
+        #     Required. The retention mode of the object.
+        class ObjectRetention
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes the retention mode.
+          module RetentionMode
+            # If set and retain_until_time is empty, clears the retention.
+            RETENTION_MODE_UNSPECIFIED = 0
+
+            # Sets the retention mode to locked.
+            LOCKED = 1
+
+            # Sets the retention mode to unlocked.
+            UNLOCKED = 2
+          end
+        end
+
         # Describes options for object metadata update.
         # @!attribute [rw] content_disposition
         #   @return [::String]
@@ -250,16 +279,13 @@ module Google
         # @!attribute [rw] content_type
         #   @return [::String]
         #     Optional. Updates objects Content-Type fixed metadata. Unset values will be
-        #     ignored.
-        #      Set empty values to clear the metadata. Refer to documentation in
-        #      https://cloud.google.com/storage/docs/metadata#content-type
+        #     ignored. Set empty values to clear the metadata. Refer to documentation in
+        #     https://cloud.google.com/storage/docs/metadata#content-type
         # @!attribute [rw] cache_control
         #   @return [::String]
         #     Optional. Updates objects Cache-Control fixed metadata. Unset values will
-        #     be
-        #      ignored. Set empty values to clear the metadata.
-        #      Additionally, the value for Custom-Time cannot decrease. Refer to
-        #      documentation in
+        #     be ignored. Set empty values to clear the metadata. Additionally, the value
+        #     for Custom-Time cannot decrease. Refer to documentation in
         #     https://cloud.google.com/storage/docs/metadata#caching_data.
         # @!attribute [rw] custom_time
         #   @return [::String]
@@ -273,6 +299,13 @@ module Google
         #     metadata values will have its value cleared. Existing custom metadata not
         #     specified with this flag is not changed. Refer to documentation in
         #     https://cloud.google.com/storage/docs/metadata#custom-metadata
+        # @!attribute [rw] object_retention
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::ObjectRetention]
+        #     Optional. Updates objects retention lock configuration. Unset values will
+        #     be ignored. Set empty values to clear the retention for the object with
+        #     existing `Unlocked` retention mode. Object with existing `Locked` retention
+        #     mode cannot be cleared or reduce retain_until_time. Refer to documentation
+        #     in https://cloud.google.com/storage/docs/object-lock
         class PutMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -326,6 +359,10 @@ module Google
         # @!attribute [r] failed_object_count
         #   @return [::Integer]
         #     Output only. Number of objects failed.
+        # @!attribute [r] total_bytes_found
+        #   @return [::Integer]
+        #     Output only. Number of bytes found from source. This field is only
+        #     populated for jobs with a prefix list object configuration.
         class Counters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
