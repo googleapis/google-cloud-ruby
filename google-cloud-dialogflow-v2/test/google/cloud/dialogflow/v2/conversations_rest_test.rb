@@ -538,6 +538,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ClientTest < Minites
     context_references = {}
     conversation_context = {}
     trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
+    security_settings = "hello world"
 
     generate_stateless_suggestion_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -553,27 +554,27 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }) do |_result, response|
+        client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_stateless_suggestion parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events do |_result, response|
+        client.generate_stateless_suggestion parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events) do |_result, response|
+        client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }, call_options) do |_result, response|
+        client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events), call_options) do |_result, response|
+        client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events, security_settings: security_settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
