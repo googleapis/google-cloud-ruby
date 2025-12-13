@@ -212,7 +212,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload submit_build(parent: nil, storage_source: nil, image_uri: nil, buildpack_build: nil, docker_build: nil, service_account: nil, worker_pool: nil, tags: nil)
+            # @overload submit_build(parent: nil, storage_source: nil, image_uri: nil, buildpack_build: nil, docker_build: nil, service_account: nil, worker_pool: nil, tags: nil, machine_type: nil, release_track: nil, client: nil)
             #   Pass arguments to `submit_build` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -246,6 +246,14 @@ module Google
             #     worker pool.
             #   @param tags [::Array<::String>]
             #     Optional. Additional tags to annotate the build.
+            #   @param machine_type [::String]
+            #     Optional. The machine type from default pool to use for the build. If left
+            #     blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
+            #     is supported. If worker_pool is set, this field will be ignored.
+            #   @param release_track [::Google::Api::LaunchStage]
+            #     Optional. The release track of the client that initiated the build request.
+            #   @param client [::String]
+            #     Optional. The client that initiated the build request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Run::V2::SubmitBuildResponse]
