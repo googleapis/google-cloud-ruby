@@ -18,6 +18,7 @@
 
 require "google/cloud/compute/v1/accelerator_types"
 require "google/cloud/compute/v1/addresses"
+require "google/cloud/compute/v1/advice"
 require "google/cloud/compute/v1/autoscalers"
 require "google/cloud/compute/v1/backend_buckets"
 require "google/cloud/compute/v1/backend_services"

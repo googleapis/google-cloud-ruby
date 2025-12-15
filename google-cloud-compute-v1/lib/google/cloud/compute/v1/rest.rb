@@ -18,6 +18,7 @@
 
 require "google/cloud/compute/v1/accelerator_types/rest"
 require "google/cloud/compute/v1/addresses/rest"
+require "google/cloud/compute/v1/advice/rest"
 require "google/cloud/compute/v1/autoscalers/rest"
 require "google/cloud/compute/v1/backend_buckets/rest"
 require "google/cloud/compute/v1/backend_services/rest"

@@ -176,13 +176,18 @@ module Google
             # The accelerator topology is available.
             AVAILABLE = 442_079_913
 
-            # The accelerator topology is running.
+            # The accelerator topology is degraded. The underlying capacity is not in a
+            # healthy state and is not available.
+            DEGRADED = 396_890_926
+
+            # The accelerator topology is running. If there are both running and
+            # degraded hosts within a topology, DEGRADED state will be returned.
             RUNNING = 121_282_975
 
             # The state of the topology is unspecified.
             TOPOLOGY_STATE_UNSPECIFIED = 188_327_545
 
-            # The accelerator topology is unhealthy.
+            # This value has been deprecated and is no longer used.
             UNHEALTHY = 462_118_084
           end
         end
@@ -207,7 +212,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The type of the resource. Alwayscompute#acceleratorType for accelerator types.
+        #     Output only. [Output Only] The type of the resource. Alwayscompute#acceleratorType for accelerator types.
         # @!attribute [rw] maximum_cards_per_instance
         #   @return [::Integer]
         #     [Output Only] Maximum number of accelerator cards allowed per instance.
@@ -216,7 +221,7 @@ module Google
         #     [Output Only] Name of the resource.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined, fully qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined, fully qualified URL for this resource.
         # @!attribute [rw] zone
         #   @return [::String]
         #     [Output Only] The name of the zone where the accelerator type resides,
@@ -236,7 +241,7 @@ module Google
         #     A list of AcceleratorTypesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#acceleratorTypeAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#acceleratorTypeAggregatedList for aggregated lists of
         #     accelerator types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -247,10 +252,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -277,7 +282,7 @@ module Google
         #     A list of AcceleratorType resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#acceleratorTypeList for lists of accelerator types.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#acceleratorTypeList for lists of accelerator types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -287,7 +292,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -335,7 +340,7 @@ module Google
         #     external IPv6 range.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#accessConfig for access configs.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#accessConfig for access configs.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this access configuration. In accessConfigs
@@ -1190,7 +1195,7 @@ module Google
         #     Check the AddressType enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -1198,8 +1203,25 @@ module Google
         #     create the resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
+        # @!attribute [rw] ip_collection
+        #   @return [::String]
+        #     Reference to the source of external IPv4 addresses,
+        #     like a PublicDelegatedPrefix (PDP) for BYOIP.
+        #     The PDP must support enhanced IPv4 allocations.
+        #
+        #     Use one of the following formats to specify a PDP when reserving an
+        #     external IPv4 address using BYOIP.
+        #
+        #        -
+        #        Full resource URL, as inhttps://www.googleapis.com/compute/v1/projects/projectId/regions/region/publicDelegatedPrefixes/pdp-name
+        #        -
+        #        Partial URL, as in
+        #
+        #
+        #               - projects/projectId/regions/region/publicDelegatedPrefixes/pdp-name
+        #               - regions/region/publicDelegatedPrefixes/pdp-name
         # @!attribute [rw] ip_version
         #   @return [::String]
         #     The IP version that will be used by this address. Valid options areIPV4 or IPV6.
@@ -1212,7 +1234,7 @@ module Google
         #     Check the Ipv6EndpointType enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#address for
+        #     Output only. [Output Only] Type of the resource. Always compute#address for
         #     addresses.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -1284,7 +1306,7 @@ module Google
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The URL of the region where a regional address resides.
+        #     Output only. [Output Only] The URL of the region where a regional address resides.
         #     For regional addresses, you must specify the region as a path parameter in
         #     the HTTP request URL. *This field is not applicable to global
         #     addresses.*
@@ -1293,7 +1315,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the address, which can be one ofRESERVING, RESERVED, or IN_USE.
+        #     Output only. [Output Only] The status of the address, which can be one ofRESERVING, RESERVED, or IN_USE.
         #     An address that is RESERVING is currently in the process of
         #     being reserved. A RESERVED address is currently reserved and
         #     available to use. An IN_USE address is currently being used
@@ -1449,7 +1471,7 @@ module Google
             VPC_PEERING = 400_800_170
           end
 
-          # [Output Only] The status of the address, which can be one ofRESERVING, RESERVED, or IN_USE.
+          # Output only. [Output Only] The status of the address, which can be one ofRESERVING, RESERVED, or IN_USE.
           # An address that is RESERVING is currently in the process of
           # being reserved. A RESERVED address is currently reserved and
           # available to use. An IN_USE address is currently being used
@@ -1477,7 +1499,7 @@ module Google
         #     A list of AddressesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#addressAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#addressAggregatedList for aggregated lists of
         #     addresses.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -1488,10 +1510,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -1518,7 +1540,7 @@ module Google
         #     A list of Address resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#addressList for
+        #     Output only. [Output Only] Type of resource. Always compute#addressList for
         #     lists of addresses.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -1529,7 +1551,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -6942,7 +6964,7 @@ module Google
         # one can create instances of varying shapes against this reservation.
         # @!attribute [rw] in_use_resources
         #   @return [::Array<::Google::Cloud::Compute::V1::AllocationAggregateReservationReservedResourceInfo>]
-        #     [Output only] List of resources currently in use.
+        #     Output only. [Output only] List of resources currently in use.
         # @!attribute [rw] reserved_resources
         #   @return [::Array<::Google::Cloud::Compute::V1::AllocationAggregateReservationReservedResourceInfo>]
         #     List of reserved resources (CPUs, memory, accelerators).
@@ -7170,13 +7192,13 @@ module Google
         #  configuration.
         # @!attribute [rw] assured_count
         #   @return [::Integer]
-        #     [Output Only] Indicates how many instances are actually usable currently.
+        #     Output only. [Output Only] Indicates how many instances are actually usable currently.
         # @!attribute [rw] count
         #   @return [::Integer]
         #     Specifies the number of resources that are allocated.
         # @!attribute [rw] in_use_count
         #   @return [::Integer]
-        #     [Output Only] Indicates how many instances are in use.
+        #     Output only. [Output Only] Indicates how many instances are in use.
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationReservedInstanceProperties]
         #     The instance properties for the reservation.
@@ -7454,7 +7476,7 @@ module Google
         # An instance-attached disk resource.
         # @!attribute [rw] architecture
         #   @return [::String]
-        #     [Output Only] The architecture of the attached disk. Valid values are ARM64
+        #     Output only. [Output Only] The architecture of the attached disk. Valid values are ARM64
         #     or X86_64.
         #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] auto_delete
@@ -7518,7 +7540,7 @@ module Google
         #     options.
         # @!attribute [rw] index
         #   @return [::Integer]
-        #     [Output Only] A zero-based index to this disk, where 0 is reserved for the
+        #     Output only. [Output Only] A zero-based index to this disk, where 0 is reserved for the
         #     boot disk. If you have many disks attached to an instance, each
         #     disk would have a unique index number.
         # @!attribute [rw] initialize_params
@@ -7540,10 +7562,10 @@ module Google
         #     Check the Interface enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#attachedDisk for attached disks.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#attachedDisk for attached disks.
         # @!attribute [rw] licenses
         #   @return [::Array<::String>]
-        #     [Output Only] Any valid publicly visible licenses.
+        #     Output only. [Output Only] Any valid publicly visible licenses.
         # @!attribute [rw] mode
         #   @return [::String]
         #     The mode in which to attach this disk, either READ_WRITE orREAD_ONLY. If not specified, the default is to attach the disk
@@ -7551,7 +7573,7 @@ module Google
         #     Check the Mode enum for the list of possible values.
         # @!attribute [rw] saved_state
         #   @return [::String]
-        #     For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this
+        #     Output only. For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this
         #     field is set to PRESERVED if the LocalSSD data has been saved
         #     to a persistent location by customer request.  (see the
         #     discard_local_ssd option on Stop/Suspend).
@@ -7559,7 +7581,7 @@ module Google
         #     Check the SavedState enum for the list of possible values.
         # @!attribute [rw] shielded_instance_initial_state
         #   @return [::Google::Cloud::Compute::V1::InitialStateConfig]
-        #     [Output Only] shielded vm initial state stored on disk
+        #     Output only. [Output Only] shielded vm initial state stored on disk
         # @!attribute [rw] source
         #   @return [::String]
         #     Specifies a valid partial or full URL to an existing Persistent Disk
@@ -7579,7 +7601,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The architecture of the attached disk. Valid values are ARM64
+          # Output only. [Output Only] The architecture of the attached disk. Valid values are ARM64
           # or X86_64.
           module Architecture
             # A value indicating that the enum field is not set.
@@ -7625,7 +7647,7 @@ module Google
             READ_WRITE = 173_607_894
           end
 
-          # For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this
+          # Output only. For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this
           # field is set to PRESERVED if the LocalSSD data has been saved
           # to a persistent location by customer request.  (see the
           # discard_local_ssd option on Stop/Suspend).
@@ -7741,9 +7763,11 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the disk. Tag keys and values
         #     have the same definition as resource
-        #     manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and
-        #     values are in the format `tagValues/456`. The field is ignored (both PUT
-        #     & PATCH) when empty.
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT & PATCH) when
+        #     empty.
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies applied to this disk for automatic snapshot creations.
@@ -8019,7 +8043,7 @@ module Google
         #     If none of these are specified, the default will be to autoscale based oncpuUtilization to 0.6 or 60%.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -8027,11 +8051,11 @@ module Google
         #     create the resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#autoscaler
+        #     Output only. [Output Only] Type of the resource. Always compute#autoscaler
         #     for autoscalers.
         # @!attribute [rw] name
         #   @return [::String]
@@ -8044,19 +8068,19 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] recommended_size
         #   @return [::Integer]
-        #     [Output Only] Target recommended MIG size (number of instances) computed by
+        #     Output only. [Output Only] Target recommended MIG size (number of instances) computed by
         #     autoscaler. Autoscaler calculates the recommended MIG size even when the
         #     autoscaling policy mode is different from ON. This field is empty when
         #     autoscaler is not connected to an existing managed instance group or
         #     autoscaler did not generate its prediction.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of theregion
+        #     Output only. [Output Only] URL of theregion
         #     where the instance group resides (for autoscalers living in regional
         #     scope).
         # @!attribute [rw] scaling_schedule_status
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::ScalingScheduleStatus}]
-        #     [Output Only] Status information of existing scaling schedules.
+        #     Output only. [Output Only] Status information of existing scaling schedules.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -8091,7 +8115,7 @@ module Google
         #     field is required when creating an autoscaler.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of thezone
+        #     Output only. [Output Only] URL of thezone
         #     where the instance group resides (for autoscalers living in zonal scope).
         class Autoscaler
           include ::Google::Protobuf::MessageExts
@@ -8148,7 +8172,7 @@ module Google
         #     A list of AutoscalersScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#autoscalerAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#autoscalerAggregatedList for aggregated lists of
         #     autoscalers.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -8159,10 +8183,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -8190,7 +8214,7 @@ module Google
         #     A list of Autoscaler resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#autoscalerList
+        #     Output only. [Output Only] Type of resource. Always compute#autoscalerList
         #     for lists of autoscalers.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -8201,7 +8225,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -8978,7 +9002,7 @@ module Google
         #     [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of the resource.
+        #     Output only. Type of the resource.
         # @!attribute [rw] load_balancing_scheme
         #   @return [::String]
         #     The value can only be INTERNAL_MANAGED for cross-region internal layer 7
@@ -9006,7 +9030,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] used_by
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendBucketUsedBy>]
-        #     [Output Only] List of resources referencing that backend bucket.
+        #     Output only. [Output Only] List of resources referencing that backend bucket.
         class BackendBucket
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -9266,7 +9290,7 @@ module Google
         #     A list of BackendBucket resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -9276,7 +9300,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -9316,7 +9340,7 @@ module Google
 
         # @!attribute [rw] reference
         #   @return [::String]
-        #     [Output Only] Server-defined URL for UrlMaps referencing that
+        #     Output only. [Output Only] Server-defined URL for UrlMaps referencing that
         #     BackendBucket.
         class BackendBucketUsedBy
           include ::Google::Protobuf::MessageExts
@@ -9420,7 +9444,7 @@ module Google
         #        load_balancing_scheme set to INTERNAL_SELF_MANAGED.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] custom_metrics
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceCustomMetric>]
@@ -9588,7 +9612,7 @@ module Google
         #     Check the IpAddressSelectionPolicy enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#backendService
+        #     Output only. [Output Only] Type of resource. Always compute#backendService
         #     for backend services.
         # @!attribute [rw] load_balancing_scheme
         #   @return [::String]
@@ -9782,7 +9806,7 @@ module Google
         #     Check the Protocol enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional backend service
+        #     Output only. [Output Only] URL of the region where the regional backend service
         #     resides. This field is not applicable to global backend services.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
@@ -9852,7 +9876,7 @@ module Google
         #     when the backend protocol is SSL, HTTPS or HTTP2.
         # @!attribute [rw] used_by
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceUsedBy>]
-        #     [Output Only] List of resources referencing given backend service.
+        #     Output only. [Output Only] List of resources referencing given backend service.
         class BackendService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -10218,7 +10242,7 @@ module Google
         #     A list of BackendServicesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -10228,10 +10252,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -10662,7 +10686,7 @@ module Google
         #     network endpoint group, determined based on configured health checks.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#backendServiceGroupHealth for the health of backend
+        #     Output only. [Output Only] Type of resource. Alwayscompute#backendServiceGroupHealth for the health of backend
         #     services.
         class BackendServiceGroupHealth
           include ::Google::Protobuf::MessageExts
@@ -10925,7 +10949,7 @@ module Google
         #     oauth2ClientSecretSha256 field.
         # @!attribute [rw] oauth2_client_secret_sha256
         #   @return [::String]
-        #     [Output Only] SHA256 hash value for the field oauth2_client_secret above.
+        #     Output only. [Output Only] SHA256 hash value for the field oauth2_client_secret above.
         class BackendServiceIAP
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -10940,7 +10964,7 @@ module Google
         #     A list of BackendService resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#backendServiceList for lists of backend services.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#backendServiceList for lists of backend services.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -10950,7 +10974,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -10968,7 +10992,7 @@ module Google
         #     A list of BackendService resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#usableBackendServiceList for lists of usable backend
+        #     Output only. [Output Only] Type of resource. Alwayscompute#usableBackendServiceList for lists of usable backend
         #     services.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -10979,7 +11003,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -11241,7 +11265,7 @@ module Google
 
         # @!attribute [rw] reference
         #   @return [::String]
-        #     [Output Only] Server-defined URL for resources referencing given
+        #     Output only. [Output Only] Server-defined URL for resources referencing given
         #     BackendService like UrlMaps, TargetTcpProxies, TargetSslProxies
         #     and ForwardingRule.
         class BackendServiceUsedBy
@@ -11507,26 +11531,26 @@ module Google
 
         # @!attribute [rw] as_paths
         #   @return [::Array<::Google::Cloud::Compute::V1::BgpRouteAsPath>]
-        #     [Output only] AS-PATH for the route
+        #     Output only. [Output only] AS-PATH for the route
         # @!attribute [rw] communities
         #   @return [::Array<::String>]
-        #     [Output only] BGP communities in human-readable A:B format.
+        #     Output only. [Output only] BGP communities in human-readable A:B format.
         # @!attribute [rw] destination
         #   @return [::Google::Cloud::Compute::V1::BgpRouteNetworkLayerReachabilityInformation]
-        #     [Output only] Destination IP range for the route, in human-readable CIDR
+        #     Output only. [Output only] Destination IP range for the route, in human-readable CIDR
         #     format
         # @!attribute [rw] med
         #   @return [::Integer]
-        #     [Output only] BGP multi-exit discriminator
+        #     Output only. [Output only] BGP multi-exit discriminator
         # @!attribute [rw] origin
         #   @return [::String]
-        #     [Output only] BGP origin (EGP, IGP or INCOMPLETE)
+        #     Output only. [Output only] BGP origin (EGP, IGP or INCOMPLETE)
         #     Check the Origin enum for the list of possible values.
         class BgpRoute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output only] BGP origin (EGP, IGP or INCOMPLETE)
+          # Output only. [Output only] BGP origin (EGP, IGP or INCOMPLETE)
           module Origin
             # A value indicating that the enum field is not set.
             UNDEFINED_ORIGIN = 0
@@ -11541,22 +11565,22 @@ module Google
 
         # @!attribute [rw] asns
         #   @return [::Array<::Integer>]
-        #     [Output only] ASNs in the path segment. When type is SEQUENCE, these are
+        #     Output only. [Output only] ASNs in the path segment. When type is SEQUENCE, these are
         #     ordered.
         # @!attribute [rw] asns32
         #   @return [::Array<::Integer>]
-        #     [Output only] ASNs in the path segment. This field is for better
+        #     Output only. [Output only] ASNs in the path segment. This field is for better
         #     support of 32 bit ASNs as the other asns field suffers from overflow when
         #     the ASN is larger. When type is SEQUENCE, these are ordered.
         # @!attribute [rw] type
         #   @return [::String]
-        #     [Output only] Type of AS-PATH segment (SEQUENCE or SET)
+        #     Output only. [Output only] Type of AS-PATH segment (SEQUENCE or SET)
         #     Check the Type enum for the list of possible values.
         class BgpRouteAsPath
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output only] Type of AS-PATH segment (SEQUENCE or SET)
+          # Output only. [Output only] Type of AS-PATH segment (SEQUENCE or SET)
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -11854,7 +11878,7 @@ module Google
         #     https://cloud.google.com/compute/docs/instances/custom-hostname-vm#naming_convention
         # @!attribute [rw] name
         #   @return [::String]
-        #     This field is only temporary. It will be removed. Do not use it.
+        #     Output only. This field is only temporary. It will be removed. Do not use it.
         class BulkInsertInstanceResourcePerInstanceProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -12089,6 +12113,77 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request to recommend the best way to consume the specified resources in the
+        # future.
+        # @!attribute [rw] future_resources_specs
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::FutureResourcesSpec}]
+        #     Specification of resources to create in the future.
+        #     The key of the map is an arbitrary string specified by the caller.
+        #     Value of the map is a specification of required resources and their
+        #     constraints. Currently only one value is allowed in this map.
+        class CalendarModeAdviceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::FutureResourcesSpec]
+          class FutureResourcesSpecsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A response containing the recommended way of creating the specified resources
+        # in the future. It contains (will contain) multiple recommendations that can
+        # be analyzed by the customer and the best one can be picked.
+        # @!attribute [rw] recommendations
+        #   @return [::Array<::Google::Cloud::Compute::V1::CalendarModeRecommendation>]
+        #     Recommendations where, how and when to create the requested resources
+        #     in order to maximize their obtainability and minimize cost.
+        class CalendarModeAdviceResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Advice.CalendarMode. See the method description for details.
+        # @!attribute [rw] calendar_mode_advice_request_resource
+        #   @return [::Google::Cloud::Compute::V1::CalendarModeAdviceRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        class CalendarModeAdviceRpcRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A single recommendation to create requested resources. Contains detailed
+        # recommendations for every future resources specification specified in
+        # CalendarModeAdviceRequest.
+        # @!attribute [rw] recommendations_per_spec
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::FutureResourcesRecommendation}]
+        #     Recommendations for every future resource specification passed in
+        #     CalendarModeAdviceRequest. Keys of the map correspond to keys
+        #     specified in the request.
+        class CalendarModeRecommendation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::FutureResourcesRecommendation]
+          class RecommendationsPerSpecEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # A request message for FutureReservations.Cancel. See the method description for details.
         # @!attribute [rw] future_reservation
         #   @return [::String]
@@ -12315,7 +12410,7 @@ module Google
         #     Check the Category enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] custom_end_timestamp
         #   @return [::String]
@@ -12327,17 +12422,17 @@ module Google
         #     when you create the resource.
         # @!attribute [rw] end_timestamp
         #   @return [::String]
-        #     [Output Only] Commitment end time inRFC3339
+        #     Output only. [Output Only] Commitment end time inRFC3339
         #     text format.
         # @!attribute [rw] existing_reservations
         #   @return [::Array<::String>]
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#commitment
+        #     Output only. [Output Only] Type of the resource. Always compute#commitment
         #     for commitments.
         # @!attribute [rw] license_resource
         #   @return [::Google::Cloud::Compute::V1::LicenseResourceCommitment]
@@ -12367,7 +12462,7 @@ module Google
         #     Check the Plan enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the commitment and committed
+        #     Output only. [Output Only] URL of the region where the commitment and committed
         #     resources are located.
         # @!attribute [rw] reservations
         #   @return [::Array<::Google::Cloud::Compute::V1::Reservation>]
@@ -12382,7 +12477,7 @@ module Google
         #     reservations to attach. To attach existing reservations, specify theexistingReservations property instead.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::CommitmentResourceStatus]
-        #     [Output Only] Status information for Commitment resource.
+        #     Output only. [Output Only] Status information for Commitment resource.
         # @!attribute [rw] resources
         #   @return [::Array<::Google::Cloud::Compute::V1::ResourceCommitment>]
         #     The list of all the hardware resources, with their types and amounts, that
@@ -12390,7 +12485,7 @@ module Google
         #     individual resource type.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] split_source_commitment
         #   @return [::String]
         #     The source commitment from which you are transferring resources to create
@@ -12398,17 +12493,17 @@ module Google
         #     Split commitments.
         # @!attribute [rw] start_timestamp
         #   @return [::String]
-        #     [Output Only] Commitment start time inRFC3339
+        #     Output only. [Output Only] Commitment start time inRFC3339
         #     text format.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] Status of the commitment with regards to eventual expiration
+        #     Output only. [Output Only] Status of the commitment with regards to eventual expiration
         #     (each commitment has an end date defined). Status can be one of the
         #     following values: NOT_YET_ACTIVE, ACTIVE, orEXPIRED.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] status_message
         #   @return [::String]
-        #     [Output Only] An optional, human-readable explanation of the status.
+        #     Output only. [Output Only] An optional, human-readable explanation of the status.
         # @!attribute [rw] type
         #   @return [::String]
         #     The type of commitment; specifies the
@@ -12417,12 +12512,11 @@ module Google
         #     resource types.
         #
         #      The type must be one of the following:ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3,ACCELERATOR_OPTIMIZED_A3_MEGA,COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D,
-        #      COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED,MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4,STORAGE_OPTIMIZED_Z3.
-        #     For example, type MEMORY_OPTIMIZED specifies a commitment
-        #     that applies only to eligible resources of memory optimized M1 and M2
-        #     machine series. Type GENERAL_PURPOSE specifies a commitment
-        #     that applies only to eligible resources of general purpose N1 machine
-        #     series.
+        #      COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, GRAPHICS_OPTIMIZED_G4,MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3,MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For
+        #     example, type MEMORY_OPTIMIZED specifies a commitment that
+        #     applies only to eligible resources of memory optimized M1 and M2 machine
+        #     series. Type GENERAL_PURPOSE specifies a commitment that
+        #     applies only to eligible resources of general purpose N1 machine series.
         #     Check the Type enum for the list of possible values.
         class Commitment
           include ::Google::Protobuf::MessageExts
@@ -12464,7 +12558,7 @@ module Google
             TWELVE_MONTH = 173_083_962
           end
 
-          # [Output Only] Status of the commitment with regards to eventual expiration
+          # Output only. [Output Only] Status of the commitment with regards to eventual expiration
           # (each commitment has an end date defined). Status can be one of the
           # following values: NOT_YET_ACTIVE, ACTIVE, orEXPIRED.
           module Status
@@ -12490,12 +12584,11 @@ module Google
           # resource types.
           #
           #  The type must be one of the following:ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3,ACCELERATOR_OPTIMIZED_A3_MEGA,COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D,
-          #  COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED,MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4,STORAGE_OPTIMIZED_Z3.
-          # For example, type MEMORY_OPTIMIZED specifies a commitment
-          # that applies only to eligible resources of memory optimized M1 and M2
-          # machine series. Type GENERAL_PURPOSE specifies a commitment
-          # that applies only to eligible resources of general purpose N1 machine
-          # series.
+          #  COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D,COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE,GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2,GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D,GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D,GRAPHICS_OPTIMIZED, GRAPHICS_OPTIMIZED_G4,MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3,MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For
+          # example, type MEMORY_OPTIMIZED specifies a commitment that
+          # applies only to eligible resources of memory optimized M1 and M2 machine
+          # series. Type GENERAL_PURPOSE specifies a commitment that
+          # applies only to eligible resources of general purpose N1 machine series.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -12544,6 +12637,8 @@ module Google
 
             GRAPHICS_OPTIMIZED = 68_500_563
 
+            GRAPHICS_OPTIMIZED_G4 = 54_029_369
+
             MEMORY_OPTIMIZED = 281_753_417
 
             MEMORY_OPTIMIZED_M3 = 276_301_372
@@ -12575,7 +12670,7 @@ module Google
         #     A list of CommitmentsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#commitmentAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#commitmentAggregatedList for aggregated lists of
         #     commitments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -12586,10 +12681,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -12616,7 +12711,7 @@ module Google
         #     A list of Commitment resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#commitmentList
+        #     Output only. [Output Only] Type of resource. Always compute#commitmentList
         #     for lists of commitments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -12627,7 +12722,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -12639,7 +12734,7 @@ module Google
         # [Output Only] Contains output only fields.
         # @!attribute [rw] custom_term_eligibility_end_timestamp
         #   @return [::String]
-        #     [Output Only] Indicates the end time of customer's eligibility to send
+        #     Output only. [Output Only] Indicates the end time of customer's eligibility to send
         #     custom term requests in RFC3339 text format. Term extension requests that
         #     (not the end time in the request) after this time will be rejected.
         class CommitmentResourceStatus
@@ -12983,18 +13078,18 @@ module Google
         # each other through Interconnect connections.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of the cross-site network.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#crossSiteNetwork for cross-site networks.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#crossSiteNetwork for cross-site networks.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -13006,7 +13101,7 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class CrossSiteNetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -13023,7 +13118,7 @@ module Google
         #     A list of CrossSiteNetwork resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#crossSiteNetwork for cross-site networks.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#crossSiteNetwork for cross-site networks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -13036,7 +13131,7 @@ module Google
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -16311,10 +16406,10 @@ module Google
         #     Disk asynchronously replicated into this disk.
         # @!attribute [rw] async_secondary_disks
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::DiskAsyncReplicationList}]
-        #     [Output Only] A list of disks this disk is asynchronously replicated to.
+        #     Output only. [Output Only] A list of disks this disk is asynchronously replicated to.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -16357,11 +16452,11 @@ module Google
         #     options.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#disk for
+        #     Output only. [Output Only] Type of the resource. Always compute#disk for
         #     disks.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -16380,11 +16475,11 @@ module Google
         #     the setLabels method.
         # @!attribute [rw] last_attach_timestamp
         #   @return [::String]
-        #     [Output Only] Last attach timestamp inRFC3339
+        #     Output only. [Output Only] Last attach timestamp inRFC3339
         #     text format.
         # @!attribute [rw] last_detach_timestamp
         #   @return [::String]
-        #     [Output Only] Last detach timestamp inRFC3339
+        #     Output only. [Output Only] Last detach timestamp inRFC3339
         #     text format.
         # @!attribute [rw] license_codes
         #   @return [::Array<::Integer>]
@@ -16433,7 +16528,7 @@ module Google
         #     greater than or equal to 1.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the disk resides. Only applicable for
+        #     Output only. [Output Only] URL of the region where the disk resides. Only applicable for
         #     regional resources.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
@@ -16446,16 +16541,16 @@ module Google
         #     Resource policies applied to this disk for automatic snapshot creations.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::DiskResourceStatus]
-        #     [Output Only] Status information for the disk resource.
+        #     Output only. [Output Only] Status information for the disk resource.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] size_gb
         #   @return [::Integer]
         #     Size, in GB, of the persistent disk. You can specify
@@ -16467,11 +16562,11 @@ module Google
         #     Acceptable values are greater than 0.
         # @!attribute [rw] source_consistency_group_policy
         #   @return [::String]
-        #     [Output Only] URL of the DiskConsistencyGroupPolicy for a secondary disk
+        #     Output only. [Output Only] URL of the DiskConsistencyGroupPolicy for a secondary disk
         #     that was created using a consistency group.
         # @!attribute [rw] source_consistency_group_policy_id
         #   @return [::String]
-        #     [Output Only] ID of the DiskConsistencyGroupPolicy for a secondary disk
+        #     Output only. [Output Only] ID of the DiskConsistencyGroupPolicy for a secondary disk
         #     that was created using a consistency group.
         # @!attribute [rw] source_disk
         #   @return [::String]
@@ -16499,7 +16594,7 @@ module Google
         #            regions/region/disks/disk
         # @!attribute [rw] source_disk_id
         #   @return [::String]
-        #     [Output Only] The unique ID of the disk used to create this disk. This
+        #     Output only. [Output Only] The unique ID of the disk used to create this disk. This
         #     value identifies the exact disk that was used to create this persistent
         #     disk. For example, if you created the persistent disk from a disk that
         #     was later deleted and recreated under the same name, the source disk ID
@@ -16538,7 +16633,7 @@ module Google
         #     protected by a customer-supplied encryption key.
         # @!attribute [rw] source_image_id
         #   @return [::String]
-        #     [Output Only] The ID value of the image used to create this disk. This
+        #     Output only. [Output Only] The ID value of the image used to create this disk. This
         #     value identifies the exact image that was used to create this persistent
         #     disk. For example, if you created the persistent disk from an image that
         #     was later deleted and recreated under the same name, the source image ID
@@ -16555,7 +16650,7 @@ module Google
         #        - zones/zone/instantSnapshots/instantSnapshot
         # @!attribute [rw] source_instant_snapshot_id
         #   @return [::String]
-        #     [Output Only] The unique ID of the instant snapshot used to create this
+        #     Output only. [Output Only] The unique ID of the instant snapshot used to create this
         #     disk. This value identifies the exact instant snapshot that was used to
         #     create this persistent disk. For example, if you created the persistent
         #     disk from an instant snapshot that was later deleted and recreated under
@@ -16578,7 +16673,7 @@ module Google
         #     is protected by a customer-supplied encryption key.
         # @!attribute [rw] source_snapshot_id
         #   @return [::String]
-        #     [Output Only] The unique ID of the snapshot used to create this disk. This
+        #     Output only. [Output Only] The unique ID of the snapshot used to create this disk. This
         #     value identifies the exact snapshot that was used to create this persistent
         #     disk. For example, if you created the persistent disk from a snapshot that
         #     was later deleted and recreated under the same name, the source snapshot ID
@@ -16594,7 +16689,7 @@ module Google
         #     import instead.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of disk creation.
+        #     Output only. [Output Only] The status of disk creation.
         #
         #
         #          - CREATING: Disk is provisioning.
@@ -16621,11 +16716,11 @@ module Google
         #     types.
         # @!attribute [rw] users
         #   @return [::Array<::String>]
-        #     [Output Only] Links to the users of the disk (attached instances)
+        #     Output only. [Output Only] Links to the users of the disk (attached instances)
         #     in form:projects/project/zones/zone/instances/instance
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the zone where the disk resides.
+        #     Output only. [Output Only] URL of the zone where the disk resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         class Disk
@@ -16695,7 +16790,7 @@ module Google
             X86_64 = 425_300_551
           end
 
-          # [Output Only] The status of disk creation.
+          # Output only. [Output Only] The status of disk creation.
           #
           #
           #      - CREATING: Disk is provisioning.
@@ -16737,7 +16832,7 @@ module Google
         #     A list of DisksScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#diskAggregatedList for aggregated lists of persistent
+        #     Output only. [Output Only] Type of resource. Alwayscompute#diskAggregatedList for aggregated lists of persistent
         #     disks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -16748,10 +16843,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -16771,11 +16866,11 @@ module Google
 
         # @!attribute [rw] consistency_group_policy
         #   @return [::String]
-        #     [Output Only] URL of the DiskConsistencyGroupPolicy if replication was
+        #     Output only. [Output Only] URL of the DiskConsistencyGroupPolicy if replication was
         #     started on the disk as a member of a group.
         # @!attribute [rw] consistency_group_policy_id
         #   @return [::String]
-        #     [Output Only] ID of the DiskConsistencyGroupPolicy if replication was
+        #     Output only. [Output Only] ID of the DiskConsistencyGroupPolicy if replication was
         #     started on the disk as a member of a group.
         # @!attribute [rw] disk
         #   @return [::String]
@@ -16789,7 +16884,7 @@ module Google
         #        - zones/zone/disks/disk
         # @!attribute [rw] disk_id
         #   @return [::String]
-        #     [Output Only] The unique ID of the other disk asynchronously replicated
+        #     Output only. [Output Only] The unique ID of the other disk asynchronously replicated
         #     to or from the current disk. This value identifies the exact disk that
         #     was used to create this replication. For example, if you started
         #     replicating the persistent disk from a disk that was later deleted and
@@ -16913,7 +17008,7 @@ module Google
         #     A list of Disk resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#diskList for
+        #     Output only. [Output Only] Type of resource. Always compute#diskList for
         #     lists of disks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -16924,7 +17019,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -16959,8 +17054,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the disk. Tag keys and values
         #     have the same definition as resource
-        #     manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and
-        #     values are in the format `tagValues/456`. The field is ignored (both PUT &
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
         #     PATCH) when empty.
         class DiskParams
           include ::Google::Protobuf::MessageExts
@@ -17061,7 +17158,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#diskType
+        #     Output only. [Output Only] Type of the resource. Always compute#diskType
         #     for disk types.
         # @!attribute [rw] name
         #   @return [::String]
@@ -17097,7 +17194,7 @@ module Google
         #     A list of DiskTypesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#diskTypeAggregatedList.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#diskTypeAggregatedList.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -17107,10 +17204,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -17137,7 +17234,7 @@ module Google
         #     A list of DiskType resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#diskTypeList
+        #     Output only. [Output Only] Type of resource. Always compute#diskTypeList
         #     for disk types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -17148,7 +17245,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -17393,7 +17490,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Errors that prevented the ResizeRequest to be fulfilled.
+        # Output only. Errors that prevented the ResizeRequest to be fulfilled.
         # @!attribute [rw] errors
         #   @return [::Array<::Google::Cloud::Compute::V1::Errors>]
         #     [Output Only] The array of errors encountered while processing this
@@ -17550,7 +17647,7 @@ module Google
         #     A list of ExchangedPeeringRoute resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#exchangedPeeringRoutesList for exchanged peering
+        #     Output only. [Output Only] Type of resource. Alwayscompute#exchangedPeeringRoutesList for exchanged peering
         #     routes lists.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -17561,7 +17658,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -17669,7 +17766,7 @@ module Google
         # Creating an HA VPN gateway and tunnel pair to a peer VPN.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -17677,7 +17774,7 @@ module Google
         #     create the resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] interfaces
         #   @return [::Array<::Google::Cloud::Compute::V1::ExternalVpnGatewayInterface>]
@@ -17689,7 +17786,7 @@ module Google
         #     interfaces should be provided for an external VPN gateway.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#externalVpnGateway for externalVpnGateways.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#externalVpnGateway for externalVpnGateways.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this ExternalVpnGateway,
@@ -17720,7 +17817,7 @@ module Google
         #     Check the RedundancyType enum for the list of possible values.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class ExternalVpnGateway
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17810,7 +17907,7 @@ module Google
         #     A list of ExternalVpnGateway resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#externalVpnGatewayList for lists of externalVpnGateways.
+        #     Output only. [Output Only] Type of resource. Always compute#externalVpnGatewayList for lists of externalVpnGateways.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -17820,7 +17917,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -17863,7 +17960,7 @@ module Google
         #     protocol and port-range tuple that describes a permitted connection.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] denied
         #   @return [::Array<::Google::Cloud::Compute::V1::Denied>]
@@ -17891,11 +17988,11 @@ module Google
         #     exist. If this is unspecified, the firewall rule will be enabled.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#firewall
+        #     Output only. [Output Only] Type of the resource. Always compute#firewall
         #     for firewall rules.
         # @!attribute [rw] log_config
         #   @return [::Google::Cloud::Compute::V1::FirewallLogConfig]
@@ -18022,7 +18119,7 @@ module Google
         #     A list of Firewall resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#firewallList
+        #     Output only. [Output Only] Type of resource. Always compute#firewallList
         #     for lists of firewalls.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -18033,7 +18130,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -18104,7 +18201,7 @@ module Google
         #     A list of associations.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of firewallPolicy associations. Alwayscompute#FirewallPoliciesListAssociations for lists of
+        #     Output only. [Output Only] Type of firewallPolicy associations. Alwayscompute#FirewallPoliciesListAssociations for lists of
         #     firewallPolicy associations.
         class FirewallPoliciesListAssociationsResponse
           include ::Google::Protobuf::MessageExts
@@ -18129,7 +18226,7 @@ module Google
         #     A list of associations that belong to this firewall policy.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -18165,7 +18262,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Alwayscompute#firewallPolicyfor firewall policies
+        #     Output only. [Output only] Type of the resource. Alwayscompute#firewallPolicyfor firewall policies
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. For Organization Firewall Policies it's a
@@ -18176,7 +18273,7 @@ module Google
         #     A list of packet mirroring rules that belong to this policy.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     [Output Only] The parent of the firewall policy.
+        #     Output only. [Output Only] The parent of the firewall policy.
         #     This field is not applicable to network firewall policies.
         # @!attribute [rw] policy_type
         #   @return [::String]
@@ -18186,13 +18283,13 @@ module Google
         #     Check the PolicyType enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional firewall policy resides.
+        #     Output only. [Output Only] URL of the region where the regional firewall policy resides.
         #     This field is not applicable to global firewall policies.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         # @!attribute [rw] rule_tuple_count
         #   @return [::Integer]
-        #     [Output Only] Total count of all firewall policy rule tuples. A firewall
+        #     Output only. [Output Only] Total count of all firewall policy rule tuples. A firewall
         #     policy can not exceed a set number of tuples.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
@@ -18205,7 +18302,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] short_name
         #   @return [::String]
         #     User-provided name of the Organization firewall policy. The name should be
@@ -18244,13 +18341,13 @@ module Google
         #     of the firewall policy of the association.
         # @!attribute [rw] firewall_policy_id
         #   @return [::String]
-        #     [Output Only] The firewall policy ID of the association.
+        #     Output only. [Output Only] The firewall policy ID of the association.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name for an association.
         # @!attribute [rw] short_name
         #   @return [::String]
-        #     [Output Only] The short name of the firewall policy of the association.
+        #     Output only. [Output Only] The short name of the firewall policy of the association.
         class FirewallPolicyAssociation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18264,7 +18361,7 @@ module Google
         #     A list of FirewallPolicy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#firewallPolicyList for listsof FirewallPolicies
+        #     Output only. [Output Only] Type of resource. Alwayscompute#firewallPolicyList for listsof FirewallPolicies
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -18310,7 +18407,7 @@ module Google
         #     cannot enable logging on "goto_next" rules.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Returnscompute#firewallPolicyRule for firewall rules andcompute#packetMirroringRule for packet mirroring rules.
+        #     Output only. [Output only] Type of the resource. Returnscompute#firewallPolicyRule for firewall rules andcompute#packetMirroringRule for packet mirroring rules.
         # @!attribute [rw] match
         #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRuleMatcher]
         #     A match condition that incoming traffic is evaluated against.
@@ -18327,7 +18424,7 @@ module Google
         #     and can be updated.
         # @!attribute [rw] rule_tuple_count
         #   @return [::Integer]
-        #     [Output Only] Calculation of the complexity of a single firewall policy
+        #     Output only. [Output Only] Calculation of the complexity of a single firewall policy
         #     rule.
         # @!attribute [rw] security_profile_group
         #   @return [::String]
@@ -18521,7 +18618,7 @@ module Google
         #     Name of the secure tag, created with TagManager's TagValue API.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] State of the secure tag, either `EFFECTIVE` or
+        #     Output only. [Output Only] State of the secure tag, either `EFFECTIVE` or
         #     `INEFFECTIVE`. A secure tag is `INEFFECTIVE` when it is deleted
         #     or its network is deleted.
         #     Check the State enum for the list of possible values.
@@ -18529,7 +18626,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] State of the secure tag, either `EFFECTIVE` or
+          # Output only. [Output Only] State of the secure tag, either `EFFECTIVE` or
           # `INEFFECTIVE`. A secure tag is `INEFFECTIVE` when it is deleted
           # or its network is deleted.
           module State
@@ -18545,7 +18642,7 @@ module Google
         # Encapsulates numeric value that can be either absolute or relative.
         # @!attribute [rw] calculated
         #   @return [::Integer]
-        #     [Output Only] Absolute value of VM instances calculated based on the
+        #     Output only. [Output Only] Absolute value of VM instances calculated based on the
         #     specific mode.
         #
         #
@@ -18566,6 +18663,25 @@ module Google
         #     Specifies a percentage of instances between 0 to 100%, inclusive. For
         #     example, specify 80 for 80%.
         class FixedOrPercent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A flexible specification of a time range that has 3 points of
+        # flexibility: (1) a flexible start time, (2) a flexible end time, (3) a
+        # flexible duration.
+        #
+        # It is possible to specify a contradictory time range that cannot be matched
+        # by any Interval. This causes a validation error.
+        # @!attribute [rw] max_duration
+        #   @return [::String]
+        # @!attribute [rw] min_duration
+        #   @return [::String]
+        # @!attribute [rw] start_time_not_earlier_than
+        #   @return [::String]
+        # @!attribute [rw] start_time_not_later_than
+        #   @return [::String]
+        class FlexibleTimeRange
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -18675,7 +18791,7 @@ module Google
         #     must be omitted for all other load balancer types.
         # @!attribute [rw] base_forwarding_rule
         #   @return [::String]
-        #     [Output Only] The URL for the corresponding base forwarding rule. By base
+        #     Output only. [Output Only] The URL for the corresponding base forwarding rule. By base
         #     forwarding rule, we mean the forwarding rule that has the same IP address,
         #     protocol, and port settings with the current forwarding rule, but without
         #     sourceIPRanges specified.
@@ -18683,7 +18799,7 @@ module Google
         #     specified.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -18757,7 +18873,7 @@ module Google
         #     This can only be set to true for load balancers that have theirloadBalancingScheme set to INTERNAL.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#forwardingRule for forwarding rule resources.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#forwardingRule for forwarding rule resources.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this resource, which is
@@ -18908,7 +19024,7 @@ module Google
         #     Check the PscConnectionStatus enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional forwarding rule resides.
+        #     Output only. [Output Only] URL of the region where the regional forwarding rule resides.
         #     This field is not applicable to global forwarding rules.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
@@ -18917,7 +19033,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] service_directory_registrations
         #   @return [::Array<::Google::Cloud::Compute::V1::ForwardingRuleServiceDirectoryRegistration>]
         #     Service Directory resources to register this forwarding rule with.
@@ -19140,7 +19256,7 @@ module Google
         #     A list of ForwardingRulesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#forwardingRuleAggregatedList for lists of forwarding rules.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#forwardingRuleAggregatedList for lists of forwarding rules.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -19150,10 +19266,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -19180,7 +19296,7 @@ module Google
         #     A list of ForwardingRule resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -19190,7 +19306,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -19269,7 +19385,7 @@ module Google
         #     existing commitment.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] The creation timestamp for this future reservation inRFC3339
+        #     Output only. [Output Only] The creation timestamp for this future reservation inRFC3339
         #     text format.
         # @!attribute [rw] deployment_type
         #   @return [::String]
@@ -19284,11 +19400,11 @@ module Google
         #     Indicates if this group of VMs have emergent maintenance enabled.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this future reservation. The server
+        #     Output only. [Output Only] A unique identifier for this future reservation. The server
         #     defines this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#futureReservation for future reservations.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#futureReservation for future reservations.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the resource, provided by the client when initially creating
@@ -19327,10 +19443,10 @@ module Google
         #     Check the SchedulingType enum for the list of possible values.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] share_settings
         #   @return [::Google::Cloud::Compute::V1::ShareSettings]
         #     List of Projects/Folders to share with.
@@ -19345,13 +19461,13 @@ module Google
         #     total count.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatus]
-        #     [Output only] Status of the Future Reservation
+        #     Output only. [Output only] Status of the Future Reservation
         # @!attribute [rw] time_window
         #   @return [::Google::Cloud::Compute::V1::FutureReservationTimeWindow]
         #     Time window for this Future Reservation.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the Zone where this future reservation resides.
+        #     Output only. [Output Only] URL of the Zone where this future reservation resides.
         class FutureReservation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19485,38 +19601,38 @@ module Google
         # [Output only] Represents status related to the future reservation.
         # @!attribute [rw] amendment_status
         #   @return [::String]
-        #     [Output Only] The current status of the requested amendment.
+        #     Output only. [Output Only] The current status of the requested amendment.
         #     Check the AmendmentStatus enum for the list of possible values.
         # @!attribute [rw] auto_created_reservations
         #   @return [::Array<::String>]
-        #     Fully qualified urls of the automatically created reservations at
+        #     Output only. Fully qualified urls of the automatically created reservations at
         #     start_time.
         # @!attribute [rw] existing_matching_usage_info
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusExistingMatchingUsageInfo]
-        #     [Output Only] Represents the existing matching usage for the future
+        #     Output only. [Output Only] Represents the existing matching usage for the future
         #     reservation.
         # @!attribute [rw] fulfilled_count
         #   @return [::Integer]
-        #     This count indicates the fulfilled capacity so far. This is set during
+        #     Output only. This count indicates the fulfilled capacity so far. This is set during
         #     "PROVISIONING" state. This count also includes capacity delivered as part
         #     of existing matching reservations.
         # @!attribute [rw] last_known_good_state
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusLastKnownGoodState]
-        #     [Output Only] This field represents the future reservation before an
+        #     Output only. [Output Only] This field represents the future reservation before an
         #     amendment was requested. If the amendment is declined, the Future
         #     Reservation will be reverted to the last known good state. The last known
         #     good state is not set when updating a future reservation whose
         #     Procurement Status is DRAFTING.
         # @!attribute [rw] lock_time
         #   @return [::String]
-        #     Time when Future Reservation would become LOCKED, after which no
+        #     Output only. Time when Future Reservation would become LOCKED, after which no
         #     modifications to Future Reservation will be allowed. Applicable only
         #     after the Future Reservation is in the APPROVED state. The lock_time is
         #     an RFC3339 string. The procurement_status will transition to PROCURING
         #     state at this time.
         # @!attribute [rw] procurement_status
         #   @return [::String]
-        #     Current state of this Future Reservation
+        #     Output only. Current state of this Future Reservation
         #     Check the ProcurementStatus enum for the list of possible values.
         # @!attribute [rw] specific_sku_properties
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusSpecificSKUProperties]
@@ -19524,7 +19640,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The current status of the requested amendment.
+          # Output only. [Output Only] The current status of the requested amendment.
           module AmendmentStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_AMENDMENT_STATUS = 0
@@ -19544,7 +19660,7 @@ module Google
             AMENDMENT_STATUS_UNSPECIFIED = 412_250_332
           end
 
-          # Current state of this Future Reservation
+          # Output only. Current state of this Future Reservation
           module ProcurementStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_PROCUREMENT_STATUS = 0
@@ -19601,11 +19717,11 @@ module Google
         # reservation.
         # @!attribute [rw] count
         #   @return [::Integer]
-        #     Count to represent min(FR total_count,
+        #     Output only. Count to represent min(FR total_count,
         #     matching_reserved_capacity+matching_unreserved_instances)
         # @!attribute [rw] timestamp
         #   @return [::String]
-        #     Timestamp when the matching usage was calculated
+        #     Output only. Timestamp when the matching usage was calculated
         class FutureReservationStatusExistingMatchingUsageInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19615,32 +19731,32 @@ module Google
         # amendment be declined.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] The description of the FutureReservation before an
+        #     Output only. [Output Only] The description of the FutureReservation before an
         #     amendment was requested.
         # @!attribute [rw] existing_matching_usage_info
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusExistingMatchingUsageInfo]
-        #     [Output Only] Represents the matching usage for the future
+        #     Output only. [Output Only] Represents the matching usage for the future
         #     reservation before an amendment was requested.
         # @!attribute [rw] future_reservation_specs
         #   @return [::Google::Cloud::Compute::V1::FutureReservationStatusLastKnownGoodStateFutureReservationSpecs]
         # @!attribute [rw] lock_time
         #   @return [::String]
-        #     [Output Only] The lock time of the FutureReservation before an
+        #     Output only. [Output Only] The lock time of the FutureReservation before an
         #     amendment was requested.
         # @!attribute [rw] name_prefix
         #   @return [::String]
-        #     [Output Only] The name prefix of the Future Reservation before an
+        #     Output only. [Output Only] The name prefix of the Future Reservation before an
         #     amendment was requested.
         # @!attribute [rw] procurement_status
         #   @return [::String]
-        #     [Output Only] The status of the last known good state for the Future
+        #     Output only. [Output Only] The status of the last known good state for the Future
         #     Reservation.
         #     Check the ProcurementStatus enum for the list of possible values.
         class FutureReservationStatusLastKnownGoodState
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The status of the last known good state for the Future
+          # Output only. [Output Only] The status of the last known good state for the Future
           # Reservation.
           module ProcurementStatus
             # A value indicating that the enum field is not set.
@@ -19697,14 +19813,14 @@ module Google
         # The properties of the last known good state for the Future Reservation.
         # @!attribute [rw] share_settings
         #   @return [::Google::Cloud::Compute::V1::ShareSettings]
-        #     [Output Only] The previous share settings of the Future Reservation.
+        #     Output only. [Output Only] The previous share settings of the Future Reservation.
         # @!attribute [rw] specific_sku_properties
         #   @return [::Google::Cloud::Compute::V1::FutureReservationSpecificSKUProperties]
-        #     [Output Only] The previous instance related properties of the
+        #     Output only. [Output Only] The previous instance related properties of the
         #     Future Reservation.
         # @!attribute [rw] time_window
         #   @return [::Google::Cloud::Compute::V1::FutureReservationTimeWindow]
-        #     [Output Only] The previous time window of the Future Reservation.
+        #     Output only. [Output Only] The previous time window of the Future Reservation.
         class FutureReservationStatusLastKnownGoodStateFutureReservationSpecs
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19744,7 +19860,7 @@ module Google
         #     A list of Future reservation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#futureReservationsAggregatedListResponse for future
+        #     Output only. [Output Only] Type of resource. Alwayscompute#futureReservationsAggregatedListResponse for future
         #     resevation aggregated list response.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -19755,10 +19871,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -19787,7 +19903,7 @@ module Google
         #     [Output Only] A list of future reservation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Alwayscompute#FutureReservationsListResponse for lists of
+        #     Output only. [Output Only] Type of resource.Alwayscompute#FutureReservationsListResponse for lists of
         #     reservations
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -19798,10 +19914,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -19818,6 +19934,289 @@ module Google
         #     Informational warning which replaces the list of future reservations when
         #     the list is empty.
         class FutureReservationsScopedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Recommendation for single resources specification, to be created in the
+        # future.
+        # @!attribute [rw] end_time
+        #   @return [::String]
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     The advised location for resource usage. When a zone, in format
+        #     'zones/'.
+        #     If not set, it means that no location is recommended - see
+        #     other_locations for details.
+        # @!attribute [rw] other_locations
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::FutureResourcesRecommendationOtherLocation}]
+        #     List of locations in the request scope that were not
+        #     recommended. Keys of the map are zones, in format 'zones/'.
+        #     The values are status information indicating the recommendation status.
+        # @!attribute [rw] recommendation_id
+        #   @return [::String]
+        #     Unique id of the recommendation, a UUID string generated by the API.
+        # @!attribute [rw] recommendation_type
+        #   @return [::String]
+        #     Type of recommendation. Currently only FUTURE_RESERVATION is supported.
+        #     Check the RecommendationType enum for the list of possible values.
+        # @!attribute [rw] start_time
+        #   @return [::String]
+        class FutureResourcesRecommendation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::FutureResourcesRecommendationOtherLocation]
+          class OtherLocationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Type of recommendation. Currently only FUTURE_RESERVATION is supported.
+          module RecommendationType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_RECOMMENDATION_TYPE = 0
+
+            # A Future Reservation is recommended.
+            FUTURE_RESERVATION = 41_036_592
+
+            # Default value, unused.
+            RECOMMENDATION_TYPE_UNSPECIFIED = 140_641_624
+          end
+        end
+
+        # Information about recommendation status for locations
+        # that were allowed but not used by the response.
+        # @!attribute [rw] details
+        #   @return [::String]
+        #     Details (human readable) describing the situation.
+        #     For example, if status is CONDITION_NOT_MET, then
+        #     details contain information about the parameters of the time window
+        #     that did not meet the required conditions.
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     Status of recommendation in this location.
+        #     Check the Status enum for the list of possible values.
+        class FutureResourcesRecommendationOtherLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of recommendation in this location.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            # The requested resources are offered in this location
+            # but the requested time window is does not meet the required conditions.
+            CONDITIONS_NOT_MET = 363_628_457
+
+            # The requested resources are not offered in this location.
+            # Retrying the request will not change this status.
+            NOT_SUPPORTED = 317_950_466
+
+            # The requested resources are offered in this location
+            # and the requested time window is accepted
+            # but there is no capacity within the requested time window.
+            NO_CAPACITY = 274_240_888
+
+            # Default value, unused.
+            OTHER_LOCATION_STATUS_UNDEFINED = 222_662_622
+
+            # The requested resources are offered in this location
+            # and it is possible to request them. However, another location
+            # was better and was recommended.
+            RECOMMENDED = 369_652_283
+          end
+        end
+
+        # Specification of resources to be created at some time in the future within an
+        # optionally specified set of locations, and within the specified time range.
+        # @!attribute [rw] deployment_type
+        #   @return [::String]
+        #     Indicates if the reservation allocation strategy is static (DENSE) or
+        #     dynamic (STANDARD). Defaults to DENSE.
+        #     Check the DeploymentType enum for the list of possible values.
+        # @!attribute [rw] location_policy
+        #   @return [::Google::Cloud::Compute::V1::FutureResourcesSpecLocationPolicy]
+        #     Optional location policy allowing to exclude some zone(s) in which
+        #     the resources must not be created.
+        # @!attribute [rw] target_resources
+        #   @return [::Google::Cloud::Compute::V1::FutureResourcesSpecTargetResources]
+        #     Specification of the reserved resources.
+        # @!attribute [rw] time_range_spec
+        #   @return [::Google::Cloud::Compute::V1::FlexibleTimeRange]
+        #     Specification of a time range in which the resources may be created.
+        #     The time range specifies start of resource use and planned end of resource
+        #     use.
+        class FutureResourcesSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates if the reservation allocation strategy is static (DENSE) or
+          # dynamic (STANDARD). Defaults to DENSE.
+          module DeploymentType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DEPLOYMENT_TYPE = 0
+
+            # The reserved capacity is made up of densely deployed reservation blocks.
+            DENSE = 64_932_607
+
+            DEPLOYMENT_TYPE_UNSPECIFIED = 234_847_180
+          end
+        end
+
+        # @!attribute [rw] accelerator_count
+        #   @return [::Integer]
+        #     Size of the request, in accelerator (chip) count.
+        # @!attribute [rw] vm_family
+        #   @return [::String]
+        #     The VM family that all instances scheduled against this reservation
+        #     must belong to. Use for TPU reservations.
+        #     Check the VmFamily enum for the list of possible values.
+        # @!attribute [rw] workload_type
+        #   @return [::String]
+        #     Workload type. Use for TPU reservations.
+        #     Check the WorkloadType enum for the list of possible values.
+        class FutureResourcesSpecAggregateResources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The VM family that all instances scheduled against this reservation
+          # must belong to. Use for TPU reservations.
+          module VmFamily
+            # A value indicating that the enum field is not set.
+            UNDEFINED_VM_FAMILY = 0
+
+            VM_FAMILY_CLOUD_TPU_DEVICE_CT3 = 42_845_948
+
+            VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L = 108_020_067
+
+            VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP = 18_705_267
+
+            VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E = 398_926_997
+
+            VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P = 517_384_376
+
+            VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P = 517_384_407
+
+            VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P = 517_384_438
+
+            VM_FAMILY_CLOUD_TPU_POD_SLICE_TPU7X = 485_271_888
+          end
+
+          # Workload type. Use for TPU reservations.
+          module WorkloadType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_WORKLOAD_TYPE = 0
+
+            # Reserved resources will be optimized for BATCH workloads, such as ML
+            # training.
+            BATCH = 62_971_674
+
+            # Reserved resources will be optimized for SERVING workloads, such as ML
+            # inference.
+            SERVING = 17_781_740
+
+            UNSPECIFIED = 526_786_327
+          end
+        end
+
+        # @!attribute [rw] disk_interface
+        #   @return [::String]
+        #     Disk interface. Defaults to SCSI.
+        #     Check the DiskInterface enum for the list of possible values.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     The size of the disk in GB.
+        class FutureResourcesSpecLocalSsdPartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Disk interface. Defaults to SCSI.
+          module DiskInterface
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DISK_INTERFACE = 0
+
+            NVME = 2_408_800
+
+            SCSI = 2_539_686
+          end
+        end
+
+        # Specification of locations to create resources in.
+        # @!attribute [rw] locations
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::FutureResourcesSpecLocationPolicyLocation}]
+        #     Preferences for specified locations.
+        #     Keys of the map are locations - zones, in format of 'zones/'.
+        #     Values are preferences for the zones.
+        #     If a zone is not specified in this map, it is ALLOWed.
+        class FutureResourcesSpecLocationPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::FutureResourcesSpecLocationPolicyLocation]
+          class LocationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Preference for a single specified location.
+        # @!attribute [rw] preference
+        #   @return [::String]
+        #     Preference for this location.
+        #     Check the Preference enum for the list of possible values.
+        class FutureResourcesSpecLocationPolicyLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Preference for this location.
+          module Preference
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PREFERENCE = 0
+
+            # Location is allowed for use.
+            ALLOW = 62_368_553
+
+            # Location is prohibited.
+            DENY = 2_094_604
+
+            # Default value, unused.
+            PREFERENCE_UNSPECIFIED = 496_219_571
+          end
+        end
+
+        # @!attribute [rw] instance_count
+        #   @return [::Integer]
+        #     Size of the request, in instance count.
+        # @!attribute [rw] local_ssd_partitions
+        #   @return [::Array<::Google::Cloud::Compute::V1::FutureResourcesSpecLocalSsdPartition>]
+        #     Local SSD partitions. You do not have to include SSD partitions that
+        #     are built in the machine type.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     The machine type to use for instances that will use the reservation.
+        #     This field only accepts machine type names. e.g. n2-standard-4
+        #     and does not accept machine type full or partial url. e.g.
+        #     projects/my-l7ilb-project/zones/us-central1-a/machineTypes/n2-standard-4.
+        #     Use for GPU reservations.
+        class FutureResourcesSpecSpecificSKUResources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification of reserved resources.
+        # @!attribute [rw] aggregate_resources
+        #   @return [::Google::Cloud::Compute::V1::FutureResourcesSpecAggregateResources]
+        # @!attribute [rw] specific_sku_resources
+        #   @return [::Google::Cloud::Compute::V1::FutureResourcesSpecSpecificSKUResources]
+        class FutureResourcesSpecTargetResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22879,7 +23278,7 @@ module Google
         # A guest attributes entry.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#guestAttributes for guest attributes entry.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#guestAttributes for guest attributes entry.
         # @!attribute [rw] query_path
         #   @return [::String]
         #     The path to be queried. This can be the default namespace ('') or a
@@ -22887,16 +23286,16 @@ module Google
         #     ('\/\').
         # @!attribute [rw] query_value
         #   @return [::Google::Cloud::Compute::V1::GuestAttributesValue]
-        #     [Output Only] The value of the requested queried path.
+        #     Output only. [Output Only] The value of the requested queried path.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] variable_key
         #   @return [::String]
         #     The key to search for.
         # @!attribute [rw] variable_value
         #   @return [::String]
-        #     [Output Only] The value found for the requested key.
+        #     Output only. [Output Only] The value found for the requested key.
         class GuestAttributes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23373,7 +23772,7 @@ module Google
         #     seconds.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp in3339
+        #     Output only. [Output Only] Creation timestamp in3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -23399,7 +23798,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of the resource.
+        #     Output only. Type of the resource.
         # @!attribute [rw] log_config
         #   @return [::Google::Cloud::Compute::V1::HealthCheckLogConfig]
         #     Configure logging on this health check.
@@ -23414,7 +23813,7 @@ module Google
         #     lowercase letter, or digit, except the last character, which isn't a dash.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] Region where the health check resides.  Not applicable to
+        #     Output only. [Output Only] Region where the health check resides.  Not applicable to
         #     global health checks.
         # @!attribute [rw] self_link
         #   @return [::String]
@@ -23491,7 +23890,7 @@ module Google
         #     A list of HealthCheck resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -23501,7 +23900,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -23537,7 +23936,7 @@ module Google
         # Represents a Health-Check as a Service resource.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -23577,11 +23976,11 @@ module Google
         #     Check the HealthStatusAggregationPolicy enum for the list of possible values.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Alwayscompute#healthCheckServicefor health check services.
+        #     Output only. [Output only] Type of the resource. Alwayscompute#healthCheckServicefor health check services.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. The name must be 1-63 characters long, and comply
@@ -23605,13 +24004,13 @@ module Google
         #     same region. For global HealthCheckService,NotificationEndpoint must be global.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the health check service
+        #     Output only. [Output Only] URL of the region where the health check service
         #     resides. This field is not applicable to global health check services.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class HealthCheckService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23658,24 +24057,24 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheckService>]
-        #     A list of HealthCheckService resources.
+        #     Output only. A list of HealthCheckService resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#healthCheckServicesList for lists of
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#healthCheckServicesList for lists of
         #     HealthCheckServices.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -23692,7 +24091,7 @@ module Google
         #     A list of HealthChecksScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -23702,10 +24101,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -24105,7 +24504,8 @@ module Google
         #     Only one of exactMatch, prefixMatch,suffixMatch, regexMatch,presentMatch or rangeMatch must be set.
         #
         #     Regular expressions can only be used when the loadBalancingScheme is
-        #     set to INTERNAL_SELF_MANAGED, EXTERNAL_MANAGED orINTERNAL_MANAGED.
+        #     set to INTERNAL_SELF_MANAGED, EXTERNAL_MANAGED
+        #     (regional scope) or INTERNAL_MANAGED.
         # @!attribute [rw] suffix_match
         #   @return [::String]
         #     The value of the header must end with the contents ofsuffixMatch.
@@ -24166,7 +24566,8 @@ module Google
         #     Only one of presentMatch, exactMatch, orregexMatch must be set.
         #
         #     Regular expressions can only be used when the loadBalancingScheme is
-        #     set to INTERNAL_SELF_MANAGED, EXTERNAL_MANAGED orINTERNAL_MANAGED.
+        #     set to INTERNAL_SELF_MANAGED, EXTERNAL_MANAGED
+        #     (regional scope) or INTERNAL_MANAGED.
         class HttpQueryParameterMatch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24588,17 +24989,22 @@ module Google
         #     has validateForProxyless field set to true.
         # @!attribute [rw] path_template_match
         #   @return [::String]
-        #     If specified, the route is a pattern match expression that must match the
-        #     :path header once the query string is removed.
+        #     If specified, this field defines a path template pattern that must match
+        #     the :path header after the query string is removed.
         #
-        #      A pattern match allows you to match
+        #     A path template pattern can include variables and wildcards.
+        #     Variables are enclosed in curly braces, for example\\{variable_name}. Wildcards include * that
+        #     matches a single path segment, and ** that matches zero or
+        #     more path segments. The pattern must follow these rules:
         #
         #
-        #           - The value must be between 1 and 1024 characters
-        #           - The pattern must start with a leading slash ("/")
-        #           - There may be no more than 5 operators in pattern
+        #           - The value must be between 1 and 1024 characters.
+        #           - The pattern must start with a leading slash ("/").
+        #           - No more than 5 operators (variables or wildcards) may appear in
+        #           the pattern.
         #
-        #      Precisely one ofprefix_match, full_path_match,regex_match or path_template_match must be set.
+        #     Precisely one ofprefixMatch, fullPathMatch,regexMatch, or pathTemplateMatch must be
+        #     set.
         # @!attribute [rw] prefix_match
         #   @return [::String]
         #     For satisfying the matchRule condition, the request's
@@ -24606,9 +25012,11 @@ module Google
         #
         #     The value must be from 1 to 1024 characters.
         #
-        #     Only one of prefixMatch, fullPathMatch,regexMatch or path_template_match must be
-        #     specified.
-        #     specified.
+        #     The * character inside a prefix match is
+        #     treated as a literal character, not as a wildcard.
+        #
+        #     Only one of prefixMatch, fullPathMatch,regexMatch or path_template_match can be
+        #     used within a matchRule.
         # @!attribute [rw] query_parameter_matches
         #   @return [::Array<::Google::Cloud::Compute::V1::HttpQueryParameterMatch>]
         #     Specifies a list of query parameter match criteria, all of which must
@@ -24626,7 +25034,8 @@ module Google
         #     specified.
         #
         #     Regular expressions can only be used when the loadBalancingScheme is
-        #     set to INTERNAL_SELF_MANAGED, EXTERNAL_MANAGED orINTERNAL_MANAGED.
+        #     set to INTERNAL_SELF_MANAGED, EXTERNAL_MANAGED
+        #     (regional scope) or INTERNAL_MANAGED.
         class HttpRouteRuleMatch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24647,11 +25056,11 @@ module Google
         #     Storage (in bytes).
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] deprecated
         #   @return [::Google::Cloud::Compute::V1::DeprecationStatus]
-        #     The deprecation status associated with this image.
+        #     Output only. The deprecation status associated with this image.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you
@@ -24661,7 +25070,7 @@ module Google
         #     Size of the image when restored onto a persistent disk (in GB).
         # @!attribute [rw] enable_confidential_compute
         #   @return [::Boolean]
-        #     Whether this image is created from a confidential compute mode disk.
+        #     Output only. Whether this image is created from a confidential compute mode disk.
         #     [Output Only]: This field is not set by user, but from source disk.
         # @!attribute [rw] family
         #   @return [::String]
@@ -24680,7 +25089,7 @@ module Google
         #     only for bootable images. To see a list of available options, see theguestOSfeatures[].type parameter.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] image_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
@@ -24699,7 +25108,7 @@ module Google
         #     need to provide a key to use the image later.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#image for
+        #     Output only. [Output Only] Type of the resource. Always compute#image for
         #     images.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -24743,10 +25152,10 @@ module Google
         #     Output only. Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] shielded_instance_initial_state
         #   @return [::Google::Cloud::Compute::V1::InitialStateConfig]
         #     Set the secure boot keys of shielded instance.
@@ -24775,7 +25184,7 @@ module Google
         #     protected by a customer-supplied encryption key.
         # @!attribute [rw] source_disk_id
         #   @return [::String]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     The ID value of the disk used to create this image. This value may be used
         #     to determine whether the image was taken from the current or a previous
         #     instance of a given disk name.
@@ -24803,7 +25212,7 @@ module Google
         #     source image is protected by a customer-supplied encryption key.
         # @!attribute [rw] source_image_id
         #   @return [::String]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     The ID value of the image used to create this image. This value may be used
         #     to determine whether the image was taken from the current or a previous
         #     instance of a given image name.
@@ -24831,7 +25240,7 @@ module Google
         #     the source snapshot is protected by a customer-supplied encryption key.
         # @!attribute [rw] source_snapshot_id
         #   @return [::String]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     The ID value of the snapshot used to create this image. This value may be
         #     used to determine whether the snapshot was taken from the current or a
         #     previous instance of a given snapshot name.
@@ -24842,7 +25251,7 @@ module Google
         #     Check the SourceType enum for the list of possible values.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the image. An image can be used to create other
+        #     Output only. [Output Only] The status of the image. An image can be used to create other
         #     resources, such as instances, only after the image has been successfully
         #     created and the status is set to READY. Possible
         #     values are FAILED, PENDING, orREADY.
@@ -24889,7 +25298,7 @@ module Google
             RAW = 80_904
           end
 
-          # [Output Only] The status of the image. An image can be used to create other
+          # Output only. [Output Only] The status of the image. An image can be used to create other
           # resources, such as instances, only after the image has been successfully
           # created and the status is set to READY. Possible
           # values are FAILED, PENDING, orREADY.
@@ -24929,7 +25338,7 @@ module Google
         #     A list of Image resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -24939,7 +25348,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -24953,8 +25362,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the image. Tag keys and values have
         #     the same definition as resource
-        #     manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and
-        #     values are in the format `tagValues/456`. The field is ignored (both PUT &
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
         #     PATCH) when empty.
         class ImageParams
           include ::Google::Protobuf::MessageExts
@@ -27431,10 +27842,10 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::ConfidentialInstanceConfig]
         # @!attribute [rw] cpu_platform
         #   @return [::String]
-        #     [Output Only] The CPU platform used by this instance.
+        #     Output only. [Output Only] The CPU platform used by this instance.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339 text format.
+        #     Output only. [Output Only] Creation timestamp inRFC3339 text format.
         # @!attribute [rw] deletion_protection
         #   @return [::Boolean]
         #     Whether the resource should be protected against deletion.
@@ -27470,7 +27881,7 @@ module Google
         #     [INSTANCE_NAME].[ZONE].c.[PROJECT_ID].internal when using zonal DNS.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] instance_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
@@ -27490,7 +27901,7 @@ module Google
         #     Check the KeyRevocationActionType enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#instance
+        #     Output only. [Output Only] Type of the resource. Always compute#instance
         #     for instances.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -27508,13 +27919,13 @@ module Google
         #     the setLabels method.
         # @!attribute [rw] last_start_timestamp
         #   @return [::String]
-        #     [Output Only] Last start timestamp inRFC3339 text format.
+        #     Output only. [Output Only] Last start timestamp inRFC3339 text format.
         # @!attribute [rw] last_stop_timestamp
         #   @return [::String]
-        #     [Output Only] Last stop timestamp inRFC3339 text format.
+        #     Output only. [Output Only] Last stop timestamp inRFC3339 text format.
         # @!attribute [rw] last_suspended_timestamp
         #   @return [::String]
-        #     [Output Only] Last suspended timestamp inRFC3339 text format.
+        #     Output only. [Output Only] Last suspended timestamp inRFC3339 text format.
         # @!attribute [rw] machine_type
         #   @return [::String]
         #     Full or partial URL of the machine type resource to use for this instance,
@@ -27586,21 +27997,21 @@ module Google
         #     Resource policies applied to this instance.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::ResourceStatus]
-        #     [Output Only] Specifies values set for instance attributes as
+        #     Output only. [Output Only] Specifies values set for instance attributes as
         #     compared to the values requested by user in the corresponding input only
         #     field.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::Scheduling]
         #     Sets the scheduling options for this instance.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] service_accounts
         #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAccount>]
         #     A list of service accounts, with their specified scopes, authorized for
@@ -27623,18 +28034,18 @@ module Google
         #     machine image.
         # @!attribute [rw] start_restricted
         #   @return [::Boolean]
-        #     [Output Only] Whether a VM has been restricted for start because Compute
+        #     Output only. [Output Only] Whether a VM has been restricted for start because Compute
         #     Engine has detected suspicious activity.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the instance. One of the
+        #     Output only. [Output Only] The status of the instance. One of the
         #     following values: PROVISIONING, STAGING,RUNNING, STOPPING, SUSPENDING,SUSPENDED, REPAIRING, andTERMINATED. For more information about the status of the
         #     instance, see
         #     Instance life cycle.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] status_message
         #   @return [::String]
-        #     [Output Only] An optional, human-readable explanation of the status.
+        #     Output only. [Output Only] An optional, human-readable explanation of the status.
         # @!attribute [rw] tags
         #   @return [::Google::Cloud::Compute::V1::Tags]
         #     Tags to apply to this instance. Tags are used to identify valid
@@ -27644,7 +28055,7 @@ module Google
         #     Multiple tags can be specified via the 'tags.items' field.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the zone where the instance resides.
+        #     Output only. [Output Only] URL of the zone where the instance resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         class Instance
@@ -27699,7 +28110,7 @@ module Google
             INHERIT_FROM_SUBNETWORK = 530_256_959
           end
 
-          # [Output Only] The status of the instance. One of the
+          # Output only. [Output Only] The status of the instance. One of the
           # following values: PROVISIONING, STAGING,RUNNING, STOPPING, SUSPENDING,SUSPENDED, REPAIRING, andTERMINATED. For more information about the status of the
           # instance, see
           # Instance life cycle.
@@ -27754,7 +28165,7 @@ module Google
         #     An object that contains a list of instances scoped by zone.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#instanceAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#instanceAggregatedList for aggregated lists of
         #     Instance resources.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -27765,10 +28176,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -27788,10 +28199,10 @@ module Google
 
         # @!attribute [rw] consumption_info
         #   @return [::Google::Cloud::Compute::V1::InstanceConsumptionInfo]
-        #     Resources consumed by the instance.
+        #     Output only. Resources consumed by the instance.
         # @!attribute [rw] instance
         #   @return [::String]
-        #     Server-defined URL for the instance.
+        #     Output only. Server-defined URL for the instance.
         class InstanceConsumptionData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27799,18 +28210,18 @@ module Google
 
         # @!attribute [rw] guest_cpus
         #   @return [::Integer]
-        #     The number of virtual CPUs that are available to the instance.
+        #     Output only. The number of virtual CPUs that are available to the instance.
         # @!attribute [rw] local_ssd_gb
         #   @return [::Integer]
-        #     The amount of local SSD storage available to the instance,
+        #     Output only. The amount of local SSD storage available to the instance,
         #     defined in GiB.
         # @!attribute [rw] memory_mb
         #   @return [::Integer]
-        #     The amount of physical memory available to the instance,
+        #     Output only. The amount of physical memory available to the instance,
         #     defined in MiB.
         # @!attribute [rw] min_node_cpus
         #   @return [::Integer]
-        #     The minimal guaranteed number of virtual CPUs that are reserved.
+        #     Output only. The minimal guaranteed number of virtual CPUs that are reserved.
         class InstanceConsumptionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27834,7 +28245,7 @@ module Google
         # groups.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] The creation timestamp for this instance group inRFC3339
+        #     Output only. [Output Only] The creation timestamp for this instance group inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -27842,16 +28253,16 @@ module Google
         #     create the resource.
         # @!attribute [rw] fingerprint
         #   @return [::String]
-        #     [Output Only] The fingerprint of the named ports. The system
+        #     Output only. [Output Only] The fingerprint of the named ports. The system
         #     uses this fingerprint to detect conflicts when multiple users change the
         #     named ports concurrently.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this instance group, generated
+        #     Output only. [Output Only] A unique identifier for this instance group, generated
         #     by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroup for instance groups.
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroup for instance groups.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the instance group. The name must be 1-63 characters
@@ -27875,24 +28286,24 @@ module Google
         #     network and subnet used by your primary interface (nic0).
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The URL of theregion
+        #     Output only. [Output Only] The URL of theregion
         #     where the instance group is located (for regional resources).
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] The URL for this instance group. The server generates
+        #     Output only. [Output Only] The URL for this instance group. The server generates
         #     this URL.
         # @!attribute [rw] size
         #   @return [::Integer]
-        #     [Output Only] The total number of instances in the instance group.
+        #     Output only. [Output Only] The total number of instances in the instance group.
         # @!attribute [rw] subnetwork
         #   @return [::String]
-        #     [Output Only] The URL of the subnetwork to which all instances in the
+        #     Output only. [Output Only] The URL of the subnetwork to which all instances in the
         #     instance group belong. If your instance has multiple network interfaces,
         #     then the network and subnetwork fields only refer to the
         #     network and subnet used by your primary interface (nic0).
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The URL of thezone
+        #     Output only. [Output Only] The URL of thezone
         #     where the instance group is located (for zonal resources).
         class InstanceGroup
           include ::Google::Protobuf::MessageExts
@@ -27901,30 +28312,30 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::InstanceGroupsScopedList}]
         #     A list of InstanceGroupsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroupAggregatedList for aggregated lists of
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupAggregatedList for aggregated lists of
         #     instance groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupAggregatedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27942,26 +28353,26 @@ module Google
         # A list of InstanceGroup resources.
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroup>]
         #     A list of InstanceGroup resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroupList for instance group lists.
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupList for instance group lists.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28000,11 +28411,11 @@ module Google
         #     [a-z](([-a-z0-9]\\{0,57})|([-a-z0-9]\\{0,51}-#\\{1,10}(\\[[0-9]\\{1,10}\\])?))
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] The creation timestamp for this managed instance group inRFC3339
+        #     Output only. [Output Only] The creation timestamp for this managed instance group inRFC3339
         #     text format.
         # @!attribute [rw] current_actions
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerActionsSummary]
-        #     [Output Only] The list of instance actions and the number of instances
+        #     Output only. [Output Only] The list of instance actions and the number of instances
         #     in this managed instance group that are scheduled for each of those
         #     actions.
         # @!attribute [rw] description
@@ -28025,7 +28436,7 @@ module Google
         #     retrieve an InstanceGroupManager.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this resource type. The server
+        #     Output only. [Output Only] A unique identifier for this resource type. The server
         #     generates this identifier.
         # @!attribute [rw] instance_flexibility_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerInstanceFlexibilityPolicy]
@@ -28035,7 +28446,7 @@ module Google
         #     template configuration.
         # @!attribute [rw] instance_group
         #   @return [::String]
-        #     [Output Only] The URL of the Instance Group resource.
+        #     Output only. [Output Only] The URL of the Instance Group resource.
         # @!attribute [rw] instance_lifecycle_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerInstanceLifecyclePolicy]
         #     The repair policy for this managed instance group.
@@ -28047,7 +28458,7 @@ module Google
         #     group do not change unless you run recreateInstances, runapplyUpdatesToInstances, or set the group'supdatePolicy.type to PROACTIVE.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroupManager for managed instance groups.
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupManager for managed instance groups.
         # @!attribute [rw] list_managed_instances_results
         #   @return [::String]
         #     Pagination behavior of the listManagedInstances API method for
@@ -28063,20 +28474,20 @@ module Google
         #     to this Instance Group Manager.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The URL of theregion
+        #     Output only. [Output Only] The URL of theregion
         #     where the managed instance group resides (for regional resources).
         # @!attribute [rw] resource_policies
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResourcePolicies]
         #     Resource policies for this managed instance group.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] The URL for this managed instance group. The server defines
+        #     Output only. [Output Only] The URL for this managed instance group. The server defines
         #     this URL.
         # @!attribute [rw] standby_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStandbyPolicy]
@@ -28086,7 +28497,7 @@ module Google
         #     Stateful configuration for this Instanced Group Manager
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatus]
-        #     [Output Only] The status of this managed instance group.
+        #     Output only. [Output Only] The status of this managed instance group.
         # @!attribute [rw] target_pools
         #   @return [::Array<::String>]
         #     The URLs for all TargetPool resources to which instances in theinstanceGroup field are added. The target pools automatically
@@ -28133,7 +28544,7 @@ module Google
         #     updates.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The URL of azone
+        #     Output only. [Output Only] The URL of azone
         #     where the managed instance group is located (for zonal resources).
         class InstanceGroupManager
           include ::Google::Protobuf::MessageExts
@@ -28159,12 +28570,12 @@ module Google
 
         # @!attribute [rw] abandoning
         #   @return [::Integer]
-        #     [Output Only] The total number of instances in the managed instance group
+        #     Output only. [Output Only] The total number of instances in the managed instance group
         #     that are scheduled to be abandoned. Abandoning an instance removes it
         #     from the managed instance group without deleting it.
         # @!attribute [rw] creating
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be created or are currently being created. If the group
         #     fails to create any of these instances, it tries again until it creates
         #     the instance successfully.
@@ -28173,54 +28584,54 @@ module Google
         #     instead, the creatingWithoutRetries field will be populated.
         # @!attribute [rw] creating_without_retries
         #   @return [::Integer]
-        #     [Output Only] The number of instances that the managed instance group
+        #     Output only. [Output Only] The number of instances that the managed instance group
         #     will attempt to create. The group attempts to create each instance
         #     only once. If the group fails to create any of these instances, it
         #     decreases the group's targetSize value accordingly.
         # @!attribute [rw] deleting
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be deleted or are currently being deleted.
         # @!attribute [rw] none
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are running and have no scheduled actions.
         # @!attribute [rw] recreating
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be recreated or are currently being being recreated.
         #     Recreating an instance deletes the existing root persistent disk
         #     and creates a new disk from the image that is defined in the
         #     instance template.
         # @!attribute [rw] refreshing
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are being reconfigured with properties that do not require a restart
         #     or a recreate action. For example, setting or removing target
         #     pools for the instance.
         # @!attribute [rw] restarting
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be restarted or are currently being restarted.
         # @!attribute [rw] resuming
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be resumed or are currently being resumed.
         # @!attribute [rw] starting
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be started or are currently being started.
         # @!attribute [rw] stopping
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be stopped or are currently being stopped.
         # @!attribute [rw] suspending
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are scheduled to be suspended or are currently being suspended.
         # @!attribute [rw] verifying
         #   @return [::Integer]
-        #     [Output Only] The number of instances in the managed instance group that
+        #     Output only. [Output Only] The number of instances in the managed instance group that
         #     are being verified. See the managedInstances[].currentAction
         #     property in the listManagedInstances method documentation.
         class InstanceGroupManagerActionsSummary
@@ -28230,30 +28641,30 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::InstanceGroupManagersScopedList}]
         #     A list of InstanceGroupManagersScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroupManagerAggregatedList for an aggregated
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupManagerAggregatedList for an aggregated
         #     list of managed instance groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupManagerAggregatedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28410,27 +28821,27 @@ module Google
         # [Output Only] A list of managed instance groups.
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManager>]
         #     A list of InstanceGroupManager resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is always
+        #     Output only. [Output Only] The resource type, which is always
         #     compute#instanceGroupManagerList for a list of managed instance groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupManagerList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28443,18 +28854,18 @@ module Google
         # InstanceGroupManager.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] The creation timestamp for this resize request inRFC3339
+        #     Output only. [Output Only] The creation timestamp for this resize request inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this resource type. The server
+        #     Output only. [Output Only] A unique identifier for this resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroupManagerResizeRequest for
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupManagerResizeRequest for
         #     resize requests.
         # @!attribute [rw] name
         #   @return [::String]
@@ -28471,28 +28882,28 @@ module Google
         #     together with 'instances'.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] The URL for this resize request. The server defines
+        #     Output only. [Output Only] The URL for this resize request. The server defines
         #     this URL.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output only] Current state of the request.
+        #     Output only. [Output only] Current state of the request.
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequestStatus]
-        #     [Output only] Status of the request.
+        #     Output only. [Output only] Status of the request.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The URL of azone
+        #     Output only. [Output Only] The URL of azone
         #     where the resize request is located. Populated only for zonal resize
         #     requests.
         class InstanceGroupManagerResizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output only] Current state of the request.
+          # Output only. [Output only] Current state of the request.
           module State
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
@@ -28522,14 +28933,14 @@ module Google
 
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::Error]
-        #     [Output only] Fatal errors encountered during the queueing or
+        #     Output only. [Output only] Fatal errors encountered during the queueing or
         #     provisioning phases of the ResizeRequest that caused the transition to
         #     the FAILED state. Contrary to the last_attempt errors, this field is
         #     final and errors are never removed from here, as the ResizeRequest is not
         #     going to retry.
         # @!attribute [rw] last_attempt
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequestStatusLastAttempt]
-        #     [Output only] Information about the last attempt to fulfill the request.
+        #     Output only. [Output only] Information about the last attempt to fulfill the request.
         #     The value is temporary since the ResizeRequest can retry, as long as it's
         #     still active and the last attempt value can either be cleared or replaced
         #     with a different error. Since ResizeRequest retries infrequently, the
@@ -28544,7 +28955,7 @@ module Google
 
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::Error]
-        #     Errors that prevented the ResizeRequest to be fulfilled.
+        #     Output only. Errors that prevented the ResizeRequest to be fulfilled.
         class InstanceGroupManagerResizeRequestStatusLastAttempt
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28553,27 +28964,27 @@ module Google
         # [Output Only] A list of resize requests.
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequest>]
         #     A list of resize request resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#instanceGroupManagerResizeRequestList for
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#instanceGroupManagerResizeRequestList for
         #     a list of resize requests.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupManagerResizeRequestsListResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28629,14 +29040,14 @@ module Google
 
         # @!attribute [rw] all_instances_config
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusAllInstancesConfig]
-        #     [Output only] Status of all-instances configuration on the group.
+        #     Output only. [Output only] Status of all-instances configuration on the group.
         # @!attribute [rw] autoscaler
         #   @return [::String]
-        #     [Output Only] The URL of theAutoscaler
+        #     Output only. [Output Only] The URL of theAutoscaler
         #     that targets this instance group manager.
         # @!attribute [rw] is_stable
         #   @return [::Boolean]
-        #     [Output Only] A bit indicating whether the managed instance group is in a
+        #     Output only. [Output Only] A bit indicating whether the managed instance group is in a
         #     stable state. A stable state means that: none of the instances in the
         #     managed instance group is currently undergoing any type of change (for
         #     example, creation, restart, or deletion); no future changes are scheduled
@@ -28644,10 +29055,10 @@ module Google
         #     group itself is not being modified.
         # @!attribute [rw] stateful
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusStateful]
-        #     [Output Only] Stateful status of the given Instance Group Manager.
+        #     Output only. [Output Only] Stateful status of the given Instance Group Manager.
         # @!attribute [rw] version_target
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusVersionTarget]
-        #     [Output Only] A status of consistency of Instances' versions with their
+        #     Output only. [Output Only] A status of consistency of Instances' versions with their
         #     target version specified by version field on Instance Group
         #     Manager.
         class InstanceGroupManagerStatus
@@ -28657,11 +29068,11 @@ module Google
 
         # @!attribute [rw] current_revision
         #   @return [::String]
-        #     [Output Only] Current all-instances configuration revision.
+        #     Output only. [Output Only] Current all-instances configuration revision.
         #     This value is in RFC3339 text format.
         # @!attribute [rw] effective
         #   @return [::Boolean]
-        #     [Output Only] A bit indicating whether this configuration has
+        #     Output only. [Output Only] A bit indicating whether this configuration has
         #     been applied to all managed instances in the group.
         class InstanceGroupManagerStatusAllInstancesConfig
           include ::Google::Protobuf::MessageExts
@@ -28670,7 +29081,7 @@ module Google
 
         # @!attribute [rw] has_stateful_config
         #   @return [::Boolean]
-        #     [Output Only] A bit indicating whether the managed instance group
+        #     Output only. [Output Only] A bit indicating whether the managed instance group
         #     has stateful configuration, that is, if you have configured any items
         #     in a stateful policy or in per-instance configs.
         #     The group might report that it has no stateful configuration even when
@@ -28678,7 +29089,7 @@ module Google
         #     if you have deleted all PICs but not yet applied those deletions.
         # @!attribute [rw] per_instance_configs
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusStatefulPerInstanceConfigs]
-        #     [Output Only] Status of per-instance configurations on the instances.
+        #     Output only. [Output Only] Status of per-instance configurations on the instances.
         class InstanceGroupManagerStatusStateful
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28686,7 +29097,7 @@ module Google
 
         # @!attribute [rw] all_effective
         #   @return [::Boolean]
-        #     A bit indicating if all of the group's per-instance configurations
+        #     Output only. A bit indicating if all of the group's per-instance configurations
         #     (listed in the output of a listPerInstanceConfigs API call) have
         #     status EFFECTIVE or there are no per-instance-configs.
         class InstanceGroupManagerStatusStatefulPerInstanceConfigs
@@ -28696,7 +29107,7 @@ module Google
 
         # @!attribute [rw] is_reached
         #   @return [::Boolean]
-        #     [Output Only] A bit indicating whether version target has been reached
+        #     Output only. [Output Only] A bit indicating whether version target has been reached
         #     in this managed instance group, i.e. all instances are in their target
         #     version. Instances' target version are specified byversion field on Instance Group Manager.
         class InstanceGroupManagerStatusVersionTarget
@@ -29064,10 +29475,10 @@ module Google
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
-        #     [Output Only] The list of errors of the managed instance group.
+        #     Output only. [Output Only] The list of errors of the managed instance group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
@@ -29079,10 +29490,10 @@ module Google
 
         # @!attribute [rw] managed_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::ManagedInstance>]
-        #     [Output Only] The list of instances in the managed instance group.
+        #     Output only. [Output Only] The list of instances in the managed instance group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
@@ -29094,17 +29505,17 @@ module Google
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::PerInstanceConfig>]
-        #     [Output Only] The list of PerInstanceConfig.
+        #     Output only. [Output Only] The list of PerInstanceConfig.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupManagersListPerInstanceConfigsResp
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -29140,11 +29551,11 @@ module Google
 
         # @!attribute [rw] instance_group_managers
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManager>]
-        #     [Output Only] The list of managed instance groups that are contained in
+        #     Output only. [Output Only] The list of managed instance groups that are contained in
         #     the specified project and zone.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] The warning that replaces the list of managed instance
+        #     Output only. [Output Only] The warning that replaces the list of managed instance
         #     groups when the list is empty.
         class InstanceGroupManagersScopedList
           include ::Google::Protobuf::MessageExts
@@ -29236,27 +29647,27 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceWithNamedPorts>]
         #     A list of InstanceWithNamedPorts resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceGroupsListInstances for the list of instances
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupsListInstances for the list of instances
         #     in the specified instance group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class InstanceGroupsListInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -29298,11 +29709,11 @@ module Google
 
         # @!attribute [rw] instance_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroup>]
-        #     [Output Only] The list ofinstance
+        #     Output only. [Output Only] The list ofinstance
         #     groups that are contained in this scope.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] An informational warning that replaces the list of
+        #     Output only. [Output Only] An informational warning that replaces the list of
         #     instance groups when the list is empty.
         class InstanceGroupsScopedList
           include ::Google::Protobuf::MessageExts
@@ -29334,7 +29745,7 @@ module Google
         #     A list of Instance resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#instanceList
+        #     Output only. [Output Only] Type of resource. Always compute#instanceList
         #     for lists of Instance resources.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -29345,7 +29756,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -29363,7 +29774,7 @@ module Google
         #     A list of Reference resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#instanceListReferrers for lists of Instance referrers.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#instanceListReferrers for lists of Instance referrers.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -29373,7 +29784,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -29384,15 +29795,15 @@ module Google
 
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::InstanceManagedByIgmErrorManagedInstanceError]
-        #     [Output Only] Contents of the error.
+        #     Output only. [Output Only] Contents of the error.
         # @!attribute [rw] instance_action_details
         #   @return [::Google::Cloud::Compute::V1::InstanceManagedByIgmErrorInstanceActionDetails]
-        #     [Output Only] Details of the instance action that triggered this error.
+        #     Output only. [Output Only] Details of the instance action that triggered this error.
         #     May be null, if the error was not caused by an action on an instance.
         #     This field is optional.
         # @!attribute [rw] timestamp
         #   @return [::String]
-        #     [Output Only] The time that this error occurred.
+        #     Output only. [Output Only] The time that this error occurred.
         #     This value is in RFC3339 text format.
         class InstanceManagedByIgmError
           include ::Google::Protobuf::MessageExts
@@ -29401,16 +29812,16 @@ module Google
 
         # @!attribute [rw] action
         #   @return [::String]
-        #     [Output Only] Action that managed instance group was executing on
+        #     Output only. [Output Only] Action that managed instance group was executing on
         #     the instance when the error occurred. Possible values:
         #     Check the Action enum for the list of possible values.
         # @!attribute [rw] instance
         #   @return [::String]
-        #     [Output Only] The URL of the instance.
+        #     Output only. [Output Only] The URL of the instance.
         #     The URL can be set even if the instance has not yet been created.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceVersion]
-        #     [Output Only] Version this instance was created from, or was being
+        #     Output only. [Output Only] Version this instance was created from, or was being
         #     created from, but the creation failed. Corresponds to one of the versions
         #     that were set on the Instance Group Manager resource at the time this
         #     instance was being created.
@@ -29418,7 +29829,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Action that managed instance group was executing on
+          # Output only. [Output Only] Action that managed instance group was executing on
           # the instance when the error occurred. Possible values:
           module Action
             # A value indicating that the enum field is not set.
@@ -29484,10 +29895,10 @@ module Google
 
         # @!attribute [rw] code
         #   @return [::String]
-        #     [Output Only] Error code.
+        #     Output only. [Output Only] Error code.
         # @!attribute [rw] message
         #   @return [::String]
-        #     [Output Only] Error message.
+        #     Output only. [Output Only] Error message.
         class InstanceManagedByIgmErrorManagedInstanceError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -29523,8 +29934,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the instance. Tag keys and values
         #     have the same definition as resource
-        #     manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and
-        #     values are in the format `tagValues/456`. The field is ignored (both PUT &
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
         #     PATCH) when empty.
         class InstanceParams
           include ::Google::Protobuf::MessageExts
@@ -29765,14 +30178,14 @@ module Google
         #     retrieve the resource.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#instance_settings for instance settings.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#instance_settings for instance settings.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::Compute::V1::InstanceSettingsMetadata]
         #     The metadata key/value pairs assigned to all the instances in the
         #     corresponding scope.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the zone where the resource resides
+        #     Output only. [Output Only] URL of the zone where the resource resides
         #     You must specify this field as part of the HTTP request URL. It is not
         #     settable as a field in the request body.
         class InstanceSettings
@@ -29786,7 +30199,7 @@ module Google
         #     The total size of all keys and values must be less than 512KB.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#metadata
+        #     Output only. [Output Only] Type of the resource. Always compute#metadata
         #     for metadata.
         class InstanceSettingsMetadata
           include ::Google::Protobuf::MessageExts
@@ -29820,7 +30233,7 @@ module Google
         # For more information, readInstance Templates.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] The creation timestamp for this instance template inRFC3339
+        #     Output only. [Output Only] The creation timestamp for this instance template inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -29828,11 +30241,11 @@ module Google
         #     create the resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this instance template. The server
+        #     Output only. [Output Only] A unique identifier for this instance template. The server
         #     defines this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceTemplate for instance templates.
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceTemplate for instance templates.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource; provided by the client when the resource is created.
@@ -29847,11 +30260,11 @@ module Google
         #     The instance properties for this instance template.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the instance template resides. Only
+        #     Output only. [Output Only] URL of the region where the instance template resides. Only
         #     applicable for regional resources.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] The URL for this instance template. The server defines this
+        #     Output only. [Output Only] The URL for this instance template. The server defines this
         #     URL.
         # @!attribute [rw] source_instance
         #   @return [::String]
@@ -29879,7 +30292,7 @@ module Google
         #     A list of InstanceTemplatesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -29889,7 +30302,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -29916,7 +30329,7 @@ module Google
         #     A list of InstanceTemplate resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#instanceTemplatesListResponse for instance template
+        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceTemplatesListResponse for instance template
         #     lists.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -29927,7 +30340,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -29951,19 +30364,19 @@ module Google
 
         # @!attribute [rw] instance
         #   @return [::String]
-        #     [Output Only] The URL of the instance.
+        #     Output only. [Output Only] The URL of the instance.
         # @!attribute [rw] named_ports
         #   @return [::Array<::Google::Cloud::Compute::V1::NamedPort>]
-        #     [Output Only] The named ports that belong to this instance group.
+        #     Output only. [Output Only] The named ports that belong to this instance group.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the instance.
+        #     Output only. [Output Only] The status of the instance.
         #     Check the Status enum for the list of possible values.
         class InstanceWithNamedPorts
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The status of the instance.
+          # Output only. [Output Only] The status of the instance.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -30046,17 +30459,17 @@ module Google
 
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     [Output Only] Deprecated, please use short name instead. The display name
+        #     Output only. [Output Only] Deprecated, please use short name instead. The display name
         #     of the firewall policy.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of the firewall policy.
+        #     Output only. [Output Only] The name of the firewall policy.
         # @!attribute [rw] packet_mirroring_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
-        #     [Output Only] The packet mirroring rules that apply to the instance.
+        #     Output only. [Output Only] The packet mirroring rules that apply to the instance.
         # @!attribute [rw] priority
         #   @return [::Integer]
-        #     [Output only] Priority of firewall policy association. Not applicable for
+        #     Output only. [Output only] Priority of firewall policy association. Not applicable for
         #     type=HIERARCHY.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
@@ -30065,17 +30478,17 @@ module Google
         #     or target secure tags are specified in the rules.
         # @!attribute [rw] short_name
         #   @return [::String]
-        #     [Output Only] The short name of the firewall policy.
+        #     Output only. [Output Only] The short name of the firewall policy.
         # @!attribute [rw] type
         #   @return [::String]
-        #     [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
+        #     Output only. [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
         #     NETWORK, NETWORK_REGIONAL, SYSTEM_GLOBAL, SYSTEM_REGIONAL.
         #     Check the Type enum for the list of possible values.
         class InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
+          # Output only. [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
           # NETWORK, NETWORK_REGIONAL, SYSTEM_GLOBAL, SYSTEM_REGIONAL.
           module Type
             # A value indicating that the enum field is not set.
@@ -30270,12 +30683,12 @@ module Google
         # You can use instant snapshots to create disk rollback points quickly..
         # @!attribute [rw] architecture
         #   @return [::String]
-        #     [Output Only] The architecture of the instant snapshot. Valid values are
+        #     Output only. [Output Only] The architecture of the instant snapshot. Valid values are
         #     ARM64 or X86_64.
         #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -30283,14 +30696,14 @@ module Google
         #     create the resource.
         # @!attribute [rw] disk_size_gb
         #   @return [::Integer]
-        #     [Output Only] Size of the source disk, specified in GB.
+        #     Output only. [Output Only] Size of the source disk, specified in GB.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#instantSnapshot for InstantSnapshot resources.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#instantSnapshot for InstantSnapshot resources.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this InstantSnapshot, which
@@ -30318,24 +30731,24 @@ module Google
         #     be a dash.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the instant snapshot resides.
+        #     Output only. [Output Only] URL of the region where the instant snapshot resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::InstantSnapshotResourceStatus]
-        #     [Output Only] Status information for the instant snapshot resource.
+        #     Output only. [Output Only] Status information for the instant snapshot resource.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource's resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource's resource id.
         # @!attribute [rw] source_disk
         #   @return [::String]
         #     URL of the source disk used to create this instant snapshot.
@@ -30363,16 +30776,16 @@ module Google
         #            regions/region/disks/disk
         # @!attribute [rw] source_disk_id
         #   @return [::String]
-        #     [Output Only] The ID value of the disk used to create this InstantSnapshot.
+        #     Output only. [Output Only] The ID value of the disk used to create this InstantSnapshot.
         #     This value may be used to determine whether the InstantSnapshot
         #     was taken from the current or a previous instance of a given disk name.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the instantSnapshot. This can beCREATING, DELETING, FAILED, orREADY.
+        #     Output only. [Output Only] The status of the instantSnapshot. This can beCREATING, DELETING, FAILED, orREADY.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the zone where the instant snapshot resides.
+        #     Output only. [Output Only] URL of the zone where the instant snapshot resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         class InstantSnapshot
@@ -30388,7 +30801,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # [Output Only] The architecture of the instant snapshot. Valid values are
+          # Output only. [Output Only] The architecture of the instant snapshot. Valid values are
           # ARM64 or X86_64.
           module Architecture
             # A value indicating that the enum field is not set.
@@ -30404,7 +30817,7 @@ module Google
             X86_64 = 425_300_551
           end
 
-          # [Output Only] The status of the instantSnapshot. This can beCREATING, DELETING, FAILED, orREADY.
+          # Output only. [Output Only] The status of the instantSnapshot. This can beCREATING, DELETING, FAILED, orREADY.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -30435,7 +30848,7 @@ module Google
         #     A list of InstantSnapshotsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#instantSnapshotAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#instantSnapshotAggregatedList for aggregated lists of
         #     instantSnapshots.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -30446,10 +30859,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -30476,7 +30889,7 @@ module Google
         #     A list of InstantSnapshot resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -30486,7 +30899,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -30564,11 +30977,11 @@ module Google
         #     Check the AvailableFeatures enum for the list of possible values.
         # @!attribute [rw] circuit_infos
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectCircuitInfo>]
-        #     [Output Only] A list of CircuitInfo objects, that describe the individual
+        #     Output only. [Output Only] A list of CircuitInfo objects, that describe the individual
         #     circuits in this LAG.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] customer_name
         #   @return [::String]
@@ -30580,26 +30993,26 @@ module Google
         #     create the resource.
         # @!attribute [rw] expected_outages
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectOutageNotification>]
-        #     [Output Only] A list of outages expected for this Interconnect.
+        #     Output only. [Output Only] A list of outages expected for this Interconnect.
         # @!attribute [rw] google_ip_address
         #   @return [::String]
-        #     [Output Only] IP address configured on the Google side of the Interconnect
+        #     Output only. [Output Only] IP address configured on the Google side of the Interconnect
         #     link. This can be used only for ping tests.
         # @!attribute [rw] google_reference_id
         #   @return [::String]
-        #     [Output Only] Google reference ID to be used when raising support tickets
+        #     Output only. [Output Only] Google reference ID to be used when raising support tickets
         #     with Google or otherwise to debug backend connectivity issues.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] interconnect_attachments
         #   @return [::Array<::String>]
-        #     [Output Only] A list of the URLs of all InterconnectAttachments configured
+        #     Output only. [Output Only] A list of the URLs of all InterconnectAttachments configured
         #     to use  this Interconnect.
         # @!attribute [rw] interconnect_groups
         #   @return [::Array<::String>]
-        #     [Output Only] URLs of InterconnectGroups that include this Interconnect.
+        #     Output only. [Output Only] URLs of InterconnectGroups that include this Interconnect.
         #     Order is arbitrary and items are unique.
         # @!attribute [rw] interconnect_type
         #   @return [::String]
@@ -30615,7 +31028,7 @@ module Google
         #     Check the InterconnectType enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#interconnect for interconnects.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#interconnect for interconnects.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this Interconnect, which
@@ -30674,7 +31087,7 @@ module Google
         #     workforce identity federation.
         # @!attribute [rw] operational_status
         #   @return [::String]
-        #     [Output Only] The current status of this Interconnect's functionality,
+        #     Output only. [Output Only] The current status of this Interconnect's functionality,
         #     which can take one of the following values:
         #
         #        - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to
@@ -30692,12 +31105,12 @@ module Google
         #     as part of resource payload.
         # @!attribute [rw] peer_ip_address
         #   @return [::String]
-        #     [Output Only] IP address configured on the customer side of the
+        #     Output only. [Output Only] IP address configured on the customer side of the
         #     Interconnect link. The customer should configure this IP address during
         #     turnup when prompted by Google NOC. This can be used only for ping tests.
         # @!attribute [rw] provisioned_link_count
         #   @return [::Integer]
-        #     [Output Only] Number of links actually provisioned in this interconnect.
+        #     Output only. [Output Only] Number of links actually provisioned in this interconnect.
         # @!attribute [rw] remote_location
         #   @return [::String]
         #     Indicates that this is a Cross-Cloud Interconnect. This field specifies the
@@ -30721,13 +31134,13 @@ module Google
         #     customer.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] The current state of Interconnect functionality, which can
+        #     Output only. [Output Only] The current state of Interconnect functionality, which can
         #     take one of the following values:
         #
         #        - ACTIVE: The Interconnect is valid, turned up and ready to use.
@@ -30745,7 +31158,7 @@ module Google
         #     Check the Subzone enum for the list of possible values.
         # @!attribute [rw] wire_groups
         #   @return [::Array<::String>]
-        #     [Output Only] A list of the URLs of all CrossSiteNetwork WireGroups
+        #     Output only. [Output Only] A list of the URLs of all CrossSiteNetwork WireGroups
         #     configured to use this Interconnect. The Interconnect cannot be deleted if
         #     this list is non-empty.
         class Interconnect
@@ -30817,7 +31230,7 @@ module Google
             LINK_TYPE_ETHERNET_400G_LR4 = 127_023_690
           end
 
-          # [Output Only] The current status of this Interconnect's functionality,
+          # Output only. [Output Only] The current status of this Interconnect's functionality,
           # which can take one of the following values:
           #
           #    - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to
@@ -30850,7 +31263,7 @@ module Google
             UNDEFINED_REQUESTED_FEATURES = 0
           end
 
-          # [Output Only] The current state of Interconnect functionality, which can
+          # Output only. [Output Only] The current state of Interconnect functionality, which can
           # take one of the following values:
           #
           #    - ACTIVE: The Interconnect is valid, turned up and ready to use.
@@ -30973,7 +31386,7 @@ module Google
         #     Not present for PARTNER_PROVIDER.
         # @!attribute [rw] attachment_group
         #   @return [::String]
-        #     [Output Only] URL of the AttachmentGroup that includes this Attachment.
+        #     Output only. [Output Only] URL of the AttachmentGroup that includes this Attachment.
         # @!attribute [rw] bandwidth
         #   @return [::String]
         #     Provisioned bandwidth capacity for the interconnect attachment. For
@@ -30997,6 +31410,36 @@ module Google
         #        - BPS_50G: 50 Gbit/s
         #        - BPS_100G: 100 Gbit/s
         #     Check the Bandwidth enum for the list of possible values.
+        # @!attribute [rw] candidate_cloud_router_ip_address
+        #   @return [::String]
+        #     Single IPv4 address + prefix length to be configured on the cloud router
+        #     interface for this interconnect attachment.
+        #
+        #        - Both candidate_cloud_router_ip_address and
+        #        candidate_customer_router_ip_address fields must be set or both must be
+        #        unset.
+        #        - Prefix length of both candidate_cloud_router_ip_address and
+        #        candidate_customer_router_ip_address must be the same.
+        #        - Max prefix length is 31.
+        # @!attribute [rw] candidate_cloud_router_ipv6_address
+        #   @return [::String]
+        #     Single IPv6 address + prefix length to be configured on the cloud router
+        #     interface for this interconnect attachment.
+        #
+        #        - Both candidate_cloud_router_ipv6_address and
+        #        candidate_customer_router_ipv6_address fields must be set or both must be
+        #        unset.
+        #        - Prefix length of both candidate_cloud_router_ipv6_address and
+        #        candidate_customer_router_ipv6_address must be the same.
+        #        - Max prefix length is 126.
+        # @!attribute [rw] candidate_customer_router_ip_address
+        #   @return [::String]
+        #     Single IPv4 address + prefix length to be configured on the customer router
+        #     interface for this interconnect attachment.
+        # @!attribute [rw] candidate_customer_router_ipv6_address
+        #   @return [::String]
+        #     Single IPv6 address + prefix length to be configured on the customer router
+        #     interface for this interconnect attachment.
         # @!attribute [rw] candidate_ipv6_subnets
         #   @return [::Array<::String>]
         #     This field is not available.
@@ -31011,37 +31454,37 @@ module Google
         #     randomly select an unused /29 from all of link-local space.
         # @!attribute [rw] cloud_router_ip_address
         #   @return [::String]
-        #     [Output Only] IPv4 address + prefix length to be configured on Cloud Router
+        #     Output only. [Output Only] IPv4 address + prefix length to be configured on Cloud Router
         #     Interface for this interconnect attachment.
         # @!attribute [rw] cloud_router_ipv6_address
         #   @return [::String]
-        #     [Output Only] IPv6 address + prefix length to be configured on Cloud
+        #     Output only. [Output Only] IPv6 address + prefix length to be configured on Cloud
         #     Router Interface for this interconnect attachment.
         # @!attribute [rw] cloud_router_ipv6_interface_id
         #   @return [::String]
         #     This field is not available.
         # @!attribute [rw] configuration_constraints
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentConfigurationConstraints]
-        #     [Output Only] Constraints for this attachment, if any. The attachment does
+        #     Output only. [Output Only] Constraints for this attachment, if any. The attachment does
         #     not work if these constraints are not met.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] customer_router_ip_address
         #   @return [::String]
-        #     [Output Only] IPv4 address + prefix length to be configured on the customer
+        #     Output only. [Output Only] IPv4 address + prefix length to be configured on the customer
         #     router subinterface for this interconnect attachment.
         # @!attribute [rw] customer_router_ipv6_address
         #   @return [::String]
-        #     [Output Only] IPv6 address + prefix length to be configured on the
+        #     Output only. [Output Only] IPv6 address + prefix length to be configured on the
         #     customer router subinterface for this interconnect attachment.
         # @!attribute [rw] customer_router_ipv6_interface_id
         #   @return [::String]
         #     This field is not available.
         # @!attribute [rw] dataplane_version
         #   @return [::Integer]
-        #     [Output Only] Dataplane version for this InterconnectAttachment. This
+        #     Output only. [Output Only] Dataplane version for this InterconnectAttachment. This
         #     field is only present for Dataplane version 2 and higher. Absence of this
         #     field in the API output indicates that the Dataplane is version 1.
         # @!attribute [rw] description
@@ -31082,12 +31525,12 @@ module Google
         #     Check the Encryption enum for the list of possible values.
         # @!attribute [rw] google_reference_id
         #   @return [::String]
-        #     [Output Only] Google reference ID, to be used when raising support tickets
+        #     Output only. [Output Only] Google reference ID, to be used when raising support tickets
         #     with Google or otherwise to debug backend connectivity issues.
         #     [Deprecated] This field is not used.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] interconnect
         #   @return [::String]
@@ -31111,7 +31554,7 @@ module Google
         #     pool.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#interconnectAttachment for interconnect attachments.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#interconnectAttachment for interconnect attachments.
         # @!attribute [rw] l2_forwarding
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentL2Forwarding]
         #     L2 Interconnect Attachment related config. This field is required if the
@@ -31153,7 +31596,7 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] operational_status
         #   @return [::String]
-        #     [Output Only] The current status of whether or not this interconnect
+        #     Output only. [Output Only] The current status of whether or not this interconnect
         #     attachment is functional, which can take one of the following values:
         #
         #        - OS_ACTIVE: The attachment has been turned up and is ready to
@@ -31186,18 +31629,18 @@ module Google
         #     available for DEDICATED.
         # @!attribute [rw] private_interconnect_info
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentPrivateInfo]
-        #     [Output Only] Information specific to an InterconnectAttachment.
+        #     Output only. [Output Only] Information specific to an InterconnectAttachment.
         #     This property is populated if the interconnect that
         #     this is attached to is of type DEDICATED.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional interconnect attachment
+        #     Output only. [Output Only] URL of the region where the regional interconnect attachment
         #     resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         # @!attribute [rw] remote_service
         #   @return [::String]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     If the attachment is on a Cross-Cloud Interconnect connection, this field
         #     contains the interconnect's remote location service provider. Example
         #     values: "Amazon Web Services" "Microsoft Azure".
@@ -31213,10 +31656,10 @@ module Google
         #     network & region within which the Cloud Router is configured.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] stack_type
         #   @return [::String]
         #     The stack type for this interconnect attachment to identify whether the
@@ -31228,7 +31671,7 @@ module Google
         #     Check the StackType enum for the list of possible values.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] The current state of this attachment's functionality.
+        #     Output only. [Output Only] The current state of this attachment's functionality.
         #     Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED/PRIVATE,
         #     PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum values
         #     PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER are used
@@ -31417,7 +31860,7 @@ module Google
             NONE = 2_402_104
           end
 
-          # [Output Only] The current status of whether or not this interconnect
+          # Output only. [Output Only] The current status of whether or not this interconnect
           # attachment is functional, which can take one of the following values:
           #
           #    - OS_ACTIVE: The attachment has been turned up and is ready to
@@ -31454,7 +31897,7 @@ module Google
             IPV4_ONLY = 22_373_798
           end
 
-          # [Output Only] The current state of this attachment's functionality.
+          # Output only. [Output Only] The current state of this attachment's functionality.
           # Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED/PRIVATE,
           # PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum values
           # PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER are used
@@ -31542,7 +31985,7 @@ module Google
         #     A list of InterconnectAttachmentsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#interconnectAttachmentAggregatedList for aggregated
+        #     Output only. [Output Only] Type of resource. Alwayscompute#interconnectAttachmentAggregatedList for aggregated
         #     lists of interconnect attachments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -31553,10 +31996,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -31576,7 +32019,7 @@ module Google
 
         # @!attribute [rw] bgp_md5
         #   @return [::String]
-        #     [Output Only] Whether the attachment's BGP session
+        #     Output only. [Output Only] Whether the attachment's BGP session
         #     requires/allows/disallows BGP MD5 authentication. This can take one of
         #     the following values: MD5_OPTIONAL, MD5_REQUIRED, MD5_UNSUPPORTED.
         #
@@ -31589,7 +32032,7 @@ module Google
         #     Check the BgpMd5 enum for the list of possible values.
         # @!attribute [rw] bgp_peer_asn_ranges
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange>]
-        #     [Output Only] List of ASN ranges that the remote location is known to
+        #     Output only. [Output Only] List of ASN ranges that the remote location is known to
         #     support. Formatted as an array of inclusive ranges {min: min-value, max:
         #     max-value}. For example, [\\{min: 123, max: 123}, \\{min: 64512, max: 65534}]
         #     allows the peer ASN to be 123 or anything in the range 64512-65534.
@@ -31600,7 +32043,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Whether the attachment's BGP session
+          # Output only. [Output Only] Whether the attachment's BGP session
           # requires/allows/disallows BGP MD5 authentication. This can take one of
           # the following values: MD5_OPTIONAL, MD5_REQUIRED, MD5_UNSUPPORTED.
           #
@@ -31648,7 +32091,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupConfigured]
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -31663,7 +32106,7 @@ module Google
         #     described byAIP 154.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] intent
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupIntent]
@@ -31674,7 +32117,7 @@ module Google
         #     Google Support.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always
+        #     Output only. [Output Only] Type of the resource. Always
         #     compute#interconnectAttachmentGroup.
         # @!attribute [rw] logical_structure
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupLogicalStructure]
@@ -31689,7 +32132,7 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class InterconnectAttachmentGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -31753,34 +32196,34 @@ module Google
         # same.
         # @!attribute [rw] attachments
         #   @return [::Array<::String>]
-        #     [Output Only] URLs of any particular Attachments to explain this
+        #     Output only. [Output Only] URLs of any particular Attachments to explain this
         #     blocker in more detail.
         # @!attribute [rw] blocker_type
         #   @return [::String]
         #     Check the BlockerType enum for the list of possible values.
         # @!attribute [rw] documentation_link
         #   @return [::String]
-        #     [Output Only] The url of Google Cloud public documentation explaining
+        #     Output only. [Output Only] The url of Google Cloud public documentation explaining
         #     this requirement. This is set for every type of requirement.
         # @!attribute [rw] explanation
         #   @return [::String]
-        #     [Output Only] A human-readable explanation of this requirement and
+        #     Output only. [Output Only] A human-readable explanation of this requirement and
         #     why it's not met. This is set for every type of requirement.
         # @!attribute [rw] metros
         #   @return [::Array<::String>]
-        #     [Output Only] Metros used to explain this blocker in more detail.
+        #     Output only. [Output Only] Metros used to explain this blocker in more detail.
         #     These are three-letter lowercase strings like "iad". This will be set
         #     for some blockers (like NO_ATTACHMENTS_IN_METRO_AND_ZONE) but does
         #     not apply to others.
         # @!attribute [rw] regions
         #   @return [::Array<::String>]
-        #     [Output Only] Regions used to explain this blocker in more
+        #     Output only. [Output Only] Regions used to explain this blocker in more
         #     detail. These are region names formatted like "us-central1". This
         #     will be set for some blockers (like INCOMPATIBLE_REGIONS) but does
         #     not apply to others.
         # @!attribute [rw] zones
         #   @return [::Array<::String>]
-        #     [Output Only] Zones used to explain this blocker in more detail.
+        #     Output only. [Output Only] Zones used to explain this blocker in more detail.
         #     Format is "zone1" and/or "zone2". This will be set for some blockers
         #     (like  MISSING_ZONE) but does not apply to others.
         class InterconnectAttachmentGroupConfiguredAvailabilitySLAIntendedSlaBlockers
@@ -31846,7 +32289,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachmentGroupLogicalStructureRegionMetro>]
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The name of a region, like "us-central1".
+        #     Output only. [Output Only] The name of a region, like "us-central1".
         class InterconnectAttachmentGroupLogicalStructureRegion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -31857,7 +32300,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachmentGroupLogicalStructureRegionMetroFacility>]
         # @!attribute [rw] metro
         #   @return [::String]
-        #     [Output Only] The name of the metro, as a three-letter lowercase
+        #     Output only. [Output Only] The name of the metro, as a three-letter lowercase
         #     string like "iad". This is the first component of the location of an
         #     Interconnect.
         class InterconnectAttachmentGroupLogicalStructureRegionMetro
@@ -31869,7 +32312,7 @@ module Google
         # Interconnects.
         # @!attribute [rw] facility
         #   @return [::String]
-        #     [Output Only] The name of a facility, like "iad-1234".
+        #     Output only. [Output Only] The name of a facility, like "iad-1234".
         # @!attribute [rw] zones
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone>]
         class InterconnectAttachmentGroupLogicalStructureRegionMetroFacility
@@ -31882,12 +32325,12 @@ module Google
         # Interconnects.
         # @!attribute [rw] attachments
         #   @return [::Array<::String>]
-        #     [Output Only] URLs of Attachments in the given zone, to the given
+        #     Output only. [Output Only] URLs of Attachments in the given zone, to the given
         #     region, on Interconnects in the given facility and metro. Every
         #     Attachment in the AG has such an entry.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The name of a zone, either "zone1" or "zone2".
+        #     Output only. [Output Only] The name of a zone, either "zone1" or "zone2".
         class InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -31925,7 +32368,7 @@ module Google
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface:
         #     MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
@@ -31942,18 +32385,18 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupConfigured]
         # @!attribute [rw] group_status
         #   @return [::String]
-        #     Summarizes the status of the group.
+        #     Output only. Summarizes the status of the group.
         #     Check the GroupStatus enum for the list of possible values.
         # @!attribute [rw] intent
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupIntent]
         # @!attribute [rw] operational
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupConfigured]
-        #     The operational state of the group, including only active Attachments.
+        #     Output only. The operational state of the group, including only active Attachments.
         class InterconnectAttachmentGroupsOperationalStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Summarizes the status of the group.
+          # Output only. Summarizes the status of the group.
           module GroupStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_GROUP_STATUS = 0
@@ -31971,27 +32414,27 @@ module Google
         # The status of one Attachment in the group. List order is arbitrary.
         # @!attribute [rw] admin_enabled
         #   @return [::Boolean]
-        #     Whether this Attachment is enabled. This becomes false when the customer
+        #     Output only. Whether this Attachment is enabled. This becomes false when the customer
         #     drains their Attachment.
         # @!attribute [rw] attachment
         #   @return [::String]
-        #     The URL of the Attachment being described.
+        #     Output only. The URL of the Attachment being described.
         # @!attribute [rw] is_active
         #   @return [::String]
-        #     Whether this Attachment is participating in the redundant configuration.
+        #     Output only. Whether this Attachment is participating in the redundant configuration.
         #     This will be ACTIVE if and only if the status below is CONNECTION_UP.
         #     Any INACTIVE Attachments are excluded from the analysis that generates
         #     operational.availabilitySLA.
         #     Check the IsActive enum for the list of possible values.
         # @!attribute [rw] status
         #   @return [::String]
-        #     Whether this Attachment is active, and if so, whether BGP is up.
+        #     Output only. Whether this Attachment is active, and if so, whether BGP is up.
         #     Check the Status enum for the list of possible values.
         class InterconnectAttachmentGroupsOperationalStatusAttachmentStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Whether this Attachment is participating in the redundant configuration.
+          # Output only. Whether this Attachment is participating in the redundant configuration.
           # This will be ACTIVE if and only if the status below is CONNECTION_UP.
           # Any INACTIVE Attachments are excluded from the analysis that generates
           # operational.availabilitySLA.
@@ -32006,7 +32449,7 @@ module Google
             UNSPECIFIED = 526_786_327
           end
 
-          # Whether this Attachment is active, and if so, whether BGP is up.
+          # Output only. Whether this Attachment is active, and if so, whether BGP is up.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -32157,7 +32600,7 @@ module Google
         #     A list of InterconnectAttachment resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#interconnectAttachmentList for lists of interconnect
+        #     Output only. [Output Only] Type of resource. Alwayscompute#interconnectAttachmentList for lists of interconnect
         #     attachments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -32168,7 +32611,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -32507,7 +32950,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::InterconnectGroupConfigured]
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -32522,7 +32965,7 @@ module Google
         #     described by AIP 154.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] intent
         #   @return [::Google::Cloud::Compute::V1::InterconnectGroupIntent]
@@ -32535,7 +32978,7 @@ module Google
         #     The size of this map is limited by an "Interconnects per group" quota.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#InterconnectGroup
+        #     Output only. [Output Only] Type of the resource. Always compute#InterconnectGroup
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -32549,7 +32992,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::InterconnectGroupPhysicalStructure]
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class InterconnectGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -32610,30 +33053,30 @@ module Google
         #     Check the BlockerType enum for the list of possible values.
         # @!attribute [rw] documentation_link
         #   @return [::String]
-        #     [Output Only] The url of Google Cloud public documentation explaining
+        #     Output only. [Output Only] The url of Google Cloud public documentation explaining
         #     this requirement. This is set for every type of requirement.
         # @!attribute [rw] explanation
         #   @return [::String]
-        #     [Output Only] A human-readable explanation of this requirement and
+        #     Output only. [Output Only] A human-readable explanation of this requirement and
         #     why it's not met. This is set for every type of requirement.
         # @!attribute [rw] facilities
         #   @return [::Array<::String>]
-        #     [Output Only] Facilities used to explain this blocker in more detail.
+        #     Output only. [Output Only] Facilities used to explain this blocker in more detail.
         #     Like physicalStructure.metros.facilities.facility, this is a numeric
         #     string like "5467".
         # @!attribute [rw] interconnects
         #   @return [::Array<::String>]
-        #     [Output Only] Interconnects used to explain this blocker in more
+        #     Output only. [Output Only] Interconnects used to explain this blocker in more
         #     detail.
         # @!attribute [rw] metros
         #   @return [::Array<::String>]
-        #     [Output Only] Metros used to explain this blocker in more detail.
+        #     Output only. [Output Only] Metros used to explain this blocker in more detail.
         #     These are three-letter lowercase strings like "iad". A blocker like
         #     INCOMPATIBLE_METROS will specify the problematic metros in this
         #     field.
         # @!attribute [rw] zones
         #   @return [::Array<::String>]
-        #     [Output Only] Zones used to explain this blocker in more detail.
+        #     Output only. [Output Only] Zones used to explain this blocker in more detail.
         #     Zone names are "zone1" and/or "zone2".
         class InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers
           include ::Google::Protobuf::MessageExts
@@ -32706,7 +33149,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectGroupPhysicalStructureMetrosFacilities>]
         # @!attribute [rw] metro
         #   @return [::String]
-        #     [Output Only] The name of the metro, as a three-letter lowercase string
+        #     Output only. [Output Only] The name of the metro, as a three-letter lowercase string
         #     like "iad". This is the first component of the location of
         #     Interconnects underneath this.
         class InterconnectGroupPhysicalStructureMetros
@@ -32718,7 +33161,7 @@ module Google
         # in.
         # @!attribute [rw] facility
         #   @return [::String]
-        #     [Output Only] The ID of this facility, as a numeric string like
+        #     Output only. [Output Only] The ID of this facility, as a numeric string like
         #     "5467". This is the third component of the location of Interconnects
         #     in this facility.
         # @!attribute [rw] zones
@@ -32732,11 +33175,11 @@ module Google
         # present in.
         # @!attribute [rw] interconnects
         #   @return [::Array<::String>]
-        #     [Output Only] URLs of Interconnects in this redundancy group in the
+        #     Output only. [Output Only] URLs of Interconnects in this redundancy group in the
         #     given metro, facility, and zone.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The name of the zone, either "zone1" or "zone2".
+        #     Output only. [Output Only] The name of the zone, either "zone1" or "zone2".
         #     This is the second component of the location of Interconnects in
         #     this facility.
         class InterconnectGroupPhysicalStructureMetrosFacilitiesZones
@@ -32960,7 +33403,7 @@ module Google
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -32973,24 +33416,24 @@ module Google
         # Request to get the status of the interconnect group with extra detail.
         # @!attribute [rw] configured
         #   @return [::Google::Cloud::Compute::V1::InterconnectGroupConfigured]
-        #     The configuration analysis, as returned by Get.
+        #     Output only. The configuration analysis, as returned by Get.
         # @!attribute [rw] group_status
         #   @return [::String]
-        #     Summarizes the status of the group.
+        #     Output only. Summarizes the status of the group.
         #     Check the GroupStatus enum for the list of possible values.
         # @!attribute [rw] intent
         #   @return [::Google::Cloud::Compute::V1::InterconnectGroupIntent]
-        #     The intent of the resource, as returned by Get.
+        #     Output only. The intent of the resource, as returned by Get.
         # @!attribute [rw] interconnect_statuses
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectGroupsOperationalStatusInterconnectStatus>]
         # @!attribute [rw] operational
         #   @return [::Google::Cloud::Compute::V1::InterconnectGroupConfigured]
-        #     The operational state of the group, including only active Interconnects.
+        #     Output only. The operational state of the group, including only active Interconnects.
         class InterconnectGroupsOperationalStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Summarizes the status of the group.
+          # Output only. Summarizes the status of the group.
           module GroupStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_GROUP_STATUS = 0
@@ -33008,24 +33451,24 @@ module Google
         # The status of one Interconnect in the group. The order is arbitrary.
         # @!attribute [rw] admin_enabled
         #   @return [::Boolean]
-        #     Whether the Interconnect is enabled.
+        #     Output only. Whether the Interconnect is enabled.
         # @!attribute [rw] diagnostics
         #   @return [::Google::Cloud::Compute::V1::InterconnectDiagnostics]
-        #     The diagnostics of the Interconnect, as returned by the existing
+        #     Output only. The diagnostics of the Interconnect, as returned by the existing
         #     get-diagnostics method.
         # @!attribute [rw] interconnect
         #   @return [::String]
-        #     The URL of the Interconnect being described.
+        #     Output only. The URL of the Interconnect being described.
         # @!attribute [rw] is_active
         #   @return [::String]
-        #     Whether this interconnect is participating in the redundant
+        #     Output only. Whether this interconnect is participating in the redundant
         #     configuration.
         #     Check the IsActive enum for the list of possible values.
         class InterconnectGroupsOperationalStatusInterconnectStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Whether this interconnect is participating in the redundant
+          # Output only. Whether this interconnect is participating in the redundant
           # configuration.
           module IsActive
             # A value indicating that the enum field is not set.
@@ -33048,7 +33491,7 @@ module Google
         #     A list of Interconnect resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#interconnectList for lists of interconnects.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#interconnectList for lists of interconnects.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -33058,7 +33501,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -33074,7 +33517,7 @@ module Google
         # Creating VLAN Attachments.
         # @!attribute [rw] address
         #   @return [::String]
-        #     [Output Only] The postal address of the Point of Presence, each line in
+        #     Output only. [Output Only] The postal address of the Point of Presence, each line in
         #     the address is separated by a newline character.
         # @!attribute [rw] availability_zone
         #   @return [::String]
@@ -33116,7 +33559,7 @@ module Google
         #     Check the Continent enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] cross_site_interconnect_infos
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectLocationCrossSiteInterconnectInfo>]
@@ -33126,39 +33569,39 @@ module Google
         #     Interconnect isn't allowed to locations which are not listed.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] An optional description of the resource.
+        #     Output only. [Output Only] An optional description of the resource.
         # @!attribute [rw] facility_provider
         #   @return [::String]
-        #     [Output Only] The name of the provider for this facility (e.g., EQUINIX).
+        #     Output only. [Output Only] The name of the provider for this facility (e.g., EQUINIX).
         # @!attribute [rw] facility_provider_facility_id
         #   @return [::String]
-        #     [Output Only] A provider-assigned Identifier for this facility (e.g.,
+        #     Output only. [Output Only] A provider-assigned Identifier for this facility (e.g.,
         #     Ashburn-DC1).
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#interconnectLocation for interconnect locations.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#interconnectLocation for interconnect locations.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] Name of the resource.
+        #     Output only. [Output Only] Name of the resource.
         # @!attribute [rw] peeringdb_facility_id
         #   @return [::String]
-        #     [Output Only] The peeringdb identifier for this facility (corresponding
+        #     Output only. [Output Only] The peeringdb identifier for this facility (corresponding
         #     with a netfac type in peeringdb).
         # @!attribute [rw] region_infos
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectLocationRegionInfo>]
-        #     [Output Only] A list of InterconnectLocation.RegionInfo objects, that
+        #     Output only. [Output Only] A list of InterconnectLocation.RegionInfo objects, that
         #     describe parameters pertaining to the relation between this
         #     InterconnectLocation and various Google Cloud regions.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] single_region_production_critical_peer_locations
         #   @return [::Array<::String>]
-        #     [Output Only] URLs of the other locations that can pair up with this
+        #     Output only. [Output Only] URLs of the other locations that can pair up with this
         #     location to support Single-Region 99.99% SLA. E.g. iad-zone1-1 and
         #     iad-zone2-5467 are Single-Region 99.99% peer locations of each other.
         # @!attribute [rw] status
@@ -33173,7 +33616,7 @@ module Google
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] supports_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         class InterconnectLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -33264,7 +33707,7 @@ module Google
         # between the containing location and another remote location.
         # @!attribute [rw] city
         #   @return [::String]
-        #     The remote location for Cross-Site Interconnect wires. This specifies an
+        #     Output only. The remote location for Cross-Site Interconnect wires. This specifies an
         #     InterconnectLocation city (metropolitan area designator), which itself
         #     may match multiple InterconnectLocations.
         class InterconnectLocationCrossSiteInterconnectInfo
@@ -33281,7 +33724,7 @@ module Google
         #     A list of InterconnectLocation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#interconnectLocationList for lists of interconnect
+        #     Output only. [Output Only] Type of resource. Alwayscompute#interconnectLocationList for lists of interconnect
         #     locations.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -33292,7 +33735,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -33306,24 +33749,24 @@ module Google
         # Region.
         # @!attribute [rw] expected_rtt_ms
         #   @return [::Integer]
-        #     Expected round-trip time in milliseconds, from this InterconnectLocation
+        #     Output only. Expected round-trip time in milliseconds, from this InterconnectLocation
         #     to a VM in this region.
         # @!attribute [rw] l2_forwarding_enabled
         #   @return [::Boolean]
-        #     Identifies whether L2 Interconnect Attachments can be created in this
+        #     Output only. Identifies whether L2 Interconnect Attachments can be created in this
         #     region for interconnects that are in this location.
         # @!attribute [rw] location_presence
         #   @return [::String]
-        #     Identifies the network presence of this location.
+        #     Output only. Identifies the network presence of this location.
         #     Check the LocationPresence enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     URL for the region of this location.
+        #     Output only. URL for the region of this location.
         class InterconnectLocationRegionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Identifies the network presence of this location.
+          # Output only. Identifies the network presence of this location.
           module LocationPresence
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCATION_PRESENCE = 0
@@ -33615,25 +34058,25 @@ module Google
         # Interconnect attachment (VLAN).
         # @!attribute [rw] address
         #   @return [::String]
-        #     [Output Only] The postal address of the Point of Presence, each line in
+        #     Output only. [Output Only] The postal address of the Point of Presence, each line in
         #     the address is separated by a newline character.
         # @!attribute [rw] attachment_configuration_constraints
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentConfigurationConstraints]
-        #     [Output Only] Subset of fields from InterconnectAttachment's
+        #     Output only. [Output Only] Subset of fields from InterconnectAttachment's
         #     |configurationConstraints| field that apply to all attachments for this
         #     remote location.
         # @!attribute [rw] city
         #   @return [::String]
-        #     [Output Only] Metropolitan area designator that indicates which city an
+        #     Output only. [Output Only] Metropolitan area designator that indicates which city an
         #     interconnect is located.
         #     For example: "Chicago, IL", "Amsterdam, Netherlands".
         # @!attribute [rw] constraints
         #   @return [::Google::Cloud::Compute::V1::InterconnectRemoteLocationConstraints]
-        #     [Output Only] Constraints on the parameters for creating Cross-Cloud
+        #     Output only. [Output Only] Constraints on the parameters for creating Cross-Cloud
         #     Interconnect and associated InterconnectAttachments.
         # @!attribute [rw] continent
         #   @return [::String]
-        #     [Output Only] Continent for this location, which can take one of the
+        #     Output only. [Output Only] Continent for this location, which can take one of the
         #     following values:
         #
         #        - AFRICA
@@ -33644,69 +34087,69 @@ module Google
         #     Check the Continent enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] An optional description of the resource.
+        #     Output only. [Output Only] An optional description of the resource.
         # @!attribute [rw] facility_provider
         #   @return [::String]
-        #     [Output Only] The name of the provider for this facility (e.g., EQUINIX).
+        #     Output only. [Output Only] The name of the provider for this facility (e.g., EQUINIX).
         # @!attribute [rw] facility_provider_facility_id
         #   @return [::String]
-        #     [Output Only] A provider-assigned Identifier for this facility (e.g.,
+        #     Output only. [Output Only] A provider-assigned Identifier for this facility (e.g.,
         #     Ashburn-DC1).
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#interconnectRemoteLocation for interconnect remote
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#interconnectRemoteLocation for interconnect remote
         #     locations.
         # @!attribute [rw] lacp
         #   @return [::String]
-        #     [Output Only] Link Aggregation Control Protocol (LACP) constraints, which
+        #     Output only. [Output Only] Link Aggregation Control Protocol (LACP) constraints, which
         #     can take one of the following values: LACP_SUPPORTED, LACP_UNSUPPORTED
         #     Check the Lacp enum for the list of possible values.
         # @!attribute [rw] max_lag_size100_gbps
         #   @return [::Integer]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     The maximum number of 100 Gbps ports supported in a link aggregation group
         #     (LAG). When linkType is 100 Gbps, requestedLinkCount cannot exceed
         #     max_lag_size_100_gbps.
         # @!attribute [rw] max_lag_size10_gbps
         #   @return [::Integer]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     The maximum number of 10 Gbps ports supported in a link aggregation group
         #     (LAG). When linkType is 10 Gbps, requestedLinkCount cannot exceed
         #     max_lag_size_10_gbps.
         # @!attribute [rw] max_lag_size400_gbps
         #   @return [::Integer]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #     The maximum number of 400 Gbps ports supported in a link aggregation group
         #     (LAG). When linkType is 400 Gbps, requestedLinkCount cannot exceed
         #     max_lag_size_400_gbps.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] Name of the resource.
+        #     Output only. [Output Only] Name of the resource.
         # @!attribute [rw] peeringdb_facility_id
         #   @return [::String]
-        #     [Output Only] The peeringdb identifier for this facility (corresponding
+        #     Output only. [Output Only] The peeringdb identifier for this facility (corresponding
         #     with a netfac type in peeringdb).
         # @!attribute [rw] permitted_connections
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectRemoteLocationPermittedConnections>]
-        #     [Output Only] Permitted connections.
+        #     Output only. [Output Only] Permitted connections.
         # @!attribute [rw] remote_service
         #   @return [::String]
-        #     [Output Only] Indicates the service provider present at the remote
+        #     Output only. [Output Only] Indicates the service provider present at the remote
         #     location. Example values: "Amazon Web Services", "Microsoft Azure".
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of this InterconnectRemoteLocation, which can take
+        #     Output only. [Output Only] The status of this InterconnectRemoteLocation, which can take
         #     one of the following values:
         #
         #        - CLOSED: The InterconnectRemoteLocation is closed and is unavailable
@@ -33719,7 +34162,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Continent for this location, which can take one of the
+          # Output only. [Output Only] Continent for this location, which can take one of the
           # following values:
           #
           #    - AFRICA
@@ -33742,7 +34185,7 @@ module Google
             SOUTH_AMERICA = 32_597_340
           end
 
-          # [Output Only] Link Aggregation Control Protocol (LACP) constraints, which
+          # Output only. [Output Only] Link Aggregation Control Protocol (LACP) constraints, which
           # can take one of the following values: LACP_SUPPORTED, LACP_UNSUPPORTED
           module Lacp
             # A value indicating that the enum field is not set.
@@ -33758,7 +34201,7 @@ module Google
             LACP_UNSUPPORTED = 203_930_104
           end
 
-          # [Output Only] The status of this InterconnectRemoteLocation, which can take
+          # Output only. [Output Only] The status of this InterconnectRemoteLocation, which can take
           # one of the following values:
           #
           #    - CLOSED: The InterconnectRemoteLocation is closed and is unavailable
@@ -33782,7 +34225,7 @@ module Google
 
         # @!attribute [rw] port_pair_remote_location
         #   @return [::String]
-        #     [Output Only] Port pair remote location constraints, which can take one
+        #     Output only. [Output Only] Port pair remote location constraints, which can take one
         #     of the following values: PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION,
         #     PORT_PAIR_MATCHING_REMOTE_LOCATION.
         #
@@ -33796,12 +34239,12 @@ module Google
         #     Check the PortPairRemoteLocation enum for the list of possible values.
         # @!attribute [rw] port_pair_vlan
         #   @return [::String]
-        #     [Output Only] Port pair VLAN constraints, which can take one of the
+        #     Output only. [Output Only] Port pair VLAN constraints, which can take one of the
         #     following values: PORT_PAIR_UNCONSTRAINED_VLAN, PORT_PAIR_MATCHING_VLAN
         #     Check the PortPairVlan enum for the list of possible values.
         # @!attribute [rw] subnet_length_range
         #   @return [::Google::Cloud::Compute::V1::InterconnectRemoteLocationConstraintsSubnetLengthRange]
-        #     [Output Only]
+        #     Output only. [Output Only]
         #
         #     [min-length, max-length]
         #
@@ -33820,7 +34263,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Port pair remote location constraints, which can take one
+          # Output only. [Output Only] Port pair remote location constraints, which can take one
           # of the following values: PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION,
           # PORT_PAIR_MATCHING_REMOTE_LOCATION.
           #
@@ -33846,7 +34289,7 @@ module Google
             PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION = 60_609_829
           end
 
-          # [Output Only] Port pair VLAN constraints, which can take one of the
+          # Output only. [Output Only] Port pair VLAN constraints, which can take one of the
           # following values: PORT_PAIR_UNCONSTRAINED_VLAN, PORT_PAIR_MATCHING_VLAN
           module PortPairVlan
             # A value indicating that the enum field is not set.
@@ -33884,7 +34327,7 @@ module Google
         #     A list of InterconnectRemoteLocation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#interconnectRemoteLocationList for lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#interconnectRemoteLocationList for lists of
         #     interconnect remote locations.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -33895,7 +34338,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -33906,7 +34349,7 @@ module Google
 
         # @!attribute [rw] interconnect_location
         #   @return [::String]
-        #     [Output Only] URL of an Interconnect location that is permitted to
+        #     Output only. [Output Only] URL of an Interconnect location that is permitted to
         #     connect to this Interconnect remote location.
         class InterconnectRemoteLocationPermittedConnections
           include ::Google::Protobuf::MessageExts
@@ -34001,7 +34444,7 @@ module Google
         #     charges a usage fee.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -34018,7 +34461,7 @@ module Google
         #     the same disk or image.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#license for
+        #     Output only. [Output Only] Type of resource. Always compute#license for
         #     licenses.
         # @!attribute [rw] license_code
         #   @return [::Integer]
@@ -34053,10 +34496,10 @@ module Google
         #     [Input Only] Deprecated.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] sole_tenant_only
         #   @return [::Boolean]
         #     If true, this license can only be used on VMs on sole tenant nodes.
@@ -34066,7 +34509,7 @@ module Google
         #     creating an image from a disk, disk from snapshot, or snapshot from disk.
         # @!attribute [rw] update_timestamp
         #   @return [::String]
-        #     [Output Only] Last update timestamp inRFC3339
+        #     Output only. [Output Only] Last update timestamp inRFC3339
         #     text format.
         class License
           include ::Google::Protobuf::MessageExts
@@ -34082,18 +34525,18 @@ module Google
         # images.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] Description of this License Code.
+        #     Output only. [Output Only] Description of this License Code.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#licenseCode for
+        #     Output only. [Output Only] Type of resource. Always compute#licenseCode for
         #     licenses.
         # @!attribute [rw] license_alias
         #   @return [::Array<::Google::Cloud::Compute::V1::LicenseCodeLicenseAlias>]
@@ -34101,24 +34544,24 @@ module Google
         #     License Code.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] Name of the resource. The name is 1-20 characters long and
+        #     Output only. [Output Only] Name of the resource. The name is 1-20 characters long and
         #     must be a valid 64 bit integer.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] Current state of this License Code.
+        #     Output only. [Output Only] Current state of this License Code.
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] transferable
         #   @return [::Boolean]
-        #     [Output Only] If true, the license will remain attached when creating
+        #     Output only. [Output Only] If true, the license will remain attached when creating
         #     images or snapshots from disks. Otherwise, the license is not transferred.
         class LicenseCode
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Current state of this License Code.
+          # Output only. [Output Only] Current state of this License Code.
           module State
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
@@ -34142,10 +34585,10 @@ module Google
 
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] Description of this License Code.
+        #     Output only. [Output Only] Description of this License Code.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] URL of license corresponding to this License Code.
+        #     Output only. [Output Only] URL of license corresponding to this License Code.
         class LicenseCodeLicenseAlias
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -34194,7 +34637,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -47632,7 +48075,7 @@ module Google
         # required to create a Virtual machine (VM) instance. For more information, seeMachine images.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] The creation timestamp for this machine image inRFC3339
+        #     Output only. [Output Only] The creation timestamp for this machine image inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -47644,14 +48087,14 @@ module Google
         #     informing the OS to prepare for the snapshot process.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this machine image. The server
+        #     Output only. [Output Only] A unique identifier for this machine image. The server
         #     defines this identifier.
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::InstanceProperties]
         #     [Output Only] Properties of source instance
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#machineImage for machine image.
+        #     Output only. [Output Only] The resource type, which is alwayscompute#machineImage for machine image.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this machine image, which is
@@ -47696,14 +48139,14 @@ module Google
         #     Output only. Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] saved_disks
         #   @return [::Array<::Google::Cloud::Compute::V1::SavedDisk>]
-        #     An array of Machine Image specific properties for disks attached to the
+        #     Output only. An array of Machine Image specific properties for disks attached to the
         #     source instance
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] The URL for this machine image. The server defines this URL.
+        #     Output only. [Output Only] The URL for this machine image. The server defines this URL.
         # @!attribute [rw] source_disk_encryption_keys
         #   @return [::Array<::Google::Cloud::Compute::V1::SourceDiskEncryptionKey>]
         #     [Input Only] Thecustomer-supplied
@@ -47720,12 +48163,12 @@ module Google
         #        - projects/project/zones/zone/instances/instance
         # @!attribute [rw] source_instance_properties
         #   @return [::Google::Cloud::Compute::V1::SourceInstanceProperties]
-        #     [Output Only] DEPRECATED: Please use instance_properties
+        #     Output only. [Output Only] DEPRECATED: Please use instance_properties
         #     instead for source instance related properties. New properties will not be
         #     added to this field.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the machine image. One of the following values:INVALID, CREATING, READY,DELETING, and UPLOADING.
+        #     Output only. [Output Only] The status of the machine image. One of the following values:INVALID, CREATING, READY,DELETING, and UPLOADING.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] storage_locations
         #   @return [::Array<::String>]
@@ -47733,7 +48176,7 @@ module Google
         #     stored.
         # @!attribute [rw] total_storage_bytes
         #   @return [::Integer]
-        #     [Output Only] Total size of the storage used by the machine image.
+        #     Output only. [Output Only] Total size of the storage used by the machine image.
         class MachineImage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -47747,7 +48190,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # [Output Only] The status of the machine image. One of the following values:INVALID, CREATING, READY,DELETING, and UPLOADING.
+          # Output only. [Output Only] The status of the machine image. One of the following values:INVALID, CREATING, READY,DELETING, and UPLOADING.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -47773,7 +48216,7 @@ module Google
         #     A list of MachineImage resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#machineImagesListResponse for machine image lists.
+        #     Output only. [Output Only] The resource type, which is alwayscompute#machineImagesListResponse for machine image lists.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -47783,7 +48226,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -47833,7 +48276,7 @@ module Google
         #     types for more information.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The type of the resource. Alwayscompute#machineType for machine types.
+        #     Output only. [Output Only] The type of the resource. Alwayscompute#machineType for machine types.
         # @!attribute [rw] maximum_persistent_disks
         #   @return [::Integer]
         #     [Output Only] Maximum persistent disks allowed.
@@ -47882,7 +48325,7 @@ module Google
         #     A list of MachineTypesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#machineTypeAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#machineTypeAggregatedList for aggregated lists of
         #     machine types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -47893,10 +48336,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -47923,7 +48366,7 @@ module Google
         #     A list of MachineType resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#machineTypeList
+        #     Output only. [Output Only] Type of resource. Always compute#machineTypeList
         #     for lists of machine types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -47934,7 +48377,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -47958,7 +48401,7 @@ module Google
         # A Managed Instance resource.
         # @!attribute [rw] current_action
         #   @return [::String]
-        #     [Output Only] The current action that the managed instance group has
+        #     Output only. [Output Only] The current action that the managed instance group has
         #     scheduled for the instance. Possible values:
         #
         #        - NONE The instance is running, and the managed
@@ -47987,48 +48430,48 @@ module Google
         #     Check the CurrentAction enum for the list of possible values.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output only] The unique identifier for this resource. This field is empty
+        #     Output only. [Output only] The unique identifier for this resource. This field is empty
         #     when instance does not exist.
         # @!attribute [rw] instance
         #   @return [::String]
-        #     [Output Only] The URL of the instance. The URL can exist even if the
+        #     Output only. [Output Only] The URL of the instance. The URL can exist even if the
         #     instance has not yet been created.
         # @!attribute [rw] instance_health
         #   @return [::Array<::Google::Cloud::Compute::V1::ManagedInstanceInstanceHealth>]
-        #     [Output Only] Health state of the instance per health-check.
+        #     Output only. [Output Only] Health state of the instance per health-check.
         # @!attribute [rw] instance_status
         #   @return [::String]
-        #     [Output Only] The status of the instance. This field is empty when
+        #     Output only. [Output Only] The status of the instance. This field is empty when
         #     the instance does not exist.
         #     Check the InstanceStatus enum for the list of possible values.
         # @!attribute [rw] last_attempt
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceLastAttempt]
-        #     [Output Only] Information about the last attempt to create or delete
+        #     Output only. [Output Only] Information about the last attempt to create or delete
         #     the instance.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of the instance. The name always exists even if the
+        #     Output only. [Output Only] The name of the instance. The name always exists even if the
         #     instance has not yet been created.
         # @!attribute [rw] preserved_state_from_config
         #   @return [::Google::Cloud::Compute::V1::PreservedState]
-        #     [Output Only] Preserved state applied from per-instance config
+        #     Output only. [Output Only] Preserved state applied from per-instance config
         #     for this instance.
         # @!attribute [rw] preserved_state_from_policy
         #   @return [::Google::Cloud::Compute::V1::PreservedState]
-        #     [Output Only] Preserved state generated based on stateful policy
+        #     Output only. [Output Only] Preserved state generated based on stateful policy
         #     for this instance.
         # @!attribute [rw] properties_from_flexibility_policy
         #   @return [::Google::Cloud::Compute::V1::ManagedInstancePropertiesFromFlexibilityPolicy]
-        #     [Output Only] Instance properties selected for this instance resulting from
+        #     Output only. [Output Only] Instance properties selected for this instance resulting from
         #     InstanceFlexibilityPolicy.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceVersion]
-        #     [Output Only] Intended version of this instance.
+        #     Output only. [Output Only] Intended version of this instance.
         class ManagedInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The current action that the managed instance group has
+          # Output only. [Output Only] The current action that the managed instance group has
           # scheduled for the instance. Possible values:
           #
           #    - NONE The instance is running, and the managed
@@ -48112,7 +48555,7 @@ module Google
             VERIFYING = 16_982_185
           end
 
-          # [Output Only] The status of the instance. This field is empty when
+          # Output only. [Output Only] The status of the instance. This field is empty when
           # the instance does not exist.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # STOPPING
@@ -48160,17 +48603,17 @@ module Google
 
         # @!attribute [rw] detailed_health_state
         #   @return [::String]
-        #     [Output Only] The current detailed instance health state.
+        #     Output only. [Output Only] The current detailed instance health state.
         #     Check the DetailedHealthState enum for the list of possible values.
         # @!attribute [rw] health_check
         #   @return [::String]
-        #     [Output Only] The URL for the health check that verifies whether the
+        #     Output only. [Output Only] The URL for the health check that verifies whether the
         #     instance is healthy.
         class ManagedInstanceInstanceHealth
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The current detailed instance health state.
+          # Output only. [Output Only] The current detailed instance health state.
           module DetailedHealthState
             # A value indicating that the enum field is not set.
             UNDEFINED_DETAILED_HEALTH_STATE = 0
@@ -48201,14 +48644,14 @@ module Google
 
         # @!attribute [rw] errors
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceLastAttemptErrors]
-        #     [Output Only] Encountered errors during the last attempt to create or
+        #     Output only. [Output Only] Encountered errors during the last attempt to create or
         #     delete the instance.
         class ManagedInstanceLastAttempt
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # [Output Only] Encountered errors during the last attempt to create or
+        # Output only. [Output Only] Encountered errors during the last attempt to create or
         # delete the instance.
         # @!attribute [rw] errors
         #   @return [::Array<::Google::Cloud::Compute::V1::Errors>]
@@ -48221,7 +48664,7 @@ module Google
 
         # @!attribute [rw] machine_type
         #   @return [::String]
-        #     The machine type to be used for this instance.
+        #     Output only. The machine type to be used for this instance.
         class ManagedInstancePropertiesFromFlexibilityPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -48229,11 +48672,11 @@ module Google
 
         # @!attribute [rw] instance_template
         #   @return [::String]
-        #     [Output Only] The intended template of the instance. This field is empty
+        #     Output only. [Output Only] The intended template of the instance. This field is empty
         #     when current_action is one of { DELETING, ABANDONING }.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] Name of the version.
+        #     Output only. [Output Only] Name of the version.
         class ManagedInstanceVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -48257,7 +48700,7 @@ module Google
         #     less than 512 KB.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#metadata
+        #     Output only. [Output Only] Type of the resource. Always compute#metadata
         #     for metadata.
         class Metadata
           include ::Google::Protobuf::MessageExts
@@ -48535,10 +48978,10 @@ module Google
         # Contains NAT IP information of a NAT config (i.e. usage status, mode).
         # @!attribute [rw] nat_ip_info_mappings
         #   @return [::Array<::Google::Cloud::Compute::V1::NatIpInfoNatIpInfoMapping>]
-        #     A list of all NAT IPs assigned to this NAT config.
+        #     Output only. A list of all NAT IPs assigned to this NAT config.
         # @!attribute [rw] nat_name
         #   @return [::String]
-        #     Name of the NAT config which the NAT IP belongs to.
+        #     Output only. Name of the NAT config which the NAT IP belongs to.
         class NatIpInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -48547,21 +48990,21 @@ module Google
         # Contains information of a NAT IP.
         # @!attribute [rw] mode
         #   @return [::String]
-        #     Specifies whether NAT IP is auto or manual.
+        #     Output only. Specifies whether NAT IP is auto or manual.
         #     Check the Mode enum for the list of possible values.
         # @!attribute [rw] nat_ip
         #   @return [::String]
-        #     NAT IP address. For example: 203.0.113.11.
+        #     Output only. NAT IP address. For example: 203.0.113.11.
         # @!attribute [rw] usage
         #   @return [::String]
-        #     Specifies whether NAT IP is currently serving at least one endpoint or
+        #     Output only. Specifies whether NAT IP is currently serving at least one endpoint or
         #     not.
         #     Check the Usage enum for the list of possible values.
         class NatIpInfoNatIpInfoMapping
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies whether NAT IP is auto or manual.
+          # Output only. Specifies whether NAT IP is auto or manual.
           module Mode
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
@@ -48571,7 +49014,7 @@ module Google
             MANUAL = 119_397_318
           end
 
-          # Specifies whether NAT IP is currently serving at least one endpoint or
+          # Output only. Specifies whether NAT IP is currently serving at least one endpoint or
           # not.
           module Usage
             # A value indicating that the enum field is not set.
@@ -48616,7 +49059,7 @@ module Google
         #     method.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -48629,14 +49072,14 @@ module Google
         #     .
         # @!attribute [rw] firewall_policy
         #   @return [::String]
-        #     [Output Only] URL of the firewall policy the network is associated with.
+        #     Output only. [Output Only] URL of the firewall policy the network is associated with.
         # @!attribute [rw] gateway_i_pv4
         #   @return [::String]
         #     [Output Only] The gateway address for default routing out of the network,
         #     selected by Google Cloud.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] internal_ipv6_range
         #   @return [::String]
@@ -48649,7 +49092,7 @@ module Google
         #     .
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#network for
+        #     Output only. [Output Only] Type of the resource. Always compute#network for
         #     networks.
         # @!attribute [rw] mtu
         #   @return [::Integer]
@@ -48687,7 +49130,7 @@ module Google
         #     as part of resource payload.
         # @!attribute [rw] peerings
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkPeering>]
-        #     [Output Only] A list of network peerings for the resource.
+        #     Output only. [Output Only] A list of network peerings for the resource.
         # @!attribute [rw] routing_config
         #   @return [::Google::Cloud::Compute::V1::NetworkRoutingConfig]
         #     The network-level routing configuration for this network.  Used by Cloud
@@ -48697,7 +49140,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] subnetworks
         #   @return [::Array<::String>]
         #     [Output Only] Server-defined fully-qualified URLs for all subnetworks
@@ -48723,14 +49166,14 @@ module Google
         # A network attachment resource ...
         # @!attribute [rw] connection_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkAttachmentConnectedEndpoint>]
-        #     [Output Only] An array of connections for all the producers connected
+        #     Output only. [Output Only] An array of connections for all the producers connected
         #     to this network attachment.
         # @!attribute [rw] connection_preference
         #   @return [::String]
         #     Check the ConnectionPreference enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -48743,11 +49186,11 @@ module Google
         #     fingerprint must be provided in order to patch.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource.
+        #     Output only. [Output Only] Type of the resource.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -48759,7 +49202,7 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] network
         #   @return [::String]
-        #     [Output Only] The URL of the network which the Network Attachment
+        #     Output only. [Output Only] The URL of the network which the Network Attachment
         #     belongs to. Practically it is inferred by fetching the network of the first
         #     subnetwork associated. Because it is required that all the subnetworks must
         #     be from the same network, it is assured that the Network Attachment belongs
@@ -48774,16 +49217,16 @@ module Google
         #     The project can be specified using its id or number.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the network attachment resides.
+        #     Output only. [Output Only] URL of the region where the network attachment resides.
         #     This field applies only to the region resource. You must specify this
         #     field as part of the HTTP request URL. It is not settable as a field in
         #     the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource's resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource's resource id.
         # @!attribute [rw] subnetworks
         #   @return [::Array<::String>]
         #     An array of URLs where each entry is the URL of a subnet
@@ -48868,7 +49311,7 @@ module Google
         #     instance network interface.
         # @!attribute [rw] subnetwork_cidr_range
         #   @return [::String]
-        #     [Output Only] The CIDR range of the subnet from which the IPv4 internal
+        #     Output only. [Output Only] The CIDR range of the subnet from which the IPv4 internal
         #     IP was allocated from.
         class NetworkAttachmentConnectedEndpoint
           include ::Google::Protobuf::MessageExts
@@ -48940,7 +49383,7 @@ module Google
         # Represents a Google Cloud Armor network edge security service resource.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -48958,11 +49401,11 @@ module Google
         #     retrieve a NetworkEdgeSecurityService.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Alwayscompute#networkEdgeSecurityService for
+        #     Output only. [Output only] Type of the resource. Alwayscompute#networkEdgeSecurityService for
         #     NetworkEdgeSecurityServices
         # @!attribute [rw] name
         #   @return [::String]
@@ -48975,7 +49418,7 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the resource resides. You must
+        #     Output only. [Output Only] URL of the region where the resource resides. You must
         #     specify this field as part of the HTTP request URL. It is not settable as a
         #     field in the request body.
         # @!attribute [rw] security_policy
@@ -48984,10 +49427,10 @@ module Google
         #     network edge security service.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         class NetworkEdgeSecurityService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -49003,7 +49446,7 @@ module Google
         #     A list of NetworkEdgeSecurityServicesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#networkEdgeSecurityServiceAggregatedList for lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#networkEdgeSecurityServiceAggregatedList for lists of
         #     Network Edge Security Services.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -49014,10 +49457,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -49127,7 +49570,7 @@ module Google
         #     Optional. Only valid when networkEndpointType isSERVERLESS. Only one of cloudRun,appEngine or cloudFunction may be set.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] default_port
         #   @return [::Integer]
@@ -49142,11 +49585,11 @@ module Google
         #     create the resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#networkEndpointGroup for network endpoint group.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#networkEndpointGroup for network endpoint group.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource; provided by the client when the resource is created.
@@ -49176,21 +49619,21 @@ module Google
         #     Optional. Only valid when networkEndpointType isPRIVATE_SERVICE_CONNECT.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The URL of theregion
+        #     Output only. [Output Only] The URL of theregion
         #     where the network endpoint group is located.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] size
         #   @return [::Integer]
-        #     [Output only] Number of network endpoints in the network endpoint group.
+        #     Output only. [Output only] Number of network endpoints in the network endpoint group.
         # @!attribute [rw] subnetwork
         #   @return [::String]
         #     Optional URL of the subnetwork to which all network endpoints in the NEG
         #     belong.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The URL of thezone
+        #     Output only. [Output Only] The URL of thezone
         #     where the network endpoint group is located.
         class NetworkEndpointGroup
           include ::Google::Protobuf::MessageExts
@@ -49249,7 +49692,7 @@ module Google
         #     A list of NetworkEndpointGroupsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#networkEndpointGroupAggregatedList for aggregated
+        #     Output only. [Output Only] The resource type, which is alwayscompute#networkEndpointGroupAggregatedList for aggregated
         #     lists of network endpoint groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -49260,10 +49703,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -49402,7 +49845,7 @@ module Google
         #     A list of NetworkEndpointGroup resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#networkEndpointGroupList for network endpoint group
+        #     Output only. [Output Only] The resource type, which is alwayscompute#networkEndpointGroupList for network endpoint group
         #     lists.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -49413,7 +49856,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -49426,7 +49869,7 @@ module Google
         # type PRIVATE_SERVICE_CONNECT.
         # @!attribute [rw] consumer_psc_address
         #   @return [::String]
-        #     [Output Only] Address allocated from given subnetwork for PSC. This IP
+        #     Output only. [Output Only] Address allocated from given subnetwork for PSC. This IP
         #     address acts as a VIP for a PSC NEG, allowing it to act as an endpoint in
         #     L7 PSC-XLB.
         # @!attribute [rw] producer_port
@@ -49436,17 +49879,17 @@ module Google
         #     PRIVATE_SERVICE_CONNECT NEG type
         # @!attribute [rw] psc_connection_id
         #   @return [::Integer]
-        #     [Output Only] The PSC connection id of the PSC Network Endpoint Group
+        #     Output only. [Output Only] The PSC connection id of the PSC Network Endpoint Group
         #     Consumer.
         # @!attribute [rw] psc_connection_status
         #   @return [::String]
-        #     [Output Only] The connection status of the PSC Forwarding Rule.
+        #     Output only. [Output Only] The connection status of the PSC Forwarding Rule.
         #     Check the PscConnectionStatus enum for the list of possible values.
         class NetworkEndpointGroupPscData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The connection status of the PSC Forwarding Rule.
+          # Output only. [Output Only] The connection status of the PSC Forwarding Rule.
           module PscConnectionStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_PSC_CONNECTION_STATUS = 0
@@ -49525,7 +49968,7 @@ module Google
         #     A list of NetworkEndpointWithHealthStatus resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute#networkEndpointGroupsListNetworkEndpoints for the list
+        #     Output only. [Output Only] The resource type, which is alwayscompute#networkEndpointGroupsListNetworkEndpoints for the list
         #     of network endpoints in the specified network endpoint group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -49544,11 +49987,11 @@ module Google
 
         # @!attribute [rw] network_endpoint_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpointGroup>]
-        #     [Output Only] The list ofnetwork
+        #     Output only. [Output Only] The list ofnetwork
         #     endpoint groups that are contained in this scope.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] An informational warning that replaces the list of network
+        #     Output only. [Output Only] An informational warning that replaces the list of network
         #     endpoint groups when the list is empty.
         class NetworkEndpointGroupsScopedList
           include ::Google::Protobuf::MessageExts
@@ -49557,13 +50000,13 @@ module Google
 
         # @!attribute [rw] healths
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatusForNetworkEndpoint>]
-        #     [Output only] The health status of network endpoint.
+        #     Output only. [Output only] The health status of network endpoint.
         #
         #     Optional. Displayed only if the network endpoint has centralized health
         #     checking configured.
         # @!attribute [rw] network_endpoint
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpoint]
-        #     [Output only] The network endpoint.
+        #     Output only. [Output only] The network endpoint.
         class NetworkEndpointWithHealthStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -49577,7 +50020,7 @@ module Google
         #     A list of FirewallPoliciesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#networkFirewallPoliciesAggregatedList for lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#networkFirewallPoliciesAggregatedList for lists of
         #     network firewall policies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -49588,10 +50031,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -49641,7 +50084,7 @@ module Google
         #     have no external IPv6 Internet access.
         # @!attribute [rw] ipv6_access_type
         #   @return [::String]
-        #     [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be
+        #     Output only. [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be
         #     accessed from the Internet. This field is always inherited from its
         #     subnetwork.
         #
@@ -49655,7 +50098,7 @@ module Google
         #     assign an internal IPv6 address from the instance's subnetwork.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#networkInterface for network interfaces.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#networkInterface for network interfaces.
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] The name of the network interface, which is generated by the
@@ -49742,7 +50185,7 @@ module Google
             IGMP_QUERY_V2 = 333_493_457
           end
 
-          # [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be
+          # Output only. [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be
           # accessed from the Internet. This field is always inherited from its
           # subnetwork.
           #
@@ -49816,7 +50259,7 @@ module Google
         #     A list of Network resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#networkList for
+        #     Output only. [Output Only] Type of resource. Always compute#networkList for
         #     lists of networks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -49827,7 +50270,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -49877,7 +50320,7 @@ module Google
         #     subnetwork routes between two networks when peering state isACTIVE.
         # @!attribute [rw] connection_status
         #   @return [::Google::Cloud::Compute::V1::NetworkPeeringConnectionStatus]
-        #     [Output Only] The effective state of the peering connection
+        #     Output only. [Output Only] The effective state of the peering connection
         #     as a whole.
         # @!attribute [rw] exchange_subnet_routes
         #   @return [::Boolean]
@@ -49922,7 +50365,7 @@ module Google
         #     as the current network.
         # @!attribute [rw] peer_mtu
         #   @return [::Integer]
-        #     [Output Only] Maximum Transmission Unit in bytes of the peer network.
+        #     Output only. [Output Only] Maximum Transmission Unit in bytes of the peer network.
         # @!attribute [rw] stack_type
         #   @return [::String]
         #     Which IP version(s) of traffic and routes are allowed to be imported or
@@ -49930,13 +50373,13 @@ module Google
         #     Check the StackType enum for the list of possible values.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The
+        #     Output only. [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The
         #     peering is `ACTIVE` when there's a matching configuration in the peer
         #     network.
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] state_details
         #   @return [::String]
-        #     [Output Only] Details about the current state of the peering.
+        #     Output only. [Output Only] Details about the current state of the peering.
         # @!attribute [rw] update_strategy
         #   @return [::String]
         #     The update strategy determines the semantics for updates and deletes to the
@@ -49963,7 +50406,7 @@ module Google
             IPV4_ONLY = 22_373_798
           end
 
-          # [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The
+          # Output only. [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The
           # peering is `ACTIVE` when there's a matching configuration in the peer
           # network.
           module State
@@ -50165,36 +50608,36 @@ module Google
         # NetworkProfile represents a Google managed network profile resource.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] An optional description of this resource.
+        #     Output only. [Output Only] An optional description of this resource.
         # @!attribute [rw] features
         #   @return [::Google::Cloud::Compute::V1::NetworkProfileNetworkFeatures]
-        #     [Output Only] Features supported by the network.
+        #     Output only. [Output Only] Features supported by the network.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#networkProfile for network profiles.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#networkProfile for network profiles.
         # @!attribute [rw] location
         #   @return [::Google::Cloud::Compute::V1::NetworkProfileLocation]
-        #     [Output Only] Location to which the network is restricted.
+        #     Output only. [Output Only] Location to which the network is restricted.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] Name of the resource.
+        #     Output only. [Output Only] Name of the resource.
         # @!attribute [rw] profile_type
         #   @return [::Google::Cloud::Compute::V1::NetworkProfileProfileType]
-        #     [Output Only] Type of the network profile.
+        #     Output only. [Output Only] Type of the network profile.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] zone
         #   @return [::String]
         class NetworkProfile
@@ -50336,11 +50779,11 @@ module Google
         #     Check the SubnetStackTypes enum for the list of possible values.
         # @!attribute [rw] subnetwork_purposes
         #   @return [::Array<::String>]
-        #     Specifies which subnetwork purposes are supported.
+        #     Output only. Specifies which subnetwork purposes are supported.
         #     Check the SubnetworkPurposes enum for the list of possible values.
         # @!attribute [rw] subnetwork_stack_types
         #   @return [::Array<::String>]
-        #     Specifies which subnetwork stack types are supported.
+        #     Output only. Specifies which subnetwork stack types are supported.
         #     Check the SubnetworkStackTypes enum for the list of possible values.
         # @!attribute [rw] unicast
         #   @return [::String]
@@ -50791,7 +51234,7 @@ module Google
         #     A list of NetworkProfile resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#networkProfileList for network profiles.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#networkProfileList for network profiles.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -50803,10 +51246,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -50838,11 +51281,11 @@ module Google
         #     Check the BgpInterRegionCost enum for the list of possible values.
         # @!attribute [rw] effective_bgp_always_compare_med
         #   @return [::Boolean]
-        #     [Output Only] Effective value of the bgp_always_compare_med
+        #     Output only. [Output Only] Effective value of the bgp_always_compare_med
         #     field.
         # @!attribute [rw] effective_bgp_inter_region_cost
         #   @return [::String]
-        #     [Output Only] Effective value of the bgp_inter_region_cost
+        #     Output only. [Output Only] Effective value of the bgp_inter_region_cost
         #     field.
         #     Check the EffectiveBgpInterRegionCost enum for the list of possible values.
         # @!attribute [rw] routing_mode
@@ -50883,7 +51326,7 @@ module Google
             DEFAULT = 115_302_945
           end
 
-          # [Output Only] Effective value of the bgp_inter_region_cost
+          # Output only. [Output Only] Effective value of the bgp_inter_region_cost
           # field.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # ADD_COST_TO_MED
@@ -50953,33 +51396,33 @@ module Google
 
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     [Output Only] Deprecated, please use short name instead. The display name
+        #     Output only. [Output Only] Deprecated, please use short name instead. The display name
         #     of the firewall policy.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of the firewall policy.
+        #     Output only. [Output Only] The name of the firewall policy.
         # @!attribute [rw] packet_mirroring_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
-        #     [Output Only] The packet mirroring rules that apply to the network.
+        #     Output only. [Output Only] The packet mirroring rules that apply to the network.
         # @!attribute [rw] priority
         #   @return [::Integer]
-        #     [Output only] Priority of firewall policy association. Not applicable for
+        #     Output only. [Output only] Priority of firewall policy association. Not applicable for
         #     type=HIERARCHY.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
         #     [Output Only] The rules that apply to the network.
         # @!attribute [rw] short_name
         #   @return [::String]
-        #     [Output Only] The short name of the firewall policy.
+        #     Output only. [Output Only] The short name of the firewall policy.
         # @!attribute [rw] type
         #   @return [::String]
-        #     [Output Only] The type of the firewall policy.
+        #     Output only. [Output Only] The type of the firewall policy.
         #     Check the Type enum for the list of possible values.
         class NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The type of the firewall policy.
+          # Output only. [Output Only] The type of the firewall policy.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -51029,7 +51472,7 @@ module Google
         #     Specifies how autoscaling should behave.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -51039,11 +51482,11 @@ module Google
         #   @return [::String]
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The type of the resource. Alwayscompute#nodeGroup for node group.
+        #     Output only. [Output Only] The type of the resource. Alwayscompute#nodeGroup for node group.
         # @!attribute [rw] location_hint
         #   @return [::String]
         #     An opaque location hint used to place the Node close to other
@@ -51080,19 +51523,19 @@ module Google
         #     URL of the node template to create the node group from.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] share_settings
         #   @return [::Google::Cloud::Compute::V1::ShareSettings]
         #     Share-settings for the node group
         # @!attribute [rw] size
         #   @return [::Integer]
-        #     [Output Only] The total number of nodes in the node group.
+        #     Output only. [Output Only] The total number of nodes in the node group.
         # @!attribute [rw] status
         #   @return [::String]
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The name of the zone where the node group resides,
+        #     Output only. [Output Only] The name of the zone where the node group resides,
         #     such as us-central1-a.
         class NodeGroup
           include ::Google::Protobuf::MessageExts
@@ -51168,7 +51611,7 @@ module Google
         #     A list of NodeGroupsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Alwayscompute#nodeGroupAggregatedList for aggregated lists of node
+        #     Output only. [Output Only] Type of resource.Alwayscompute#nodeGroupAggregatedList for aggregated lists of node
         #     groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -51179,10 +51622,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -51246,7 +51689,7 @@ module Google
         #     A list of NodeGroup resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Always compute#nodeGroupList
+        #     Output only. [Output Only] Type of resource.Always compute#nodeGroupList
         #     for lists of node groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -51257,7 +51700,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -51270,7 +51713,7 @@ module Google
         # maintenance will be performed within this window.
         # @!attribute [rw] maintenance_duration
         #   @return [::Google::Cloud::Compute::V1::Duration]
-        #     [Output only] A predetermined duration for the window, automatically
+        #     Output only. [Output only] A predetermined duration for the window, automatically
         #     chosen to be the smallest possible in the given scenario.
         # @!attribute [rw] start_time
         #   @return [::String]
@@ -51287,7 +51730,7 @@ module Google
         #     Accelerators for this node.
         # @!attribute [rw] consumed_resources
         #   @return [::Google::Cloud::Compute::V1::InstanceConsumptionInfo]
-        #     Node resources that are reserved by all instances.
+        #     Output only. Node resources that are reserved by all instances.
         # @!attribute [rw] cpu_overcommit_type
         #   @return [::String]
         #     CPU overcommit.
@@ -51297,7 +51740,7 @@ module Google
         #     Local disk configurations.
         # @!attribute [rw] instance_consumption_data
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceConsumptionData>]
-        #     Instance data that shows consumed resources on the node.
+        #     Output only. Instance data that shows consumed resources on the node.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     Instances scheduled on this node.
@@ -51309,7 +51752,7 @@ module Google
         #     The type of this node.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] server_binding
         #   @return [::Google::Cloud::Compute::V1::ServerBinding]
         #     Binding properties for the physical server.
@@ -51321,10 +51764,10 @@ module Google
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] total_resources
         #   @return [::Google::Cloud::Compute::V1::InstanceConsumptionInfo]
-        #     Total amount of available resources on the node.
+        #     Output only. Total amount of available resources on the node.
         # @!attribute [rw] upcoming_maintenance
         #   @return [::Google::Cloud::Compute::V1::UpcomingMaintenance]
-        #     [Output Only] The information about an upcoming maintenance event.
+        #     Output only. [Output Only] The information about an upcoming maintenance event.
         class NodeGroupNode
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51375,27 +51818,27 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeGroupNode>]
         #     A list of Node resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is alwayscompute.nodeGroupsListNodes for the list of nodes in the
+        #     Output only. [Output Only] The resource type, which is alwayscompute.nodeGroupsListNodes for the list of nodes in the
         #     specified node group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class NodeGroupsListNodes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51454,7 +51897,7 @@ module Google
         #     Check the CpuOvercommitType enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -51464,11 +51907,11 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::LocalDisk>]
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The type of the resource. Alwayscompute#nodeTemplate for node templates.
+        #     Output only. [Output Only] The type of the resource. Alwayscompute#nodeTemplate for node templates.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the resource, provided by the client when initially creating
@@ -51490,11 +51933,11 @@ module Google
         #     Do not use. Instead, use the node_type property.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The name of the region where the node template resides,
+        #     Output only. [Output Only] The name of the region where the node template resides,
         #     such as us-central1.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] server_binding
         #   @return [::Google::Cloud::Compute::V1::ServerBinding]
         #     Sets the binding properties for the physical server. Valid values include:
@@ -51511,11 +51954,11 @@ module Google
         #     node options for more information.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the node template. One of the following values:CREATING, READY, and DELETING.
+        #     Output only. [Output Only] The status of the node template. One of the following values:CREATING, READY, and DELETING.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] status_message
         #   @return [::String]
-        #     [Output Only] An optional, human-readable explanation of the status.
+        #     Output only. [Output Only] An optional, human-readable explanation of the status.
         class NodeTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51541,7 +51984,7 @@ module Google
             NONE = 2_402_104
           end
 
-          # [Output Only] The status of the node template. One of the following values:CREATING, READY, and DELETING.
+          # Output only. [Output Only] The status of the node template. One of the following values:CREATING, READY, and DELETING.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -51568,7 +52011,7 @@ module Google
         #     A list of NodeTemplatesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Alwayscompute#nodeTemplateAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource.Alwayscompute#nodeTemplateAggregatedList for aggregated lists of
         #     node templates.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -51579,10 +52022,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -51609,7 +52052,7 @@ module Google
         #     A list of NodeTemplate resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Always compute#nodeTemplateList
+        #     Output only. [Output Only] Type of resource.Always compute#nodeTemplateList
         #     for lists of node templates.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -51620,7 +52063,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -51682,13 +52125,13 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The type of the resource. Alwayscompute#nodeType for node types.
+        #     Output only. [Output Only] The type of the resource. Alwayscompute#nodeType for node types.
         # @!attribute [rw] local_ssd_gb
         #   @return [::Integer]
         #     [Output Only] Local SSD available to the node type, defined in GB.
         # @!attribute [rw] max_vms
         #   @return [::Integer]
-        #     [Output Only] Maximum number of VMs that can be created for this node type.
+        #     Output only. [Output Only] Maximum number of VMs that can be created for this node type.
         # @!attribute [rw] memory_mb
         #   @return [::Integer]
         #     [Output Only] The amount of physical memory available to the node type,
@@ -51698,10 +52141,10 @@ module Google
         #     [Output Only] Name of the resource.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] The name of the zone where the node type resides,
+        #     Output only. [Output Only] The name of the zone where the node type resides,
         #     such as us-central1-a.
         class NodeType
           include ::Google::Protobuf::MessageExts
@@ -51716,7 +52159,7 @@ module Google
         #     A list of NodeTypesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Alwayscompute#nodeTypeAggregatedList for aggregated lists of node
+        #     Output only. [Output Only] Type of resource.Alwayscompute#nodeTypeAggregatedList for aggregated lists of node
         #     types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -51727,10 +52170,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -51757,7 +52200,7 @@ module Google
         #     A list of NodeType resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Always compute#nodeTypeList for
+        #     Output only. [Output Only] Type of resource.Always compute#nodeTypeList for
         #     lists of node types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -51768,7 +52211,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -51799,7 +52242,7 @@ module Google
         # Health checks overview.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -51811,11 +52254,11 @@ module Google
         #     the retry duration.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] A unique identifier for this resource type. The server
+        #     Output only. [Output Only] A unique identifier for this resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#notificationEndpoint for notification endpoints.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#notificationEndpoint for notification endpoints.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -51827,13 +52270,13 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the notification endpoint resides.
+        #     Output only. [Output Only] URL of the region where the notification endpoint resides.
         #     This field applies only to the regional resource. You must specify this
         #     field as part of the HTTP request URL. It is not settable as a field in
         #     the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class NotificationEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51879,7 +52322,7 @@ module Google
         #     A list of NotificationEndpoint resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#notificationEndpoint for notification endpoints.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#notificationEndpoint for notification endpoints.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -51967,14 +52410,14 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::InstancesBulkInsertOperationMetadata]
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always `compute#operation` for
+        #     Output only. [Output Only] Type of the resource. Always `compute#operation` for
         #     Operation resources.
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] Name of the operation.
         # @!attribute [rw] operation_group_id
         #   @return [::String]
-        #     [Output Only] An ID that represents a group of operations, such as when a
+        #     Output only. [Output Only] An ID that represents a group of operations, such as when a
         #     group of operations results from a `bulkInsert` API request.
         # @!attribute [rw] operation_type
         #   @return [::String]
@@ -51996,7 +52439,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] set_common_instance_metadata_operation_metadata
         #   @return [::Google::Cloud::Compute::V1::SetCommonInstanceMetadataOperationMetadata]
-        #     [Output Only] If the operation is for projects.setCommonInstanceMetadata,
+        #     Output only. [Output Only] If the operation is for projects.setCommonInstanceMetadata,
         #     this field will contain information on all underlying zonal actions and
         #     their state.
         # @!attribute [rw] start_time
@@ -52063,7 +52506,7 @@ module Google
         #     [Output Only] A map of scoped operation lists.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always `compute#operationAggregatedList`
+        #     Output only. [Output Only] Type of resource. Always `compute#operationAggregatedList`
         #     for aggregated lists of operations.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -52078,7 +52521,7 @@ module Google
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -52106,7 +52549,7 @@ module Google
         #     [Output Only] A list of Operation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always `compute#operations` for Operations
+        #     Output only. [Output Only] Type of resource. Always `compute#operations` for Operations
         #     resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -52144,7 +52587,7 @@ module Google
         #     A list of associations.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of securityPolicy associations. Alwayscompute#organizationSecurityPoliciesListAssociations for lists
+        #     Output only. [Output Only] Type of securityPolicy associations. Alwayscompute#organizationSecurityPoliciesListAssociations for lists
         #     of securityPolicy associations.
         class OrganizationSecurityPoliciesListAssociationsResponse
           include ::Google::Protobuf::MessageExts
@@ -52309,7 +52752,7 @@ module Google
         #     set to true.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -52328,11 +52771,11 @@ module Google
         #     Filter for mirrored traffic. If unspecified, all IPv4 traffic is mirrored.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#packetMirroring for packet mirrorings.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#packetMirroring for packet mirrorings.
         # @!attribute [rw] mirrored_resources
         #   @return [::Google::Cloud::Compute::V1::PacketMirroringMirroredResourceInfo]
         #     PacketMirroring mirroredResourceInfos.
@@ -52365,7 +52808,7 @@ module Google
         #     [Output Only] URI of the region where the packetMirroring resides.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         class PacketMirroring
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52394,7 +52837,7 @@ module Google
         #     A list of PacketMirroring resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -52404,10 +52847,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -52468,7 +52911,7 @@ module Google
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
-        #     [Output Only] Unique identifier for the forwarding rule; defined by the
+        #     Output only. [Output Only] Unique identifier for the forwarding rule; defined by the
         #     server.
         # @!attribute [rw] url
         #   @return [::String]
@@ -52488,7 +52931,7 @@ module Google
         #     A list of PacketMirroring resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#packetMirroring
+        #     Output only. [Output Only] Type of resource. Always compute#packetMirroring
         #     for packetMirrorings.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -52499,7 +52942,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -52535,7 +52978,7 @@ module Google
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
-        #     [Output Only] Unique identifier for the instance; defined by the
+        #     Output only. [Output Only] Unique identifier for the instance; defined by the
         #     server.
         # @!attribute [rw] url
         #   @return [::String]
@@ -52547,7 +52990,7 @@ module Google
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
-        #     [Output Only] Unique identifier for the subnetwork; defined by the
+        #     Output only. [Output Only] Unique identifier for the subnetwork; defined by the
         #     server.
         # @!attribute [rw] url
         #   @return [::String]
@@ -52560,7 +53003,7 @@ module Google
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
-        #     [Output Only] Unique identifier for the network; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the network; defined by the server.
         # @!attribute [rw] url
         #   @return [::String]
         #     URL of the network resource.
@@ -54563,9 +55006,12 @@ module Google
         # @!attribute [rw] path_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::PathRule>]
         #     The list of path rules. Use this list instead of routeRules
-        #     when routing based on simple path matching is all that's required. The
-        #     order by which path rules are specified does not matter. Matches are always
-        #     done on the longest-path-first basis.
+        #     when routing based on simple path matching is all that's required. A path
+        #     rule can only include a wildcard character (*) after a
+        #     forward slash character ("/").
+        #
+        #     The order by which path rules are specified does not matter.
+        #     Matches are always done on the longest-path-first basis.
         #
         #     For example: a pathRule with a path /a/b/c/* will match
         #     before /a/b/* irrespective of the order in which those paths appear in this
@@ -55188,18 +55634,18 @@ module Google
         #     Check the ActivationStatus enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] Description of the feature.
+        #     Output only. [Output Only] Description of the feature.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] The type of the feature. Always "compute#previewFeature" for
+        #     Output only. [Output only] The type of the feature. Always "compute#previewFeature" for
         #     preview features.
         # @!attribute [rw] name
         #   @return [::String]
@@ -55209,10 +55655,10 @@ module Google
         #     Rollout operation of the feature.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::PreviewFeatureStatus]
-        #     [Output only] Status of the feature.
+        #     Output only. [Output only] Status of the feature.
         class PreviewFeature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -55247,10 +55693,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -55303,10 +55749,10 @@ module Google
         # [Output Only] The status of the feature.
         # @!attribute [rw] description
         #   @return [::String]
-        #     [Output Only] The description of the feature.
+        #     Output only. [Output Only] The description of the feature.
         # @!attribute [rw] help_link
         #   @return [::String]
-        #     [Output Only] Link to the public documentation for the feature.
+        #     Output only. [Output Only] Link to the public documentation for the feature.
         # @!attribute [rw] release_status
         #   @return [::Google::Cloud::Compute::V1::PreviewFeatureStatusReleaseStatus]
         class PreviewFeatureStatus
@@ -55317,7 +55763,7 @@ module Google
         # [Output Only] The release status of the feature.
         # @!attribute [rw] stage
         #   @return [::String]
-        #     [Output Only] The stage of the feature.
+        #     Output only. [Output Only] The stage of the feature.
         #     Check the Stage enum for the list of possible values.
         # @!attribute [rw] update_date
         #   @return [::Google::Cloud::Compute::V1::Date]
@@ -55326,7 +55772,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The stage of the feature.
+          # Output only. [Output Only] The stage of the feature.
           module Stage
             # A value indicating that the enum field is not set.
             UNDEFINED_STAGE = 0
@@ -55366,7 +55812,7 @@ module Google
         # Resource Hierarchy.
         # @!attribute [rw] cloud_armor_tier
         #   @return [::String]
-        #     [Output Only] The Cloud Armor tier for this project. It can be one of the
+        #     Output only. [Output Only] The Cloud Armor tier for this project. It can be one of the
         #     following values: CA_STANDARD,CA_ENTERPRISE_PAYGO.
         #
         #     If this field is not specified, it is assumed to beCA_STANDARD.
@@ -55402,7 +55848,7 @@ module Google
         #     just a unique ID used by Compute Engine to identify resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#project for
+        #     Output only. [Output Only] Type of the resource. Always compute#project for
         #     projects.
         # @!attribute [rw] name
         #   @return [::String]
@@ -55420,7 +55866,7 @@ module Google
         #     Storage bucket where they are stored.
         # @!attribute [rw] vm_dns_setting
         #   @return [::String]
-        #     [Output Only] Default internal DNS setting used by VMs running in
+        #     Output only. [Output Only] Default internal DNS setting used by VMs running in
         #     this project.
         #     Check the VmDnsSetting enum for the list of possible values.
         # @!attribute [rw] xpn_project_status
@@ -55433,7 +55879,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The Cloud Armor tier for this project. It can be one of the
+          # Output only. [Output Only] The Cloud Armor tier for this project. It can be one of the
           # following values: CA_STANDARD,CA_ENTERPRISE_PAYGO.
           #
           # If this field is not specified, it is assumed to beCA_STANDARD.
@@ -55474,7 +55920,7 @@ module Google
             STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
 
-          # [Output Only] Default internal DNS setting used by VMs running in
+          # Output only. [Output Only] Default internal DNS setting used by VMs running in
           # this project.
           module VmDnsSetting
             # A value indicating that the enum field is not set.
@@ -55520,11 +55966,11 @@ module Google
 
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#projectsGetXpnResources for lists of service resources
+        #     Output only. [Output Only] Type of resource. Alwayscompute#projectsGetXpnResources for lists of service resources
         #     (a.k.a service projects)
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
@@ -55607,11 +56053,11 @@ module Google
         # advertisement and is announced globally to the internet.
         # @!attribute [rw] byoip_api_version
         #   @return [::String]
-        #     [Output Only] The version of BYOIP API.
+        #     Output only. [Output Only] The version of BYOIP API.
         #     Check the ByoipApiVersion enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -55632,7 +56078,7 @@ module Google
         #     retrieve a PublicAdvertisedPrefix.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
@@ -55644,7 +56090,7 @@ module Google
         #     Check the Ipv6AccessType enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#publicAdvertisedPrefix for public advertised prefixes.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#publicAdvertisedPrefix for public advertised prefixes.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -55670,11 +56116,11 @@ module Google
         #     Check the PdpScope enum for the list of possible values.
         # @!attribute [rw] public_delegated_prefixs
         #   @return [::Array<::Google::Cloud::Compute::V1::PublicAdvertisedPrefixPublicDelegatedPrefix>]
-        #     [Output Only] The list of public delegated prefixes that exist for this
+        #     Output only. [Output Only] The list of public delegated prefixes that exist for this
         #     public advertised prefix.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] shared_secret
         #   @return [::String]
         #     [Output Only] The shared secret to be used for reverse DNS verification.
@@ -55696,7 +56142,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The version of BYOIP API.
+          # Output only. [Output Only] The version of BYOIP API.
           module ByoipApiVersion
             # A value indicating that the enum field is not set.
             UNDEFINED_BYOIP_API_VERSION = 0
@@ -55808,7 +56254,7 @@ module Google
         #     A list of PublicAdvertisedPrefix resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#publicAdvertisedPrefix for public advertised prefixes.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#publicAdvertisedPrefix for public advertised prefixes.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -55864,16 +56310,20 @@ module Google
         #     It cannot be set for IPv4 prefixes either, and it always defaults to 32.
         # @!attribute [rw] byoip_api_version
         #   @return [::String]
-        #     [Output Only] The version of BYOIP API.
+        #     Output only. [Output Only] The version of BYOIP API.
         #     Check the ByoipApiVersion enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you
         #     create the resource.
+        # @!attribute [rw] enable_enhanced_ipv4_allocation
+        #   @return [::Boolean]
+        #     Output only. [Output Only] Whether this PDP supports enhanced IPv4 allocations.
+        #     Applicable for IPv4 PDPs only.
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object.
@@ -55886,7 +56336,7 @@ module Google
         #     retrieve a PublicDelegatedPrefix.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
@@ -55894,7 +56344,7 @@ module Google
         #     delegated prefix.
         # @!attribute [rw] ipv6_access_type
         #   @return [::String]
-        #     [Output Only] The internet access type for IPv6 Public Delegated Prefixes.
+        #     Output only. [Output Only] The internet access type for IPv6 Public Delegated Prefixes.
         #     Inherited from parent prefix.
         #     Check the Ipv6AccessType enum for the list of possible values.
         # @!attribute [rw] is_live_migration
@@ -55902,7 +56352,7 @@ module Google
         #     If true, the prefix will be live migrated.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#publicDelegatedPrefix for public delegated prefixes.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#publicDelegatedPrefix for public delegated prefixes.
         # @!attribute [rw] mode
         #   @return [::String]
         #     The public delegated prefix mode for IPv6 only.
@@ -55926,13 +56376,13 @@ module Google
         #     delegated prefix.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the public delegated prefix resides.
+        #     Output only. [Output Only] URL of the region where the public delegated prefix resides.
         #     This field applies only to the region resource. You must specify this
         #     field as part of the HTTP request URL. It is not settable as a field in
         #     the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] status
         #   @return [::String]
         #     [Output Only] The status of the public delegated prefix, which can be one
@@ -55952,7 +56402,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The version of BYOIP API.
+          # Output only. [Output Only] The version of BYOIP API.
           module ByoipApiVersion
             # A value indicating that the enum field is not set.
             UNDEFINED_BYOIP_API_VERSION = 0
@@ -55967,7 +56417,7 @@ module Google
             V2 = 2716
           end
 
-          # [Output Only] The internet access type for IPv6 Public Delegated Prefixes.
+          # Output only. [Output Only] The internet access type for IPv6 Public Delegated Prefixes.
           # Inherited from parent prefix.
           module Ipv6AccessType
             # A value indicating that the enum field is not set.
@@ -56059,7 +56509,7 @@ module Google
         #     A list of PublicDelegatedPrefixesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#publicDelegatedPrefixAggregatedList for aggregated
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#publicDelegatedPrefixAggregatedList for aggregated
         #     lists of public delegated prefixes.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -56073,7 +56523,7 @@ module Google
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -56099,7 +56549,7 @@ module Google
         #     A list of PublicDelegatedPrefix resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#publicDelegatedPrefixList for public delegated
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#publicDelegatedPrefixList for public delegated
         #     prefixes.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -56130,13 +56580,17 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you
         #     create the resource.
+        # @!attribute [rw] enable_enhanced_ipv4_allocation
+        #   @return [::Boolean]
+        #     Output only. [Output Only] Whether this PDP supports enhanced IPv4 allocations.
+        #     Applicable for IPv4 PDPs only.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
         #     The IP address range, in CIDR format, represented by this sub public
         #     delegated prefix.
         # @!attribute [rw] ipv6_access_type
         #   @return [::String]
-        #     [Output Only] The internet access type for IPv6 Public Delegated Sub
+        #     Output only. [Output Only] The internet access type for IPv6 Public Delegated Sub
         #     Prefixes. Inherited from parent prefix.
         #     Check the Ipv6AccessType enum for the list of possible values.
         # @!attribute [rw] is_address
@@ -56152,17 +56606,17 @@ module Google
         #     The name of the sub public delegated prefix.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The region of the sub public delegated prefix if it is
+        #     Output only. [Output Only] The region of the sub public delegated prefix if it is
         #     regional. If absent, the sub prefix is global.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the sub public delegated prefix.
+        #     Output only. [Output Only] The status of the sub public delegated prefix.
         #     Check the Status enum for the list of possible values.
         class PublicDelegatedPrefixPublicDelegatedSubPrefix
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The internet access type for IPv6 Public Delegated Sub
+          # Output only. [Output Only] The internet access type for IPv6 Public Delegated Sub
           # Prefixes. Inherited from parent prefix.
           module Ipv6AccessType
             # A value indicating that the enum field is not set.
@@ -56205,7 +56659,7 @@ module Google
             INTERNAL_IPV6_SUBNETWORK_CREATION = 153_239_834
           end
 
-          # [Output Only] The status of the sub public delegated prefix.
+          # Output only. [Output Only] The status of the sub public delegated prefix.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -56634,7 +57088,7 @@ module Google
           end
         end
 
-        # [Output Only] Warning of fetching the `quotas` field for this region. This
+        # Output only. [Output Only] Warning of fetching the `quotas` field for this region. This
         # field is populated only if fetching of the `quotas` field fails.
         # @!attribute [rw] code
         #   @return [::String]
@@ -56884,7 +57338,7 @@ module Google
         # Represents a reference to a resource.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#reference
+        #     Output only. [Output Only] Type of the resource. Always compute#reference
         #     for references.
         # @!attribute [rw] reference_type
         #   @return [::String]
@@ -56925,14 +57379,14 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#region for
+        #     Output only. [Output Only] Type of the resource. Always compute#region for
         #     regions.
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] Name of the resource.
         # @!attribute [rw] quota_status_warning
         #   @return [::Google::Cloud::Compute::V1::QuotaStatusWarning]
-        #     [Output Only] Warning of fetching the `quotas` field for this region. This
+        #     Output only. [Output Only] Warning of fetching the `quotas` field for this region. This
         #     field is populated only if fetching of the `quotas` field fails.
         # @!attribute [rw] quotas
         #   @return [::Array<::Google::Cloud::Compute::V1::Quota>]
@@ -56946,7 +57400,7 @@ module Google
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] supports_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] zones
         #   @return [::Array<::String>]
         #     [Output Only] A list of zones available in this region, in the form of
@@ -56994,7 +57448,7 @@ module Google
         #     A list of Autoscaler resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -57004,7 +57458,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -57021,7 +57475,7 @@ module Google
         #     A list of DiskType resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#regionDiskTypeList for region disk types.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#regionDiskTypeList for region disk types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -57031,7 +57485,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -57096,26 +57550,26 @@ module Google
         # Contains a list of InstanceGroup resources.
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroup>]
         #     A list of InstanceGroup resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     The resource type.
+        #     Output only. The resource type.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class RegionInstanceGroupList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -57134,28 +57588,28 @@ module Google
         # Contains a list of managed instance groups.
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManager>]
         #     A list of InstanceGroupManager resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The resource type, which is always
+        #     Output only. [Output Only] The resource type, which is always
         #     compute#instanceGroupManagerList for a list of managed instance groups that
         #     exist in th regional scope.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class RegionInstanceGroupManagerList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -57327,7 +57781,7 @@ module Google
         #     [Output Only] The list of errors of the managed instance group.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
@@ -57339,17 +57793,17 @@ module Google
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::PerInstanceConfig>]
-        #     [Output Only] The list of PerInstanceConfig.
+        #     Output only. [Output Only] The list of PerInstanceConfig.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class RegionInstanceGroupManagersListInstanceConfigsResp
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -57360,7 +57814,7 @@ module Google
         #     A list of managed instances.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
@@ -57448,26 +57902,26 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceWithNamedPorts>]
         #     A list of InstanceWithNamedPorts resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     The resource type.
+        #     Output only. The resource type.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class RegionInstanceGroupsListInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -57527,7 +57981,7 @@ module Google
         #     A list of Region resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#regionList for
+        #     Output only. [Output Only] Type of resource. Always compute#regionList for
         #     lists of regions.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -57538,7 +57992,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -57565,7 +58019,7 @@ module Google
 
         # @!attribute [rw] firewall_policys
         #   @return [::Array<::Google::Cloud::Compute::V1::RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
-        #     [Output only] Effective firewalls from firewall policy. It applies to
+        #     Output only. [Output only] Effective firewalls from firewall policy. It applies to
         #     Regional Network Firewall Policies in the specified region, Global Network
         #     Firewall Policies and Hierachial Firewall Policies which are associated
         #     with the network.
@@ -57579,30 +58033,30 @@ module Google
 
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     [Output Only] The display name of the firewall policy.
+        #     Output only. [Output Only] The display name of the firewall policy.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of the firewall policy.
+        #     Output only. [Output Only] The name of the firewall policy.
         # @!attribute [rw] packet_mirroring_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
-        #     [Output only] The packet mirroring rules that apply to the network.
+        #     Output only. [Output only] The packet mirroring rules that apply to the network.
         # @!attribute [rw] priority
         #   @return [::Integer]
-        #     [Output only] Priority of firewall policy association. Not applicable for
+        #     Output only. [Output only] Priority of firewall policy association. Not applicable for
         #     type=HIERARCHY.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
-        #     [Output only] The rules that apply to the network.
+        #     Output only. [Output only] The rules that apply to the network.
         # @!attribute [rw] type
         #   @return [::String]
-        #     [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
+        #     Output only. [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
         #     NETWORK, NETWORK_REGIONAL, SYSTEM_GLOBAL, SYSTEM_REGIONAL.
         #     Check the Type enum for the list of possible values.
         class RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
+          # Output only. [Output Only] The type of the firewall policy. Can be one of HIERARCHY,
           # NETWORK, NETWORK_REGIONAL, SYSTEM_GLOBAL, SYSTEM_REGIONAL.
           module Type
             # A value indicating that the enum field is not set.
@@ -58346,11 +58800,11 @@ module Google
         #     Reservation for aggregated resources, providing shape flexibility.
         # @!attribute [rw] commitment
         #   @return [::String]
-        #     [Output Only] Full or partial URL to a parent commitment. This field
+        #     Output only. [Output Only] Full or partial URL to a parent commitment. This field
         #     displays for reservations that are tied to a commitment.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] delete_after_duration
         #   @return [::Google::Cloud::Compute::V1::Duration]
@@ -58374,14 +58828,14 @@ module Google
         #     for example, to fix hardware errors.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#reservations for reservations.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#reservations for reservations.
         # @!attribute [rw] linked_commitments
         #   @return [::Array<::String>]
-        #     [Output Only] Full or partial URL to parent commitments. This field
+        #     Output only. [Output Only] Full or partial URL to parent commitments. This field
         #     displays for reservations that are tied to multiple commitments.
         # @!attribute [rw] name
         #   @return [::String]
@@ -58410,17 +58864,17 @@ module Google
         #     policy with reservation.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatus]
-        #     [Output Only] Status information for Reservation resource.
+        #     Output only. [Output Only] Status information for Reservation resource.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] scheduling_type
         #   @return [::String]
         #     The type of maintenance for the reservation.
         #     Check the SchedulingType enum for the list of possible values.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] share_settings
         #   @return [::Google::Cloud::Compute::V1::ShareSettings]
         #     Specify share-settings to create a shared reservation. This property is
@@ -58437,7 +58891,7 @@ module Google
         #     the reservation by name can consume from this reservation.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the reservation.
+        #     Output only. [Output Only] The status of the reservation.
         #
         #
         #          - CREATING: Reservation resources are being
@@ -58516,7 +58970,7 @@ module Google
             INDEPENDENT = 127_011_674
           end
 
-          # [Output Only] The status of the reservation.
+          # Output only. [Output Only] The status of the reservation.
           #
           #
           #      - CREATING: Reservation resources are being
@@ -58624,7 +59078,7 @@ module Google
         #     A list of Allocation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -58634,10 +59088,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -58658,63 +59112,63 @@ module Google
         # Represents a reservation block resource.
         # @!attribute [rw] count
         #   @return [::Integer]
-        #     [Output Only] The number of resources that are allocated in this
+        #     Output only. [Output Only] The number of resources that are allocated in this
         #     reservation block.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339 text format.
+        #     Output only. [Output Only] Creation timestamp inRFC3339 text format.
         # @!attribute [rw] health_info
         #   @return [::Google::Cloud::Compute::V1::ReservationBlockHealthInfo]
-        #     [Output Only] Health information for the reservation block.
+        #     Output only. [Output Only] Health information for the reservation block.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] in_use_count
         #   @return [::Integer]
-        #     [Output Only] The number of instances that are currently in use on this
+        #     Output only. [Output Only] The number of instances that are currently in use on this
         #     reservation block.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#reservationBlock for reservation blocks.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#reservationBlock for reservation blocks.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of this reservation block generated by Google
+        #     Output only. [Output Only] The name of this reservation block generated by Google
         #     Compute Engine. The name must be 1-63 characters long, and comply with
         #     RFC1035 @pattern [a-z](?:[-a-z0-9]\\{0,61}[a-z0-9])?
         # @!attribute [rw] physical_topology
         #   @return [::Google::Cloud::Compute::V1::ReservationBlockPhysicalTopology]
-        #     [Output Only] The physical topology of the reservation block.
+        #     Output only. [Output Only] The physical topology of the reservation block.
         # @!attribute [rw] reservation_maintenance
         #   @return [::Google::Cloud::Compute::V1::GroupMaintenanceInfo]
-        #     [Output Only] Maintenance information for this reservation block.
+        #     Output only. [Output Only] Maintenance information for this reservation block.
         # @!attribute [rw] reservation_sub_block_count
         #   @return [::Integer]
-        #     [Output Only] The number of reservation subBlocks associated with this
+        #     Output only. [Output Only] The number of reservation subBlocks associated with this
         #     reservation block.
         # @!attribute [rw] reservation_sub_block_in_use_count
         #   @return [::Integer]
-        #     [Output Only] The number of in-use reservation subBlocks associated with
+        #     Output only. [Output Only] The number of in-use reservation subBlocks associated with
         #     this reservation block. If at least one VM is running on a subBlock, it is
         #     considered in-use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] Status of the reservation block.
+        #     Output only. [Output Only] Status of the reservation block.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] Zone in which the reservation block resides.
+        #     Output only. [Output Only] Zone in which the reservation block resides.
         class ReservationBlock
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Status of the reservation block.
+          # Output only. [Output Only] Status of the reservation block.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -58771,7 +59225,7 @@ module Google
         #     The cluster name of the reservation block.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::ReservationBlockPhysicalTopologyInstance>]
-        #     The detailed instances information for a given Block
+        #     Output only. The detailed instances information for a given Block
         class ReservationBlockPhysicalTopology
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -58783,7 +59237,7 @@ module Google
         #     The InstanceId of the instance
         # @!attribute [rw] physical_host_topology
         #   @return [::Google::Cloud::Compute::V1::ReservationBlockPhysicalTopologyInstancePhysicalHostTopology]
-        #     The PhysicalHostTopology of instances within a Block resource.
+        #     Output only. The PhysicalHostTopology of instances within a Block resource.
         # @!attribute [rw] project_id
         #   @return [::Integer]
         #     Project where the instance lives
@@ -58848,7 +59302,7 @@ module Google
         #     [Output Only] A list of Allocation resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Always compute#reservationsList
+        #     Output only. [Output Only] Type of resource.Always compute#reservationsList
         #     for listsof reservations
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -58859,7 +59313,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -58871,57 +59325,57 @@ module Google
         # Represents a reservation subBlock resource.
         # @!attribute [rw] accelerator_topologies_info
         #   @return [::Google::Cloud::Compute::V1::AcceleratorTopologiesInfo]
-        #     [Output Only] Slice info for the reservation subBlock.
+        #     Output only. [Output Only] Slice info for the reservation subBlock.
         # @!attribute [rw] count
         #   @return [::Integer]
-        #     [Output Only] The number of hosts that are allocated in this
+        #     Output only. [Output Only] The number of hosts that are allocated in this
         #     reservation subBlock.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339 text format.
+        #     Output only. [Output Only] Creation timestamp inRFC3339 text format.
         # @!attribute [rw] health_info
         #   @return [::Google::Cloud::Compute::V1::ReservationSubBlockHealthInfo]
-        #     [Output Only] Health information for the reservation subBlock.
+        #     Output only. [Output Only] Health information for the reservation subBlock.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] in_use_count
         #   @return [::Integer]
-        #     [Output Only] The number of instances that are currently in use on this
+        #     Output only. [Output Only] The number of instances that are currently in use on this
         #     reservation subBlock.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#reservationSubBlock for reservation subBlocks.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#reservationSubBlock for reservation subBlocks.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of this reservation subBlock generated by Google
+        #     Output only. [Output Only] The name of this reservation subBlock generated by Google
         #     Compute Engine. The name must be 1-63 characters long, and comply with
         #     RFC1035 @pattern [a-z](?:[-a-z0-9]\\{0,61}[a-z0-9])?
         # @!attribute [rw] physical_topology
         #   @return [::Google::Cloud::Compute::V1::ReservationSubBlockPhysicalTopology]
-        #     [Output Only] The physical topology of the reservation subBlock.
+        #     Output only. [Output Only] The physical topology of the reservation subBlock.
         # @!attribute [rw] reservation_sub_block_maintenance
         #   @return [::Google::Cloud::Compute::V1::GroupMaintenanceInfo]
-        #     Maintenance information for this reservation subBlock.
+        #     Output only. Maintenance information for this reservation subBlock.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] Status of the reservation subBlock.
+        #     Output only. [Output Only] Status of the reservation subBlock.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] Zone in which the reservation subBlock resides.
+        #     Output only. [Output Only] Zone in which the reservation subBlock resides.
         class ReservationSubBlock
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Status of the reservation subBlock.
+          # Output only. [Output Only] Status of the reservation subBlock.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -59474,7 +59928,7 @@ module Google
         # snapshots.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -59486,14 +59940,14 @@ module Google
         #     Resource policy for instances for placement configuration.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] instance_schedule_policy
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyInstanceSchedulePolicy]
         #     Resource policy for scheduling instance operations.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#resource_policies for resource policies.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#resource_policies for resource policies.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the resource, provided by the client when initially creating
@@ -59508,16 +59962,16 @@ module Google
         #   @return [::String]
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyResourceStatus]
-        #     [Output Only] The system status of the resource policy.
+        #     Output only. [Output Only] The system status of the resource policy.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] snapshot_schedule_policy
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicySnapshotSchedulePolicy]
         #     Resource policy for persistent disks for creating snapshots.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of resource policy creation.
+        #     Output only. [Output Only] The status of resource policy creation.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] workload_policy
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyWorkloadPolicy]
@@ -59526,7 +59980,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The status of resource policy creation.
+          # Output only. [Output Only] The status of resource policy creation.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -59558,7 +60012,7 @@ module Google
         #     A list of ResourcePolicy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -59568,10 +60022,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -59596,7 +60050,7 @@ module Google
         #     how many days pass between the start of each cycle.
         # @!attribute [rw] duration
         #   @return [::String]
-        #     [Output only] A predetermined duration for the window, automatically
+        #     Output only. [Output only] A predetermined duration for the window, automatically
         #     chosen to be the smallest possible in the given scenario.
         # @!attribute [rw] start_time
         #   @return [::String]
@@ -59652,7 +60106,7 @@ module Google
         # Time window specified for hourly operations.
         # @!attribute [rw] duration
         #   @return [::String]
-        #     [Output only] Duration of the time window, automatically chosen to be
+        #     Output only. [Output only] Duration of the time window, automatically chosen to be
         #     smallest possible in the given scenario.
         # @!attribute [rw] hours_in_cycle
         #   @return [::Integer]
@@ -59711,7 +60165,7 @@ module Google
         #     [Output Only] A list of ResourcePolicy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource.Alwayscompute#resourcePoliciesList for listsof resourcePolicies
+        #     Output only. [Output Only] Type of resource.Alwayscompute#resourcePoliciesList for listsof resourcePolicies
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -59721,7 +60175,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -59736,7 +60190,7 @@ module Google
         # of ResourcePolicy proto specification.
         # @!attribute [rw] instance_schedule_policy
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyResourceStatusInstanceSchedulePolicyStatus]
-        #     [Output Only] Specifies a set of output values reffering to
+        #     Output only. [Output Only] Specifies a set of output values reffering to
         #     the instance_schedule_policy system status.
         #     This field should have the same name as corresponding policy field.
         class ResourcePolicyResourceStatus
@@ -59746,11 +60200,11 @@ module Google
 
         # @!attribute [rw] last_run_start_time
         #   @return [::String]
-        #     [Output Only] The last time the schedule successfully ran.
+        #     Output only. [Output Only] The last time the schedule successfully ran.
         #     The timestamp is an RFC3339 string.
         # @!attribute [rw] next_run_start_time
         #   @return [::String]
-        #     [Output Only] The next time the schedule is planned to run.
+        #     Output only. [Output Only] The next time the schedule is planned to run.
         #     The actual time might be slightly different.
         #     The timestamp is an RFC3339 string.
         class ResourcePolicyResourceStatusInstanceSchedulePolicyStatus
@@ -59864,7 +60318,7 @@ module Google
         #     Check the Day enum for the list of possible values.
         # @!attribute [rw] duration
         #   @return [::String]
-        #     [Output only] Duration of the time window, automatically chosen to be
+        #     Output only. [Output only] Duration of the time window, automatically chosen to be
         #     smallest possible in the given scenario.
         # @!attribute [rw] start_time
         #   @return [::String]
@@ -59950,22 +60404,22 @@ module Google
         # to the value requested by the user (intent) in their instance CRUD calls.
         # @!attribute [rw] effective_instance_metadata
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusEffectiveInstanceMetadata]
-        #     [Output Only] Effective metadata is a field that consolidates project,
+        #     Output only. [Output Only] Effective metadata is a field that consolidates project,
         #     zonal instance settings, and instance-level predefined metadata keys to
         #     provide the overridden value for those metadata keys at the instance level.
         # @!attribute [rw] physical_host
         #   @return [::String]
-        #     [Output Only] The precise location of your instance within the zone's data
+        #     Output only. [Output Only] The precise location of your instance within the zone's data
         #     center, including the block, sub-block, and host. The field is formatted as
         #     follows: blockId/subBlockId/hostId.
         # @!attribute [rw] physical_host_topology
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusPhysicalHostTopology]
-        #     [Output Only] A series of fields containing the global name of the Compute
+        #     Output only. [Output Only] A series of fields containing the global name of the Compute
         #     Engine cluster, as well as the ID of the block, sub-block, and host on
         #     which the running instance is located.
         # @!attribute [rw] reservation_consumption_info
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusReservationConsumptionInfo]
-        #     [Output Only] Reservation information that the instance is consuming from.
+        #     Output only. [Output Only] Reservation information that the instance is consuming from.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusScheduling]
         # @!attribute [rw] upcoming_maintenance
@@ -60033,7 +60487,7 @@ module Google
         # Reservation consumption information that the instance is consuming from.
         # @!attribute [rw] consumed_reservation
         #   @return [::String]
-        #     [Output Only] The full resource name of the reservation that this
+        #     Output only. [Output Only] The full resource name of the reservation that this
         #     instance is consuming from.
         class ResourceStatusReservationConsumptionInfo
           include ::Google::Protobuf::MessageExts
@@ -60154,10 +60608,10 @@ module Google
         # For more information, read theRoutes overview.
         # @!attribute [rw] as_paths
         #   @return [::Array<::Google::Cloud::Compute::V1::RouteAsPath>]
-        #     [Output Only] AS path.
+        #     Output only. [Output Only] AS path.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -60172,11 +60626,11 @@ module Google
         #     compressed format.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of this resource. Always compute#routes for
+        #     Output only. [Output Only] Type of this resource. Always compute#routes for
         #     Route resources.
         # @!attribute [rw] name
         #   @return [::String]
@@ -60197,7 +60651,7 @@ module Google
         #     partial valid URL: projects/project/global/gateways/default-internet-gateway
         # @!attribute [rw] next_hop_hub
         #   @return [::String]
-        #     [Output Only] The full resource name of the Network Connectivity Center hub
+        #     Output only. [Output Only] The full resource name of the Network Connectivity Center hub
         #     that will handle matching packets.
         # @!attribute [rw] next_hop_ilb
         #   @return [::String]
@@ -60230,9 +60684,16 @@ module Google
         #     https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/
         # @!attribute [rw] next_hop_inter_region_cost
         #   @return [::Integer]
-        #     [Output only] Internal fixed region-to-region cost that Google Cloud
+        #     Output only. [Output only] Internal fixed region-to-region cost that Google Cloud
         #     calculates based on factors such as network performance, distance, and
         #     available bandwidth between regions.
+        # @!attribute [rw] next_hop_interconnect_attachment
+        #   @return [::String]
+        #     Output only. [Output Only] The URL to an InterconnectAttachment which is the next hop
+        #     for the route.
+        #     This field will only be populated for dynamic routes generated by
+        #     Cloud Router with a linked interconnectAttachment or the static route
+        #     generated by each L2 Interconnect Attachment.
         # @!attribute [rw] next_hop_ip
         #   @return [::String]
         #     The network IP address of an instance that should handle matching packets.
@@ -60244,20 +60705,20 @@ module Google
         #     IPv4-mapped IPv6 address.
         # @!attribute [rw] next_hop_med
         #   @return [::Integer]
-        #     [Output Only] Multi-Exit Discriminator, a BGP route metric that indicates
+        #     Output only. [Output Only] Multi-Exit Discriminator, a BGP route metric that indicates
         #     the desirability of a particular route in a network.
         # @!attribute [rw] next_hop_network
         #   @return [::String]
         #     The URL of the local network if it should handle matching packets.
         # @!attribute [rw] next_hop_origin
         #   @return [::String]
-        #     [Output Only] Indicates the origin of the route. Can be IGP
+        #     Output only. [Output Only] Indicates the origin of the route. Can be IGP
         #     (Interior Gateway Protocol), EGP (Exterior Gateway Protocol),
         #     or INCOMPLETE.
         #     Check the NextHopOrigin enum for the list of possible values.
         # @!attribute [rw] next_hop_peering
         #   @return [::String]
-        #     [Output Only] The network peering name that should handle matching packets,
+        #     Output only. [Output Only] The network peering name that should handle matching packets,
         #     which should conform to RFC1035.
         # @!attribute [rw] next_hop_vpn_tunnel
         #   @return [::String]
@@ -60275,13 +60736,13 @@ module Google
         #     priority value must be from `0` to `65535`, inclusive.
         # @!attribute [rw] route_status
         #   @return [::String]
-        #     [Output only] The status of the route. This status only applies to
-        #     dynamic routes learned by Cloud Routers. This status is not applicable
-        #     to static routes.
+        #     [Output only] The status of the route. This status applies to
+        #     dynamic routes learned by Cloud Routers. It is also applicable to routes
+        #     undergoing migration.
         #     Check the RouteStatus enum for the list of possible values.
         # @!attribute [rw] route_type
         #   @return [::String]
-        #     [Output Only] The type of this route, which can be one of the following
+        #     Output only. [Output Only] The type of this route, which can be one of the following
         #     values:
         #     - 'TRANSIT' for a transit route that this router learned from
         #     another Cloud Router and will readvertise to one of its BGP peers
@@ -60297,13 +60758,13 @@ module Google
         #     A list of instance tags to which this route applies.
         # @!attribute [rw] warnings
         #   @return [::Array<::Google::Cloud::Compute::V1::Warnings>]
-        #     [Output Only] If potential misconfigurations are detected for this
+        #     Output only. [Output Only] If potential misconfigurations are detected for this
         #     route, this field will be populated with warning messages.
         class Route
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] Indicates the origin of the route. Can be IGP
+          # Output only. [Output Only] Indicates the origin of the route. Can be IGP
           # (Interior Gateway Protocol), EGP (Exterior Gateway Protocol),
           # or INCOMPLETE.
           module NextHopOrigin
@@ -60317,9 +60778,9 @@ module Google
             INCOMPLETE = 11_941_214
           end
 
-          # [Output only] The status of the route. This status only applies to
-          # dynamic routes learned by Cloud Routers. This status is not applicable
-          # to static routes.
+          # [Output only] The status of the route. This status applies to
+          # dynamic routes learned by Cloud Routers. It is also applicable to routes
+          # undergoing migration.
           module RouteStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTE_STATUS = 0
@@ -60341,7 +60802,7 @@ module Google
             PENDING = 35_394_935
           end
 
-          # [Output Only] The type of this route, which can be one of the following
+          # Output only. [Output Only] The type of this route, which can be one of the following
           # values:
           # - 'TRANSIT' for a transit route that this router learned from
           # another Cloud Router and will readvertise to one of its BGP peers
@@ -60419,7 +60880,7 @@ module Google
         #     A list of Route resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -60429,7 +60890,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -60541,7 +61002,7 @@ module Google
         #     either the interface name, IP address, or peer IP address. Please refer toRFC4273.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -60570,7 +61031,7 @@ module Google
         #     However, you cannot create a BGP peer that uses that interface.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#router for
+        #     Output only. [Output Only] Type of resource. Always compute#router for
         #     routers.
         # @!attribute [rw] md5_authentication_keys
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterMd5AuthenticationKey>]
@@ -60628,7 +61089,7 @@ module Google
         #     A list of Router resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -60638,10 +61099,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -60822,7 +61283,7 @@ module Google
         #     IPv6 address of the interface inside Google Cloud Platform.
         # @!attribute [rw] management_type
         #   @return [::String]
-        #     [Output Only] The resource that configures and manages this BGP peer.
+        #     Output only. [Output Only] The resource that configures and manages this BGP peer.
         #
         #        -  MANAGED_BY_USER is the default value and can be managed by you
         #        or other users
@@ -60903,7 +61364,7 @@ module Google
             TRUE = 2_583_950
           end
 
-          # [Output Only] The resource that configures and manages this BGP peer.
+          # Output only. [Output Only] The resource that configures and manages this BGP peer.
           #
           #    -  MANAGED_BY_USER is the default value and can be managed by you
           #    or other users
@@ -61038,7 +61499,7 @@ module Google
         #     a VPN tunnel, an Interconnect attachment, or a subnetwork.
         # @!attribute [rw] management_type
         #   @return [::String]
-        #     [Output Only] The resource that configures and manages this interface.
+        #     Output only. [Output Only] The resource that configures and manages this interface.
         #
         #        - MANAGED_BY_USER is the default value and can be managed directly
         #        by users.
@@ -61095,7 +61556,7 @@ module Google
             IPV6 = 2_254_343
           end
 
-          # [Output Only] The resource that configures and manages this interface.
+          # Output only. [Output Only] The resource that configures and manages this interface.
           #
           #    - MANAGED_BY_USER is the default value and can be managed directly
           #    by users.
@@ -61129,7 +61590,7 @@ module Google
         #     A list of Router resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#router for
+        #     Output only. [Output Only] Type of resource. Always compute#router for
         #     routers.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -61140,7 +61601,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -61683,55 +62144,55 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::BfdStatus]
         # @!attribute [rw] enable_ipv4
         #   @return [::Boolean]
-        #     Enable IPv4 traffic over BGP Peer.
+        #     Output only. Enable IPv4 traffic over BGP Peer.
         #     It is enabled by default if the peerIpAddress is version 4.
         # @!attribute [rw] enable_ipv6
         #   @return [::Boolean]
-        #     Enable IPv6 traffic over BGP Peer.
+        #     Output only. Enable IPv6 traffic over BGP Peer.
         #     It is enabled by default if the peerIpAddress is version 6.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     IP address of the local BGP interface.
+        #     Output only. IP address of the local BGP interface.
         # @!attribute [rw] ipv4_nexthop_address
         #   @return [::String]
-        #     IPv4 address of the local BGP interface.
+        #     Output only. IPv4 address of the local BGP interface.
         # @!attribute [rw] ipv6_nexthop_address
         #   @return [::String]
-        #     IPv6 address of the local BGP interface.
+        #     Output only. IPv6 address of the local BGP interface.
         # @!attribute [rw] linked_vpn_tunnel
         #   @return [::String]
-        #     URL of the VPN tunnel that this BGP peer controls.
+        #     Output only. URL of the VPN tunnel that this BGP peer controls.
         # @!attribute [rw] md5_auth_enabled
         #   @return [::Boolean]
         #     Informs whether MD5 authentication is enabled on this BGP peer.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of this BGP peer. Unique within the Routers resource.
+        #     Output only. Name of this BGP peer. Unique within the Routers resource.
         # @!attribute [rw] num_learned_routes
         #   @return [::Integer]
-        #     Number of routes learned from the remote BGP Peer.
+        #     Output only. Number of routes learned from the remote BGP Peer.
         # @!attribute [rw] peer_ip_address
         #   @return [::String]
-        #     IP address of the remote BGP interface.
+        #     Output only. IP address of the remote BGP interface.
         # @!attribute [rw] peer_ipv4_nexthop_address
         #   @return [::String]
-        #     IPv4 address of the remote BGP interface.
+        #     Output only. IPv4 address of the remote BGP interface.
         # @!attribute [rw] peer_ipv6_nexthop_address
         #   @return [::String]
-        #     IPv6 address of the remote BGP interface.
+        #     Output only. IPv6 address of the remote BGP interface.
         # @!attribute [rw] router_appliance_instance
         #   @return [::String]
-        #     [Output only] URI of the VM instance that is used as third-party router
+        #     Output only. [Output only] URI of the VM instance that is used as third-party router
         #     appliances such as Next Gen Firewalls, Virtual Routers, or Router
         #     Appliances.
         #     The VM instance is the peer side of the BGP session.
         # @!attribute [rw] state
         #   @return [::String]
-        #     The state of the BGP session. For a list of possible values for this
+        #     Output only. The state of the BGP session. For a list of possible values for this
         #     field, seeBGP session states.
         # @!attribute [rw] status
         #   @return [::String]
-        #     Status of the BGP peer: \\{UP, DOWN}
+        #     Output only. Status of the BGP peer: \\{UP, DOWN}
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] status_reason
         #   @return [::String]
@@ -61739,19 +62200,19 @@ module Google
         #     Check the StatusReason enum for the list of possible values.
         # @!attribute [rw] uptime
         #   @return [::String]
-        #     Time this session has been up.
+        #     Output only. Time this session has been up.
         #     Format:
         #      14 years, 51 weeks, 6 days, 23 hours, 59 minutes, 59 seconds
         # @!attribute [rw] uptime_seconds
         #   @return [::String]
-        #     Time this session has been up, in seconds.
+        #     Output only. Time this session has been up, in seconds.
         #     Format:
         #      145
         class RouterStatusBgpPeerStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Status of the BGP peer: \\{UP, DOWN}
+          # Output only. Status of the BGP peer: \\{UP, DOWN}
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -61788,36 +62249,36 @@ module Google
         # Status of a NAT contained in this router.
         # @!attribute [rw] auto_allocated_nat_ips
         #   @return [::Array<::String>]
-        #     A list of IPs auto-allocated for NAT. Example: ["1.1.1.1", "129.2.16.89"]
+        #     Output only. A list of IPs auto-allocated for NAT. Example: ["1.1.1.1", "129.2.16.89"]
         # @!attribute [rw] drain_auto_allocated_nat_ips
         #   @return [::Array<::String>]
-        #     A list of IPs auto-allocated for NAT that are in drain mode.
+        #     Output only. A list of IPs auto-allocated for NAT that are in drain mode.
         #     Example: ["1.1.1.1", "179.12.26.133"].
         # @!attribute [rw] drain_user_allocated_nat_ips
         #   @return [::Array<::String>]
-        #     A list of IPs user-allocated for NAT that are in drain mode.
+        #     Output only. A list of IPs user-allocated for NAT that are in drain mode.
         #     Example: ["1.1.1.1", "179.12.26.133"].
         # @!attribute [rw] min_extra_nat_ips_needed
         #   @return [::Integer]
-        #     The number of extra IPs to allocate. This will be greater than 0 only if
+        #     Output only. The number of extra IPs to allocate. This will be greater than 0 only if
         #     user-specified IPs are NOT enough to allow all configured VMs to use NAT.
         #     This value is meaningful only when auto-allocation of NAT IPs is *not*
         #     used.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Unique name of this NAT.
+        #     Output only. Unique name of this NAT.
         # @!attribute [rw] num_vm_endpoints_with_nat_mappings
         #   @return [::Integer]
-        #     Number of VM endpoints (i.e., Nics) that can use NAT.
+        #     Output only. Number of VM endpoints (i.e., Nics) that can use NAT.
         # @!attribute [rw] rule_status
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterStatusNatStatusNatRuleStatus>]
         #     Status of rules in this NAT.
         # @!attribute [rw] user_allocated_nat_ip_resources
         #   @return [::Array<::String>]
-        #     A list of fully qualified URLs of reserved IP address resources.
+        #     Output only. A list of fully qualified URLs of reserved IP address resources.
         # @!attribute [rw] user_allocated_nat_ips
         #   @return [::Array<::String>]
-        #     A list of IPs user-allocated for NAT.
+        #     Output only. A list of IPs user-allocated for NAT.
         #     They will be raw IP strings like "179.12.26.133".
         class RouterStatusNatStatus
           include ::Google::Protobuf::MessageExts
@@ -61827,24 +62288,24 @@ module Google
         # Status of a NAT Rule contained in this NAT.
         # @!attribute [rw] active_nat_ips
         #   @return [::Array<::String>]
-        #     A list of active IPs for NAT.
+        #     Output only. A list of active IPs for NAT.
         #     Example: ["1.1.1.1", "179.12.26.133"].
         # @!attribute [rw] drain_nat_ips
         #   @return [::Array<::String>]
-        #     A list of IPs for NAT that are in drain mode.
+        #     Output only. A list of IPs for NAT that are in drain mode.
         #     Example: ["1.1.1.1", "179.12.26.133"].
         # @!attribute [rw] min_extra_ips_needed
         #   @return [::Integer]
-        #     The number of extra IPs to allocate. This will be greater than 0 only
+        #     Output only. The number of extra IPs to allocate. This will be greater than 0 only
         #     if the existing IPs in this NAT Rule are NOT enough to allow all
         #     configured VMs to use NAT.
         # @!attribute [rw] num_vm_endpoints_with_nat_mappings
         #   @return [::Integer]
-        #     Number of VM endpoints (i.e., NICs) that have NAT Mappings from this
+        #     Output only. Number of VM endpoints (i.e., NICs) that have NAT Mappings from this
         #     NAT Rule.
         # @!attribute [rw] rule_number
         #   @return [::Integer]
-        #     Rule number of the rule.
+        #     Output only. Rule number of the rule.
         class RouterStatusNatStatusNatRuleStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -61852,7 +62313,7 @@ module Google
 
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::RouterStatus]
         class RouterStatusResponse
@@ -61875,7 +62336,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#routersListBgpRoutes for lists of bgp routes.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#routersListBgpRoutes for lists of bgp routes.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -61888,10 +62349,10 @@ module Google
         #     [Output Only] A list of bgp routes.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -61908,7 +62369,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#routersListRoutePolicies for lists of route policies.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#routersListRoutePolicies for lists of route policies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -61921,10 +62382,10 @@ module Google
         #     [Output Only] A list of route policies.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -62081,7 +62542,7 @@ module Google
         #     The size of the disk in base-2 GB.
         # @!attribute [rw] disk_type
         #   @return [::String]
-        #     [Output Only] URL of the disk type resource. For example:projects/project/zones/zone/diskTypes/pd-standard or
+        #     Output only. [Output Only] URL of the disk type resource. For example:projects/project/zones/zone/diskTypes/pd-standard or
         #     pd-ssd
         # @!attribute [rw] guest_os_features
         #   @return [::Array<::Google::Cloud::Compute::V1::GuestOsFeature>]
@@ -62091,7 +62552,7 @@ module Google
         #     options.
         # @!attribute [rw] index
         #   @return [::Integer]
-        #     Specifies zero-based index of the disk that is attached to the source
+        #     Output only. Specifies zero-based index of the disk that is attached to the source
         #     instance.
         # @!attribute [rw] interface
         #   @return [::String]
@@ -62100,10 +62561,10 @@ module Google
         #     Check the Interface enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#attachedDisk for attached disks.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#attachedDisk for attached disks.
         # @!attribute [rw] licenses
         #   @return [::Array<::String>]
-        #     [Output Only] Any valid publicly visible licenses.
+        #     Output only. [Output Only] Any valid publicly visible licenses.
         # @!attribute [rw] mode
         #   @return [::String]
         #     The mode in which this disk is attached to the source instance, eitherREAD_WRITE or READ_ONLY.
@@ -62113,11 +62574,11 @@ module Google
         #     Specifies a URL of the disk attached to the source instance.
         # @!attribute [rw] storage_bytes
         #   @return [::Integer]
-        #     [Output Only] A size of the storage used by the disk's snapshot by this
+        #     Output only. [Output Only] A size of the storage used by the disk's snapshot by this
         #     machine image.
         # @!attribute [rw] storage_bytes_status
         #   @return [::String]
-        #     [Output Only] An indicator whether storageBytes is in a
+        #     Output only. [Output Only] An indicator whether storageBytes is in a
         #     stable state or it is being adjusted as a result of shared storage
         #     reallocation. This status can either be UPDATING, meaning
         #     the size of the snapshot is being updated, or UP_TO_DATE,
@@ -62156,7 +62617,7 @@ module Google
             READ_WRITE = 173_607_894
           end
 
-          # [Output Only] An indicator whether storageBytes is in a
+          # Output only. [Output Only] An indicator whether storageBytes is in a
           # stable state or it is being adjusted as a result of shared storage
           # reallocation. This status can either be UPDATING, meaning
           # the size of the snapshot is being updated, or UP_TO_DATE,
@@ -62184,22 +62645,22 @@ module Google
         # An instance-attached disk resource.
         # @!attribute [rw] architecture
         #   @return [::String]
-        #     [Output Only] The architecture of the attached disk.
+        #     Output only. [Output Only] The architecture of the attached disk.
         #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#savedDisk
+        #     Output only. [Output Only] Type of the resource. Always compute#savedDisk
         #     for attached disks.
         # @!attribute [rw] source_disk
         #   @return [::String]
-        #     Specifies a URL of the disk attached to the source instance.
+        #     Output only. Specifies a URL of the disk attached to the source instance.
         # @!attribute [rw] storage_bytes
         #   @return [::Integer]
-        #     [Output Only] Size of the individual disk snapshot used by this machine
+        #     Output only. [Output Only] Size of the individual disk snapshot used by this machine
         #     image.
         # @!attribute [rw] storage_bytes_status
         #   @return [::String]
-        #     [Output Only] An indicator whether storageBytes is in a
+        #     Output only. [Output Only] An indicator whether storageBytes is in a
         #     stable state or it is being adjusted as a result of shared storage
         #     reallocation. This status can either be UPDATING, meaning
         #     the size of the snapshot is being updated, or UP_TO_DATE,
@@ -62209,7 +62670,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The architecture of the attached disk.
+          # Output only. [Output Only] The architecture of the attached disk.
           module Architecture
             # A value indicating that the enum field is not set.
             UNDEFINED_ARCHITECTURE = 0
@@ -62224,7 +62685,7 @@ module Google
             X86_64 = 425_300_551
           end
 
-          # [Output Only] An indicator whether storageBytes is in a
+          # Output only. [Output Only] An indicator whether storageBytes is in a
           # stable state or it is being adjusted as a result of shared storage
           # reallocation. This status can either be UPDATING, meaning
           # the size of the snapshot is being updated, or UP_TO_DATE,
@@ -62470,7 +62931,7 @@ module Google
         #     [Output Only] The Base64-encoded screenshot data.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#screenshot
+        #     Output only. [Output Only] Type of the resource. Always compute#screenshot
         #     for the screenshots.
         class Screenshot
           include ::Google::Protobuf::MessageExts
@@ -62487,7 +62948,7 @@ module Google
         #     A list of SecurityPoliciesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#securityPolicyAggregatedList for lists of Security
+        #     Output only. [Output Only] Type of resource. Alwayscompute#securityPolicyAggregatedList for lists of Security
         #     Policies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -62498,10 +62959,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -62559,7 +63020,7 @@ module Google
         #     A list of associations that belong to this policy.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] ddos_protection_config
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyDdosProtectionConfig]
@@ -62580,11 +63041,11 @@ module Google
         #     security policy.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Alwayscompute#securityPolicyfor security policies
+        #     Output only. [Output only] Type of the resource. Alwayscompute#securityPolicyfor security policies
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this security policy, which
@@ -62610,12 +63071,12 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     [Output Only] The parent of the security policy.
+        #     Output only. [Output Only] The parent of the security policy.
         # @!attribute [rw] recaptcha_options_config
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRecaptchaOptionsConfig]
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional security policy
+        #     Output only. [Output Only] URL of the region where the regional security policy
         #     resides. This field is not applicable to global security policies.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRule>]
@@ -62628,7 +63089,7 @@ module Google
         #     added.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] short_name
         #   @return [::String]
         #     User-provided name of the organization security policy. The name should be
@@ -62844,6 +63305,11 @@ module Google
         # @!attribute [rw] log_level
         #   @return [::String]
         #     Check the LogLevel enum for the list of possible values.
+        # @!attribute [rw] request_body_inspection_size
+        #   @return [::String]
+        #     The maximum request size chosen by the customer with Waf enabled.
+        #     Values supported are "8KB", "16KB, "32KB", "48KB" and "64KB".
+        #     Values are case insensitive.
         # @!attribute [rw] user_ip_request_headers
         #   @return [::Array<::String>]
         #     An optional list of case-insensitive request header names to use for
@@ -62895,7 +63361,7 @@ module Google
         #     The resource that the security policy is attached to.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     [Output Only] The display name of the security policy of the association.
+        #     Output only. [Output Only] The display name of the security policy of the association.
         # @!attribute [rw] excluded_folders
         #   @return [::Array<::String>]
         #     A list of folders to exclude from the security policy.
@@ -62907,10 +63373,10 @@ module Google
         #     The name for an association.
         # @!attribute [rw] security_policy_id
         #   @return [::String]
-        #     [Output Only] The security policy ID of the association.
+        #     Output only. [Output Only] The security policy ID of the association.
         # @!attribute [rw] short_name
         #   @return [::String]
-        #     [Output Only] The short name of the security policy of the association.
+        #     Output only. [Output Only] The short name of the security policy of the association.
         class SecurityPolicyAssociation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -62944,7 +63410,7 @@ module Google
         #     A list of SecurityPolicy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#securityPolicyList for listsof securityPolicies
+        #     Output only. [Output Only] Type of resource. Alwayscompute#securityPolicyList for listsof securityPolicies
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -63020,7 +63486,7 @@ module Google
         #     CLOUD_ARMOR.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Alwayscompute#securityPolicyRule for security policy rules
+        #     Output only. [Output only] Type of the resource. Alwayscompute#securityPolicyRule for security policy rules
         # @!attribute [rw] match
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleMatcher]
         #     A match condition that incoming traffic is evaluated against.
@@ -63786,7 +64252,7 @@ module Google
         #     [Output Only] The contents of the console output.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#serialPortOutput for serial port output.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#serialPortOutput for serial port output.
         # @!attribute [rw] next
         #   @return [::Integer]
         #     [Output Only] The position of the next byte of content, regardless of
@@ -63795,7 +64261,7 @@ module Google
         #     parameter.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] start
         #   @return [::Integer]
         #     The starting byte position of the output that was returned.
@@ -63851,7 +64317,7 @@ module Google
         # the consumers connecting to the service.
         # @!attribute [rw] connected_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAttachmentConnectedEndpoint>]
-        #     [Output Only] An array of connections for all the consumers connected to
+        #     Output only. [Output Only] An array of connections for all the consumers connected to
         #     this service attachment.
         # @!attribute [rw] connection_preference
         #   @return [::String]
@@ -63878,7 +64344,7 @@ module Google
         #     attachment must contain either only projects or only networks.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -63906,11 +64372,11 @@ module Google
         #     ServiceAttachment.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#serviceAttachment for service attachments.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#serviceAttachment for service attachments.
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Metadata of the service attachment.
@@ -63948,7 +64414,7 @@ module Google
         #     If unspecified, the default propagated connection limit is 250.
         # @!attribute [rw] psc_service_attachment_id
         #   @return [::Google::Cloud::Compute::V1::Uint128]
-        #     [Output Only] An 128-bit global unique ID of the PSC service attachment.
+        #     Output only. [Output Only] An 128-bit global unique ID of the PSC service attachment.
         # @!attribute [rw] reconcile_connections
         #   @return [::Boolean]
         #     This flag determines whether a consumer accept/reject list change can
@@ -63967,13 +64433,13 @@ module Google
         #     For newly created service attachment, this boolean defaults to false.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the service attachment resides.
+        #     Output only. [Output Only] URL of the region where the service attachment resides.
         #     This field applies only to the region resource. You must specify this
         #     field as part of the HTTP request URL. It is not settable as a field in
         #     the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] target_service
         #   @return [::String]
         #     The URL of a service serving the endpoint identified by this service
@@ -64016,7 +64482,7 @@ module Google
         #     A list of ServiceAttachmentsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -64026,10 +64492,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -64122,7 +64588,7 @@ module Google
         #     A list of ServiceAttachment resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#serviceAttachment for service attachments.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#serviceAttachment for service attachments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -66856,7 +67322,7 @@ module Google
         #     issued to the Shielded Instance's vTPM.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#shieldedInstanceIdentity for shielded Instance
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#shieldedInstanceIdentity for shielded Instance
         #     identity entry.
         # @!attribute [rw] signing_key
         #   @return [::Google::Cloud::Compute::V1::ShieldedInstanceIdentityEntry]
@@ -66983,12 +67449,12 @@ module Google
         # persistent disk snapshots.
         # @!attribute [rw] architecture
         #   @return [::String]
-        #     [Output Only] The architecture of the snapshot. Valid values are
+        #     Output only. [Output Only] The architecture of the snapshot. Valid values are
         #     ARM64 or X86_64.
         #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] auto_created
         #   @return [::Boolean]
-        #     [Output Only] Set to true if snapshots are automatically created by
+        #     Output only. [Output Only] Set to true if snapshots are automatically created by
         #     applying resource policy on the target disk.
         # @!attribute [rw] chain_name
         #   @return [::String]
@@ -67000,10 +67466,10 @@ module Google
         #     field is visible only if it has a non-empty value.
         # @!attribute [rw] creation_size_bytes
         #   @return [::Integer]
-        #     [Output Only] Size in bytes of the snapshot at creation time.
+        #     Output only. [Output Only] Size in bytes of the snapshot at creation time.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -67011,13 +67477,13 @@ module Google
         #     create the resource.
         # @!attribute [rw] disk_size_gb
         #   @return [::Integer]
-        #     [Output Only] Size of the source disk, specified in GB.
+        #     Output only. [Output Only] Size of the source disk, specified in GB.
         # @!attribute [rw] download_bytes
         #   @return [::Integer]
-        #     [Output Only] Number of bytes downloaded to restore a snapshot to a disk.
+        #     Output only. [Output Only] Number of bytes downloaded to restore a snapshot to a disk.
         # @!attribute [rw] enable_confidential_compute
         #   @return [::Boolean]
-        #     Whether this snapshot is created from a confidential compute mode disk.
+        #     Output only. Whether this snapshot is created from a confidential compute mode disk.
         #     [Output Only]: This field is not set by user, but from source disk.
         # @!attribute [rw] guest_flush
         #   @return [::Boolean]
@@ -67025,17 +67491,17 @@ module Google
         #     informing the OS to prepare for the snapshot process.
         # @!attribute [rw] guest_os_features
         #   @return [::Array<::Google::Cloud::Compute::V1::GuestOsFeature>]
-        #     [Output Only] A list of features to enable on the guest operating system.
+        #     Output only. [Output Only] A list of features to enable on the guest operating system.
         #     Applicable only for bootable images. Read
         #     Enabling guest operating system features to see a list of available
         #     options.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#snapshot
+        #     Output only. [Output Only] Type of the resource. Always compute#snapshot
         #     for Snapshot resources.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -67055,11 +67521,11 @@ module Google
         #     Label values may be empty.
         # @!attribute [rw] license_codes
         #   @return [::Array<::Integer>]
-        #     [Output Only] Integer license codes indicating which licenses are attached
+        #     Output only. [Output Only] Integer license codes indicating which licenses are attached
         #     to this snapshot.
         # @!attribute [rw] licenses
         #   @return [::Array<::String>]
-        #     [Output Only] A list of public visible licenses that apply to this
+        #     Output only. [Output Only] A list of public visible licenses that apply to this
         #     snapshot. This can be because the original image had licenses attached
         #     (such as a Windows image).
         # @!attribute [rw] location_hint
@@ -67085,10 +67551,10 @@ module Google
         #     Output only. Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] snapshot_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
         #     Encrypts the snapshot using acustomer-supplied
@@ -67123,7 +67589,7 @@ module Google
         #     snapshot.
         # @!attribute [rw] source_disk_id
         #   @return [::String]
-        #     [Output Only] The ID value of the disk used to create this snapshot. This
+        #     Output only. [Output Only] The ID value of the disk used to create this snapshot. This
         #     value may be used to determine whether the snapshot was taken from the
         #     current or a previous instance of a given disk name.
         # @!attribute [rw] source_instant_snapshot
@@ -67142,7 +67608,7 @@ module Google
         #     Snapshot.
         # @!attribute [rw] source_instant_snapshot_id
         #   @return [::String]
-        #     [Output Only] The unique ID of the instant snapshot used to create this
+        #     Output only. [Output Only] The unique ID of the instant snapshot used to create this
         #     snapshot. This value identifies the exact instant snapshot that was used to
         #     create this snapshot. For example, if you created the snapshot from an
         #     instant snapshot that was later deleted and recreated under the same name,
@@ -67150,24 +67616,24 @@ module Google
         #     that was used.
         # @!attribute [rw] source_snapshot_schedule_policy
         #   @return [::String]
-        #     [Output Only] URL of the resource policy which created this
+        #     Output only. [Output Only] URL of the resource policy which created this
         #     scheduled snapshot.
         # @!attribute [rw] source_snapshot_schedule_policy_id
         #   @return [::String]
-        #     [Output Only] ID of the resource policy which created this
+        #     Output only. [Output Only] ID of the resource policy which created this
         #     scheduled snapshot.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The status of the snapshot. This can beCREATING, DELETING, FAILED,READY, or UPLOADING.
+        #     Output only. [Output Only] The status of the snapshot. This can beCREATING, DELETING, FAILED,READY, or UPLOADING.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] storage_bytes
         #   @return [::Integer]
-        #     [Output Only] A size of the storage used by the snapshot. As snapshots
+        #     Output only. [Output Only] A size of the storage used by the snapshot. As snapshots
         #     share storage, this number is expected to change with snapshot
         #     creation/deletion.
         # @!attribute [rw] storage_bytes_status
         #   @return [::String]
-        #     [Output Only] An indicator whether storageBytes is in a
+        #     Output only. [Output Only] An indicator whether storageBytes is in a
         #     stable state or it is being adjusted as a result of shared storage
         #     reallocation. This status can either be UPDATING, meaning
         #     the size of the snapshot is being updated, or UP_TO_DATE,
@@ -67190,7 +67656,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # [Output Only] The architecture of the snapshot. Valid values are
+          # Output only. [Output Only] The architecture of the snapshot. Valid values are
           # ARM64 or X86_64.
           module Architecture
             # A value indicating that the enum field is not set.
@@ -67216,7 +67682,7 @@ module Google
             STANDARD = 484_642_493
           end
 
-          # [Output Only] The status of the snapshot. This can beCREATING, DELETING, FAILED,READY, or UPLOADING.
+          # Output only. [Output Only] The status of the snapshot. This can beCREATING, DELETING, FAILED,READY, or UPLOADING.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -67237,7 +67703,7 @@ module Google
             UPLOADING = 267_603_489
           end
 
-          # [Output Only] An indicator whether storageBytes is in a
+          # Output only. [Output Only] An indicator whether storageBytes is in a
           # stable state or it is being adjusted as a result of shared storage
           # reallocation. This status can either be UPDATING, meaning
           # the size of the snapshot is being updated, or UP_TO_DATE,
@@ -67261,7 +67727,7 @@ module Google
         #     A list of Snapshot resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -67271,7 +67737,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -67285,8 +67751,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the snapshot. Tag keys and values have
         #     the same definition as resource
-        #     manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and
-        #     values are in the format `tagValues/456`. The field is ignored (both PUT &
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
         #     PATCH) when empty.
         class SnapshotParams
           include ::Google::Protobuf::MessageExts
@@ -67546,14 +68014,14 @@ module Google
         #     create the resource.
         # @!attribute [rw] expire_time
         #   @return [::String]
-        #     [Output Only] Expire time of the certificate. RFC3339
+        #     Output only. [Output Only] Expire time of the certificate. RFC3339
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#sslCertificate for SSL certificates.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#sslCertificate for SSL certificates.
         # @!attribute [rw] managed
         #   @return [::Google::Cloud::Compute::V1::SslCertificateManagedSslCertificate]
         #     Configuration and status of a managed SSL certificate.
@@ -67573,7 +68041,7 @@ module Google
         #     requests include this field.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional SSL Certificate
+        #     Output only. [Output Only] URL of the region where the regional SSL Certificate
         #     resides. This field is not applicable to global SSL Certificate.
         # @!attribute [rw] self_link
         #   @return [::String]
@@ -67583,7 +68051,7 @@ module Google
         #     Configuration and status of a self-managed SSL certificate.
         # @!attribute [rw] subject_alternative_names
         #   @return [::Array<::String>]
-        #     [Output Only] Domains associated with the certificate via Subject
+        #     Output only. [Output Only] Domains associated with the certificate via Subject
         #     Alternative Name.
         # @!attribute [rw] type
         #   @return [::String]
@@ -67618,7 +68086,7 @@ module Google
         #     A list of SslCertificatesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#sslCertificateAggregatedList for lists of SSL
+        #     Output only. [Output Only] Type of resource. Alwayscompute#sslCertificateAggregatedList for lists of SSL
         #     Certificates.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -67629,10 +68097,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -67659,7 +68127,7 @@ module Google
         #     A list of SslCertificate resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -67669,7 +68137,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -67681,7 +68149,7 @@ module Google
         # Configuration and status of a managed SSL certificate.
         # @!attribute [rw] domain_status
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     [Output only] Detailed statuses of the domains specified for managed
+        #     Output only. [Output only] Detailed statuses of the domains specified for managed
         #     certificate resource.
         # @!attribute [rw] domains
         #   @return [::Array<::String>]
@@ -67691,7 +68159,7 @@ module Google
         #     certificate](/load-balancing/docs/quotas#ssl_certificates).
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output only] Status of the managed certificate resource.
+        #     Output only. [Output only] Status of the managed certificate resource.
         #     Check the Status enum for the list of possible values.
         class SslCertificateManagedSslCertificate
           include ::Google::Protobuf::MessageExts
@@ -67706,7 +68174,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # [Output only] Status of the managed certificate resource.
+          # Output only. [Output only] Status of the managed certificate resource.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -67778,7 +68246,7 @@ module Google
         #     A list of SslPoliciesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#sslPolicyAggregatedList for lists of SSL Policies.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#sslPolicyAggregatedList for lists of SSL Policies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -67788,10 +68256,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -67811,23 +68279,23 @@ module Google
 
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::SslPolicy>]
-        #     A list of SslPolicy resources.
+        #     Output only. A list of SslPolicy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#sslPoliciesList for lists of sslPolicies.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#sslPoliciesList for lists of sslPolicies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -67863,7 +68331,7 @@ module Google
         # SSL policies overview.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] custom_features
         #   @return [::Array<::String>]
@@ -67876,7 +68344,7 @@ module Google
         #     create the resource.
         # @!attribute [rw] enabled_features
         #   @return [::Array<::String>]
-        #     [Output Only] The list of features enabled in the SSL policy.
+        #     Output only. [Output Only] The list of features enabled in the SSL policy.
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object.
@@ -67889,11 +68357,11 @@ module Google
         #     retrieve an SslPolicy.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output only] Type of the resource. Alwayscompute#sslPolicyfor SSL policies.
+        #     Output only. [Output only] Type of the resource. Alwayscompute#sslPolicyfor SSL policies.
         # @!attribute [rw] min_tls_version
         #   @return [::String]
         #     The minimum version of SSL protocol that can be used by the clients to
@@ -67917,14 +68385,14 @@ module Google
         #     Check the Profile enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional SSL policy
+        #     Output only. [Output Only] URL of the region where the regional SSL policy
         #     resides. This field is not applicable to global SSL policies.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] warnings
         #   @return [::Array<::Google::Cloud::Compute::V1::Warnings>]
-        #     [Output Only] If potential misconfigurations are detected for this
+        #     Output only. [Output Only] If potential misconfigurations are detected for this
         #     SSL policy, this field will be populated with warning messages.
         class SslPolicy
           include ::Google::Protobuf::MessageExts
@@ -68549,7 +69017,7 @@ module Google
         #     Check the CapacityProvisioningType enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -68557,11 +69025,11 @@ module Google
         #     create the resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#storagePool
+        #     Output only. [Output Only] Type of the resource. Always compute#storagePool
         #     for storage pools.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -68606,16 +69074,16 @@ module Google
         #     storage pool type is hyperdisk-balanced or hyperdisk-throughput.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::StoragePoolResourceStatus]
-        #     [Output Only] Status information for the storage pool resource.
+        #     Output only. [Output Only] Status information for the storage pool resource.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined fully-qualified URL for this resource.
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource's resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource's resource id.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] The status of storage pool creation.
+        #     Output only. [Output Only] The status of storage pool creation.
         #
         #
         #          - CREATING: Storage pool is provisioning.
@@ -68626,13 +69094,13 @@ module Google
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::StoragePoolResourceStatus]
-        #     [Output Only] Status information for the storage pool resource.
+        #     Output only. [Output Only] Status information for the storage pool resource.
         # @!attribute [rw] storage_pool_type
         #   @return [::String]
         #     Type of the storage pool.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the zone where the storage pool resides.
+        #     Output only. [Output Only] URL of the zone where the storage pool resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         class StoragePool
@@ -68669,7 +69137,7 @@ module Google
             UNDEFINED_PERFORMANCE_PROVISIONING_TYPE = 0
           end
 
-          # [Output Only] The status of storage pool creation.
+          # Output only. [Output Only] The status of storage pool creation.
           #
           #
           #      - CREATING: Storage pool is provisioning.
@@ -68705,7 +69173,7 @@ module Google
         #     A list of StoragePoolsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#storagePoolAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#storagePoolAggregatedList for aggregated lists of
         #     storage pools.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -68716,10 +69184,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -68739,45 +69207,45 @@ module Google
 
         # @!attribute [rw] attached_instances
         #   @return [::Array<::String>]
-        #     [Output Only] Instances this disk is attached to.
+        #     Output only. [Output Only] Instances this disk is attached to.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] disk
         #   @return [::String]
-        #     [Output Only] The URL of the disk.
+        #     Output only. [Output Only] The URL of the disk.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of the disk.
+        #     Output only. [Output Only] The name of the disk.
         # @!attribute [rw] provisioned_iops
         #   @return [::Integer]
-        #     [Output Only] The number of IOPS provisioned for the disk.
+        #     Output only. [Output Only] The number of IOPS provisioned for the disk.
         # @!attribute [rw] provisioned_throughput
         #   @return [::Integer]
-        #     [Output Only] The throughput provisioned for the disk.
+        #     Output only. [Output Only] The throughput provisioned for the disk.
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
-        #     [Output Only] Resource policies applied to disk for automatic snapshot
+        #     Output only. [Output Only] Resource policies applied to disk for automatic snapshot
         #     creations.
         # @!attribute [rw] size_gb
         #   @return [::Integer]
-        #     [Output Only] The disk size, in GB.
+        #     Output only. [Output Only] The disk size, in GB.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] The disk status.
+        #     Output only. [Output Only] The disk status.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] type
         #   @return [::String]
-        #     [Output Only] The disk type.
+        #     Output only. [Output Only] The disk type.
         # @!attribute [rw] used_bytes
         #   @return [::Integer]
-        #     [Output Only] Amount of disk space used.
+        #     Output only. [Output Only] Amount of disk space used.
         class StoragePoolDisk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The disk status.
+          # Output only. [Output Only] The disk status.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -68814,7 +69282,7 @@ module Google
         #     A list of StoragePool resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#storagePoolList
+        #     Output only. [Output Only] Type of resource. Always compute#storagePoolList
         #     for lists of storagePools.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -68825,10 +69293,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -68842,31 +69310,31 @@ module Google
         #   @return [::String]
         # @!attribute [rw] id
         #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::StoragePoolDisk>]
         #     A list of StoragePoolDisk resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#storagePoolListDisks for lists of disks in a
+        #     Output only. [Output Only] Type of resource. Alwayscompute#storagePoolListDisks for lists of disks in a
         #     storagePool.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for
+        #     Output only. [Output Only] This token allows you to get the next page of results for
         #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
         #     the query parameter pageToken in the next list request.
         #     Subsequent list requests will have their own nextPageToken to
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
+        #     Output only. [Output Only] Informational warning message.
         class StoragePoolListDisks
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -68878,7 +69346,7 @@ module Google
         #     [Output Only] Number of disks used.
         # @!attribute [rw] last_resize_timestamp
         #   @return [::String]
-        #     [Output Only] Timestamp of the last successful resize inRFC3339 text format.
+        #     Output only. [Output Only] Timestamp of the last successful resize inRFC3339 text format.
         # @!attribute [rw] max_total_provisioned_disk_capacity_gb
         #   @return [::Integer]
         #     [Output Only] Maximum allowed aggregate disk size in GiB.
@@ -68935,7 +69403,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#storagePoolType for storage pool types.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#storagePoolType for storage pool types.
         # @!attribute [rw] max_pool_provisioned_capacity_gb
         #   @return [::Integer]
         #     [Output Only] Maximum storage pool size in GB.
@@ -68966,7 +69434,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] supported_disk_types
         #   @return [::Array<::String>]
         #     [Output Only] The list of disk types supported in this storage pool type.
@@ -68988,7 +69456,7 @@ module Google
         #     A list of StoragePoolTypesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#storagePoolTypeAggregatedList.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#storagePoolTypeAggregatedList.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -68998,7 +69466,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -69025,7 +69493,7 @@ module Google
         #     A list of StoragePoolType resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#storagePoolTypeList for storage pool types.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#storagePoolTypeList for storage pool types.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -69035,7 +69503,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -69074,9 +69542,31 @@ module Google
         # Private Cloud network with one primary IP range and zero or more secondary
         # IP ranges. For more information, read
         # Virtual Private Cloud (VPC) Network.
+        # @!attribute [rw] allow_subnet_cidr_routes_overlap
+        #   @return [::Boolean]
+        #     Whether this subnetwork's ranges can conflict with existing static routes.
+        #     Setting this to true allows this subnetwork's primary and secondary ranges
+        #     to overlap with (and contain) static routes that have already been
+        #     configured on the corresponding network.
+        #
+        #     For example if a static route has range 10.1.0.0/16, a subnet
+        #     range 10.0.0.0/8 could only be created if allow_conflicting_routes=true.
+        #
+        #     Overlapping is only allowed on subnetwork operations; routes
+        #     whose ranges conflict with this subnetwork's ranges won't be allowed unless
+        #     route.allow_conflicting_subnetworks is set to true.
+        #
+        #     Typically packets destined to IPs within the subnetwork (which may contain
+        #     private/sensitive data) are prevented from leaving the virtual network.
+        #     Setting this field to true will disable this feature.
+        #
+        #     The default value is false and applies to all existing subnetworks and
+        #     automatically created subnetworks.
+        #
+        #     This field cannot be set to true at resource creation time.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -69105,11 +69595,11 @@ module Google
         #     retrieve a Subnetwork.
         # @!attribute [rw] gateway_address
         #   @return [::String]
-        #     [Output Only] The gateway address for default routes to reach destination
+        #     Output only. [Output Only] The gateway address for default routes to reach destination
         #     addresses outside this subnetwork.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] internal_ipv6_prefix
         #   @return [::String]
@@ -69149,10 +69639,10 @@ module Google
         #     Check the Ipv6AccessType enum for the list of possible values.
         # @!attribute [rw] ipv6_cidr_range
         #   @return [::String]
-        #     [Output Only] This field is for internal use.
+        #     Output only. [Output Only] This field is for internal use.
         # @!attribute [rw] ipv6_gce_endpoint
         #   @return [::String]
-        #     [Output Only] Possible endpoints of this subnetwork. It can be one of the
+        #     Output only. [Output Only] Possible endpoints of this subnetwork. It can be one of the
         #     following:
         #
         #        - VM_ONLY: The subnetwork can be used for creating instances and
@@ -69165,7 +69655,7 @@ module Google
         #     Check the Ipv6GceEndpoint enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#subnetwork
+        #     Output only. [Output Only] Type of the resource. Always compute#subnetwork
         #     for Subnetwork resources.
         # @!attribute [rw] log_config
         #   @return [::Google::Cloud::Compute::V1::SubnetworkLogConfig]
@@ -69238,7 +69728,7 @@ module Google
         #     Check the StackType enum for the list of possible values.
         # @!attribute [rw] state
         #   @return [::String]
-        #     [Output Only] The state of the subnetwork, which can be one of the
+        #     Output only. [Output Only] The state of the subnetwork, which can be one of the
         #     following values:READY: Subnetwork is created and ready to useDRAINING: only applicable to subnetworks that have the
         #     purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that
         #     connections to the load balancer are being drained. A subnetwork that is
@@ -69278,7 +69768,7 @@ module Google
             UNSPECIFIED_IPV6_ACCESS_TYPE = 313_080_613
           end
 
-          # [Output Only] Possible endpoints of this subnetwork. It can be one of the
+          # Output only. [Output Only] Possible endpoints of this subnetwork. It can be one of the
           # following:
           #
           #    - VM_ONLY: The subnetwork can be used for creating instances and
@@ -69384,7 +69874,7 @@ module Google
             UNSPECIFIED_STACK_TYPE = 298_084_569
           end
 
-          # [Output Only] The state of the subnetwork, which can be one of the
+          # Output only. [Output Only] The state of the subnetwork, which can be one of the
           # following values:READY: Subnetwork is created and ready to useDRAINING: only applicable to subnetworks that have the
           # purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that
           # connections to the load balancer are being drained. A subnetwork that is
@@ -69409,7 +69899,7 @@ module Google
         #     A list of SubnetworksScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#subnetworkAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#subnetworkAggregatedList for aggregated lists of
         #     subnetworks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -69420,10 +69910,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -69450,7 +69940,7 @@ module Google
         #     A list of Subnetwork resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#subnetworkList
+        #     Output only. [Output Only] Type of resource. Always compute#subnetworkList
         #     for lists of subnetworks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -69461,7 +69951,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -69987,7 +70477,7 @@ module Google
         # gRPC backend services.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -70004,11 +70494,11 @@ module Google
         #     TargetGrpcProxy.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#targetGrpcProxy for target grpc proxies.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#targetGrpcProxy for target grpc proxies.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -70020,10 +70510,10 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     [Output Only] Server-defined URL with id for the resource.
+        #     Output only. [Output Only] Server-defined URL with id for the resource.
         # @!attribute [rw] url_map
         #   @return [::String]
         #     URL to the UrlMap resource that defines the mapping from URL to the
@@ -70054,7 +70544,7 @@ module Google
         #     A list of TargetGrpcProxy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#targetGrpcProxy for target grpc proxies.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#targetGrpcProxy for target grpc proxies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -70106,7 +70596,7 @@ module Google
         # Forwarding rule concepts.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -70137,7 +70627,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#targetHttpProxy
+        #     Output only. [Output Only] Type of resource. Always compute#targetHttpProxy
         #     for target HTTP proxies.
         # @!attribute [rw] name
         #   @return [::String]
@@ -70163,7 +70653,7 @@ module Google
         #     The default is false.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional Target HTTP Proxy
+        #     Output only. [Output Only] URL of the region where the regional Target HTTP Proxy
         #     resides. This field is not applicable to global Target HTTP Proxies.
         # @!attribute [rw] self_link
         #   @return [::String]
@@ -70185,7 +70675,7 @@ module Google
         #     A list of TargetHttpProxiesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetHttpProxyAggregatedList for lists of Target HTTP
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetHttpProxyAggregatedList for lists of Target HTTP
         #     Proxies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -70196,10 +70686,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         class TargetHttpProxyAggregatedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -70223,7 +70713,7 @@ module Google
         #     A list of TargetHttpProxy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource. Always compute#targetHttpProxyList for lists
+        #     Output only. Type of resource. Always compute#targetHttpProxyList for lists
         #     of target HTTP proxies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -70234,7 +70724,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -70345,7 +70835,7 @@ module Google
         #      Accepted format is//certificatemanager.googleapis.com/projects/\\{project}/locations/\\{location}/certificateMaps/\\{resourceName}.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -70376,7 +70866,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetHttpsProxy for target HTTPS proxies.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetHttpsProxy for target HTTPS proxies.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -70416,7 +70906,7 @@ module Google
         #     Check the QuicOverride enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional TargetHttpsProxy
+        #     Output only. [Output Only] URL of the region where the regional TargetHttpsProxy
         #     resides. This field is not applicable to global TargetHttpsProxies.
         # @!attribute [rw] self_link
         #   @return [::String]
@@ -70593,7 +71083,7 @@ module Google
         #     A list of TargetHttpsProxiesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetHttpsProxyAggregatedList for lists of Target
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetHttpsProxyAggregatedList for lists of Target
         #     HTTP Proxies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -70604,10 +71094,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -70634,7 +71124,7 @@ module Google
         #     A list of TargetHttpsProxy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource. Always compute#targetHttpsProxyList for
+        #     Output only. Type of resource. Always compute#targetHttpsProxyList for
         #     lists of target HTTPS proxies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -70645,7 +71135,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -70663,7 +71153,7 @@ module Google
         # instances.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -70685,7 +71175,7 @@ module Google
         #        - zones/zone/instances/instance
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] The type of the resource. Alwayscompute#targetInstance for target instances.
+        #     Output only. [Output Only] The type of the resource. Alwayscompute#targetInstance for target instances.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -70715,7 +71205,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] URL of the zone where the target instance resides.
+        #     Output only. [Output Only] URL of the zone where the target instance resides.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
         class TargetInstance
@@ -70742,7 +71232,7 @@ module Google
         #     A list of TargetInstance resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -70752,10 +71242,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -70782,7 +71272,7 @@ module Google
         #     A list of TargetInstance resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -70792,7 +71282,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -70836,7 +71326,7 @@ module Google
         #     best effort, or to all instances when no instance is healthy.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -70875,7 +71365,7 @@ module Google
         #     They must live in zones contained in the same region as this pool.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#targetPool
+        #     Output only. [Output Only] Type of the resource. Always compute#targetPool
         #     for target pools.
         # @!attribute [rw] name
         #   @return [::String]
@@ -70888,7 +71378,7 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the target pool resides.
+        #     Output only. [Output Only] URL of the region where the target pool resides.
         # @!attribute [rw] security_policy
         #   @return [::String]
         #     [Output Only] The resource URL for the security policy associated with this
@@ -70979,7 +71469,7 @@ module Google
         #     A list of TargetPool resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetPoolAggregatedList for aggregated lists of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetPoolAggregatedList for aggregated lists of
         #     target pools.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -70990,10 +71480,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -71015,7 +71505,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatus>]
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetPoolInstanceHealth when checking the health of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetPoolInstanceHealth when checking the health of
         #     an instance.
         class TargetPoolInstanceHealth
           include ::Google::Protobuf::MessageExts
@@ -71031,7 +71521,7 @@ module Google
         #     A list of TargetPool resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#targetPoolList
+        #     Output only. [Output Only] Type of resource. Always compute#targetPoolList
         #     for lists of target pools.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -71042,7 +71532,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -71177,7 +71667,7 @@ module Google
         #      Accepted format is//certificatemanager.googleapis.com/projects/\\{project}/locations/\\{location}/certificateMaps/\\{resourceName}.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -71189,7 +71679,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#targetSslProxy for target SSL proxies.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#targetSslProxy for target SSL proxies.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -71249,7 +71739,7 @@ module Google
         #     A list of TargetSslProxy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -71259,7 +71749,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -71317,7 +71807,7 @@ module Google
         # Load Balancer overview.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -71329,7 +71819,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#targetTcpProxy for target TCP proxies.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#targetTcpProxy for target TCP proxies.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -71360,7 +71850,7 @@ module Google
         #     Check the ProxyHeader enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional TCP proxy resides.
+        #     Output only. [Output Only] URL of the region where the regional TCP proxy resides.
         #     This field is not applicable to global TCP proxy.
         # @!attribute [rw] self_link
         #   @return [::String]
@@ -71393,7 +71883,7 @@ module Google
         #     A list of TargetTcpProxiesScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetTcpProxyAggregatedList for lists of Target
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetTcpProxyAggregatedList for lists of Target
         #     TCP Proxies.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -71404,10 +71894,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -71434,7 +71924,7 @@ module Google
         #     A list of TargetTcpProxy resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -71444,7 +71934,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -71460,7 +71950,7 @@ module Google
         # Cloud VPN Overview.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -71477,7 +71967,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetVpnGateway for target VPN gateways.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetVpnGateway for target VPN gateways.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     A fingerprint for the labels being applied to this TargetVpnGateway, which
@@ -71561,7 +72051,7 @@ module Google
         #     A list of TargetVpnGateway resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetVpnGateway for target VPN gateways.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetVpnGateway for target VPN gateways.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -71571,10 +72061,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -71601,7 +72091,7 @@ module Google
         #     A list of TargetVpnGateway resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#targetVpnGateway for target VPN gateways.
+        #     Output only. [Output Only] Type of resource. Alwayscompute#targetVpnGateway for target VPN gateways.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -71611,7 +72101,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -73509,7 +73999,7 @@ module Google
         # Map Concepts.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] default_custom_error_response_policy
         #   @return [::Google::Cloud::Compute::V1::CustomErrorResponsePolicy]
@@ -73626,7 +74116,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#urlMaps for
+        #     Output only. [Output Only] Type of the resource. Always compute#urlMaps for
         #     url maps.
         # @!attribute [rw] name
         #   @return [::String]
@@ -73642,7 +74132,7 @@ module Google
         #     The list of named PathMatchers to use against the URL.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the regional URL map resides.
+        #     Output only. [Output Only] URL of the region where the regional URL map resides.
         #     This field is not applicable to global URL maps.
         #     You must specify this field as part of the HTTP request URL. It is
         #     not settable as a field in the request body.
@@ -73670,7 +74160,7 @@ module Google
         #     A list of UrlMap resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -73680,7 +74170,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -73783,7 +74273,7 @@ module Google
         #     A list of UrlMapsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -73793,10 +74283,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -73926,11 +74416,11 @@ module Google
         # Subnetwork which the current user has compute.subnetworks.use permission on.
         # @!attribute [rw] external_ipv6_prefix
         #   @return [::String]
-        #     [Output Only] The external IPv6 address range that is assigned to this
+        #     Output only. [Output Only] The external IPv6 address range that is assigned to this
         #     subnetwork.
         # @!attribute [rw] internal_ipv6_prefix
         #   @return [::String]
-        #     [Output Only] The internal IPv6 address range that is assigned to this
+        #     Output only. [Output Only] The internal IPv6 address range that is assigned to this
         #     subnetwork.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
@@ -74083,7 +74573,7 @@ module Google
         #     [Output] A list of usable subnetwork URLs.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#usableSubnetworksAggregatedList for aggregated lists
+        #     Output only. [Output Only] Type of resource. Alwayscompute#usableSubnetworksAggregatedList for aggregated lists
         #     of usable subnetworks.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -74096,14 +74586,14 @@ module Google
         #     next page of results.
         # @!attribute [rw] scoped_warnings
         #   @return [::Array<::Google::Cloud::Compute::V1::SubnetworksScopedWarning>]
-        #     [Output Only] Informational warning messages for failures encountered from
+        #     Output only. [Output Only] Informational warning messages for failures encountered from
         #     scopes.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -74167,7 +74657,7 @@ module Google
         # Contain information of Nat mapping for a VM endpoint (i.e., NIC).
         # @!attribute [rw] instance_name
         #   @return [::String]
-        #     Name of the VM instance which the endpoint belongs to
+        #     Output only. Name of the VM instance which the endpoint belongs to
         # @!attribute [rw] interface_nat_mappings
         #   @return [::Array<::Google::Cloud::Compute::V1::VmEndpointNatMappingsInterfaceNatMappings>]
         class VmEndpointNatMappings
@@ -74178,36 +74668,36 @@ module Google
         # Contain information of Nat mapping for an interface of this endpoint.
         # @!attribute [rw] drain_nat_ip_port_ranges
         #   @return [::Array<::String>]
-        #     List of all drain IP:port-range mappings assigned to this interface.
+        #     Output only. List of all drain IP:port-range mappings assigned to this interface.
         #     These ranges are inclusive, that is, both the first and the last
         #     ports can be used for NAT. Example: ["2.2.2.2:12345-12355",
         #     "1.1.1.1:2234-2234"].
         # @!attribute [rw] nat_ip_port_ranges
         #   @return [::Array<::String>]
-        #     A list of all IP:port-range mappings assigned to this interface.
+        #     Output only. A list of all IP:port-range mappings assigned to this interface.
         #     These ranges are inclusive, that is, both the first and the last
         #     ports can be used for NAT. Example: ["2.2.2.2:12345-12355",
         #     "1.1.1.1:2234-2234"].
         # @!attribute [rw] num_total_drain_nat_ports
         #   @return [::Integer]
-        #     Total number of drain ports across all NAT IPs allocated to this
+        #     Output only. Total number of drain ports across all NAT IPs allocated to this
         #     interface. It equals to the aggregated port number in the field
         #     drain_nat_ip_port_ranges.
         # @!attribute [rw] num_total_nat_ports
         #   @return [::Integer]
-        #     Total number of ports across all NAT IPs allocated to this interface.
+        #     Output only. Total number of ports across all NAT IPs allocated to this interface.
         #     It equals to the aggregated port number in the field nat_ip_port_ranges.
         # @!attribute [rw] rule_mappings
         #   @return [::Array<::Google::Cloud::Compute::V1::VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings>]
-        #     Information about mappings provided by rules in this NAT.
+        #     Output only. Information about mappings provided by rules in this NAT.
         # @!attribute [rw] source_alias_ip_range
         #   @return [::String]
-        #     Alias IP range for this interface endpoint.
+        #     Output only. Alias IP range for this interface endpoint.
         #     It will be a private (RFC 1918) IP range.
         #     Examples: "10.33.4.55/32", or "192.168.5.0/24".
         # @!attribute [rw] source_virtual_ip
         #   @return [::String]
-        #     Primary IP of the VM for this NIC.
+        #     Output only. Primary IP of the VM for this NIC.
         class VmEndpointNatMappingsInterfaceNatMappings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74216,32 +74706,32 @@ module Google
         # Contains information of NAT Mappings provided by a NAT Rule.
         # @!attribute [rw] drain_nat_ip_port_ranges
         #   @return [::Array<::String>]
-        #     List of all drain IP:port-range mappings assigned to this interface
+        #     Output only. List of all drain IP:port-range mappings assigned to this interface
         #     by this rule.
         #     These ranges are inclusive, that is, both the first and the last
         #     ports can be used for NAT. Example: ["2.2.2.2:12345-12355",
         #     "1.1.1.1:2234-2234"].
         # @!attribute [rw] nat_ip_port_ranges
         #   @return [::Array<::String>]
-        #     A list of all IP:port-range mappings assigned to this interface by this
+        #     Output only. A list of all IP:port-range mappings assigned to this interface by this
         #     rule.
         #     These ranges are inclusive, that is, both the first and the last
         #     ports can be used for NAT. Example: ["2.2.2.2:12345-12355",
         #     "1.1.1.1:2234-2234"].
         # @!attribute [rw] num_total_drain_nat_ports
         #   @return [::Integer]
-        #     Total number of drain ports across all NAT IPs allocated to this
+        #     Output only. Total number of drain ports across all NAT IPs allocated to this
         #     interface by this rule.
         #     It equals the aggregated port number in the field
         #     drain_nat_ip_port_ranges.
         # @!attribute [rw] num_total_nat_ports
         #   @return [::Integer]
-        #     Total number of ports across all NAT IPs allocated to this interface
+        #     Output only. Total number of ports across all NAT IPs allocated to this interface
         #     by this rule.
         #     It equals the aggregated port number in the field nat_ip_port_ranges.
         # @!attribute [rw] rule_number
         #   @return [::Integer]
-        #     Rule number of the NAT Rule.
+        #     Output only. Rule number of the NAT Rule.
         class VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74254,7 +74744,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Alwayscompute#vmEndpointNatMappingsList for lists of Nat mappings of
+        #     Output only. [Output Only] Type of resource. Alwayscompute#vmEndpointNatMappingsList for lists of Nat mappings of
         #     VM endpoints.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -74268,7 +74758,7 @@ module Google
         #     [Output Only] A list of Nat mapping information of VM endpoints.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -74286,7 +74776,7 @@ module Google
         # Cloud VPN topologies .
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -74299,11 +74789,11 @@ module Google
         #     Check the GatewayIpVersion enum for the list of possible values.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#vpnGateway for
+        #     Output only. [Output Only] Type of resource. Always compute#vpnGateway for
         #     VPN gateways.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -74335,10 +74825,10 @@ module Google
         #     client when the VPN gateway is created.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where the VPN gateway resides.
+        #     Output only. [Output Only] URL of the region where the VPN gateway resides.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] stack_type
         #   @return [::String]
         #     The stack type for this VPN gateway to identify the IP protocols that are
@@ -74398,7 +74888,7 @@ module Google
         #     A list of VpnGateway resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#vpnGateway for
+        #     Output only. [Output Only] Type of resource. Always compute#vpnGateway for
         #     VPN gateways.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -74409,10 +74899,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -74439,7 +74929,7 @@ module Google
         #     A list of VpnGateway resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#vpnGateway for
+        #     Output only. [Output Only] Type of resource. Always compute#vpnGateway for
         #     VPN gateways.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -74450,7 +74940,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -74461,7 +74951,7 @@ module Google
 
         # @!attribute [rw] vpn_connections
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnGatewayStatusVpnConnection>]
-        #     List of VPN connection for this VpnGateway.
+        #     Output only. List of VPN connection for this VpnGateway.
         class VpnGatewayStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74517,15 +75007,15 @@ module Google
         # Contains some information about a VPN tunnel.
         # @!attribute [rw] local_gateway_interface
         #   @return [::Integer]
-        #     The VPN gateway interface this VPN tunnel is associated with.
+        #     Output only. The VPN gateway interface this VPN tunnel is associated with.
         # @!attribute [rw] peer_gateway_interface
         #   @return [::Integer]
-        #     The peer gateway interface this VPN tunnel is connected to, the peer
+        #     Output only. The peer gateway interface this VPN tunnel is connected to, the peer
         #     gateway could either be an external VPN gateway or a Google Cloud
         #     VPN gateway.
         # @!attribute [rw] tunnel_url
         #   @return [::String]
-        #     URL reference to the VPN tunnel.
+        #     Output only. URL reference to the VPN tunnel.
         class VpnGatewayStatusTunnel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74536,12 +75026,12 @@ module Google
         # gateway or a Google Cloud VPN gateway.
         # @!attribute [rw] peer_external_gateway
         #   @return [::String]
-        #     URL reference to the peer external VPN gateways to which the VPN tunnels
+        #     Output only. URL reference to the peer external VPN gateways to which the VPN tunnels
         #     in this VPN connection are connected.
         #     This field is mutually exclusive with peer_gcp_gateway.
         # @!attribute [rw] peer_gcp_gateway
         #   @return [::String]
-        #     URL reference to the peer side VPN gateways to which the VPN tunnels in
+        #     Output only. URL reference to the peer side VPN gateways to which the VPN tunnels in
         #     this VPN connection are connected.
         #     This field is mutually exclusive with peer_gcp_gateway.
         # @!attribute [rw] state
@@ -74558,7 +75048,7 @@ module Google
         # A VPN gateway interface.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] Numeric identifier for this VPN interface associated with
+        #     Output only. [Output Only] Numeric identifier for this VPN interface associated with
         #     the VPN gateway.
         # @!attribute [rw] interconnect_attachment
         #   @return [::String]
@@ -74569,7 +75059,7 @@ module Google
         #     specified VLAN attachment resource.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     [Output Only] IP address for this VPN interface associated with the VPN
+        #     Output only. [Output Only] IP address for this VPN interface associated with the VPN
         #     gateway.
         #     The IP address could be either a regional external IP address or
         #     a regional internal IP address. The two IP addresses for a VPN gateway
@@ -74582,7 +75072,7 @@ module Google
         #     IP address.
         # @!attribute [rw] ipv6_address
         #   @return [::String]
-        #     [Output Only] IPv6 address for this VPN interface associated with the VPN
+        #     Output only. [Output Only] IPv6 address for this VPN interface associated with the VPN
         #     gateway.
         #     The IPv6 address must be a regional external IPv6 address. The format is
         #     RFC 5952 format (e.g. 2001:db8::2d9:51:0:0).
@@ -74620,7 +75110,7 @@ module Google
         #     IKE protocol.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -74640,7 +75130,7 @@ module Google
         #     The default version is 2.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#vpnTunnel for
+        #     Output only. [Output Only] Type of resource. Always compute#vpnTunnel for
         #     VPN tunnels.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -74874,7 +75364,7 @@ module Google
         #     A list of VpnTunnelsScopedList resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#vpnTunnel for
+        #     Output only. [Output Only] Type of resource. Always compute#vpnTunnel for
         #     VPN tunnels.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -74885,10 +75375,10 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -74924,7 +75414,7 @@ module Google
         #     A list of VpnTunnel resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#vpnTunnel for
+        #     Output only. [Output Only] Type of resource. Always compute#vpnTunnel for
         #     VPN tunnels.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -74935,7 +75425,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -75381,15 +75871,15 @@ module Google
         # A pseudowire that connects two Interconnect connections.
         # @!attribute [rw] admin_enabled
         #   @return [::Boolean]
-        #     [Output Only] Indicates whether the wire is enabled.
+        #     Output only. [Output Only] Indicates whether the wire is enabled.
         #     When false, the wire is disabled. When true and when the wire group of
         #     the wire is also enabled, the wire is enabled. Defaults to true.
         # @!attribute [rw] endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::WireEndpoint>]
-        #     Wire endpoints are specific Interconnect connections.
+        #     Output only. Wire endpoints are specific Interconnect connections.
         # @!attribute [rw] label
         #   @return [::String]
-        #     [Output Only] A label that identifies the wire. The format of this label
+        #     Output only. [Output Only] A label that identifies the wire. The format of this label
         #     combines the existing labels of the wire group endpoints and Interconnect
         #     connections used by this wire in alphabetical order as follows:
         #     `ENDPOINT_A+CONNECTION_A1,ENDPOINT_B+CONNECTION_B1`, where:
@@ -75402,7 +75892,7 @@ module Google
         #        Interconnect objects.
         # @!attribute [rw] wire_properties
         #   @return [::Google::Cloud::Compute::V1::WireProperties]
-        #     [Output Only] Properties of the wire.
+        #     Output only. [Output Only] Properties of the wire.
         class Wire
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75427,7 +75917,7 @@ module Google
         #     false, a given wire is enabled. Defaults to true.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     [Output Only] Creation timestamp inRFC3339
+        #     Output only. [Output Only] Creation timestamp inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
@@ -75441,11 +75931,11 @@ module Google
         #        - Value: an Endpoint object.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource type. The server
+        #     Output only. [Output Only] The unique identifier for the resource type. The server
         #     generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#wireGroups for wire groups.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#wireGroups for wire groups.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created.
@@ -75457,19 +75947,19 @@ module Google
         #     cannot be a dash.
         # @!attribute [rw] reconciling
         #   @return [::Boolean]
-        #     [Output Only] Indicates whether there are wire changes yet to be processed.
+        #     Output only. [Output Only] Indicates whether there are wire changes yet to be processed.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
+        #     Output only. [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] topology
         #   @return [::Google::Cloud::Compute::V1::WireGroupTopology]
-        #     Topology details for the wire group configuration.
+        #     Output only. Topology details for the wire group configuration.
         # @!attribute [rw] wire_properties
         #   @return [::Google::Cloud::Compute::V1::WireProperties]
         #     Properties for all wires in the wire group.
         # @!attribute [rw] wires
         #   @return [::Array<::Google::Cloud::Compute::V1::Wire>]
-        #     The single/redundant wire(s) managed by the wire group.
+        #     Output only. The single/redundant wire(s) managed by the wire group.
         class WireGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75558,7 +76048,7 @@ module Google
         #     A list of wire group resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Alwayscompute#wireGroups for wire groups.
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#wireGroups for wire groups.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -75571,7 +76061,7 @@ module Google
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] unreachables
         #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources.
+        #     Output only. [Output Only] Unreachable resources.
         #     end_interface: MixerListResponseWithEtagBuilder
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
@@ -75584,7 +76074,7 @@ module Google
         # Topology details for the wire group.
         # @!attribute [rw] endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::WireGroupTopologyEndpoint>]
-        #     Topology details for all endpoints in the wire group.
+        #     Output only. Topology details for all endpoints in the wire group.
         class WireGroupTopology
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75593,11 +76083,11 @@ module Google
         # Topology details for a single wire group endpoint.
         # @!attribute [rw] city
         #   @return [::String]
-        #     The InterconnectLocation.city (metropolitan area designator) that all
+        #     Output only. The InterconnectLocation.city (metropolitan area designator) that all
         #     interconnects are located in.
         # @!attribute [rw] label
         #   @return [::String]
-        #     Endpoint label from the wire group.
+        #     Output only. Endpoint label from the wire group.
         class WireGroupTopologyEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75743,7 +76233,7 @@ module Google
         #     [Output Only] A list of shared VPC host project URLs.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#xpnHostList for
+        #     Output only. [Output Only] Type of resource. Always compute#xpnHostList for
         #     lists of shared VPC hosts.
         # @!attribute [rw] next_page_token
         #   @return [::String]
@@ -75754,7 +76244,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
@@ -75812,7 +76302,7 @@ module Google
         #     defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#zone for
+        #     Output only. [Output Only] Type of the resource. Always compute#zone for
         #     zones.
         # @!attribute [rw] name
         #   @return [::String]
@@ -75829,7 +76319,7 @@ module Google
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] supports_pzs
         #   @return [::Boolean]
-        #     [Output Only] Reserved for future use.
+        #     Output only. [Output Only] Reserved for future use.
         class Zone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75854,7 +76344,7 @@ module Google
         #     A list of Zone resources.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Type of resource.
+        #     Output only. Type of resource.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     [Output Only] This token allows you to get the next page of results for
@@ -75864,7 +76354,7 @@ module Google
         #     continue paging through the results.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
+        #     Output only. [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
