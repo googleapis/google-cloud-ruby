@@ -414,6 +414,9 @@ module Google
         # @!attribute [rw] export_operation_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::ExportOperationMetadata]
         #     Metadata for the Export Data Operation such as the destination of export.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
         class KnowledgeOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

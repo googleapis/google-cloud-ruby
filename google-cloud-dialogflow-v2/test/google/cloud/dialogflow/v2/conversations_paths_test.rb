@@ -220,4 +220,16 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientPathsTest < Minitest
       assert_equal "projects/value0", path
     end
   end
+
+  def test_tool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.tool_path project: "value0", location: "value1", tool: "value2"
+      assert_equal "projects/value0/locations/value1/tools/value2", path
+    end
+  end
 end

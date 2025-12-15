@@ -84,8 +84,9 @@ module Google
           #     Output only. The number dialed to connect this call in E.164 format.
           # @!attribute [rw] sdp
           #   @return [::String]
-          #     Optional. SDP of the call. It's initially the SDP answer to the endpoint,
-          #     but maybe later updated for the purpose of making the link active, etc.
+          #     Optional. SDP of the call. It's initially the SDP answer to the incoming
+          #     call, but maybe later updated for the purpose of making the link active,
+          #     etc.
           # @!attribute [r] sip_headers
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo::SipHeader>]
           #     Output only. The SIP headers from the initial SIP INVITE.
@@ -150,6 +151,12 @@ module Google
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. The time when this information was incorporated into the
             #     relevant context reference.
+            # @!attribute [rw] answer_record
+            #   @return [::String]
+            #     If the context content was generated from a tool call, specify the
+            #     answer record associated with the tool call.
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/answerRecords/<Answer Record ID>`.
             class ContextContent
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -625,6 +632,16 @@ module Google
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
         #     Optional. A list of trigger events. Generator will be triggered only if
         #     it's trigger event is included here.
+        # @!attribute [rw] security_settings
+        #   @return [::String]
+        #     Optional. Name of the CX SecuritySettings which is used to redact generated
+        #     response. If this field is empty, try to fetch v2 security_settings, which
+        #     is a project level setting. If this field is empty and no v2
+        #     security_settings set up in this project, no redaction will be done.
+        #
+        #     Format:
+        #     `projects/<Project ID>/locations/<Location ID>/securitySettings/<Security
+        #     Settings ID>`.
         class GenerateStatelessSuggestionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
