@@ -154,17 +154,13 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     mock.verify
   end
 
-  it "reloads the resource when publishing if created with skip_lookup: true" do
+  it "does not reload the resource when publishing if created with skip_lookup: true" do
     mock = Minitest::Mock.new
     pubsub.service.mocked_topic_admin = mock
 
     publisher = pubsub.publisher topic_name, skip_lookup: true
 
     _(publisher).must_be :reference?
-
-    mock.expect :get_topic, Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)) do |actual_topic|
-      actual_topic == {topic: topic_path(topic_name)}
-    end
 
     # Expect publish to be called
     message = "new-message-here"
@@ -181,7 +177,7 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
 
     msg = publisher.publish message
 
-    _(publisher).wont_be :reference?
+    _(publisher).must_be :reference?
     _(msg.message_id).must_equal "msg1"
 
     mock.verify
