@@ -806,6 +806,100 @@ module Google
             end
 
             ##
+            # Queries data from a natural language user query.
+            #
+            # @overload query_data(request, options = nil)
+            #   Pass arguments to `query_data` via a request object, either of type
+            #   {::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_data(parent: nil, prompt: nil, context: nil, generation_options: nil)
+            #   Pass arguments to `query_data` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource to generate the query for.
+            #     Format: projects/\\{project}/locations/\\{location}
+            #   @param prompt [::String]
+            #     Required. The natural language query for which to generate query.
+            #     Example: "What are the top 5 best selling products this month?"
+            #   @param context [::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataContext, ::Hash]
+            #     Required. The context for the data query, including the data sources to
+            #     use.
+            #   @param generation_options [::Google::Cloud::GeminiDataAnalytics::V1beta::GenerationOptions, ::Hash]
+            #     Optional. Options to control query generation and execution behavior.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gemini_data_analytics/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new
+            #
+            #   # Call the query_data method.
+            #   result = client.query_data request
+            #
+            #   # The returned object is of type Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataResponse.
+            #   p result
+            #
+            def query_data request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_data.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_data.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_data.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_chat_service_stub.call_rpc :query_data, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DataChatService API.
             #
             # This class represents the configuration for DataChatService,
@@ -1018,6 +1112,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_messages
+                ##
+                # RPC-specific configuration for `query_data`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_data
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1033,6 +1132,8 @@ module Google
                   @list_conversations = ::Gapic::Config::Method.new list_conversations_config
                   list_messages_config = parent_rpcs.list_messages if parent_rpcs.respond_to? :list_messages
                   @list_messages = ::Gapic::Config::Method.new list_messages_config
+                  query_data_config = parent_rpcs.query_data if parent_rpcs.respond_to? :query_data
+                  @query_data = ::Gapic::Config::Method.new query_data_config
 
                   yield self if block_given?
                 end

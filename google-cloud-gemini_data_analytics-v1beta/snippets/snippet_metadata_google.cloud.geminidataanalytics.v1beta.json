@@ -570,6 +570,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "geminidataanalytics_v1beta_generated_DataChatService_QueryData_sync",
+      "title": "Snippet for the query_data call in the DataChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#query_data.",
+      "file": "data_chat_service/query_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_data",
+        "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client#query_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataResponse",
+        "client": {
+          "short_name": "DataChatService::Client",
+          "full_name": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client"
+        },
+        "method": {
+          "short_name": "QueryData",
+          "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService.QueryData",
+          "service": {
+            "short_name": "DataChatService",
+            "full_name": "google.cloud.geminidataanalytics.v1beta.DataChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

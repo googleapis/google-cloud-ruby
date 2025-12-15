@@ -21,6 +21,148 @@ module Google
   module Cloud
     module GeminiDataAnalytics
       module V1beta
+        # Request to query data from a natural language query.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource to generate the query for.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] prompt
+        #   @return [::String]
+        #     Required. The natural language query for which to generate query.
+        #     Example: "What are the top 5 best selling products this month?"
+        # @!attribute [rw] context
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataContext]
+        #     Required. The context for the data query, including the data sources to
+        #     use.
+        # @!attribute [rw] generation_options
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::GenerationOptions]
+        #     Optional. Options to control query generation and execution behavior.
+        class QueryDataRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Options to control query generation, execution, and response format.
+        # @!attribute [rw] generate_query_result
+        #   @return [::Boolean]
+        #     Optional. If true, the generated query will be executed, and the result
+        #     data will be returned in the response.
+        # @!attribute [rw] generate_natural_language_answer
+        #   @return [::Boolean]
+        #     Optional. If true, a natural language answer based on the query execution
+        #     result will be generated and returned in the response.
+        # @!attribute [rw] generate_explanation
+        #   @return [::Boolean]
+        #     Optional. If true, an explanation of the generated query will be returned
+        #     in the response.
+        # @!attribute [rw] generate_disambiguation_question
+        #   @return [::Boolean]
+        #     Optional. If true (default to false), the service may return a
+        #     clarifying_question if the input query is ambiguous.
+        class GenerationOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # References to data sources and context to use for the query.
+        # @!attribute [rw] datasource_references
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DatasourceReferences]
+        #     Required. The datasource references to use for the query.
+        class QueryDataContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response containing the generated query and related information.
+        # @!attribute [rw] generated_query
+        #   @return [::String]
+        #     Generated query for the given user prompt.
+        # @!attribute [rw] intent_explanation
+        #   @return [::String]
+        #     A natural language explanation of the generated query.
+        #     Populated if options.generate_explanation was true in the request.
+        # @!attribute [rw] query_result
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ExecutedQueryResult]
+        #     The result of executing the query.
+        #     Populated if options.generate_query_result or
+        #     options.generate_natural_language_answer was true in the request, and
+        #     execution was successful or attempted.
+        # @!attribute [rw] natural_language_answer
+        #   @return [::String]
+        #     A natural language answer to the query, based on the query_result.
+        #     Populated if options.generate_natural_language_answer was true in the
+        #     request and query execution was successful based in the response from
+        #     executeSql API.
+        # @!attribute [rw] disambiguation_question
+        #   @return [::Array<::String>]
+        #     If ambiguity was detected in the natural language query and
+        #     options.generate_disambiguation_question was true, this field contains a
+        #     question to the user for clarification. The returned represents the
+        #     service's best effort based on the ambiguous input.
+        class QueryDataResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The result of a query execution. The design is generic for all dialects.
+        # @!attribute [rw] columns
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ExecutedQueryResult::Column>]
+        #     The columns in the result set, in order.
+        # @!attribute [rw] rows
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ExecutedQueryResult::Row>]
+        #     The rows returned by the query.
+        # @!attribute [rw] total_row_count
+        #   @return [::Integer]
+        #     The total number of rows in the full result set, if known.
+        #     This may be an estimate or an exact count.
+        # @!attribute [rw] partial_result
+        #   @return [::Boolean]
+        #     Set to true if the returned rows in `query_result` are a subset of the
+        #     full result. This can happen, for example, if the query execution hits a
+        #     row limit. When true, the `query_result` does not contain all
+        #     rows. To retrieve the complete result, consider using the
+        #     `generated_query` in `QueryDataResponse` and executing it in your own
+        #     environment.
+        # @!attribute [rw] query_execution_error
+        #   @return [::String]
+        #     The error message if the query execution failed.
+        class ExecutedQueryResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes a single column in the result set.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the column.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     The type of the column (e.g., "VARCHAR", "INT64", "TIMESTAMP").
+          class Column
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a single value within a row.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The cell value, represented in a string format.
+          #     Timestamps could be formatted, for example, using RFC3339Nano.
+          #     This field is used if the value is not null.
+          class Value
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a single row in the result set.
+          # @!attribute [rw] values
+          #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ExecutedQueryResult::Value>]
+          #     The values in the row, corresponding positionally to the columns.
+          class Row
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request for listing chat messages based on parent and conversation_id.
         # @!attribute [rw] parent
         #   @return [::String]
