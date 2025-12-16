@@ -57,6 +57,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enum that represents an event in the payment transaction lifecycle.
+          # Ensure that applications can handle values not explicitly listed.
           module TransactionEventType
             # Default, unspecified event type.
             TRANSACTION_EVENT_TYPE_UNSPECIFIED = 0
@@ -155,6 +156,20 @@ module Google
           end
         end
 
+        # Details on a phone authentication event
+        # @!attribute [rw] phone_number
+        #   @return [::String]
+        #     Required. Phone number in E.164 format for which a multi-factor
+        #     authentication challenge was initiated, succeeded, or failed.
+        # @!attribute [rw] event_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The time at which the multi-factor authentication event
+        #     (challenge or verification) occurred.
+        class PhoneAuthenticationEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request message to annotate an Assessment.
         # @!attribute [rw] name
         #   @return [::String]
@@ -183,6 +198,10 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent]
         #     Optional. If the assessment is part of a payment transaction, provide
         #     details on payment lifecycle events that occur in the transaction.
+        # @!attribute [rw] phone_authentication_event
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PhoneAuthenticationEvent]
+        #     Optional. If using an external multi-factor authentication provider,
+        #     provide phone authentication details for fraud detection purposes.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -328,6 +347,7 @@ module Google
 
           # Result of the account verification as contained in the verdict token issued
           # at the end of the verification flow.
+          # Ensure that applications can handle values not explicitly listed.
           module Result
             # No information about the latest account verification.
             RESULT_UNSPECIFIED = 0
@@ -487,7 +507,7 @@ module Google
         #     Optional. The URI resource the user requested that triggered an assessment.
         # @!attribute [rw] waf_token_assessment
         #   @return [::Boolean]
-        #     Optional. Flag for running WAF token assessment.
+        #     Optional. Flag for running Web Application Firewall (WAF) token assessment.
         #     If enabled, the token must be specified, and have been created by a
         #     WAF-enabled key.
         # @!attribute [rw] ja3
@@ -525,6 +545,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Setting that controls Fraud Prevention assessments.
+          # Ensure that applications can handle values not explicitly listed.
           module FraudPrevention
             # Default, unspecified setting. `fraud_prevention_assessment` is returned
             # if `transaction_data` is present in `Event` and Fraud Prevention is
@@ -757,13 +778,18 @@ module Google
         #     The set of possible reasons is subject to change.
         # @!attribute [r] challenge
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::Challenge]
-        #     Output only. Challenge information for SCORE_AND_CHALLENGE and INVISIBLE
-        #     keys
+        #     Output only. Challenge information for POLICY_BASED_CHALLENGE and INVISIBLE
+        #     keys.
+        # @!attribute [r] verified_bots
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::Bot>]
+        #     Output only. Bots with identities that have been verified by reCAPTCHA and
+        #     detected in the event.
         class RiskAnalysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Reasons contributing to the risk analysis verdict.
+          # Ensure that applications can handle values not explicitly listed.
           module ClassificationReason
             # Default unspecified type.
             CLASSIFICATION_REASON_UNSPECIFIED = 0
@@ -792,7 +818,8 @@ module Google
             SUSPECTED_CHARGEBACK = 7
           end
 
-          # Challenge information for SCORE_AND_CHALLENGE and INVISIBLE keys
+          # Challenge information for POLICY_BASED_CHALLENGE and INVISIBLE keys.
+          # Ensure that applications can handle values not explicitly listed.
           module Challenge
             # Default unspecified type.
             CHALLENGE_UNSPECIFIED = 0
@@ -806,6 +833,37 @@ module Google
             # A solution was submitted that was incorrect or otherwise
             # deemed suspicious.
             FAILED = 3
+          end
+        end
+
+        # Bot information and metadata.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. Enumerated string value that indicates the identity of the bot,
+        #     formatted in kebab-case.
+        # @!attribute [rw] bot_type
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Bot::BotType]
+        #     Optional. Enumerated field representing the type of bot.
+        class Bot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Types of bots.
+          # Ensure that applications can handle values not explicitly listed.
+          module BotType
+            # Default unspecified type.
+            BOT_TYPE_UNSPECIFIED = 0
+
+            # Software program that interacts with a site and performs tasks
+            # autonomously.
+            AI_AGENT = 1
+
+            # Software that extracts specific data from sites for use.
+            CONTENT_SCRAPER = 2
+
+            # Software that crawls sites and stores content for the purpose of
+            # efficient retrieval, likely as part of a search engine.
+            SEARCH_INDEXER = 3
           end
         end
 
@@ -843,6 +901,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enum that represents the types of invalid token reasons.
+          # Ensure that applications can handle values not explicitly listed.
           module InvalidReason
             # Default unspecified type.
             INVALID_REASON_UNSPECIFIED = 0
@@ -865,6 +924,16 @@ module Google
             # A retriable error (such as network failure) occurred on the browser.
             # Could easily be simulated by an attacker.
             BROWSER_ERROR = 6
+
+            # The action provided at token generation was different than
+            # the `expected_action` in the assessment request. The comparison is
+            # case-insensitive. This reason can only be returned if all of the
+            # following are true:
+            #
+            #   - your `site_key` has the POLICY_BASED_CHALLENGE integration type
+            #   - you set an action score threshold higher than 0.0
+            #   - you provided a non-empty `expected_action`
+            UNEXPECTED_ACTION = 7
           end
         end
 
@@ -874,6 +943,10 @@ module Google
         #     Output only. Probability of this transaction being fraudulent. Summarizes
         #     the combined risk of attack vectors below. Values are from 0.0 (lowest)
         #     to 1.0 (highest).
+        # @!attribute [r] risk_reasons
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::RiskReason>]
+        #     Output only. Reasons why the transaction is probably fraudulent and
+        #     received a high transaction risk score.
         # @!attribute [r] stolen_instrument_verdict
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::StolenInstrumentVerdict]
         #     Output only. Assessment of this transaction for risk of a stolen
@@ -888,6 +961,42 @@ module Google
         class FraudPreventionAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Risk reasons applicable to the Fraud Prevention assessment.
+          # @!attribute [r] reason
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::RiskReason::Reason]
+          #     Output only. Risk reasons applicable to the Fraud Prevention assessment.
+          class RiskReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Risk reasons applicable to the Fraud Prevention assessment. New risk
+            # reasons will be added over time.
+            module Reason
+              # Default unspecified type.
+              REASON_UNSPECIFIED = 0
+
+              # A suspiciously high number of recent transactions have used identifiers
+              # present in this transaction.
+              HIGH_TRANSACTION_VELOCITY = 1
+
+              # User is cycling through a suspiciously large number of identifiers,
+              # suggesting enumeration or validation attacks within a potential fraud
+              # network.
+              EXCESSIVE_ENUMERATION_PATTERN = 2
+
+              # User has a short history or no history in the reCAPTCHA network,
+              # suggesting the possibility of synthetic identity generation.
+              SHORT_IDENTITY_HISTORY = 3
+
+              # Identifiers used in this transaction originate from an unusual or
+              # conflicting set of geolocations.
+              GEOLOCATION_DISCREPANCY = 4
+
+              # This transaction is linked to a cluster of known fraudulent activity.
+              ASSOCIATED_WITH_FRAUD_CLUSTER = 5
+            end
+          end
 
           # Information about stolen instrument fraud, where the user is not the
           # legitimate owner of the instrument being used for the purchase.
@@ -960,6 +1069,7 @@ module Google
 
             # Risk labels describing the card being assessed, such as its funding
             # mechanism.
+            # Ensure that applications can handle values not explicitly listed.
             module CardLabel
               # No label specified.
               CARD_LABEL_UNSPECIFIED = 0
@@ -991,6 +1101,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Reasons contributing to the SMS toll fraud verdict.
+          # Ensure that applications can handle values not explicitly listed.
           module SmsTollFraudReason
             # Default unspecified reason
             SMS_TOLL_FRAUD_REASON_UNSPECIFIED = 0
@@ -1018,6 +1129,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Labels returned by account defender for this request.
+          # Ensure that applications can handle values not explicitly listed.
           module AccountDefenderLabel
             # Default unspecified type.
             ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
@@ -1234,7 +1346,7 @@ module Google
         #     Optional. If true, skips the billing check.
         #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
         #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-        #     https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
+        #     https://docs.cloud.google.com/recaptcha/quotas#quota_limit). To avoid
         #     any disruption of your usage, we check that a billing account is present.
         #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
         #     billing check and proceed with the migration. See
@@ -1331,7 +1443,7 @@ module Google
         #     Optional. Options for user acceptance testing.
         # @!attribute [rw] waf_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings]
-        #     Optional. Settings for WAF
+        #     Optional. Settings for Web Application Firewall (WAF).
         class Key
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1360,8 +1472,9 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that represents the challenge option for challenge-based (CHECKBOX,
-          # INVISIBLE) testing keys.
+          # Enum that represents the challenge option for challenge-based (for example,
+          # CHECKBOX and INVISIBLE) testing keys.
+          # Ensure that applications can handle values not explicitly listed.
           module TestingChallenge
             # Perform the normal risk analysis and return either nocaptcha or a
             # challenge depending on risk and trust factors.
@@ -1387,6 +1500,10 @@ module Google
         #     subdomains of an allowed domain are automatically allowed. A valid domain
         #     requires a host and must not include any path, port, query or fragment.
         #     Examples: 'example.com' or 'subdomain.example.com'
+        #     Each key supports a maximum of 250 domains. To use a key on more domains,
+        #     set `allow_all_domains` to true. When this is set, you are responsible for
+        #     validating the hostname by checking the `token_properties.hostname` field
+        #     in each assessment response against your list of allowed domains.
         # @!attribute [rw] allow_amp_traffic
         #   @return [::Boolean]
         #     Optional. If set to true, the key can be used on AMP (Accelerated Mobile
@@ -1398,12 +1515,55 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ChallengeSecurityPreference]
         #     Optional. Settings for the frequency and difficulty at which this key
         #     triggers captcha challenges. This should only be specified for
-        #     IntegrationTypes CHECKBOX and INVISIBLE and SCORE_AND_CHALLENGE.
+        #     `IntegrationType` CHECKBOX, INVISIBLE or POLICY_BASED_CHALLENGE.
+        # @!attribute [rw] challenge_settings
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ChallengeSettings]
+        #     Optional. Challenge settings.
         class WebKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Per-action challenge settings.
+          # @!attribute [rw] score_threshold
+          #   @return [::Float]
+          #     Required. A challenge is triggered if the end-user score is below that
+          #     threshold. Value must be between 0 and 1 (inclusive).
+          class ActionSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Settings for POLICY_BASED_CHALLENGE keys to control when a challenge is
+          # triggered.
+          # @!attribute [rw] default_settings
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ActionSettings]
+          #     Required. Defines when a challenge is triggered (unless the default
+          #     threshold is overridden for the given action, see `action_settings`).
+          # @!attribute [rw] action_settings
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ActionSettings}]
+          #     Optional. The action to score threshold map.
+          #     The action name should be the same as the action name passed in the
+          #     `data-action` attribute
+          #     (see https://cloud.google.com/recaptcha/docs/actions-website).
+          #     Action names are case-insensitive.
+          #     There is a maximum of 100 action settings.
+          #     An action name has a maximum length of 100.
+          class ChallengeSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ActionSettings]
+            class ActionSettingsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Enum that represents the integration types for web keys.
+          # Ensure that applications can handle values not explicitly listed.
           module IntegrationType
             # Default type that indicates this enum hasn't been specified. This is not
             # a valid IntegrationType, one of the other types must be specified
@@ -1421,10 +1581,15 @@ module Google
             # Doesn't display the "I'm not a robot" checkbox, but may show captcha
             # challenges after risk analysis.
             INVISIBLE = 3
+
+            # Displays a visual challenge or not depending on the user risk analysis
+            # score.
+            POLICY_BASED_CHALLENGE = 5
           end
 
           # Enum that represents the possible challenge frequency and difficulty
           # configurations for a web key.
+          # Ensure that applications can handle values not explicitly listed.
           module ChallengeSecurityPreference
             # Default type that indicates this enum hasn't been specified.
             CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED = 0
@@ -1448,6 +1613,11 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. Android package names of apps allowed to use the key.
         #     Example: 'com.companyname.appname'
+        #     Each key supports a maximum of 250 package names. To use a key on more
+        #     apps, set `allow_all_package_names` to true. When this is set, you
+        #     are responsible for validating the package name by checking the
+        #     `token_properties.android_package_name` field in each assessment response
+        #     against your list of allowed package names.
         # @!attribute [rw] support_non_google_app_store_distribution
         #   @return [::Boolean]
         #     Optional. Set to true for keys that are used in an Android application that
@@ -1464,8 +1634,13 @@ module Google
         #     Optional. If set to true, allowed_bundle_ids are not enforced.
         # @!attribute [rw] allowed_bundle_ids
         #   @return [::Array<::String>]
-        #     Optional. iOS bundle ids of apps allowed to use the key.
+        #     Optional. iOS bundle IDs of apps allowed to use the key.
         #     Example: 'com.companyname.productname.appname'
+        #     Each key supports a maximum of 250 bundle IDs. To use a key on more
+        #     apps, set `allow_all_bundle_ids` to true. When this is set, you
+        #     are responsible for validating the bundle id by checking the
+        #     `token_properties.ios_bundle_id` field in each assessment response
+        #     against your list of allowed bundle IDs.
         # @!attribute [rw] apple_developer_id
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AppleDeveloperId]
         #     Optional. Apple Developer account details for the app that is protected by
@@ -1952,16 +2127,18 @@ module Google
         # Firewall).
         # @!attribute [rw] waf_service
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings::WafService]
-        #     Required. The WAF service that uses this key.
+        #     Required. The Web Application Firewall (WAF) service that uses this key.
         # @!attribute [rw] waf_feature
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings::WafFeature]
-        #     Required. The WAF feature for which this key is enabled.
+        #     Required. The Web Application Firewall (WAF) feature for which this key is
+        #     enabled.
         class WafSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Supported WAF features. For more information, see
           # https://cloud.google.com/recaptcha/docs/usecase#comparison_of_features.
+          # Ensure that applications can handle values not explicitly listed.
           module WafFeature
             # Undefined feature.
             WAF_FEATURE_UNSPECIFIED = 0
@@ -1976,12 +2153,12 @@ module Google
             # Use reCAPTCHA action-tokens to protect user actions.
             ACTION_TOKEN = 3
 
-            # Use reCAPTCHA WAF express protection to protect any content other than
-            # web pages, like APIs and IoT devices.
+            # Deprecated: Use `express_settings` instead.
             EXPRESS = 5
           end
 
-          # Web Application Firewalls supported by reCAPTCHA.
+          # Web Application Firewalls that reCAPTCHA supports.
+          # Ensure that applications can handle values not explicitly listed.
           module WafService
             # Undefined WAF
             WAF_SERVICE_UNSPECIFIED = 0
@@ -2007,10 +2184,10 @@ module Google
         #     Optional. Identifies the client module initiating the CreateAssessment
         #     request. This can be the link to the client module's project. Examples
         #     include:
-        #     - "github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager"
-        #     - "cloud.google.com/recaptcha/docs/implement-waf-akamai"
-        #     - "cloud.google.com/recaptcha/docs/implement-waf-cloudflare"
-        #     - "wordpress.org/plugins/recaptcha-something"
+        #
+        #       -
+        #       "github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager"
+        #       - "wordpress.org/plugins/recaptcha-something"
         # @!attribute [rw] version
         #   @return [::String]
         #     Optional. The version of the client module. For example, "1.0.0".
@@ -2037,6 +2214,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enum that represents the type of IP override.
+          # Ensure that applications can handle values not explicitly listed.
           module OverrideType
             # Default override type that indicates this enum hasn't been specified.
             OVERRIDE_TYPE_UNSPECIFIED = 0

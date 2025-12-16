@@ -299,7 +299,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, account_id: nil, hashed_account_id: nil, transaction_event: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, account_id: nil, hashed_account_id: nil, transaction_event: nil, phone_authentication_event: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -325,6 +325,9 @@ module Google
             #   @param transaction_event [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent, ::Hash]
             #     Optional. If the assessment is part of a payment transaction, provide
             #     details on payment lifecycle events that occur in the transaction.
+            #   @param phone_authentication_event [::Google::Cloud::RecaptchaEnterprise::V1::PhoneAuthenticationEvent, ::Hash]
+            #     Optional. If using an external multi-factor authentication provider,
+            #     provide phone authentication details for fraud detection purposes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse]
@@ -954,7 +957,7 @@ module Google
             #     Optional. If true, skips the billing check.
             #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
             #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-            #     https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
+            #     https://docs.cloud.google.com/recaptcha/quotas#quota_limit). To avoid
             #     any disruption of your usage, we check that a billing account is present.
             #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
             #     billing check and proceed with the migration. See
@@ -1026,7 +1029,7 @@ module Google
 
             ##
             # Adds an IP override to a key. The following restrictions hold:
-            # * The maximum number of IP overrides per key is 100.
+            # * The maximum number of IP overrides per key is 1000.
             # * For any conflict (such as IP already exists or IP part of an existing
             #   IP range), an error is returned.
             #
