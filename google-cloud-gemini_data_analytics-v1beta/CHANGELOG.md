@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.1 (2025-12-16)
+
+#### Documentation
+
+* specify the data sources supported only by the QueryData API ([#32275](https://github.com/googleapis/google-cloud-ruby/issues/32275)) 
+
 ### 0.5.0 (2025-12-16)
 
 #### Features
