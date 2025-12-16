@@ -1,5 +1,11 @@
 # Release History
 
+### 3.1.1 (2025-12-16)
+
+#### Bug Fixes
+
+* Remove get_topic lookup when publishing via lazy loading ([#32273](https://github.com/googleapis/google-cloud-ruby/issues/32273)) 
+
 ### 3.1.0 (2025-12-12)
 
 #### Features
