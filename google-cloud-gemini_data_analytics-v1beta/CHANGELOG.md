@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2025-12-16)
+
+#### Features
+
+* A new message `AgentContextReference` is added 
+* add a QueryData API for NL2SQL conversion ([#32258](https://github.com/googleapis/google-cloud-ruby/issues/32258)) 
+
 ### 0.4.0 (2025-11-12)
 
 #### Features
