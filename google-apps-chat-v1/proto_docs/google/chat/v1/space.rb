@@ -137,7 +137,8 @@ module Google
         #     Private apps can also use the `customers/my_customer` alias to create
         #     the space in the same Google Workspace organization as the app.
         #
-        #     For DMs, this field isn't populated.
+        #     This field isn't populated for direct messages (DMs) or when the space is
+        #     created by non-Google Workspace users.
         # @!attribute [r] space_uri
         #   @return [::String]
         #     Output only. The URI for a user to access the space.
@@ -551,8 +552,10 @@ module Google
         #
         #     You can update the following fields for a space:
         #
-        #     `space_details`: Updates the space's description. Supports up to 150
-        #     characters.
+        #     `space_details`: Updates the space's description and guidelines. You must
+        #     pass both description and guidelines in the update request as
+        #     {::Google::Apps::Chat::V1::Space::SpaceDetails `SpaceDetails`}. If you only want to
+        #     update one of the fields, pass the existing value for the other field.
         #
         #     `display_name`: Only supports updating the display name for spaces where
         #     `spaceType` field is `SPACE`.
@@ -596,8 +599,7 @@ module Google
         #     of a space.
         #     When updating permission settings, you can only specify
         #     `permissionSettings` field masks; you cannot update other field masks
-        #     at the same time. `permissionSettings` is not supported with
-        #     `useAdminAccess`.
+        #     at the same time.
         #     The supported field masks include:
         #
         #     - `permission_settings.manageMembersAndGroups`

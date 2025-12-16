@@ -98,6 +98,8 @@ module Google
         #     This doesn't apply to Unicode emoji, such as `U+1F600` for a grinning
         #     face emoji.
         #
+        #     * Bullet list items using asterisks (`*`)—for example, `* item`.
+        #
         #     For more information, see [View text formatting sent in a
         #     message](https://developers.google.com/workspace/chat/format-messages#view_text_formatting_sent_in_a_message)
         # @!attribute [rw] cards
@@ -191,8 +193,6 @@ module Google
         #     and omit the following:
         #
         #     * [Attachments](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments)
-        #     * [Accessory
-        #     widgets](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages#Message.AccessoryWidget)
         #
         #     For details, see [Send a message
         #     privately](https://developers.google.com/workspace/chat/create-messages#private).
