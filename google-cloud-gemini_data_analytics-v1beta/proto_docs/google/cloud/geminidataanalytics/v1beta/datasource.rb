@@ -39,17 +39,20 @@ module Google
         #     Note: The following fields are mutually exclusive: `looker`, `bq`, `studio`, `alloydb`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] alloydb
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AlloyDbReference]
-        #     Reference to an AlloyDB database.
+        #     Reference to an AlloyDB database. Only supported for the `QueryData`
+        #     method.
         #
         #     Note: The following fields are mutually exclusive: `alloydb`, `bq`, `studio`, `looker`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spanner_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SpannerReference]
-        #     Reference to a Spanner database.
+        #     Reference to a Spanner database. Only supported for the `QueryData`
+        #     method.
         #
         #     Note: The following fields are mutually exclusive: `spanner_reference`, `bq`, `studio`, `looker`, `alloydb`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::CloudSqlReference]
-        #     Reference to a CloudSql database.
+        #     Reference to a CloudSql database. Only supported for the `QueryData`
+        #     method.
         #
         #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bq`, `studio`, `looker`, `alloydb`, `spanner_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DatasourceReferences
@@ -57,10 +60,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message representing references to BigQuery tables.
+        # Message representing references to BigQuery tables and property graphs.
+        # At least one of `table_references` or `property_graph_references` must be
+        # populated.
         # @!attribute [rw] table_references
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryTableReference>]
-        #     Required. References to BigQuery tables.
+        #     Optional. References to BigQuery tables.
         class BigQueryTableReferences
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,6 +108,7 @@ module Google
         end
 
         # Message representing reference to an AlloyDB database and agent context.
+        # Only supported for the `QueryData` method.
         # @!attribute [rw] database_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AlloyDbDatabaseReference]
         #     Required. Singular proto that supports specifying which database and tables
@@ -140,6 +146,7 @@ module Google
         end
 
         # Message representing reference to a Spanner database and agent context.
+        # Only supported for the `QueryData` method.
         # @!attribute [rw] database_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SpannerDatabaseReference]
         #     Required. Singular proto that supports specifying which database and tables
@@ -189,6 +196,7 @@ module Google
         end
 
         # Message representing reference to a CloudSQL database and agent context.
+        # Only supported for the `QueryData` method.
         # @!attribute [rw] database_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::CloudSqlDatabaseReference]
         #     Required. Singular proto that supports specifying which database and tables
