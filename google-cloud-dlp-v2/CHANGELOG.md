@@ -1,5 +1,12 @@
 # Release History
 
+### 1.15.2 (2025-12-16)
+
+#### Documentation
+
+* add example resource name to VertexDatasetResourceReference 
+* add messages stating that Data Catalog actions are deprecated ([#32257](https://github.com/googleapis/google-cloud-ruby/issues/32257)) 
+
 ### 1.15.1 (2025-10-27)
 
 #### Documentation
