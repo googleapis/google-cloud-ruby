@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2025-12-16)
+
+#### Features
+
+* Add object retention setting to StorageBatchOperations API 
+* Add support for creating Job resource in dry-run mode ([#32267](https://github.com/googleapis/google-cloud-ruby/issues/32267)) 
+
 ### 0.4.1 (2025-10-27)
 
 #### Documentation
