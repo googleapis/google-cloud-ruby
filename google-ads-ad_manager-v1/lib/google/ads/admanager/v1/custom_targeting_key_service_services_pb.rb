@@ -37,6 +37,18 @@ module Google
             rpc :GetCustomTargetingKey, ::Google::Ads::AdManager::V1::GetCustomTargetingKeyRequest, ::Google::Ads::AdManager::V1::CustomTargetingKey
             # API to retrieve a list of `CustomTargetingKey` objects.
             rpc :ListCustomTargetingKeys, ::Google::Ads::AdManager::V1::ListCustomTargetingKeysRequest, ::Google::Ads::AdManager::V1::ListCustomTargetingKeysResponse
+            # API to create a `CustomTargetingKey` object.
+            rpc :CreateCustomTargetingKey, ::Google::Ads::AdManager::V1::CreateCustomTargetingKeyRequest, ::Google::Ads::AdManager::V1::CustomTargetingKey
+            # API to batch create `CustomTargetingKey` objects.
+            rpc :BatchCreateCustomTargetingKeys, ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysRequest, ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingKeysResponse
+            # API to update a `CustomTargetingKey` object.
+            rpc :UpdateCustomTargetingKey, ::Google::Ads::AdManager::V1::UpdateCustomTargetingKeyRequest, ::Google::Ads::AdManager::V1::CustomTargetingKey
+            # API to batch update `CustomTargetingKey` objects.
+            rpc :BatchUpdateCustomTargetingKeys, ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysRequest, ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingKeysResponse
+            # API to batch activate `CustomTargetingKey` objects.
+            rpc :BatchActivateCustomTargetingKeys, ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysRequest, ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingKeysResponse
+            # Deactivates a list of `CustomTargetingKey` objects.
+            rpc :BatchDeactivateCustomTargetingKeys, ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysRequest, ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingKeysResponse
           end
 
           Stub = Service.rpc_stub_class

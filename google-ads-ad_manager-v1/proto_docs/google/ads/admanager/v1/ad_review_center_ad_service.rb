@@ -50,10 +50,11 @@ module Google
         #     is the value returned from a previous Search request, or empty.
         # @!attribute [rw] status
         #   @return [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
-        #     Required. Only return ads with the given status.
+        #     Optional. Only return ads with the given status.
         # @!attribute [rw] ad_review_center_ad_id
         #   @return [::Array<::String>]
-        #     Optional. If provided, only return ads with the given AdReviewCenterAd IDs.
+        #     Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
+        #     no other filter can be set (other than page size and page token).
         # @!attribute [rw] date_time_range
         #   @return [::Google::Type::Interval]
         #     Optional. If provided, only return ads that served within the given date

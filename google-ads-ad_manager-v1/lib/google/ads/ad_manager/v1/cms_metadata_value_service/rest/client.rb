@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `CmsMetadataKey` object.
+              # API to retrieve a `CmsMetadataValue` object.
               #
               # @overload get_cms_metadata_value(request, options = nil)
               #   Pass arguments to `get_cms_metadata_value` via a request object, either of type
@@ -195,7 +195,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the CmsMetadataKey.
+              #     Required. The resource name of the CmsMetadataValue.
               #     Format: `networks/{network_code}/cmsMetadataValues/{cms_metadata_value_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::CmsMetadataValue]

@@ -24,7 +24,7 @@ module Google
         # Request object for `GetCmsMetadataValue` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the CmsMetadataKey.
+        #     Required. The resource name of the CmsMetadataValue.
         #     Format: `networks/{network_code}/cmsMetadataValues/{cms_metadata_value_id}`
         class GetCmsMetadataValueRequest
           include ::Google::Protobuf::MessageExts
