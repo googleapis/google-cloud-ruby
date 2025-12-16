@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.0 (2025-12-16)
+
+#### Features
+
+* Addition of GMAIL_MESSAGE value for RichLinkType enum in the RichLinkMetadata proto ([#32271](https://github.com/googleapis/google-cloud-ruby/issues/32271)) 
+
 ### 0.17.0 (2025-11-21)
 
 #### Features
