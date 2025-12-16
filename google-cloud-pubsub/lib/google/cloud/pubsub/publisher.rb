@@ -213,7 +213,7 @@ module Google
         #
         def publish data = nil, attributes = nil, ordering_key: nil, compress: nil, compression_bytes_threshold: nil,
                     **extra_attrs, &block
-          ensure_grpc!
+          ensure_service!
           batch = BatchPublisher.new data,
                                      attributes,
                                      ordering_key,
@@ -337,7 +337,7 @@ module Google
         #   publisher.async_publisher.stop!
         #
         def publish_async data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
-          ensure_grpc!
+          ensure_service!
           @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.publish data, attributes, ordering_key: ordering_key, **extra_attrs, &callback
         end
@@ -414,13 +414,6 @@ module Google
         # available.
         def ensure_service!
           raise "Must have active connection to service" unless service
-        end
-
-        ##
-        # Ensures a Google::Cloud::PubSub::V1::Topic object exists.
-        def ensure_grpc!
-          ensure_service!
-          reload! if reference?
         end
       end
     end
