@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.2 (2025-12-17)
+
+#### Documentation
+
+* Add the IDENTIFIER field behavior annotation to fields of Cloud Pub/Sub methods that represent a specific identity and need to be sourced with additional care ([#32251](https://github.com/googleapis/google-cloud-ruby/issues/32251)) 
+
 ### 1.14.1 (2025-10-27)
 
 #### Documentation
