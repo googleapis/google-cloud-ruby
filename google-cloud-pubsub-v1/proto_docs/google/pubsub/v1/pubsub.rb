@@ -830,6 +830,8 @@ module Google
         #     resource. For example:
         #       "123/environment": "production",
         #       "123/costCenter": "marketing"
+        #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+        #     using tags with Pub/Sub resources.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1249,6 +1251,8 @@ module Google
         #     resource. For example:
         #       "123/environment": "production",
         #       "123/costCenter": "marketing"
+        #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+        #     using tags with Pub/Sub resources.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2044,6 +2048,8 @@ module Google
         #     resource. For example:
         #       "123/environment": "production",
         #       "123/costCenter": "marketing"
+        #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+        #     using tags with Pub/Sub resources.
         class CreateSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
