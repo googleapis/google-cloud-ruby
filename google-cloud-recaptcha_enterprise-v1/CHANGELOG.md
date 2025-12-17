@@ -1,5 +1,12 @@
 # Release History
 
+### 1.10.0 (2025-12-17)
+
+#### Features
+
+* add risk reasons to FraudPreventionAssessment 
+* add verifiedBots field to RiskAnalysis and definitions for a Bot object to store metadata for a detected bot ([#32269](https://github.com/googleapis/google-cloud-ruby/issues/32269)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation
