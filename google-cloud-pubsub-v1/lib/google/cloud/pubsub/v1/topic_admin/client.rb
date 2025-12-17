@@ -308,6 +308,8 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+            #     using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
