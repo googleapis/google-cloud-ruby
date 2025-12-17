@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.0 (2025-12-17)
+
+#### Features
+
+* Update GCB with latest proto changes ([#32228](https://github.com/googleapis/google-cloud-ruby/issues/32228)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation
