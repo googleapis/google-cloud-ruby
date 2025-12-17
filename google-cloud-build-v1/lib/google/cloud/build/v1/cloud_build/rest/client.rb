@@ -740,8 +740,8 @@ module Google
               ##
               # Approves or rejects a pending build.
               #
-              # If approved, the returned LRO will be analogous to the LRO returned from
-              # a CreateBuild call.
+              # If approved, the returned long-running operation (LRO) will be analogous to
+              # the LRO returned from a CreateBuild call.
               #
               # If rejected, the returned LRO will be immediately done.
               #
@@ -835,8 +835,6 @@ module Google
               ##
               # Creates a new `BuildTrigger`.
               #
-              # This API is experimental.
-              #
               # @overload create_build_trigger(request, options = nil)
               #   Pass arguments to `create_build_trigger` via a request object, either of type
               #   {::Google::Cloud::Build::V1::CreateBuildTriggerRequest} or an equivalent Hash.
@@ -920,8 +918,6 @@ module Google
               ##
               # Returns information about a `BuildTrigger`.
               #
-              # This API is experimental.
-              #
               # @overload get_build_trigger(request, options = nil)
               #   Pass arguments to `get_build_trigger` via a request object, either of type
               #   {::Google::Cloud::Build::V1::GetBuildTriggerRequest} or an equivalent Hash.
@@ -1004,8 +1000,6 @@ module Google
 
               ##
               # Lists existing `BuildTrigger`s.
-              #
-              # This API is experimental.
               #
               # @overload list_build_triggers(request, options = nil)
               #   Pass arguments to `list_build_triggers` via a request object, either of type
@@ -1098,8 +1092,6 @@ module Google
               ##
               # Deletes a `BuildTrigger` by its project ID and trigger ID.
               #
-              # This API is experimental.
-              #
               # @overload delete_build_trigger(request, options = nil)
               #   Pass arguments to `delete_build_trigger` via a request object, either of type
               #   {::Google::Cloud::Build::V1::DeleteBuildTriggerRequest} or an equivalent Hash.
@@ -1182,8 +1174,6 @@ module Google
 
               ##
               # Updates a `BuildTrigger` by its project ID and trigger ID.
-              #
-              # This API is experimental.
               #
               # @overload update_build_trigger(request, options = nil)
               #   Pass arguments to `update_build_trigger` via a request object, either of type
@@ -1757,7 +1747,7 @@ module Google
               #     The `name` field is used to identify the `WorkerPool` to update.
               #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     A mask specifying which fields in `worker_pool` to update.
+              #     Optional. A mask specifying which fields in `worker_pool` to update.
               #   @param validate_only [::Boolean]
               #     If set, validate the request and preview the response, but do not actually
               #     post it.
@@ -1914,6 +1904,86 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @cloud_build_stub, :list_worker_pools, "worker_pools", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the `DefaultServiceAccount` used by the project.
+              #
+              # @overload get_default_service_account(request, options = nil)
+              #   Pass arguments to `get_default_service_account` via a request object, either of type
+              #   {::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_default_service_account(name: nil)
+              #   Pass arguments to `get_default_service_account` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `DefaultServiceAccount` to retrieve.
+              #     Format:
+              #     `projects/{project}/locations/{location}/defaultServiceAccount`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Build::V1::DefaultServiceAccount]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Build::V1::DefaultServiceAccount]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/build/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Build::V1::CloudBuild::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Build::V1::GetDefaultServiceAccountRequest.new
+              #
+              #   # Call the get_default_service_account method.
+              #   result = client.get_default_service_account request
+              #
+              #   # The returned object is of type Google::Cloud::Build::V1::DefaultServiceAccount.
+              #   p result
+              #
+              def get_default_service_account request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_default_service_account.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Build::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_default_service_account.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_default_service_account.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_build_stub.get_default_service_account request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2155,6 +2225,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_worker_pools
+                  ##
+                  # RPC-specific configuration for `get_default_service_account`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_default_service_account
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2194,6 +2269,8 @@ module Google
                     @update_worker_pool = ::Gapic::Config::Method.new update_worker_pool_config
                     list_worker_pools_config = parent_rpcs.list_worker_pools if parent_rpcs.respond_to? :list_worker_pools
                     @list_worker_pools = ::Gapic::Config::Method.new list_worker_pools_config
+                    get_default_service_account_config = parent_rpcs.get_default_service_account if parent_rpcs.respond_to? :get_default_service_account
+                    @get_default_service_account = ::Gapic::Config::Method.new get_default_service_account_config
 
                     yield self if block_given?
                   end
