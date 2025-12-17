@@ -506,44 +506,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A query for retrieving data from a Looker Explore. See
-        # [Run Inline
-        # Query](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Query/run_inline_query).
-        # @!attribute [rw] model
-        #   @return [::String]
-        #     Required. The LookML model used to generate the query.
-        # @!attribute [rw] explore
-        #   @return [::String]
-        #     Required. The LookML Explore used to generate the query.
-        # @!attribute [rw] fields
-        #   @return [::Array<::String>]
-        #     Optional. The fields to retrieve from the Explore.
-        # @!attribute [rw] filters
-        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery::Filter>]
-        #     Optional. The filters to apply to the Explore.
-        # @!attribute [rw] sorts
-        #   @return [::Array<::String>]
-        #     Optional. The sorts to apply to the Explore.
-        # @!attribute [rw] limit
-        #   @return [::String]
-        #     Optional. Limit in the query.
-        class LookerQuery
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # A Looker query filter.
-          # @!attribute [rw] field
-          #   @return [::String]
-          #     Required. The field to filter on.
-          # @!attribute [rw] value
-          #   @return [::String]
-          #     Required. The value f field to filter on.
-          class Filter
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-        end
-
         # A query for retrieving data.
         # @!attribute [rw] looker
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery]
