@@ -28,7 +28,7 @@ module Google
         #     Format: accounts/\\{account_id}/customers/\\{customer_id}
         # @!attribute [rw] event_type
         #   @return [::Google::Cloud::Channel::V1::CustomerEvent::Type]
-        #     Type of event which happened on the customer.
+        #     Type of event which happened for the customer.
         class CustomerEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -53,7 +53,7 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
         # @!attribute [rw] event_type
         #   @return [::Google::Cloud::Channel::V1::EntitlementEvent::Type]
-        #     Type of event which happened on the entitlement.
+        #     Type of event which happened for the entitlement.
         class EntitlementEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
