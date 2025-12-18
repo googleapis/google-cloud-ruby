@@ -23,6 +23,6 @@ gem "google-cloud-tasks-v2beta3", path: master ? "../../google-cloud-tasks-v2bet
 
 group :test do
   gem "rack-test"
-  gem "minitest", "~> 5.13"
+  gem "minitest", ">= 5.13", "< 7"
   gem "rake"
 end

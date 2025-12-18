@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "google-style", "~> 1.31.1"
-gem "minitest", "~> 5.22"
+gem "minitest", ">= 5.22", "< 7"
 gem "minitest-focus", "~> 1.4"
 gem "minitest-rg", "~> 5.3"
 gem "rake", ">= 13.0"

@@ -26,7 +26,7 @@ end
 
 group :test do
   gem "google-style", "~> 1.26.1"
-  gem "minitest", "~> 5.16"
+  gem "minitest", ">= 5.16", "< 7"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-hooks", "~> 1.5"
 end
