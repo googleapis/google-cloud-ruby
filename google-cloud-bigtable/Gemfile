@@ -25,7 +25,7 @@ local_dependencies.each do |name|
 end
 
 gem "google-style", "~> 1.30.1"
-gem "minitest", "~> 5.16"
+gem "minitest", ">= 5.16", "< 7"
 gem "minitest-focus", "~> 1.1"
 gem "minitest-reporters", "~> 1.5.0", require: false
 gem "minitest-rg", "~> 5.2"
