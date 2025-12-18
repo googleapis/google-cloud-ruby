@@ -14,6 +14,7 @@
 
 
 require "google-cloud-pubsub"
+require "google/cloud/pubsub/logging"
 require "google/cloud/pubsub/project"
 require "google/cloud/config"
 require "google/cloud/env"
@@ -70,11 +71,16 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/pubsub`
       # @param [Numeric] timeout Default timeout to use in requests. Optional.
+      # @param [String] universe_domain A custom universe domain. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
-      # @param universe_domain [String] A custom universe domain. Optional.
+      # @param [Logger] logger Optional Logger instance for emitting
+      #   library-level debug logs. If not provided, it will default to
+      #   configure.logger, which defaults to Logger.new STDOUT if not set. To
+      #   enable logging, set environment variable GOOGLE_SDK_RUBY_LOGGING_GEMS
+      #   to "all" or a comma separated list of gem names, including "pubsub".
       #
       # @return [Google::Cloud::PubSub::Project]
       #
@@ -92,13 +98,15 @@ module Google
                    timeout: nil,
                    universe_domain: nil,
                    endpoint: nil,
-                   emulator_host: nil
+                   emulator_host: nil,
+                   logger: nil
         project_id ||= default_project_id
         scope ||= configure.scope
         timeout ||= configure.timeout
         endpoint ||= configure.endpoint
         universe_domain ||= configure.universe_domain
         emulator_host ||= configure.emulator_host
+        logger ||= configure.logger
 
         if emulator_host
           credentials = :this_channel_is_insecure
@@ -114,10 +122,12 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
+        logging = Google::Cloud::PubSub::Logging.create logger
         service = PubSub::Service.new project_id, credentials,
                                       host: endpoint,
                                       timeout: timeout,
-                                      universe_domain: universe_domain
+                                      universe_domain: universe_domain,
+                                      logging: logging
         PubSub::Project.new service
       end
 
