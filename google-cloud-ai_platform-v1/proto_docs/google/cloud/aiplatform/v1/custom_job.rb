@@ -277,6 +277,9 @@ module Google
         # @!attribute [rw] nfs_mounts
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::NfsMount>]
         #     Optional. List of NFS mount spec.
+        # @!attribute [rw] lustre_mounts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::LustreMount>]
+        #     Optional. List of Lustre mounts.
         # @!attribute [rw] disk_spec
         #   @return [::Google::Cloud::AIPlatform::V1::DiskSpec]
         #     Disk spec.
