@@ -53,6 +53,11 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Client specified annotations.
+        # @!attribute [r] fingerprints
+        #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::Hash>]
+        #     Output only. Immutable reference for the version, calculated based on the
+        #     version's content. Currently we only support dirsum_sha256 hash algorithm.
+        #     Additional hash algorithms may be added in the future.
         class Version
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
