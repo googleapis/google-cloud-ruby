@@ -4564,7 +4564,7 @@ module Google
               end
 
               ##
-              # Exports an artifact.
+              # Exports an artifact to a Cloud Storage bucket.
               #
               # @overload export_artifact(request, options = nil)
               #   Pass arguments to `export_artifact` via a request object, either of type
