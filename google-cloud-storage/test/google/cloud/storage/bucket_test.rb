@@ -644,13 +644,13 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
-  it "creates an file with a StringIO" do
+  it "creates a file with StringIO" do
     new_file_name = random_file_path
-    new_file_contents = StringIO.new("Hello world")
-
+    new_file_contents = StringIO.new("Hello world strngio")
+    crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for new_file_contents
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
+      [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -1455,9 +1455,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                       event_based_hold: nil
 
     # Set crc32c if both md5 and crc32c are not provided
-    if md5.nil? && crc32c.nil?
-      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new("Hello world"))
-    end
+    crc32c = set_crc32c_as_default(md5, crc32c)
 
     params = {
       cache_control: cache_control, content_type: content_type,

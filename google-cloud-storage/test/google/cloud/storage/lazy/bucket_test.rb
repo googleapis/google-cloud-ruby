@@ -249,7 +249,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     new_file_name = random_file_path
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
-      tmpfile.write "Hello world!"
+      tmpfile.write "Hello world 123"
       tmpfile.rewind
 
       crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
@@ -1112,9 +1112,8 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
                       content_type: nil, crc32c: nil, md5: nil, metadata: nil,
                       storage_class: nil
     # Set crc32c if both md5 and crc32c are not provided
-    if md5.nil? && crc32c.nil?
-      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new("Hello world"))
-    end
+    crc32c = set_crc32c_as_default(md5, crc32c)
+
     params = {
       cache_control: cache_control, content_type: content_type,
       content_disposition: content_disposition, md5_hash: md5,
