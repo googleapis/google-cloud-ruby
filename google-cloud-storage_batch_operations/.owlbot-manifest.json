@@ -20,6 +20,16 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/Rakefile",
+    "samples/acceptance/batch_job_test.rb",
+    "samples/acceptance/helper.rb",
+    "samples/storage_batch_cancel_job.rb",
+    "samples/storage_batch_create_job.rb",
+    "samples/storage_batch_delete_job.rb",
+    "samples/storage_batch_get_job.rb",
+    "samples/storage_batch_list_jobs.rb"
   ]
 }
