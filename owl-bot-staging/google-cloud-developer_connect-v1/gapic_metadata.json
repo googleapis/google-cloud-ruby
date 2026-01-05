@@ -1,0 +1,172 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.developerconnect.v1",
+  "libraryPackage": "::Google::Cloud::DeveloperConnect::V1",
+  "services": {
+    "DeveloperConnect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client",
+          "rpcs": {
+            "ListConnections": {
+              "methods": [
+                "list_connections"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "get_connection"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "create_connection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "update_connection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "delete_connection"
+              ]
+            },
+            "CreateGitRepositoryLink": {
+              "methods": [
+                "create_git_repository_link"
+              ]
+            },
+            "DeleteGitRepositoryLink": {
+              "methods": [
+                "delete_git_repository_link"
+              ]
+            },
+            "ListGitRepositoryLinks": {
+              "methods": [
+                "list_git_repository_links"
+              ]
+            },
+            "GetGitRepositoryLink": {
+              "methods": [
+                "get_git_repository_link"
+              ]
+            },
+            "FetchReadWriteToken": {
+              "methods": [
+                "fetch_read_write_token"
+              ]
+            },
+            "FetchReadToken": {
+              "methods": [
+                "fetch_read_token"
+              ]
+            },
+            "FetchLinkableGitRepositories": {
+              "methods": [
+                "fetch_linkable_git_repositories"
+              ]
+            },
+            "FetchGitHubInstallations": {
+              "methods": [
+                "fetch_git_hub_installations"
+              ]
+            },
+            "FetchGitRefs": {
+              "methods": [
+                "fetch_git_refs"
+              ]
+            },
+            "ListAccountConnectors": {
+              "methods": [
+                "list_account_connectors"
+              ]
+            },
+            "GetAccountConnector": {
+              "methods": [
+                "get_account_connector"
+              ]
+            },
+            "CreateAccountConnector": {
+              "methods": [
+                "create_account_connector"
+              ]
+            },
+            "UpdateAccountConnector": {
+              "methods": [
+                "update_account_connector"
+              ]
+            },
+            "DeleteAccountConnector": {
+              "methods": [
+                "delete_account_connector"
+              ]
+            },
+            "FetchAccessToken": {
+              "methods": [
+                "fetch_access_token"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "list_users"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "delete_user"
+              ]
+            },
+            "FetchSelf": {
+              "methods": [
+                "fetch_self"
+              ]
+            },
+            "DeleteSelf": {
+              "methods": [
+                "delete_self"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InsightsConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client",
+          "rpcs": {
+            "ListInsightsConfigs": {
+              "methods": [
+                "list_insights_configs"
+              ]
+            },
+            "CreateInsightsConfig": {
+              "methods": [
+                "create_insights_config"
+              ]
+            },
+            "GetInsightsConfig": {
+              "methods": [
+                "get_insights_config"
+              ]
+            },
+            "UpdateInsightsConfig": {
+              "methods": [
+                "update_insights_config"
+              ]
+            },
+            "DeleteInsightsConfig": {
+              "methods": [
+                "delete_insights_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
