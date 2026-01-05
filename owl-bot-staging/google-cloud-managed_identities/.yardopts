@@ -1,0 +1,11 @@
+--no-private
+--title="Managed Service for Microsoft Active Directory API API"
+--exclude _pb\.rb$
+--markup markdown
+--markup-provider redcarpet
+
+./lib/**/*.rb
+-
+README.md
+AUTHENTICATION.md
+LICENSE.md
