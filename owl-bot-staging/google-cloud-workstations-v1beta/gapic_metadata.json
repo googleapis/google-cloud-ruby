@@ -1,0 +1,118 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.workstations.v1beta",
+  "libraryPackage": "::Google::Cloud::Workstations::V1beta",
+  "services": {
+    "Workstations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Workstations::V1beta::Workstations::Client",
+          "rpcs": {
+            "GetWorkstationCluster": {
+              "methods": [
+                "get_workstation_cluster"
+              ]
+            },
+            "ListWorkstationClusters": {
+              "methods": [
+                "list_workstation_clusters"
+              ]
+            },
+            "CreateWorkstationCluster": {
+              "methods": [
+                "create_workstation_cluster"
+              ]
+            },
+            "UpdateWorkstationCluster": {
+              "methods": [
+                "update_workstation_cluster"
+              ]
+            },
+            "DeleteWorkstationCluster": {
+              "methods": [
+                "delete_workstation_cluster"
+              ]
+            },
+            "GetWorkstationConfig": {
+              "methods": [
+                "get_workstation_config"
+              ]
+            },
+            "ListWorkstationConfigs": {
+              "methods": [
+                "list_workstation_configs"
+              ]
+            },
+            "ListUsableWorkstationConfigs": {
+              "methods": [
+                "list_usable_workstation_configs"
+              ]
+            },
+            "CreateWorkstationConfig": {
+              "methods": [
+                "create_workstation_config"
+              ]
+            },
+            "UpdateWorkstationConfig": {
+              "methods": [
+                "update_workstation_config"
+              ]
+            },
+            "DeleteWorkstationConfig": {
+              "methods": [
+                "delete_workstation_config"
+              ]
+            },
+            "GetWorkstation": {
+              "methods": [
+                "get_workstation"
+              ]
+            },
+            "ListWorkstations": {
+              "methods": [
+                "list_workstations"
+              ]
+            },
+            "ListUsableWorkstations": {
+              "methods": [
+                "list_usable_workstations"
+              ]
+            },
+            "CreateWorkstation": {
+              "methods": [
+                "create_workstation"
+              ]
+            },
+            "UpdateWorkstation": {
+              "methods": [
+                "update_workstation"
+              ]
+            },
+            "DeleteWorkstation": {
+              "methods": [
+                "delete_workstation"
+              ]
+            },
+            "StartWorkstation": {
+              "methods": [
+                "start_workstation"
+              ]
+            },
+            "StopWorkstation": {
+              "methods": [
+                "stop_workstation"
+              ]
+            },
+            "GenerateAccessToken": {
+              "methods": [
+                "generate_access_token"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
