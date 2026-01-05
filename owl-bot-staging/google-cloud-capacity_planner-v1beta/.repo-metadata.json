@@ -1,0 +1,17 @@
+{
+    "api_id": "capacityplanner.googleapis.com",
+    "api_shortname": "capacityplanner",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-capacity_planner-v1beta/latest",
+    "distribution_name": "google-cloud-capacity_planner-v1beta",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "capacityplanner",
+    "name_pretty": "Capacity Planner V1BETA API",
+    "product_documentation": "https://cloud.google.com/capacity-planner/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides programmatic access to Capacity Planner features. Note that google-cloud-capacity_planner-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-capacity_planner instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/capacity-planner/docs",
+    "library_type": "GAPIC_AUTO"
+}
