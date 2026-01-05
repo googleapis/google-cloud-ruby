@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.gkeconnect.gateway.v1beta1",
+  "libraryPackage": "::Google::Cloud::GkeConnect::Gateway::V1beta1",
+  "services": {
+    "GatewayControl": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client",
+          "rpcs": {
+            "GenerateCredentials": {
+              "methods": [
+                "generate_credentials"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
