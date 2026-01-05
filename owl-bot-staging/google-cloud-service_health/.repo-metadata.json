@@ -1,0 +1,17 @@
+{
+    "api_id": "servicehealth.googleapis.com",
+    "api_shortname": "servicehealth",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-service_health/latest",
+    "distribution_name": "google-cloud-service_health",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "servicehealth",
+    "name_pretty": "Service Health API",
+    "product_documentation": "https://cloud.google.com/service-health/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Personalized Service Health helps you gain visibility into disruptive events impacting Google Cloud products.",
+    "ruby-cloud-product-url": "https://cloud.google.com/service-health/docs/overview",
+    "library_type": "GAPIC_AUTO"
+}
