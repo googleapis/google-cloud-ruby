@@ -368,9 +368,9 @@ BigQuery](https://cloud.google.com/bigquery/streaming-data-into-bigquery).
 ### Uploading a file
 
 To follow along with this example, please download the
-[names.zip](https://www.ssa.gov/OACT/babynames/names.zip) archive from the U.S.
-Social Security Administration. Inside the archive you will find over 100 files
-containing baby name records since the year 1880.
+`names.zip` archive in `https://www.ssa.gov/OACT/babynames/names.zip`, sourced
+from the U.S. Social Security Administration. Inside the archive you will find
+over 100 files containing baby name records since the year 1880.
 
 ```ruby
 require "google/cloud/bigquery"
