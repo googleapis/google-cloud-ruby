@@ -1640,10 +1640,7 @@ module Google
         #   * `crc32c` - Calculate and provide a checksum using the CRC32c hash.
         #   * `all` - Calculate and provide checksums for all available verifications.
         #
-        #   Optional. The default is `nil`. Do not provide if also providing a
-        #   corresponding `crc32c` or `md5` argument. See
-        #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
-        #   for more information.
+        #   Defaults to :crc32c if not provided.
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
         #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
