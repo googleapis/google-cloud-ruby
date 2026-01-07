@@ -298,7 +298,6 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world"
       tmpfile.rewind
-
       metadata = {
         "player" => "Bob",
         score: 10
