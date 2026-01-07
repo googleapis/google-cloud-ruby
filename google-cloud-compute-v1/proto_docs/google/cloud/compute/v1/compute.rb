@@ -69023,6 +69023,9 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you
         #     create the resource.
+        # @!attribute [rw] exapool_provisioned_capacity_gb
+        #   @return [::Google::Cloud::Compute::V1::StoragePoolExapoolProvisionedCapacityGb]
+        #     Output only. [Output Only] Provisioned capacities for each SKU for this Exapool in GiB
         # @!attribute [rw] id
         #   @return [::Integer]
         #     Output only. [Output Only] The unique identifier for the resource. This identifier is
@@ -69271,6 +69274,21 @@ module Google
           end
         end
 
+        # Exapool provisioned capacities for each SKU type
+        # @!attribute [rw] capacity_optimized
+        #   @return [::Integer]
+        #     Output only. Size, in GiB, of provisioned capacity-optimized capacity for this Exapool
+        # @!attribute [rw] read_optimized
+        #   @return [::Integer]
+        #     Output only. Size, in GiB, of provisioned read-optimized capacity for this Exapool
+        # @!attribute [rw] write_optimized
+        #   @return [::Integer]
+        #     Output only. Size, in GiB, of provisioned write-optimized capacity for this Exapool
+        class StoragePoolExapoolProvisionedCapacityGb
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A list of StoragePool resources.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -69344,6 +69362,20 @@ module Google
         # @!attribute [rw] disk_count
         #   @return [::Integer]
         #     [Output Only] Number of disks used.
+        # @!attribute [rw] exapool_max_read_iops
+        #   @return [::Integer]
+        #     Output only. [Output Only] Maximum allowed read IOPS for this Exapool.
+        # @!attribute [rw] exapool_max_read_throughput
+        #   @return [::Integer]
+        #     Output only. [Output Only] Maximum allowed read throughput in MiB/s for
+        #     this Exapool.
+        # @!attribute [rw] exapool_max_write_iops
+        #   @return [::Integer]
+        #     Output only. [Output Only] Maximum allowed write IOPS for this Exapool.
+        # @!attribute [rw] exapool_max_write_throughput
+        #   @return [::Integer]
+        #     Output only. [Output Only] Maximum allowed write throughput in MiB/s
+        #     for this Exapool.
         # @!attribute [rw] last_resize_timestamp
         #   @return [::String]
         #     Output only. [Output Only] Timestamp of the last successful resize inRFC3339 text format.
@@ -69578,7 +69610,7 @@ module Google
         #     explicitly set, it will not appear in get listings. If not set
         #     the default behavior is determined by the org policy, if there is no org
         #     policy specified, then it will default to disabled. This field isn't
-        #     supported if the subnet purpose field is set toREGIONAL_MANAGED_PROXY.
+        #     supported if the subnet purpose field is set toREGIONAL_MANAGED_PROXY. It is recommended to uselogConfig.enable field instead.
         # @!attribute [rw] external_ipv6_prefix
         #   @return [::String]
         #     The external IPv6 address range that is owned by this
