@@ -1,5 +1,11 @@
 # Release History
 
+### 1.58.0 (2026-01-08)
+
+#### Features
+
+* Adding support for partial success bucket list  ([#32173](https://github.com/googleapis/google-cloud-ruby/issues/32173)) 
+
 ### 1.57.1 (2025-11-04)
 
 #### Documentation
