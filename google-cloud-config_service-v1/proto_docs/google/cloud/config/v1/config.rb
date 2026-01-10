@@ -206,6 +206,9 @@ module Google
             # Cloud Storage bucket creation failed due to an issue unrelated to
             # permissions.
             BUCKET_CREATION_FAILED = 8
+
+            # Failed to import values from an external source.
+            EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 10
           end
 
           # Possible lock states of a deployment.
@@ -753,6 +756,9 @@ module Google
             # quota validation failed for one or more resources in terraform
             # configuration files.
             QUOTA_VALIDATION_FAILED = 7
+
+            # Failed to import values from an external source.
+            EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 8
           end
         end
 
@@ -1331,6 +1337,9 @@ module Google
 
             # Preview created a build but build failed and logs were generated.
             PREVIEW_BUILD_RUN_FAILED = 6
+
+            # Failed to import values from an external source.
+            EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 7
           end
         end
 
@@ -1957,6 +1966,47 @@ module Google
             # Service maintained provider source type.
             SERVICE_MAINTAINED = 1
           end
+        end
+
+        # The request message for the GetAutoMigrationConfig method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the AutoMigrationConfig.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/AutoMigrationConfig'.
+        class GetAutoMigrationConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AutoMigrationConfig contains the automigration configuration for a project.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the AutoMigrationConfig.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/AutoMigrationConfig'.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the AutoMigrationConfig was last updated.
+        # @!attribute [rw] auto_migration_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether the auto migration is enabled for the project.
+        class AutoMigrationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdateAutoMigrationConfig method.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The update mask applies to the resource. See
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        # @!attribute [rw] auto_migration_config
+        #   @return [::Google::Cloud::ConfigService::V1::AutoMigrationConfig]
+        #     Required. The AutoMigrationConfig to update.
+        class UpdateAutoMigrationConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Enum values to control quota checks for resources in terraform

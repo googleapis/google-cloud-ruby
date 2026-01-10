@@ -2784,6 +2784,176 @@ module Google
               end
 
               ##
+              # Get the AutoMigrationConfig for a given project and location.
+              #
+              # @overload get_auto_migration_config(request, options = nil)
+              #   Pass arguments to `get_auto_migration_config` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_auto_migration_config(name: nil)
+              #   Pass arguments to `get_auto_migration_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the AutoMigrationConfig.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/AutoMigrationConfig'.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::AutoMigrationConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::AutoMigrationConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest.new
+              #
+              #   # Call the get_auto_migration_config method.
+              #   result = client.get_auto_migration_config request
+              #
+              #   # The returned object is of type Google::Cloud::ConfigService::V1::AutoMigrationConfig.
+              #   p result
+              #
+              def get_auto_migration_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_auto_migration_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_auto_migration_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_auto_migration_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.get_auto_migration_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the AutoMigrationConfig for a given project and location.
+              #
+              # @overload update_auto_migration_config(request, options = nil)
+              #   Pass arguments to `update_auto_migration_config` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_auto_migration_config(update_mask: nil, auto_migration_config: nil)
+              #   Pass arguments to `update_auto_migration_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The update mask applies to the resource. See
+              #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+              #   @param auto_migration_config [::Google::Cloud::ConfigService::V1::AutoMigrationConfig, ::Hash]
+              #     Required. The AutoMigrationConfig to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest.new
+              #
+              #   # Call the update_auto_migration_config method.
+              #   result = client.update_auto_migration_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_auto_migration_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_auto_migration_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_auto_migration_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_auto_migration_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.update_auto_migration_config request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Config REST API.
               #
               # This class represents the configuration for Config REST,
@@ -3071,6 +3241,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_resource_drift
+                  ##
+                  # RPC-specific configuration for `get_auto_migration_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_auto_migration_config
+                  ##
+                  # RPC-specific configuration for `update_auto_migration_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_auto_migration_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3128,6 +3308,10 @@ module Google
                     @list_resource_drifts = ::Gapic::Config::Method.new list_resource_drifts_config
                     get_resource_drift_config = parent_rpcs.get_resource_drift if parent_rpcs.respond_to? :get_resource_drift
                     @get_resource_drift = ::Gapic::Config::Method.new get_resource_drift_config
+                    get_auto_migration_config_config = parent_rpcs.get_auto_migration_config if parent_rpcs.respond_to? :get_auto_migration_config
+                    @get_auto_migration_config = ::Gapic::Config::Method.new get_auto_migration_config_config
+                    update_auto_migration_config_config = parent_rpcs.update_auto_migration_config if parent_rpcs.respond_to? :update_auto_migration_config
+                    @update_auto_migration_config = ::Gapic::Config::Method.new update_auto_migration_config_config
 
                     yield self if block_given?
                   end

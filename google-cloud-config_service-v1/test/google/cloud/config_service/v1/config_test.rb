@@ -1789,6 +1789,129 @@ class ::Google::Cloud::ConfigService::V1::Config::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_auto_migration_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfigService::V1::AutoMigrationConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_auto_migration_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_auto_migration_config, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_auto_migration_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_auto_migration_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_auto_migration_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_auto_migration_config ::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_auto_migration_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_auto_migration_config(::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_auto_migration_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_auto_migration_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    auto_migration_config = {}
+
+    update_auto_migration_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_auto_migration_config, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfigService::V1::AutoMigrationConfig), request["auto_migration_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_auto_migration_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_auto_migration_config({ update_mask: update_mask, auto_migration_config: auto_migration_config }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_auto_migration_config update_mask: update_mask, auto_migration_config: auto_migration_config do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_auto_migration_config ::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest.new(update_mask: update_mask, auto_migration_config: auto_migration_config) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_auto_migration_config({ update_mask: update_mask, auto_migration_config: auto_migration_config }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_auto_migration_config(::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest.new(update_mask: update_mask, auto_migration_config: auto_migration_config), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_auto_migration_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

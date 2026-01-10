@@ -94,6 +94,10 @@ module Google
             rpc :ListResourceDrifts, ::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest, ::Google::Cloud::ConfigService::V1::ListResourceDriftsResponse
             # Get a ResourceDrift for a given preview.
             rpc :GetResourceDrift, ::Google::Cloud::ConfigService::V1::GetResourceDriftRequest, ::Google::Cloud::ConfigService::V1::ResourceDrift
+            # Get the AutoMigrationConfig for a given project and location.
+            rpc :GetAutoMigrationConfig, ::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest, ::Google::Cloud::ConfigService::V1::AutoMigrationConfig
+            # Updates the AutoMigrationConfig for a given project and location.
+            rpc :UpdateAutoMigrationConfig, ::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

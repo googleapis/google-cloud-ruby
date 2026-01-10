@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the Config API.
           module Paths
             ##
+            # Create a fully-qualified AutoMigrationConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/autoMigrationConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def auto_migration_config_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/autoMigrationConfig"
+            end
+
+            ##
             # Create a fully-qualified Deployment resource string.
             #
             # The resource will be in the following format:

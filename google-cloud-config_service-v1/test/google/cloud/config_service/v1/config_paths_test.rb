@@ -41,6 +41,18 @@ class ::Google::Cloud::ConfigService::V1::Config::ClientPathsTest < Minitest::Te
     end
   end
 
+  def test_auto_migration_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.auto_migration_config_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/autoMigrationConfig", path
+    end
+  end
+
   def test_deployment_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
