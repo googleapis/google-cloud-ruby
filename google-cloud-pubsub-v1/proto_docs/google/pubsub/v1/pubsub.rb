@@ -753,11 +753,54 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for making inference requests against Vertex AI models.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. An endpoint to a Vertex AI model of the form
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}` or
+        #     `projects/{project}/locations/{location}/publishers/{publisher}/models/{model}`.
+        #     Vertex AI API requests will be sent to this endpoint.
+        # @!attribute [rw] unstructured_inference
+        #   @return [::Google::Cloud::PubSub::V1::AIInference::UnstructuredInference]
+        #     Optional. Requests and responses can be any arbitrary JSON object.
+        # @!attribute [rw] service_account_email
+        #   @return [::String]
+        #     Optional. The service account to use to make prediction requests against
+        #     endpoints. The resource creator or updater that specifies this field must
+        #     have `iam.serviceAccounts.actAs` permission on the service account. If not
+        #     specified, the Pub/Sub [service
+        #     agent](\\{$universe.dns_names.final_documentation_domain}/iam/docs/service-agents),
+        #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+        class AIInference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for making inferences using arbitrary JSON payloads.
+          # @!attribute [rw] parameters
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. A parameters object to be included in each inference request.
+          #     The parameters object is combined with the data field of the Pub/Sub
+          #     message to form the inference request.
+          class UnstructuredInference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # All supported message transforms types.
         # @!attribute [rw] javascript_udf
         #   @return [::Google::Cloud::PubSub::V1::JavaScriptUDF]
         #     Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's
         #     are specified on a resource, each must have a unique `function_name`.
+        #
+        #     Note: The following fields are mutually exclusive: `javascript_udf`, `ai_inference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ai_inference
+        #   @return [::Google::Cloud::PubSub::V1::AIInference]
+        #     Optional. AI Inference. Specifies the Vertex AI endpoint that inference
+        #     requests built from the Pub/Sub message data and provided parameters will
+        #     be sent to.
+        #
+        #     Note: The following fields are mutually exclusive: `ai_inference`, `javascript_udf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enabled
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
@@ -924,7 +967,7 @@ module Google
         # Request for the GetTopic method.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Required. Identifier. The name of the topic to get.
+        #     Required. The name of the topic to get.
         #     Format is `projects/{project}/topics/{topic}`.
         class GetTopicRequest
           include ::Google::Protobuf::MessageExts
@@ -950,8 +993,8 @@ module Google
         # Request for the Publish method.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Required. Identifier. The messages in the request will be published on this
-        #     topic. Format is `projects/{project}/topics/{topic}`.
+        #     Required. The messages in the request will be published on this topic.
+        #     Format is `projects/{project}/topics/{topic}`.
         # @!attribute [rw] messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::PubsubMessage>]
         #     Required. The messages to publish.
@@ -974,7 +1017,7 @@ module Google
         # Request for the `ListTopics` method.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. Identifier. The name of the project in which to list topics.
+        #     Required. The name of the project in which to list topics.
         #     Format is `projects/{project-id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -1070,7 +1113,7 @@ module Google
         # Request for the `DeleteTopic` method.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Required. Identifier. Name of the topic to delete.
+        #     Required. Name of the topic to delete.
         #     Format is `projects/{project}/topics/{topic}`.
         class DeleteTopicRequest
           include ::Google::Protobuf::MessageExts
@@ -1240,7 +1283,7 @@ module Google
         # @!attribute [r] analytics_hub_subscription_info
         #   @return [::Google::Cloud::PubSub::V1::Subscription::AnalyticsHubSubscriptionInfo]
         #     Output only. Information about the associated Analytics Hub subscription.
-        #     Only set if the subscritpion is created by Analytics Hub.
+        #     Only set if the subscription is created by Analytics Hub.
         # @!attribute [rw] message_transforms
         #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
         #     Optional. Transforms to be applied to messages before they are delivered to
@@ -1555,6 +1598,11 @@ module Google
             # Cannot write to the destination because enforce_in_transit is set to true
             # and the destination locations are not in the allowed regions.
             IN_TRANSIT_LOCATION_RESTRICTION = 5
+
+            # Cannot write to the BigQuery table because the table is not in the same
+            # location as where Vertex AI models used in `message_transform`s are
+            # deployed.
+            VERTEX_AI_LOCATION_RESTRICTION = 6
           end
         end
 
@@ -1670,6 +1718,11 @@ module Google
             # Cannot write to the Cloud Storage bucket due to an incompatibility
             # between the topic schema and subscription settings.
             SCHEMA_MISMATCH = 5
+
+            # Cannot write to the Cloud Storage bucket because the bucket is not in the
+            # same location as where Vertex AI models used in `message_transform`s are
+            # deployed.
+            VERTEX_AI_LOCATION_RESTRICTION = 6
           end
         end
 
@@ -1706,7 +1759,7 @@ module Google
         # Request for the GetSubscription method.
         # @!attribute [rw] subscription
         #   @return [::String]
-        #     Required. Identifier. The name of the subscription to get.
+        #     Required. The name of the subscription to get.
         #     Format is `projects/{project}/subscriptions/{sub}`.
         class GetSubscriptionRequest
           include ::Google::Protobuf::MessageExts
@@ -1729,8 +1782,8 @@ module Google
         # Request for the `ListSubscriptions` method.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. Identifier. The name of the project in which to list
-        #     subscriptions. Format is `projects/{project-id}`.
+        #     Required. The name of the project in which to list subscriptions.
+        #     Format is `projects/{project-id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of subscriptions to return.
@@ -1761,7 +1814,7 @@ module Google
         # Request for the DeleteSubscription method.
         # @!attribute [rw] subscription
         #   @return [::String]
-        #     Required. Identifier. The subscription to delete.
+        #     Required. The subscription to delete.
         #     Format is `projects/{project}/subscriptions/{sub}`.
         class DeleteSubscriptionRequest
           include ::Google::Protobuf::MessageExts
@@ -2021,10 +2074,10 @@ module Google
         # Request for the `CreateSnapshot` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Identifier. User-provided name for this snapshot. If the name is
-        #     not provided in the request, the server will assign a random name for this
-        #     snapshot on the same project as the subscription. Note that for REST API
-        #     requests, you must specify a name.  See the [resource name
+        #     Required. User-provided name for this snapshot. If the name is not provided
+        #     in the request, the server will assign a random name for this snapshot on
+        #     the same project as the subscription. Note that for REST API requests, you
+        #     must specify a name.  See the [resource name
         #     rules](https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
         #     Format is `projects/{project}/snapshots/{snap}`.
         # @!attribute [rw] subscription
@@ -2131,7 +2184,7 @@ module Google
         # Request for the GetSnapshot method.
         # @!attribute [rw] snapshot
         #   @return [::String]
-        #     Required. Identifier. The name of the snapshot to get.
+        #     Required. The name of the snapshot to get.
         #     Format is `projects/{project}/snapshots/{snap}`.
         class GetSnapshotRequest
           include ::Google::Protobuf::MessageExts
@@ -2141,7 +2194,7 @@ module Google
         # Request for the `ListSnapshots` method.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. Identifier. The name of the project in which to list snapshots.
+        #     Required. The name of the project in which to list snapshots.
         #     Format is `projects/{project-id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -2173,7 +2226,7 @@ module Google
         # Request for the `DeleteSnapshot` method.
         # @!attribute [rw] snapshot
         #   @return [::String]
-        #     Required. Identifier. The name of the snapshot to delete.
+        #     Required. The name of the snapshot to delete.
         #     Format is `projects/{project}/snapshots/{snap}`.
         class DeleteSnapshotRequest
           include ::Google::Protobuf::MessageExts
