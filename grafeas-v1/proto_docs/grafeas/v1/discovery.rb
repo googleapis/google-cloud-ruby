@@ -64,6 +64,9 @@ module Grafeas
     # @!attribute [rw] vulnerability_attestation
     #   @return [::Grafeas::V1::DiscoveryOccurrence::VulnerabilityAttestation]
     #     The status of an vulnerability attestation generation.
+    # @!attribute [rw] files
+    #   @return [::Array<::Grafeas::V1::DiscoveryOccurrence::File>]
+    #     Files that make up the resource described by the occurrence.
     class DiscoveryOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,6 +129,24 @@ module Grafeas
 
           # Attestation was unsuccessfully generated and stored.
           FAILURE = 2
+        end
+      end
+
+      # @!attribute [rw] name
+      #   @return [::String]
+      # @!attribute [rw] digest
+      #   @return [::Google::Protobuf::Map{::String => ::String}]
+      class File
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # @!attribute [rw] key
+        #   @return [::String]
+        # @!attribute [rw] value
+        #   @return [::String]
+        class DigestEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
 
