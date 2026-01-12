@@ -30,7 +30,7 @@ jobs:
         gh api user -i 2>&1 | grep -i "x-oauth-scopes" || echo "Could not determine scopes"
 
         echo "=== 3. Can I see the target fork? ==="
-        gh repo view yoshi-code-bot/google-cloud-ruby --json permissions
+        gh repo view yoshi-code-bot/google-cloud-ruby --json viewerPermission
     - name: Install Ruby 3.3
       uses: ruby/setup-ruby@v1
       with:
