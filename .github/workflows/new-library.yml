@@ -19,18 +19,19 @@ jobs:
       with:
           # IMPORTANT: This ensures the checkout uses the correct identity for git operations
           token: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
-    - name: Debug Token Permissions
-      env:
-        GH_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }} 
-      run: |
-        echo "=== 1. Who does this token belong to? ==="
-        gh api user --jq .login
+    # - name: Debug Token Permissions
+    #   # Uncomment to debug access token issues
+    #   env:
+    #     GH_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }} 
+    #   run: |
+    #     echo "=== 1. Who does this token belong to? ==="
+    #     gh api user --jq .login
         
-        echo "=== 2. What scopes does this token have? ==="
-        gh api user -i 2>&1 | grep -i "x-oauth-scopes" || echo "Could not determine scopes"
+    #     echo "=== 2. What scopes does this token have? ==="
+    #     gh api user -i 2>&1 | grep -i "x-oauth-scopes" || echo "Could not determine scopes"
 
-        echo "=== 3. Can I see the target fork? ==="
-        gh repo view yoshi-code-bot/google-cloud-ruby --json viewerPermission
+    #     echo "=== 3. Can I see the target fork? ==="
+    #     gh repo view yoshi-code-bot/google-cloud-ruby --json viewerPermission
     - name: Install Ruby 3.3
       uses: ruby/setup-ruby@v1
       with:
