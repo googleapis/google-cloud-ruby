@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.2 (2026-01-13)
+
+#### Documentation
+
+* change comment indicating `enable_gemini_in_bigquery` field for BigQuery Reservation Assignments is deprecated ([#32306](https://github.com/googleapis/google-cloud-ruby/issues/32306)) 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation
