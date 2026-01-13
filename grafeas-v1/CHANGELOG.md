@@ -1,5 +1,12 @@
 # Release History
 
+### 1.6.0 (2026-01-13)
+
+#### Features
+
+* A new field `files` is added to message `.grafeas.v1.DiscoveryOccurrence` 
+* A new message `File` is added ([#32345](https://github.com/googleapis/google-cloud-ruby/issues/32345)) 
+
 ### 1.5.1 (2025-10-27)
 
 #### Documentation
