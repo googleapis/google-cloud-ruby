@@ -591,6 +591,10 @@
       "component": "google-cloud-data_labeling-v1beta1",
       "version_file": "lib/google/cloud/data_labeling/v1beta1/version.rb"
     },
+    "google-cloud-database_center": {
+      "component": "google-cloud-database_center",
+      "version_file": "lib/google/cloud/database_center/version.rb"
+    },
     "google-cloud-database_center-v1beta": {
       "component": "google-cloud-database_center-v1beta",
       "version_file": "lib/google/cloud/database_center/v1beta/version.rb"

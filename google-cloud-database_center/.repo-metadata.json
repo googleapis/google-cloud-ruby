@@ -1,0 +1,17 @@
+{
+    "api_id": "databasecenter.googleapis.com",
+    "api_shortname": "databasecenter",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-database_center/latest",
+    "distribution_name": "google-cloud-database_center",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "databasecenter",
+    "name_pretty": "Database Center API",
+    "product_documentation": "https://cloud.google.com/database-center/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Database Center API provides access to an organization-wide, cross-product database fleet health platform. It aggregates health, security, and compliance signals from various Google Cloud databases, offering a single pane of glass to identify and manage issues.",
+    "ruby-cloud-product-url": "https://cloud.google.com/database-center/docs/overview",
+    "library_type": "GAPIC_MANUAL"
+}
