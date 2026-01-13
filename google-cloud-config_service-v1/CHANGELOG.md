@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.6.0 (2026-01-13)
+
+#### Features
+
+* add support for enabling automigration from deprecated Terraform versions ([#32341](https://github.com/googleapis/google-cloud-ruby/issues/32341)) 
+* added error code when failing import values from an external source 
+
 ### 2.5.1 (2025-10-27)
 
 #### Documentation
