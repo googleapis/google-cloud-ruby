@@ -198,6 +198,20 @@
           }
         }
       }
+    },
+    "BackupDrProtectionSummary": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Client",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "list_resource_backup_configs"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
