@@ -243,6 +243,13 @@ module Grafeas
     # @!attribute [rw] page_token
     #   @return [::String]
     #     Token to provide to skip to a particular spot in the list.
+    # @!attribute [rw] return_partial_success
+    #   @return [::Boolean]
+    #     If set, the request will return all reachable Occurrences
+    #     and report all unreachable regions in the `unreachable` field in
+    #     the response.
+    #
+    #     Only applicable for requests in the global region.
     class ListOccurrencesRequest
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -257,6 +264,12 @@ module Grafeas
     #     The next pagination token in the list response. It should be used as
     #     `page_token` for the following request. An empty value means no more
     #     results.
+    # @!attribute [rw] unreachable
+    #   @return [::Array<::String>]
+    #     Unreachable regions. Populated for requests from the global region
+    #     when `return_partial_success` is set.
+    #
+    #     Format: `projects/[PROJECT_ID]/locations/[LOCATION]`
     class ListOccurrencesResponse
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,6 +349,13 @@ module Grafeas
     # @!attribute [rw] page_token
     #   @return [::String]
     #     Token to provide to skip to a particular spot in the list.
+    # @!attribute [rw] return_partial_success
+    #   @return [::Boolean]
+    #     If set, the request will return all reachable Notes
+    #     and report all unreachable regions in the `unreachable` field in
+    #     the response.
+    #
+    #     Only applicable for requests in the global region.
     class ListNotesRequest
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -350,6 +370,12 @@ module Grafeas
     #     The next pagination token in the list response. It should be used as
     #     `page_token` for the following request. An empty value means no more
     #     results.
+    # @!attribute [rw] unreachable
+    #   @return [::Array<::String>]
+    #     Unreachable regions. Populated for requests from the global region
+    #     when `return_partial_success` is set.
+    #
+    #     Format: `projects/[PROJECT_ID]/locations/[LOCATION]`
     class ListNotesResponse
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

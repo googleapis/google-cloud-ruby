@@ -335,7 +335,7 @@ module Grafeas
         #   @param options [::Gapic::CallOptions, ::Hash]
         #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
         #
-        # @overload list_occurrences(parent: nil, filter: nil, page_size: nil, page_token: nil)
+        # @overload list_occurrences(parent: nil, filter: nil, page_size: nil, page_token: nil, return_partial_success: nil)
         #   Pass arguments to `list_occurrences` via keyword arguments. Note that at
         #   least one keyword argument is required. To specify no parameters, or to keep all
         #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -350,6 +350,12 @@ module Grafeas
         #     page size is 1000. If not specified, page size defaults to 20.
         #   @param page_token [::String]
         #     Token to provide to skip to a particular spot in the list.
+        #   @param return_partial_success [::Boolean]
+        #     If set, the request will return all reachable Occurrences
+        #     and report all unreachable regions in the `unreachable` field in
+        #     the response.
+        #
+        #     Only applicable for requests in the global region.
         #
         # @yield [response, operation] Access the result along with the RPC operation
         # @yieldparam response [::Gapic::PagedEnumerable<::Grafeas::V1::Occurrence>]
@@ -961,7 +967,7 @@ module Grafeas
         #   @param options [::Gapic::CallOptions, ::Hash]
         #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
         #
-        # @overload list_notes(parent: nil, filter: nil, page_size: nil, page_token: nil)
+        # @overload list_notes(parent: nil, filter: nil, page_size: nil, page_token: nil, return_partial_success: nil)
         #   Pass arguments to `list_notes` via keyword arguments. Note that at
         #   least one keyword argument is required. To specify no parameters, or to keep all
         #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -976,6 +982,12 @@ module Grafeas
         #     size is 1000. If not specified, page size defaults to 20.
         #   @param page_token [::String]
         #     Token to provide to skip to a particular spot in the list.
+        #   @param return_partial_success [::Boolean]
+        #     If set, the request will return all reachable Notes
+        #     and report all unreachable regions in the `unreachable` field in
+        #     the response.
+        #
+        #     Only applicable for requests in the global region.
         #
         # @yield [response, operation] Access the result along with the RPC operation
         # @yieldparam response [::Gapic::PagedEnumerable<::Grafeas::V1::Note>]
