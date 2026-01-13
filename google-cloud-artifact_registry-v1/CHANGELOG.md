@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.10.0 (2026-01-13)
+
+#### Features
+
+* add Fingerprint to Artifact Registry Version resource ([#32303](https://github.com/googleapis/google-cloud-ruby/issues/32303)) 
+#### Documentation
+
+* update the description of ExportArtifact 
+
 ### 1.9.0 (2025-12-10)
 
 #### Features
