@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.0 (2026-01-13)
+
+#### Features
+
+* add POSTGRES_18 to DatabaseVersion ([#32335](https://github.com/googleapis/google-cloud-ruby/issues/32335)) 
+
 ### 0.17.1 (2025-10-27)
 
 #### Documentation
