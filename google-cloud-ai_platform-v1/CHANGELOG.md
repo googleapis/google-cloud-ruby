@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.34.0 (2026-01-13)
+
+#### Features
+
+* Add Lustre support to the Vertex Training Custom Job API ([#32302](https://github.com/googleapis/google-cloud-ruby/issues/32302)) 
+#### Documentation
+
+* Update comments for machine resources and autoscaling 
+
 ### 1.33.0 (2025-12-11)
 
 #### Features
