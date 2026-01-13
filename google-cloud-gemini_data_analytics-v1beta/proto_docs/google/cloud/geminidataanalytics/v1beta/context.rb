@@ -41,6 +41,11 @@ module Google
         #     Optional. A list of example queries, providing examples of relevant and
         #     commonly used SQL queries and their corresponding natural language queries
         #     optionally present. Currently only used for BigQuery data sources.
+        # @!attribute [rw] looker_golden_queries
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::LookerGoldenQuery>]
+        #     Optional. A list of golden queries, providing examples of relevant and
+        #     commonly used Looker queries and their corresponding natural language
+        #     queries optionally present.
         # @!attribute [rw] glossary_terms
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::GlossaryTerm>]
         #     Optional. Term definitions (currently, only user authored)
@@ -124,6 +129,58 @@ module Google
         class ExampleQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A golden query for Looker, including natural language questions and a
+        # corresponding Looker Query. Analogous to ExampleQuery.
+        # @!attribute [rw] natural_language_questions
+        #   @return [::Array<::String>]
+        #     Optional. Natural language questions that a user might ask.
+        #     For example: "How many orders were placed last month?"
+        # @!attribute [rw] looker_query
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery]
+        #     Optional. The Looker Query corresponding to the natural language questions.
+        class LookerGoldenQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Looker Query Object
+        # [Looker API
+        # documentation](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Query/run_inline_query).
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Required. The LookML model used to generate the query.
+        # @!attribute [rw] explore
+        #   @return [::String]
+        #     Required. The LookML explore used to generate the query.
+        # @!attribute [rw] fields
+        #   @return [::Array<::String>]
+        #     Optional. The fields to retrieve from the explore.
+        # @!attribute [rw] filters
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::LookerQuery::Filter>]
+        #     Optional. The filters to apply to the explore.
+        # @!attribute [rw] sorts
+        #   @return [::Array<::String>]
+        #     Optional. The sorts to apply to the explore.
+        # @!attribute [rw] limit
+        #   @return [::String]
+        #     Optional. Limit in the query.
+        class LookerQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A Looker query filter.
+          # @!attribute [rw] field
+          #   @return [::String]
+          #     Required. The field to filter on.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     Required. The value for the field to filter on.
+          class Filter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Definition of a term within a specific domain.
