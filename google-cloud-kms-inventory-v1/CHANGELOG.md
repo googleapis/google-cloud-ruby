@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.16.2 (2026-01-13)
+
+#### Documentation
+
+* Marking MODIFIED_CUSTOMER_INITIATED_ACCESS and MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION Key Access Justification codes as deprecated in favor of GOOGLE_RESPONSE_TO_PRODUCTION_ALERT ([#32338](https://github.com/googleapis/google-cloud-ruby/issues/32338)) 
+
 ### 0.16.1 (2025-10-27)
 
 #### Documentation
