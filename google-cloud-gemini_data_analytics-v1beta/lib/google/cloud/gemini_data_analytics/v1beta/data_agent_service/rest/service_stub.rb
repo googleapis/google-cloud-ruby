@@ -234,6 +234,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_data_agent_sync REST call
+              #
+              # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              #   A result object deserialized from the server's reply
+              def create_data_agent_sync request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_data_agent_sync_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_data_agent_sync",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the update_data_agent REST call
               #
               # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest]
@@ -274,6 +314,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_data_agent_sync REST call
+              #
+              # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              #   A result object deserialized from the server's reply
+              def update_data_agent_sync request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_data_agent_sync_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_data_agent_sync",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the delete_data_agent REST call
               #
               # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest]
@@ -307,6 +387,46 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_data_agent_sync REST call
+              #
+              # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_data_agent_sync request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_data_agent_sync_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_data_agent_sync",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -481,6 +601,28 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the create_data_agent_sync REST call
+              #
+              # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_data_agent_sync_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta/{parent}/dataAgents:createSync",
+                                                          body: "data_agent",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the update_data_agent REST call
               #
               # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest]
@@ -503,6 +645,28 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the update_data_agent_sync REST call
+              #
+              # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_data_agent_sync_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1beta/{data_agent.name}:updateSync",
+                                                          body: "data_agent",
+                                                          matches: [
+                                                            ["data_agent.name", %r{^projects/[^/]+/locations/[^/]+/dataAgents/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the delete_data_agent REST call
               #
               # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest]
@@ -514,6 +678,27 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :delete,
                                                           uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/dataAgents/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_data_agent_sync REST call
+              #
+              # @param request_pb [::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_data_agent_sync_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1beta/{name}:deleteSync",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/dataAgents/[^/]+/?$}, false]
                                                           ]

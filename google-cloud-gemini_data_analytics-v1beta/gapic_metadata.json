@@ -30,14 +30,29 @@
                 "create_data_agent"
               ]
             },
+            "CreateDataAgentSync": {
+              "methods": [
+                "create_data_agent_sync"
+              ]
+            },
             "UpdateDataAgent": {
               "methods": [
                 "update_data_agent"
               ]
             },
+            "UpdateDataAgentSync": {
+              "methods": [
+                "update_data_agent_sync"
+              ]
+            },
             "DeleteDataAgent": {
               "methods": [
                 "delete_data_agent"
+              ]
+            },
+            "DeleteDataAgentSync": {
+              "methods": [
+                "delete_data_agent_sync"
               ]
             },
             "GetIamPolicy": {

@@ -605,6 +605,104 @@ module Google
               end
 
               ##
+              # Creates a new DataAgent in a given project and location synchronously.
+              #
+              # @overload create_data_agent_sync(request, options = nil)
+              #   Pass arguments to `create_data_agent_sync` via a request object, either of type
+              #   {::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_data_agent_sync(parent: nil, data_agent_id: nil, data_agent: nil, request_id: nil)
+              #   Pass arguments to `create_data_agent_sync` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Value for parent.
+              #   @param data_agent_id [::String]
+              #     Optional. Id of the requesting object. Must be unique within the parent.
+              #     The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+              #     If not provided, the server will auto-generate a value for the id.
+              #   @param data_agent [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent, ::Hash]
+              #     Required. The resource being created.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gemini_data_analytics/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new
+              #
+              #   # Call the create_data_agent_sync method.
+              #   result = client.create_data_agent_sync request
+              #
+              #   # The returned object is of type Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.
+              #   p result
+              #
+              def create_data_agent_sync request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_data_agent_sync.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_data_agent_sync.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_data_agent_sync.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_agent_service_stub.create_data_agent_sync request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates the parameters of a single DataAgent.
               #
               # @overload update_data_agent(request, options = nil)
@@ -714,6 +812,106 @@ module Google
               end
 
               ##
+              # Updates the parameters of a single DataAgent synchronously.
+              #
+              # @overload update_data_agent_sync(request, options = nil)
+              #   Pass arguments to `update_data_agent_sync` via a request object, either of type
+              #   {::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_data_agent_sync(update_mask: nil, data_agent: nil, request_id: nil)
+              #   Pass arguments to `update_data_agent_sync` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     DataAgent resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields with non-default values
+              #     present in the request will be overwritten. If a wildcard mask is provided,
+              #     all fields will be overwritten.
+              #   @param data_agent [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent, ::Hash]
+              #     Required. The resource being updated.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gemini_data_analytics/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new
+              #
+              #   # Call the update_data_agent_sync method.
+              #   result = client.update_data_agent_sync request
+              #
+              #   # The returned object is of type Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.
+              #   p result
+              #
+              def update_data_agent_sync request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_data_agent_sync.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_data_agent_sync.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_data_agent_sync.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_agent_service_stub.update_data_agent_sync request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes a single DataAgent.
               #
               # @overload delete_data_agent(request, options = nil)
@@ -809,6 +1007,98 @@ module Google
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single DataAgent synchronously.
+              #
+              # @overload delete_data_agent_sync(request, options = nil)
+              #   Pass arguments to `delete_data_agent_sync` via a request object, either of type
+              #   {::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_data_agent_sync(name: nil, request_id: nil)
+              #   Pass arguments to `delete_data_agent_sync` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gemini_data_analytics/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new
+              #
+              #   # Call the delete_data_agent_sync method.
+              #   result = client.delete_data_agent_sync request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_data_agent_sync request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_data_agent_sync.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GeminiDataAnalytics::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_data_agent_sync.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_data_agent_sync.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_agent_service_stub.delete_data_agent_sync request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1160,15 +1450,30 @@ module Google
                   #
                   attr_reader :create_data_agent
                   ##
+                  # RPC-specific configuration for `create_data_agent_sync`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_data_agent_sync
+                  ##
                   # RPC-specific configuration for `update_data_agent`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_data_agent
                   ##
+                  # RPC-specific configuration for `update_data_agent_sync`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_data_agent_sync
+                  ##
                   # RPC-specific configuration for `delete_data_agent`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_data_agent
+                  ##
+                  # RPC-specific configuration for `delete_data_agent_sync`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_data_agent_sync
                   ##
                   # RPC-specific configuration for `get_iam_policy`
                   # @return [::Gapic::Config::Method]
@@ -1190,10 +1495,16 @@ module Google
                     @get_data_agent = ::Gapic::Config::Method.new get_data_agent_config
                     create_data_agent_config = parent_rpcs.create_data_agent if parent_rpcs.respond_to? :create_data_agent
                     @create_data_agent = ::Gapic::Config::Method.new create_data_agent_config
+                    create_data_agent_sync_config = parent_rpcs.create_data_agent_sync if parent_rpcs.respond_to? :create_data_agent_sync
+                    @create_data_agent_sync = ::Gapic::Config::Method.new create_data_agent_sync_config
                     update_data_agent_config = parent_rpcs.update_data_agent if parent_rpcs.respond_to? :update_data_agent
                     @update_data_agent = ::Gapic::Config::Method.new update_data_agent_config
+                    update_data_agent_sync_config = parent_rpcs.update_data_agent_sync if parent_rpcs.respond_to? :update_data_agent_sync
+                    @update_data_agent_sync = ::Gapic::Config::Method.new update_data_agent_sync_config
                     delete_data_agent_config = parent_rpcs.delete_data_agent if parent_rpcs.respond_to? :delete_data_agent
                     @delete_data_agent = ::Gapic::Config::Method.new delete_data_agent_config
+                    delete_data_agent_sync_config = parent_rpcs.delete_data_agent_sync if parent_rpcs.respond_to? :delete_data_agent_sync
+                    @delete_data_agent_sync = ::Gapic::Config::Method.new delete_data_agent_sync_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
