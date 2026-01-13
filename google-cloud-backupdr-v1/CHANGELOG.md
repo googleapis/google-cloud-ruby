@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.7.0 (2026-01-13)
+
+#### Features
+
+* A new message `ListResourceBackupConfigsRequest` is added 
+* A new service `BackupDrProtectionSummary` is added ([#32340](https://github.com/googleapis/google-cloud-ruby/issues/32340)) 
+
 ### 1.6.0 (2025-11-19)
 
 #### Features
