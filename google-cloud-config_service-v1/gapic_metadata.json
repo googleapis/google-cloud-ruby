@@ -144,6 +144,16 @@
               "methods": [
                 "get_resource_drift"
               ]
+            },
+            "GetAutoMigrationConfig": {
+              "methods": [
+                "get_auto_migration_config"
+              ]
+            },
+            "UpdateAutoMigrationConfig": {
+              "methods": [
+                "update_auto_migration_config"
+              ]
             }
           }
         }
