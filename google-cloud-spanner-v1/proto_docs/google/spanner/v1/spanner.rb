@@ -205,9 +205,32 @@ module Google
         #     (ASCII 32 - 126) and the length of a `transaction_tag` is limited to 50
         #     characters. Values that exceed this limit are truncated.
         #     Any leading underscore (_) characters are removed from the string.
+        # @!attribute [rw] client_context
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions::ClientContext]
+        #     Optional. Optional context that may be needed for some requests.
         class RequestOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Container for various pieces of client-owned context attached to a request.
+          # @!attribute [rw] secure_context
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
+          #     Optional. Map of parameter name to value for this request. These values
+          #     will be returned by any SECURE_CONTEXT() calls invoked by this request
+          #     (e.g., by queries against Parameterized Secure Views).
+          class ClientContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Protobuf::Value]
+            class SecureContextEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # The relative priority for requests. Note that priority isn't applicable
           # for {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
