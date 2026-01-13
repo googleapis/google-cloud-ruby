@@ -25,18 +25,26 @@
     "samples/Gemfile",
     "samples/Rakefile",
     "samples/acceptance/helper.rb",
+    "samples/acceptance/storage_control_anywhere_cache_test.rb",
     "samples/acceptance/storage_control_folders_test.rb",
     "samples/acceptance/storage_control_managed_folders_test.rb",
     "samples/acceptance/storage_control_quickstart_test.rb",
+    "samples/storage_control_create_anywhere_cache.rb",
     "samples/storage_control_create_folder.rb",
     "samples/storage_control_delete_folder.rb",
+    "samples/storage_control_disable_anywhere_cache.rb",
+    "samples/storage_control_get_anywhere_cache.rb",
     "samples/storage_control_get_folder.rb",
+    "samples/storage_control_list_anywhere_caches.rb",
     "samples/storage_control_list_folders.rb",
     "samples/storage_control_managed_folder_create.rb",
     "samples/storage_control_managed_folder_delete.rb",
     "samples/storage_control_managed_folder_get.rb",
     "samples/storage_control_managed_folder_list.rb",
+    "samples/storage_control_pause_anywhere_cache.rb",
     "samples/storage_control_quickstart_sample.rb",
-    "samples/storage_control_rename_folder.rb"
+    "samples/storage_control_rename_folder.rb",
+    "samples/storage_control_resume_anywhere_cache.rb",
+    "samples/storage_control_update_anywhere_cache.rb"
   ]
 }
