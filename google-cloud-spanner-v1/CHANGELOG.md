@@ -1,5 +1,12 @@
 # Release History
 
+### 1.13.0 (2026-01-13)
+
+#### Features
+
+* add a ClientContext field to Spanner requests ([#32336](https://github.com/googleapis/google-cloud-ruby/issues/32336)) 
+* add Secure Parameters to the ClientContext 
+
 ### 1.12.1 (2025-11-21)
 
 #### Documentation
