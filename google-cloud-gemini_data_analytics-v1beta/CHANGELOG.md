@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.6.0 (2026-01-13)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* add LookerGoldenQuery to Context 
+* added sync APIs for the CRUD operations of Data Agent ([#32297](https://github.com/googleapis/google-cloud-ruby/issues/32297)) 
+
 ### 0.5.1 (2025-12-16)
 
 #### Documentation
