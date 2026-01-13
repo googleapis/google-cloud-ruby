@@ -1785,6 +1785,9 @@ module Google
 
           # The database version is Postgres 17.
           POSTGRES_17 = 5
+
+          # The database version is Postgres 18.
+          POSTGRES_18 = 6
         end
 
         # Subscription_type added to distinguish between Standard and Trial
