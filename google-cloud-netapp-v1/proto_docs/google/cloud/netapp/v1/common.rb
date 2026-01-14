@@ -32,6 +32,9 @@ module Google
         # @!attribute [r] has_vcp
         #   @return [::Boolean]
         #     Output only. Indicates if the location has VCP support.
+        # @!attribute [r] has_ontap_proxy
+        #   @return [::Boolean]
+        #     Output only. Indicates if the location has ONTAP Proxy support.
         class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -97,6 +100,21 @@ module Google
           ACTIVE_DIRECTORY = 1
         end
 
+        # Type of storage pool
+        module StoragePoolType
+          # Storage pool type is not specified.
+          STORAGE_POOL_TYPE_UNSPECIFIED = 0
+
+          # Storage pool type is file.
+          FILE = 1
+
+          # Storage pool type is unified.
+          UNIFIED = 2
+
+          # Storage pool type is unified large capacity.
+          UNIFIED_LARGE_CAPACITY = 3
+        end
+
         # Schedule for Hybrid Replication.
         # New enum values may be added in future to support different frequency of
         # replication.
@@ -124,6 +142,21 @@ module Google
 
           # QoS Type is Manual
           MANUAL = 2
+        end
+
+        # OS types for the host group
+        module OsType
+          # Unspecified OS Type
+          OS_TYPE_UNSPECIFIED = 0
+
+          # OS Type is Linux
+          LINUX = 1
+
+          # OS Type is Windows
+          WINDOWS = 2
+
+          # OS Type is VMware ESXi
+          ESXI = 3
         end
       end
     end

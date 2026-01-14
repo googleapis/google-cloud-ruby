@@ -261,10 +261,17 @@ module Google
         # @!attribute [rw] throughput_mibps
         #   @return [::Float]
         #     Optional. Throughput of the volume (in MiB/s)
+        # @!attribute [rw] cache_parameters
+        #   @return [::Google::Cloud::NetApp::V1::CacheParameters]
+        #     Optional. Cache parameters for the volume.
         # @!attribute [r] hot_tier_size_used_gib
         #   @return [::Integer]
         #     Output only. Total hot tier data rounded down to the nearest GiB used by
         #     the Volume. This field is only used for flex Service Level
+        # @!attribute [rw] block_devices
+        #   @return [::Array<::Google::Cloud::NetApp::V1::BlockDevice>]
+        #     Optional. Block devices for the volume.
+        #     Currently, only one block device is permitted per Volume.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -380,16 +387,16 @@ module Google
         # @!attribute [rw] anon_uid
         #   @return [::Integer]
         #     Optional. An integer representing the anonymous user ID. Range is 0 to
-        #     4294967295. Required when squash_mode is ROOT_SQUASH or ALL_SQUASH.
+        #     `4294967295`. Required when `squash_mode` is `ROOT_SQUASH` or `ALL_SQUASH`.
         class SimpleExportPolicyRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # SquashMode defines how remote user privileges are restricted when accessing
-          # an NFS export. It controls how user identities (like root) are mapped to
-          # anonymous users to limit access and enforce security.
+          # `SquashMode` defines how remote user privileges are restricted when
+          # accessing an NFS export. It controls how user identities (like root) are
+          # mapped to anonymous users to limit access and enforce security.
           module SquashMode
-            # Defaults to NO_ROOT_SQUASH.
+            # Defaults to `NO_ROOT_SQUASH`.
             SQUASH_MODE_UNSPECIFIED = 0
 
             # The root user (UID 0) retains full access. Other users are
@@ -664,6 +671,193 @@ module Google
           end
         end
 
+        # Cache Parameters for the volume.
+        # @!attribute [rw] peer_volume_name
+        #   @return [::String]
+        #     Required. Name of the origin volume for the cache volume.
+        # @!attribute [rw] peer_cluster_name
+        #   @return [::String]
+        #     Required. Name of the origin volume's ONTAP cluster.
+        # @!attribute [rw] peer_svm_name
+        #   @return [::String]
+        #     Required. Name of the origin volume's SVM.
+        # @!attribute [rw] peer_ip_addresses
+        #   @return [::Array<::String>]
+        #     Required. List of IC LIF addresses of the origin volume's ONTAP cluster.
+        # @!attribute [rw] enable_global_file_lock
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the cache volume has global file lock enabled.
+        # @!attribute [rw] cache_config
+        #   @return [::Google::Cloud::NetApp::V1::CacheConfig]
+        #     Optional. Configuration of the cache volume.
+        # @!attribute [r] cache_state
+        #   @return [::Google::Cloud::NetApp::V1::CacheParameters::CacheState]
+        #     Output only. State of the cache volume indicating the peering status.
+        # @!attribute [r] command
+        #   @return [::String]
+        #     Output only. Copy-paste-able commands to be used on user's ONTAP to accept
+        #     peering requests.
+        # @!attribute [rw] peering_command_expiry_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Expiration time for the peering command to be executed on user's
+        #     ONTAP.
+        # @!attribute [r] passphrase
+        #   @return [::String]
+        #     Output only. Temporary passphrase generated to accept cluster peering
+        #     command.
+        # @!attribute [r] state_details
+        #   @return [::String]
+        #     Output only. Detailed description of the current cache state.
+        class CacheParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State of the cache volume indicating the peering status.
+          module CacheState
+            # Default unspecified state.
+            CACHE_STATE_UNSPECIFIED = 0
+
+            # State indicating waiting for cluster peering to be established.
+            PENDING_CLUSTER_PEERING = 1
+
+            # State indicating waiting for SVM peering to be established.
+            PENDING_SVM_PEERING = 2
+
+            # State indicating successful establishment of peering with origin
+            # volumes's ONTAP cluster.
+            PEERED = 3
+
+            # Terminal state wherein peering with origin volume's ONTAP cluster
+            # has failed.
+            ERROR = 4
+          end
+        end
+
+        # Configuration of the cache volume.
+        # @!attribute [rw] cache_pre_populate
+        #   @return [::Google::Cloud::NetApp::V1::CachePrePopulate]
+        #     Optional. Pre-populate cache volume with data from the origin volume.
+        # @!attribute [rw] writeback_enabled
+        #   @return [::Boolean]
+        #     Optional. Flag indicating whether writeback is enabled for the FlexCache
+        #     volume.
+        # @!attribute [rw] cifs_change_notify_enabled
+        #   @return [::Boolean]
+        #     Optional. Flag indicating whether a CIFS change notification is enabled for
+        #     the FlexCache volume.
+        # @!attribute [r] cache_pre_populate_state
+        #   @return [::Google::Cloud::NetApp::V1::CacheConfig::CachePrePopulateState]
+        #     Output only. State of the prepopulation job indicating how the
+        #     prepopulation is progressing.
+        class CacheConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State of the prepopulation job indicating how the prepopulation is
+          # progressing.
+          module CachePrePopulateState
+            # Default unspecified state.
+            CACHE_PRE_POPULATE_STATE_UNSPECIFIED = 0
+
+            # State representing when the most recent create or update request did not
+            # require a prepopulation job.
+            NOT_NEEDED = 1
+
+            # State representing when the most recent update request requested a
+            # prepopulation job but it has not yet completed.
+            IN_PROGRESS = 2
+
+            # State representing when the most recent update request requested a
+            # prepopulation job and it has completed successfully.
+            COMPLETE = 3
+
+            # State representing when the most recent update request requested a
+            # prepopulation job but the prepopulate job failed.
+            ERROR = 4
+          end
+        end
+
+        # Pre-populate cache volume with data from the origin volume.
+        # @!attribute [rw] path_list
+        #   @return [::Array<::String>]
+        #     Optional. List of directory-paths to be pre-populated for the FlexCache
+        #     volume.
+        # @!attribute [rw] exclude_path_list
+        #   @return [::Array<::String>]
+        #     Optional. List of directory-paths to be excluded for pre-population for the
+        #     FlexCache volume.
+        # @!attribute [rw] recursion
+        #   @return [::Boolean]
+        #     Optional. Flag indicating whether the directories listed with the
+        #     `path_list` need to be recursively pre-populated.
+        class CachePrePopulate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Block device represents the device(s) which are stored in the block volume.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. User-defined name for the block device, unique within the volume.
+        #     In case no user input is provided, name will be auto-generated in the
+        #     backend. The name must meet the following requirements:
+        #     *   Be between 1 and 255 characters long.
+        #     *   Contain only uppercase or lowercase letters (A-Z, a-z), numbers (0-9),
+        #         and the following special characters: "-", "_", "}", "{", ".".
+        #     *   Spaces are not allowed.
+        # @!attribute [rw] host_groups
+        #   @return [::Array<::String>]
+        #     Optional. A list of host groups that identify hosts that can mount the
+        #     block volume. Format:
+        #     `projects/{project_id}/locations/{location}/hostGroups/{host_group_id}`
+        #     This field can be updated after the block device is created.
+        # @!attribute [r] identifier
+        #   @return [::String]
+        #     Output only. Device identifier of the block volume. This represents
+        #     `lun_serial_number` for iSCSI volumes.
+        # @!attribute [rw] size_gib
+        #   @return [::Integer]
+        #     Optional. The size of the block device in GiB.
+        #     Any value provided for the `size_gib` field during volume creation is
+        #     ignored. The block device's size is system-managed and will be set to match
+        #     the parent Volume's `capacity_gib`.
+        # @!attribute [rw] os_type
+        #   @return [::Google::Cloud::NetApp::V1::OsType]
+        #     Required. Immutable. The OS type of the volume.
+        #     This field can't be changed after the block device is created.
+        class BlockDevice
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RestoreBackupFilesRequest restores files from a backup to a volume.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The volume resource name, in the format
+        #     `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+        # @!attribute [rw] backup
+        #   @return [::String]
+        #     Required. The backup resource name, in the format
+        #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}/backups/{backup_id}`
+        # @!attribute [rw] file_list
+        #   @return [::Array<::String>]
+        #     Required. List of files to be restored, specified by their absolute path in
+        #     the source volume.
+        # @!attribute [rw] restore_destination_path
+        #   @return [::String]
+        #     Optional. Absolute directory path in the destination volume. This is
+        #     required if the `file_list` is provided.
+        class RestoreBackupFilesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RestoreBackupFilesResponse is the result of RestoreBackupFilesRequest.
+        class RestoreBackupFilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Protocols is an enum of all the supported network protocols for a volume.
         module Protocols
           # Unspecified protocol
@@ -677,6 +871,9 @@ module Google
 
           # SMB protocol
           SMB = 3
+
+          # ISCSI protocol
+          ISCSI = 4
         end
 
         # AccessType is an enum of all the supported access types for a volume.

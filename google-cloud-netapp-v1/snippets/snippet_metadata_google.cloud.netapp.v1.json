@@ -2410,6 +2410,246 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_RestoreBackupFiles_sync",
+      "title": "Snippet for the restore_backup_files call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#restore_backup_files.",
+      "file": "netapp/restore_backup_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_backup_files",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#restore_backup_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "RestoreBackupFiles",
+          "full_name": "google.cloud.netapp.v1.NetApp.RestoreBackupFiles",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListHostGroups_sync",
+      "title": "Snippet for the list_host_groups call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_host_groups.",
+      "file": "netapp/list_host_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_host_groups",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_host_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListHostGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListHostGroupsResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListHostGroups",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListHostGroups",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetHostGroup_sync",
+      "title": "Snippet for the get_host_group call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_host_group.",
+      "file": "netapp/get_host_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_host_group",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_host_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetHostGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::HostGroup",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetHostGroup",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetHostGroup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateHostGroup_sync",
+      "title": "Snippet for the create_host_group call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_host_group.",
+      "file": "netapp/create_host_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_host_group",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_host_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateHostGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateHostGroup",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateHostGroup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateHostGroup_sync",
+      "title": "Snippet for the update_host_group call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_host_group.",
+      "file": "netapp/update_host_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_host_group",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_host_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateHostGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateHostGroup",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateHostGroup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteHostGroup_sync",
+      "title": "Snippet for the delete_host_group call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_host_group.",
+      "file": "netapp/delete_host_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_host_group",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_host_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteHostGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteHostGroup",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteHostGroup",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

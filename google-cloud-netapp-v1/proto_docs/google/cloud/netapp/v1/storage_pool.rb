@@ -234,6 +234,13 @@ module Google
         #   @return [::Integer]
         #     Output only. Total hot tier data rounded down to the nearest GiB used by
         #     the storage pool.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::NetApp::V1::StoragePoolType]
+        #     Optional. Type of the storage pool. This field is used to control whether
+        #     the pool supports `FILE` based volumes only or `UNIFIED` (both `FILE` and
+        #     `BLOCK`) volumes or `UNIFIED_LARGE_CAPACITY` (both `FILE` and `BLOCK`)
+        #     volumes with large capacity. If not specified during creation, it defaults
+        #     to `FILE`.
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
