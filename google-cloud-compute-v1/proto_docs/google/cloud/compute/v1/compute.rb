@@ -9730,6 +9730,12 @@ module Google
         #     Balancers when the haPolicy fastIpMove is enabled.
         #
         #     This field can only be specified when the load balancing scheme is set toINTERNAL, or when the load balancing scheme is set toEXTERNAL and haPolicy fastIpMove is enabled.
+        # @!attribute [rw] network_pass_through_lb_traffic_policy
+        #   @return [::Google::Cloud::Compute::V1::BackendServiceNetworkPassThroughLbTrafficPolicy]
+        #     Configures traffic steering properties of internal passthrough Network
+        #     Load Balancers.
+        #
+        #     networkPassThroughLbTrafficPolicy cannot be specified with haPolicy.
         # @!attribute [rw] outlier_detection
         #   @return [::Google::Cloud::Compute::V1::OutlierDetection]
         #     Settings controlling the ejection of unhealthy backend endpoints from the
@@ -11179,6 +11185,78 @@ module Google
 
             # All optional fields.
             INCLUDE_ALL_OPTIONAL = 535_606_965
+          end
+        end
+
+        # @!attribute [rw] zonal_affinity
+        #   @return [::Google::Cloud::Compute::V1::BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity]
+        #     When configured, new connections are load balanced across healthy backend
+        #     endpoints in the local zone.
+        class BackendServiceNetworkPassThroughLbTrafficPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] spillover
+        #   @return [::String]
+        #     This field indicates whether zonal affinity is enabled or not. The
+        #     possible values are:
+        #
+        #        - ZONAL_AFFINITY_DISABLED: Default Value. Zonal Affinity
+        #        is disabled. The load balancer distributes new connections to all
+        #        healthy backend endpoints across all zones.
+        #        - ZONAL_AFFINITY_STAY_WITHIN_ZONE: Zonal Affinity is
+        #        enabled. The load balancer distributes new connections to all healthy
+        #        backend endpoints in the local zone only. If there are no healthy
+        #        backend endpoints in the local zone, the load balancer distributes
+        #        new connections to all backend endpoints in the local zone.
+        #        - ZONAL_AFFINITY_SPILL_CROSS_ZONE: Zonal Affinity is
+        #        enabled. The load balancer distributes new connections to all healthy
+        #        backend endpoints in the local zone only. If there aren't enough
+        #        healthy backend endpoints in the local zone, the load balancer
+        #        distributes new connections to all healthy backend endpoints across all
+        #        zones.
+        #     Check the Spillover enum for the list of possible values.
+        # @!attribute [rw] spillover_ratio
+        #   @return [::Float]
+        #     The value of the field must be in [0, 1]. When the ratio of the count
+        #     of healthy backend endpoints in a zone to the count of backend
+        #     endpoints in that same zone is equal to or above this threshold, the
+        #     load balancer distributes new connections to all healthy endpoints in
+        #     the local zone only. When the ratio of the count of healthy backend
+        #     endpoints in a zone to the count of backend endpoints in that same
+        #     zone is below this threshold, the load balancer distributes all new
+        #     connections to all healthy endpoints across all zones.
+        class BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # This field indicates whether zonal affinity is enabled or not. The
+          # possible values are:
+          #
+          #    - ZONAL_AFFINITY_DISABLED: Default Value. Zonal Affinity
+          #    is disabled. The load balancer distributes new connections to all
+          #    healthy backend endpoints across all zones.
+          #    - ZONAL_AFFINITY_STAY_WITHIN_ZONE: Zonal Affinity is
+          #    enabled. The load balancer distributes new connections to all healthy
+          #    backend endpoints in the local zone only. If there are no healthy
+          #    backend endpoints in the local zone, the load balancer distributes
+          #    new connections to all backend endpoints in the local zone.
+          #    - ZONAL_AFFINITY_SPILL_CROSS_ZONE: Zonal Affinity is
+          #    enabled. The load balancer distributes new connections to all healthy
+          #    backend endpoints in the local zone only. If there aren't enough
+          #    healthy backend endpoints in the local zone, the load balancer
+          #    distributes new connections to all healthy backend endpoints across all
+          #    zones.
+          module Spillover
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SPILLOVER = 0
+
+            ZONAL_AFFINITY_DISABLED = 230_207_960
+
+            ZONAL_AFFINITY_SPILL_CROSS_ZONE = 251_048_410
+
+            ZONAL_AFFINITY_STAY_WITHIN_ZONE = 12_177_782
           end
         end
 
@@ -12647,11 +12725,29 @@ module Google
 
             MEMORY_OPTIMIZED_M4_6TB = 210_543_650
 
+            # CUD bucket for X4 machine with 1440 vCPUs and 24TB of memory.
+            MEMORY_OPTIMIZED_X4_1440_24T = 206_669_823
+
             MEMORY_OPTIMIZED_X4_16TB = 183_089_120
+
+            # CUD bucket for X4 machine with 1920 vCPUs and 32TB of memory.
+            MEMORY_OPTIMIZED_X4_1920_32T = 291_963_529
 
             MEMORY_OPTIMIZED_X4_24TB = 183_116_989
 
             MEMORY_OPTIMIZED_X4_32TB = 183_144_858
+
+            # CUD bucket for X4 machine with 480 vCPUs and 6TB of memory.
+            MEMORY_OPTIMIZED_X4_480_6T = 478_547_742
+
+            # CUD bucket for X4 machine with 480 vCPUs and 8TB of memory.
+            MEMORY_OPTIMIZED_X4_480_8T = 478_547_804
+
+            # CUD bucket for X4 machine with 960 vCPUs and 12TB of memory.
+            MEMORY_OPTIMIZED_X4_960_12T = 424_752_410
+
+            # CUD bucket for X4 machine with 960 vCPUs and 16TB of memory.
+            MEMORY_OPTIMIZED_X4_960_16T = 424_752_534
 
             STORAGE_OPTIMIZED_Z3 = 316_796_085
 
@@ -18487,6 +18583,15 @@ module Google
         #   @return [::Array<::String>]
         #     CIDR IP address range.
         #     Maximum number of destination CIDR IP ranges allowed is 5000.
+        # @!attribute [rw] dest_network_context
+        #   @return [::String]
+        #     Network context of the traffic destination. Allowed values are:
+        #
+        #
+        #          - UNSPECIFIED
+        #          - INTERNET
+        #          - NON_INTERNET
+        #     Check the DestNetworkContext enum for the list of possible values.
         # @!attribute [rw] dest_network_type
         #   @return [::String]
         #     Network type of the traffic destination. Allowed values are:
@@ -18522,6 +18627,17 @@ module Google
         #   @return [::Array<::String>]
         #     CIDR IP address range.
         #     Maximum number of source CIDR IP ranges allowed is 5000.
+        # @!attribute [rw] src_network_context
+        #   @return [::String]
+        #     Network context of the traffic source. Allowed values are:
+        #
+        #
+        #          - UNSPECIFIED
+        #          - INTERNET
+        #          - INTRA_VPC
+        #          - NON_INTERNET
+        #          - VPC_NETWORKS
+        #     Check the SrcNetworkContext enum for the list of possible values.
         # @!attribute [rw] src_network_type
         #   @return [::String]
         #     Network type of the traffic source. Allowed values are:
@@ -18557,6 +18673,23 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Network context of the traffic destination. Allowed values are:
+          #
+          #
+          #      - UNSPECIFIED
+          #      - INTERNET
+          #      - NON_INTERNET
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # INTERNET
+          # INTRA_VPC
+          # NON_INTERNET
+          # UNSPECIFIED
+          # VPC_NETWORKS
+          module DestNetworkContext
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DEST_NETWORK_CONTEXT = 0
+          end
+
           # Network type of the traffic destination. Allowed values are:
           #
           #
@@ -18572,6 +18705,25 @@ module Google
           module DestNetworkType
             # A value indicating that the enum field is not set.
             UNDEFINED_DEST_NETWORK_TYPE = 0
+          end
+
+          # Network context of the traffic source. Allowed values are:
+          #
+          #
+          #      - UNSPECIFIED
+          #      - INTERNET
+          #      - INTRA_VPC
+          #      - NON_INTERNET
+          #      - VPC_NETWORKS
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # INTERNET
+          # INTRA_VPC
+          # NON_INTERNET
+          # UNSPECIFIED
+          # VPC_NETWORKS
+          module SrcNetworkContext
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SRC_NETWORK_CONTEXT = 0
           end
 
           # Network type of the traffic source. Allowed values are:
@@ -34482,6 +34634,10 @@ module Google
         #   @return [::Boolean]
         #     If true, indicates this is an OS license. Only one OS license can be
         #     attached to a disk or image at a time.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::LicenseParams]
+        #     Input only. Additional params passed with the request, but not persisted
+        #     as part of resource payload.
         # @!attribute [rw] removable_from_disk
         #   @return [::Boolean]
         #     If true, this license can be removed from a disk's set of licenses, with no
@@ -34592,6 +34748,30 @@ module Google
         class LicenseCodeLicenseAlias
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Additional license params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Input only. Resource manager tags to be bound to the license. Tag keys and values
+        #     have the same definition as resource
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
+        #     PATCH) when empty.
+        class LicenseParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Commitment for a particular license resource.
@@ -50670,6 +50850,10 @@ module Google
         #     Specifies what address purposes are supported. If empty, all address
         #     purposes are supported.
         #     Check the AddressPurposes enum for the list of possible values.
+        # @!attribute [rw] allow_address_creation
+        #   @return [::String]
+        #     Specifies whether address creation is allowed.
+        #     Check the AllowAddressCreation enum for the list of possible values.
         # @!attribute [rw] allow_alias_ip_ranges
         #   @return [::String]
         #     Specifies whether alias IP ranges (and secondary address ranges) are
@@ -50700,6 +50884,10 @@ module Google
         #     Specifies whether VMs are allowed to have external IP access on network
         #     interfaces connected to this VPC.
         #     Check the AllowExternalIpAccess enum for the list of possible values.
+        # @!attribute [rw] allow_firewall_policy
+        #   @return [::String]
+        #     Specifies whether firewall policy can be attached to the network.
+        #     Check the AllowFirewallPolicy enum for the list of possible values.
         # @!attribute [rw] allow_interconnect
         #   @return [::String]
         #     Specifies whether Cloud Interconnect creation is allowed.
@@ -50716,6 +50904,10 @@ module Google
         #   @return [::String]
         #     Specifies whether multi-nic in the same network is allowed.
         #     Check the AllowMultiNicInSameNetwork enum for the list of possible values.
+        # @!attribute [rw] allow_multi_nic_in_same_subnetwork
+        #   @return [::String]
+        #     Specifies whether multi-nic in the same subnetwork is allowed.
+        #     Check the AllowMultiNicInSameSubnetwork enum for the list of possible values.
         # @!attribute [rw] allow_multicast
         #   @return [::String]
         #     Specifies whether multicast is allowed.
@@ -50752,6 +50944,14 @@ module Google
         #   @return [::String]
         #     Specifies whether sub interfaces are allowed.
         #     Check the AllowSubInterfaces enum for the list of possible values.
+        # @!attribute [rw] allow_subnetwork_creation
+        #   @return [::String]
+        #     Specifies whether subnetwork creation is allowed.
+        #     Check the AllowSubnetworkCreation enum for the list of possible values.
+        # @!attribute [rw] allow_vpc_firewall_rules
+        #   @return [::String]
+        #     Specifies whether VPC firewall rules can be created under the network.
+        #     Check the AllowVpcFirewallRules enum for the list of possible values.
         # @!attribute [rw] allow_vpc_peering
         #   @return [::String]
         #     Specifies whether VPC peering is allowed.
@@ -50760,6 +50960,9 @@ module Google
         #   @return [::String]
         #     Specifies whether VPN creation is allowed.
         #     Check the AllowVpn enum for the list of possible values.
+        # @!attribute [rw] firewall_policy_types
+        #   @return [::Array<::String>]
+        #     Check the FirewallPolicyTypes enum for the list of possible values.
         # @!attribute [rw] interface_types
         #   @return [::Array<::String>]
         #     If set, limits the interface types that the network supports. If
@@ -50769,6 +50972,12 @@ module Google
         #   @return [::String]
         #     Specifies which type of multicast is supported.
         #     Check the Multicast enum for the list of possible values.
+        # @!attribute [rw] predefined_network_internal_ipv6_range
+        #   @return [::String]
+        #     Specifies a predefined internal IPv6 range for the network.
+        # @!attribute [rw] predefined_subnetwork_ranges
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkProfileNetworkFeaturesPredefinedSubnetworkRange>]
+        #     Predefined subnetwork ranges for the network.
         # @!attribute [rw] subnet_purposes
         #   @return [::Array<::String>]
         #     Specifies which subnetwork purposes are supported.
@@ -50828,6 +51037,16 @@ module Google
 
             # IP range for peer networks.
             VPC_PEERING = 400_800_170
+          end
+
+          # Specifies whether address creation is allowed.
+          module AllowAddressCreation
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ALLOW_ADDRESS_CREATION = 0
+
+            ADDRESS_CREATION_ALLOWED = 181_903_667
+
+            ADDRESS_CREATION_BLOCKED = 534_937_975
           end
 
           # Specifies whether alias IP ranges (and secondary address ranges) are
@@ -50902,6 +51121,16 @@ module Google
             EXTERNAL_IP_ACCESS_BLOCKED = 462_564_501
           end
 
+          # Specifies whether firewall policy can be attached to the network.
+          module AllowFirewallPolicy
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ALLOW_FIREWALL_POLICY = 0
+
+            FIREWALL_POLICY_ALLOWED = 388_488_346
+
+            FIREWALL_POLICY_BLOCKED = 204_651_742
+          end
+
           # Specifies whether Cloud Interconnect creation is allowed.
           module AllowInterconnect
             # A value indicating that the enum field is not set.
@@ -50940,6 +51169,16 @@ module Google
             MULTI_NIC_IN_SAME_NETWORK_ALLOWED = 457_555_419
 
             MULTI_NIC_IN_SAME_NETWORK_BLOCKED = 273_718_815
+          end
+
+          # Specifies whether multi-nic in the same subnetwork is allowed.
+          module AllowMultiNicInSameSubnetwork
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ALLOW_MULTI_NIC_IN_SAME_SUBNETWORK = 0
+
+            MULTI_NIC_IN_SAME_SUBNETWORK_ALLOWED = 288_044_595
+
+            MULTI_NIC_IN_SAME_SUBNETWORK_BLOCKED = 104_207_991
           end
 
           # Specifies whether multicast is allowed.
@@ -51032,6 +51271,26 @@ module Google
             SUBINTERFACES_BLOCKED = 511_720_199
           end
 
+          # Specifies whether subnetwork creation is allowed.
+          module AllowSubnetworkCreation
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ALLOW_SUBNETWORK_CREATION = 0
+
+            SUBNETWORK_CREATION_ALLOWED = 158_580_825
+
+            SUBNETWORK_CREATION_BLOCKED = 511_615_133
+          end
+
+          # Specifies whether VPC firewall rules can be created under the network.
+          module AllowVpcFirewallRules
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ALLOW_VPC_FIREWALL_RULES = 0
+
+            VPC_FIREWALL_RULES_ALLOWED = 489_586_007
+
+            VPC_FIREWALL_RULES_BLOCKED = 305_749_403
+          end
+
           # Specifies whether VPC peering is allowed.
           module AllowVpcPeering
             # A value indicating that the enum field is not set.
@@ -51050,6 +51309,15 @@ module Google
             VPN_ALLOWED = 162_163_997
 
             VPN_BLOCKED = 515_198_305
+          end
+
+          module FirewallPolicyTypes
+            # A value indicating that the enum field is not set.
+            UNDEFINED_FIREWALL_POLICY_TYPES = 0
+
+            RDMA_ROCE_POLICY = 148_757_145
+
+            VPC_POLICY = 74_319_208
           end
 
           module InterfaceTypes
@@ -51161,6 +51429,17 @@ module Google
           end
         end
 
+        # @!attribute [rw] ipv6_range
+        #   @return [::String]
+        #     The IPv6 range of the predefined subnetwork.
+        # @!attribute [rw] name_prefix
+        #   @return [::String]
+        #     The naming prefix of the predefined subnetwork.
+        class NetworkProfileNetworkFeaturesPredefinedSubnetworkRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] network_type
         #   @return [::String]
         #     Check the NetworkType enum for the list of possible values.
@@ -51201,6 +51480,9 @@ module Google
 
             # RDMA over Converged Ethernet (RoCE).
             ROCE = 2_520_927
+
+            # RDMA over Converged Ethernet (RoCE) for Bare Metal.
+            ROCE_METAL = 421_218_823
           end
 
           module UllSubtype
@@ -59128,6 +59410,10 @@ module Google
         #   @return [::Integer]
         #     Output only. [Output Only] The number of instances that are currently in use on this
         #     reservation block.
+        # @!attribute [rw] in_use_host_count
+        #   @return [::Integer]
+        #     Output only. Number of hosts currently in use. If there is one or more Instances running
+        #     on the host, it is considered in use.
         # @!attribute [rw] kind
         #   @return [::String]
         #     Output only. [Output Only] Type of the resource. Alwayscompute#reservationBlock for reservation blocks.
@@ -59344,6 +59630,10 @@ module Google
         #   @return [::Integer]
         #     Output only. [Output Only] The number of instances that are currently in use on this
         #     reservation subBlock.
+        # @!attribute [rw] in_use_host_count
+        #   @return [::Integer]
+        #     Output only. Number of hosts currently in use. If there is one or more Instances running
+        #     on the host, it is considered in use.
         # @!attribute [rw] kind
         #   @return [::String]
         #     Output only. [Output Only] Type of the resource. Alwayscompute#reservationSubBlock for reservation subBlocks.
@@ -67920,6 +68210,10 @@ module Google
         # @!attribute [rw] network_interfaces
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkInterface>]
         #     An array of network access configurations for this interface.
+        # @!attribute [rw] post_key_revocation_action_type
+        #   @return [::String]
+        #     PostKeyRevocationActionType of the instance.
+        #     Check the PostKeyRevocationActionType enum for the list of possible values.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::Scheduling]
         #     Specifies the scheduling options for the instances that are created from
@@ -67963,6 +68257,21 @@ module Google
 
             # Indicates user chose to opt for VM shutdown on key revocation.
             STOP = 2_555_906
+          end
+
+          # PostKeyRevocationActionType of the instance.
+          module PostKeyRevocationActionType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_POST_KEY_REVOCATION_ACTION_TYPE = 0
+
+            # Indicates user chose no operation.
+            NOOP = 2_402_146
+
+            # Default value. This value is unused.
+            POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 228_738_393
+
+            # Indicates user chose to opt for VM shutdown on key revocation.
+            SHUTDOWN = 76_412_502
           end
         end
 
@@ -69058,6 +69367,10 @@ module Google
         #     which means the first character must be a lowercase letter, and all
         #     following characters must be a dash, lowercase letter, or digit, except
         #     the last character, which cannot be a dash.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::StoragePoolParams]
+        #     Input only. Additional params passed with the request, but not persisted
+        #     as part of resource payload.
         # @!attribute [rw] performance_provisioning_type
         #   @return [::String]
         #     Provisioning type of the performance-related parameters of the pool,
@@ -69356,6 +69669,30 @@ module Google
         class StoragePoolListDisks
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Additional storage pool params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Input only. Resource manager tags to be bound to the storage pool. Tag keys and values
+        #     have the same definition as resource
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/456` or in namespaced
+        #     format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
+        #     PATCH) when empty.
+        class StoragePoolParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # [Output Only] Contains output only fields.
@@ -72210,6 +72547,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Autoscalers.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class TestIamPermissionsAutoscalerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for BackendBuckets.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -72311,6 +72666,21 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsGlobalAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for HealthChecks.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsHealthCheckRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -72579,6 +72949,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionAutoscalers.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionAutoscalerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -72611,6 +72999,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionHealthChecks.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionHealthCheckRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -72665,6 +73071,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNotificationEndpoints.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionNotificationEndpointRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -72743,6 +73167,21 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsResourcePolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Routes.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -72848,6 +73287,51 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsTargetPoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for TargetSslProxies.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsTargetSslProxyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for TargetTcpProxies.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsTargetTcpProxyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for UrlMaps.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsUrlMapRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
