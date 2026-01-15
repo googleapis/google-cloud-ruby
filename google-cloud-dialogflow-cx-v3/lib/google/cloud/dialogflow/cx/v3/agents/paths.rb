@@ -142,6 +142,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Playbook resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param agent [String]
+              # @param playbook [String]
+              #
+              # @return [::String]
+              def playbook_path project:, location:, agent:, playbook:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/agents/#{agent}/playbooks/#{playbook}"
+              end
+
+              ##
               # Create a fully-qualified SecretVersion resource string.
               #
               # The resource will be in the following format:

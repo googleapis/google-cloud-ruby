@@ -258,14 +258,21 @@ module Google
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           #
-          #     Note: The following fields are mutually exclusive: `target_page`, `target_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `target_page`, `target_flow`, `target_playbook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           #
-          #     Note: The following fields are mutually exclusive: `target_flow`, `target_page`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `target_flow`, `target_page`, `target_playbook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] target_playbook
+          #   @return [::String]
+          #     The target playbook to transition to.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_playbook`, `target_page`, `target_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class EventHandler
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

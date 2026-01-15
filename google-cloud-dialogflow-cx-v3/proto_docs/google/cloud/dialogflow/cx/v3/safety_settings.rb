@@ -23,9 +23,23 @@ module Google
       module CX
         module V3
           # Settings for Generative Safety.
+          # @!attribute [rw] default_banned_phrase_match_strategy
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SafetySettings::PhraseMatchStrategy]
+          #     Optional. Default phrase match strategy for banned phrases.
           # @!attribute [rw] banned_phrases
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::SafetySettings::Phrase>]
           #     Banned phrases for generated text.
+          # @!attribute [rw] rai_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SafetySettings::RaiSettings]
+          #     Optional. Settings for Responsible AI checks.
+          # @!attribute [rw] default_rai_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SafetySettings::RaiSettings]
+          #     Optional. Immutable. Default RAI settings to be annotated on the agent, so
+          #     that users will be able to restore their RAI configurations to the default
+          #     settings. Read-only field for the API proto only.
+          # @!attribute [rw] prompt_security_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SafetySettings::PromptSecuritySettings]
+          #     Optional. Settings for prompt security checks.
           class SafetySettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -40,6 +54,86 @@ module Google
             class Phrase
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Settings for Responsible AI.
+            # @!attribute [rw] category_filters
+            #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::SafetySettings::RaiSettings::CategoryFilter>]
+            #     Optional. RAI blocking configurations.
+            class RaiSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Configuration of the sensitivity level for blocking an RAI category.
+              # @!attribute [rw] category
+              #   @return [::Google::Cloud::Dialogflow::CX::V3::SafetySettings::RaiSettings::SafetyCategory]
+              #     RAI category to configure.
+              # @!attribute [rw] filter_level
+              #   @return [::Google::Cloud::Dialogflow::CX::V3::SafetySettings::RaiSettings::SafetyFilterLevel]
+              #     Blocking sensitivity level to configure for the RAI category.
+              class CategoryFilter
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Sensitivity level for RAI categories.
+              module SafetyFilterLevel
+                # Unspecified -- uses default sensitivity levels.
+                SAFETY_FILTER_LEVEL_UNSPECIFIED = 0
+
+                # Block no text -- effectively disables the category.
+                BLOCK_NONE = 1
+
+                # Block a few suspicious texts.
+                BLOCK_FEW = 2
+
+                # Block some suspicious texts.
+                BLOCK_SOME = 3
+
+                # Block most suspicious texts.
+                BLOCK_MOST = 4
+              end
+
+              # RAI categories to configure.
+              module SafetyCategory
+                # Unspecified.
+                SAFETY_CATEGORY_UNSPECIFIED = 0
+
+                # Dangerous content.
+                DANGEROUS_CONTENT = 1
+
+                # Hate speech.
+                HATE_SPEECH = 2
+
+                # Harassment.
+                HARASSMENT = 3
+
+                # Sexually explicit content.
+                SEXUALLY_EXPLICIT_CONTENT = 4
+              end
+            end
+
+            # Settings for prompt security checks.
+            # @!attribute [rw] enable_prompt_security
+            #   @return [::Boolean]
+            #     Optional. Enable prompt security checks.
+            class PromptSecuritySettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Strategy for matching phrases.
+            module PhraseMatchStrategy
+              # Unspecified, defaults to PARTIAL_MATCH.
+              PHRASE_MATCH_STRATEGY_UNSPECIFIED = 0
+
+              # Text that contains the phrase as a substring will be matched, e.g. "foo"
+              # will match "afoobar".
+              PARTIAL_MATCH = 1
+
+              # Text that contains the tokenized words of the phrase will be matched,
+              # e.g. "foo" will match "a foo bar" and "foo bar", but not "foobar".
+              WORD_MATCH = 2
             end
           end
         end

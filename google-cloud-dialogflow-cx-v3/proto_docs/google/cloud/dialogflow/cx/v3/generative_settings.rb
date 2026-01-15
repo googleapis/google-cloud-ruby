@@ -39,6 +39,9 @@ module Google
           # @!attribute [rw] language_code
           #   @return [::String]
           #     Language for this settings.
+          # @!attribute [rw] llm_model_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::LlmModelSettings]
+          #     LLM model settings.
           class GenerativeSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -105,6 +108,18 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Settings for LLM models.
+          # @!attribute [rw] model
+          #   @return [::String]
+          #     The selected LLM model.
+          # @!attribute [rw] prompt_text
+          #   @return [::String]
+          #     The custom prompt to use.
+          class LlmModelSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

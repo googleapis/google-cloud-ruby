@@ -153,6 +153,12 @@ module Google
           # @!attribute [rw] knowledge_connector_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::KnowledgeConnectorSettings]
           #     Optional. Knowledge connector configuration.
+          # @!attribute [rw] input_parameter_definitions
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::ParameterDefinition>]
+          #     Optional. Defined structured input parameters for this flow.
+          # @!attribute [rw] output_parameter_definitions
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::ParameterDefinition>]
+          #     Optional. Defined structured output parameters for this flow.
           # @!attribute [rw] multi_language_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Flow::MultiLanguageSettings]
           #     Optional. Multi-lingual agent settings for this flow.
