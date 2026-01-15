@@ -77,6 +77,9 @@ module Google
         #     All other probes are disabled if a startup probe is provided, until it
         #     succeeds. Container will not be added to service endpoints if the probe
         #     fails.
+        # @!attribute [rw] readiness_probe
+        #   @return [::Google::Cloud::Run::V2::Probe]
+        #     Readiness probe to be used for health checks.
         # @!attribute [rw] depends_on
         #   @return [::Array<::String>]
         #     Names of the containers that must start before this container.
