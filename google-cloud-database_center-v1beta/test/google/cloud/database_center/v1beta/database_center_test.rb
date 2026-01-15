@@ -281,6 +281,71 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::ClientTest < Mini
     end
   end
 
+  def test_aggregate_issue_stats
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    signal_type_groups = [{}]
+    baseline_date = {}
+
+    aggregate_issue_stats_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :aggregate_issue_stats, name
+      assert_kind_of ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_kind_of ::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup, request["signal_type_groups"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Type::Date), request["baseline_date"]
+      assert request.has_baseline_date?
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, aggregate_issue_stats_client_stub do
+      # Create client
+      client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.aggregate_issue_stats parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.aggregate_issue_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.aggregate_issue_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, aggregate_issue_stats_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

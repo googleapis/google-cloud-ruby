@@ -622,6 +622,114 @@ module Google
             end
 
             ##
+            # AggregateIssueStats provides database resource issues statistics.
+            #
+            # @overload aggregate_issue_stats(request, options = nil)
+            #   Pass arguments to `aggregate_issue_stats` via a request object, either of type
+            #   {::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload aggregate_issue_stats(parent: nil, filter: nil, signal_type_groups: nil, baseline_date: nil)
+            #   Pass arguments to `aggregate_issue_stats` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent can be a project, a folder, or an organization. The search
+            #     is limited to the resources within the `scope`.
+            #
+            #     The allowed values are:
+            #
+            #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+            #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+            #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+            #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+            #   @param filter [::String]
+            #     Optional. The expression to filter resources.
+            #
+            #     Supported fields are: `full_resource_name`, `resource_type`, `container`,
+            #       `product.type`, `product.engine`, `product.version`, `location`,
+            #       `labels`, `issues`, fields of availability_info,
+            #       data_protection_info,'resource_name', etc.
+            #
+            #     The expression is a list of zero or more restrictions combined via logical
+            #     operators `AND` and `OR`. When `AND` and `OR` are both used in the
+            #     expression, parentheses must be appropriately used to group the
+            #     combinations.
+            #
+            #     Example: location="us-east1"
+            #     Example: container="projects/123" OR container="projects/456"
+            #     Example: (container="projects/123" OR
+            #               container="projects/456") AND location="us-east1"
+            #   @param signal_type_groups [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup, ::Hash>]
+            #     Optional. Lists of signal types that are issues.
+            #   @param baseline_date [::Google::Type::Date, ::Hash]
+            #     Optional. The baseline date w.r.t. which the delta counts are calculated.
+            #     If not set, delta counts are not included in the response and the response
+            #     indicates the current state of the fleet.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/database_center/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new
+            #
+            #   # Call the aggregate_issue_stats method.
+            #   result = client.aggregate_issue_stats request
+            #
+            #   # The returned object is of type Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsResponse.
+            #   p result
+            #
+            def aggregate_issue_stats request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.aggregate_issue_stats.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DatabaseCenter::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.aggregate_issue_stats.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.aggregate_issue_stats.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @database_center_stub.call_rpc :aggregate_issue_stats, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DatabaseCenter API.
             #
             # This class represents the configuration for DatabaseCenter,
@@ -819,6 +927,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :query_database_resource_groups
+                ##
+                # RPC-specific configuration for `aggregate_issue_stats`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :aggregate_issue_stats
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -828,6 +941,8 @@ module Google
                   @aggregate_fleet = ::Gapic::Config::Method.new aggregate_fleet_config
                   query_database_resource_groups_config = parent_rpcs.query_database_resource_groups if parent_rpcs.respond_to? :query_database_resource_groups
                   @query_database_resource_groups = ::Gapic::Config::Method.new query_database_resource_groups_config
+                  aggregate_issue_stats_config = parent_rpcs.aggregate_issue_stats if parent_rpcs.respond_to? :aggregate_issue_stats
+                  @aggregate_issue_stats = ::Gapic::Config::Method.new aggregate_issue_stats_config
 
                   yield self if block_given?
                 end

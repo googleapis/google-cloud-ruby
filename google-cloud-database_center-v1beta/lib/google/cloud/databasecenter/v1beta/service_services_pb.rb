@@ -41,6 +41,8 @@ module Google
             rpc :AggregateFleet, ::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest, ::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetResponse
             # QueryDatabaseResourceGroups returns paginated results of database groups.
             rpc :QueryDatabaseResourceGroups, ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest, ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsResponse
+            # AggregateIssueStats provides database resource issues statistics.
+            rpc :AggregateIssueStats, ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest, ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsResponse
           end
 
           Stub = Service.rpc_stub_class

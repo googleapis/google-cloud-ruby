@@ -23,7 +23,6 @@ module Google
       module V1beta
         # MachineConfig describes the configuration of a machine specific to a Database
         # Resource.
-        # NextID: 5
         # @!attribute [rw] memory_size_bytes
         #   @return [::Integer]
         #     Memory size in bytes.
