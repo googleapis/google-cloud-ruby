@@ -164,6 +164,19 @@ module Google
             rpc :UpdateQuotaRule, ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest, ::Google::Longrunning::Operation
             # Deletes a quota rule.
             rpc :DeleteQuotaRule, ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest, ::Google::Longrunning::Operation
+            # Restore files from a backup to a volume.
+            rpc :RestoreBackupFiles, ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest, ::Google::Longrunning::Operation
+            # Returns a list of host groups in a `location`. Use `-` as location to list
+            # host groups across all locations.
+            rpc :ListHostGroups, ::Google::Cloud::NetApp::V1::ListHostGroupsRequest, ::Google::Cloud::NetApp::V1::ListHostGroupsResponse
+            # Returns details of the specified host group.
+            rpc :GetHostGroup, ::Google::Cloud::NetApp::V1::GetHostGroupRequest, ::Google::Cloud::NetApp::V1::HostGroup
+            # Creates a new host group.
+            rpc :CreateHostGroup, ::Google::Cloud::NetApp::V1::CreateHostGroupRequest, ::Google::Longrunning::Operation
+            # Updates an existing host group.
+            rpc :UpdateHostGroup, ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest, ::Google::Longrunning::Operation
+            # Deletes a host group.
+            rpc :DeleteHostGroup, ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

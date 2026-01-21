@@ -6178,6 +6178,594 @@ module Google
             end
 
             ##
+            # Restore files from a backup to a volume.
+            #
+            # @overload restore_backup_files(request, options = nil)
+            #   Pass arguments to `restore_backup_files` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload restore_backup_files(name: nil, backup: nil, file_list: nil, restore_destination_path: nil)
+            #   Pass arguments to `restore_backup_files` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The volume resource name, in the format
+            #     `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+            #   @param backup [::String]
+            #     Required. The backup resource name, in the format
+            #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}/backups/{backup_id}`
+            #   @param file_list [::Array<::String>]
+            #     Required. List of files to be restored, specified by their absolute path in
+            #     the source volume.
+            #   @param restore_destination_path [::String]
+            #     Optional. Absolute directory path in the destination volume. This is
+            #     required if the `file_list` is provided.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new
+            #
+            #   # Call the restore_backup_files method.
+            #   result = client.restore_backup_files request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def restore_backup_files request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.restore_backup_files.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.restore_backup_files.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.restore_backup_files.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :restore_backup_files, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns a list of host groups in a `location`. Use `-` as location to list
+            # host groups across all locations.
+            #
+            # @overload list_host_groups(request, options = nil)
+            #   Pass arguments to `list_host_groups` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::ListHostGroupsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::ListHostGroupsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_host_groups(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_host_groups` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListHostGroupsRequest
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, the server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. Filter to apply to the request.
+            #   @param order_by [::String]
+            #     Optional. Hint for how to order the results
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::HostGroup>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::HostGroup>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::ListHostGroupsRequest.new
+            #
+            #   # Call the list_host_groups method.
+            #   result = client.list_host_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetApp::V1::HostGroup.
+            #     p item
+            #   end
+            #
+            def list_host_groups request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ListHostGroupsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_host_groups.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_host_groups.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_host_groups.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :list_host_groups, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @net_app_stub, :list_host_groups, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns details of the specified host group.
+            #
+            # @overload get_host_group(request, options = nil)
+            #   Pass arguments to `get_host_group` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::GetHostGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::GetHostGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_host_group(name: nil)
+            #   Pass arguments to `get_host_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the host group.
+            #     Format:
+            #     `projects/{project_number}/locations/{location_id}/hostGroups/{host_group_id}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetApp::V1::HostGroup]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetApp::V1::HostGroup]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::GetHostGroupRequest.new
+            #
+            #   # Call the get_host_group method.
+            #   result = client.get_host_group request
+            #
+            #   # The returned object is of type Google::Cloud::NetApp::V1::HostGroup.
+            #   p result
+            #
+            def get_host_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::GetHostGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_host_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_host_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_host_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :get_host_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new host group.
+            #
+            # @overload create_host_group(request, options = nil)
+            #   Pass arguments to `create_host_group` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::CreateHostGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::CreateHostGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_host_group(parent: nil, host_group: nil, host_group_id: nil)
+            #   Pass arguments to `create_host_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for CreateHostGroupRequest
+            #   @param host_group [::Google::Cloud::NetApp::V1::HostGroup, ::Hash]
+            #     Required. Fields of the host group to create.
+            #   @param host_group_id [::String]
+            #     Required. ID of the host group to create. Must be unique within the parent
+            #     resource. Must contain only letters, numbers, and hyphen, with
+            #     the first character a letter or underscore, the last a letter or underscore
+            #     or a number, and a 63 character maximum.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::CreateHostGroupRequest.new
+            #
+            #   # Call the create_host_group method.
+            #   result = client.create_host_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_host_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::CreateHostGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_host_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_host_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_host_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :create_host_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates an existing host group.
+            #
+            # @overload update_host_group(request, options = nil)
+            #   Pass arguments to `update_host_group` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::UpdateHostGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::UpdateHostGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_host_group(host_group: nil, update_mask: nil)
+            #   Pass arguments to `update_host_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param host_group [::Google::Cloud::NetApp::V1::HostGroup, ::Hash]
+            #     Required. The host group to update.
+            #     The host group's `name` field is used to identify the host group.
+            #     Format:
+            #     `projects/{project_number}/locations/{location_id}/hostGroups/{host_group_id}`.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The list of fields to update.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new
+            #
+            #   # Call the update_host_group method.
+            #   result = client.update_host_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_host_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_host_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.host_group&.name
+                header_params["host_group.name"] = request.host_group.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_host_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_host_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :update_host_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a host group.
+            #
+            # @overload delete_host_group(request, options = nil)
+            #   Pass arguments to `delete_host_group` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::DeleteHostGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::DeleteHostGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_host_group(name: nil)
+            #   Pass arguments to `delete_host_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the host group.
+            #     Format:
+            #     `projects/{project_number}/locations/{location_id}/hostGroups/{host_group_id}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new
+            #
+            #   # Call the delete_host_group method.
+            #   result = client.delete_host_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_host_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_host_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_host_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_host_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :delete_host_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the NetApp API.
             #
             # This class represents the configuration for NetApp,
@@ -6660,6 +7248,36 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_quota_rule
+                ##
+                # RPC-specific configuration for `restore_backup_files`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :restore_backup_files
+                ##
+                # RPC-specific configuration for `list_host_groups`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_host_groups
+                ##
+                # RPC-specific configuration for `get_host_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_host_group
+                ##
+                # RPC-specific configuration for `create_host_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_host_group
+                ##
+                # RPC-specific configuration for `update_host_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_host_group
+                ##
+                # RPC-specific configuration for `delete_host_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_host_group
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -6783,6 +7401,18 @@ module Google
                   @update_quota_rule = ::Gapic::Config::Method.new update_quota_rule_config
                   delete_quota_rule_config = parent_rpcs.delete_quota_rule if parent_rpcs.respond_to? :delete_quota_rule
                   @delete_quota_rule = ::Gapic::Config::Method.new delete_quota_rule_config
+                  restore_backup_files_config = parent_rpcs.restore_backup_files if parent_rpcs.respond_to? :restore_backup_files
+                  @restore_backup_files = ::Gapic::Config::Method.new restore_backup_files_config
+                  list_host_groups_config = parent_rpcs.list_host_groups if parent_rpcs.respond_to? :list_host_groups
+                  @list_host_groups = ::Gapic::Config::Method.new list_host_groups_config
+                  get_host_group_config = parent_rpcs.get_host_group if parent_rpcs.respond_to? :get_host_group
+                  @get_host_group = ::Gapic::Config::Method.new get_host_group_config
+                  create_host_group_config = parent_rpcs.create_host_group if parent_rpcs.respond_to? :create_host_group
+                  @create_host_group = ::Gapic::Config::Method.new create_host_group_config
+                  update_host_group_config = parent_rpcs.update_host_group if parent_rpcs.respond_to? :update_host_group
+                  @update_host_group = ::Gapic::Config::Method.new update_host_group_config
+                  delete_host_group_config = parent_rpcs.delete_host_group if parent_rpcs.respond_to? :delete_host_group
+                  @delete_host_group = ::Gapic::Config::Method.new delete_host_group_config
 
                   yield self if block_given?
                 end
