@@ -532,6 +532,366 @@
       ]
     },
     {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_ListSingleTenantHsmInstances_sync",
+      "title": "Snippet for the list_single_tenant_hsm_instances call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#list_single_tenant_hsm_instances.",
+      "file": "hsm_management/list_single_tenant_hsm_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_single_tenant_hsm_instances",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#list_single_tenant_hsm_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesResponse",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "ListSingleTenantHsmInstances",
+          "full_name": "google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstances",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_GetSingleTenantHsmInstance_sync",
+      "title": "Snippet for the get_single_tenant_hsm_instance call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#get_single_tenant_hsm_instance.",
+      "file": "hsm_management/get_single_tenant_hsm_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_single_tenant_hsm_instance",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#get_single_tenant_hsm_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::SingleTenantHsmInstance",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "GetSingleTenantHsmInstance",
+          "full_name": "google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstance",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_CreateSingleTenantHsmInstance_sync",
+      "title": "Snippet for the create_single_tenant_hsm_instance call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#create_single_tenant_hsm_instance.",
+      "file": "hsm_management/create_single_tenant_hsm_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_single_tenant_hsm_instance",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#create_single_tenant_hsm_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateSingleTenantHsmInstance",
+          "full_name": "google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstance",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_CreateSingleTenantHsmInstanceProposal_sync",
+      "title": "Snippet for the create_single_tenant_hsm_instance_proposal call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#create_single_tenant_hsm_instance_proposal.",
+      "file": "hsm_management/create_single_tenant_hsm_instance_proposal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_single_tenant_hsm_instance_proposal",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#create_single_tenant_hsm_instance_proposal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateSingleTenantHsmInstanceProposal",
+          "full_name": "google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposal",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_ApproveSingleTenantHsmInstanceProposal_sync",
+      "title": "Snippet for the approve_single_tenant_hsm_instance_proposal call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#approve_single_tenant_hsm_instance_proposal.",
+      "file": "hsm_management/approve_single_tenant_hsm_instance_proposal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "approve_single_tenant_hsm_instance_proposal",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#approve_single_tenant_hsm_instance_proposal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalResponse",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "ApproveSingleTenantHsmInstanceProposal",
+          "full_name": "google.cloud.kms.v1.HsmManagement.ApproveSingleTenantHsmInstanceProposal",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_ExecuteSingleTenantHsmInstanceProposal_sync",
+      "title": "Snippet for the execute_single_tenant_hsm_instance_proposal call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#execute_single_tenant_hsm_instance_proposal.",
+      "file": "hsm_management/execute_single_tenant_hsm_instance_proposal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_single_tenant_hsm_instance_proposal",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#execute_single_tenant_hsm_instance_proposal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "ExecuteSingleTenantHsmInstanceProposal",
+          "full_name": "google.cloud.kms.v1.HsmManagement.ExecuteSingleTenantHsmInstanceProposal",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_GetSingleTenantHsmInstanceProposal_sync",
+      "title": "Snippet for the get_single_tenant_hsm_instance_proposal call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#get_single_tenant_hsm_instance_proposal.",
+      "file": "hsm_management/get_single_tenant_hsm_instance_proposal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_single_tenant_hsm_instance_proposal",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#get_single_tenant_hsm_instance_proposal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "GetSingleTenantHsmInstanceProposal",
+          "full_name": "google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceProposal",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_ListSingleTenantHsmInstanceProposals_sync",
+      "title": "Snippet for the list_single_tenant_hsm_instance_proposals call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#list_single_tenant_hsm_instance_proposals.",
+      "file": "hsm_management/list_single_tenant_hsm_instance_proposals.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_single_tenant_hsm_instance_proposals",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#list_single_tenant_hsm_instance_proposals",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsResponse",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "ListSingleTenantHsmInstanceProposals",
+          "full_name": "google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstanceProposals",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_HsmManagement_DeleteSingleTenantHsmInstanceProposal_sync",
+      "title": "Snippet for the delete_single_tenant_hsm_instance_proposal call in the HsmManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::HsmManagement::Client#delete_single_tenant_hsm_instance_proposal.",
+      "file": "hsm_management/delete_single_tenant_hsm_instance_proposal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_single_tenant_hsm_instance_proposal",
+        "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client#delete_single_tenant_hsm_instance_proposal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "HsmManagement::Client",
+          "full_name": "::Google::Cloud::Kms::V1::HsmManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteSingleTenantHsmInstanceProposal",
+          "full_name": "google.cloud.kms.v1.HsmManagement.DeleteSingleTenantHsmInstanceProposal",
+          "service": {
+            "short_name": "HsmManagement",
+            "full_name": "google.cloud.kms.v1.HsmManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_sync",
       "title": "Snippet for the list_key_rings call in the KeyManagementService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_key_rings.",

@@ -19,6 +19,7 @@
 require "google/cloud/kms/v1/autokey"
 require "google/cloud/kms/v1/autokey_admin"
 require "google/cloud/kms/v1/ekm_service"
+require "google/cloud/kms/v1/hsm_management"
 require "google/cloud/kms/v1/key_management_service"
 require "google/cloud/kms/v1/version"
 
