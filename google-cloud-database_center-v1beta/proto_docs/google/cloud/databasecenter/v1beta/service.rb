@@ -309,6 +309,123 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AggregateIssueStatsRequest represents the input to the AggregateIssueStats
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent can be a project, a folder, or an organization. The search
+        #     is limited to the resources within the `scope`.
+        #
+        #     The allowed values are:
+        #
+        #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+        #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+        #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+        #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The expression to filter resources.
+        #
+        #     Supported fields are: `full_resource_name`, `resource_type`, `container`,
+        #       `product.type`, `product.engine`, `product.version`, `location`,
+        #       `labels`, `issues`, fields of availability_info,
+        #       data_protection_info,'resource_name', etc.
+        #
+        #     The expression is a list of zero or more restrictions combined via logical
+        #     operators `AND` and `OR`. When `AND` and `OR` are both used in the
+        #     expression, parentheses must be appropriately used to group the
+        #     combinations.
+        #
+        #     Example: location="us-east1"
+        #     Example: container="projects/123" OR container="projects/456"
+        #     Example: (container="projects/123" OR
+        #               container="projects/456") AND location="us-east1"
+        # @!attribute [rw] signal_type_groups
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup>]
+        #     Optional. Lists of signal types that are issues.
+        # @!attribute [rw] baseline_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The baseline date w.r.t. which the delta counts are calculated.
+        #     If not set, delta counts are not included in the response and the response
+        #     indicates the current state of the fleet.
+        class AggregateIssueStatsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message containing one of more group of relevant health issues
+        # for database resources.
+        # @!attribute [rw] issue_group_stats
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::IssueGroupStats>]
+        #     List of issue group stats where each group contains stats for resources
+        #     having a particular combination of relevant issues.
+        # @!attribute [rw] total_resources_count
+        #   @return [::Integer]
+        #     Total count of the resources filtered in based on the user given filter.
+        # @!attribute [rw] total_resource_groups_count
+        #   @return [::Integer]
+        #     Total count of the resource filtered in based on the user given filter.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. List of unreachable regions from where data could not be
+        #     retrieved.
+        class AggregateIssueStatsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # IssueGroupStats refers to stats for a particulare combination of relevant
+        # health issues of database resources.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Database resource level health card name. This will corresponds to one of
+        #     the requested input group names.
+        # @!attribute [rw] resource_groups_count
+        #   @return [::Integer]
+        #     Total count of the groups of resources returned by the filter that
+        #     also have one or more resources for which any of the specified issues
+        #     are applicable.
+        # @!attribute [rw] resources_count
+        #   @return [::Integer]
+        #     Total count of resources returned by the filter for which any of the
+        #     specified issues are applicable.
+        # @!attribute [rw] healthy_resource_groups_count
+        #   @return [::Integer]
+        #     The number of resource groups from the total groups as defined above
+        #     that are healthy with respect to all of the specified issues.
+        # @!attribute [rw] healthy_resources_count
+        #   @return [::Integer]
+        #     The number of resources from the total defined above in field
+        #     total_resources_count that are healthy with respect to all of the specified
+        #     issues.
+        # @!attribute [rw] issue_stats
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::IssueStats>]
+        #     List of issues stats containing count of resources having particular issue
+        #     category.
+        class IssueGroupStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # IssueStats holds stats for a particular signal category.
+        # @!attribute [rw] signal_type
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::SignalType]
+        #     Type of signal which is an issue.
+        # @!attribute [rw] resource_count
+        #   @return [::Integer]
+        #     Number of resources having issues of a given type.
+        # @!attribute [rw] delta_details
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::DeltaDetails]
+        #     Optional. Delta counts and details of resources for which issue was raised
+        #     or fixed.
+        # @!attribute [rw] issue_severity
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::IssueSeverity]
+        #     Severity of the issue.
+        class IssueStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Label is a key value pair applied to a resource.
         # @!attribute [rw] key
         #   @return [::String]

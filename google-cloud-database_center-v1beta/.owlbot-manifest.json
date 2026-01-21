@@ -53,6 +53,7 @@
     "proto_docs/google/type/timeofday.rb",
     "snippets/Gemfile",
     "snippets/database_center/aggregate_fleet.rb",
+    "snippets/database_center/aggregate_issue_stats.rb",
     "snippets/database_center/query_database_resource_groups.rb",
     "snippets/database_center/query_products.rb",
     "snippets/snippet_metadata_google.cloud.databasecenter.v1beta.json",

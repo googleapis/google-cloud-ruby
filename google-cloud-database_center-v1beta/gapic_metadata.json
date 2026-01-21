@@ -24,6 +24,11 @@
               "methods": [
                 "query_database_resource_groups"
               ]
+            },
+            "AggregateIssueStats": {
+              "methods": [
+                "aggregate_issue_stats"
+              ]
             }
           }
         }
