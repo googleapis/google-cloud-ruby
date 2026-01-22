@@ -65,6 +65,18 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientPathsTest < Minitest
     end
   end
 
+  def test_subnetwork_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.subnetwork_path project: "value0", region: "value1", subnetwork: "value2"
+      assert_equal "projects/value0/regions/value1/subnetworks/value2", path
+    end
+  end
+
   def test_topic_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
