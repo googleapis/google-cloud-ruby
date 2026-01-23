@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.2 (2026-01-23)
+
+#### Documentation
+
+* Correct typo in comment for field `quota_id` ([#32374](https://github.com/googleapis/google-cloud-ruby/issues/32374)) 
+
 ### 0.6.1 (2025-10-27)
 
 #### Documentation
