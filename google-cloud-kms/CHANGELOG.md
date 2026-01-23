@@ -1,5 +1,14 @@
 # Release History
 
+### 2.10.0 (2026-01-23)
+
+#### Features
+
+* add the SingleTenantHsm functionality including the management API and resource types ([#32371](https://github.com/googleapis/google-cloud-ruby/issues/32371)) 
+#### Documentation
+
+* A comment for field `crypto_key_backend` in message `.google.cloud.kms.v1.CryptoKey` is expanded to include SingleTenantHsmInstances 
+
 ### 2.9.3 (2025-09-12)
 
 #### Documentation
