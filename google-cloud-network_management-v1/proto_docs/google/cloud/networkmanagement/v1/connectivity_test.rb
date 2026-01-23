@@ -158,6 +158,10 @@ module Google
         #   @return [::String]
         #     A [Redis Cluster](https://cloud.google.com/memorystore/docs/cluster) URI.
         #     Applicable only to destination endpoint.
+        # @!attribute [rw] gke_pod
+        #   @return [::String]
+        #     A [GKE Pod](https://cloud.google.com/kubernetes-engine/docs/concepts/pod)
+        #     URI.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudFunctionEndpoint]
         #     A [Cloud Function](https://cloud.google.com/functions). Applicable only to
@@ -174,23 +178,18 @@ module Google
         #     Applicable only to source endpoint.
         # @!attribute [rw] network
         #   @return [::String]
-        #     A VPC network URI.
+        #     A VPC network URI. For source endpoints, used according to the
+        #     `network_type`. For destination endpoints, used only when the source is an
+        #     external IP address endpoint, and the destination is an internal IP address
+        #     endpoint.
         # @!attribute [rw] network_type
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::NetworkType]
-        #     Type of the network where the endpoint is located.
-        #     Applicable only to source endpoint, as destination network type can be
-        #     inferred from the source.
+        #     For source endpoints, type of the network where the endpoint is located.
+        #     Not relevant for destination endpoints.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Project ID where the endpoint is located.
-        #     The project ID can be derived from the URI if you provide a endpoint or
-        #     network URI.
-        #     The following are two cases where you may need to provide the project ID:
-        #     1. Only the IP address is specified, and the IP address is within a Google
-        #     Cloud project.
-        #     2. When you are using Shared VPC and the IP address that you provide is
-        #     from the service project. In this case, the network that the IP address
-        #     resides in is defined in the host project.
+        #     For source endpoints, endpoint project ID. Used according to the
+        #     `network_type`. Not relevant for destination endpoints.
         class Endpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -232,21 +231,37 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The type definition of an endpoint's network. Use one of the
-          # following choices:
+          # The type of the network of the IP address endpoint. Relevant for the source
+          # IP address endpoints.
           module NetworkType
-            # Default type if unspecified.
+            # Unspecified. The test will analyze all possible IP address locations.
+            # This might take longer and produce inaccurate or ambiguous results, so
+            # prefer specifying an explicit network type.
+            #
+            # The `project_id` field should be set to the project where the GCP
+            # endpoint is located, or where the non-GCP endpoint should be reachable
+            # from (via routes to non-GCP networks). The project might also be inferred
+            # from the Connectivity Test project or other projects referenced in the
+            # request.
             NETWORK_TYPE_UNSPECIFIED = 0
 
-            # A network hosted within Google Cloud.
-            # To receive more detailed output, specify the URI for the source or
-            # destination network.
+            # A VPC network. Should be used for internal IP addresses in VPC networks.
+            # The `network` field should be set to the URI of this network. Only
+            # endpoints within this network will be considered.
             GCP_NETWORK = 1
 
-            # A network hosted outside of Google Cloud.
-            # This can be an on-premises network, an internet resource or a network
-            # hosted by another cloud provider.
+            # A non-GCP network (for example, an on-premises network or another cloud
+            # provider network). Should be used for internal IP addresses outside of
+            # Google Cloud. The `network` field should be set to the URI of the VPC
+            # network containing a corresponding Cloud VPN tunnel, Cloud Interconnect
+            # VLAN attachment, or a router appliance instance. Only endpoints reachable
+            # from the provided VPC network via the routes to non-GCP networks will be
+            # considered.
             NON_GCP_NETWORK = 2
+
+            # Internet. Should be used for internet-routable external IP addresses or
+            # IP addresses for global Google APIs and services.
+            INTERNET = 3
           end
 
           # Type of the target of a forwarding rule.

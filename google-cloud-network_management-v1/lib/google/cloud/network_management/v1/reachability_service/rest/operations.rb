@@ -854,7 +854,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}/operations",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/locations/global/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -882,7 +882,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/locations/global/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -910,7 +910,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/locations/global/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -940,7 +940,7 @@ module Google
                                                           uri_template: "/v1/{name}:cancel",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/locations/global/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
