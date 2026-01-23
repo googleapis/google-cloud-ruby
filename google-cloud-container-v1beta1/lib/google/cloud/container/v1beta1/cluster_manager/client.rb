@@ -699,7 +699,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil, boot_disk: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil, boot_disk: nil, node_drain_config: nil, consolidation_delay: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -834,6 +834,12 @@ module Google
             #     The desired boot disk config for nodes in the node pool.
             #     Initiates an upgrade operation that migrates the nodes in the
             #     node pool to the specified boot disk config.
+            #   @param node_drain_config [::Google::Cloud::Container::V1beta1::NodePool::NodeDrainConfig, ::Hash]
+            #     The desired node drain configuration for nodes in the node pool.
+            #   @param consolidation_delay [::Google::Protobuf::Duration, ::Hash]
+            #     Consolidation delay defines duration after which the Cluster Autoscaler can
+            #     scale down underutilized nodes. If not set, nodes are scaled down by
+            #     default behavior, i.e. according to the chosen autoscaling profile.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
@@ -4097,6 +4103,95 @@ module Google
             end
 
             ##
+            # CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
+            # performing the step two upgrade for a specific cluster.
+            #
+            # @overload complete_control_plane_upgrade(request, options = nil)
+            #   Pass arguments to `complete_control_plane_upgrade` via a request object, either of type
+            #   {::Google::Cloud::Container::V1beta1::CompleteControlPlaneUpgradeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1beta1::CompleteControlPlaneUpgradeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload complete_control_plane_upgrade(name: nil, version: nil)
+            #   Pass arguments to `complete_control_plane_upgrade` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name (project, location, cluster) of the cluster to complete upgrade.
+            #     Specified in the format `projects/*/locations/*/clusters/*`.
+            #   @param version [::String]
+            #     API request version that initiates this operation.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::CompleteControlPlaneUpgradeRequest.new
+            #
+            #   # Call the complete_control_plane_upgrade method.
+            #   result = client.complete_control_plane_upgrade request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
+            def complete_control_plane_upgrade request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::CompleteControlPlaneUpgradeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.complete_control_plane_upgrade.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.complete_control_plane_upgrade.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.complete_control_plane_upgrade.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :complete_control_plane_upgrade, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ClusterManager API.
             #
             # This class represents the configuration for ClusterManager,
@@ -4464,6 +4559,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :fetch_node_pool_upgrade_info
+                ##
+                # RPC-specific configuration for `complete_control_plane_upgrade`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :complete_control_plane_upgrade
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4541,6 +4641,8 @@ module Google
                   @fetch_cluster_upgrade_info = ::Gapic::Config::Method.new fetch_cluster_upgrade_info_config
                   fetch_node_pool_upgrade_info_config = parent_rpcs.fetch_node_pool_upgrade_info if parent_rpcs.respond_to? :fetch_node_pool_upgrade_info
                   @fetch_node_pool_upgrade_info = ::Gapic::Config::Method.new fetch_node_pool_upgrade_info_config
+                  complete_control_plane_upgrade_config = parent_rpcs.complete_control_plane_upgrade if parent_rpcs.respond_to? :complete_control_plane_upgrade
+                  @complete_control_plane_upgrade = ::Gapic::Config::Method.new complete_control_plane_upgrade_config
 
                   yield self if block_given?
                 end

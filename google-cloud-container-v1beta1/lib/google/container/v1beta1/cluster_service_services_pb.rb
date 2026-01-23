@@ -140,6 +140,9 @@ module Google
             rpc :FetchClusterUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchClusterUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::ClusterUpgradeInfo
             # Fetch upgrade information of a specific nodepool.
             rpc :FetchNodePoolUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchNodePoolUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::NodePoolUpgradeInfo
+            # CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
+            # performing the step two upgrade for a specific cluster.
+            rpc :CompleteControlPlaneUpgrade, ::Google::Cloud::Container::V1beta1::CompleteControlPlaneUpgradeRequest, ::Google::Cloud::Container::V1beta1::Operation
           end
 
           Stub = Service.rpc_stub_class
