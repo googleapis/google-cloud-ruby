@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.0 (2026-01-23)
+
+#### Features
+
+* Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#32370](https://github.com/googleapis/google-cloud-ruby/issues/32370)) 
+
 ### 1.10.1 (2025-10-27)
 
 #### Documentation
