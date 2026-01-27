@@ -23,6 +23,6 @@ else
 end
 
 group :test do
-  gem "minitest", "~> 5.14"
+  gem "minitest", ">= 5.14", "< 7"
   gem "rake", ">= 12.0"
 end
