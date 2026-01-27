@@ -157,7 +157,7 @@ The Google Cloud Ruby library supports two transports: REST (HTTP/1.1) and gRPC.
 
 ### Installation & Setup
 
-Unlike PHP (which requires PECL), Ruby handles these extensions via Gems. If you are using `google-cloud-*` gems, these dependencies are usually installed automatically.
+Ruby handles extensions via Gems. If you are using `google-cloud-*` gems, these dependencies are usually installed automatically.
 
 **Gemfile:**
 
@@ -223,7 +223,9 @@ end
 
 ### gRPC Bidirectional Streaming
 
-**Crucial Difference:** unlike PHP's imperative `write()` / `read()` loop, Ruby utilizes **Enumerators**. You pass an *Input Enumerator* (containing your requests) to the method, and the method returns an *Output Enumerator* (containing the server responses).
+Ruby utilizes **Enumerators** for gRPC Bidirectional streaming. Pass an *Input Enumerator*
+(containing your requests) to the method, and the method returns an *Output Enumerator*
+(containing the server responses).
 
 #### Concept:
 

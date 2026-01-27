@@ -64,7 +64,7 @@ storage = Google::Cloud::Storage.new(
 
 ## 5. Configuring Retries and Timeouts
 
-Ruby uses **Seconds** (Float/Integer) for time values, whereas PHP uses Milliseconds.
+Ruby uses **Seconds** (Float/Integer) for time values.
 
 ### Per-Call Configuration (Recommended)
 
@@ -111,7 +111,7 @@ client.list_secrets request, options
 
 You can configure defaults globally when initializing the low-level GAPIC client, though per-call is preferred for specific logic.
 
-```php
+```ruby
 require "google/cloud/pubsub"
 
 # Create a client with a custom timeout for all requests
