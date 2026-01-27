@@ -20,7 +20,7 @@ gem "google-cloud-ai_platform", path: master ? "../../google-cloud-ai_platform" 
 
 group :test do
   gem "google-style", "~> 1.26.2"
-  gem "minitest", "~> 5.17"
+  gem "minitest", ">= 5.17", "< 7"
   gem "minitest-focus", "~> 1.4"
   gem "minitest-rg", "~> 5.2"
   gem "rake"

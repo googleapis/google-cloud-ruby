@@ -27,7 +27,7 @@ gem "google-cloud-pubsub", "~> 3.0"
 group :test do
   gem "google-style", "~> 1.25.1"
   gem "irb"
-  gem "minitest", "~> 5.14"
+  gem "minitest", ">= 5.14", "< 7"
   gem "minitest-focus", "~> 1.1"
   gem "rake", ">= 12.0"
 end

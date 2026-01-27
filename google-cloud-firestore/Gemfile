@@ -21,7 +21,7 @@ end
 
 gem "autotest-suffix", "~> 1.1"
 gem "google-style", "~> 1.30.1"
-gem "minitest", "~> 5.25"
+gem "minitest", ">= 5.25", "< 7"
 gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.4"
 gem "minitest-rg", "~> 5.3"
