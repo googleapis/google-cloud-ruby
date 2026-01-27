@@ -71,6 +71,8 @@
   "google-cloud-api_keys+FILLER": "0.0.0",
   "google-cloud-api_keys-v2": "0.11.1",
   "google-cloud-api_keys-v2+FILLER": "0.0.0",
+  "google-cloud-api_registry": "0.0.1",
+  "google-cloud-api_registry+FILLER": "0.0.0",
   "google-cloud-api_registry-v1beta": "0.0.1",
   "google-cloud-api_registry-v1beta+FILLER": "0.0.0",
   "google-cloud-apigee_connect": "1.5.2",

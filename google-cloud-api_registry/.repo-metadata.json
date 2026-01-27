@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudapiregistry.googleapis.com",
+    "api_shortname": "cloudapiregistry",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-api_registry/latest",
+    "distribution_name": "google-cloud-api_registry",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudapiregistry",
+    "name_pretty": "Cloud API Registry API",
+    "product_documentation": "https://docs.cloud.google.com/api-registry/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-api_registry is the official client library for the Cloud API Registry API.",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/api-registry/docs/overview",
+    "library_type": "GAPIC_MANUAL"
+}
