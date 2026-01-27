@@ -244,6 +244,25 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
       mock.verify
     end
   end
+  
+  it "creates a file with checksum: :crc32c by default" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world 123"
+      tmpfile.rewind
+
+      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
+
+      bucket.service.mocked_service = mock
+      bucket.create_file tmpfile, new_file_name
+
+      mock.verify
+    end
+  end
 
   it "creates a file with attributes" do
     new_file_name = random_file_path
@@ -279,7 +298,6 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world"
       tmpfile.rewind
-
       metadata = {
         "player" => "Bob",
         score: 10
@@ -340,9 +358,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     new_file_name = random_file_path
 
     Tempfile.create ["google-cloud", ".txt"] do |tmpfile|
+      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
+        [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
 
       bucket_user_project.service.mocked_service = mock
 
@@ -1091,6 +1110,9 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
                       content_encoding: nil, content_language: nil,
                       content_type: nil, crc32c: nil, md5: nil, metadata: nil,
                       storage_class: nil
+    # Set crc32c if both md5 and crc32c are not provided
+    crc32c = set_crc32c_as_default(md5, crc32c)
+
     params = {
       cache_control: cache_control, content_type: content_type,
       content_disposition: content_disposition, md5_hash: md5,

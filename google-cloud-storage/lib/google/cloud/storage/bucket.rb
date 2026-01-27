@@ -1639,11 +1639,11 @@ module Google
         #   * `md5` - Calculate and provide a checksum using the MD5 hash.
         #   * `crc32c` - Calculate and provide a checksum using the CRC32c hash.
         #   * `all` - Calculate and provide checksums for all available verifications.
-        #
-        #   Optional. The default is `nil`. Do not provide if also providing a
+        #   Optional. The default is `crc32c`. Do not provide if also providing a
         #   corresponding `crc32c` or `md5` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
         #   for more information.
+        #
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
         #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
@@ -1805,6 +1805,8 @@ module Google
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
           raise ArgumentError, "must provide path" if path.nil?
+          # setting crc32c as default checksum algorithm if none provided for integrity check
+          checksum = :crc32c if checksum.nil? && crc32c.nil? && md5.nil?
           crc32c = crc32c_for file, checksum, crc32c
           md5 = md5_for file, checksum, md5
 
