@@ -1642,6 +1642,7 @@ module Google
         #   Optional. The default is `crc32c`. Do not provide if also providing a
         #   corresponding `crc32c` or `md5` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
+        #   for more information.
         #
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
