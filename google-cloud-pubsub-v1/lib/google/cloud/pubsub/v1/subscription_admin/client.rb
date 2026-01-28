@@ -429,6 +429,8 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+            #     using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -513,7 +515,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param subscription [::String]
-            #     Required. Identifier. The name of the subscription to get.
+            #     Required. The name of the subscription to get.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -689,8 +691,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. Identifier. The name of the project in which to list
-            #     subscriptions. Format is `projects/{project-id}`.
+            #     Required. The name of the project in which to list subscriptions.
+            #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of subscriptions to return.
             #   @param page_token [::String]
@@ -791,7 +793,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param subscription [::String]
-            #     Required. Identifier. The subscription to delete.
+            #     Required. The subscription to delete.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1359,7 +1361,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param snapshot [::String]
-            #     Required. Identifier. The name of the snapshot to get.
+            #     Required. The name of the snapshot to get.
             #     Format is `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1449,7 +1451,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. Identifier. The name of the project in which to list snapshots.
+            #     Required. The name of the project in which to list snapshots.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of snapshots to return.
@@ -1562,10 +1564,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Identifier. User-provided name for this snapshot. If the name is
-            #     not provided in the request, the server will assign a random name for this
-            #     snapshot on the same project as the subscription. Note that for REST API
-            #     requests, you must specify a name.  See the [resource name
+            #     Required. User-provided name for this snapshot. If the name is not provided
+            #     in the request, the server will assign a random name for this snapshot on
+            #     the same project as the subscription. Note that for REST API requests, you
+            #     must specify a name.  See the [resource name
             #     rules](https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
             #     Format is `projects/{project}/snapshots/{snap}`.
             #   @param subscription [::String]
@@ -1586,6 +1588,8 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+            #     using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]
@@ -1771,7 +1775,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param snapshot [::String]
-            #     Required. Identifier. The name of the snapshot to delete.
+            #     Required. The name of the snapshot to delete.
             #     Format is `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
