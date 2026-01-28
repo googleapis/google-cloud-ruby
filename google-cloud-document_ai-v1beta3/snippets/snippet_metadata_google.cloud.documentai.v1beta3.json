@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-document_ai-v1beta3",
-    "version": "0.46.1",
+    "version": "0.46.2",
     "language": "RUBY",
     "apis": [
       {
