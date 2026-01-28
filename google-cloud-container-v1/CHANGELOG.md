@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.0 (2026-01-28)
+
+#### Features
+
+* Add SwapConfig to enable and configure swap memory for node pools ([#32388](https://github.com/googleapis/google-cloud-ruby/issues/32388)) 
+
 ### 1.11.1 (2025-10-27)
 
 #### Documentation
