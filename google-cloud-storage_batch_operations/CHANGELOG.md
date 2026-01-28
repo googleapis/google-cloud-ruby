@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.2.0 (2026-01-13)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response ([#32325](https://github.com/googleapis/google-cloud-ruby/issues/32325)) 
+* update min_speaker_count and max_speaker_count to be optional 
+
 ### 0.1.2 (2025-09-12)
 
 #### Documentation
