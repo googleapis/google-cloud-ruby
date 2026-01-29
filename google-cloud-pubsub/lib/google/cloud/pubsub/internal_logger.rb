@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 require "logger"
-require "google/logging/google_sdk_logger_delegator"
+
 require "google/cloud/config"
 
 module Google
@@ -20,23 +20,20 @@ module Google
     module PubSub
       ##
       # @private
-      class Logging
+      class InternalLogger
         LOG_NAME = "pubsub".freeze
         VALID_LOG_LEVELS = [:debug, :info, :warn, :error, :fatal].freeze
         private_constant :VALID_LOG_LEVELS, :LOG_NAME
 
         ##
         # @private
-        def self.create logger
-          new logger
-        end
-
-        ##
-        # @private
         # rubocop:disable Naming/BlockForwarding
         def log level, subtag, &message_block
           return unless VALID_LOG_LEVELS.include?(level) && block_given?
-          @logging_delegator.public_send(level, "#{LOG_NAME}:#{subtag}", &message_block)
+          # Only log if the logger is explicitly tagged for 'pubsub'.
+          return unless @logger && @logger.progname == LOG_NAME
+
+          @logger.public_send(level, "#{LOG_NAME}:#{subtag}", &message_block)
         end
         # rubocop:enable Naming/BlockForwarding
 
@@ -71,7 +68,7 @@ module Google
         private
 
         def initialize logger
-          @logging_delegator = Google::Logging::GoogleSdkLoggerDelegator.new LOG_NAME, logger
+          @logger = logger || Logger.new(nil)
         end
       end
     end

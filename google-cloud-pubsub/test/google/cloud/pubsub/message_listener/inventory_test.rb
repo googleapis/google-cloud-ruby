@@ -219,7 +219,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
   it "removes expired items" do
     logging_mock = Minitest::Mock.new
     logging_mock.expect :log_expiry, nil, [Array]
-    service_mock = OpenStruct.new logging: logging_mock
+    service_mock = OpenStruct.new logger: logging_mock
     listener_mock = OpenStruct.new service: service_mock
     stream_mock = OpenStruct.new subscriber: listener_mock
 

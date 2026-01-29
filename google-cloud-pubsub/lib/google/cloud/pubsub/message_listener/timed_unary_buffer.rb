@@ -320,7 +320,7 @@ module Google
                              reason
                            end
               requests[:acknowledge].each do |req|
-                @subscriber.service.logging.log_batch "ack-batch", new_reason, "ack", req.ack_ids.length, req.to_proto.bytesize
+                @subscriber.service.logger.log_batch "ack-batch", new_reason, "ack", req.ack_ids.length, req.to_proto.bytesize
               end
             end
             requests[:modify_ack_deadline] =
@@ -329,7 +329,7 @@ module Google
                 type = mod_deadline.zero? ? "nack" : "modack"
                 new_reason = mod_ack_reqs.length > 1 ? "#{reason} and partitioned for exceeding max bytes" : reason
                 mod_ack_reqs.each do |req|
-                  @subscriber.service.logging.log_batch "ack-batch", new_reason, type, req.ack_ids.length, req.to_proto.bytesize
+                  @subscriber.service.logger.log_batch "ack-batch", new_reason, type, req.ack_ids.length, req.to_proto.bytesize
                 end
                 mod_ack_reqs
               end.flatten

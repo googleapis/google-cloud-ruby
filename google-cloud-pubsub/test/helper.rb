@@ -109,8 +109,8 @@ class MockPubsub < Minitest::Spec
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:pubsub) do
     logger = Google::Cloud.configure.pubsub.logger || Logger.new(STDOUT)
-    logging = Google::Cloud::PubSub::Logging.create logger
-    service = Google::Cloud::PubSub::Service.new project, credentials, logging: logging
+    internal_logger = Google::Cloud::PubSub::InternalLogger.new logger
+    service = Google::Cloud::PubSub::Service.new project, credentials, logger: internal_logger
     Google::Cloud::PubSub::Project.new service
   end
 

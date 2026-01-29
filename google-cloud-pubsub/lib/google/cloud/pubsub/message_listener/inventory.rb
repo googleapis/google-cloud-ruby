@@ -86,7 +86,7 @@ module Google
               extension_time = Time.new - extension
               expired, keep = @inventory.partition { |_ack_id, item| item.pulled_at < extension_time }
               @inventory = keep.to_h
-              stream.subscriber.service.logging.log_expiry expired
+              stream.subscriber.service.logger.log_expiry expired
               @wait_cond.broadcast
             end
           end

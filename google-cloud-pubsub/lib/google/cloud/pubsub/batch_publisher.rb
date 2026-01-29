@@ -122,7 +122,7 @@ module Google
           grpc = service.publish topic_name,
                                  messages,
                                  compress: compress && total_message_bytes >= compression_bytes_threshold
-          service.logging.log_batch "publish-batch", reason, "publish", messages.count, @total_message_bytes
+          service.logger.log_batch "publish-batch", reason, "publish", messages.count, @total_message_bytes
           to_gcloud_messages Array(grpc.message_ids)
         end
       end

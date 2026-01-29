@@ -219,7 +219,7 @@ describe Google::Cloud::PubSub::Service do
   end
 
   it "should raise errors other than grpc on ack" do
-    service = Google::Cloud::PubSub::Service.new project, nil, logging: mock_logging
+    service = Google::Cloud::PubSub::Service.new project, nil, logger: mock_logging
     mocked_subscription_admin = Minitest::Mock.new
     service.mocked_subscription_admin = mocked_subscription_admin
     def mocked_subscription_admin.acknowledge_internal *args

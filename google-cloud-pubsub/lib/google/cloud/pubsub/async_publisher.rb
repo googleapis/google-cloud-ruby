@@ -379,7 +379,7 @@ module Google
               grpc = @service.publish topic_name,
                                       items.map(&:msg),
                                       compress: compress && batch.total_message_bytes >= compression_bytes_threshold
-              service.logging.log_batch "publish-batch", reason, "publish", items.count, items.sum(&:bytesize)
+              service.logger.log_batch "publish-batch", reason, "publish", items.count, items.sum(&:bytesize)
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 next unless item.callback

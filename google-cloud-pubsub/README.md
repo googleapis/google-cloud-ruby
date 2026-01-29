@@ -109,38 +109,24 @@ The following subtags are used:
 
 **WARNING:** These logs may contain message data in plaintext, which could include sensitive information. Ensure you are practicing good data hygiene with your application logs. It is recommended to enable this logging only for debugging purposes and not permanently in production.
 
-To enable logging across all of Google Cloud Ruby SDK Gems, set the `GOOGLE_SDK_RUBY_LOGGING_GEMS` environment variable to `all`.
-To enable logging for just the google-cloud-pubsub gem, set the `GOOGLE_SDK_RUBY_LOGGING_GEMS` environment variable to a comma separated string that contains `pubsub`
-To disable logging across all of Google Cloud Ruby SDK Gems, set the `GOOGLE_SDK_RUBY_LOGGING_GEMS` to `none`
-
-```sh
-export GOOGLE_SDK_RUBY_LOGGING_GEMS=pubsub
-```
-
-You can programmatically configure a custom logger. The logger can be set globally for the Pub/Sub library, or provided on a per-client basis.
-
-To set a logger globally, configure it on the `Google::Cloud` configuration object:
+To enable these debug logs, you must provide a logger with the `progname` set to `"pubsub"`.
 
 ```ruby
 require "google/cloud/pubsub"
 require "logger"
 
-# Configure a global logger for the pubsub library
-Google::Cloud.configure.pubsub.logger = Logger.new "my-app.log"
+# Create a logger and set the progname to "pubsub" to enable library-level logging
+logger = Logger.new($stdout)
+logger.progname = "pubsub"
+
+# Configure the logger globally
+Google::Cloud.configure.pubsub.logger = logger
+
+# Or provide it directly to the client
+pubsub = Google::Cloud::PubSub.new logger: logger
 ```
 
-Alternatively, you can provide a logger directly to the `PubSub` client initializer. If a logger instance is provided, it will override any globally configured logger.
-
-```ruby
-require "google/cloud/pubsub"
-require "logger"
-
-# Provide a logger directly to the client
-custom_logger = Logger.new "pubsub-client.log"
-pubsub = Google::Cloud::PubSub.new logger: custom_logger
-```
-
-If no custom logger is configured, a default logger that writes to standard output will be used.
+If the logger's `progname` is not set to `"pubsub"`, these debug logs will be suppressed, even if the logger is provided.
 
 
 ## Supported Ruby Versions

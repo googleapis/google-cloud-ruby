@@ -14,7 +14,7 @@
 
 
 require "google-cloud-pubsub"
-require "google/cloud/pubsub/logging"
+require "google/cloud/pubsub/internal_logger"
 require "google/cloud/pubsub/project"
 require "google/cloud/config"
 require "google/cloud/env"
@@ -122,12 +122,12 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        logging = Google::Cloud::PubSub::Logging.create logger
+        logger = Google::Cloud::PubSub::InternalLogger.new logger
         service = PubSub::Service.new project_id, credentials,
                                       host: endpoint,
                                       timeout: timeout,
                                       universe_domain: universe_domain,
-                                      logging: logging
+                                      logger: logger
         PubSub::Project.new service
       end
 
