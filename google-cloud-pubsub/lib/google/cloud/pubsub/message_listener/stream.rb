@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 require "google/cloud/pubsub/message_listener/sequencer"
 require "google/cloud/pubsub/message_listener/enumerator_queue"
 require "google/cloud/pubsub/message_listener/inventory"
@@ -73,7 +72,12 @@ module Google
               execution_interval: 30
             ) do
               # push empty request every 30 seconds to keep stream alive
-              push Google::Cloud::PubSub::V1::StreamingPullRequest.new unless inventory.empty?
+              unless inventory.empty?
+                subscriber.service.logging.log :info, "subscriber-streams" do
+                  "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
+                end
+                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
+              end
             end.execute
           end
 
@@ -93,6 +97,9 @@ module Google
             synchronize do
               break if @stopped
 
+              subscriber.service.logging.log :info, "subscriber-streams" do
+                "stopping stream for subscription #{@subscriber.subscription_name}"
+              end
               # Close the stream by pushing the sentinel value.
               # The unary pusher does not use the stream, so it can close here.
               @request_queue&.push self
@@ -138,8 +145,9 @@ module Google
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
+            removed_items = {}
             synchronize do
-              @inventory.remove ack_ids
+              removed_items = @inventory.remove ack_ids
               @subscriber.buffer.acknowledge ack_ids, callback
             end
 
@@ -152,8 +160,9 @@ module Google
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
+            removed_items = {}
             synchronize do
-              @inventory.remove mod_ack_ids
+              removed_items = @inventory.remove mod_ack_ids
               @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
 
@@ -215,7 +224,13 @@ module Google
           def background_run
             synchronize do
               # Don't allow a stream to restart if already stopped
-              return if @stopped
+              if @stopped
+                subscriber.service.logging.log :debug, "subscriber-streams" do
+                  "not filling stream for subscription #{@subscriber.subscription_name} because stream is already" \
+                  " stopped"
+                end
+                return
+              end
 
               @stopped = false
               @paused  = false
@@ -233,6 +248,9 @@ module Google
             # Call the StreamingPull API to get the response enumerator
             options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
             enum = @subscriber.service.streaming_pull @request_queue.each, options
+            subscriber.service.logging.log :info, "subscriber-streams" do
+              "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
+            end
 
             loop do
               synchronize do
@@ -287,13 +305,23 @@ module Google
             stop
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
-                 GRPC::Unavailable
+                 GRPC::Unavailable => e
+            status_code = e.respond_to?(:code) ? e.code : e.class.name
+            subscriber.service.logging.log :error, "subscriber-streams" do
+              "Subscriber stream for subscription #{@subscriber.subscription_name} has ended with status " \
+              "#{status_code}; will be retried."
+            end
             # Restart the stream with an incremental back for a retriable error.
-
             retry
           rescue RestartStream
+            subscriber.service.logging.log :info, "subscriber-streams" do
+              "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
+            end
             retry
           rescue StandardError => e
+            subscriber.service.logging.log :error, "subscriber-streams" do
+              "error on stream for subscription #{@subscriber.subscription_name}: #{e.inspect}"
+            end
             @subscriber.error! e
 
             retry
@@ -336,13 +364,22 @@ module Google
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, rec_msg, &method(:perform_callback_sync)
+              callback_thread_pool,
+              rec_msg,
+              &method(:perform_callback_sync)
             )
           end
 
           def perform_callback_sync rec_msg
+            subscriber.service.logging.log :info, "callback-delivery" do
+              "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) delivery to user callbacks"
+            end
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
+            subscriber.service.logging.log :info, "callback-exceptions" do
+              "message (ID #{rec_msg.message_id}, ackID #{rec_msg.ack_id}) caused a user callback exception: " \
+                "#{e.inspect}"
+            end
             @subscriber.error! e
           ensure
             release rec_msg
@@ -369,6 +406,9 @@ module Google
             return unless pause_streaming?
 
             @paused = true
+            subscriber.service.logging.log :info, "subscriber-flow-control" do
+              "subscriber for #{@subscriber.subscription_name} is client-side flow control blocked"
+            end
           end
 
           def pause_streaming?
@@ -382,6 +422,9 @@ module Google
             return unless unpause_streaming?
 
             @paused = nil
+            subscriber.service.logging.log :info, "subscriber-flow-control" do
+              "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
+            end
             # signal to the background thread that we are unpaused
             @pause_cond.broadcast
           end
