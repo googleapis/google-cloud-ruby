@@ -1,5 +1,11 @@
 # Release History
 
+### 3.2.0 (2026-01-30)
+
+#### Features
+
+* Support adhoc debug logging ([#32404](https://github.com/googleapis/google-cloud-ruby/issues/32404)) 
+
 ### 3.1.1 (2025-12-16)
 
 #### Bug Fixes
