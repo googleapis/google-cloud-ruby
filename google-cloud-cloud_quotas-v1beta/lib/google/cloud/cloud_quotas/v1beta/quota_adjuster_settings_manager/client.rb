@@ -199,7 +199,7 @@ module Google
             # Service calls
 
             ##
-            # RPC Method for updating QuotaAdjusterSettings based on the request
+            # Updates the QuotaAdjusterSettings for the specified resource.
             #
             # @overload update_quota_adjuster_settings(request, options = nil)
             #   Pass arguments to `update_quota_adjuster_settings` via a request object, either of type
@@ -290,7 +290,7 @@ module Google
             end
 
             ##
-            # RPC Method for getting QuotaAdjusterSettings based on the request
+            # Gets the QuotaAdjusterSettings for the specified resource.
             #
             # @overload get_quota_adjuster_settings(request, options = nil)
             #   Pass arguments to `get_quota_adjuster_settings` via a request object, either of type
