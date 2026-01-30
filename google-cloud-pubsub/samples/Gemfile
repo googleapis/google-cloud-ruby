@@ -37,4 +37,5 @@ group :test do
   gem "rack-test"
   gem "rake"
   gem "toys-core"
+  gem "google-logging-utils", "~>0.3.0"
 end

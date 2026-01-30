@@ -15,6 +15,7 @@
 require "helper"
 require "gapic/grpc/service_stub"
 require "google/cloud/pubsub/v1"
+require "logger"
 
 describe Google::Cloud::PubSub::Service do
   class PubSubServiceTestDummyStub
@@ -35,6 +36,20 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
+  class MockLogging
+    def log_ack_nack ack_ids, type
+      # Do nothing
+    end
+
+    def log_batch logger_name, reason, type, num_messages, total_bytes
+      # Do nothing
+    end
+
+    def log_expiry expired
+      # Do nothing
+    end
+  end
+
   let(:project) { "test" }
   let(:credentials) { :this_channel_is_insecure }
   let(:timeout) { 123.4 }
@@ -42,6 +57,7 @@ describe Google::Cloud::PubSub::Service do
   let(:endpoint_2) { "localhost:4567" }
   let(:universe_domain) { "googleapis.com" }
   let(:universe_domain_2) { "mydomain.com" }
+  let(:mock_logging) { MockLogging.new }
 
   # Values below are hardcoded in Service.
   let(:lib_name) { "gccl" }
@@ -203,13 +219,13 @@ describe Google::Cloud::PubSub::Service do
   end
 
   it "should raise errors other than grpc on ack" do
-    service = Google::Cloud::PubSub::Service.new project, nil
+    service = Google::Cloud::PubSub::Service.new project, nil, logger: mock_logging
     mocked_subscription_admin = Minitest::Mock.new
     service.mocked_subscription_admin = mocked_subscription_admin
     def mocked_subscription_admin.acknowledge_internal *args
       raise RuntimeError.new "test"
     end
-    assert_raises RuntimeError do 
+    assert_raises RuntimeError do
       service.acknowledge "sub","ack_id"
     end
   end

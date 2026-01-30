@@ -92,6 +92,43 @@ module GRPC
 end
 ```
 
+### Enabling library level logging
+
+This library includes an opt-in logging mechanism that provides detailed information about high-level operations. These logs are useful for troubleshooting and monitoring the client's behavior. When enabled, logs are tagged with subtags to indicate the operation type.
+
+The following subtags are used:
+
+*   `callback-delivery`: Logs when a message is delivered to the user-provided callback.
+*   `callback-exceptions`: Logs any exceptions raised from the user callback.
+*   `ack-nack`: Logs when a message is acknowledged (`ack`) or negatively acknowledged (`nack`).
+*   `ack-batch`: Logs the reason and size of acknowledgement batches sent to the server.
+*   `publish-batch`: Logs the reason and size of message batches sent to the server for publishing.
+*   `expiry`: Logs when a message's lease expires and it is dropped from client-side lease management.
+*   `subscriber-streams`: Logs key events in the subscriber's streaming connection, such as opening, closing, and errors.
+*   `subscriber-flow-control`: Logs when the subscriber's client-side flow control is paused or resumed.
+
+**WARNING:** These logs may contain message data in plaintext, which could include sensitive information. Ensure you are practicing good data hygiene with your application logs. It is recommended to enable this logging only for debugging purposes and not permanently in production.
+
+To enable these debug logs, you must provide a logger with the `progname` set to `"pubsub"`.
+
+```ruby
+require "google/cloud/pubsub"
+require "logger"
+
+# Create a logger and set the progname to "pubsub" to enable library-level logging
+logger = Logger.new($stdout)
+logger.progname = "pubsub"
+
+# Configure the logger globally
+Google::Cloud.configure.pubsub.logger = logger
+
+# Or provide it directly to the client
+pubsub = Google::Cloud::PubSub.new logger: logger
+```
+
+If the logger's `progname` is not set to `"pubsub"`, these debug logs will be suppressed, even if the logger is provided.
+
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 3.1+.

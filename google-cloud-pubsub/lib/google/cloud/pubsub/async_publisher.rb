@@ -157,7 +157,7 @@ module Google
             end
             batch_action = batch.add msg, callback
             if batch_action == :full
-              publish_batches!
+              publish_batches! reason: "batch full"
             elsif @published_at.nil?
               # Set initial time to now to start the background counter
               @published_at = Time.now
@@ -180,7 +180,7 @@ module Google
             break if @stopped
 
             @stopped = true
-            publish_batches! stop: true
+            publish_batches! stop: true, reason: "shutdown"
             @cond.signal
             @publish_thread_pool.shutdown
           end
@@ -234,7 +234,7 @@ module Google
         # @return [AsyncPublisher] returns self so calls can be chained.
         def flush
           synchronize do
-            publish_batches!
+            publish_batches! reason: "manual flush"
             @cond.signal
           end
 
@@ -313,7 +313,7 @@ module Google
               time_since_first_publish = Time.now - @published_at
               if time_since_first_publish > @interval
                 # interval met, flush the batches...
-                publish_batches!
+                publish_batches! reason: "interval timeout"
                 @cond.wait
               else
                 # still waiting for the interval to publish the batch...
@@ -347,28 +347,28 @@ module Google
           end
         end
 
-        def publish_batches! stop: nil
+        def publish_batches! stop: nil, reason: "unknown"
           @batches.reject! { |_ordering_key, batch| batch.empty? }
           @batches.each_value do |batch|
             ready = batch.publish! stop: stop
-            publish_batch_async @topic_name, batch if ready
+            publish_batch_async @topic_name, batch, reason: reason if ready
           end
           # Set published_at to nil to wait indefinitely
           @published_at = nil
         end
 
-        def publish_batch_async topic_name, batch
+        def publish_batch_async topic_name, batch, reason: "unknown"
           # TODO: raise unless @publish_thread_pool.running?
           return unless @publish_thread_pool.running?
 
           Concurrent::Promises.future_on(
-            @publish_thread_pool, topic_name, batch
-          ) { |t, b| publish_batch_sync t, b }
+            @publish_thread_pool, topic_name, batch, reason
+          ) { |t, b, r| publish_batch_sync t, b, reason: r }
         end
 
         # rubocop:disable Metrics/AbcSize
 
-        def publish_batch_sync topic_name, batch
+        def publish_batch_sync topic_name, batch, reason: "unknown"
           # The only batch methods that are safe to call from the loop are
           # rebalance! and reset! because they are the only methods that are
           # synchronized.
@@ -379,6 +379,7 @@ module Google
               grpc = @service.publish topic_name,
                                       items.map(&:msg),
                                       compress: compress && batch.total_message_bytes >= compression_bytes_threshold
+              service.logger.log_batch "publish-batch", reason, "publish", items.count, items.sum(&:bytesize)
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 next unless item.callback
