@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n2google/ads/datamanager/v1/experimental_field.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\";\n\x11\x45xperimentalField\x12\x12\n\x05\x66ield\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x12\n\x05value\x18\x02 \x01(\tB\x03\xe0\x41\x01\x42\xd6\x01\n\x1d\x63om.google.ads.datamanager.v1B\x16\x45xperimentalFieldProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
+descriptor_data = "\n2google/ads/datamanager/v1/experimental_field.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\";\n\x11\x45xperimentalField\x12\x12\n\x05\x66ield\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x12\n\x05value\x18\x02 \x01(\tB\x03\xe0\x41\x01\x42\xd3\x01\n\x1d\x63om.google.ads.datamanager.v1B\x16\x45xperimentalFieldProtoP\x01ZAcloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
