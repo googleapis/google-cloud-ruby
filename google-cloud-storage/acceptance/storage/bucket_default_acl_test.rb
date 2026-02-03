@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "storage_helper"
+require_relative "../storage_helper"
 
 describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   let(:bucket_name) { $bucket_names.first }
@@ -50,6 +50,12 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "updates predefined rules" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    )
     _(bucket.default_acl.readers).wont_include "allAuthenticatedUsers"
     bucket.default_acl.auth!
     _(bucket.default_acl.readers).must_include "allAuthenticatedUsers"
@@ -60,6 +66,12 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "deletes rules" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    )
     bucket.default_acl.auth!
     _(bucket.default_acl.readers).must_include "allAuthenticatedUsers"
     bucket.default_acl.delete "allAuthenticatedUsers"
@@ -106,6 +118,12 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "sets predefined ACL rules" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    ) 
     safe_gcs_execute { bucket.default_acl.authenticatedRead! }
     safe_gcs_execute { bucket.default_acl.auth! }
     safe_gcs_execute { bucket.default_acl.auth_read! }

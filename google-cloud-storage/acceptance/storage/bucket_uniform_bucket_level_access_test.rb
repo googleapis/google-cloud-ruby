@@ -107,6 +107,12 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and default object acl and object acls are preserved" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    )
     bucket.default_acl.public!
     _(bucket.default_acl.readers).must_equal ["allUsers"]
     file_default_acl = bucket.create_file StringIO.new("default_acl"), "default_acl.txt"
@@ -166,6 +172,12 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify default ACL rules" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    )
     refute bucket.policy_only?
     safe_gcs_execute { bucket.policy_only = true }
     assert bucket.policy_only?
