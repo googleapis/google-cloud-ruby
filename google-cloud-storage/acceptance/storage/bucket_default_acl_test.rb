@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "../storage_helper"
+require "storage_helper"
 
 describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   let(:bucket_name) { $bucket_names.first }

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "../storage_helper"
+require "storage_helper"
 require "net/http"
 require "uri"
 require "zlib"
@@ -681,7 +681,7 @@ describe Google::Cloud::Storage::File, :storage do
       "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
       "access prevention is enforced. See " \
       "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    # )
+    )
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
     _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
     _(uploaded.content_language).must_equal "en"
