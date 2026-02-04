@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.10.2 (2026-02-04)
+
+#### Documentation
+
+* Regenerated REST and RPC Document AI documentation to include missing changes from September 2024 to November 2025 ([#32377](https://github.com/googleapis/google-cloud-ruby/issues/32377)) 
+
 ### 1.10.1 (2025-10-27)
 
 #### Documentation
