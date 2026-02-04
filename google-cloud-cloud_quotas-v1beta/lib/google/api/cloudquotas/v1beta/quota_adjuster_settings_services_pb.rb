@@ -38,9 +38,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager'
 
-            # RPC Method for updating QuotaAdjusterSettings based on the request
+            # Updates the QuotaAdjusterSettings for the specified resource.
             rpc :UpdateQuotaAdjusterSettings, ::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest, ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettings
-            # RPC Method for getting QuotaAdjusterSettings based on the request
+            # Gets the QuotaAdjusterSettings for the specified resource.
             rpc :GetQuotaAdjusterSettings, ::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest, ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettings
           end
 
