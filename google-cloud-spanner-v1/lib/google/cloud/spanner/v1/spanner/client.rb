@@ -1985,7 +1985,8 @@ module Google
             #     a `PartitionedDml` transaction for large, partition-friendly DML
             #     operations.
             #   @param params [::Google::Protobuf::Struct, ::Hash]
-            #     Parameter names and values that bind to placeholders in the SQL string.
+            #     Optional. Parameter names and values that bind to placeholders in the SQL
+            #     string.
             #
             #     A parameter placeholder consists of the `@` character followed by the
             #     parameter name (for example, `@firstName`). Parameter names can contain
@@ -1998,9 +1999,9 @@ module Google
             #
             #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It isn't always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value. For example, values of type `BYTES` and values
-            #     of type `STRING` both appear in
+            #     Optional. It isn't always possible for Cloud Spanner to infer the right SQL
+            #     type from a JSON value. For example, values of type `BYTES` and values of
+            #     type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
             #
             #     In these cases, `param_types` can be used to specify the exact

@@ -50,6 +50,14 @@ module Google
         #     a multiplexed session. Pass the precommit token with the highest sequence
         #     number from this transaction attempt to the
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} request for this transaction.
+        # @!attribute [rw] cache_update
+        #   @return [::Google::Cloud::Spanner::V1::CacheUpdate]
+        #     Optional. A cache update expresses a set of changes the client should
+        #     incorporate into its location cache. The client should discard the changes
+        #     if they are older than the data it already has. This data can be obtained
+        #     in response to requests that included a `RoutingHint` field, but may also
+        #     be obtained by explicit location-fetching RPCs which may be added in the
+        #     future.
         class ResultSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

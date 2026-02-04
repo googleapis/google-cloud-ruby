@@ -197,8 +197,9 @@ module Google
         #     A tag used for statistics collection about this transaction.
         #     Both `request_tag` and `transaction_tag` can be specified for a read or
         #     query that belongs to a transaction.
-        #     The value of transaction_tag should be the same for all requests belonging
-        #     to the same transaction.
+        #     To enable tagging on a transaction, `transaction_tag` must be set to the
+        #     same value for all requests belonging to the same transaction, including
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
         #     If this request doesn't belong to any transaction, `transaction_tag` is
         #     ignored.
         #     Legal characters for `transaction_tag` values are all printable characters
@@ -762,7 +763,8 @@ module Google
         #     operations.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Struct]
-        #     Parameter names and values that bind to placeholders in the SQL string.
+        #     Optional. Parameter names and values that bind to placeholders in the SQL
+        #     string.
         #
         #     A parameter placeholder consists of the `@` character followed by the
         #     parameter name (for example, `@firstName`). Parameter names can contain
@@ -776,9 +778,9 @@ module Google
         #     It's an error to execute a SQL statement with unbound parameters.
         # @!attribute [rw] param_types
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Spanner::V1::Type}]
-        #     It isn't always possible for Cloud Spanner to infer the right SQL type
-        #     from a JSON value. For example, values of type `BYTES` and values
-        #     of type `STRING` both appear in
+        #     Optional. It isn't always possible for Cloud Spanner to infer the right SQL
+        #     type from a JSON value. For example, values of type `BYTES` and values of
+        #     type `STRING` both appear in
         #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
         #
         #     In these cases, `param_types` can be used to specify the exact
@@ -1169,7 +1171,12 @@ module Google
         # @!attribute [rw] commit_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     The commit timestamp of the transaction that applied this batch.
-        #     Present if `status` is `OK`, absent otherwise.
+        #     Present if status is OK and the mutation groups were applied, absent
+        #     otherwise.
+        #
+        #     For mutation groups with conditions, a status=OK and missing
+        #     commit_timestamp means that the mutation groups were not applied due to the
+        #     condition not being satisfied after evaluation.
         class BatchWriteResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
