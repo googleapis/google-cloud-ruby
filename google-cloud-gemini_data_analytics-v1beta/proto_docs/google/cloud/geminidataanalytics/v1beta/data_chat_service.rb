@@ -367,37 +367,42 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TextMessage]
         #     A direct natural language response to the user message.
         #
-        #     Note: The following fields are mutually exclusive: `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SchemaMessage]
         #     A message produced during schema resolution.
         #
-        #     Note: The following fields are mutually exclusive: `schema`, `text`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `schema`, `text`, `data`, `analysis`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::DataMessage]
         #     A message produced during data retrieval.
         #
-        #     Note: The following fields are mutually exclusive: `data`, `text`, `schema`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data`, `text`, `schema`, `analysis`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] analysis
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AnalysisMessage]
         #     A message produced during analysis.
         #
-        #     Note: The following fields are mutually exclusive: `analysis`, `text`, `schema`, `data`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `analysis`, `text`, `schema`, `data`, `chart`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] chart
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ChartMessage]
         #     A message produced during chart generation.
         #
-        #     Note: The following fields are mutually exclusive: `chart`, `text`, `schema`, `data`, `analysis`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chart`, `text`, `schema`, `data`, `analysis`, `error`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] error
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ErrorMessage]
         #     An error message.
         #
-        #     Note: The following fields are mutually exclusive: `error`, `text`, `schema`, `data`, `analysis`, `chart`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `error`, `text`, `schema`, `data`, `analysis`, `chart`, `example_queries`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] example_queries
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ExampleQueries]
         #     Optional. A message containing example queries.
         #
-        #     Note: The following fields are mutually exclusive: `example_queries`, `text`, `schema`, `data`, `analysis`, `chart`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `example_queries`, `text`, `schema`, `data`, `analysis`, `chart`, `error`, `clarification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] clarification
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationMessage]
+        #     Optional. A message containing clarification questions.
+        #
+        #     Note: The following fields are mutually exclusive: `clarification`, `text`, `schema`, `data`, `analysis`, `chart`, `error`, `example_queries`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] group_id
         #   @return [::Integer]
         #     Identifies the group that the event belongs to. Similar events are deemed
@@ -415,6 +420,10 @@ module Google
         # @!attribute [rw] text_type
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::TextMessage::TextType]
         #     Optional. The type of the text message.
+        # @!attribute [rw] thought_signature
+        #   @return [::String]
+        #     Optional. An opaque signature for a thought so it can be reused in
+        #     subsequent requests.
         class TextMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -427,7 +436,7 @@ module Google
             # The text is a final response to the user question.
             FINAL_RESPONSE = 1
 
-            # The text is a thinking plan generated by the thinking tool.
+            # The text is a thought from the model.
             THOUGHT = 2
 
             # The text is an informational message about the agent's progress, such as
@@ -546,6 +555,15 @@ module Google
         #     Optional. The content of the data. Each row is a struct that matches the
         #     schema. Simple values are represented as strings, while nested structures
         #     are represented as lists or structs.
+        # @!attribute [rw] formatted_data
+        #   @return [::Array<::Google::Protobuf::Struct>]
+        #     Optional. Formatted representation of the data, when applicable.
+        #     Each row is a struct that directly corresponds to the row at the same index
+        #     within the `data` field. Its values are string representations of the
+        #     original data, formatted according to data source specifications (e.g.,
+        #     "$1,234.56" for currency). Columns without formatting will default to
+        #     their raw value representation. If no columns have formatting rules, this
+        #     field will be empty.
         class DataResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -731,6 +749,62 @@ module Google
         #   @return [::String]
         #     Output only. The text of the error.
         class ErrorMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a single question to the user to help clarify their query.
+        # @!attribute [rw] question
+        #   @return [::String]
+        #     Required. The natural language question to ask the user.
+        # @!attribute [rw] selection_mode
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationQuestion::SelectionMode]
+        #     Required. The selection mode for this question.
+        # @!attribute [rw] options
+        #   @return [::Array<::String>]
+        #     Required. A list of distinct options for the user to choose from.
+        #     The number of options is limited to a maximum of 5.
+        # @!attribute [rw] clarification_question_type
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationQuestion::ClarificationQuestionType]
+        #     Optional. The type of clarification question.
+        class ClarificationQuestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The selection mode for the clarification question.
+          module SelectionMode
+            # Unspecified selection mode.
+            SELECTION_MODE_UNSPECIFIED = 0
+
+            # The user can select only one option.
+            SINGLE_SELECT = 1
+
+            # The user can select multiple options.
+            MULTI_SELECT = 2
+          end
+
+          # The type of clarification question.
+          # This enum may be extended with new values in the future.
+          module ClarificationQuestionType
+            # Unspecified clarification question type.
+            CLARIFICATION_QUESTION_TYPE_UNSPECIFIED = 0
+
+            # The clarification question is for filter values.
+            FILTER_VALUES = 1
+
+            # The clarification question is for data fields. This is a generic term
+            # encompassing SQL columns, Looker fields (dimensions/measures), or
+            # nested data structure properties.
+            FIELDS = 2
+          end
+        end
+
+        # A message of questions to help clarify the user's query. This is returned
+        # when the system cannot confidently answer the user's question.
+        # @!attribute [rw] questions
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::ClarificationQuestion>]
+        #     Required. A batch of clarification questions to ask the user.
+        class ClarificationMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
