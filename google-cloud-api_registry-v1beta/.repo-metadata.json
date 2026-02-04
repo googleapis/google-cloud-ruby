@@ -8,7 +8,7 @@
     "name": "cloudapiregistry",
     "name_pretty": "Cloud API Registry V1BETA API",
     "product_documentation": "https://docs.cloud.google.com/api-registry/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-api_registry-v1beta is the official client library for the Cloud API Registry V1BETA API. Note that google-cloud-api_registry-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-api_registry instead. See the readme for more details.",
