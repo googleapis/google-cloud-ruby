@@ -98,10 +98,13 @@ module Google
             # set.
             #
             # Storing a timestamp value into a TTL-enabled field will be treated as
-            # the document's absolute expiration time. Timestamp values in the past
-            # indicate that the document is eligible for immediate expiration. Using any
-            # other data type or leaving the field absent will disable expiration for the
-            # individual document.
+            # the document's absolute expiration time. For Enterprise edition databases,
+            # the timestamp value may also be stored in an array value in the
+            # TTL-enabled field.
+            #
+            # Timestamp values in the past indicate that the document is eligible for
+            # immediate expiration. Using any other data type or leaving the field absent
+            # will disable expiration for the individual document.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Firestore::Admin::V1::Field::TtlConfig::State]
             #     Output only. The state of the TTL configuration.

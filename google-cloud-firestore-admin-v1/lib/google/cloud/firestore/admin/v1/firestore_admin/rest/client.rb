@@ -943,8 +943,8 @@ module Google
                 #     Required. Database to export. Should be of the form:
                 #     `projects/{project_id}/databases/{database_id}`.
                 #   @param collection_ids [::Array<::String>]
-                #     Which collection IDs to export. Unspecified means all collections. Each
-                #     collection ID in this list must be unique.
+                #     IDs of the collection groups to export. Unspecified means all
+                #     collection groups. Each collection group in this list must be unique.
                 #   @param output_uri_prefix [::String]
                 #     The output URI. Currently only supports Google Cloud Storage URIs of the
                 #     form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name
@@ -1062,8 +1062,9 @@ module Google
                 #     Required. Database to import into. Should be of the form:
                 #     `projects/{project_id}/databases/{database_id}`.
                 #   @param collection_ids [::Array<::String>]
-                #     Which collection IDs to import. Unspecified means all collections included
-                #     in the import. Each collection ID in this list must be unique.
+                #     IDs of the collection groups to import. Unspecified means all collection
+                #     groups that were included in the export. Each collection group in this list
+                #     must be unique.
                 #   @param input_uri_prefix [::String]
                 #     Location of the exported files.
                 #     This must match the output_uri_prefix of an ExportDocumentsResponse from
@@ -1286,7 +1287,7 @@ module Google
                 #     with first character a letter and the last a letter or a number. Must not
                 #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
                 #
-                #     "(default)" database ID is also valid.
+                #     "(default)" database ID is also valid if the database is Standard edition.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2561,7 +2562,7 @@ module Google
                 #     with first character a letter and the last a letter or a number. Must not
                 #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
                 #
-                #     "(default)" database ID is also valid.
+                #     "(default)" database ID is also valid if the database is Standard edition.
                 #   @param backup [::String]
                 #     Required. Backup to restore from. Must be from the same project as the
                 #     parent.
@@ -3100,7 +3101,7 @@ module Google
                 #     with first character a letter and the last a letter or a number. Must not
                 #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
                 #
-                #     "(default)" database ID is also valid.
+                #     "(default)" database ID is also valid if the database is Standard edition.
                 #   @param pitr_snapshot [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot, ::Hash]
                 #     Required. Specification of the PITR data to clone from. The source database
                 #     must exist.

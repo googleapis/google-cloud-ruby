@@ -53,7 +53,7 @@ module Google
           #     with first character a letter and the last a letter or a number. Must not
           #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
           #
-          #     "(default)" database ID is also valid.
+          #     "(default)" database ID is also valid if the database is Standard edition.
           class CreateDatabaseRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -457,8 +457,8 @@ module Google
           #     `projects/{project_id}/databases/{database_id}`.
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
-          #     Which collection IDs to export. Unspecified means all collections. Each
-          #     collection ID in this list must be unique.
+          #     IDs of the collection groups to export. Unspecified means all
+          #     collection groups. Each collection group in this list must be unique.
           # @!attribute [rw] output_uri_prefix
           #   @return [::String]
           #     The output URI. Currently only supports Google Cloud Storage URIs of the
@@ -499,8 +499,9 @@ module Google
           #     `projects/{project_id}/databases/{database_id}`.
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
-          #     Which collection IDs to import. Unspecified means all collections included
-          #     in the import. Each collection ID in this list must be unique.
+          #     IDs of the collection groups to import. Unspecified means all collection
+          #     groups that were included in the export. Each collection group in this list
+          #     must be unique.
           # @!attribute [rw] input_uri_prefix
           #   @return [::String]
           #     Location of the exported files.
@@ -652,7 +653,7 @@ module Google
           #     with first character a letter and the last a letter or a number. Must not
           #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
           #
-          #     "(default)" database ID is also valid.
+          #     "(default)" database ID is also valid if the database is Standard edition.
           # @!attribute [rw] backup
           #   @return [::String]
           #     Required. Backup to restore from. Must be from the same project as the
@@ -705,7 +706,7 @@ module Google
           #     with first character a letter and the last a letter or a number. Must not
           #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
           #
-          #     "(default)" database ID is also valid.
+          #     "(default)" database ID is also valid if the database is Standard edition.
           # @!attribute [rw] pitr_snapshot
           #   @return [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot]
           #     Required. Specification of the PITR data to clone from. The source database
