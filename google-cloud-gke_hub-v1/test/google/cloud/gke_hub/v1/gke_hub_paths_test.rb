@@ -53,6 +53,21 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_fleet_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.fleet_path project: "value0", location: "value1", fleet: "value2"
+      assert_equal "projects/value0/locations/value1/fleets/value2", path
+
+      path = client.fleet_path organization: "value0", location: "value1", fleet: "value2"
+      assert_equal "organizations/value0/locations/value1/fleets/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -74,6 +89,57 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientPathsTest < Minitest::Test
 
       path = client.membership_path project: "value0", location: "value1", membership: "value2"
       assert_equal "projects/value0/locations/value1/memberships/value2", path
+    end
+  end
+
+  def test_membership_binding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.membership_binding_path project: "value0", location: "value1", membership: "value2", membershipbinding: "value3"
+      assert_equal "projects/value0/locations/value1/memberships/value2/bindings/value3", path
+    end
+  end
+
+  def test_namespace_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.namespace_path project: "value0", location: "value1", scope: "value2", namespace: "value3"
+      assert_equal "projects/value0/locations/value1/scopes/value2/namespaces/value3", path
+    end
+  end
+
+  def test_rbac_role_binding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.rbac_role_binding_path project: "value0", location: "value1", scope: "value2", rbacrolebinding: "value3"
+      assert_equal "projects/value0/locations/value1/scopes/value2/rbacrolebindings/value3", path
+
+      path = client.rbac_role_binding_path project: "value0", location: "value1", membership: "value2", rbacrolebinding: "value3"
+      assert_equal "projects/value0/locations/value1/memberships/value2/rbacrolebindings/value3", path
+    end
+  end
+
+  def test_scope_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.scope_path project: "value0", location: "value1", scope: "value2"
+      assert_equal "projects/value0/locations/value1/scopes/value2", path
     end
   end
 end
