@@ -69,9 +69,7 @@ module Google
             rpc :DeleteSavedQuery, ::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest, ::Google::Longrunning::Operation
             # Gets an AnnotationSpec.
             rpc :GetAnnotationSpec, ::Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest, ::Google::Cloud::AIPlatform::V1::AnnotationSpec
-            # Lists Annotations belongs to a dataitem
-            # This RPC is only available in InternalDatasetService. It is only used for
-            # exporting conversation data to CCAI Insights.
+            # Lists Annotations belongs to a dataitem.
             rpc :ListAnnotations, ::Google::Cloud::AIPlatform::V1::ListAnnotationsRequest, ::Google::Cloud::AIPlatform::V1::ListAnnotationsResponse
           end
 
