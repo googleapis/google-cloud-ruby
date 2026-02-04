@@ -181,6 +181,12 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify bucket ACL rules" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    )
     refute bucket.policy_only?
     bucket.policy_only = true
     assert bucket.policy_only?

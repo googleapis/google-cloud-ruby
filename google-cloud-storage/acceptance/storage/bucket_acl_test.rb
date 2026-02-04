@@ -74,6 +74,12 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
   end
 
   it "deletes rules" do
+    skip(
+      "Skipping this test due to a change in GCS behavior that disallows copying " \
+      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+      "access prevention is enforced. See " \
+      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
+    )
     bucket.acl.auth!
     _(bucket.acl.readers).must_include "allAuthenticatedUsers"
     bucket.acl.delete "allAuthenticatedUsers"
