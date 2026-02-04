@@ -8,7 +8,7 @@
     "name": "cloudapiregistry",
     "name_pretty": "Cloud API Registry API",
     "product_documentation": "https://docs.cloud.google.com/api-registry/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-api_registry is the official client library for the Cloud API Registry API.",
