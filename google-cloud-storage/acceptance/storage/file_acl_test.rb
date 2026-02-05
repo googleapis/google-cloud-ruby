@@ -57,7 +57,6 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   it "adds an owner" do
-    
     file = bucket.create_file local_file, "OwnerTest.png"
     user_val = "user-test@example.com"
     _(file.acl.owners).wont_include user_val
@@ -70,7 +69,6 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   it "updates predefined rules" do
-  
     file = bucket.create_file local_file, "AclTest.png"
     _(file.acl.readers).must_include "allAuthenticatedUsers"
     file.acl.private!
@@ -82,7 +80,6 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   it "deletes rules" do
-    
     file = bucket.create_file local_file, "DeleteTest.png"
     _(file.acl.readers).must_include "allAuthenticatedUsers"
     file.acl.delete "allAuthenticatedUsers"
@@ -94,7 +91,6 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   it "retrieves and modifies the ACL" do
-
     bucket.default_acl.private!
     file = bucket.create_file local_file, "CRUDTest.png"
     _(bucket.default_acl.owners).must_be  :empty?
@@ -132,7 +128,6 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   it "sets predefined ACL rules" do
-    
     file = nil
     safe_gcs_execute { file = bucket.create_file local_file, "PredefinedTest.png" }
     safe_gcs_execute { file.acl.authenticatedRead! }
