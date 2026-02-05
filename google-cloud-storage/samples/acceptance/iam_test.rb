@@ -55,12 +55,7 @@ describe "IAM Snippets" do
   end
 
   it "set_bucket_public_iam" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     # set_bucket_public_iam
     assert_output "Bucket #{bucket.name} is now publicly readable\n" do
       set_bucket_public_iam bucket_name: bucket.name

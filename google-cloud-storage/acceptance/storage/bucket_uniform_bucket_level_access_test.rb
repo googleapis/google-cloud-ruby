@@ -75,12 +75,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and is unable to modify bucket ACL rules" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     refute bucket.uniform_bucket_level_access?
     bucket.uniform_bucket_level_access = true
     assert bucket.uniform_bucket_level_access?
@@ -90,12 +85,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and is unable to modify default ACL rules" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     refute bucket.uniform_bucket_level_access?
     bucket.uniform_bucket_level_access = true
     assert bucket.uniform_bucket_level_access?
@@ -119,12 +109,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets uniform_bucket_level_access true and default object acl and object acls are preserved" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     bucket.default_acl.public!
     _(bucket.default_acl.readers).must_equal ["allUsers"]
     file_default_acl = bucket.create_file StringIO.new("default_acl"), "default_acl.txt"
@@ -159,12 +144,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and is unable to get the file" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     refute bucket.policy_only?
     file = bucket.create_file local_file, "ReaderTest.png"
 
@@ -181,12 +161,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify bucket ACL rules" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     refute bucket.policy_only?
     bucket.policy_only = true
     assert bucket.policy_only?
@@ -196,12 +171,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify default ACL rules" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     refute bucket.policy_only?
     safe_gcs_execute { bucket.policy_only = true }
     assert bucket.policy_only?
@@ -225,12 +195,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "sets DEPRECATED policy_only true and default object acl and object acls are preserved" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     bucket.default_acl.public!
     _(bucket.default_acl.readers).must_equal ["allUsers"]
     file_default_acl = bucket.create_file StringIO.new("default_acl"), "default_acl.txt"
@@ -251,12 +216,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
 
   it "creates new bucket with public_access_prevention enforced then sets public_access_prevention to enforced" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     # Insert a new bucket with Public Access Prevention Enforced.
     bucket_pap = storage.create_bucket "#{$bucket_names[2]}-pap" do |b|
       b.public_access_prevention = :enforced

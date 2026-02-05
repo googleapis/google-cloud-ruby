@@ -30,12 +30,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   let(:user_val) { "user-test@example.com" }
 
   before do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     # always create the bucket and set default acl to auth
     safe_gcs_execute { bucket.default_acl.auth! }
   end

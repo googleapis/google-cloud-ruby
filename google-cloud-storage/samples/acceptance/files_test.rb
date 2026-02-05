@@ -324,12 +324,7 @@ describe "Files Snippets" do
   end
 
   it "make_public" do
-    skip(
-      "Skipping this test due to a change in GCS behavior that disallows copying " \
-      "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
-      "access prevention is enforced. See " \
-      "https://cloud.google.com/storage/docs/public-access-prevention for more details."
-    )
+    skip PAP_SKIP_MESSAGE
     bucket.create_file local_file, remote_file_name
     response = Net::HTTP.get URI(bucket.file(remote_file_name).public_url)
     refute_equal File.read(local_file), response
