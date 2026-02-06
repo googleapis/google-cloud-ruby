@@ -93,6 +93,11 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
                   }
 
+                  default_config.rpcs.delete_folder_recursive.timeout = 60.0
+                  default_config.rpcs.delete_folder_recursive.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
                   default_config.rpcs.get_storage_layout.timeout = 60.0
                   default_config.rpcs.get_storage_layout.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
@@ -826,6 +831,115 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @storage_control_stub.call_rpc :rename_folder, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a folder recursively. This operation is only applicable to a
+              # hierarchical namespace enabled bucket.
+              #
+              # @overload delete_folder_recursive(request, options = nil)
+              #   Pass arguments to `delete_folder_recursive` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_folder_recursive(name: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, request_id: nil)
+              #   Pass arguments to `delete_folder_recursive` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the folder being deleted, however all of its contents
+              #     will be deleted too. Format:
+              #     `projects/{project}/buckets/{bucket}/folders/{folder}`
+              #   @param if_metageneration_match [::Integer]
+              #     Optional. Makes the operation only succeed conditional on whether the root
+              #     folder's current metageneration matches the given value.
+              #   @param if_metageneration_not_match [::Integer]
+              #     Optional. Makes the operation only succeed conditional on whether the root
+              #     folder's current metageneration does not match the given value.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new
+              #
+              #   # Call the delete_folder_recursive method.
+              #   result = client.delete_folder_recursive request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_folder_recursive request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_folder_recursive.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_folder_recursive.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_folder_recursive.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :delete_folder_recursive, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   throw :response, response
@@ -3085,6 +3199,11 @@ module Google
                   #
                   attr_reader :rename_folder
                   ##
+                  # RPC-specific configuration for `delete_folder_recursive`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_folder_recursive
+                  ##
                   # RPC-specific configuration for `get_storage_layout`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3202,6 +3321,8 @@ module Google
                     @list_folders = ::Gapic::Config::Method.new list_folders_config
                     rename_folder_config = parent_rpcs.rename_folder if parent_rpcs.respond_to? :rename_folder
                     @rename_folder = ::Gapic::Config::Method.new rename_folder_config
+                    delete_folder_recursive_config = parent_rpcs.delete_folder_recursive if parent_rpcs.respond_to? :delete_folder_recursive
+                    @delete_folder_recursive = ::Gapic::Config::Method.new delete_folder_recursive_config
                     get_storage_layout_config = parent_rpcs.get_storage_layout if parent_rpcs.respond_to? :get_storage_layout
                     @get_storage_layout = ::Gapic::Config::Method.new get_storage_layout_config
                     create_managed_folder_config = parent_rpcs.create_managed_folder if parent_rpcs.respond_to? :create_managed_folder

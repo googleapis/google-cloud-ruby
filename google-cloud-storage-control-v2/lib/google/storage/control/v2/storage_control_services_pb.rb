@@ -51,6 +51,9 @@ module Google
               # source and destination folders are locked until the long running operation
               # completes.
               rpc :RenameFolder, ::Google::Cloud::Storage::Control::V2::RenameFolderRequest, ::Google::Longrunning::Operation
+              # Deletes a folder recursively. This operation is only applicable to a
+              # hierarchical namespace enabled bucket.
+              rpc :DeleteFolderRecursive, ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest, ::Google::Longrunning::Operation
               # Returns the storage layout configuration for a given bucket.
               rpc :GetStorageLayout, ::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest, ::Google::Cloud::Storage::Control::V2::StorageLayout
               # Creates a new managed folder.
