@@ -24,6 +24,7 @@
     "lib/google/cloud/vision_ai/v1/app_platform/rest/client.rb",
     "lib/google/cloud/vision_ai/v1/app_platform/rest/operations.rb",
     "lib/google/cloud/vision_ai/v1/app_platform/rest/service_stub.rb",
+    "lib/google/cloud/vision_ai/v1/bindings_override.rb",
     "lib/google/cloud/vision_ai/v1/health_check_service.rb",
     "lib/google/cloud/vision_ai/v1/health_check_service/client.rb",
     "lib/google/cloud/vision_ai/v1/health_check_service/credentials.rb",
