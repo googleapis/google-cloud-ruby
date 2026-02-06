@@ -80,6 +80,9 @@ module Google
           # @!attribute [rw] enable_table_annotation
           #   @return [::Boolean]
           #     Optional. Whether to include table annotations in layout parser response.
+          # @!attribute [rw] enable_table_split
+          #   @return [::Boolean]
+          #     Optional. Whether to split table.
           class LayoutConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +160,7 @@ module Google
         #     {::Google::Cloud::DocumentAI::V1beta3::Document#mime_type mime_type} fields must
         #     be set.
         # @!attribute [rw] skip_human_review
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Whether human review should be skipped for this request. Default to
         #     `false`.
@@ -287,6 +291,7 @@ module Google
         #     {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
         #     method.
         # @!attribute [rw] skip_human_review
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Whether human review should be skipped for this request. Default to
         #     `false`.
@@ -1222,6 +1227,17 @@ module Google
         #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
         #     The basic metadata for the long-running operation.
         class ImportProcessorVersionMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The long-running operation metadata for the
+        # [UpdateProcessorVersion][google.cloud.documentai.v1beta3.DocumentProcessorService.UpdateProcessorVersion]
+        # method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata for the long-running operation.
+        class UpdateProcessorVersionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

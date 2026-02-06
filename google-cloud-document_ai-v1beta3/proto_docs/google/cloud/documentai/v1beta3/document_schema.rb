@@ -93,7 +93,7 @@ module Google
         # The schema defines the output of the processed document by a processor.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Display name to show to users.
+        #     Display name to show users.
         # @!attribute [rw] description
         #   @return [::String]
         #     Description of the schema.
@@ -103,6 +103,11 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema::Metadata]
         #     Metadata of the schema.
+        # @!attribute [rw] document_prompt
+        #   @return [::String]
+        #     Optional. Document level prompt provided by the user. This custom text is
+        #     injected into the AI model's prompt to provide extra, document-wide
+        #     guidance for processing.
         class DocumentSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,7 +119,7 @@ module Google
           #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema::EntityType::EnumValues]
           #     If specified, lists all the possible values for this entity.  This
           #     should not be more than a handful of values.  If the number of values
-          #     is >10 or could change frequently use the `EntityType.value_ontology`
+          #     is >10 or could change frequently, use the `EntityType.value_ontology`
           #     field and specify a list of all possible values in a value ontology
           #     file.
           # @!attribute [rw] display_name
@@ -130,7 +135,7 @@ module Google
           #     - Maximum 64 characters.
           #     - Must start with a letter.
           #     - Allowed characters: ASCII letters `[a-z0-9_-]`.  (For backward
-          #       compatibility internal infrastructure and tooling can handle any ascii
+          #       compatibility, internal infrastructure and tooling can handle any ASCII
           #       character.)
           #     - The `/` is sometimes used to denote a property of a type.  For example
           #       `line_item/amount`.  This convention is deprecated, but will still be
@@ -197,9 +202,9 @@ module Google
               # For example, a bank statement might only have one
               # `account_number`, but this account number can be mentioned in several
               # places on the document.  In this case, the `account_number` is
-              # considered a `REQUIRED_ONCE` entity type. If, on the other hand, we
-              # expect a bank statement to contain the status of multiple different
-              # accounts for the customers, the occurrence type is set to
+              # considered a `REQUIRED_ONCE` entity type. If, on the other hand, it's
+              # expected that a bank statement contains the status of multiple
+              # different accounts for the customers, the occurrence type is set to
               # `REQUIRED_MULTIPLE`.
               module OccurrenceType
                 # Unspecified occurrence type.
@@ -251,7 +256,7 @@ module Google
           #     If set, all the nested entities must be prefixed with the parents.
           # @!attribute [rw] skip_naming_validation
           #   @return [::Boolean]
-          #     If set, we will skip the naming format validation in the schema. So the
+          #     If set, this will skip the naming format validation in the schema. So the
           #     string values in `DocumentSchema.EntityType.name` and
           #     `DocumentSchema.EntityType.Property.name` will not be checked.
           class Metadata

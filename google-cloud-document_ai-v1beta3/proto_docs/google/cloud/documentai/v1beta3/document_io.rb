@@ -21,6 +21,15 @@ module Google
   module Cloud
     module DocumentAI
       module V1beta3
+        # A set of inline documents.
+        # @!attribute [rw] documents
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document>]
+        #     The list of documents.
+        class Documents
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Payload message of raw document content (bytes).
         # @!attribute [rw] content
         #   @return [::String]
@@ -67,6 +76,15 @@ module Google
         #   @return [::String]
         #     The URI prefix.
         class GcsPrefix
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies a set of raw documents.
+        # @!attribute [rw] documents
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::RawDocument>]
+        #     Specifies raw document content and mime type.
+        class RawDocuments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
