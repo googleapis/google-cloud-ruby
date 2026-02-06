@@ -130,11 +130,11 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
   def empty_file_gapi cache_control: nil, content_disposition: nil,
                       content_encoding: nil, content_language: nil,
                       content_type: nil, crc32c: nil, md5: nil, metadata: nil,
-                      storage_class: nil, checksum: nil
+                      storage_class: nil, checksum: nil, content: nil
 
     # If no checksum type or specific value is provided, the default will be set to crc32c. 
     # If the checksum is set to false, it will be disabled.
-    crc32c ||= set_crc32c_as_default md5, crc32c, checksum
+    crc32c ||= set_crc32c_as_default md5, crc32c, checksum, content
 
     params = {
       cache_control: cache_control, content_type: content_type,
