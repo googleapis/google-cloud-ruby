@@ -613,11 +613,12 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Object.from_json file_hash
   end
 
-  def set_crc32c_as_default md5, crc32c, checksum
+  def set_crc32c_as_default md5, crc32c, checksum, content = nil
     # If no checksum type or specific value is provided, the default will be set to crc32c. 
     # If the checksum is set to false, it will be disabled.
     if [checksum, crc32c, md5].all?(&:nil?) || checksum == true
-      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new("Hello world"))
+      # if content is present and crc32c is not provided, calculate crc32c based on content
+      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new(content || "Hello world"))
     end
     crc32c
   end
