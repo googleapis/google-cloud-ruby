@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.19.0 (2026-02-08)
+
+#### Features
+
+* Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto 
+#### Documentation
+
+* update reference documentation for `SelectionInput.DROPDOWN` to include dynamic data sources and autosuggestion ([#32413](https://github.com/googleapis/google-cloud-ruby/issues/32413)) 
+
 ### 0.18.0 (2025-12-16)
 
 #### Features
