@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.35.0 (2026-02-08)
+
+#### Features
+
+* Add `fps` to message `VideoMetadata` 
+#### Documentation
+
+* update documentation of `.google.cloud.aiplatform.v1.DatasetService`, `.google.cloud.aiplatform.v1.Dataset`, and `.google.cloud.aiplatform.v1.DatasetVersion` ([#32408](https://github.com/googleapis/google-cloud-ruby/issues/32408)) 
+
 ### 1.34.0 (2026-01-13)
 
 #### Features
