@@ -2016,6 +2016,8 @@ module Google
             # Send a document for Human Review. The input document should be processed by
             # the specified processor.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload review_document(request, options = nil)
             #   Pass arguments to `review_document` via a request object, either of type
             #   {::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest} or an equivalent Hash.
