@@ -42,6 +42,9 @@ module Google
 
             # MD5 hash.
             MD5 = 2
+
+            # Dirsum SHA256 hash.
+            DIRSUM_SHA256 = 3
           end
         end
 
