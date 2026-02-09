@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* add ClarificationMessage, thought-signature, formatted-data ([#32410](https://github.com/googleapis/google-cloud-ruby/issues/32410)) 
+
 ### 0.6.0 (2026-01-13)
 
 #### Features
