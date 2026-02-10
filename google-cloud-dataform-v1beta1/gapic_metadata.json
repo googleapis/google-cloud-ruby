@@ -10,6 +10,71 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataform::V1beta1::Dataform::Client",
           "rpcs": {
+            "GetTeamFolder": {
+              "methods": [
+                "get_team_folder"
+              ]
+            },
+            "CreateTeamFolder": {
+              "methods": [
+                "create_team_folder"
+              ]
+            },
+            "UpdateTeamFolder": {
+              "methods": [
+                "update_team_folder"
+              ]
+            },
+            "DeleteTeamFolder": {
+              "methods": [
+                "delete_team_folder"
+              ]
+            },
+            "QueryTeamFolderContents": {
+              "methods": [
+                "query_team_folder_contents"
+              ]
+            },
+            "SearchTeamFolders": {
+              "methods": [
+                "search_team_folders"
+              ]
+            },
+            "GetFolder": {
+              "methods": [
+                "get_folder"
+              ]
+            },
+            "CreateFolder": {
+              "methods": [
+                "create_folder"
+              ]
+            },
+            "UpdateFolder": {
+              "methods": [
+                "update_folder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "delete_folder"
+              ]
+            },
+            "QueryFolderContents": {
+              "methods": [
+                "query_folder_contents"
+              ]
+            },
+            "QueryUserRootContents": {
+              "methods": [
+                "query_user_root_contents"
+              ]
+            },
+            "MoveFolder": {
+              "methods": [
+                "move_folder"
+              ]
+            },
             "ListRepositories": {
               "methods": [
                 "list_repositories"
@@ -33,6 +98,11 @@
             "DeleteRepository": {
               "methods": [
                 "delete_repository"
+              ]
+            },
+            "MoveRepository": {
+              "methods": [
+                "move_repository"
               ]
             },
             "CommitRepositoryChanges": {
@@ -278,6 +348,21 @@
             "UpdateConfig": {
               "methods": [
                 "update_config"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
               ]
             }
           }
