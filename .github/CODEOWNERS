@@ -5,13 +5,13 @@
 # https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#codeowners-syntax
 
 
-# @googleapis/ruby-team is the default owner for anything not
+# @googleapis/cloud-sdk-ruby-team is the default owner for anything not
 # explicitly taken by someone else.
-*                                    @googleapis/ruby-team @yoshi-approver
+*                                    @googleapis/cloud-sdk-ruby-team @yoshi-approver
 
-/google-cloud-bigquery*/.            @googleapis/ruby-team @yoshi-approver @googleapis/api-bigquery
-/google-cloud-bigtable*/.            @googleapis/ruby-team @yoshi-approver @googleapis/api-bigtable-sdk
-/google-cloud-datastore*/.           @googleapis/ruby-team @yoshi-approver @googleapis/api-datastore-sdk
-/google-cloud-firestore*/.           @googleapis/ruby-team @yoshi-approver @googleapis/api-firestore-sdk
-/google-cloud-pubsub*/.              @googleapis/ruby-team @yoshi-approver @googleapis/api-pubsub
-/google-cloud-storage/               @googleapis/ruby-team @yoshi-approver @googleapis/gcs-sdk-team
+/google-cloud-bigquery*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-bigquery
+/google-cloud-bigtable*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-bigtable-sdk
+/google-cloud-datastore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-datastore-sdk
+/google-cloud-firestore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-firestore-sdk
+/google-cloud-pubsub*/.              @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-pubsub
+/google-cloud-storage/               @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/gcs-sdk-team
