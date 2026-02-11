@@ -1052,6 +1052,46 @@
       ]
     },
     {
+      "region_tag": "cloudkms_v1_generated_KeyManagementService_ListRetiredResources_sync",
+      "title": "Snippet for the list_retired_resources call in the KeyManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_retired_resources.",
+      "file": "key_management_service/list_retired_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_retired_resources",
+        "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client#list_retired_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::ListRetiredResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::ListRetiredResourcesResponse",
+        "client": {
+          "short_name": "KeyManagementService::Client",
+          "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client"
+        },
+        "method": {
+          "short_name": "ListRetiredResources",
+          "full_name": "google.cloud.kms.v1.KeyManagementService.ListRetiredResources",
+          "service": {
+            "short_name": "KeyManagementService",
+            "full_name": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GetKeyRing_sync",
       "title": "Snippet for the get_key_ring call in the KeyManagementService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_key_ring.",
@@ -1252,6 +1292,46 @@
       ]
     },
     {
+      "region_tag": "cloudkms_v1_generated_KeyManagementService_GetRetiredResource_sync",
+      "title": "Snippet for the get_retired_resource call in the KeyManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#get_retired_resource.",
+      "file": "key_management_service/get_retired_resource.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_retired_resource",
+        "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client#get_retired_resource",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::GetRetiredResourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::RetiredResource",
+        "client": {
+          "short_name": "KeyManagementService::Client",
+          "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client"
+        },
+        "method": {
+          "short_name": "GetRetiredResource",
+          "full_name": "google.cloud.kms.v1.KeyManagementService.GetRetiredResource",
+          "service": {
+            "short_name": "KeyManagementService",
+            "full_name": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_CreateKeyRing_sync",
       "title": "Snippet for the create_key_ring call in the KeyManagementService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#create_key_ring.",
@@ -1367,6 +1447,86 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_KeyManagementService_DeleteCryptoKey_sync",
+      "title": "Snippet for the delete_crypto_key call in the KeyManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key.",
+      "file": "key_management_service/delete_crypto_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_crypto_key",
+        "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "KeyManagementService::Client",
+          "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCryptoKey",
+          "full_name": "google.cloud.kms.v1.KeyManagementService.DeleteCryptoKey",
+          "service": {
+            "short_name": "KeyManagementService",
+            "full_name": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudkms_v1_generated_KeyManagementService_DeleteCryptoKeyVersion_sync",
+      "title": "Snippet for the delete_crypto_key_version call in the KeyManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key_version.",
+      "file": "key_management_service/delete_crypto_key_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_crypto_key_version",
+        "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client#delete_crypto_key_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "KeyManagementService::Client",
+          "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCryptoKeyVersion",
+          "full_name": "google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersion",
+          "service": {
+            "short_name": "KeyManagementService",
+            "full_name": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

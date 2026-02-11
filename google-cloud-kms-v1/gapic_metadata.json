@@ -176,6 +176,11 @@
                 "list_import_jobs"
               ]
             },
+            "ListRetiredResources": {
+              "methods": [
+                "list_retired_resources"
+              ]
+            },
             "GetKeyRing": {
               "methods": [
                 "get_key_ring"
@@ -201,6 +206,11 @@
                 "get_import_job"
               ]
             },
+            "GetRetiredResource": {
+              "methods": [
+                "get_retired_resource"
+              ]
+            },
             "CreateKeyRing": {
               "methods": [
                 "create_key_ring"
@@ -214,6 +224,16 @@
             "CreateCryptoKeyVersion": {
               "methods": [
                 "create_crypto_key_version"
+              ]
+            },
+            "DeleteCryptoKey": {
+              "methods": [
+                "delete_crypto_key"
+              ]
+            },
+            "DeleteCryptoKeyVersion": {
+              "methods": [
+                "delete_crypto_key_version"
               ]
             },
             "ImportCryptoKeyVersion": {
