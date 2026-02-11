@@ -112,12 +112,12 @@ module Google
         #     expression, parentheses must be appropriately used to group the
         #     combinations.
         #
-        #     Example: location="us-east1"
-        #     Example: container="projects/123" OR container="projects/456"
-        #     Example: (container="projects/123" OR
-        #               container="projects/456") AND location="us-east1"
-        #     Example: full_resource_name=~"test"
-        #     Example: full_resource_name=~"test.*master"
+        #     Example: `location="us-east1"`
+        #     Example: `container="projects/123" OR container="projects/456"`
+        #     Example: `(container="projects/123" OR
+        #               container="projects/456") AND location="us-east1"`
+        #     Example: `full_resource_name=~"test"`
+        #     Example: `full_resource_name=~"test.*master"`
         # @!attribute [rw] signal_type_groups
         #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup>]
         #     Optional. Groups of signal types that are requested.
@@ -161,12 +161,13 @@ module Google
         #     order. It only supports a single field at a time.
         #
         #     For example:
-        #      order_by = "full_resource_name" sorts response in ascending order
-        #      order_by = "full_resource_name DESC" sorts response in descending order
-        #      order_by = "issue_count DESC" sorts response in descending order of
+        #      `order_by = "full_resource_name"` sorts response in ascending order
+        #      `order_by = "full_resource_name DESC"` sorts response in descending order
+        #      `order_by = "issue_count DESC"` sorts response in descending order of
         #      count of all issues associated with a resource.
         #
-        #     More explicitly, order_by = "full_resource_name, product" is not supported.
+        #     More explicitly, `order_by = "full_resource_name, product"` is not
+        #     supported.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. If unspecified, at most 50 resource groups will be returned.
@@ -336,10 +337,10 @@ module Google
         #     expression, parentheses must be appropriately used to group the
         #     combinations.
         #
-        #     Example: location="us-east1"
-        #     Example: container="projects/123" OR container="projects/456"
-        #     Example: (container="projects/123" OR
-        #               container="projects/456") AND location="us-east1"
+        #     Example: `location="us-east1"`
+        #     Example: `container="projects/123" OR container="projects/456"`
+        #     Example: `(container="projects/123" OR
+        #               container="projects/456") AND location="us-east1"`
         # @!attribute [rw] signal_type_groups
         #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup>]
         #     Optional. Lists of signal types that are issues.
@@ -469,10 +470,10 @@ module Google
         #     expression, parentheses must be appropriately used to group the
         #     combinations.
         #
-        #     Example: location="us-east1"
-        #     Example: container="projects/123" OR container="projects/456"
-        #     Example: (container="projects/123" OR
-        #               container="projects/456") AND location="us-east1"
+        #     Example: `location="us-east1"`
+        #     Example: `container="projects/123" OR container="projects/456"`
+        #     Example: `(container="projects/123" OR
+        #               container="projects/456") AND location="us-east1"`
         # @!attribute [rw] group_by
         #   @return [::String]
         #     Optional. A field that statistics are grouped by.
@@ -504,9 +505,10 @@ module Google
         #     descending order. Add "ASC" after the field name to indicate ascending
         #     order. It supports ordering using multiple fields.
         #     For example:
-        #      order_by = "resource_groups_count" sorts response in ascending order
-        #      order_by = "resource_groups_count DESC" sorts response in descending order
-        #      order_by = "product.type, product.version DESC, location" orders by type
+        #      `order_by = "resource_groups_count"` sorts response in ascending order
+        #      `order_by = "resource_groups_count DESC"` sorts response in descending
+        #      order
+        #      `order_by = "product.type, product.version DESC, location"` orders by type
         #      in ascending order, version in descending order and location in ascending
         #      order
         # @!attribute [rw] page_size
@@ -529,7 +531,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message to aggregate a fleet by some group by fields.
+        # The response message to aggregate a fleet by some group by
+        # fields.
         # @!attribute [rw] rows
         #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRow>]
         #     Represents a row grouped by the fields in the input.
@@ -686,6 +689,100 @@ module Google
         #   @return [::Boolean]
         #     Indicates if the resource is managed by BackupDR.
         class BackupDRConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryIssuesRequest is the request to get a list of issues.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent can be a project, a folder, or an organization. The list
+        #     is limited to the one attached to resources within the `scope` that a user
+        #     has access to.
+        #
+        #     The allowed values are:
+        #
+        #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+        #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+        #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+        #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional.
+        #     Supported fields are:
+        #     'product',
+        #     `location`,
+        #     `issue_severity`,
+        #     'tags',
+        #     'labels',
+        # @!attribute [rw] signal_products_filters
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalProductsFilters>]
+        #     Optional. Filters based on signal and product. The filter list will be ORed
+        #     across pairs and ANDed within a signal and products pair.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Following fields are sortable:
+        #     SignalType
+        #     Product
+        #     Location
+        #     IssueSeverity
+        #
+        #     The default order is ascending. Add "DESC" after the field name to indicate
+        #     descending order. Add "ASC" after the field name to indicate ascending
+        #     order. It only supports a single field at a time.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. If unspecified, at most 50 issues will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `QueryIssues` call.
+        #     Provide this to retrieve the subsequent page.
+        #     All parameters except page size should match the parameters used in the
+        #     call that provided the page token.
+        class QueryIssuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SignalProductsFilters represents a signal and list of supported products.
+        # @!attribute [rw] signal_type
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::SignalType]
+        #     Optional. The type of signal.
+        # @!attribute [rw] products
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::Product>]
+        #     Optional. Product type of the resource. The version of the product will be
+        #     ignored in filtering.
+        class SignalProductsFilters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryIssuesResponse is the response containing a list of issues.
+        # @!attribute [rw] resource_issues
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::DatabaseResourceIssue>]
+        #     List of issues and resource details.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. List of unreachable regions from where data could not be
+        #     retrieved.
+        class QueryIssuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DatabaseResource and Issue associated with it.
+        # @!attribute [rw] signal
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::Signal]
+        #     Signal associated with the issue.
+        # @!attribute [rw] resource
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::DatabaseResource]
+        #     Resource associated with the issue.
+        class DatabaseResourceIssue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

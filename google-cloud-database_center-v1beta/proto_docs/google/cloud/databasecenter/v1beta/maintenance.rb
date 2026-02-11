@@ -69,9 +69,9 @@ module Google
         # @!attribute [rw] deny_maintenance_schedules
         #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::ResourceMaintenanceDenySchedule>]
         #     Optional. List of Deny maintenance period for the database resource.
-        # @!attribute [rw] maintenance_version
+        # @!attribute [r] maintenance_version
         #   @return [::String]
-        #     Optional. Current Maintenance version of the database resource. Example:
+        #     Output only. Current Maintenance version of the database resource. Example:
         #     "MYSQL_8_0_41.R20250531.01_15"
         class MaintenanceInfo
           include ::Google::Protobuf::MessageExts

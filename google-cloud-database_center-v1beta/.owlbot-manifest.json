@@ -55,6 +55,7 @@
     "snippets/database_center/aggregate_fleet.rb",
     "snippets/database_center/aggregate_issue_stats.rb",
     "snippets/database_center/query_database_resource_groups.rb",
+    "snippets/database_center/query_issues.rb",
     "snippets/database_center/query_products.rb",
     "snippets/snippet_metadata_google.cloud.databasecenter.v1beta.json",
     "test/google/cloud/database_center/v1beta/database_center_rest_test.rb",
