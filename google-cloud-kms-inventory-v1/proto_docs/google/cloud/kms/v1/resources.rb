@@ -1015,6 +1015,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A RetiredResource resource represents the record of a deleted
+        # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Its purpose is to provide
+        # visibility into retained user data and to prevent reuse of these names for
+        # new {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. The resource name for this
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} in the format
+        #     `projects/*/locations/*/retiredResources/*`.
+        # @!attribute [r] original_resource
+        #   @return [::String]
+        #     Output only. The full resource name of the original
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} that was deleted in the format
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        # @!attribute [r] resource_type
+        #   @return [::String]
+        #     Output only. The resource type of the original deleted resource.
+        # @!attribute [r] delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the original resource was deleted and this
+        #     RetiredResource record was created.
+        class RetiredResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} specifies how
         # cryptographic operations are performed. For more information, see [Protection
         # levels] (https://cloud.google.com/kms/docs/algorithms#protection_levels).
