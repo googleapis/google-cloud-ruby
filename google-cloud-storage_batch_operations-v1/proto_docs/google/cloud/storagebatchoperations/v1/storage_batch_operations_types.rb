@@ -84,6 +84,10 @@ module Google
         #     Optional. If true, the job will run in dry run mode, returning the total
         #     object count and, if the object configuration is a prefix list, the bytes
         #     found from source. No transformations will be performed.
+        # @!attribute [r] is_multi_bucket_job
+        #   @return [::Boolean]
+        #     Output only. If true, this Job operates on multiple buckets. Multibucket
+        #     jobs are subject to different quota limits than single-bucket jobs.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +108,94 @@ module Google
 
             # Terminated due to an unrecoverable failure.
             FAILED = 4
+
+            # Queued but not yet started.
+            QUEUED = 5
+          end
+        end
+
+        # BucketOperation represents a bucket-level breakdown of a Job.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the BucketOperation. This is defined by
+        #     the service. Format:
+        #     projects/\\{project}/locations/global/jobs/\\{job_id}/bucketOperations/\\{bucket_operation}.
+        # @!attribute [rw] bucket_name
+        #   @return [::String]
+        #     The bucket name of the objects to be transformed in the BucketOperation.
+        # @!attribute [rw] prefix_list
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::PrefixList]
+        #     Specifies objects matching a prefix set.
+        #
+        #     Note: The following fields are mutually exclusive: `prefix_list`, `manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] manifest
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::Manifest]
+        #     Specifies objects in a manifest file.
+        #
+        #     Note: The following fields are mutually exclusive: `manifest`, `prefix_list`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] put_object_hold
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::PutObjectHold]
+        #     Changes object hold status.
+        #
+        #     Note: The following fields are mutually exclusive: `put_object_hold`, `delete_object`, `put_metadata`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] delete_object
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::DeleteObject]
+        #     Delete objects.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_object`, `put_object_hold`, `put_metadata`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] put_metadata
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::PutMetadata]
+        #     Updates object metadata. Allows updating fixed-key and custom metadata
+        #     and fixed-key metadata i.e. Cache-Control, Content-Disposition,
+        #     Content-Encoding, Content-Language, Content-Type, Custom-Time.
+        #
+        #     Note: The following fields are mutually exclusive: `put_metadata`, `put_object_hold`, `delete_object`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] rewrite_object
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::RewriteObject]
+        #     Rewrite the object and updates metadata like KMS key.
+        #
+        #     Note: The following fields are mutually exclusive: `rewrite_object`, `put_object_hold`, `delete_object`, `put_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time that the BucketOperation was created.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time that the BucketOperation was started.
+        # @!attribute [r] complete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time that the BucketOperation was completed.
+        # @!attribute [r] counters
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::Counters]
+        #     Output only. Information about the progress of the bucket operation.
+        # @!attribute [r] error_summaries
+        #   @return [::Array<::Google::Cloud::StorageBatchOperations::V1::ErrorSummary>]
+        #     Output only. Summarizes errors encountered with sample error log entries.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::BucketOperation::State]
+        #     Output only. State of the BucketOperation.
+        class BucketOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes state of the BucketOperation.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # Created but not yet started.
+            QUEUED = 1
+
+            # In progress.
+            RUNNING = 2
+
+            # Completed successfully.
+            SUCCEEDED = 3
+
+            # Cancelled by the user.
+            CANCELED = 4
+
+            # Terminated due to an unrecoverable failure.
+            FAILED = 5
           end
         end
 

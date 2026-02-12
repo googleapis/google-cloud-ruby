@@ -540,7 +540,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_job(name: nil, request_id: nil)
+            # @overload delete_job(name: nil, request_id: nil, force: nil)
             #   Pass arguments to `delete_job` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -554,6 +554,11 @@ module Google
             #     `request_id` will be ignored for at least 60 minutes since the first
             #     request. The request ID must be a valid UUID with the exception that zero
             #     UUID is not supported (00000000-0000-0000-0000-000000000000).
+            #   @param force [::Boolean]
+            #     Optional. If set to true, any child bucket operations of the job will also
+            #     be deleted. Highly recommended to be set to true by all clients. Users
+            #     cannot mutate bucket operations directly, so only the jobs.delete
+            #     permission is required to delete a job (and its child bucket operations).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -705,6 +710,192 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @storage_batch_operations_stub.call_rpc :cancel_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists BucketOperations in a given project and job.
+            #
+            # @overload list_bucket_operations(request, options = nil)
+            #   Pass arguments to `list_bucket_operations` via a request object, either of type
+            #   {::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_bucket_operations(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil)
+            #   Pass arguments to `list_bucket_operations` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Format: projects/\\{project_id}/locations/global/jobs/\\{job_id}.
+            #   @param filter [::String]
+            #     Optional. Filters results as defined by https://google.aip.dev/160.
+            #   @param page_size [::Integer]
+            #     Optional. The list page size. Default page size is 100.
+            #   @param page_token [::String]
+            #     Optional. The list page token.
+            #   @param order_by [::String]
+            #     Optional. Field to sort by. Supported fields are name, create_time.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::StorageBatchOperations::V1::BucketOperation>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::StorageBatchOperations::V1::BucketOperation>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_batch_operations/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsRequest.new
+            #
+            #   # Call the list_bucket_operations method.
+            #   result = client.list_bucket_operations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::StorageBatchOperations::V1::BucketOperation.
+            #     p item
+            #   end
+            #
+            def list_bucket_operations request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_bucket_operations.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageBatchOperations::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_bucket_operations.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_bucket_operations.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_batch_operations_stub.call_rpc :list_bucket_operations, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @storage_batch_operations_stub, :list_bucket_operations, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a BucketOperation.
+            #
+            # @overload get_bucket_operation(request, options = nil)
+            #   Pass arguments to `get_bucket_operation` via a request object, either of type
+            #   {::Google::Cloud::StorageBatchOperations::V1::GetBucketOperationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageBatchOperations::V1::GetBucketOperationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_bucket_operation(name: nil)
+            #   Pass arguments to `get_bucket_operation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. `name` of the bucket operation to retrieve.
+            #     Format:
+            #     projects/\\{project_id}/locations/global/jobs/\\{job_id}/bucketOperations/\\{bucket_operation_id}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::StorageBatchOperations::V1::BucketOperation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::StorageBatchOperations::V1::BucketOperation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_batch_operations/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageBatchOperations::V1::GetBucketOperationRequest.new
+            #
+            #   # Call the get_bucket_operation method.
+            #   result = client.get_bucket_operation request
+            #
+            #   # The returned object is of type Google::Cloud::StorageBatchOperations::V1::BucketOperation.
+            #   p result
+            #
+            def get_bucket_operation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageBatchOperations::V1::GetBucketOperationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_bucket_operation.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageBatchOperations::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_bucket_operation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_bucket_operation.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_batch_operations_stub.call_rpc :get_bucket_operation, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -919,6 +1110,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_job
+                ##
+                # RPC-specific configuration for `list_bucket_operations`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_bucket_operations
+                ##
+                # RPC-specific configuration for `get_bucket_operation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_bucket_operation
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -932,6 +1133,10 @@ module Google
                   @delete_job = ::Gapic::Config::Method.new delete_job_config
                   cancel_job_config = parent_rpcs.cancel_job if parent_rpcs.respond_to? :cancel_job
                   @cancel_job = ::Gapic::Config::Method.new cancel_job_config
+                  list_bucket_operations_config = parent_rpcs.list_bucket_operations if parent_rpcs.respond_to? :list_bucket_operations
+                  @list_bucket_operations = ::Gapic::Config::Method.new list_bucket_operations_config
+                  get_bucket_operation_config = parent_rpcs.get_bucket_operation if parent_rpcs.respond_to? :get_bucket_operation
+                  @get_bucket_operation = ::Gapic::Config::Method.new get_bucket_operation_config
 
                   yield self if block_given?
                 end
