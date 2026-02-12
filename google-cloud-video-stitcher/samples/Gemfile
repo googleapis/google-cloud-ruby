@@ -21,7 +21,7 @@ gem "google-cloud-video-stitcher-v1", path: master ? "../../google-cloud-video-s
 
 group :test do
   gem "google-style", "~> 1.26.1"
-  gem "minitest", "~> 5.16"
+  gem "minitest", ">= 5.16", "< 7"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-rg", "~> 5.2"
   gem "rake"
