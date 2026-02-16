@@ -50,6 +50,9 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::ClientPathsTest < Minitest::Test
 
       path = client.autokey_config_path folder: "value0"
       assert_equal "folders/value0/autokeyConfig", path
+
+      path = client.autokey_config_path project: "value0"
+      assert_equal "projects/value0/autokeyConfig", path
     end
   end
 
