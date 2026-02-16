@@ -571,12 +571,39 @@ module Google
             KEM_XWING = 63
 
             # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 1. Randomized version.
+            PQ_SIGN_ML_DSA_44 = 68
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
             # security level 3. Randomized version.
             PQ_SIGN_ML_DSA_65 = 56
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 5. Randomized version.
+            PQ_SIGN_ML_DSA_87 = 69
 
             # The post-quantum stateless hash-based digital signature algorithm, at
             # security level 1. Randomized version.
             PQ_SIGN_SLH_DSA_SHA2_128S = 57
+
+            # The post-quantum stateless hash-based digital signature algorithm, at
+            # security level 1. Randomized pre-hash version supporting SHA256 digests.
+            PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 1. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 3. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 5. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
           end
 
           # The state of a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
@@ -879,8 +906,7 @@ module Google
         #     operations are performed. Currently, this field is only populated for keys
         #     stored in HSM_SINGLE_TENANT. Note, this list is non-exhaustive and may
         #     apply to additional {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels}
-        #     in the future.
-        #     Supported resources:
+        #     in the future. Supported resources:
         #     * `"projects/*/locations/*/singleTenantHsmInstances/*"`
         class ImportJob
           include ::Google::Protobuf::MessageExts
