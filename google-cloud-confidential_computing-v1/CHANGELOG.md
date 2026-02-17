@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.1.0 (2026-02-17)
+
+#### Features
+
+* add Nvidia Attestation proto message with its relevant fields and ConfidentialGke options ([#32429](https://github.com/googleapis/google-cloud-ruby/issues/32429)) 
+
 ### 2.0.1 (2025-10-27)
 
 #### Documentation
