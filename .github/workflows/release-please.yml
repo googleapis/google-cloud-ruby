@@ -37,5 +37,8 @@ jobs:
           toys release manifest -v \
             --fork --skip-labeling \
             --github-event-name=${{ github.event_name }} \
-            ${{ github.event.inputs.args }} \
-            -- ${{ github.event.inputs.gem }}
+            ${GITHUB_EVENT_INPUTS_ARGS} \
+            -- ${GITHUB_EVENT_INPUTS_GEM}
+        env:
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}
+          GITHUB_EVENT_INPUTS_GEM: ${{ github.event.inputs.gem }}
