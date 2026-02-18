@@ -22,4 +22,6 @@ jobs:
       - name: Install tools
         run: "gem install --no-document toys"
       - name: execute
-        run: "toys update-release-levels --git-remote=origin ${{ github.event.inputs.args }}"
+        run: "toys update-release-levels --git-remote=origin ${GITHUB_EVENT_INPUTS_ARGS}"
+        env:
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}
