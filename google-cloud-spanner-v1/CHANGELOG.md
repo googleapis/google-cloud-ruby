@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2026-02-18)
+
+#### Features
+
+* include cache updates into the ResultSet response ([#32416](https://github.com/googleapis/google-cloud-ruby/issues/32416)) 
+
 ### 1.13.0 (2026-01-13)
 
 #### Features
