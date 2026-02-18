@@ -64,6 +64,9 @@ module Google
         # @!attribute [rw] advanced_site_search_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedSiteSearchConfig]
         #     Optional. Configuration for advanced site search.
+        # @!attribute [rw] natural_language_query_understanding_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::NaturalLanguageQueryUnderstandingConfig]
+        #     Optional. Configuration for Natural Language Query Understanding.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     Input only. The KMS key to be used to protect this DataStore at creation
@@ -199,6 +202,33 @@ module Google
         class AdvancedSiteSearchConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for Natural Language Query Understanding.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::NaturalLanguageQueryUnderstandingConfig::Mode]
+        #     Mode of Natural Language Query Understanding. If this field is unset, the
+        #     behavior defaults to
+        #     {::Google::Cloud::DiscoveryEngine::V1::NaturalLanguageQueryUnderstandingConfig::Mode::DISABLED NaturalLanguageQueryUnderstandingConfig.Mode.DISABLED}.
+        class NaturalLanguageQueryUnderstandingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode of Natural Language Query Understanding. When the
+          # NaturalLanguageQueryUnderstandingConfig.Mode is ENABLED, the natural
+          # language understanding capabilities will be enabled for a search request if
+          # the NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition in the
+          # SearchRequest is ENABLED.
+          module Mode
+            # Default value.
+            MODE_UNSPECIFIED = 0
+
+            # Natural Language Query Understanding is disabled.
+            DISABLED = 1
+
+            # Natural Language Query Understanding is enabled.
+            ENABLED = 2
+          end
         end
 
         # Config to store data store type configuration for workspace data
