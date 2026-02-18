@@ -221,7 +221,6 @@ module Google
 
         # DatabaseResource represents every individually configured database unit
         # representing compute and/or storage.
-        # NextId: 20
         # @!attribute [rw] child_resources
         #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::DatabaseResource>]
         #     List of children associated with a database group.
@@ -239,16 +238,17 @@ module Google
         #      `//alloydb.googleapis.com/projects/project-number/locations/us-central1/clusters/c1/instances/i1`
         # @!attribute [rw] container
         #   @return [::String]
-        #     Specifies where the resource is created. For GCP, it is the full name of
-        #     the project.
+        #     Specifies where the resource is created. For Google Cloud resources, it is
+        #     the full name of the project.
         # @!attribute [rw] product
         #   @return [::Google::Cloud::DatabaseCenter::V1beta::Product]
         #     The product this resource represents.
         # @!attribute [rw] location
         #   @return [::String]
         #     The location of the resources. It supports returning only regional
-        #     locations in GCP. These are of the form: "us-central1", "us-east1", etc.
-        #     See https://cloud.google.com/about/locations for a list of such regions.
+        #     locations in Google Cloud. These are of the form: "us-central1",
+        #     "us-east1", etc. See https://cloud.google.com/about/locations for a list of
+        #     such regions.
         # @!attribute [rw] labels
         #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::Label>]
         #     Labels applied on the resource. The requirements for labels assigned to
@@ -578,8 +578,8 @@ module Google
         # Dimension used to aggregate the fleet.
         # @!attribute [rw] container
         #   @return [::String]
-        #     Specifies where the resource is created. For GCP, it is the full name of
-        #     the project.
+        #     Specifies where the resource is created. For Google Cloud resources, it
+        #     is the full name of the project.
         #
         #     Note: The following fields are mutually exclusive: `container`, `product_type`, `product_engine`, `product_version`, `location`, `resource_type`, `sub_resource_type`, `resource_category`, `management_type`, `edition`, `tag_key`, `tag_value`, `tag_source`, `tag_inherited`, `label_key`, `label_value`, `label_source`, `has_maintenance_schedule`, `has_deny_maintenance_schedules`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] product_type
@@ -600,7 +600,7 @@ module Google
         # @!attribute [rw] location
         #   @return [::String]
         #     The location of the resources. It supports returning only regional
-        #     locations in GCP.
+        #     locations in Google Cloud.
         #
         #     Note: The following fields are mutually exclusive: `location`, `container`, `product_type`, `product_engine`, `product_version`, `resource_type`, `sub_resource_type`, `resource_category`, `management_type`, `edition`, `tag_key`, `tag_value`, `tag_source`, `tag_inherited`, `label_key`, `label_value`, `label_source`, `has_maintenance_schedule`, `has_deny_maintenance_schedules`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] resource_type
@@ -822,8 +822,8 @@ module Google
         #     Full resource name of the resource.
         # @!attribute [rw] container
         #   @return [::String]
-        #     Specifies where the resource is created. For GCP, it is the full name of
-        #     the project.
+        #     Specifies where the resource is created. For Google Cloud resources, it is
+        #     the full name of the project.
         # @!attribute [rw] product
         #   @return [::Google::Cloud::DatabaseCenter::V1beta::Product]
         #     Product type of the resource.
