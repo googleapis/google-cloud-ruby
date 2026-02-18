@@ -29,6 +29,11 @@
               "methods": [
                 "aggregate_issue_stats"
               ]
+            },
+            "QueryIssues": {
+              "methods": [
+                "query_issues"
+              ]
             }
           }
         }
