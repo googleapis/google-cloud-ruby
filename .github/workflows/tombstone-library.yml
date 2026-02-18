@@ -28,4 +28,7 @@ jobs:
         gem install --no-document toys
     - name: Tombstone-library
       run: |
-        toys tombstone-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
+        toys tombstone-library -v --fork ${GITHUB_EVENT_INPUTS_FLAGS} ${GITHUB_EVENT_INPUTS_GEM}
+      env:
+        GITHUB_EVENT_INPUTS_FLAGS: ${{ github.event.inputs.flags }}
+        GITHUB_EVENT_INPUTS_GEM: ${{ github.event.inputs.gem }}
