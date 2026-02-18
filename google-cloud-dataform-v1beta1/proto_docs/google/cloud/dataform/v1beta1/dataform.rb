@@ -35,6 +35,19 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The repository's name.
+        # @!attribute [rw] containing_folder
+        #   @return [::String]
+        #     Optional. The name of the containing folder of the repository.
+        #     The field is immutable and it can be modified via a MoveRepository
+        #     operation.
+        #     Format: `projects/*/locations/*/folders/*`. or
+        #     `projects/*/locations/*/teamFolders/*`.
+        # @!attribute [r] team_folder_name
+        #   @return [::String]
+        #     Output only. The resource name of the TeamFolder that this Repository is
+        #     associated with. This should take the format:
+        #     projects/\\{project}/locations/\\{location}/teamFolders/\\{teamFolder}. If this
+        #     is not set, the Repository is not associated with a TeamFolder.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp of when the repository was created.
@@ -178,6 +191,16 @@ module Google
           end
         end
 
+        # Metadata used to identify if a resource is user scoped.
+        # @!attribute [r] user_scoped
+        #   @return [::Boolean]
+        #     Output only. If true, this resource is user-scoped, meaning it is either a
+        #     workspace or sourced from a workspace.
+        class PrivateResourceMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `ListRepositories` request message.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -221,6 +244,21 @@ module Google
         #   @return [::Array<::String>]
         #     Locations which could not be reached.
         class ListRepositoriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `MoveRepository` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the repository to move.
+        # @!attribute [rw] destination_containing_folder
+        #   @return [::String]
+        #     Optional. The name of the Folder, TeamFolder, or root location to move the
+        #     repository to. Can be in the format of: "" to move into the root User
+        #     folder, `projects/*/locations/*/folders/*`,
+        #     `projects/*/locations/*/teamFolders/*`
+        class MoveRepositoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -270,9 +308,13 @@ module Google
         #     Required. The repository's name.
         # @!attribute [rw] force
         #   @return [::Boolean]
-        #     Optional. If set to true, any child resources of this repository will also
-        #     be deleted. (Otherwise, the request will only succeed if the repository has
-        #     no child resources.)
+        #     Optional. If set to true, child resources of this repository (compilation
+        #     results and workflow invocations) will also be deleted. Otherwise, the
+        #     request will only succeed if the repository has no child resources.
+        #
+        #     **Note:** *This flag doesn't support deletion of workspaces, release
+        #     configs or workflow configs. If any of such resources exists in the
+        #     repository, the request will fail.*.
         class DeleteRepositoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -550,6 +592,14 @@ module Google
         #     Output only. All the metadata information that is used internally to serve
         #     the resource. For example: timestamps, flags, status fields, etc. The
         #     format of this field is a JSON string.
+        # @!attribute [rw] disable_moves
+        #   @return [::Boolean]
+        #     Optional. If set to true, workspaces will not be moved if its linked
+        #     Repository is moved. Instead, it will be deleted.
+        # @!attribute [r] private_resource_metadata
+        #   @return [::Google::Cloud::Dataform::V1beta1::PrivateResourceMetadata]
+        #     Output only. Metadata indicating whether this resource is user-scoped. For
+        #     `Workspace` resources, the `user_scoped` field is always `true`.
         class Workspace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1342,6 +1392,11 @@ module Google
         #     Output only. All the metadata information that is used internally to serve
         #     the resource. For example: timestamps, flags, status fields, etc. The
         #     format of this field is a JSON string.
+        # @!attribute [r] private_resource_metadata
+        #   @return [::Google::Cloud::Dataform::V1beta1::PrivateResourceMetadata]
+        #     Output only. Metadata indicating whether this resource is user-scoped.
+        #     `CompilationResult` resource is `user_scoped` only if it is sourced
+        #     from a workspace.
         class CompilationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1657,6 +1712,24 @@ module Google
           #     options clause of a create table/view statement. See
           #     https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
           #     for more information on which options are supported.
+          # @!attribute [rw] connection
+          #   @return [::String]
+          #     Optional. The connection specifying the credentials to be used to read
+          #     and write to external storage, such as Cloud Storage. The connection can
+          #     have the form `{project}.{location}.{connection_id}` or
+          #     `projects/{project}/locations/{location}/connections/{connection_id}`,
+          #     or be set to DEFAULT.
+          # @!attribute [rw] table_format
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation::TableFormat]
+          #     Optional. The table format for the BigQuery table.
+          # @!attribute [rw] file_format
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation::FileFormat]
+          #     Optional. The file format for the BigQuery table.
+          # @!attribute [rw] storage_uri
+          #   @return [::String]
+          #     Optional. The fully qualified location prefix of the external folder
+          #     where table data is stored. The URI should be in the format
+          #     `gs://bucket/path_to_table/`.
           class Relation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1718,6 +1791,24 @@ module Google
 
               # The relation is a materialized view.
               MATERIALIZED_VIEW = 4
+            end
+
+            # Supported table formats for BigQuery tables.
+            module TableFormat
+              # Default value.
+              TABLE_FORMAT_UNSPECIFIED = 0
+
+              # Apache Iceberg format.
+              ICEBERG = 1
+            end
+
+            # Supported file formats for BigQuery tables.
+            module FileFormat
+              # Default value.
+              FILE_FORMAT_UNSPECIFIED = 0
+
+              # Apache Parquet format.
+              PARQUET = 1
             end
           end
 
@@ -2036,9 +2127,30 @@ module Google
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account to run workflow invocations under.
+        # @!attribute [rw] query_priority
+        #   @return [::Google::Cloud::Dataform::V1beta1::InvocationConfig::QueryPriority]
+        #     Optional. Specifies the priority for query execution in BigQuery.
+        #     More information can be found at
+        #     https://cloud.google.com/bigquery/docs/running-queries#queries.
         class InvocationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Types of priority for query execution in BigQuery.
+          module QueryPriority
+            # Default value. This value is unused.
+            QUERY_PRIORITY_UNSPECIFIED = 0
+
+            # Query will be executed in BigQuery with interactive priority.
+            # More information can be found at
+            # https://cloud.google.com/bigquery/docs/running-queries#queries.
+            INTERACTIVE = 1
+
+            # Query will be executed in BigQuery with batch priority.
+            # More information can be found at
+            # https://cloud.google.com/bigquery/docs/running-queries#batchqueries.
+            BATCH = 2
+          end
         end
 
         # `ListWorkflowConfigs` request message.
@@ -2167,6 +2279,11 @@ module Google
         #     Output only. All the metadata information that is used internally to serve
         #     the resource. For example: timestamps, flags, status fields, etc. The
         #     format of this field is a JSON string.
+        # @!attribute [r] private_resource_metadata
+        #   @return [::Google::Cloud::Dataform::V1beta1::PrivateResourceMetadata]
+        #     Output only. Metadata indicating whether this resource is user-scoped.
+        #     `WorkflowInvocation` resource is `user_scoped` only if it is sourced
+        #     from a compilation result and the compilation result is user-scoped.
         class WorkflowInvocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2531,6 +2648,11 @@ module Google
         #   @return [::String]
         #     Optional. The default KMS key that is used if no encryption key is provided
         #     when a repository is created.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class Config
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2555,6 +2677,529 @@ module Google
         class UpdateConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a Dataform Folder. This is a resource that is used to organize
+        # Files and other Folders and provide hierarchical access controls.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The Folder's name.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. The Folder's user-friendly name.
+        # @!attribute [rw] containing_folder
+        #   @return [::String]
+        #     Optional. The containing Folder resource name. This should take
+        #     the format: projects/\\{project}/locations/\\{location}/folders/\\{folder},
+        #     projects/\\{project}/locations/\\{location}/teamFolders/\\{teamFolder}, or just
+        #     projects/\\{project}/locations/\\{location} if this is a root Folder. This
+        #     field can only be updated through MoveFolder.
+        # @!attribute [r] team_folder_name
+        #   @return [::String]
+        #     Output only. The resource name of the TeamFolder that this Folder is
+        #     associated with. This should take the format:
+        #     projects/\\{project}/locations/\\{location}/teamFolders/\\{teamFolder}. If this
+        #     is not set, the Folder is not associated with a TeamFolder and is a
+        #     UserFolder.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the Folder was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the Folder was last updated.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
+        # @!attribute [r] creator_iam_principal
+        #   @return [::String]
+        #     Output only. The IAM principal identifier of the creator of the Folder.
+        class Folder
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `CreateFolder` request message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The location in which to create the Folder. Must be in the format
+        #     `projects/*/locations/*`.
+        # @!attribute [rw] folder
+        #   @return [::Google::Cloud::Dataform::V1beta1::Folder]
+        #     Required. The Folder to create.
+        # @!attribute [rw] folder_id
+        #   @return [::String]
+        #     The ID to use for the Folder, which will become the final component of
+        #     the Folder's resource name.
+        class CreateFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `MoveFolder` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the Folder to move.
+        # @!attribute [rw] destination_containing_folder
+        #   @return [::String]
+        #     Optional. The name of the Folder, TeamFolder, or root location to move the
+        #     Folder to. Can be in the format of: "" to move into the root User folder,
+        #     `projects/*/locations/*/folders/*`, `projects/*/locations/*/teamFolders/*`
+        class MoveFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `GetFolder` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Folder's name.
+        class GetFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `UpdateFolder` request message.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Specifies the fields to be updated in the Folder. If left unset,
+        #     all fields that can be updated, will be updated. A few fields cannot be
+        #     updated and will be ignored if specified in the update_mask (e.g.
+        #     parent_name, team_folder_name).
+        # @!attribute [rw] folder
+        #   @return [::Google::Cloud::Dataform::V1beta1::Folder]
+        #     Required. The updated Folder.
+        class UpdateFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteFolder` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Folder's name.
+        class DeleteFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `QueryFolderContents` request message.
+        # @!attribute [rw] folder
+        #   @return [::String]
+        #     Required. Name of the folder whose contents to list.
+        #     Format: projects/*/locations/*/folders/*
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of paths to return. The server may return fewer
+        #     items than requested. If unspecified, the server will pick an appropriate
+        #     default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `QueryFolderContents` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `QueryFolderContents`, with the exception of `page_size`, must match the
+        #     call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to additionally sort results by.
+        #     Will order Folders before Repositories, and then by `order_by` in ascending
+        #     order. Supported keywords: display_name (default), create_time,
+        #     last_modified_time.
+        #     Examples:
+        #       - `orderBy="display_name"`
+        #       - `orderBy="display_name desc"`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Optional filtering for the returned list. Filtering is currently
+        #     only supported on the `display_name` field.
+        #
+        #     Example:
+        #      - `filter="display_name="MyFolder""`
+        class QueryFolderContentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `QueryFolderContents` response message.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse::FolderContentsEntry>]
+        #     List of entries in the folder.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class QueryFolderContentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a single content entry.
+          # @!attribute [rw] folder
+          #   @return [::Google::Cloud::Dataform::V1beta1::Folder]
+          #     A subfolder.
+          #
+          #     Note: The following fields are mutually exclusive: `folder`, `repository`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] repository
+          #   @return [::Google::Cloud::Dataform::V1beta1::Repository]
+          #     A repository.
+          #
+          #     Note: The following fields are mutually exclusive: `repository`, `folder`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class FolderContentsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # `QueryUserRootContents` request message.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Required. Location of the user root folder whose contents to list.
+        #     Format: projects/*/locations/*
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of paths to return. The server may return fewer
+        #     items than requested. If unspecified, the server will pick an appropriate
+        #     default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `QueryUserRootContents` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `QueryUserRootFolderContents`, with the exception of `page_size`, must
+        #     match the call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to additionally sort results by.
+        #     Will order Folders before Repositories, and then by `order_by` in ascending
+        #     order. Supported keywords: display_name (default), created_at,
+        #     last_modified_at. Examples:
+        #       - `orderBy="display_name"`
+        #       - `orderBy="display_name desc"`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Optional filtering for the returned list. Filtering is currently
+        #     only supported on the `display_name` field.
+        #
+        #     Example:
+        #      - `filter="display_name="MyFolder""`
+        class QueryUserRootContentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `QueryUserRootContents` response message.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse::RootContentsEntry>]
+        #     List of entries in the folder.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class QueryUserRootContentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a single content entry.
+          # @!attribute [rw] folder
+          #   @return [::Google::Cloud::Dataform::V1beta1::Folder]
+          #     A subfolder.
+          #
+          #     Note: The following fields are mutually exclusive: `folder`, `repository`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] repository
+          #   @return [::Google::Cloud::Dataform::V1beta1::Repository]
+          #     A repository.
+          #
+          #     Note: The following fields are mutually exclusive: `repository`, `folder`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class RootContentsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Represents a Dataform TeamFolder. This is a resource that sits at the project
+        # level and is used to organize Repositories and Folders with hierarchical
+        # access controls. They provide a team context and stricter access controls.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The TeamFolder's name.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. The TeamFolder's user-friendly name.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the TeamFolder was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the TeamFolder was last updated.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
+        # @!attribute [r] creator_iam_principal
+        #   @return [::String]
+        #     Output only. The IAM principal identifier of the creator of the TeamFolder.
+        class TeamFolder
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `CreateTeamFolder` request message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The location in which to create the TeamFolder. Must be in the
+        #     format `projects/*/locations/*`.
+        # @!attribute [rw] team_folder
+        #   @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+        #     Required. The TeamFolder to create.
+        # @!attribute [rw] team_folder_id
+        #   @return [::String]
+        #     The ID to use for the TeamFolder, which will become the final component of
+        #     the TeamFolder's resource name.
+        class CreateTeamFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `GetTeamFolder` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The TeamFolder's name.
+        class GetTeamFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `UpdateTeamFolder` request message.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Specifies the fields to be updated in the Folder. If left unset,
+        #     all fields will be updated.
+        # @!attribute [rw] team_folder
+        #   @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+        #     Required. The updated TeamFolder.
+        class UpdateTeamFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteTeamFolder` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The TeamFolder's name.
+        class DeleteTeamFolderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `QueryTeamFolderContents` request message.
+        # @!attribute [rw] team_folder
+        #   @return [::String]
+        #     Required. Name of the team_folder whose contents to list.
+        #     Format: `projects/*/locations/*/teamFolders/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of paths to return. The server may return fewer
+        #     items than requested. If unspecified, the server will pick an appropriate
+        #     default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `QueryTeamFolderContents`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `QueryTeamFolderContents`, with the exception of `page_size`, must match
+        #     the call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to additionally sort results by.
+        #     Will order Folders before Repositories, and then by `order_by` in ascending
+        #     order. Supported keywords: `display_name` (default), `create_time`,
+        #     last_modified_time.
+        #     Examples:
+        #       - `orderBy="display_name"`
+        #       - `orderBy="display_name desc"`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Optional filtering for the returned list. Filtering is currently
+        #     only supported on the `display_name` field.
+        #
+        #     Example:
+        #      - `filter="display_name="MyFolder""`
+        class QueryTeamFolderContentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `QueryTeamFolderContents` response message.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse::TeamFolderContentsEntry>]
+        #     List of entries in the TeamFolder.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class QueryTeamFolderContentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a single content entry.
+          # @!attribute [rw] folder
+          #   @return [::Google::Cloud::Dataform::V1beta1::Folder]
+          #     A subfolder.
+          #
+          #     Note: The following fields are mutually exclusive: `folder`, `repository`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] repository
+          #   @return [::Google::Cloud::Dataform::V1beta1::Repository]
+          #     A repository.
+          #
+          #     Note: The following fields are mutually exclusive: `repository`, `folder`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class TeamFolderContentsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # `SearchTeamFolders` request message.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Required. Location in which to query TeamFolders.
+        #     Format: `projects/*/locations/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of TeamFolders to return. The server may return
+        #     fewer items than requested. If unspecified, the server will pick an
+        #     appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `SearchTeamFolders` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `SearchTeamFolders`, with the exception of `page_size`, must
+        #     match the call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to additionally sort results by.
+        #     Supported keywords: `display_name` (default), `create_time`,
+        #     `last_modified_time`. Examples:
+        #       - `orderBy="display_name"`
+        #       - `orderBy="display_name desc"`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Optional filtering for the returned list. Filtering is currently
+        #     only supported on the `display_name` field.
+        #
+        #     Example:
+        #      - `filter="display_name="MyFolder""`
+        class SearchTeamFoldersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `SearchTeamFolders` response message.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse::TeamFolderSearchResult>]
+        #     List of TeamFolders that match the search query.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class SearchTeamFoldersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a single content entry.
+          # @!attribute [rw] team_folder
+          #   @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+          #     A TeamFolder resource that is in the project / location.
+          class TeamFolderSearchResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Contains metadata about the progress of the MoveFolder Long-running
+        # operations.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] target
+        #   @return [::String]
+        #     Output only. Server-defined resource path for the target of the operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dataform::V1beta1::MoveFolderMetadata::State]
+        #     The state of the move.
+        # @!attribute [rw] percent_complete
+        #   @return [::Integer]
+        #     Percent complete of the move [0, 100].
+        class MoveFolderMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Different states of the move.
+          module State
+            # The state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The move was initialized and recorded by the server, but not yet started.
+            INITIALIZED = 1
+
+            # The move is in progress.
+            IN_PROGRESS = 2
+
+            # The move has completed successfully.
+            SUCCESS = 3
+
+            # The move has failed.
+            FAILED = 4
+          end
+        end
+
+        # Contains metadata about the progress of the MoveRepository Long-running
+        # operations.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] target
+        #   @return [::String]
+        #     Output only. Server-defined resource path for the target of the operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dataform::V1beta1::MoveRepositoryMetadata::State]
+        #     The state of the move.
+        # @!attribute [rw] percent_complete
+        #   @return [::Integer]
+        #     Percent complete of the move [0, 100].
+        class MoveRepositoryMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Different states of the move.
+          module State
+            # The state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The move was initialized and recorded by the server, but not yet started.
+            INITIALIZED = 1
+
+            # The move is in progress.
+            IN_PROGRESS = 2
+
+            # The move has completed successfully.
+            SUCCESS = 3
+
+            # The move has failed.
+            FAILED = 4
+          end
         end
       end
     end

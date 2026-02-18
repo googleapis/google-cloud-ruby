@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/dataform/v1beta1"
 
-client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new
-request = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new # (request fields as keyword arguments...)
-response = client.list_repositories request
+client = ::Google::Longrunning::Operations::Client.new
+request = ::Google::Longrunning::ListOperationsRequest.new # (request fields as keyword arguments...)
+response = client.list_operations request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataform-v1beta1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/dataform/v1beta1"
 require "logger"
 
-client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+client = ::Google::Longrunning::Operations::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

@@ -25,6 +25,7 @@ require "google/cloud/dataform/v1beta1/bindings_override"
 
 require "google/cloud/dataform/v1beta1/dataform/credentials"
 require "google/cloud/dataform/v1beta1/dataform/paths"
+require "google/cloud/dataform/v1beta1/dataform/rest/operations"
 require "google/cloud/dataform/v1beta1/dataform/rest/client"
 
 module Google

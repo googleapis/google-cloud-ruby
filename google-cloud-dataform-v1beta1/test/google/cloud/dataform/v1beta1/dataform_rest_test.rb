@@ -78,6 +78,731 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_get_team_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_team_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_team_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_team_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_team_folder ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_team_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_team_folder(::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_team_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    team_folder = {}
+    team_folder_id = "hello world"
+
+    create_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_team_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_team_folder({ parent: parent, team_folder: team_folder, team_folder_id: team_folder_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_team_folder parent: parent, team_folder: team_folder, team_folder_id: team_folder_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_team_folder ::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new(parent: parent, team_folder: team_folder, team_folder_id: team_folder_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_team_folder({ parent: parent, team_folder: team_folder, team_folder_id: team_folder_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_team_folder(::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new(parent: parent, team_folder: team_folder, team_folder_id: team_folder_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_team_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    team_folder = {}
+
+    update_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_team_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_team_folder({ update_mask: update_mask, team_folder: team_folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_team_folder update_mask: update_mask, team_folder: team_folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_team_folder ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new(update_mask: update_mask, team_folder: team_folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_team_folder({ update_mask: update_mask, team_folder: team_folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_team_folder(::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new(update_mask: update_mask, team_folder: team_folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_team_folder
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_team_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_team_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_team_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_team_folder ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_team_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_team_folder(::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_team_folder_contents
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    team_folder = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_team_folder_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_team_folder_contents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_team_folder_contents_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_team_folder_contents({ team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_team_folder_contents team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_team_folder_contents ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new(team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_team_folder_contents({ team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_team_folder_contents(::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new(team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_team_folder_contents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_search_team_folders
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    search_team_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_search_team_folders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, search_team_folders_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.search_team_folders({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.search_team_folders location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.search_team_folders ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.search_team_folders({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.search_team_folders(::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, search_team_folders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_folder ::Google::Cloud::Dataform::V1beta1::GetFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_folder(::Google::Cloud::Dataform::V1beta1::GetFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    folder = {}
+    folder_id = "hello world"
+
+    create_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_folder({ parent: parent, folder: folder, folder_id: folder_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_folder parent: parent, folder: folder, folder_id: folder_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_folder ::Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_folder({ parent: parent, folder: folder, folder_id: folder_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_folder(::Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    folder = {}
+
+    update_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_folder({ update_mask: update_mask, folder: folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_folder update_mask: update_mask, folder: folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_folder ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new(update_mask: update_mask, folder: folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_folder({ update_mask: update_mask, folder: folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_folder(::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new(update_mask: update_mask, folder: folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_folder
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_folder ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_folder(::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_folder_contents
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    folder = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_folder_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_folder_contents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_folder_contents_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_folder_contents({ folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_folder_contents folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_folder_contents ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new(folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_folder_contents({ folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_folder_contents(::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new(folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_folder_contents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_user_root_contents
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_user_root_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_user_root_contents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_user_root_contents_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_user_root_contents({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_user_root_contents location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_user_root_contents ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_user_root_contents({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_user_root_contents(::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_user_root_contents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move_folder
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_containing_folder = "hello world"
+
+    move_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_move_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_folder_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move_folder({ name: name, destination_containing_folder: destination_containing_folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move_folder name: name, destination_containing_folder: destination_containing_folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move_folder ::Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new(name: name, destination_containing_folder: destination_containing_folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move_folder({ name: name, destination_containing_folder: destination_containing_folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move_folder(::Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new(name: name, destination_containing_folder: destination_containing_folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_folder_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_repositories
     # Create test objects.
     client_result = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse.new
@@ -352,6 +1077,61 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
 
         # Verify method calls
         assert_equal 5, delete_repository_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move_repository
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_containing_folder = "hello world"
+
+    move_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_move_repository_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_repository_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.move_repository({ name: name, destination_containing_folder: destination_containing_folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.move_repository name: name, destination_containing_folder: destination_containing_folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.move_repository ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new(name: name, destination_containing_folder: destination_containing_folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.move_repository({ name: name, destination_containing_folder: destination_containing_folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.move_repository(::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new(name: name, destination_containing_folder: destination_containing_folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_repository_client_stub.call_count
       end
     end
   end
@@ -3068,6 +3848,172 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
 
         # Verify method calls
         assert_equal 5, update_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_iam_policy resource: resource, options: options do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create test objects.
+    client_result = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, test_iam_permissions_client_stub.call_count
       end
     end
   end

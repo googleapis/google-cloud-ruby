@@ -152,6 +152,13 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
+              end
+
               @dataform_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataform::V1beta1::Dataform::Stub,
                 credentials: credentials,
@@ -192,6 +199,13 @@ module Google
             end
 
             ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::Dataform::Operations]
+            #
+            attr_reader :operations_client
+
+            ##
             # Get the associated client for mix-in of the Locations.
             #
             # @return [Google::Cloud::Location::Locations::Client]
@@ -215,6 +229,1272 @@ module Google
             end
 
             # Service calls
+
+            ##
+            # Fetches a single TeamFolder.
+            #
+            # @overload get_team_folder(request, options = nil)
+            #   Pass arguments to `get_team_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_team_folder(name: nil)
+            #   Pass arguments to `get_team_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The TeamFolder's name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new
+            #
+            #   # Call the get_team_folder method.
+            #   result = client.get_team_folder request
+            #
+            #   # The returned object is of type Google::Cloud::Dataform::V1beta1::TeamFolder.
+            #   p result
+            #
+            def get_team_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_team_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_team_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_team_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :get_team_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new TeamFolder in a given project and location.
+            #
+            # @overload create_team_folder(request, options = nil)
+            #   Pass arguments to `create_team_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_team_folder(parent: nil, team_folder: nil, team_folder_id: nil)
+            #   Pass arguments to `create_team_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The location in which to create the TeamFolder. Must be in the
+            #     format `projects/*/locations/*`.
+            #   @param team_folder [::Google::Cloud::Dataform::V1beta1::TeamFolder, ::Hash]
+            #     Required. The TeamFolder to create.
+            #   @param team_folder_id [::String]
+            #     The ID to use for the TeamFolder, which will become the final component of
+            #     the TeamFolder's resource name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new
+            #
+            #   # Call the create_team_folder method.
+            #   result = client.create_team_folder request
+            #
+            #   # The returned object is of type Google::Cloud::Dataform::V1beta1::TeamFolder.
+            #   p result
+            #
+            def create_team_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_team_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_team_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_team_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :create_team_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a single TeamFolder.
+            #
+            # @overload update_team_folder(request, options = nil)
+            #   Pass arguments to `update_team_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_team_folder(update_mask: nil, team_folder: nil)
+            #   Pass arguments to `update_team_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Specifies the fields to be updated in the Folder. If left unset,
+            #     all fields will be updated.
+            #   @param team_folder [::Google::Cloud::Dataform::V1beta1::TeamFolder, ::Hash]
+            #     Required. The updated TeamFolder.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new
+            #
+            #   # Call the update_team_folder method.
+            #   result = client.update_team_folder request
+            #
+            #   # The returned object is of type Google::Cloud::Dataform::V1beta1::TeamFolder.
+            #   p result
+            #
+            def update_team_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_team_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.team_folder&.name
+                header_params["team_folder.name"] = request.team_folder.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_team_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_team_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :update_team_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single TeamFolder.
+            #
+            # @overload delete_team_folder(request, options = nil)
+            #   Pass arguments to `delete_team_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_team_folder(name: nil)
+            #   Pass arguments to `delete_team_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The TeamFolder's name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new
+            #
+            #   # Call the delete_team_folder method.
+            #   result = client.delete_team_folder request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_team_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_team_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_team_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_team_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :delete_team_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the contents of a given TeamFolder.
+            #
+            # @overload query_team_folder_contents(request, options = nil)
+            #   Pass arguments to `query_team_folder_contents` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_team_folder_contents(team_folder: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `query_team_folder_contents` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param team_folder [::String]
+            #     Required. Name of the team_folder whose contents to list.
+            #     Format: `projects/*/locations/*/teamFolders/*`.
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of paths to return. The server may return fewer
+            #     items than requested. If unspecified, the server will pick an appropriate
+            #     default.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `QueryTeamFolderContents`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `QueryTeamFolderContents`, with the exception of `page_size`, must match
+            #     the call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. Field to additionally sort results by.
+            #     Will order Folders before Repositories, and then by `order_by` in ascending
+            #     order. Supported keywords: `display_name` (default), `create_time`,
+            #     last_modified_time.
+            #     Examples:
+            #       - `orderBy="display_name"`
+            #       - `orderBy="display_name desc"`
+            #   @param filter [::String]
+            #     Optional. Optional filtering for the returned list. Filtering is currently
+            #     only supported on the `display_name` field.
+            #
+            #     Example:
+            #      - `filter="display_name="MyFolder""`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse::TeamFolderContentsEntry>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse::TeamFolderContentsEntry>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new
+            #
+            #   # Call the query_team_folder_contents method.
+            #   result = client.query_team_folder_contents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse::TeamFolderContentsEntry.
+            #     p item
+            #   end
+            #
+            def query_team_folder_contents request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_team_folder_contents.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.team_folder
+                header_params["team_folder"] = request.team_folder
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_team_folder_contents.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_team_folder_contents.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :query_team_folder_contents, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_team_folder_contents, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns all TeamFolders in a given location that the caller has access to
+            # and match the provided filter.
+            #
+            # @overload search_team_folders(request, options = nil)
+            #   Pass arguments to `search_team_folders` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_team_folders(location: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `search_team_folders` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param location [::String]
+            #     Required. Location in which to query TeamFolders.
+            #     Format: `projects/*/locations/*`.
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of TeamFolders to return. The server may return
+            #     fewer items than requested. If unspecified, the server will pick an
+            #     appropriate default.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `SearchTeamFolders` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `SearchTeamFolders`, with the exception of `page_size`, must
+            #     match the call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. Field to additionally sort results by.
+            #     Supported keywords: `display_name` (default), `create_time`,
+            #     `last_modified_time`. Examples:
+            #       - `orderBy="display_name"`
+            #       - `orderBy="display_name desc"`
+            #   @param filter [::String]
+            #     Optional. Optional filtering for the returned list. Filtering is currently
+            #     only supported on the `display_name` field.
+            #
+            #     Example:
+            #      - `filter="display_name="MyFolder""`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse::TeamFolderSearchResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse::TeamFolderSearchResult>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new
+            #
+            #   # Call the search_team_folders method.
+            #   result = client.search_team_folders request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse::TeamFolderSearchResult.
+            #     p item
+            #   end
+            #
+            def search_team_folders request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_team_folders.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_team_folders.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_team_folders.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :search_team_folders, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataform_stub, :search_team_folders, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetches a single Folder.
+            #
+            # @overload get_folder(request, options = nil)
+            #   Pass arguments to `get_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::GetFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::GetFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_folder(name: nil)
+            #   Pass arguments to `get_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The Folder's name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataform::V1beta1::Folder]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::Folder]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::GetFolderRequest.new
+            #
+            #   # Call the get_folder method.
+            #   result = client.get_folder request
+            #
+            #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Folder.
+            #   p result
+            #
+            def get_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::GetFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :get_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new Folder in a given project and location.
+            #
+            # @overload create_folder(request, options = nil)
+            #   Pass arguments to `create_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::CreateFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::CreateFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_folder(parent: nil, folder: nil, folder_id: nil)
+            #   Pass arguments to `create_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The location in which to create the Folder. Must be in the format
+            #     `projects/*/locations/*`.
+            #   @param folder [::Google::Cloud::Dataform::V1beta1::Folder, ::Hash]
+            #     Required. The Folder to create.
+            #   @param folder_id [::String]
+            #     The ID to use for the Folder, which will become the final component of
+            #     the Folder's resource name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataform::V1beta1::Folder]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::Folder]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new
+            #
+            #   # Call the create_folder method.
+            #   result = client.create_folder request
+            #
+            #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Folder.
+            #   p result
+            #
+            def create_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::CreateFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :create_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a single Folder.
+            #
+            # @overload update_folder(request, options = nil)
+            #   Pass arguments to `update_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_folder(update_mask: nil, folder: nil)
+            #   Pass arguments to `update_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Specifies the fields to be updated in the Folder. If left unset,
+            #     all fields that can be updated, will be updated. A few fields cannot be
+            #     updated and will be ignored if specified in the update_mask (e.g.
+            #     parent_name, team_folder_name).
+            #   @param folder [::Google::Cloud::Dataform::V1beta1::Folder, ::Hash]
+            #     Required. The updated Folder.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataform::V1beta1::Folder]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataform::V1beta1::Folder]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new
+            #
+            #   # Call the update_folder method.
+            #   result = client.update_folder request
+            #
+            #   # The returned object is of type Google::Cloud::Dataform::V1beta1::Folder.
+            #   p result
+            #
+            def update_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.folder&.name
+                header_params["folder.name"] = request.folder.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :update_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single Folder.
+            #
+            # @overload delete_folder(request, options = nil)
+            #   Pass arguments to `delete_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_folder(name: nil)
+            #   Pass arguments to `delete_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The Folder's name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new
+            #
+            #   # Call the delete_folder method.
+            #   result = client.delete_folder request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :delete_folder, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the contents of a given Folder.
+            #
+            # @overload query_folder_contents(request, options = nil)
+            #   Pass arguments to `query_folder_contents` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_folder_contents(folder: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `query_folder_contents` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param folder [::String]
+            #     Required. Name of the folder whose contents to list.
+            #     Format: projects/*/locations/*/folders/*
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of paths to return. The server may return fewer
+            #     items than requested. If unspecified, the server will pick an appropriate
+            #     default.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `QueryFolderContents` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `QueryFolderContents`, with the exception of `page_size`, must match the
+            #     call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. Field to additionally sort results by.
+            #     Will order Folders before Repositories, and then by `order_by` in ascending
+            #     order. Supported keywords: display_name (default), create_time,
+            #     last_modified_time.
+            #     Examples:
+            #       - `orderBy="display_name"`
+            #       - `orderBy="display_name desc"`
+            #   @param filter [::String]
+            #     Optional. Optional filtering for the returned list. Filtering is currently
+            #     only supported on the `display_name` field.
+            #
+            #     Example:
+            #      - `filter="display_name="MyFolder""`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse::FolderContentsEntry>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse::FolderContentsEntry>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new
+            #
+            #   # Call the query_folder_contents method.
+            #   result = client.query_folder_contents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse::FolderContentsEntry.
+            #     p item
+            #   end
+            #
+            def query_folder_contents request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_folder_contents.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.folder
+                header_params["folder"] = request.folder
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_folder_contents.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_folder_contents.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :query_folder_contents, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_folder_contents, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the contents of a caller's root folder in a given location.
+            # The root folder contains all resources that are created by the user and not
+            # contained in any other folder.
+            #
+            # @overload query_user_root_contents(request, options = nil)
+            #   Pass arguments to `query_user_root_contents` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_user_root_contents(location: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `query_user_root_contents` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param location [::String]
+            #     Required. Location of the user root folder whose contents to list.
+            #     Format: projects/*/locations/*
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of paths to return. The server may return fewer
+            #     items than requested. If unspecified, the server will pick an appropriate
+            #     default.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `QueryUserRootContents` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `QueryUserRootFolderContents`, with the exception of `page_size`, must
+            #     match the call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. Field to additionally sort results by.
+            #     Will order Folders before Repositories, and then by `order_by` in ascending
+            #     order. Supported keywords: display_name (default), created_at,
+            #     last_modified_at. Examples:
+            #       - `orderBy="display_name"`
+            #       - `orderBy="display_name desc"`
+            #   @param filter [::String]
+            #     Optional. Optional filtering for the returned list. Filtering is currently
+            #     only supported on the `display_name` field.
+            #
+            #     Example:
+            #      - `filter="display_name="MyFolder""`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse::RootContentsEntry>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse::RootContentsEntry>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new
+            #
+            #   # Call the query_user_root_contents method.
+            #   result = client.query_user_root_contents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse::RootContentsEntry.
+            #     p item
+            #   end
+            #
+            def query_user_root_contents request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_user_root_contents.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_user_root_contents.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_user_root_contents.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :query_user_root_contents, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_user_root_contents, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Moves a Folder to a new Folder, TeamFolder, or the root location.
+            #
+            # @overload move_folder(request, options = nil)
+            #   Pass arguments to `move_folder` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::MoveFolderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::MoveFolderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload move_folder(name: nil, destination_containing_folder: nil)
+            #   Pass arguments to `move_folder` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full resource name of the Folder to move.
+            #   @param destination_containing_folder [::String]
+            #     Optional. The name of the Folder, TeamFolder, or root location to move the
+            #     Folder to. Can be in the format of: "" to move into the root User folder,
+            #     `projects/*/locations/*/folders/*`, `projects/*/locations/*/teamFolders/*`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new
+            #
+            #   # Call the move_folder method.
+            #   result = client.move_folder request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def move_folder request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::MoveFolderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.move_folder.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.move_folder.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.move_folder.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :move_folder, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
 
             ##
             # Lists Repositories in a given project and location.
@@ -618,9 +1898,13 @@ module Google
             #   @param name [::String]
             #     Required. The repository's name.
             #   @param force [::Boolean]
-            #     Optional. If set to true, any child resources of this repository will also
-            #     be deleted. (Otherwise, the request will only succeed if the repository has
-            #     no child resources.)
+            #     Optional. If set to true, child resources of this repository (compilation
+            #     results and workflow invocations) will also be deleted. Otherwise, the
+            #     request will only succeed if the repository has no child resources.
+            #
+            #     **Note:** *This flag doesn't support deletion of workspaces, release
+            #     configs or workflow configs. If any of such resources exists in the
+            #     repository, the request will fail.*.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -681,6 +1965,105 @@ module Google
 
               @dataform_stub.call_rpc :delete_repository, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Moves a Repository to a new location.
+            #
+            # @overload move_repository(request, options = nil)
+            #   Pass arguments to `move_repository` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload move_repository(name: nil, destination_containing_folder: nil)
+            #   Pass arguments to `move_repository` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full resource name of the repository to move.
+            #   @param destination_containing_folder [::String]
+            #     Optional. The name of the Folder, TeamFolder, or root location to move the
+            #     repository to. Can be in the format of: "" to move into the root User
+            #     folder, `projects/*/locations/*/folders/*`,
+            #     `projects/*/locations/*/teamFolders/*`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new
+            #
+            #   # Call the move_repository method.
+            #   result = client.move_repository request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def move_repository request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.move_repository.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.move_repository.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.move_repository.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :move_repository, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5207,6 +6590,294 @@ module Google
             end
 
             ##
+            # Gets the access control policy for a resource.
+            # Returns an empty policy if the resource exists and does not have a policy
+            # set.
+            #
+            # @overload get_iam_policy(request, options = nil)
+            #   Pass arguments to `get_iam_policy` via a request object, either of type
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_iam_policy(resource: nil, options: nil)
+            #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy is being requested.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+            #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+            #     `GetIamPolicy`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
+            def get_iam_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Sets the access control policy on the specified resource. Replaces any
+            # existing policy.
+            #
+            # Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+            #
+            # @overload set_iam_policy(request, options = nil)
+            #   Pass arguments to `set_iam_policy` via a request object, either of type
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+            #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy is being specified.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+            #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+            #     the policy is limited to a few 10s of KB. An empty policy is a
+            #     valid policy but certain Cloud Platform services (such as Projects)
+            #     might reject them.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+            #     the fields in the mask will be modified. If no mask is provided, the
+            #     following default mask is used:
+            #
+            #     `paths: "bindings, etag"`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
+            def set_iam_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns permissions that a caller has on the specified resource.
+            # If the resource does not exist, this will return an empty set of
+            # permissions, not a `NOT_FOUND` error.
+            #
+            # Note: This operation is designed to be used for building permission-aware
+            # UIs and command-line tools, not for authorization checking. This operation
+            # may "fail open" without warning.
+            #
+            # @overload test_iam_permissions(request, options = nil)
+            #   Pass arguments to `test_iam_permissions` via a request object, either of type
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload test_iam_permissions(resource: nil, permissions: nil)
+            #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy detail is being requested.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param permissions [::Array<::String>]
+            #     The set of permissions to check for the `resource`. Permissions with
+            #     wildcards (such as '*' or 'storage.*') are not allowed. For more
+            #     information see
+            #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
+            def test_iam_permissions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Dataform API.
             #
             # This class represents the configuration for Dataform,
@@ -5222,17 +6893,17 @@ module Google
             # @example
             #
             #   # Modify the global config, setting the timeout for
-            #   # list_repositories to 20 seconds,
+            #   # get_team_folder to 20 seconds,
             #   # and all remaining timeouts to 10 seconds.
             #   ::Google::Cloud::Dataform::V1beta1::Dataform::Client.configure do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.list_repositories.timeout = 20.0
+            #     config.rpcs.get_team_folder.timeout = 20.0
             #   end
             #
             #   # Apply the above configuration only to a new client.
             #   client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.list_repositories.timeout = 20.0
+            #     config.rpcs.get_team_folder.timeout = 20.0
             #   end
             #
             # @!attribute [rw] endpoint
@@ -5390,6 +7061,71 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `get_team_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_team_folder
+                ##
+                # RPC-specific configuration for `create_team_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_team_folder
+                ##
+                # RPC-specific configuration for `update_team_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_team_folder
+                ##
+                # RPC-specific configuration for `delete_team_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_team_folder
+                ##
+                # RPC-specific configuration for `query_team_folder_contents`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_team_folder_contents
+                ##
+                # RPC-specific configuration for `search_team_folders`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_team_folders
+                ##
+                # RPC-specific configuration for `get_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_folder
+                ##
+                # RPC-specific configuration for `create_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_folder
+                ##
+                # RPC-specific configuration for `update_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_folder
+                ##
+                # RPC-specific configuration for `delete_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_folder
+                ##
+                # RPC-specific configuration for `query_folder_contents`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_folder_contents
+                ##
+                # RPC-specific configuration for `query_user_root_contents`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_user_root_contents
+                ##
+                # RPC-specific configuration for `move_folder`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :move_folder
+                ##
                 # RPC-specific configuration for `list_repositories`
                 # @return [::Gapic::Config::Method]
                 #
@@ -5414,6 +7150,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_repository
+                ##
+                # RPC-specific configuration for `move_repository`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :move_repository
                 ##
                 # RPC-specific configuration for `commit_repository_changes`
                 # @return [::Gapic::Config::Method]
@@ -5659,9 +7400,50 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_config
+                ##
+                # RPC-specific configuration for `get_iam_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_iam_policy
+                ##
+                # RPC-specific configuration for `set_iam_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_iam_policy
+                ##
+                # RPC-specific configuration for `test_iam_permissions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :test_iam_permissions
 
                 # @private
                 def initialize parent_rpcs = nil
+                  get_team_folder_config = parent_rpcs.get_team_folder if parent_rpcs.respond_to? :get_team_folder
+                  @get_team_folder = ::Gapic::Config::Method.new get_team_folder_config
+                  create_team_folder_config = parent_rpcs.create_team_folder if parent_rpcs.respond_to? :create_team_folder
+                  @create_team_folder = ::Gapic::Config::Method.new create_team_folder_config
+                  update_team_folder_config = parent_rpcs.update_team_folder if parent_rpcs.respond_to? :update_team_folder
+                  @update_team_folder = ::Gapic::Config::Method.new update_team_folder_config
+                  delete_team_folder_config = parent_rpcs.delete_team_folder if parent_rpcs.respond_to? :delete_team_folder
+                  @delete_team_folder = ::Gapic::Config::Method.new delete_team_folder_config
+                  query_team_folder_contents_config = parent_rpcs.query_team_folder_contents if parent_rpcs.respond_to? :query_team_folder_contents
+                  @query_team_folder_contents = ::Gapic::Config::Method.new query_team_folder_contents_config
+                  search_team_folders_config = parent_rpcs.search_team_folders if parent_rpcs.respond_to? :search_team_folders
+                  @search_team_folders = ::Gapic::Config::Method.new search_team_folders_config
+                  get_folder_config = parent_rpcs.get_folder if parent_rpcs.respond_to? :get_folder
+                  @get_folder = ::Gapic::Config::Method.new get_folder_config
+                  create_folder_config = parent_rpcs.create_folder if parent_rpcs.respond_to? :create_folder
+                  @create_folder = ::Gapic::Config::Method.new create_folder_config
+                  update_folder_config = parent_rpcs.update_folder if parent_rpcs.respond_to? :update_folder
+                  @update_folder = ::Gapic::Config::Method.new update_folder_config
+                  delete_folder_config = parent_rpcs.delete_folder if parent_rpcs.respond_to? :delete_folder
+                  @delete_folder = ::Gapic::Config::Method.new delete_folder_config
+                  query_folder_contents_config = parent_rpcs.query_folder_contents if parent_rpcs.respond_to? :query_folder_contents
+                  @query_folder_contents = ::Gapic::Config::Method.new query_folder_contents_config
+                  query_user_root_contents_config = parent_rpcs.query_user_root_contents if parent_rpcs.respond_to? :query_user_root_contents
+                  @query_user_root_contents = ::Gapic::Config::Method.new query_user_root_contents_config
+                  move_folder_config = parent_rpcs.move_folder if parent_rpcs.respond_to? :move_folder
+                  @move_folder = ::Gapic::Config::Method.new move_folder_config
                   list_repositories_config = parent_rpcs.list_repositories if parent_rpcs.respond_to? :list_repositories
                   @list_repositories = ::Gapic::Config::Method.new list_repositories_config
                   get_repository_config = parent_rpcs.get_repository if parent_rpcs.respond_to? :get_repository
@@ -5672,6 +7454,8 @@ module Google
                   @update_repository = ::Gapic::Config::Method.new update_repository_config
                   delete_repository_config = parent_rpcs.delete_repository if parent_rpcs.respond_to? :delete_repository
                   @delete_repository = ::Gapic::Config::Method.new delete_repository_config
+                  move_repository_config = parent_rpcs.move_repository if parent_rpcs.respond_to? :move_repository
+                  @move_repository = ::Gapic::Config::Method.new move_repository_config
                   commit_repository_changes_config = parent_rpcs.commit_repository_changes if parent_rpcs.respond_to? :commit_repository_changes
                   @commit_repository_changes = ::Gapic::Config::Method.new commit_repository_changes_config
                   read_repository_file_config = parent_rpcs.read_repository_file if parent_rpcs.respond_to? :read_repository_file
@@ -5770,6 +7554,12 @@ module Google
                   @get_config = ::Gapic::Config::Method.new get_config_config
                   update_config_config = parent_rpcs.update_config if parent_rpcs.respond_to? :update_config
                   @update_config = ::Gapic::Config::Method.new update_config_config
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
                 end
