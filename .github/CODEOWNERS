@@ -9,9 +9,9 @@
 # explicitly taken by someone else.
 *                                    @googleapis/cloud-sdk-ruby-team @yoshi-approver
 
-/google-cloud-bigquery*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-bigquery
-/google-cloud-bigtable*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-bigtable-sdk
-/google-cloud-datastore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-datastore-sdk
-/google-cloud-firestore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-firestore-sdk
-/google-cloud-pubsub*/.              @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/api-pubsub
-/google-cloud-storage/               @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/gcs-sdk-team
+/google-cloud-bigquery*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/bigquery-team
+/google-cloud-bigtable*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/bigtable-team
+/google-cloud-datastore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver
+/google-cloud-firestore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/firestore-team
+/google-cloud-pubsub*/.              @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/pubsub-team
+/google-cloud-storage/               @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/gcs-team
