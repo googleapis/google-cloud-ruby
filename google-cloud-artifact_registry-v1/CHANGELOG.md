@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.0 (2026-02-18)
+
+#### Features
+
+* add DIRSUM_SHA256 hash type ([#32417](https://github.com/googleapis/google-cloud-ruby/issues/32417)) 
+
 ### 1.10.0 (2026-01-13)
 
 #### Features
