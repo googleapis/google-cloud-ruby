@@ -663,9 +663,36 @@ module Google
           # @!attribute [r] candidates_tokens_details
           #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
           #     Output only. List of modalities that were returned in the response.
+          # @!attribute [r] tool_use_prompt_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. A detailed breakdown by modality of the token counts from
+          #     the results of tool executions, which are provided back to the model as
+          #     input.
+          # @!attribute [r] traffic_type
+          #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::UsageMetadata::TrafficType]
+          #     Output only. The traffic type for this request.
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of traffic that this request was processed with, indicating
+            # which quota is consumed.
+            module TrafficType
+              # Unspecified request traffic type.
+              TRAFFIC_TYPE_UNSPECIFIED = 0
+
+              # The request was processed using Pay-As-You-Go quota.
+              ON_DEMAND = 1
+
+              # Type for Priority Pay-As-You-Go traffic.
+              ON_DEMAND_PRIORITY = 3
+
+              # Type for Flex traffic.
+              ON_DEMAND_FLEX = 4
+
+              # Type for Provisioned Throughput traffic.
+              PROVISIONED_THROUGHPUT = 2
+            end
           end
         end
 
