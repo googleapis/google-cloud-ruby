@@ -24,4 +24,6 @@ jobs:
           gem install --no-document toys
       - name: execute
         run: |
-          toys update-release-levels --fork ${{ github.event.inputs.args }}
+          toys update-release-levels --fork ${GITHUB_EVENT_INPUTS_ARGS}
+        env:
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}
