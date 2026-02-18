@@ -26,4 +26,6 @@ jobs:
         gem install --no-document toys
     - name: Create library
       run: |
-        toys new-library -v --pull --test --fork --bootstrap-releases ${{ github.event.inputs.protoPath }}
+        toys new-library -v --pull --test --fork --bootstrap-releases ${GITHUB_EVENT_INPUTS_PROTOPATH}
+      env:
+        GITHUB_EVENT_INPUTS_PROTOPATH: ${{ github.event.inputs.protoPath }}

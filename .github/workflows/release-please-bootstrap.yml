@@ -24,4 +24,6 @@ jobs:
           gem install --no-document toys
       - name: execute
         run: |
-          toys release bootstrap -v --fork ${{ github.event.inputs.gems }}
+          toys release bootstrap -v --fork ${GITHUB_EVENT_INPUTS_GEMS}
+        env:
+          GITHUB_EVENT_INPUTS_GEMS: ${{ github.event.inputs.gems }}

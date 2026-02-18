@@ -34,4 +34,6 @@ jobs:
         run: |
           toys release label-please -v \
             --github-event-name=${{ github.event_name }} \
-            ${{ github.event.inputs.args }}
+            ${GITHUB_EVENT_INPUTS_ARGS}
+        env:
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}

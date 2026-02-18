@@ -32,6 +32,10 @@ jobs:
       - name: execute
         run: |
           toys bump-version -v --fork \
-            --version "${{ github.event.inputs.version }}" \
-            ${{ github.event.inputs.args }} -- \
-            ${{ github.event.inputs.gems }}
+            --version "${GITHUB_EVENT_INPUTS_VERSION}" \
+            ${GITHUB_EVENT_INPUTS_ARGS} -- \
+            ${GITHUB_EVENT_INPUTS_GEMS}
+        env:
+          GITHUB_EVENT_INPUTS_VERSION: ${{ github.event.inputs.version }}
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}
+          GITHUB_EVENT_INPUTS_GEMS: ${{ github.event.inputs.gems }}
