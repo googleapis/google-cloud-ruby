@@ -132,6 +132,9 @@ module Grafeas
     # @!attribute [rw] layer_count
     #   @return [::Integer]
     #     The number of layers that the base image is composed of.
+    # @!attribute [rw] registry
+    #   @return [::String]
+    #     The registry in which the base image is from.
     class BaseImage
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
