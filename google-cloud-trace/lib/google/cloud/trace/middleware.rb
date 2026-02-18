@@ -301,11 +301,24 @@ module Google
         #
         def configure_span span, env
           span.name = get_path env
+          set_default_labels span.labels
           set_basic_labels span.labels, env
           set_extended_labels span.labels,
                               span.trace.trace_context.capture_stack?
           span
         end
+
+        ##
+        # Configures default labels.
+        # @private
+        #
+        # rubocop:disable Naming/AccessorMethodName
+        def set_default_labels labels
+          configuration.default_labels.each do |key, value|
+            set_label labels, key, value
+          end
+        end
+        # rubocop:enable Naming/AccessorMethodName
 
         ##
         # Configures standard labels.
