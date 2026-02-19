@@ -727,7 +727,8 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new restriction_mode: "NotRestricted"
+        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new
+        #     restriction_mode: "NotRestricted"
         #   allowed restriction_mode for all the config will be "NotRestricted" or "FullyRestricted"
 
         def customer_managed_encryption_enforcement_config
@@ -735,8 +736,9 @@ module Google
         end
 
         def customer_managed_encryption_enforcement_config= new_customer_managed_encryption_enforcement_config
-          @gapi.encryption = API::Bucket::Encryption.new \
-            customer_managed_encryption_enforcement_config: new_customer_managed_encryption_enforcement_config
+          @gapi.encryption ||= API::Bucket::Encryption.new
+          @gapi.encryption.customer_managed_encryption_enforcement_config =
+            new_customer_managed_encryption_enforcement_config
           patch_gapi! :encryption
         end
 
@@ -749,7 +751,8 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new restriction_mode: "NotRestricted"
+        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new
+        #     restriction_mode: "NotRestricted"
         #   allowed restriction_mode for all the config will be "NotRestricted" or "FullyRestricted"
 
         def customer_supplied_encryption_enforcement_config
@@ -757,8 +760,9 @@ module Google
         end
 
         def customer_supplied_encryption_enforcement_config= new_customer_supplied_encryption_enforcement_config
-          @gapi.encryption = API::Bucket::Encryption.new \
-            customer_supplied_encryption_enforcement_config: new_customer_supplied_encryption_enforcement_config
+          @gapi.encryption ||= API::Bucket::Encryption.new
+          @gapi.encryption.customer_supplied_encryption_enforcement_config =
+            new_customer_supplied_encryption_enforcement_config
           patch_gapi! :encryption
         end
 
@@ -772,7 +776,8 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEGoogleManagedEncryptionEnforcementConfigncryptionEnforcementConfig.new restriction_mode: "NotRestricted"
+        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new
+        #     restriction_mode: "NotRestricted"
         #   allowed restriction_mode for all the config will be "NotRestricted" or "FullyRestricted"
 
         def google_managed_encryption_enforcement_config
@@ -780,8 +785,9 @@ module Google
         end
 
         def google_managed_encryption_enforcement_config= new_google_managed_encryption_enforcement_config
-          @gapi.encryption = API::Bucket::Encryption.new \
-            google_managed_encryption_enforcement_config: new_google_managed_encryption_enforcement_config
+          @gapi.encryption ||= API::Bucket::Encryption.new
+          @gapi.encryption.google_managed_encryption_enforcement_config =
+            new_google_managed_encryption_enforcement_config
           patch_gapi! :encryption
         end
 

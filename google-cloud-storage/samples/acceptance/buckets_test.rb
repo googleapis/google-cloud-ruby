@@ -172,10 +172,11 @@ describe "Buckets Snippets" do
     end
   end
 
-  describe "storage_set_encryption_enforcement_config" do
+  describe "storage_encryption_enforcement_config" do
     bucket_name = random_bucket_name
 
-    it "creates bucket with encryption enforcement config" do
+    it "gets, sets and clears bucket encryption enforcement config" do
+      # creates bucket with encryption enforcement config
       expected = "Created bucket #{bucket_name} with Encryption Enforcement Config.\n"
 
       retry_resource_exhaustion do
@@ -183,7 +184,8 @@ describe "Buckets Snippets" do
           set_encryption_enforcement_config bucket_name: bucket_name
         end
       end
-
+      
+      # get encryption enforcement config
       expected = "Encryption Enforcement Config for bucket #{bucket_name}:\n" \
                  "Customer-managed encryption enforcement config restriction mode: NotRestricted\n" \
                  "Customer-supplied encryption enforcement config restriction mode: FullyRestricted\n" \
@@ -193,15 +195,15 @@ describe "Buckets Snippets" do
           get_encryption_enforcement_config bucket_name: bucket_name
         end
       end
-
-       expected = "Removed Encryption Enforcement Config from bucket #{bucket_name}.\n"
+      
+      # clears encryption enforcement config
+      expected = "Removed Encryption Enforcement Config from bucket #{bucket_name}.\n"
 
       retry_resource_exhaustion do
         assert_output expected do
           remove_all_encryption_enforcement_config bucket_name: bucket_name
         end
       end
-
 
       refute_nil storage_client.bucket bucket_name
     end

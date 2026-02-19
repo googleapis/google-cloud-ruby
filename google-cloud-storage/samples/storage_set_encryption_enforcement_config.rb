@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_set_encryption_enforcement_config]
-def set_encryption_enforcement_config bucket_name:, restriction_mode: nil
+def set_encryption_enforcement_config bucket_name:
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -21,13 +21,24 @@ def set_encryption_enforcement_config bucket_name:, restriction_mode: nil
 
   storage = Google::Cloud::Storage.new
 
-  customer_managed_encryption_enforcement_config = Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new restriction_mode: "NotRestricted"
-  customer_supplied_encryption_enforcement_config = Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"
-  google_managed_encryption_enforcement_config = Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"
-  bucket = storage.create_bucket bucket_name 
-  bucket.customer_managed_encryption_enforcement_config = customer_managed_encryption_enforcement_config
-  bucket.customer_supplied_encryption_enforcement_config = customer_supplied_encryption_enforcement_config
-  bucket.google_managed_encryption_enforcement_config = google_managed_encryption_enforcement_config
+  customer_managed_config =
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
+  customer_supplied_config =
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+    )
+  google_managed_config =
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+    )
+
+  bucket = storage.create_bucket bucket_name do |b|
+    b.customer_managed_encryption_enforcement_config = customer_managed_config
+    b.customer_supplied_encryption_enforcement_config = customer_supplied_config
+    b.google_managed_encryption_enforcement_config = google_managed_config
+  end
   puts "Created bucket #{bucket.name} with Encryption Enforcement Config."
 end
 # [END storage_set_encryption_enforcement_config]
