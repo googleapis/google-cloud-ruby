@@ -751,7 +751,7 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new
+        #   bucket.customer_supplied_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new
         #     restriction_mode: "NotRestricted"
         #   allowed restriction_mode for all the config will be "NotRestricted" or "FullyRestricted"
 
@@ -766,7 +766,7 @@ module Google
           patch_gapi! :encryption
         end
 
-         # The bucket's encryption configuration for google-managed encryption keys.
+        # The bucket's encryption configuration for google-managed encryption keys.
         # This configuration defines the
         # default encryption behavior for the bucket and its files, and it can be used to enforce encryption requirements for the bucket.
         # For more information, see [Bucket encryption](https://docs.cloud.google.com/storage/docs/encryption/).
@@ -776,7 +776,7 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.customer_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new
+        #   bucket.google_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new
         #     restriction_mode: "NotRestricted"
         #   allowed restriction_mode for all the config will be "NotRestricted" or "FullyRestricted"
 

@@ -439,5 +439,3 @@ describe Google::Cloud::Storage::Bucket, :storage do
     end
   end
 end
-
-

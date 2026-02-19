@@ -184,7 +184,7 @@ describe "Buckets Snippets" do
           set_encryption_enforcement_config bucket_name: bucket_name
         end
       end
-      
+
       # get encryption enforcement config
       expected = "Encryption Enforcement Config for bucket #{bucket_name}:\n" \
                  "Customer-managed encryption enforcement config restriction mode: NotRestricted\n" \
@@ -195,7 +195,7 @@ describe "Buckets Snippets" do
           get_encryption_enforcement_config bucket_name: bucket_name
         end
       end
-      
+
       # clears encryption enforcement config
       expected = "Removed Encryption Enforcement Config from bucket #{bucket_name}.\n"
 

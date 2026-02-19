@@ -22,9 +22,12 @@ def get_encryption_enforcement_config bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
   puts "Encryption Enforcement Config for bucket #{bucket.name}:"
-  puts "Customer-managed encryption enforcement config restriction mode: #{bucket.customer_managed_encryption_enforcement_config.restriction_mode}"
-  puts "Customer-supplied encryption enforcement config restriction mode: #{bucket.customer_supplied_encryption_enforcement_config.restriction_mode}"
-  puts "Google-managed encryption enforcement config restriction mode: #{bucket.google_managed_encryption_enforcement_config.restriction_mode}"
+  puts "Customer-managed encryption enforcement config restriction mode: " \
+       "#{bucket.customer_managed_encryption_enforcement_config&.restriction_mode}"
+  puts "Customer-supplied encryption enforcement config restriction mode: " \
+       "#{bucket.customer_supplied_encryption_enforcement_config&.restriction_mode}"
+  puts "Google-managed encryption enforcement config restriction mode: " \
+       "#{bucket.google_managed_encryption_enforcement_config&.restriction_mode}"
 end
 # [END storage_get_encryption_enforcement_config]
 
