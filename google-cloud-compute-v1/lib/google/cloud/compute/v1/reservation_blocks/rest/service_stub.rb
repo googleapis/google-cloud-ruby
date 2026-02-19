@@ -114,6 +114,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_iam_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyReservationBlockRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Policy]
+              #   A result object deserialized from the server's reply
+              def get_iam_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_iam_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_iam_policy",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the list REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::ListReservationBlocksRequest]
@@ -194,6 +234,86 @@ module Google
               end
 
               ##
+              # Baseline implementation for the set_iam_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyReservationBlockRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Policy]
+              #   A result object deserialized from the server's reply
+              def set_iam_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_set_iam_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "set_iam_policy",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the test_iam_permissions REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsReservationBlockRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              #   A result object deserialized from the server's reply
+              def test_iam_permissions request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_test_iam_permissions_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "test_iam_permissions",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the get REST call
@@ -212,6 +332,30 @@ module Google
                                                             ["zone", %r{^[^/]+/?$}, false],
                                                             ["reservation", %r{^[^/]+/?$}, false],
                                                             ["reservation_block", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_iam_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyReservationBlockRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_iam_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{parent_resource}/reservationBlocks/{resource}/getIamPolicy",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["parent_resource", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -260,6 +404,56 @@ module Google
                                                             ["zone", %r{^[^/]+/?$}, false],
                                                             ["reservation", %r{^[^/]+/?$}, false],
                                                             ["reservation_block", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_iam_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyReservationBlockRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_set_iam_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{parent_resource}/reservationBlocks/{resource}/setIamPolicy",
+                                                          body: "zone_set_nested_policy_request_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["parent_resource", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the test_iam_permissions REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsReservationBlockRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_test_iam_permissions_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{parent_resource}/reservationBlocks/{resource}/testIamPermissions",
+                                                          body: "test_permissions_request_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["parent_resource", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
