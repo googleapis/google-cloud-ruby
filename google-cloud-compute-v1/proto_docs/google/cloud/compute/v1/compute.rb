@@ -11885,6 +11885,9 @@ module Google
         # @!attribute [rw] count
         #   @return [::Integer]
         #     The maximum number of instances to create.
+        # @!attribute [rw] instance_flexibility_policy
+        #   @return [::Google::Cloud::Compute::V1::InstanceFlexibilityPolicy]
+        #     A flexible specification of machine type of instances to create.
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::InstanceProperties]
         #     The instance properties defining the VM instances to be created. Required
@@ -28379,6 +28382,59 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A flexible specification of machine types for instances to create.
+        # @!attribute [rw] instance_selections
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::InstanceFlexibilityPolicyInstanceSelection}]
+        #     Specification of alternative, flexible instance subsets.
+        #     One of them will be selected to create the instances
+        #     based on various criteria, like:
+        #     - ranks,
+        #     - location policy,
+        #     - current capacity,
+        #     - available reservations (you can specify affinity in
+        #     InstanceProperties),
+        #     - SWAN/GOOSE limitations.
+        #     Key is an arbitrary, unique RFC1035 string that identifies the instance
+        #     selection.
+        class InstanceFlexibilityPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::InstanceFlexibilityPolicyInstanceSelection]
+          class InstanceSelectionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Specification of machine type to use. Every position inside this message
+        # is an alternative.
+        # The count specified in the shape flexibility must not exceed the number
+        # of entries in per_instance_properties or the capacity of the
+        # name_pattern, if used.
+        # @!attribute [rw] disks
+        #   @return [::Array<::Google::Cloud::Compute::V1::AttachedDisk>]
+        #     Disks to be attached to the instances created from in this selection.
+        #     They override the disks specified in the instance properties.
+        # @!attribute [rw] machine_types
+        #   @return [::Array<::String>]
+        #     Alternative machine types to use for instances that are created from
+        #     these properties. This field only accepts a machine type names, for
+        #     example `n2-standard-4` and not URLs or partial URLs.
+        # @!attribute [rw] rank
+        #   @return [::Integer]
+        #     Rank when prioritizing the shape flexibilities.
+        #     The instance selections with rank are considered
+        #     first, in the ascending order of the rank.
+        #     If not set, defaults to 0.
+        class InstanceFlexibilityPolicyInstanceSelection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents an Instance Group resource.
         #
         # Instance Groups can be used to configure a target forload
@@ -30715,6 +30771,7 @@ module Google
 
             SILENT_DATA_CORRUPTION = 111_360_678
 
+            # Unrecoverable GPU error identified by an XID
             UNRECOVERABLE_GPU_ERROR = 363_710_747
           end
         end
@@ -31561,6 +31618,7 @@ module Google
         #        - BPS_20G: 20 Gbit/s
         #        - BPS_50G: 50 Gbit/s
         #        - BPS_100G: 100 Gbit/s
+        #        - BPS_400G: 400 Gbit/s
         #     Check the Bandwidth enum for the list of possible values.
         # @!attribute [rw] candidate_cloud_router_ip_address
         #   @return [::String]
@@ -31913,6 +31971,7 @@ module Google
           #    - BPS_20G: 20 Gbit/s
           #    - BPS_50G: 50 Gbit/s
           #    - BPS_100G: 100 Gbit/s
+          #    - BPS_400G: 400 Gbit/s
           module Bandwidth
             # A value indicating that the enum field is not set.
             UNDEFINED_BANDWIDTH = 0
@@ -31940,6 +31999,9 @@ module Google
 
             # 300 Mbit/s
             BPS_300M = 49_607_540
+
+            # 400 Gbit/s
+            BPS_400G = 49_637_325
 
             # 400 Mbit/s
             BPS_400M = 49_637_331
