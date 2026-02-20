@@ -63,32 +63,42 @@ module Google
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubConfig]
         #     Configuration for connections to github.com.
         #
-        #     Note: The following fields are mutually exclusive: `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`, `secure_source_manager_instance_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] github_enterprise_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubEnterpriseConfig]
         #     Configuration for connections to an instance of GitHub Enterprise.
         #
-        #     Note: The following fields are mutually exclusive: `github_enterprise_config`, `github_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `github_enterprise_config`, `github_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`, `secure_source_manager_instance_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabConfig]
         #     Configuration for connections to gitlab.com.
         #
-        #     Note: The following fields are mutually exclusive: `gitlab_config`, `github_config`, `github_enterprise_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gitlab_config`, `github_config`, `github_enterprise_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`, `secure_source_manager_instance_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_enterprise_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabEnterpriseConfig]
         #     Configuration for connections to an instance of GitLab Enterprise.
         #
-        #     Note: The following fields are mutually exclusive: `gitlab_enterprise_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gitlab_enterprise_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`, `secure_source_manager_instance_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bitbucket_data_center_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::BitbucketDataCenterConfig]
         #     Configuration for connections to an instance of Bitbucket Data Center.
         #
-        #     Note: The following fields are mutually exclusive: `bitbucket_data_center_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bitbucket_data_center_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_cloud_config`, `secure_source_manager_instance_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bitbucket_cloud_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::BitbucketCloudConfig]
         #     Configuration for connections to an instance of Bitbucket Clouds.
         #
-        #     Note: The following fields are mutually exclusive: `bitbucket_cloud_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bitbucket_cloud_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `secure_source_manager_instance_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] secure_source_manager_instance_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::SecureSourceManagerInstanceConfig]
+        #     Configuration for connections to an instance of Secure Source Manager.
+        #
+        #     Note: The following fields are mutually exclusive: `secure_source_manager_instance_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`, `http_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] http_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GenericHTTPEndpointConfig]
+        #     Optional. Configuration for connections to an HTTP service provider.
+        #
+        #     Note: The following fields are mutually exclusive: `http_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`, `secure_source_manager_instance_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the connection, in the format
@@ -177,6 +187,14 @@ module Google
         #   @return [::Boolean]
         #     Optional. Setting this to true allows the git proxy to be used for
         #     performing git operations on the repositories linked in the connection.
+        # @!attribute [r] http_proxy_base_uri
+        #   @return [::String]
+        #     Output only. The base URI for the HTTP proxy endpoint. Has
+        #     the format
+        #     `https://{generatedID}-c-h-{shortRegion}.developerconnect.dev`
+        #     Populated only when enabled is set to true.
+        #     This endpoint is used by other Google services that integrate with
+        #     Developer Connect.
         class GitProxyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,6 +238,57 @@ module Google
           end
         end
 
+        # Defines the configuration for connections to an HTTP service provider.
+        # @!attribute [rw] basic_authentication
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GenericHTTPEndpointConfig::BasicAuthentication]
+        #     Optional. Basic authentication with username and password.
+        #
+        #     Note: The following fields are mutually exclusive: `basic_authentication`, `bearer_token_authentication`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bearer_token_authentication
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GenericHTTPEndpointConfig::BearerTokenAuthentication]
+        #     Optional. Bearer token authentication with a token.
+        #
+        #     Note: The following fields are mutually exclusive: `bearer_token_authentication`, `basic_authentication`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] host_uri
+        #   @return [::String]
+        #     Required. Immutable. The service provider's https endpoint.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ServiceDirectoryConfig]
+        #     Optional. Configuration for using Service Directory to privately connect to
+        #     a HTTP service provider. This should only be set if the Http service
+        #     provider is hosted on-premises and not reachable by public internet. If
+        #     this field is left empty, calls to the HTTP service provider will be made
+        #     over the public internet.
+        # @!attribute [rw] ssl_ca_certificate
+        #   @return [::String]
+        #     Optional. The SSL certificate to use for requests to the HTTP service
+        #     provider.
+        class GenericHTTPEndpointConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Basic authentication with username and password.
+          # @!attribute [rw] password_secret_version
+          #   @return [::String]
+          #     The password SecretManager secret version to authenticate as.
+          # @!attribute [rw] username
+          #   @return [::String]
+          #     Required. The username to authenticate as.
+          class BasicAuthentication
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Bearer token authentication with a token.
+          # @!attribute [rw] token_secret_version
+          #   @return [::String]
+          #     Optional. The token SecretManager secret version to authenticate as.
+          class BearerTokenAuthentication
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Configuration for connections to github.com.
         # @!attribute [rw] github_app
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubConfig::GitHubApp]
@@ -252,6 +321,9 @@ module Google
 
             # The Firebase GitHub Application.
             FIREBASE = 2
+
+            # The Gemini Code Assist Application.
+            GEMINI_CODE_ASSIST = 3
           end
         end
 
@@ -268,11 +340,15 @@ module Google
         # @!attribute [rw] private_key_secret_version
         #   @return [::String]
         #     Optional. SecretManager resource containing the private key of the GitHub
-        #     App, formatted as `projects/*/secrets/*/versions/*`.
+        #     App, formatted as `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location).
         # @!attribute [rw] webhook_secret_secret_version
         #   @return [::String]
         #     Optional. SecretManager resource containing the webhook secret of the
-        #     GitHub App, formatted as `projects/*/secrets/*/versions/*`.
+        #     GitHub App, formatted as `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location).
         # @!attribute [rw] app_installation_id
         #   @return [::Integer]
         #     Optional. ID of the installation of the GitHub App.
@@ -293,6 +369,10 @@ module Google
         # @!attribute [rw] ssl_ca_certificate
         #   @return [::String]
         #     Optional. SSL certificate to use for requests to GitHub Enterprise.
+        # @!attribute [rw] organization
+        #   @return [::String]
+        #     Optional. Immutable. GitHub Enterprise organization in which the GitHub App
+        #     is created.
         class GitHubEnterpriseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -315,7 +395,9 @@ module Google
         # @!attribute [rw] oauth_token_secret_version
         #   @return [::String]
         #     Required. A SecretManager resource containing the OAuth token that
-        #     authorizes the connection. Format: `projects/*/secrets/*/versions/*`.
+        #     authorizes the connection. Format: `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location).
         # @!attribute [r] username
         #   @return [::String]
         #     Output only. The username associated with this token.
@@ -328,8 +410,9 @@ module Google
         # @!attribute [rw] webhook_secret_secret_version
         #   @return [::String]
         #     Required. Immutable. SecretManager resource containing the webhook secret
-        #     of a GitLab project, formatted as `projects/*/secrets/*/versions/*`. This
-        #     is used to validate webhooks.
+        #     of a GitLab project, formatted as `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location). This is used to validate webhooks.
         # @!attribute [rw] read_authorizer_credential
         #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
         #     Required. A GitLab personal access token with the minimum `read_api` scope
@@ -353,7 +436,9 @@ module Google
         #   @return [::String]
         #     Required. A SecretManager resource containing the user token that
         #     authorizes the Developer Connect connection. Format:
-        #     `projects/*/secrets/*/versions/*`.
+        #     `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location).
         # @!attribute [r] username
         #   @return [::String]
         #     Output only. The username associated with this token.
@@ -369,8 +454,9 @@ module Google
         # @!attribute [rw] webhook_secret_secret_version
         #   @return [::String]
         #     Required. Immutable. SecretManager resource containing the webhook secret
-        #     of a GitLab project, formatted as `projects/*/secrets/*/versions/*`. This
-        #     is used to validate webhooks.
+        #     of a GitLab project, formatted as `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location). This is used to validate webhooks.
         # @!attribute [rw] read_authorizer_credential
         #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
         #     Required. A GitLab personal access token with the minimum `read_api` scope
@@ -411,7 +497,9 @@ module Google
         #   @return [::String]
         #     Required. Immutable. SecretManager resource containing the webhook secret
         #     used to verify webhook events, formatted as
-        #     `projects/*/secrets/*/versions/*`. This is used to validate webhooks.
+        #     `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location). This is used to validate webhooks.
         # @!attribute [rw] read_authorizer_credential
         #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
         #     Required. An http access token with the minimum `Repository read` access.
@@ -450,8 +538,9 @@ module Google
         #   @return [::String]
         #     Required. Immutable. SecretManager resource containing the webhook secret
         #     used to verify webhook events, formatted as
-        #     `projects/*/secrets/*/versions/*`. This is used to validate and create
-        #     webhooks.
+        #     `projects/*/secrets/*/versions/*` or
+        #     `projects/*/locations/*/secrets/*/versions/*` (if regional secrets are
+        #     supported in that location). This is used to validate and create webhooks.
         # @!attribute [rw] read_authorizer_credential
         #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
         #     Required. An access token with the minimum `repository` access.
@@ -464,6 +553,16 @@ module Google
         #     access token. This is needed to create webhooks. It's recommended to use a
         #     system account to generate these credentials.
         class BitbucketCloudConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for connections to Secure Source Manager instance
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Immutable. Secure Source Manager instance resource, formatted as
+        #     `projects/*/locations/*/instances/*`
+        class SecureSourceManagerInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -887,6 +986,102 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for starting an OAuth flow.
+        # @!attribute [rw] account_connector
+        #   @return [::String]
+        #     Required. The resource name of the AccountConnector in the format
+        #     `projects/*/locations/*/accountConnectors/*`.
+        class StartOAuthRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for responding to starting an OAuth flow.
+        # @!attribute [rw] system_provider_id
+        #   @return [::Google::Cloud::DeveloperConnect::V1::SystemProvider]
+        #     The ID of the system provider.
+        # @!attribute [rw] ticket
+        #   @return [::String]
+        #     The ticket to be used for post processing the callback from the service
+        #     provider.
+        # @!attribute [rw] code_challenge
+        #   @return [::String]
+        #     Please refer to https://datatracker.ietf.org/doc/html/rfc7636#section-4.1
+        # @!attribute [rw] code_challenge_method
+        #   @return [::String]
+        #     Please refer to https://datatracker.ietf.org/doc/html/rfc7636#section-4.2
+        # @!attribute [rw] client_id
+        #   @return [::String]
+        #     The client ID to the OAuth App of the service provider.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     The list of scopes requested by the application.
+        # @!attribute [rw] auth_uri
+        #   @return [::String]
+        #     The authorization server URL to the OAuth flow of the service provider.
+        class StartOAuthResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for finishing an OAuth flow.
+        # @!attribute [rw] oauth_params
+        #   @return [::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest::OAuthParams]
+        #     The params returned by non-Google OAuth 2.0 flow redirect.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth_params`, `google_oauth_params`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] google_oauth_params
+        #   @return [::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest::GoogleOAuthParams]
+        #     The params returned by Google OAuth flow redirects.
+        #
+        #     Note: The following fields are mutually exclusive: `google_oauth_params`, `oauth_params`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] account_connector
+        #   @return [::String]
+        #     Required. The resource name of the AccountConnector in the format
+        #     `projects/*/locations/*/accountConnectors/*`.
+        class FinishOAuthRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The params returned by non-Google OAuth 2.0 flow redirect.
+          # @!attribute [rw] code
+          #   @return [::String]
+          #     Required. The code to be used for getting the token from SCM provider.
+          # @!attribute [rw] ticket
+          #   @return [::String]
+          #     Required. The ticket to be used for post processing the callback from SCM
+          #     provider.
+          class OAuthParams
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The params returned by Google OAuth flow redirects.
+          # @!attribute [rw] scopes
+          #   @return [::Array<::String>]
+          #     Required. The scopes returned by Google OAuth flow.
+          # @!attribute [rw] version_info
+          #   @return [::String]
+          #     Optional. The version info returned by Google OAuth flow.
+          # @!attribute [rw] ticket
+          #   @return [::String]
+          #     Required. The ticket to be used for post processing the callback from
+          #     Google OAuth flow.
+          class GoogleOAuthParams
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Message for responding to finishing an OAuth flow.
+        # @!attribute [rw] exchange_error
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ExchangeError]
+        #     The error resulted from exchanging OAuth tokens from the service provider.
+        class FinishOAuthResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message for representing an error from exchanging OAuth tokens.
         # @!attribute [rw] code
         #   @return [::String]
@@ -1256,7 +1451,7 @@ module Google
         # token endpoints.
         # @!attribute [rw] provider_oauth_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::ProviderOAuthConfig]
-        #     Provider OAuth config.
+        #     Optional. Provider OAuth config.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the accountConnector, in the format
@@ -1328,7 +1523,7 @@ module Google
         # ProviderOAuthConfig is the OAuth config for a provider.
         # @!attribute [rw] system_provider_id
         #   @return [::Google::Cloud::DeveloperConnect::V1::SystemProvider]
-        #     Immutable. Developer Connect provided OAuth.
+        #     Optional. Immutable. Developer Connect provided OAuth.
         # @!attribute [rw] scopes
         #   @return [::Array<::String>]
         #     Required. User selected scopes to apply to the Oauth config

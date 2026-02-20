@@ -34,7 +34,7 @@ module Google
             #
             # The InsightsConfig resource is the core configuration object to capture
             # events from your Software Development Lifecycle. It acts as the central hub
-            # for managing how Developer connect understands your application, its runtime
+            # for managing how Developer Connect understands your application, its runtime
             # environments, and the artifacts deployed within them.
             # A user can create an InsightsConfig, list previously-requested
             # InsightsConfigs or get InsightsConfigs by their ID to determine the status of
@@ -592,7 +592,7 @@ module Google
               end
 
               ##
-              # Delete a single Insight.
+              # Deletes a single Insight.
               #
               # @overload delete_insights_config(request, options = nil)
               #   Pass arguments to `delete_insights_config` via a request object, either of type
@@ -691,6 +691,186 @@ module Google
 
                 @insights_config_service_stub.delete_insights_config request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a single Deployment Event.
+              #
+              # @overload get_deployment_event(request, options = nil)
+              #   Pass arguments to `get_deployment_event` via a request object, either of type
+              #   {::Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_deployment_event(name: nil)
+              #   Pass arguments to `get_deployment_event` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the deployment event to retrieve.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/insightsConfigs/\\{insights_config}/deploymentEvents/\\{uuid}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Developerconnect::V1::DeploymentEvent]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Developerconnect::V1::DeploymentEvent]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest.new
+              #
+              #   # Call the get_deployment_event method.
+              #   result = client.get_deployment_event request
+              #
+              #   # The returned object is of type Google::Cloud::Developerconnect::V1::DeploymentEvent.
+              #   p result
+              #
+              def get_deployment_event request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_deployment_event.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_deployment_event.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_deployment_event.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @insights_config_service_stub.get_deployment_event request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Deployment Events in a given insights config.
+              #
+              # @overload list_deployment_events(request, options = nil)
+              #   Pass arguments to `list_deployment_events` via a request object, either of type
+              #   {::Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_deployment_events(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_deployment_events` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent insights config that owns this collection of
+              #     deployment events. Format:
+              #     projects/\\{project}/locations/\\{location}/insightsConfigs/\\{insights_config}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of deployment events to return. The service
+              #     may return fewer than this value. If unspecified, at most 50 deployment
+              #     events will be returned. The maximum value is 1000; values above 1000 will
+              #     be coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListDeploymentEvents`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListDeploymentEvents`
+              #     must match the call that provided the page token.
+              #   @param filter [::String]
+              #     Optional. Filter expression that matches a subset of the DeploymentEvents.
+              #     https://google.aip.dev/160.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Developerconnect::V1::DeploymentEvent>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Developerconnect::V1::DeploymentEvent>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/developer_connect/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Developerconnect::V1::InsightsConfigService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest.new
+              #
+              #   # Call the list_deployment_events method.
+              #   result = client.list_deployment_events request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Developerconnect::V1::DeploymentEvent.
+              #     p item
+              #   end
+              #
+              def list_deployment_events request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_deployment_events.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_deployment_events.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_deployment_events.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @insights_config_service_stub.list_deployment_events request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @insights_config_service_stub, :list_deployment_events, "deployment_events", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -876,6 +1056,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_insights_config
+                  ##
+                  # RPC-specific configuration for `get_deployment_event`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_deployment_event
+                  ##
+                  # RPC-specific configuration for `list_deployment_events`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_deployment_events
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -889,6 +1079,10 @@ module Google
                     @update_insights_config = ::Gapic::Config::Method.new update_insights_config_config
                     delete_insights_config_config = parent_rpcs.delete_insights_config if parent_rpcs.respond_to? :delete_insights_config
                     @delete_insights_config = ::Gapic::Config::Method.new delete_insights_config_config
+                    get_deployment_event_config = parent_rpcs.get_deployment_event if parent_rpcs.respond_to? :get_deployment_event
+                    @get_deployment_event = ::Gapic::Config::Method.new get_deployment_event_config
+                    list_deployment_events_config = parent_rpcs.list_deployment_events if parent_rpcs.respond_to? :list_deployment_events
+                    @list_deployment_events = ::Gapic::Config::Method.new list_deployment_events_config
 
                     yield self if block_given?
                   end

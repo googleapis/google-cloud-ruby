@@ -129,6 +129,16 @@
               "methods": [
                 "delete_self"
               ]
+            },
+            "StartOAuth": {
+              "methods": [
+                "start_o_auth"
+              ]
+            },
+            "FinishOAuth": {
+              "methods": [
+                "finish_o_auth"
+              ]
             }
           }
         }
@@ -162,6 +172,16 @@
             "DeleteInsightsConfig": {
               "methods": [
                 "delete_insights_config"
+              ]
+            },
+            "GetDeploymentEvent": {
+              "methods": [
+                "get_deployment_event"
+              ]
+            },
+            "ListDeploymentEvents": {
+              "methods": [
+                "list_deployment_events"
               ]
             }
           }
