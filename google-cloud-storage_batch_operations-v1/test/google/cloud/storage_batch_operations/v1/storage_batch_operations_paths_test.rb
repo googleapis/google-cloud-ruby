@@ -41,6 +41,18 @@ class ::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Clien
     end
   end
 
+  def test_bucket_operation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.bucket_operation_path project: "value0", location: "value1", job: "value2", bucket_operation: "value3"
+      assert_equal "projects/value0/locations/value1/jobs/value2/bucketOperations/value3", path
+    end
+  end
+
   def test_crypto_key_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
