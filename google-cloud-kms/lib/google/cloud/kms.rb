@@ -153,13 +153,15 @@ module Google
       # ## About AutokeyAdmin
       #
       # Provides interfaces for managing [Cloud KMS
-      # Autokey](https://cloud.google.com/kms/help/autokey) folder-level
-      # configurations. A configuration is inherited by all descendent projects. A
-      # configuration at one folder overrides any other configurations in its
-      # ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
-      # Autokey, so that users working in a descendant project can request
-      # provisioned CryptoKeys, ready for Customer
-      # Managed Encryption Key (CMEK) use, on-demand.
+      # Autokey](https://cloud.google.com/kms/help/autokey) folder-level or
+      # project-level configurations. A configuration is inherited by all descendent
+      # folders and projects. A configuration at a folder or project overrides any
+      # other configurations in its ancestry. Setting a configuration on a folder is
+      # a prerequisite for Cloud KMS Autokey, so that users working in a descendant
+      # project can request provisioned CryptoKeys,
+      # ready for Customer Managed Encryption Key (CMEK) use, on-demand when using
+      # the dedicated key project mode. This is not required when using the delegated
+      # key management mode for same-project keys.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
