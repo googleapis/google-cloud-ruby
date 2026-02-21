@@ -1968,7 +1968,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload change_offer(name: nil, offer: nil, parameters: nil, purchase_order_id: nil, request_id: nil, billing_account: nil)
+              # @overload change_offer(name: nil, offer: nil, parameters: nil, purchase_order_id: nil, request_id: nil, billing_account: nil, price_reference_id: nil)
               #   Pass arguments to `change_offer` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2006,6 +2006,10 @@ module Google
               #
               #     This field is only relevant for multi-currency accounts. It should be
               #     left empty for single currency accounts.
+              #   @param price_reference_id [::String]
+              #     Optional. Price reference ID for the offer. Only for offers that require
+              #     additional price information. Used to guarantee that the pricing is
+              #     consistent between quoting the offer and placing the order.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4424,7 +4428,8 @@ module Google
               #   @param page_token [::String]
               #     Optional. A token identifying a page of results beyond the first page.
               #     Obtained through
-              #     [ListSkuGroups.next_page_token][] of the previous
+              #     {::Google::Cloud::Channel::V1::ListSkuGroupsResponse#next_page_token ListSkuGroupsResponse.next_page_token}
+              #     of the previous
               #     {::Google::Cloud::Channel::V1::CloudChannelService::Rest::Client#list_sku_groups CloudChannelService.ListSkuGroups}
               #     call.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -4537,7 +4542,8 @@ module Google
               #   @param page_token [::String]
               #     Optional. A token identifying a page of results beyond the first page.
               #     Obtained through
-              #     [ListSkuGroupBillableSkus.next_page_token][] of the previous
+              #     {::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusResponse#next_page_token ListSkuGroupBillableSkusResponse.next_page_token}
+              #     of the previous
               #     {::Google::Cloud::Channel::V1::CloudChannelService::Rest::Client#list_sku_group_billable_skus CloudChannelService.ListSkuGroupBillableSkus}
               #     call.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -5325,8 +5331,8 @@ module Google
               end
 
               ##
-              # Registers a service account with subscriber privileges on the Cloud Pub/Sub
-              # topic for this Channel Services account. After you create a
+              # Registers a service account with subscriber privileges on the Pub/Sub
+              # topic for this Channel Services account or integrator. After you create a
               # subscriber, you get the events through
               # {::Google::Cloud::Channel::V1::SubscriberEvent SubscriberEvent}
               #
@@ -5354,16 +5360,20 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload register_subscriber(account: nil, service_account: nil)
+              # @overload register_subscriber(account: nil, service_account: nil, integrator: nil)
               #   Pass arguments to `register_subscriber` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param account [::String]
-              #     Required. Resource name of the account.
+              #     Optional. Resource name of the account. Required if integrator is not
+              #     provided. Otherwise, leave this field empty/unset.
               #   @param service_account [::String]
               #     Required. Service account that provides subscriber access to the registered
               #     topic.
+              #   @param integrator [::String]
+              #     Optional. Resource name of the integrator. Required if account is not
+              #     provided. Otherwise, leave this field empty/unset.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Channel::V1::RegisterSubscriberResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -5423,10 +5433,10 @@ module Google
               end
 
               ##
-              # Unregisters a service account with subscriber privileges on the Cloud
-              # Pub/Sub topic created for this Channel Services account. If there are no
-              # service accounts left with subscriber privileges, this deletes the topic.
-              # You can call ListSubscribers to check for these accounts.
+              # Unregisters a service account with subscriber privileges on the Pub/Sub
+              # topic created for this Channel Services account or integrator. If there are
+              # no service accounts left with subscriber privileges, this deletes the
+              # topic. You can call ListSubscribers to check for these accounts.
               #
               # Possible error codes:
               #
@@ -5455,16 +5465,20 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload unregister_subscriber(account: nil, service_account: nil)
+              # @overload unregister_subscriber(account: nil, service_account: nil, integrator: nil)
               #   Pass arguments to `unregister_subscriber` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param account [::String]
-              #     Required. Resource name of the account.
+              #     Optional. Resource name of the account. Required if integrator is not
+              #     provided. Otherwise, leave this field empty/unset.
               #   @param service_account [::String]
               #     Required. Service account to unregister from subscriber access to the
               #     topic.
+              #   @param integrator [::String]
+              #     Optional. Resource name of the integrator. Required if account is not
+              #     provided. Otherwise, leave this field empty/unset.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Channel::V1::UnregisterSubscriberResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -5524,8 +5538,8 @@ module Google
               end
 
               ##
-              # Lists service accounts with subscriber privileges on the Cloud Pub/Sub
-              # topic created for this Channel Services account.
+              # Lists service accounts with subscriber privileges on the Pub/Sub topic
+              # created for this Channel Services account or integrator.
               #
               # Possible error codes:
               #
@@ -5552,13 +5566,14 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_subscribers(account: nil, page_size: nil, page_token: nil)
+              # @overload list_subscribers(account: nil, page_size: nil, page_token: nil, integrator: nil)
               #   Pass arguments to `list_subscribers` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param account [::String]
-              #     Required. Resource name of the account.
+              #     Optional. Resource name of the account. Required if integrator is not
+              #     provided. Otherwise, leave this field empty/unset.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of service accounts to return. The service may
               #     return fewer than this value. If unspecified, returns at most 100 service
@@ -5570,6 +5585,9 @@ module Google
               #
               #     When paginating, all other parameters provided to `ListSubscribers` must
               #     match the call that provided the page token.
+              #   @param integrator [::String]
+              #     Optional. Resource name of the integrator. Required if account is not
+              #     provided. Otherwise, leave this field empty/unset.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Channel::V1::ListSubscribersResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

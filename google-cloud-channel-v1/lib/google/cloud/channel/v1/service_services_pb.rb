@@ -985,8 +985,8 @@ module Google
             # be purchased using the same billing account and the billing accounts
             # eligible to purchase each SKU group.
             rpc :QueryEligibleBillingAccounts, ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsRequest, ::Google::Cloud::Channel::V1::QueryEligibleBillingAccountsResponse
-            # Registers a service account with subscriber privileges on the Cloud Pub/Sub
-            # topic for this Channel Services account. After you create a
+            # Registers a service account with subscriber privileges on the Pub/Sub
+            # topic for this Channel Services account or integrator. After you create a
             # subscriber, you get the events through
             # [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]
             #
@@ -1004,10 +1004,10 @@ module Google
             # Return value:
             # The topic name with the registered service email address.
             rpc :RegisterSubscriber, ::Google::Cloud::Channel::V1::RegisterSubscriberRequest, ::Google::Cloud::Channel::V1::RegisterSubscriberResponse
-            # Unregisters a service account with subscriber privileges on the Cloud
-            # Pub/Sub topic created for this Channel Services account. If there are no
-            # service accounts left with subscriber privileges, this deletes the topic.
-            # You can call ListSubscribers to check for these accounts.
+            # Unregisters a service account with subscriber privileges on the Pub/Sub
+            # topic created for this Channel Services account or integrator. If there are
+            # no service accounts left with subscriber privileges, this deletes the
+            # topic. You can call ListSubscribers to check for these accounts.
             #
             # Possible error codes:
             #
@@ -1026,8 +1026,8 @@ module Google
             # Returns a success response if the service email address wasn't registered
             # with the topic.
             rpc :UnregisterSubscriber, ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest, ::Google::Cloud::Channel::V1::UnregisterSubscriberResponse
-            # Lists service accounts with subscriber privileges on the Cloud Pub/Sub
-            # topic created for this Channel Services account.
+            # Lists service accounts with subscriber privileges on the Pub/Sub topic
+            # created for this Channel Services account or integrator.
             #
             # Possible error codes:
             #

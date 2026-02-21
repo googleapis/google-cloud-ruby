@@ -937,6 +937,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     purchase_order_id = "hello world"
     request_id = "hello world"
     billing_account = "hello world"
+    price_reference_id = "hello world"
 
     change_offer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -952,27 +953,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }) do |_result, response|
+        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account do |_result, response|
+        client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account) do |_result, response|
+        client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }, call_options) do |_result, response|
+        client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account), call_options) do |_result, response|
+        client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2607,6 +2608,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     account = "hello world"
     service_account = "hello world"
+    integrator = "hello world"
 
     register_subscriber_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -2622,27 +2624,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.register_subscriber({ account: account, service_account: service_account }) do |_result, response|
+        client.register_subscriber({ account: account, service_account: service_account, integrator: integrator }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.register_subscriber account: account, service_account: service_account do |_result, response|
+        client.register_subscriber account: account, service_account: service_account, integrator: integrator do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account) do |_result, response|
+        client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.register_subscriber({ account: account, service_account: service_account }, call_options) do |_result, response|
+        client.register_subscriber({ account: account, service_account: service_account, integrator: integrator }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.register_subscriber(::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account), call_options) do |_result, response|
+        client.register_subscriber(::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2662,6 +2664,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     account = "hello world"
     service_account = "hello world"
+    integrator = "hello world"
 
     unregister_subscriber_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -2677,27 +2680,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.unregister_subscriber({ account: account, service_account: service_account }) do |_result, response|
+        client.unregister_subscriber({ account: account, service_account: service_account, integrator: integrator }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unregister_subscriber account: account, service_account: service_account do |_result, response|
+        client.unregister_subscriber account: account, service_account: service_account, integrator: integrator do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account) do |_result, response|
+        client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unregister_subscriber({ account: account, service_account: service_account }, call_options) do |_result, response|
+        client.unregister_subscriber({ account: account, service_account: service_account, integrator: integrator }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unregister_subscriber(::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account), call_options) do |_result, response|
+        client.unregister_subscriber(::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2718,6 +2721,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     account = "hello world"
     page_size = 42
     page_token = "hello world"
+    integrator = "hello world"
 
     list_subscribers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -2733,27 +2737,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.list_subscribers({ account: account, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_subscribers({ account: account, page_size: page_size, page_token: page_token, integrator: integrator }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_subscribers account: account, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_subscribers account: account, page_size: page_size, page_token: page_token, integrator: integrator do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token, integrator: integrator) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_subscribers({ account: account, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_subscribers({ account: account, page_size: page_size, page_token: page_token, integrator: integrator }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_subscribers(::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_subscribers(::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token, integrator: integrator), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
