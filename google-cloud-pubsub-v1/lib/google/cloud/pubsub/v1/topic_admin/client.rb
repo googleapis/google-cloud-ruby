@@ -308,6 +308,8 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+            #     using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
@@ -485,8 +487,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param topic [::String]
-            #     Required. Identifier. The messages in the request will be published on this
-            #     topic. Format is `projects/{project}/topics/{topic}`.
+            #     Required. The messages in the request will be published on this topic.
+            #     Format is `projects/{project}/topics/{topic}`.
             #   @param messages [::Array<::Google::Cloud::PubSub::V1::PubsubMessage, ::Hash>]
             #     Required. The messages to publish.
             #
@@ -573,7 +575,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param topic [::String]
-            #     Required. Identifier. The name of the topic to get.
+            #     Required. The name of the topic to get.
             #     Format is `projects/{project}/topics/{topic}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -659,7 +661,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. Identifier. The name of the project in which to list topics.
+            #     Required. The name of the project in which to list topics.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of topics to return.
@@ -949,7 +951,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param topic [::String]
-            #     Required. Identifier. Name of the topic to delete.
+            #     Required. Name of the topic to delete.
             #     Format is `projects/{project}/topics/{topic}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
