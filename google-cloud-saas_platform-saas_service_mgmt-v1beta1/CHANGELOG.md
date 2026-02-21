@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2026-02-21)
+
+#### Features
+
+* Add AppHub related condition types to Deployment protos ([#32448](https://github.com/googleapis/google-cloud-ruby/issues/32448)) 
+
 ### 0.2.1 (2025-10-27)
 
 #### Documentation
