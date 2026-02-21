@@ -25,7 +25,7 @@ gem "google-cloud-monitoring-dashboard-v1", path: master ? "../../google-cloud-m
 group :test do
   gem "google-style", "~> 1.25.1"
   gem "irb"
-  gem "minitest", "~> 5.14"
+  gem "minitest", ">= 5.14", "< 7"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-hooks", "~> 1.5"
   gem "rake", ">= 12.0"

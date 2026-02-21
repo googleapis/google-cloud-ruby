@@ -19,6 +19,6 @@ gem "google-cloud-dlp", path: master ? "../../google-cloud-dlp" : nil
 gem "google-cloud-dlp-v2", path: master ? "../../google-cloud-dlp-v2" : nil
 
 group :test do
-  gem "minitest", "~> 5.14"
+  gem "minitest", ">= 5.14", "< 7"
   gem "rake", ">= 12.0"
 end
