@@ -93,6 +93,9 @@ class ::Google::Cloud::Run::V2::Builds::Rest::ClientTest < Minitest::Test
     service_account = "hello world"
     worker_pool = "hello world"
     tags = ["hello world"]
+    machine_type = "hello world"
+    release_track = :LAUNCH_STAGE_UNSPECIFIED
+    client = "hello world"
 
     submit_build_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -108,27 +111,27 @@ class ::Google::Cloud::Run::V2::Builds::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags }) do |_result, response|
+        client.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_build parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags do |_result, response|
+        client.submit_build parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_build ::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags) do |_result, response|
+        client.submit_build ::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags }, call_options) do |_result, response|
+        client.submit_build({ parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_build(::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags), call_options) do |_result, response|
+        client.submit_build(::Google::Cloud::Run::V2::SubmitBuildRequest.new(parent: parent, storage_source: storage_source, image_uri: image_uri, buildpack_build: buildpack_build, service_account: service_account, worker_pool: worker_pool, tags: tags, machine_type: machine_type, release_track: release_track, client: client), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
