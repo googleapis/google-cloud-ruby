@@ -9,7 +9,7 @@ require 'google/ads/datamanager/v1/user_data_pb'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n(google/ads/datamanager/v1/audience.proto\x12\x19google.ads.datamanager.v1\x1a\'google/ads/datamanager/v1/consent.proto\x1a)google/ads/datamanager/v1/user_data.proto\x1a\x1fgoogle/api/field_behavior.proto\"\xa9\x02\n\x0e\x41udienceMember\x12#\n\x16\x64\x65stination_references\x18\x01 \x03(\tB\x03\xe0\x41\x01\x12\x38\n\tuser_data\x18\x02 \x01(\x0b\x32#.google.ads.datamanager.v1.UserDataH\x00\x12\x38\n\tpair_data\x18\x04 \x01(\x0b\x32#.google.ads.datamanager.v1.PairDataH\x00\x12<\n\x0bmobile_data\x18\x05 \x01(\x0b\x32%.google.ads.datamanager.v1.MobileDataH\x00\x12\x38\n\x07\x63onsent\x18\x03 \x01(\x0b\x32\".google.ads.datamanager.v1.ConsentB\x03\xe0\x41\x01\x42\x06\n\x04\x64\x61ta\"!\n\x08PairData\x12\x15\n\x08pair_ids\x18\x01 \x03(\tB\x03\xe0\x41\x02\"%\n\nMobileData\x12\x17\n\nmobile_ids\x18\x01 \x03(\tB\x03\xe0\x41\x02\x42\xca\x01\n\x1d\x63om.google.ads.datamanager.v1B\rAudienceProtoP\x01ZAcloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
+descriptor_data = "\n(google/ads/datamanager/v1/audience.proto\x12\x19google.ads.datamanager.v1\x1a\'google/ads/datamanager/v1/consent.proto\x1a)google/ads/datamanager/v1/user_data.proto\x1a\x1fgoogle/api/field_behavior.proto\"\xa2\x03\n\x0e\x41udienceMember\x12#\n\x16\x64\x65stination_references\x18\x01 \x03(\tB\x03\xe0\x41\x01\x12\x38\n\tuser_data\x18\x02 \x01(\x0b\x32#.google.ads.datamanager.v1.UserDataH\x00\x12\x38\n\tpair_data\x18\x04 \x01(\x0b\x32#.google.ads.datamanager.v1.PairDataH\x00\x12<\n\x0bmobile_data\x18\x05 \x01(\x0b\x32%.google.ads.datamanager.v1.MobileDataH\x00\x12=\n\x0cuser_id_data\x18\x06 \x01(\x0b\x32%.google.ads.datamanager.v1.UserIdDataH\x00\x12\x38\n\tppid_data\x18\x07 \x01(\x0b\x32#.google.ads.datamanager.v1.PpidDataH\x00\x12\x38\n\x07\x63onsent\x18\x03 \x01(\x0b\x32\".google.ads.datamanager.v1.ConsentB\x03\xe0\x41\x01\x42\x06\n\x04\x64\x61ta\"!\n\x08PairData\x12\x15\n\x08pair_ids\x18\x01 \x03(\tB\x03\xe0\x41\x02\"%\n\nMobileData\x12\x17\n\nmobile_ids\x18\x01 \x03(\tB\x03\xe0\x41\x02\"\"\n\nUserIdData\x12\x14\n\x07user_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x1e\n\x08PpidData\x12\x12\n\x05ppids\x18\x01 \x03(\tB\x03\xe0\x41\x02\x42\xca\x01\n\x1d\x63om.google.ads.datamanager.v1B\rAudienceProtoP\x01ZAcloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -44,6 +44,8 @@ module Google
         AudienceMember = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.datamanager.v1.AudienceMember").msgclass
         PairData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.datamanager.v1.PairData").msgclass
         MobileData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.datamanager.v1.MobileData").msgclass
+        UserIdData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.datamanager.v1.UserIdData").msgclass
+        PpidData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.datamanager.v1.PpidData").msgclass
       end
     end
   end
