@@ -36,7 +36,7 @@ module Google
             API_VERSION = ""
 
             # @private
-            DEFAULT_ENDPOINT_TEMPLATE = "visionai.$UNIVERSE_DOMAIN$"
+            DEFAULT_ENDPOINT_TEMPLATE = "warehouse-visionai.$UNIVERSE_DOMAIN$"
 
             include Paths
 
@@ -4820,7 +4820,7 @@ module Google
             #     If negative, INVALID_ARGUMENT error will be returned.
             #     If unspecified or 0, API will pick a default size, which is 10.
             #     If the requested page size is larger than the maximum size, API will pick
-            #     the maximum size, which is 100.
+            #     the maximum size, which is 200.
             #   @param page_token [::String]
             #     The continuation token to fetch the next page. If empty, it means it is
             #     fetching the first page.
@@ -6460,7 +6460,7 @@ module Google
 
               # @private
               # The endpoint specific to the default "googleapis.com" universe. Deprecated.
-              DEFAULT_ENDPOINT = "visionai.googleapis.com"
+              DEFAULT_ENDPOINT = "warehouse-visionai.googleapis.com"
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|

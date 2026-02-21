@@ -22,6 +22,7 @@ require "google/cloud/vision_ai/v1/streaming_service/rest"
 require "google/cloud/vision_ai/v1/streams_service/rest"
 require "google/cloud/vision_ai/v1/warehouse/rest"
 require "google/cloud/vision_ai/v1/health_check_service/rest"
+require "google/cloud/vision_ai/v1/bindings_override"
 require "google/cloud/vision_ai/v1/version"
 
 module Google
