@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n0google/ads/datamanager/v1/terms_of_service.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\"v\n\x0eTermsOfService\x12\x64\n&customer_match_terms_of_service_status\x18\x01 \x01(\x0e\x32/.google.ads.datamanager.v1.TermsOfServiceStatusB\x03\xe0\x41\x01*[\n\x14TermsOfServiceStatus\x12\'\n#TERMS_OF_SERVICE_STATUS_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x41\x43\x43\x45PTED\x10\x01\x12\x0c\n\x08REJECTED\x10\x02\x42\xd3\x01\n\x1d\x63om.google.ads.datamanager.v1B\x13TermsOfServiceProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
+descriptor_data = "\n0google/ads/datamanager/v1/terms_of_service.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\"v\n\x0eTermsOfService\x12\x64\n&customer_match_terms_of_service_status\x18\x01 \x01(\x0e\x32/.google.ads.datamanager.v1.TermsOfServiceStatusB\x03\xe0\x41\x01*[\n\x14TermsOfServiceStatus\x12\'\n#TERMS_OF_SERVICE_STATUS_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x41\x43\x43\x45PTED\x10\x01\x12\x0c\n\x08REJECTED\x10\x02\x42\xd0\x01\n\x1d\x63om.google.ads.datamanager.v1B\x13TermsOfServiceProtoP\x01ZAcloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

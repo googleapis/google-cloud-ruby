@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n\'google/ads/datamanager/v1/consent.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x99\x01\n\x07\x43onsent\x12\x43\n\x0c\x61\x64_user_data\x18\x01 \x01(\x0e\x32(.google.ads.datamanager.v1.ConsentStatusB\x03\xe0\x41\x01\x12I\n\x12\x61\x64_personalization\x18\x02 \x01(\x0e\x32(.google.ads.datamanager.v1.ConsentStatusB\x03\xe0\x41\x01*X\n\rConsentStatus\x12\x1e\n\x1a\x43ONSENT_STATUS_UNSPECIFIED\x10\x00\x12\x13\n\x0f\x43ONSENT_GRANTED\x10\x01\x12\x12\n\x0e\x43ONSENT_DENIED\x10\x02\x42\xcc\x01\n\x1d\x63om.google.ads.datamanager.v1B\x0c\x43onsentProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
+descriptor_data = "\n\'google/ads/datamanager/v1/consent.proto\x12\x19google.ads.datamanager.v1\x1a\x1fgoogle/api/field_behavior.proto\"\x99\x01\n\x07\x43onsent\x12\x43\n\x0c\x61\x64_user_data\x18\x01 \x01(\x0e\x32(.google.ads.datamanager.v1.ConsentStatusB\x03\xe0\x41\x01\x12I\n\x12\x61\x64_personalization\x18\x02 \x01(\x0e\x32(.google.ads.datamanager.v1.ConsentStatusB\x03\xe0\x41\x01*X\n\rConsentStatus\x12\x1e\n\x1a\x43ONSENT_STATUS_UNSPECIFIED\x10\x00\x12\x13\n\x0f\x43ONSENT_GRANTED\x10\x01\x12\x12\n\x0e\x43ONSENT_DENIED\x10\x02\x42\xc9\x01\n\x1d\x63om.google.ads.datamanager.v1B\x0c\x43onsentProtoP\x01ZAcloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb\xaa\x02\x19Google.Ads.DataManager.V1\xca\x02\x19Google\\Ads\\DataManager\\V1\xea\x02\x1cGoogle::Ads::DataManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
