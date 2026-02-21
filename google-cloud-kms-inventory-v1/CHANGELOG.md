@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.18.0 (2026-02-21)
+
+#### Features
+
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+* Add support for project level key usage tracking ([#32447](https://github.com/googleapis/google-cloud-ruby/issues/32447)) 
+* Added DeleteCryptoKey and DeleteCryptoKeyVersion RPCs to permanently remove resources 
+
 ### 0.17.0 (2026-01-23)
 
 #### Features

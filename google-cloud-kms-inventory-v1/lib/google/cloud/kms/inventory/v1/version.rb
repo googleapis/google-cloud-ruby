@@ -22,7 +22,7 @@ module Google
     module Kms
       module Inventory
         module V1
-          VERSION = "0.17.0"
+          VERSION = "0.18.0"
         end
       end
     end
