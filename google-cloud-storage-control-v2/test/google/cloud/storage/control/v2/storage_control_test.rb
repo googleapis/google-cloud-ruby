@@ -411,6 +411,77 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
     end
   end
 
+  def test_delete_folder_recursive
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    delete_folder_recursive_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_folder_recursive, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["if_metageneration_match"]
+      assert request.has_if_metageneration_match?
+      assert_equal 42, request["if_metageneration_not_match"]
+      assert request.has_if_metageneration_not_match?
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_folder_recursive_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_folder_recursive({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_folder_recursive name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_folder_recursive ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_folder_recursive({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_folder_recursive(::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_folder_recursive_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_storage_layout
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Storage::Control::V2::StorageLayout.new
