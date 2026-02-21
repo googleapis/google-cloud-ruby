@@ -1,5 +1,15 @@
 # Release History
 
+### 0.47.0 (2026-02-21)
+
+### ⚠ BREAKING CHANGES
+
+* The `SpannerIndexingConfig` message and the `spanner_indexing_config` field within the `Dataset` message have been removed. Client code referencing these will need to stop referencing these in case of an error docs: Updated comments for various fields and messages
+
+#### Features
+
+* A new field `revisions` is added to message `.google.cloud.documentai.v1beta3.Evaluation` ([#32431](https://github.com/googleapis/google-cloud-ruby/issues/32431)) 
+
 ### 0.46.2 (2026-02-04)
 
 #### Documentation
