@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.7.0 (2026-02-21)
+
+#### Features
+
+* add Natural Language Query Understanding fields and messages to DiscoveryEngine request, response, and datastore messages ([#32444](https://github.com/googleapis/google-cloud-ruby/issues/32444)) 
+
 ### 2.6.2 (2025-10-27)
 
 #### Documentation
