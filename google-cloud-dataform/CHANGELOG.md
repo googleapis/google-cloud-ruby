@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-02-21)
+
+#### Features
+
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs ([#32441](https://github.com/googleapis/google-cloud-ruby/issues/32441)) 
+
 ### 0.5.2 (2025-09-12)
 
 #### Documentation
