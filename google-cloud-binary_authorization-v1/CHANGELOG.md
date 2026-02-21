@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.0 (2026-02-21)
+
+#### Features
+
+* A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#32452](https://github.com/googleapis/google-cloud-ruby/issues/32452)) 
+
 ### 1.4.1 (2025-10-27)
 
 #### Documentation
