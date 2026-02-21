@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.36.0 (2026-02-21)
+
+#### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#32443](https://github.com/googleapis/google-cloud-ruby/issues/32443)) 
+* add max_concurrent_active_run_count field to Schedule message 
+
 ### 1.35.0 (2026-02-08)
 
 #### Features
