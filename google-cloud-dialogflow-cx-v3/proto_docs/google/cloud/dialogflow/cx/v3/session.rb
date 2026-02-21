@@ -116,6 +116,11 @@ module Google
           # @!attribute [rw] output_audio_config
           #   @return [::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig]
           #     Instructs the speech synthesizer how to generate the output audio.
+          # @!attribute [rw] response_view
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponseView]
+          #     Optional. Specifies which fields in the
+          #     {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} to return. If not
+          #     set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
           class DetectIntentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -243,6 +248,11 @@ module Google
           # @!attribute [rw] enable_debugging_info
           #   @return [::Boolean]
           #     If true, `StreamingDetectIntentResponse.debugging_info` will get populated.
+          # @!attribute [rw] response_view
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponseView]
+          #     Optional. Specifies which fields in the
+          #     {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} to return. If not
+          #     set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
           class StreamingDetectIntentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -519,6 +529,14 @@ module Google
           #     * MapValue value: If parameter's entity type is a composite entity then use
           #     map from composite entity property names to property values, otherwise,
           #     use parameter value.
+          # @!attribute [rw] parameter_scope
+          #   @return [::String]
+          #     Scope for the parameters. If not specified, parameters will be treated as
+          #     session parameters. Parameters with custom scope will not be put into
+          #     {::Google::Cloud::Dialogflow::CX::V3::SessionInfo#parameters session parameters}.
+          #
+          #     You can reference the parameters with custom scope in the agent with the
+          #     following format: $parameter-scope.params.parameter-id.
           # @!attribute [rw] current_page
           #   @return [::String]
           #     The unique identifier of the {::Google::Cloud::Dialogflow::CX::V3::Page page} to
@@ -561,6 +579,18 @@ module Google
           #     flow X will go through version 1 regardless of the version configuration in
           #     the environment. Each flow can have at most one version specified in this
           #     list.
+          # @!attribute [rw] current_playbook
+          #   @return [::String]
+          #     Optional. The unique identifier of the
+          #     {::Google::Cloud::Dialogflow::CX::V3::Playbook playbook} to start or continue the
+          #     session with. If `current_playbook` is specified, the previous state of the
+          #     session will be ignored by Dialogflow.
+          #
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
+          # @!attribute [rw] llm_model_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::LlmModelSettings]
+          #     Optional. Use the specified LLM model settings for processing the request.
           # @!attribute [rw] channel
           #   @return [::String]
           #     The channel which this query is for.
@@ -829,27 +859,32 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextInput]
           #     The natural language text to be processed.
           #
-          #     Note: The following fields are mutually exclusive: `text`, `intent`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `text`, `intent`, `audio`, `event`, `dtmf`, `tool_call_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intent
           #   @return [::Google::Cloud::Dialogflow::CX::V3::IntentInput]
           #     The intent to be triggered.
           #
-          #     Note: The following fields are mutually exclusive: `intent`, `text`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `intent`, `text`, `audio`, `event`, `dtmf`, `tool_call_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] audio
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AudioInput]
           #     The natural language speech audio to be processed.
           #
-          #     Note: The following fields are mutually exclusive: `audio`, `text`, `intent`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `audio`, `text`, `intent`, `event`, `dtmf`, `tool_call_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] event
           #   @return [::Google::Cloud::Dialogflow::CX::V3::EventInput]
           #     The event to be triggered.
           #
-          #     Note: The following fields are mutually exclusive: `event`, `text`, `intent`, `audio`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `event`, `text`, `intent`, `audio`, `dtmf`, `tool_call_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dtmf
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DtmfInput]
           #     The DTMF event to be handled.
           #
-          #     Note: The following fields are mutually exclusive: `dtmf`, `text`, `intent`, `audio`, `event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `dtmf`, `text`, `intent`, `audio`, `event`, `tool_call_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] tool_call_result
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ToolCallResult]
+          #     The results of a tool executed by the client.
+          #
+          #     Note: The following fields are mutually exclusive: `tool_call_result`, `text`, `intent`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     Required. The language of the input. See [Language
@@ -923,18 +958,6 @@ module Google
           #     The list of rich messages returned to the client. Responses vary from
           #     simple text messages to more sophisticated, structured payloads used
           #     to drive complex logic.
-          # @!attribute [rw] webhook_ids
-          #   @return [::Array<::String>]
-          #     The list of webhook ids in the order of call sequence.
-          # @!attribute [rw] webhook_display_names
-          #   @return [::Array<::String>]
-          #     The list of webhook display names in the order of call sequence.
-          # @!attribute [rw] webhook_latencies
-          #   @return [::Array<::Google::Protobuf::Duration>]
-          #     The list of webhook latencies in the order of call sequence.
-          # @!attribute [rw] webhook_tags
-          #   @return [::Array<::String>]
-          #     The list of webhook tags in the order of call sequence.
           # @!attribute [rw] webhook_statuses
           #   @return [::Array<::Google::Rpc::Status>]
           #     The list of webhook call status in the order of call sequence.
@@ -1161,7 +1184,8 @@ module Google
               # The query was matched to a Knowledge Connector answer.
               KNOWLEDGE_CONNECTOR = 8
 
-              # The query was handled by a [`Playbook`][Playbook].
+              # The query was handled by a
+              # {::Google::Cloud::Dialogflow::CX::V3::Playbook `Playbook`}.
               PLAYBOOK = 9
             end
           end
@@ -1296,6 +1320,26 @@ module Google
           class SentimentAnalysisResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response view specifies which fields in the
+          # {::Google::Cloud::Dialogflow::CX::V3::QueryResult QueryResult} to return.
+          module DetectIntentResponseView
+            # Not specified. `DETECT_INTENT_RESPONSE_VIEW_DEFAULT` will be used.
+            DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED = 0
+
+            # Full response view includes all fields.
+            DETECT_INTENT_RESPONSE_VIEW_FULL = 1
+
+            # Basic response view omits the following fields:
+            # -
+            # {::Google::Cloud::Dialogflow::CX::V3::QueryResult#diagnostic_info QueryResult.diagnostic_info}
+            DETECT_INTENT_RESPONSE_VIEW_BASIC = 2
+
+            # Default response view omits the following fields:
+            # -
+            # [QueryResult.trace_blocks][google.cloud.dialogflow.cx.v3.QueryResult.trace_blocks]
+            DETECT_INTENT_RESPONSE_VIEW_DEFAULT = 3
           end
         end
       end
