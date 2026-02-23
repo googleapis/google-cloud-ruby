@@ -243,8 +243,35 @@ class MockStorage < Minitest::Spec
     OpenStruct.new(header: headers)
   end
 
-  def encryption_gapi key_name
-    Google::Apis::StorageV1::Bucket::Encryption.new default_kms_key_name: key_name
+  def encryption_gapi(key_name: nil, 
+                    customer_managed_config_restriction_mode: nil, 
+                    customer_supplied_config_restriction_mode: nil, 
+                    google_managed_config_restriction_mode: nil)
+  
+    cm_config = customer_managed_config(restriction_mode: customer_managed_config_restriction_mode) if customer_managed_config_restriction_mode
+    cs_config = customer_supplied_config(restriction_mode: customer_supplied_config_restriction_mode) if customer_supplied_config_restriction_mode
+    gm_config = google_managed_config(restriction_mode: google_managed_config_restriction_mode) if google_managed_config_restriction_mode
+
+    params = {
+      default_kms_key_name: key_name,
+      customer_managed_encryption_enforcement_config: cm_config,
+      customer_supplied_encryption_enforcement_config: cs_config,
+      google_managed_encryption_enforcement_config: gm_config
+    }.compact # This removes the nil values so the API doesn't get empty configs
+
+    Google::Apis::StorageV1::Bucket::Encryption.new(**params)
+  end
+
+  def customer_managed_config restriction_mode: nil
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new restriction_mode: restriction_mode
+  end
+
+  def customer_supplied_config restriction_mode: nil
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new restriction_mode: restriction_mode
+  end
+
+  def google_managed_config restriction_mode: nil
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: restriction_mode
   end
 
   def lifecycle_gapi *rules
