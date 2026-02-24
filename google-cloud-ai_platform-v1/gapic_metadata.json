@@ -1602,6 +1602,50 @@
         }
       }
     },
+    "SessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::SessionService::Client",
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "create_session"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "get_session"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "update_session"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "delete_session"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "list_events"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "append_event"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SpecialistPoolService": {
       "clients": {
         "grpc": {
