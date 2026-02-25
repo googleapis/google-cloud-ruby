@@ -74,17 +74,17 @@ module Google
         #   @return [::Google::Cloud::NetworkManagement::V1::InstanceInfo]
         #     Display information of a Compute Engine instance.
         #
-        #     Note: The following fields are mutually exclusive: `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] firewall
         #   @return [::Google::Cloud::NetworkManagement::V1::FirewallInfo]
         #     Display information of a Compute Engine firewall rule.
         #
-        #     Note: The following fields are mutually exclusive: `firewall`, `instance`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `firewall`, `instance`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] route
         #   @return [::Google::Cloud::NetworkManagement::V1::RouteInfo]
         #     Display information of a Compute Engine route.
         #
-        #     Note: The following fields are mutually exclusive: `route`, `instance`, `firewall`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `route`, `instance`, `firewall`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] endpoint
         #   @return [::Google::Cloud::NetworkManagement::V1::EndpointInfo]
         #     Display information of the source and destination under analysis.
@@ -92,156 +92,172 @@ module Google
         #     initial input, as it might be modified by state like NAT,
         #     or Connection Proxy.
         #
-        #     Note: The following fields are mutually exclusive: `endpoint`, `instance`, `firewall`, `route`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `endpoint`, `instance`, `firewall`, `route`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_service
         #   @return [::Google::Cloud::NetworkManagement::V1::GoogleServiceInfo]
         #     Display information of a Google service
         #
-        #     Note: The following fields are mutually exclusive: `google_service`, `instance`, `firewall`, `route`, `endpoint`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `google_service`, `instance`, `firewall`, `route`, `endpoint`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] forwarding_rule
         #   @return [::Google::Cloud::NetworkManagement::V1::ForwardingRuleInfo]
         #     Display information of a Compute Engine forwarding rule.
         #
-        #     Note: The following fields are mutually exclusive: `forwarding_rule`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `forwarding_rule`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] hybrid_subnet
         #   @return [::Google::Cloud::NetworkManagement::V1::HybridSubnetInfo]
         #     Display information of a hybrid subnet.
         #
-        #     Note: The following fields are mutually exclusive: `hybrid_subnet`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `hybrid_subnet`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vpn_gateway
         #   @return [::Google::Cloud::NetworkManagement::V1::VpnGatewayInfo]
         #     Display information of a Compute Engine VPN gateway.
         #
-        #     Note: The following fields are mutually exclusive: `vpn_gateway`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `vpn_gateway`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vpn_tunnel
         #   @return [::Google::Cloud::NetworkManagement::V1::VpnTunnelInfo]
         #     Display information of a Compute Engine VPN tunnel.
         #
-        #     Note: The following fields are mutually exclusive: `vpn_tunnel`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `vpn_tunnel`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] interconnect_attachment
         #   @return [::Google::Cloud::NetworkManagement::V1::InterconnectAttachmentInfo]
         #     Display information of an interconnect attachment.
         #
-        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vpc_connector
         #   @return [::Google::Cloud::NetworkManagement::V1::VpcConnectorInfo]
         #     Display information of a VPC connector.
         #
-        #     Note: The following fields are mutually exclusive: `vpc_connector`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `vpc_connector`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] direct_vpc_egress_connection
         #   @return [::Google::Cloud::NetworkManagement::V1::DirectVpcEgressConnectionInfo]
         #     Display information of a serverless direct VPC egress connection.
         #
-        #     Note: The following fields are mutually exclusive: `direct_vpc_egress_connection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `direct_vpc_egress_connection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] serverless_external_connection
         #   @return [::Google::Cloud::NetworkManagement::V1::ServerlessExternalConnectionInfo]
         #     Display information of a serverless public (external) connection.
         #
-        #     Note: The following fields are mutually exclusive: `serverless_external_connection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `serverless_external_connection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] deliver
         #   @return [::Google::Cloud::NetworkManagement::V1::DeliverInfo]
         #     Display information of the final state "deliver" and reason.
         #
-        #     Note: The following fields are mutually exclusive: `deliver`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `deliver`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] forward
         #   @return [::Google::Cloud::NetworkManagement::V1::ForwardInfo]
         #     Display information of the final state "forward" and reason.
         #
-        #     Note: The following fields are mutually exclusive: `forward`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `forward`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] abort
         #   @return [::Google::Cloud::NetworkManagement::V1::AbortInfo]
         #     Display information of the final state "abort" and reason.
         #
-        #     Note: The following fields are mutually exclusive: `abort`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `abort`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] drop
         #   @return [::Google::Cloud::NetworkManagement::V1::DropInfo]
         #     Display information of the final state "drop" and reason.
         #
-        #     Note: The following fields are mutually exclusive: `drop`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `drop`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] load_balancer
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerInfo]
         #     Display information of the load balancers. Deprecated in favor of the
         #     `load_balancer_backend_info` field, not used in new tests.
         #
-        #     Note: The following fields are mutually exclusive: `load_balancer`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `load_balancer`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] network
         #   @return [::Google::Cloud::NetworkManagement::V1::NetworkInfo]
         #     Display information of a Google Cloud network.
         #
-        #     Note: The following fields are mutually exclusive: `network`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `network`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gke_master
         #   @return [::Google::Cloud::NetworkManagement::V1::GKEMasterInfo]
         #     Display information of a Google Kubernetes Engine cluster master.
         #
-        #     Note: The following fields are mutually exclusive: `gke_master`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gke_master`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gke_pod
         #   @return [::Google::Cloud::NetworkManagement::V1::GkePodInfo]
         #     Display information of a Google Kubernetes Engine Pod.
         #
-        #     Note: The following fields are mutually exclusive: `gke_pod`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gke_pod`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ip_masquerading_skipped
         #   @return [::Google::Cloud::NetworkManagement::V1::IpMasqueradingSkippedInfo]
         #     Display information of the reason why GKE Pod IP masquerading was
         #     skipped.
         #
-        #     Note: The following fields are mutually exclusive: `ip_masquerading_skipped`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `ip_masquerading_skipped`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] gke_network_policy
+        #   @return [::Google::Cloud::NetworkManagement::V1::GkeNetworkPolicyInfo]
+        #     Display information of a GKE Network Policy.
+        #
+        #     Note: The following fields are mutually exclusive: `gke_network_policy`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] gke_network_policy_skipped
+        #   @return [::Google::Cloud::NetworkManagement::V1::GkeNetworkPolicySkippedInfo]
+        #     Display information of the reason why GKE Network Policy evaluation was
+        #     skipped.
+        #
+        #     Note: The following fields are mutually exclusive: `gke_network_policy_skipped`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_instance
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudSQLInstanceInfo]
         #     Display information of a Cloud SQL instance.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_instance`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] redis_instance
         #   @return [::Google::Cloud::NetworkManagement::V1::RedisInstanceInfo]
         #     Display information of a Redis Instance.
         #
-        #     Note: The following fields are mutually exclusive: `redis_instance`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `redis_instance`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] redis_cluster
         #   @return [::Google::Cloud::NetworkManagement::V1::RedisClusterInfo]
         #     Display information of a Redis Cluster.
         #
-        #     Note: The following fields are mutually exclusive: `redis_cluster`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `redis_cluster`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudFunctionInfo]
         #     Display information of a Cloud Function.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_function`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_function`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] app_engine_version
         #   @return [::Google::Cloud::NetworkManagement::V1::AppEngineVersionInfo]
         #     Display information of an App Engine service version.
         #
-        #     Note: The following fields are mutually exclusive: `app_engine_version`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `app_engine_version`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_run_revision
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudRunRevisionInfo]
         #     Display information of a Cloud Run revision.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_run_revision`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_run_revision`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] nat
         #   @return [::Google::Cloud::NetworkManagement::V1::NatInfo]
         #     Display information of a NAT.
         #
-        #     Note: The following fields are mutually exclusive: `nat`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `nat`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] proxy_connection
         #   @return [::Google::Cloud::NetworkManagement::V1::ProxyConnectionInfo]
         #     Display information of a ProxyConnection.
         #
-        #     Note: The following fields are mutually exclusive: `proxy_connection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `proxy_connection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] load_balancer_backend_info
         #   @return [::Google::Cloud::NetworkManagement::V1::LoadBalancerBackendInfo]
         #     Display information of a specific load balancer backend.
         #
-        #     Note: The following fields are mutually exclusive: `load_balancer_backend_info`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `load_balancer_backend_info`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `storage_bucket`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] storage_bucket
         #   @return [::Google::Cloud::NetworkManagement::V1::StorageBucketInfo]
         #     Display information of a Storage Bucket. Used only for return traces.
         #
-        #     Note: The following fields are mutually exclusive: `storage_bucket`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `storage_bucket`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `serverless_neg`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] serverless_neg
         #   @return [::Google::Cloud::NetworkManagement::V1::ServerlessNegInfo]
         #     Display information of a Serverless network endpoint group backend. Used
         #     only for return traces.
         #
-        #     Note: The following fields are mutually exclusive: `serverless_neg`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `serverless_neg`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `ngfw_packet_inspection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ngfw_packet_inspection
+        #   @return [::Google::Cloud::NetworkManagement::V1::NgfwPacketInspectionInfo]
+        #     Display information of a layer 7 packet inspection by the firewall.
+        #
+        #     Note: The following fields are mutually exclusive: `ngfw_packet_inspection`, `instance`, `firewall`, `route`, `endpoint`, `google_service`, `forwarding_rule`, `hybrid_subnet`, `vpn_gateway`, `vpn_tunnel`, `interconnect_attachment`, `vpc_connector`, `direct_vpc_egress_connection`, `serverless_external_connection`, `deliver`, `forward`, `abort`, `drop`, `load_balancer`, `network`, `gke_master`, `gke_pod`, `ip_masquerading_skipped`, `gke_network_policy`, `gke_network_policy_skipped`, `cloud_sql_instance`, `redis_instance`, `redis_cluster`, `cloud_function`, `app_engine_version`, `cloud_run_revision`, `nat`, `proxy_connection`, `load_balancer_backend_info`, `storage_bucket`, `serverless_neg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Step
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,6 +376,9 @@ module Google
             # Forwarding state: arriving at a VPC connector.
             ARRIVE_AT_VPC_CONNECTOR = 24
 
+            # Forwarding state: arriving at a GKE Pod.
+            ARRIVE_AT_GKE_POD = 44
+
             # Forwarding state: for packets originating from a serverless endpoint
             # forwarded through Direct VPC egress.
             DIRECT_VPC_EGRESS_CONNECTION = 35
@@ -368,6 +387,10 @@ module Google
             # forwarded through public (external) connectivity.
             SERVERLESS_EXTERNAL_CONNECTION = 36
 
+            # Forwarding state: Layer 7 packet inspection by the firewall endpoint
+            # based on the configured security profile group.
+            NGFW_PACKET_INSPECTION = 47
+
             # Transition state: packet header translated. The `nat` field is populated
             # with the translation information.
             NAT = 14
@@ -375,6 +398,20 @@ module Google
             # Transition state: GKE Pod IP masquerading is skipped. The
             # `ip_masquerading_skipped` field is populated with the reason.
             SKIP_GKE_POD_IP_MASQUERADING = 40
+
+            # Transition state: GKE Ingress Network Policy is skipped. The
+            # `gke_network_policy_skipped` field is populated with the reason.
+            SKIP_GKE_INGRESS_NETWORK_POLICY = 41
+
+            # Transition state: GKE Egress Network Policy is skipped. The
+            # `gke_network_policy_skipped` field is populated with the reason.
+            SKIP_GKE_EGRESS_NETWORK_POLICY = 42
+
+            # Config checking state: verify ingress GKE network policy.
+            APPLY_INGRESS_GKE_NETWORK_POLICY = 45
+
+            # Config checking state: verify egress GKE network policy.
+            APPLY_EGRESS_GKE_NETWORK_POLICY = 46
 
             # Transition state: original connection is terminated and a new proxied
             # connection is initiated.
@@ -1962,6 +1999,13 @@ module Google
             # Packet is dropped because no matching route was found in the hybrid
             # subnet.
             HYBRID_SUBNET_NO_ROUTE = 106
+
+            # Packet is dropped by GKE Network Policy.
+            GKE_NETWORK_POLICY = 108
+
+            # Packet is dropped because there is no valid matching route from the
+            # network of the Google-managed service to the destination.
+            NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION = 110
           end
         end
 
@@ -2051,6 +2095,63 @@ module Google
 
             # Masquerading not applied because the packet is a return packet.
             NO_MASQUERADING_FOR_RETURN_PACKET = 7
+          end
+        end
+
+        # For display only. Metadata associated with a GKE Network Policy.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The name of the Network Policy.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the Network Policy.
+        #     Format for a Network Policy in a zonal cluster:
+        #     `projects/<project_id>/zones/<zone>/clusters/<cluster>/k8s/namespaces/<namespace>/networking.k8s.io/networkpolicies/<networkpolicy>`
+        #     Format for a Network Policy in a regional cluster:
+        #     `projects/<project_id>/locations/<location>/clusters/<cluster>/k8s/namespaces/<namespace>/networking.k8s.io/networkpolicies/<networkpolicy>`
+        # @!attribute [rw] direction
+        #   @return [::String]
+        #     Possible values: INGRESS, EGRESS
+        # @!attribute [rw] action
+        #   @return [::String]
+        #     Possible values: ALLOW, DENY
+        class GkeNetworkPolicyInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Contains information about why GKE Network Policy
+        # evaluation was skipped.
+        # @!attribute [rw] reason
+        #   @return [::Google::Cloud::NetworkManagement::V1::GkeNetworkPolicySkippedInfo::Reason]
+        #     Reason why Network Policy evaluation was skipped.
+        class GkeNetworkPolicySkippedInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          module Reason
+            # Unused default value.
+            REASON_UNSPECIFIED = 0
+
+            # Network Policy is disabled on the cluster.
+            NETWORK_POLICY_DISABLED = 1
+
+            # Ingress traffic to a Pod from a source on the same Node is always
+            # allowed.
+            INGRESS_SOURCE_ON_SAME_NODE = 2
+
+            # Egress traffic from a Pod that uses the Node's network namespace is not
+            # subject to Network Policy.
+            EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD = 3
+
+            # Network Policy is not applied to response traffic. This is because GKE
+            # Network Policy evaluation is stateful in both GKE Dataplane V2 (eBPF) and
+            # legacy (iptables) implementations.
+            NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC = 4
+
+            # Network Policy evaluation is currently not supported for clusters with
+            # FQDN Network Policies enabled.
+            NETWORK_POLICY_ANALYSIS_UNSUPPORTED = 100
           end
         end
 
@@ -2450,6 +2551,17 @@ module Google
         #   @return [::String]
         #     URI of the serverless network endpoint group.
         class ServerlessNegInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with a layer 7 packet inspection by the
+        # firewall.
+        # @!attribute [rw] security_profile_group_uri
+        #   @return [::String]
+        #     URI of the security profile group associated with this firewall packet
+        #     inspection.
+        class NgfwPacketInspectionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
