@@ -74,7 +74,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
     it "gets and sets its encryption config" do
       mock = Minitest::Mock.new
-      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(kms_key)
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(key_name: kms_key)
       mock.expect :patch_bucket, patch_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
       bucket.service.mocked_service = mock
@@ -88,9 +88,9 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
     it "sets its encryption config to nil" do
       bucket_gapi_with_key = bucket_gapi.dup
-      bucket_gapi_with_key.encryption = encryption_gapi(kms_key)
+      bucket_gapi_with_key.encryption = encryption_gapi(key_name: kms_key)
       bucket_with_key = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi_with_key, storage.service
-      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(nil)
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(key_name: nil)
       mock = Minitest::Mock.new
       mock.expect :patch_bucket, bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
