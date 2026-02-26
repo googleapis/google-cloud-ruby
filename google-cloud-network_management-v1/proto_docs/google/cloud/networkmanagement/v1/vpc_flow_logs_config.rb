@@ -24,8 +24,14 @@ module Google
         # A configuration to generate VPC Flow Logs.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. Unique name of the configuration using the form:
-        #         `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+        #     Identifier. Unique name of the configuration. The name can have one of the
+        #     following forms:
+        #
+        #     - For project-level configurations:
+        #     `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+        #
+        #     - For organization-level configurations:
+        #     `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The user-supplied description of the VPC Flow Logs configuration.
@@ -33,7 +39,8 @@ module Google
         # @!attribute [rw] state
         #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::State]
         #     Optional. The state of the VPC Flow Log configuration. Default value is
-        #     ENABLED. When creating a new configuration, it must be enabled.
+        #     ENABLED. When creating a new configuration, it must be enabled. Setting
+        #     state=DISABLED will pause the log generation for this config.
         # @!attribute [rw] aggregation_interval
         #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::AggregationInterval]
         #     Optional. The aggregation interval for the logs. Default value is
@@ -57,23 +64,41 @@ module Google
         #   @return [::String]
         #     Optional. Export filter used to define which VPC Flow Logs should be
         #     logged.
+        # @!attribute [rw] cross_project_metadata
+        #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::CrossProjectMetadata]
+        #     Optional. Determines whether to include cross project annotations in the
+        #     logs. This field is available only for organization configurations. If not
+        #     specified in org configs will be set to CROSS_PROJECT_METADATA_ENABLED.
         # @!attribute [r] target_resource_state
         #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::TargetResourceState]
-        #     Output only. A diagnostic bit - describes the state of the configured
-        #     target resource for diagnostic purposes.
+        #     Output only. Describes the state of the configured target resource for
+        #     diagnostic purposes.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Traffic will be logged from VMs, VPN tunnels and Interconnect Attachments
+        #     within the network.
+        #     Format: projects/\\{project_id}/global/networks/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `network`, `subnet`, `interconnect_attachment`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] subnet
+        #   @return [::String]
+        #     Traffic will be logged from VMs within the subnetwork.
+        #     Format: projects/\\{project_id}/regions/\\{region}/subnetworks/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `subnet`, `network`, `interconnect_attachment`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] interconnect_attachment
         #   @return [::String]
         #     Traffic will be logged from the Interconnect Attachment.
         #     Format:
         #     projects/\\{project_id}/regions/\\{region}/interconnectAttachments/\\{name}
         #
-        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `network`, `subnet`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vpn_tunnel
         #   @return [::String]
         #     Traffic will be logged from the VPN Tunnel.
         #     Format: projects/\\{project_id}/regions/\\{region}/vpnTunnels/\\{name}
         #
-        #     Note: The following fields are mutually exclusive: `vpn_tunnel`, `interconnect_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `vpn_tunnel`, `network`, `subnet`, `interconnect_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Resource labels to represent user-provided metadata.
@@ -97,7 +122,6 @@ module Google
           end
 
           # Determines whether this configuration will be generating logs.
-          # Setting state=DISABLED will pause the log generation for this config.
           module State
             # If not specified, will default to ENABLED.
             STATE_UNSPECIFIED = 0
@@ -148,8 +172,23 @@ module Google
             CUSTOM_METADATA = 3
           end
 
-          # Optional states of the target resource that are used as part of the
-          # diagnostic bit.
+          # Determines whether to include cross project annotations in the logs.
+          # Project configurations will always have CROSS_PROJECT_METADATA_DISABLED.
+          module CrossProjectMetadata
+            # If not specified, the default is CROSS_PROJECT_METADATA_ENABLED.
+            CROSS_PROJECT_METADATA_UNSPECIFIED = 0
+
+            # When CROSS_PROJECT_METADATA_ENABLED, metadata from other projects will be
+            # included in the logs.
+            CROSS_PROJECT_METADATA_ENABLED = 1
+
+            # When CROSS_PROJECT_METADATA_DISABLED, metadata from other projects will
+            # not be included in the logs.
+            CROSS_PROJECT_METADATA_DISABLED = 2
+          end
+
+          # Output only. Indicates whether the target resource exists, for diagnostic
+          # purposes.
           module TargetResourceState
             # Unspecified target resource state.
             TARGET_RESOURCE_STATE_UNSPECIFIED = 0
@@ -159,6 +198,112 @@ module Google
 
             # Indicates that the target resource does not exist.
             TARGET_RESOURCE_DOES_NOT_EXIST = 2
+          end
+        end
+
+        # A configuration to generate a response for GetEffectiveVpcFlowLogsConfig
+        # request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Unique name of the configuration. The name can have one of the following
+        #     forms:
+        #
+        #     - For project-level configurations:
+        #     `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+        #
+        #     - For organization-level configurations:
+        #     `organizations/{organization_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+        #
+        #     - For a Compute config, the name will be the path of the subnet:
+        #     `projects/{project_id}/regions/{region}/subnetworks/{subnet_id}`
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::State]
+        #     The state of the VPC Flow Log configuration. Default value is ENABLED.
+        #     When creating a new configuration, it must be enabled.
+        #     Setting state=DISABLED will pause the log generation for this config.
+        # @!attribute [rw] aggregation_interval
+        #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::AggregationInterval]
+        #     The aggregation interval for the logs. Default value is INTERVAL_5_SEC.
+        # @!attribute [rw] flow_sampling
+        #   @return [::Float]
+        #     The value of the field must be in (0, 1]. The sampling rate of VPC Flow
+        #     Logs where 1.0 means all collected logs are reported.
+        #     Setting the sampling rate to 0.0 is not allowed. If you want to disable VPC
+        #     Flow Logs, use the state field instead.
+        #     Default value is 1.0.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::Metadata]
+        #     Configures whether all, none or a subset of metadata fields should be
+        #     added to the reported VPC flow logs.
+        #     Default value is INCLUDE_ALL_METADATA.
+        # @!attribute [rw] metadata_fields
+        #   @return [::Array<::String>]
+        #     Custom metadata fields to include in the reported VPC flow logs.
+        #     Can only be specified if "metadata" was set to CUSTOM_METADATA.
+        # @!attribute [rw] filter_expr
+        #   @return [::String]
+        #     Export filter used to define which VPC Flow Logs should be logged.
+        # @!attribute [rw] cross_project_metadata
+        #   @return [::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig::CrossProjectMetadata]
+        #     Determines whether to include cross project annotations in the logs.
+        #     This field is available only for organization configurations. If not
+        #     specified in org configs will be set to CROSS_PROJECT_METADATA_ENABLED.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Traffic will be logged from VMs, VPN tunnels and Interconnect Attachments
+        #     within the network.
+        #     Format: projects/\\{project_id}/global/networks/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `network`, `subnet`, `interconnect_attachment`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] subnet
+        #   @return [::String]
+        #     Traffic will be logged from VMs within the subnetwork.
+        #     Format: projects/\\{project_id}/regions/\\{region}/subnetworks/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `subnet`, `network`, `interconnect_attachment`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] interconnect_attachment
+        #   @return [::String]
+        #     Traffic will be logged from the Interconnect Attachment.
+        #     Format:
+        #     projects/\\{project_id}/regions/\\{region}/interconnectAttachments/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `network`, `subnet`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vpn_tunnel
+        #   @return [::String]
+        #     Traffic will be logged from the VPN Tunnel.
+        #     Format: projects/\\{project_id}/regions/\\{region}/vpnTunnels/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `vpn_tunnel`, `network`, `subnet`, `interconnect_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::NetworkManagement::V1::EffectiveVpcFlowLogsConfig::Scope]
+        #     Specifies the scope of the config (e.g., SUBNET, NETWORK, ORGANIZATION..).
+        class EffectiveVpcFlowLogsConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The scope for this flow log configuration.
+          module Scope
+            # Scope is unspecified.
+            SCOPE_UNSPECIFIED = 0
+
+            # Target resource is a subnet (Network Management API).
+            SUBNET = 1
+
+            # Target resource is a subnet, and the config originates from the Compute
+            # API.
+            COMPUTE_API_SUBNET = 2
+
+            # Target resource is a network.
+            NETWORK = 3
+
+            # Target resource is a VPN tunnel.
+            VPN_TUNNEL = 4
+
+            # Target resource is an interconnect attachment.
+            INTERCONNECT_ATTACHMENT = 5
+
+            # Configuration applies to an entire organization.
+            ORGANIZATION = 6
           end
         end
       end

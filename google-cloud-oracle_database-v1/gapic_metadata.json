@@ -70,6 +70,11 @@
                 "list_gi_versions"
               ]
             },
+            "ListMinorVersions": {
+              "methods": [
+                "list_minor_versions"
+              ]
+            },
             "ListDbSystemShapes": {
               "methods": [
                 "list_db_system_shapes"
@@ -88,6 +93,11 @@
             "CreateAutonomousDatabase": {
               "methods": [
                 "create_autonomous_database"
+              ]
+            },
+            "UpdateAutonomousDatabase": {
+              "methods": [
+                "update_autonomous_database"
               ]
             },
             "DeleteAutonomousDatabase": {
@@ -133,6 +143,161 @@
             "RestartAutonomousDatabase": {
               "methods": [
                 "restart_autonomous_database"
+              ]
+            },
+            "SwitchoverAutonomousDatabase": {
+              "methods": [
+                "switchover_autonomous_database"
+              ]
+            },
+            "FailoverAutonomousDatabase": {
+              "methods": [
+                "failover_autonomous_database"
+              ]
+            },
+            "ListOdbNetworks": {
+              "methods": [
+                "list_odb_networks"
+              ]
+            },
+            "GetOdbNetwork": {
+              "methods": [
+                "get_odb_network"
+              ]
+            },
+            "CreateOdbNetwork": {
+              "methods": [
+                "create_odb_network"
+              ]
+            },
+            "DeleteOdbNetwork": {
+              "methods": [
+                "delete_odb_network"
+              ]
+            },
+            "ListOdbSubnets": {
+              "methods": [
+                "list_odb_subnets"
+              ]
+            },
+            "GetOdbSubnet": {
+              "methods": [
+                "get_odb_subnet"
+              ]
+            },
+            "CreateOdbSubnet": {
+              "methods": [
+                "create_odb_subnet"
+              ]
+            },
+            "DeleteOdbSubnet": {
+              "methods": [
+                "delete_odb_subnet"
+              ]
+            },
+            "ListExadbVmClusters": {
+              "methods": [
+                "list_exadb_vm_clusters"
+              ]
+            },
+            "GetExadbVmCluster": {
+              "methods": [
+                "get_exadb_vm_cluster"
+              ]
+            },
+            "CreateExadbVmCluster": {
+              "methods": [
+                "create_exadb_vm_cluster"
+              ]
+            },
+            "DeleteExadbVmCluster": {
+              "methods": [
+                "delete_exadb_vm_cluster"
+              ]
+            },
+            "UpdateExadbVmCluster": {
+              "methods": [
+                "update_exadb_vm_cluster"
+              ]
+            },
+            "RemoveVirtualMachineExadbVmCluster": {
+              "methods": [
+                "remove_virtual_machine_exadb_vm_cluster"
+              ]
+            },
+            "ListExascaleDbStorageVaults": {
+              "methods": [
+                "list_exascale_db_storage_vaults"
+              ]
+            },
+            "GetExascaleDbStorageVault": {
+              "methods": [
+                "get_exascale_db_storage_vault"
+              ]
+            },
+            "CreateExascaleDbStorageVault": {
+              "methods": [
+                "create_exascale_db_storage_vault"
+              ]
+            },
+            "DeleteExascaleDbStorageVault": {
+              "methods": [
+                "delete_exascale_db_storage_vault"
+              ]
+            },
+            "ListDbSystemInitialStorageSizes": {
+              "methods": [
+                "list_db_system_initial_storage_sizes"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "list_databases"
+              ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "get_database"
+              ]
+            },
+            "ListPluggableDatabases": {
+              "methods": [
+                "list_pluggable_databases"
+              ]
+            },
+            "GetPluggableDatabase": {
+              "methods": [
+                "get_pluggable_database"
+              ]
+            },
+            "ListDbSystems": {
+              "methods": [
+                "list_db_systems"
+              ]
+            },
+            "GetDbSystem": {
+              "methods": [
+                "get_db_system"
+              ]
+            },
+            "CreateDbSystem": {
+              "methods": [
+                "create_db_system"
+              ]
+            },
+            "DeleteDbSystem": {
+              "methods": [
+                "delete_db_system"
+              ]
+            },
+            "ListDbVersions": {
+              "methods": [
+                "list_db_versions"
+              ]
+            },
+            "ListDatabaseCharacterSets": {
+              "methods": [
+                "list_database_character_sets"
               ]
             }
           }

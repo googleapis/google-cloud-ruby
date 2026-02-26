@@ -31,7 +31,7 @@ module Google
         #     `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
         # @!attribute [rw] quota_id
         #   @return [::String]
-        #     The id of the quota, which is unquie within the service.
+        #     The id of the quota, which is unique within the service.
         #     For example, `CpusPerProjectPerRegion`
         # @!attribute [rw] metric
         #   @return [::String]

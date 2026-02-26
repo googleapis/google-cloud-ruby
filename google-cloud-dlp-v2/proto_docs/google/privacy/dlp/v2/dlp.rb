@@ -3624,8 +3624,11 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `publish_summary_to_cscc`, `save_findings`, `pub_sub`, `publish_findings_to_cloud_data_catalog`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_findings_to_cloud_data_catalog
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
-        #     Publish findings to Cloud Datahub.
+        #     Deprecated because Data Catalog is being turned down. Use
+        #     publish_findings_to_dataplex_catalog to publish findings to Dataplex
+        #     Universal Catalog.
         #
         #     Note: The following fields are mutually exclusive: `publish_findings_to_cloud_data_catalog`, `save_findings`, `pub_sub`, `publish_summary_to_cscc`, `publish_findings_to_dataplex_catalog`, `deidentify`, `job_notification_emails`, `publish_to_stackdriver`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_findings_to_dataplex_catalog
@@ -5969,11 +5972,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Identifies a single Vertex AI dataset.
+        # Identifies a single Vertex AI resource. Only datasets are
+        # supported.
         # @!attribute [rw] dataset_resource_name
         #   @return [::String]
-        #     Required. The name of the dataset resource. If set within a project-level
+        #     Required. The name of the Vertex AI resource. If set within a project-level
         #     configuration, the specified resource must be within the project.
+        #     Examples:
+        #
+        #     * `projects/{project}/locations/{location}/datasets/{dataset}`
         class VertexDatasetResourceReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8154,9 +8161,9 @@ module Google
         end
 
         # Message used to identify the type of resource being profiled.
-        # @!attribute [r] data_source
+        # @!attribute [rw] data_source
         #   @return [::String]
-        #     Output only. An identifying string to the type of resource being profiled.
+        #     A string that identifies the type of resource being profiled.
         #     Current values:
         #
         #     * google/bigquery/table
@@ -8546,30 +8553,30 @@ module Google
 
         # Type of the match which can be applied to different ways of matching, like
         # Dictionary, regular expression and intersecting with findings of another
-        # info type.
+        # infoType.
         module MatchingType
           # Invalid.
           MATCHING_TYPE_UNSPECIFIED = 0
 
           # Full match.
           #
-          # - Dictionary: join of Dictionary results matched complete finding quote
-          # - Regex: all regex matches fill a finding quote start to end
-          # - Exclude info type: completely inside affecting info types findings
+          # - Dictionary: join of Dictionary results matched the complete finding quote
+          # - Regex: all regex matches fill a finding quote from start to end
+          # - Exclude infoType: completely inside affecting infoTypes findings
           MATCHING_TYPE_FULL_MATCH = 1
 
           # Partial match.
           #
           # - Dictionary: at least one of the tokens in the finding matches
           # - Regex: substring of the finding matches
-          # - Exclude info type: intersects with affecting info types findings
+          # - Exclude infoType: intersects with affecting infoTypes findings
           MATCHING_TYPE_PARTIAL_MATCH = 2
 
           # Inverse match.
           #
           # - Dictionary: no tokens in the finding match the dictionary
           # - Regex: finding doesn't match the regex
-          # - Exclude info type: no intersection with affecting info types findings
+          # - Exclude infoType: no intersection with affecting infoTypes findings
           MATCHING_TYPE_INVERSE_MATCH = 3
         end
 

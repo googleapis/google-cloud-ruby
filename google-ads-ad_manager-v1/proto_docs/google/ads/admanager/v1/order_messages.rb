@@ -42,8 +42,9 @@ module Google
         #     Order. Format: "networks/\\{network_code}/users/\\{user_id}"
         # @!attribute [rw] advertiser_contacts
         #   @return [::Array<::String>]
-        #     Optional. The resource names of Contacts from the advertiser of this Order.
-        #     Format: "networks/\\{network_code}/contacts/\\{contact_id}"
+        #     Optional. Unordered list. The resource names of Contacts from the
+        #     advertiser of this Order. Format:
+        #     "networks/\\{network_code}/contacts/\\{contact_id}"
         # @!attribute [rw] advertiser
         #   @return [::String]
         #     Required. The resource name of the Company, which is of type
@@ -69,22 +70,21 @@ module Google
         # @!attribute [r] creator
         #   @return [::String]
         #     Output only. The resource name of the User who created the Order on behalf
-        #     of the advertiser. This value is assigned by Google. Format:
-        #     "networks/\\{network_code}/users/\\{user_id}"
+        #     of the advertiser. Format: "networks/\\{network_code}/users/\\{user_id}"
         # @!attribute [r] currency_code
         #   @return [::String]
         #     Output only. The ISO 4217 3-letter currency code for the currency used by
         #     the Order. This value is the network's currency code.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The instant at which the Order and its associated line items
-        #     are eligible to begin serving. This attribute is derived from the line item
-        #     of the order that has the earliest LineItem.start_time.
+        #     Output only. The instant at which the Order and its associated Line items
+        #     are eligible to begin serving. This attribute is derived from the Line item
+        #     of the order that has the earliest `LineItem.start_time`.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The instant at which the Order and its associated line items
-        #     stop being served. This attribute is derived from the line item of the
-        #     order that has the latest LineItem.end_time.
+        #     Output only. The instant at which the Order and its associated Line items
+        #     stop being served. This attribute is derived from the Line item of the
+        #     order that has the latest `LineItem.end_time`.
         # @!attribute [r] unlimited_end_time
         #   @return [::Boolean]
         #     Output only. Indicates whether or not this Order has an end time.

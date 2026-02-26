@@ -1,5 +1,23 @@
 # Release History
 
+### 1.14.2 (2025-12-17)
+
+#### Documentation
+
+* Add the IDENTIFIER field behavior annotation to fields of Cloud Pub/Sub methods that represent a specific identity and need to be sourced with additional care ([#32251](https://github.com/googleapis/google-cloud-ruby/issues/32251)) 
+
+### 1.14.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.14.0 (2025-10-17)
+
+#### Features
+
+* Add tags to Subscription, Topic, and CreateSnapshotRequest messages for use in CreateSubscription, CreateTopic, and CreateSnapshot requests respectively ([#31778](https://github.com/googleapis/google-cloud-ruby/issues/31778)) 
+
 ### 1.13.0 (2025-10-01)
 
 #### Features

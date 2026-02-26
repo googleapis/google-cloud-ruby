@@ -36,6 +36,8 @@ module Google
         # The AwsClusters API provides a single centrally managed service
         # to create and manage Anthos clusters that run on AWS infrastructure.
         #
+        # @deprecated This service is deprecated and may be removed in the next major version update.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gke_multi_cloud/v1/aws_clusters"

@@ -21,7 +21,7 @@ module Google
   module Analytics
     module Admin
       module V1alpha
-        VERSION = "0.38.0"
+        VERSION = "0.38.1"
       end
     end
   end

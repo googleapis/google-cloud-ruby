@@ -22,6 +22,7 @@ module Google
     module GkeMultiCloud
       module V1
         # An Anthos cluster running on AWS.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this resource.
@@ -152,6 +153,7 @@ module Google
         end
 
         # ControlPlane defines common parameters between control plane nodes.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] version
         #   @return [::String]
         #     Required. The Kubernetes version to run on control plane replicas
@@ -242,6 +244,7 @@ module Google
         end
 
         # Authentication configuration for the management of AWS resources.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] role_arn
         #   @return [::String]
         #     Required. The Amazon Resource Name (ARN) of the role that the Anthos
@@ -257,6 +260,7 @@ module Google
         end
 
         # Configuration related to the cluster RBAC settings.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] admin_users
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsClusterUser>]
         #     Optional. Users that can perform operations as a cluster admin. A managed
@@ -279,6 +283,7 @@ module Google
         end
 
         # Identities of a user-type subject for AWS clusters.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] username
         #   @return [::String]
         #     Required. The name of the user, e.g. `my-gcp-id@gmail.com`.
@@ -288,6 +293,7 @@ module Google
         end
 
         # Identities of a group-type subject for AWS clusters.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] group
         #   @return [::String]
         #     Required. The name of the group, e.g. `my-group@domain.com`.
@@ -297,6 +303,7 @@ module Google
         end
 
         # Configuration related to application-layer secrets encryption.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] kms_key_arn
         #   @return [::String]
         #     Required. The ARN of the AWS KMS key used to encrypt cluster secrets.
@@ -306,6 +313,7 @@ module Google
         end
 
         # Configuration template for AWS EBS volumes.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] size_gib
         #   @return [::Integer]
         #     Optional. The size of the volume, in GiBs.
@@ -326,7 +334,7 @@ module Google
         #     Optional. The throughput that the volume supports, in MiB/s. Only valid if
         #     volume_type is GP3.
         #
-        #     If the volume_type is GP3 and this is not speficied, it defaults to 125.
+        #     If the volume_type is GP3 and this is not specified, it defaults to 125.
         # @!attribute [rw] kms_key_arn
         #   @return [::String]
         #     Optional. The Amazon Resource Name (ARN) of the Customer Managed Key (CMK)
@@ -358,6 +366,7 @@ module Google
         #
         # Anthos clusters on AWS run on a single VPC. This includes control
         # plane replicas and node pool nodes.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] vpc_id
         #   @return [::String]
         #     Required. The VPC associated with the cluster. All component clusters
@@ -387,6 +396,7 @@ module Google
         end
 
         # An Anthos node pool running on AWS.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this resource.
@@ -527,6 +537,7 @@ module Google
         # unavailable during the update.
         # 3. (max_surge + max_unavailable) determines the level of parallelism (i.e.,
         # the number of nodes being updated at the same time).
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] surge_settings
         #   @return [::Google::Cloud::GkeMultiCloud::V1::SurgeSettings]
         #     Optional. Settings for surge update.
@@ -536,6 +547,7 @@ module Google
         end
 
         # SurgeSettings contains the parameters for Surge update.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] max_surge
         #   @return [::Integer]
         #     Optional. The maximum number of nodes that can be created beyond the
@@ -552,6 +564,7 @@ module Google
 
         # AwsNodeManagement defines the set of node management features turned on for
         # an AWS node pool.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] auto_repair
         #   @return [::Boolean]
         #     Optional. Whether or not the nodes will be automatically repaired. When set
@@ -564,6 +577,7 @@ module Google
         end
 
         # Parameters that describe the nodes in a cluster.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] instance_type
         #   @return [::String]
         #     Optional. The EC2 instance type when creating on-Demand instances.
@@ -657,6 +671,7 @@ module Google
 
         # AwsNodePoolAutoscaling contains information required by cluster autoscaler
         # to adjust the size of the node pool to the current cluster usage.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] min_node_count
         #   @return [::Integer]
         #     Required. Minimum number of nodes in the node pool. Must be greater than or
@@ -672,6 +687,7 @@ module Google
 
         # AwsOpenIdConfig is an OIDC discovery document for the cluster.
         # See the OpenID Connect Discovery 1.0 specification for details.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] issuer
         #   @return [::String]
         #     OIDC Issuer.
@@ -699,6 +715,7 @@ module Google
         end
 
         # AwsJsonWebKeys is a valid JSON Web Key Set as specififed in RFC 7517.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::Jwk>]
         #     The public component of the keys used by the cluster to sign token
@@ -709,6 +726,7 @@ module Google
         end
 
         # AwsServerConfig is the configuration of GKE cluster on AWS.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the config.
@@ -727,6 +745,7 @@ module Google
         end
 
         # Kubernetes version information of GKE cluster on AWS.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] version
         #   @return [::String]
         #     Kubernetes version name.
@@ -756,6 +775,7 @@ module Google
         end
 
         # SSH configuration for AWS resources.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] ec2_key_pair
         #   @return [::String]
         #     Required. The name of the EC2 key pair used to login into cluster machines.
@@ -765,6 +785,7 @@ module Google
         end
 
         # Details of a proxy config stored in AWS Secret Manager.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] secret_arn
         #   @return [::String]
         #     The ARN of the AWS Secret Manager secret that contains the HTTP(S) proxy
@@ -783,6 +804,7 @@ module Google
         end
 
         # Config encryption for user data.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] kms_key_arn
         #   @return [::String]
         #     Required. The ARN of the AWS KMS key used to encrypt user data.
@@ -796,6 +818,7 @@ module Google
         #
         #  * T3 instances that use the unlimited CPU credit option don't support host
         #  tenancy.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] tenancy
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsInstancePlacement::Tenancy]
         #     Required. The tenancy for instance.
@@ -821,6 +844,7 @@ module Google
 
         # Configuration related to CloudWatch metrics collection in an AWS
         # Auto Scaling group.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] granularity
         #   @return [::String]
         #     Required. The frequency at which EC2 Auto Scaling sends aggregated data to
@@ -837,6 +861,7 @@ module Google
         end
 
         # SpotConfig has configuration info for Spot node.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] instance_types
         #   @return [::Array<::String>]
         #     Required. A list of instance types for creating spot node pool.
@@ -846,6 +871,7 @@ module Google
         end
 
         # AwsClusterError describes errors found on AWS clusters.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] message
         #   @return [::String]
         #     Human-friendly description of the error.
@@ -855,6 +881,7 @@ module Google
         end
 
         # AwsNodePoolError describes errors found on AWS node pools.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] message
         #   @return [::String]
         #     Human-friendly description of the error.

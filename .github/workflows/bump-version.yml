@@ -20,7 +20,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install Ruby 3.3
         uses: ruby/setup-ruby@v1
         with:
@@ -31,6 +31,10 @@ jobs:
       - name: execute
         run: |
           toys bump-version -v --fork \
-            --version "${{ github.event.inputs.version }}" \
-            ${{ github.event.inputs.args }} -- \
-            ${{ github.event.inputs.gems }}
+            --version "${GITHUB_EVENT_INPUTS_VERSION}" \
+            ${GITHUB_EVENT_INPUTS_ARGS} -- \
+            ${GITHUB_EVENT_INPUTS_GEMS}
+        env:
+          GITHUB_EVENT_INPUTS_VERSION: ${{ github.event.inputs.version }}
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}
+          GITHUB_EVENT_INPUTS_GEMS: ${{ github.event.inputs.gems }}

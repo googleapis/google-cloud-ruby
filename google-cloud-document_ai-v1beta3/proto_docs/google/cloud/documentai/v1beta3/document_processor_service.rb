@@ -80,6 +80,9 @@ module Google
           # @!attribute [rw] enable_table_annotation
           #   @return [::Boolean]
           #     Optional. Whether to include table annotations in layout parser response.
+          # @!attribute [rw] enable_table_split
+          #   @return [::Boolean]
+          #     Optional. Whether to split table.
           class LayoutConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -95,12 +98,14 @@ module Google
             # @!attribute [rw] semantic_chunking_group_size
             #   @return [::Boolean]
             #     Optional. The number of tokens to group together when evaluating
-            #     semantic similarity. THIS FIELD IS NOT YET USED.
+            #     semantic similarity.
+            #     **Note:** This field is not yet used.
             # @!attribute [rw] breakpoint_percentile_threshold
             #   @return [::Integer]
             #     Optional. The percentile of cosine dissimilarity that must be exceeded
             #     between a group of tokens and the next. The smaller this number is, the
-            #     more chunks will be generated. THIS FIELD IS NOT YET USED.
+            #     more chunks will be generated.
+            #     **Note:** This field is not yet used.
             class ChunkingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,6 +160,7 @@ module Google
         #     {::Google::Cloud::DocumentAI::V1beta3::Document#mime_type mime_type} fields must
         #     be set.
         # @!attribute [rw] skip_human_review
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Whether human review should be skipped for this request. Default to
         #     `false`.
@@ -285,6 +291,7 @@ module Google
         #     {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
         #     method.
         # @!attribute [rw] skip_human_review
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Whether human review should be skipped for this request. Default to
         #     `false`.
@@ -1220,6 +1227,17 @@ module Google
         #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
         #     The basic metadata for the long-running operation.
         class ImportProcessorVersionMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The long-running operation metadata for the
+        # [UpdateProcessorVersion][google.cloud.documentai.v1beta3.DocumentProcessorService.UpdateProcessorVersion]
+        # method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata for the long-running operation.
+        class UpdateProcessorVersionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -101,6 +101,11 @@ module Google
           #     used to create a sub-account under an existing advanced account through
           #     this method. Additional `account_management` or
           #     `product_management` services may be provided.
+          # @!attribute [rw] set_alias
+          #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::SetAliasForRelationship>]
+          #     Optional. If a relationship is created with a provider, you can set an
+          #     alias for it with this field. The calling user must be an admin on the
+          #     provider to be able to set an alias.
           class CreateAndConfigureAccountRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,6 +119,10 @@ module Google
             #   @return [::Google::Shopping::Merchant::Accounts::V1::User]
             #     Optional. Details about the user to be added. At the moment, only access
             #     rights may be specified.
+            # @!attribute [rw] verification_mail_settings
+            #   @return [::Google::Shopping::Merchant::Accounts::V1::VerificationMailSettings]
+            #     Optional. Settings related to configuring the verification email that is
+            #     sent after adding a user.
             class AddUser
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,12 +135,75 @@ module Google
             #     The provider is an
             #     [aggregator](https://support.google.com/merchants/answer/188487) for
             #     the account. Payload for service type Account Aggregation.
+            #
+            #     Note: The following fields are mutually exclusive: `account_aggregation`, `account_management`, `comparison_shopping`, `products_management`, `campaigns_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] account_management
+            #   @return [::Google::Shopping::Merchant::Accounts::V1::AccountManagement]
+            #     The provider manages this account. Payload for service type Account
+            #     Management.
+            #
+            #     Note: The following fields are mutually exclusive: `account_management`, `account_aggregation`, `comparison_shopping`, `products_management`, `campaigns_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] comparison_shopping
+            #   @return [::Google::Shopping::Merchant::Accounts::V1::ComparisonShopping]
+            #     The provider is a CSS (Comparison Shopping Service) of this account.
+            #     Payload for service type Comparison Shopping.
+            #
+            #     Note: The following fields are mutually exclusive: `comparison_shopping`, `account_aggregation`, `account_management`, `products_management`, `campaigns_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] products_management
+            #   @return [::Google::Shopping::Merchant::Accounts::V1::ProductsManagement]
+            #     The provider manages products for this account. Payload for service
+            #     type products management.
+            #
+            #     Note: The following fields are mutually exclusive: `products_management`, `account_aggregation`, `account_management`, `comparison_shopping`, `campaigns_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] campaigns_management
+            #   @return [::Google::Shopping::Merchant::Accounts::V1::CampaignsManagement]
+            #     The provider manages campaigns for this account. Payload for service
+            #     type campaigns management.
+            #
+            #     Note: The following fields are mutually exclusive: `campaigns_management`, `account_aggregation`, `account_management`, `comparison_shopping`, `products_management`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] provider
             #   @return [::String]
             #     Required. The provider of the service. Either the reference to an account
             #     such as `providers/123` or a well-known service provider (one of
             #     `providers/GOOGLE_ADS` or `providers/GOOGLE_BUSINESS_PROFILE`).
+            # @!attribute [rw] external_account_id
+            #   @return [::String]
+            #     Immutable. An optional, immutable identifier that Google uses to refer to
+            #     this account when communicating with the provider. This should be the
+            #     unique account ID within the provider's system (for example, your shop ID
+            #     in Shopify).
+            #
+            #     If you have multiple accounts with the same provider - for instance,
+            #     different accounts for various regions — the `external_account_id`
+            #     differentiates between them, ensuring accurate linking and integration
+            #     between Google and the provider.
+            #
+            #     The external account ID must be specified for the campaigns management
+            #     service type.
+            #
+            #     The external account ID must not be specified for the account aggregation
+            #     service type.
+            #
+            #     The external account ID is optional / may be specified for all other
+            #     service types.
             class AddAccountService
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Set an alias for a relationship between a provider and the account to
+            # be created.
+            # @!attribute [rw] provider
+            #   @return [::String]
+            #     Required. The provider of the service. This is a reference to an account
+            #     such as `providers/123` or `accounts/123`. The same provider must be
+            #     specified in at least one of the `service` fields.
+            # @!attribute [rw] account_id_alias
+            #   @return [::String]
+            #     Required. The unique ID of this account in the provider's system.
+            #     The value must be unique across all accounts on the platform for this
+            #     provider.
+            class SetAliasForRelationship
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

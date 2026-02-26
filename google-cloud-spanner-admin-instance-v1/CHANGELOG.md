@@ -1,5 +1,26 @@
 # Release History
 
+### 2.5.0 (2026-01-13)
+
+#### Features
+
+* Exposing total CPU related fields in AutoscalingConfig ([#32299](https://github.com/googleapis/google-cloud-ruby/issues/32299)) 
+#### Documentation
+
+* Update high_priority_cpu_utilization_percent in AutoscalingConfig to be Optional and clarify its behavior when not specified 
+
+### 2.4.0 (2025-11-03)
+
+#### Features
+
+* Exposing AutoscalingConfig in InstancePartition ([#32122](https://github.com/googleapis/google-cloud-ruby/issues/32122)) 
+
+### 2.3.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 2.3.0 (2025-10-08)
 
 #### Features

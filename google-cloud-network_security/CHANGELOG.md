@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2025-12-03)
+
+#### Features
+
+* publish networksecurity v1beta1 api ([#32232](https://github.com/googleapis/google-cloud-ruby/issues/32232)) 
+
 ### 1.1.2 (2025-09-12)
 
 #### Documentation

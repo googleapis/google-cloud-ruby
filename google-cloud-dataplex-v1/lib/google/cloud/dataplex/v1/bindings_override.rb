@@ -206,6 +206,22 @@ module Google
                 uri_method: :get,
                 uri_template: "/v1/{resource}:getIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/changeRequests/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
                   ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: nil
@@ -353,6 +369,14 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/changeRequests/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
                   ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -362,14 +386,6 @@ module Google
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1/{resource}:setIamPolicy",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/dataAssets/[^/]+/?$}, false]
                 ],
                 body: "*"
               )
@@ -516,6 +532,14 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/changeRequests/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
                   ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -525,14 +549,6 @@ module Google
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1/{resource}:testIamPermissions",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/dataAssets/[^/]+/?$}, false]
                 ],
                 body: "*"
               )

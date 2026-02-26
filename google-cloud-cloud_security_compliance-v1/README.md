@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/cloud_security_compliance/v1"
 
-client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Client.new
-request = ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworksRequest.new # (request fields as keyword arguments...)
-response = client.list_frameworks request
+client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new
+request = ::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new # (request fields as keyword arguments...)
+response = client.generate_framework_audit_scope_report request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_security_compliance-v1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/cloud_security_compliance/v1"
 require "logger"
 
-client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Client.new do |config|
+client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

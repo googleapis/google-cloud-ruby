@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.ads.datamanager.v1",
+  "libraryPackage": "::Google::Ads::DataManager::V1",
+  "services": {
+    "IngestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::DataManager::V1::IngestionService::Client",
+          "rpcs": {
+            "IngestAudienceMembers": {
+              "methods": [
+                "ingest_audience_members"
+              ]
+            },
+            "RemoveAudienceMembers": {
+              "methods": [
+                "remove_audience_members"
+              ]
+            },
+            "IngestEvents": {
+              "methods": [
+                "ingest_events"
+              ]
+            },
+            "RetrieveRequestStatus": {
+              "methods": [
+                "retrieve_request_status"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

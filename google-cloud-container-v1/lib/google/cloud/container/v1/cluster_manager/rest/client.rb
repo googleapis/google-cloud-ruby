@@ -453,7 +453,7 @@ module Google
               # network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
               #
               # One firewall is added for the cluster. After cluster creation,
-              # the Kubelet creates routes for each node to allow the containers
+              # the kubelet creates routes for each node to allow the containers
               # on that node to communicate with all other instances in the
               # cluster.
               #
@@ -654,7 +654,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil, boot_disk: nil)
+              # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil, boot_disk: nil, node_drain_config: nil, consolidation_delay: nil)
               #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -700,6 +700,14 @@ module Google
               #     in which the node pool's nodes should be located. Changing the locations
               #     for a node pool will result in nodes being either created or removed from
               #     the node pool, depending on whether locations are being added or removed.
+              #
+              #     Warning: It is recommended to update node pool locations in a standalone
+              #     API call. Do not combine a location update with changes to other fields
+              #     (such as `tags`, `labels`, `taints`, etc.) in the same request.
+              #     Otherwise, the API performs a structural modification where changes to
+              #     other fields will only apply to newly created nodes and will not be
+              #     applied to existing nodes in the node pool. To ensure all nodes are updated
+              #     consistently, use a separate API call for location changes.
               #   @param workload_metadata_config [::Google::Cloud::Container::V1::WorkloadMetadataConfig, ::Hash]
               #     The desired workload metadata config for the node pool.
               #   @param upgrade_settings [::Google::Cloud::Container::V1::NodePool::UpgradeSettings, ::Hash]
@@ -784,6 +792,12 @@ module Google
               #     The desired boot disk config for nodes in the node pool.
               #     Initiates an upgrade operation that migrates the nodes in the
               #     node pool to the specified boot disk config.
+              #   @param node_drain_config [::Google::Cloud::Container::V1::NodePool::NodeDrainConfig, ::Hash]
+              #     The desired node drain configuration for nodes in the node pool.
+              #   @param consolidation_delay [::Google::Protobuf::Duration, ::Hash]
+              #     Consolidation delay defines duration after which the Cluster Autoscaler can
+              #     scale down underutilized nodes. If not set, nodes are scaled down by
+              #     default behavior, i.e. according to the chosen autoscaling profile.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Container::V1::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

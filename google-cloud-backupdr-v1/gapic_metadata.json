@@ -80,6 +80,11 @@
                 "list_backups"
               ]
             },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetch_backups_for_resource_type"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "get_backup"
@@ -175,6 +180,11 @@
                 "get_data_source_reference"
               ]
             },
+            "ListDataSourceReferences": {
+              "methods": [
+                "list_data_source_references"
+              ]
+            },
             "FetchDataSourceReferencesForResourceType": {
               "methods": [
                 "fetch_data_source_references_for_resource_type"
@@ -183,6 +193,20 @@
             "InitializeService": {
               "methods": [
                 "initialize_service"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackupDrProtectionSummary": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Client",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "list_resource_backup_configs"
               ]
             }
           }

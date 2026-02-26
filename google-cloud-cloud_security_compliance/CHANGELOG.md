@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.2.0 (2025-11-03)
+
+#### Features
+
+* add Audit API surface 
+* Adding client libraries for Monitoring API Compliance Manager Service 
+#### Documentation
+
+* Updated docs for the APIs ([#32119](https://github.com/googleapis/google-cloud-ruby/issues/32119)) 
+
 ### 0.1.0 (2025-09-25)
 
 #### Features

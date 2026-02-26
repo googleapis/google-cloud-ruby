@@ -60,6 +60,31 @@
                 "delete_lb_route_extension"
               ]
             },
+            "ListLbEdgeExtensions": {
+              "methods": [
+                "list_lb_edge_extensions"
+              ]
+            },
+            "GetLbEdgeExtension": {
+              "methods": [
+                "get_lb_edge_extension"
+              ]
+            },
+            "CreateLbEdgeExtension": {
+              "methods": [
+                "create_lb_edge_extension"
+              ]
+            },
+            "UpdateLbEdgeExtension": {
+              "methods": [
+                "update_lb_edge_extension"
+              ]
+            },
+            "DeleteLbEdgeExtension": {
+              "methods": [
+                "delete_lb_edge_extension"
+              ]
+            },
             "ListAuthzExtensions": {
               "methods": [
                 "list_authz_extensions"

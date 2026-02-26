@@ -72,11 +72,13 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Mini
 
     # Create request parameters for a unary method.
     name = "hello world"
+    fallback_scope = :FALLBACK_SCOPE_UNSPECIFIED
 
     get_protected_resources_summary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_protected_resources_summary, name
       assert_kind_of ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :FALLBACK_SCOPE_UNSPECIFIED, request["fallback_scope"]
       refute_nil options
     end
 
@@ -87,31 +89,31 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Mini
       end
 
       # Use hash object
-      client.get_protected_resources_summary({ name: name }) do |response, operation|
+      client.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_protected_resources_summary name: name do |response, operation|
+      client.get_protected_resources_summary name: name, fallback_scope: fallback_scope do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_protected_resources_summary ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name) do |response, operation|
+      client.get_protected_resources_summary ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_protected_resources_summary({ name: name }, grpc_options) do |response, operation|
+      client.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_protected_resources_summary(::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_protected_resources_summary(::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,5 +211,25 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Mini
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 end

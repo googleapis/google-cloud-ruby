@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n+google/cloud/bigquery/storage/v1/avro.proto\x12 google.cloud.bigquery.storage.v1\"\x1c\n\nAvroSchema\x12\x0e\n\x06schema\x18\x01 \x01(\t\"A\n\x08\x41vroRows\x12\x1e\n\x16serialized_binary_rows\x18\x01 \x01(\x0c\x12\x15\n\trow_count\x18\x02 \x01(\x03\x42\x02\x18\x01\"A\n\x18\x41vroSerializationOptions\x12%\n\x1d\x65nable_display_name_attribute\x18\x01 \x01(\x08\x42\xb9\x01\n$com.google.cloud.bigquery.storage.v1B\tAvroProtoP\x01Z>cloud.google.com/go/bigquery/storage/apiv1/storagepb;storagepb\xaa\x02 Google.Cloud.BigQuery.Storage.V1\xca\x02 Google\\Cloud\\BigQuery\\Storage\\V1b\x06proto3"
+descriptor_data = "\n+google/cloud/bigquery/storage/v1/avro.proto\x12 google.cloud.bigquery.storage.v1\"\x1c\n\nAvroSchema\x12\x0e\n\x06schema\x18\x01 \x01(\t\"A\n\x08\x41vroRows\x12\x1e\n\x16serialized_binary_rows\x18\x01 \x01(\x0c\x12\x15\n\trow_count\x18\x02 \x01(\x03\x42\x02\x18\x01\"\xdd\x02\n\x18\x41vroSerializationOptions\x12%\n\x1d\x65nable_display_name_attribute\x18\x01 \x01(\x08\x12u\n\x19picos_timestamp_precision\x18\x02 \x01(\x0e\x32R.google.cloud.bigquery.storage.v1.AvroSerializationOptions.PicosTimestampPrecision\"\xa2\x01\n\x17PicosTimestampPrecision\x12)\n%PICOS_TIMESTAMP_PRECISION_UNSPECIFIED\x10\x00\x12\x1e\n\x1aTIMESTAMP_PRECISION_MICROS\x10\x01\x12\x1d\n\x19TIMESTAMP_PRECISION_NANOS\x10\x02\x12\x1d\n\x19TIMESTAMP_PRECISION_PICOS\x10\x03\x42\xb9\x01\n$com.google.cloud.bigquery.storage.v1B\tAvroProtoP\x01Z>cloud.google.com/go/bigquery/storage/apiv1/storagepb;storagepb\xaa\x02 Google.Cloud.BigQuery.Storage.V1\xca\x02 Google\\Cloud\\BigQuery\\Storage\\V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -39,6 +39,7 @@ module Google
           AvroSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroSchema").msgclass
           AvroRows = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroRows").msgclass
           AvroSerializationOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroSerializationOptions").msgclass
+          AvroSerializationOptions::PicosTimestampPrecision = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroSerializationOptions.PicosTimestampPrecision").enummodule
         end
       end
     end

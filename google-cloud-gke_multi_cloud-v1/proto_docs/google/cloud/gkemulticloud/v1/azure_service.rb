@@ -22,6 +22,7 @@ module Google
     module GkeMultiCloud
       module V1
         # Request message for `AzureClusters.CreateAzureCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent location where this
@@ -56,6 +57,7 @@ module Google
         end
 
         # Request message for `AzureClusters.UpdateAzureCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_cluster
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureCluster]
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
@@ -92,6 +94,7 @@ module Google
         end
 
         # Request message for `AzureClusters.GetAzureCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -109,6 +112,7 @@ module Google
         end
 
         # Request message for `AzureClusters.ListAzureClusters` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent location which owns this collection of
@@ -138,6 +142,7 @@ module Google
         end
 
         # Response message for `AzureClusters.ListAzureClusters` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_clusters
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureCluster>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
@@ -152,6 +157,7 @@ module Google
         end
 
         # Request message for `AzureClusters.DeleteAzureCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -194,6 +200,7 @@ module Google
         end
 
         # Response message for `AzureClusters.CreateAzureNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
@@ -229,6 +236,7 @@ module Google
         end
 
         # Request message for `AzureClusters.UpdateAzureNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_node_pool
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureNodePool]
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
@@ -255,6 +263,7 @@ module Google
         end
 
         # Request message for `AzureClusters.GetAzureNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -272,6 +281,7 @@ module Google
         end
 
         # Request message for `AzureClusters.ListAzureNodePools` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent `AzureCluster` which owns this collection of
@@ -302,6 +312,7 @@ module Google
         end
 
         # Response message for `AzureClusters.ListAzureNodePools` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_node_pools
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureNodePool>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AzureNodePool AzureNodePool}
@@ -316,6 +327,7 @@ module Google
         end
 
         # Request message for `AzureClusters.DeleteAzureNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -361,6 +373,7 @@ module Google
 
         # GetAzureOpenIdConfigRequest gets the OIDC discovery document for the
         # cluster. See the OpenID Connect Discovery 1.0 specification for details.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_cluster
         #   @return [::String]
         #     Required. The AzureCluster, which owns the OIDC discovery document.
@@ -375,6 +388,7 @@ module Google
         # cluster to sign token requests. This will be the jwks_uri for the discover
         # document returned by getOpenIDConfig. See the OpenID Connect
         # Discovery 1.0 specification for details.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_cluster
         #   @return [::String]
         #     Required. The AzureCluster, which owns the JsonWebKeys.
@@ -386,6 +400,7 @@ module Google
         end
 
         # GetAzureServerConfigRequest gets the server config of GKE cluster on Azure.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -403,6 +418,7 @@ module Google
         end
 
         # Request message for `AzureClusters.CreateAzureClient` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent location where this
@@ -437,6 +453,7 @@ module Google
         end
 
         # Request message for `AzureClusters.GetAzureClient` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -455,6 +472,7 @@ module Google
         end
 
         # Request message for `AzureClusters.ListAzureClients` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent location which owns this collection of
@@ -484,6 +502,7 @@ module Google
         end
 
         # Response message for `AzureClusters.ListAzureClients` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_clients
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureClient>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient}
@@ -498,6 +517,7 @@ module Google
         end
 
         # Request message for `AzureClusters.DeleteAzureClient` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -526,6 +546,7 @@ module Google
         end
 
         # Request message for `AzureClusters.GenerateAzureAccessToken` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_cluster
         #   @return [::String]
         #     Required. The name of the
@@ -543,6 +564,7 @@ module Google
         end
 
         # Response message for `AzureClusters.GenerateAzureAccessToken` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] access_token
         #   @return [::String]
         #     Output only. Access token to authenticate to k8s api-server.
@@ -554,6 +576,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] azure_cluster
         #   @return [::String]
         #     Required.
@@ -589,6 +612,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] access_token
         #   @return [::String]
         # @!attribute [rw] expires_in

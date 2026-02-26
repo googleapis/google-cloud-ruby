@@ -63,6 +63,8 @@ module Google
             rpc :Rollback, ::Google::Cloud::Firestore::V1::RollbackRequest, ::Google::Protobuf::Empty
             # Runs a query.
             rpc :RunQuery, ::Google::Cloud::Firestore::V1::RunQueryRequest, stream(::Google::Cloud::Firestore::V1::RunQueryResponse)
+            # Executes a pipeline query.
+            rpc :ExecutePipeline, ::Google::Cloud::Firestore::V1::ExecutePipelineRequest, stream(::Google::Cloud::Firestore::V1::ExecutePipelineResponse)
             # Runs an aggregation query.
             #
             # Rather than producing [Document][google.firestore.v1.Document] results like

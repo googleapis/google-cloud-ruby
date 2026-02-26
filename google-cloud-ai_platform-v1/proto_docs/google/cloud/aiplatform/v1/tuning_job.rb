@@ -26,6 +26,13 @@ module Google
         #   @return [::String]
         #     The base model that is being tuned. See [Supported
         #     models](https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/tuning#supported_models).
+        #
+        #     Note: The following fields are mutually exclusive: `base_model`, `pre_tuned_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pre_tuned_model
+        #   @return [::Google::Cloud::AIPlatform::V1::PreTunedModel]
+        #     The pre-tuned model for continuous tuning.
+        #
+        #     Note: The following fields are mutually exclusive: `pre_tuned_model`, `base_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] supervised_tuning_spec
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedTuningSpec]
         #     Tuning Spec for Supervised Fine Tuning.
@@ -37,7 +44,10 @@ module Google
         #   @return [::String]
         #     Optional. The display name of the
         #     {::Google::Cloud::AIPlatform::V1::Model TunedModel}. The name can be up to 128
-        #     characters long and can consist of any UTF-8 characters.
+        #     characters long and can consist of any UTF-8 characters. For continuous
+        #     tuning, tuned_model_display_name will by default use the same display name
+        #     as the pre-tuned model. If a new display name is provided, the tuning job
+        #     will create a new model instead of a new version.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The description of the
@@ -125,7 +135,18 @@ module Google
         # @!attribute [r] model
         #   @return [::String]
         #     Output only. The resource name of the TunedModel. Format:
-        #     `projects/{project}/locations/{location}/models/{model}`.
+        #
+        #     `projects/{project}/locations/{location}/models/{model}@{version_id}`
+        #
+        #     When tuning from a base model, the version ID will be 1.
+        #
+        #     For continuous tuning, if the provided tuned_model_display_name is set and
+        #     different from parent model's display name, the tuned model will have a new
+        #     parent model with version 1. Otherwise the version id will be incremented
+        #     by 1 from the last version ID in the parent model. E.g.,
+        #
+        #     `projects/{project}/locations/{location}/models/{model}@{last_version_id +
+        #     1}`
         # @!attribute [r] endpoint
         #   @return [::String]
         #     Output only. A resource name of an Endpoint. Format:
@@ -346,6 +367,32 @@ module Google
         #     The Endpoint resource name that the checkpoint is deployed to. Format:
         #     `projects/{project}/locations/{location}/endpoints/{endpoint}`.
         class TunedModelCheckpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A pre-tuned model for continuous tuning.
+        # @!attribute [rw] tuned_model_name
+        #   @return [::String]
+        #     The resource name of the Model.
+        #     E.g., a model resource name with a specified version id or alias:
+        #
+        #     `projects/{project}/locations/{location}/models/{model}@{version_id}`
+        #
+        #     `projects/{project}/locations/{location}/models/{model}@{alias}`
+        #
+        #     Or, omit the version id to use the default version:
+        #
+        #     `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     Optional. The source checkpoint id. If not specified, the default
+        #     checkpoint will be used.
+        # @!attribute [r] base_model
+        #   @return [::String]
+        #     Output only. The name of the base model this
+        #     {::Google::Cloud::AIPlatform::V1::PreTunedModel PreTunedModel} was tuned from.
+        class PreTunedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

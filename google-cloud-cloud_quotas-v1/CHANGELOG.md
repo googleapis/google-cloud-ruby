@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.2.2 (2026-01-23)
+
+#### Documentation
+
+* Correct typo in comment for field `quota_id` ([#32375](https://github.com/googleapis/google-cloud-ruby/issues/32375)) 
+
+### 2.2.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 2.2.0 (2025-09-11)
 
 #### Features

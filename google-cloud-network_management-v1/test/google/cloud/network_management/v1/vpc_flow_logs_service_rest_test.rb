@@ -355,6 +355,121 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::ClientTe
     end
   end
 
+  def test_query_org_vpc_flow_logs_configs
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    query_org_vpc_flow_logs_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::ServiceStub.stub :transcode_query_org_vpc_flow_logs_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_org_vpc_flow_logs_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_org_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_org_vpc_flow_logs_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_org_vpc_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_org_vpc_flow_logs_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_org_vpc_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::QueryOrgVpcFlowLogsConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_org_vpc_flow_logs_configs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_show_effective_flow_logs_configs
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    resource = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    show_effective_flow_logs_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::ServiceStub.stub :transcode_show_effective_flow_logs_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, show_effective_flow_logs_configs_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.show_effective_flow_logs_configs({ parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.show_effective_flow_logs_configs parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.show_effective_flow_logs_configs ::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new(parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.show_effective_flow_logs_configs({ parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.show_effective_flow_logs_configs(::Google::Cloud::NetworkManagement::V1::ShowEffectiveFlowLogsConfigsRequest.new(parent: parent, resource: resource, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, show_effective_flow_logs_configs_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

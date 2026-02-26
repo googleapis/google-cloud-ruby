@@ -63,6 +63,8 @@ module Google
             rpc :UpdateDataSource, ::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest, ::Google::Longrunning::Operation
             # Lists Backups in a given project and location.
             rpc :ListBackups, ::Google::Cloud::BackupDR::V1::ListBackupsRequest, ::Google::Cloud::BackupDR::V1::ListBackupsResponse
+            # Fetch Backups for a given resource type.
+            rpc :FetchBackupsForResourceType, ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest, ::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeResponse
             # Gets details of a Backup.
             rpc :GetBackup, ::Google::Cloud::BackupDR::V1::GetBackupRequest, ::Google::Cloud::BackupDR::V1::Backup
             # Updates the settings of a Backup.
@@ -101,6 +103,8 @@ module Google
             rpc :TriggerBackup, ::Google::Cloud::BackupDR::V1::TriggerBackupRequest, ::Google::Longrunning::Operation
             # Gets details of a single DataSourceReference.
             rpc :GetDataSourceReference, ::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest, ::Google::Cloud::BackupDR::V1::DataSourceReference
+            # Lists DataSourceReferences for a given project and location.
+            rpc :ListDataSourceReferences, ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest, ::Google::Cloud::BackupDR::V1::ListDataSourceReferencesResponse
             # Fetch DataSourceReferences for a given project, location and resource type.
             rpc :FetchDataSourceReferencesForResourceType, ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest, ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeResponse
             # Initializes the service related config for a project.

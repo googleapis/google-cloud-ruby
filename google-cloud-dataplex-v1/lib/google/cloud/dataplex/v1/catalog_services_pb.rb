@@ -74,10 +74,25 @@ module Google
             # Deletes an Entry.
             rpc :DeleteEntry, ::Google::Cloud::Dataplex::V1::DeleteEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Lists Entries within an EntryGroup.
+            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+            # Metastore metadata that is stored in Dataplex Universal Catalog is
+            # changing. For more information, see [Changes to metadata stored in
+            # Dataplex Universal
+            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             rpc :ListEntries, ::Google::Cloud::Dataplex::V1::ListEntriesRequest, ::Google::Cloud::Dataplex::V1::ListEntriesResponse
             # Gets an Entry.
+            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+            # Metastore metadata that is stored in Dataplex Universal Catalog is
+            # changing. For more information, see [Changes to metadata stored in
+            # Dataplex Universal
+            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             rpc :GetEntry, ::Google::Cloud::Dataplex::V1::GetEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Looks up an entry by name using the permission on the source system.
+            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+            # Metastore metadata that is stored in Dataplex Universal Catalog is
+            # changing. For more information, see [Changes to metadata stored in
+            # Dataplex Universal
+            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             rpc :LookupEntry, ::Google::Cloud::Dataplex::V1::LookupEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Searches for Entries matching the given query and scope.
             rpc :SearchEntries, ::Google::Cloud::Dataplex::V1::SearchEntriesRequest, ::Google::Cloud::Dataplex::V1::SearchEntriesResponse

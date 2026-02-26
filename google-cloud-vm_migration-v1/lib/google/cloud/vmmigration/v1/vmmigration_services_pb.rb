@@ -177,7 +177,7 @@ module Google
             rpc :ListImageImportJobs, ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest, ::Google::Cloud::VMMigration::V1::ListImageImportJobsResponse
             # Gets details of a single ImageImportJob.
             rpc :GetImageImportJob, ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest, ::Google::Cloud::VMMigration::V1::ImageImportJob
-            # Initiates the cancellation of a running clone job.
+            # Initiates the cancellation of a running ImageImportJob.
             rpc :CancelImageImportJob, ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest, ::Google::Longrunning::Operation
             # Creates a new disk migration job in a given Source.
             rpc :CreateDiskMigrationJob, ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest, ::Google::Longrunning::Operation

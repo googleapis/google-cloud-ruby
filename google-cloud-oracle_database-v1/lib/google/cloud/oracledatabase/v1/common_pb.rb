@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n+google/cloud/oracledatabase/v1/common.proto\x12\x1egoogle.cloud.oracledatabase.v1\x1a\x1fgoogle/api/field_behavior.proto\"%\n\x0f\x43ustomerContact\x12\x12\n\x05\x65mail\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\xe5\x01\n\"com.google.cloud.oracledatabase.v1B\x0b\x43ommonProtoP\x01ZJcloud.google.com/go/oracledatabase/apiv1/oracledatabasepb;oracledatabasepb\xaa\x02\x1eGoogle.Cloud.OracleDatabase.V1\xca\x02\x1eGoogle\\Cloud\\OracleDatabase\\V1\xea\x02!Google::Cloud::OracleDatabase::V1b\x06proto3"
+descriptor_data = "\n+google/cloud/oracledatabase/v1/common.proto\x12\x1egoogle.cloud.oracledatabase.v1\x1a\x1fgoogle/api/field_behavior.proto\"%\n\x0f\x43ustomerContact\x12\x12\n\x05\x65mail\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x93\x02\n\x11IdentityConnector\x12 \n\x13service_agent_email\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12`\n\x10\x63onnection_state\x18\x02 \x01(\x0e\x32\x41.google.cloud.oracledatabase.v1.IdentityConnector.ConnectionStateB\x03\xe0\x41\x03\"z\n\x0f\x43onnectionState\x12 \n\x1c\x43ONNECTION_STATE_UNSPECIFIED\x10\x00\x12\r\n\tCONNECTED\x10\x01\x12\x17\n\x13PARTIALLY_CONNECTED\x10\x02\x12\x10\n\x0c\x44ISCONNECTED\x10\x03\x12\x0b\n\x07UNKNOWN\x10\x04\"\x9b\x01\n\x1b\x44\x61taCollectionOptionsCommon\x12*\n\x1dis_diagnostics_events_enabled\x18\x01 \x01(\x08\x42\x03\xe0\x41\x01\x12)\n\x1cis_health_monitoring_enabled\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x12%\n\x18is_incident_logs_enabled\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01*]\n\x0c\x43omputeModel\x12\x1d\n\x19\x43OMPUTE_MODEL_UNSPECIFIED\x10\x00\x12\x16\n\x12\x43OMPUTE_MODEL_ECPU\x10\x01\x12\x16\n\x12\x43OMPUTE_MODEL_OCPU\x10\x02\x42\xe5\x01\n\"com.google.cloud.oracledatabase.v1B\x0b\x43ommonProtoP\x01ZJcloud.google.com/go/oracledatabase/apiv1/oracledatabasepb;oracledatabasepb\xaa\x02\x1eGoogle.Cloud.OracleDatabase.V1\xca\x02\x1eGoogle\\Cloud\\OracleDatabase\\V1\xea\x02!Google::Cloud::OracleDatabase::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -38,6 +38,10 @@ module Google
     module OracleDatabase
       module V1
         CustomerContact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oracledatabase.v1.CustomerContact").msgclass
+        IdentityConnector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oracledatabase.v1.IdentityConnector").msgclass
+        IdentityConnector::ConnectionState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oracledatabase.v1.IdentityConnector.ConnectionState").enummodule
+        DataCollectionOptionsCommon = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oracledatabase.v1.DataCollectionOptionsCommon").msgclass
+        ComputeModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oracledatabase.v1.ComputeModel").enummodule
       end
     end
   end

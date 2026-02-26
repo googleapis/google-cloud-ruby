@@ -59,9 +59,34 @@ module Google
           #     Setting this field to true, populates avro field names with a placeholder
           #     value and populates a "displayName" attribute for every avro field with the
           #     original column name.
+          # @!attribute [rw] picos_timestamp_precision
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSerializationOptions::PicosTimestampPrecision]
+          #     Optional. Set timestamp precision option. If not set, the default precision
+          #     is microseconds.
           class AvroSerializationOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The precision of the timestamp value in the Avro message. This precision
+            # will **only** be applied to the column(s) with the `TIMESTAMP_PICOS` type.
+            module PicosTimestampPrecision
+              # Unspecified timestamp precision. The default precision is microseconds.
+              PICOS_TIMESTAMP_PRECISION_UNSPECIFIED = 0
+
+              # Timestamp values returned by Read API will be truncated to microsecond
+              # level precision. The value will be encoded as Avro TIMESTAMP type in a
+              # 64 bit integer.
+              TIMESTAMP_PRECISION_MICROS = 1
+
+              # Timestamp values returned by Read API will be truncated to nanosecond
+              # level precision. The value will be encoded as Avro TIMESTAMP type in a
+              # 64 bit integer.
+              TIMESTAMP_PRECISION_NANOS = 2
+
+              # Read API will return full precision picosecond value. The value will be
+              # encoded as a string which conforms to ISO 8601 format.
+              TIMESTAMP_PRECISION_PICOS = 3
+            end
           end
         end
       end

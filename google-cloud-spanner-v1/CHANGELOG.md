@@ -1,5 +1,37 @@
 # Release History
 
+### 1.14.0 (2026-02-18)
+
+#### Features
+
+* include cache updates into the ResultSet response ([#32416](https://github.com/googleapis/google-cloud-ruby/issues/32416)) 
+
+### 1.13.0 (2026-01-13)
+
+#### Features
+
+* add a ClientContext field to Spanner requests ([#32336](https://github.com/googleapis/google-cloud-ruby/issues/32336)) 
+* add Secure Parameters to the ClientContext 
+
+### 1.12.1 (2025-11-21)
+
+#### Documentation
+
+* minor update for Spanner Location API ([#32220](https://github.com/googleapis/google-cloud-ruby/issues/32220)) 
+
+### 1.12.0 (2025-11-19)
+
+#### Features
+
+* Add Send and Ack mutations for Queues 
+* Add Spanner location API ([#32204](https://github.com/googleapis/google-cloud-ruby/issues/32204)) 
+
+### 1.11.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 1.11.0 (2025-09-11)
 
 #### Features

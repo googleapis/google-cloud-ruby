@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-backupdr-v1",
-    "version": "1.4.0",
+    "version": "1.8.0",
     "language": "RUBY",
     "apis": [
       {
@@ -555,6 +555,46 @@
         "method": {
           "short_name": "ListBackups",
           "full_name": "google.cloud.backupdr.v1.BackupDR.ListBackups",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_FetchBackupsForResourceType_sync",
+      "title": "Snippet for the fetch_backups_for_resource_type call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#fetch_backups_for_resource_type.",
+      "file": "backupdr/fetch_backups_for_resource_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_backups_for_resource_type",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#fetch_backups_for_resource_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::FetchBackupsForResourceTypeResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "FetchBackupsForResourceType",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.FetchBackupsForResourceType",
           "service": {
             "short_name": "BackupDR",
             "full_name": "google.cloud.backupdr.v1.BackupDR"
@@ -1332,6 +1372,46 @@
       ]
     },
     {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListDataSourceReferences_sync",
+      "title": "Snippet for the list_data_source_references call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_data_source_references.",
+      "file": "backupdr/list_data_source_references.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_source_references",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_data_source_references",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListDataSourceReferencesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListDataSourceReferencesResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListDataSourceReferences",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListDataSourceReferences",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "backupdr_v1_generated_BackupDR_FetchDataSourceReferencesForResourceType_sync",
       "title": "Snippet for the fetch_data_source_references_for_resource_type call in the BackupDR service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#fetch_data_source_references_for_resource_type.",
@@ -1407,6 +1487,46 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDrProtectionSummary_ListResourceBackupConfigs_sync",
+      "title": "Snippet for the list_resource_backup_configs call in the BackupDrProtectionSummary service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Client#list_resource_backup_configs.",
+      "file": "backup_dr_protection_summary/list_resource_backup_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_resource_backup_configs",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Client#list_resource_backup_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListResourceBackupConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListResourceBackupConfigsResponse",
+        "client": {
+          "short_name": "BackupDrProtectionSummary::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDrProtectionSummary::Client"
+        },
+        "method": {
+          "short_name": "ListResourceBackupConfigs",
+          "full_name": "google.cloud.backupdr.v1.BackupDrProtectionSummary.ListResourceBackupConfigs",
+          "service": {
+            "short_name": "BackupDrProtectionSummary",
+            "full_name": "google.cloud.backupdr.v1.BackupDrProtectionSummary"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]

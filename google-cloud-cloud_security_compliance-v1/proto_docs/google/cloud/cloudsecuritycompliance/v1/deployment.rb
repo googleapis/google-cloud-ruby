@@ -21,37 +21,39 @@ module Google
   module Cloud
     module CloudSecurityCompliance
       module V1
-        # FrameworkDeployment represents deployment of a Framework on a target
-        # resource. Supported target resources are organizations/\\{organization},
-        # folders/\\{folder}, and projects/\\{project}.
+        # Framework deployments represent the assignment of a framework to a target
+        # resource. Supported target resources are organizations, folders, and
+        # projects.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. FrameworkDeployment name in the following format:
-        #     organizations/\\{organization}/locations/\\{location}/frameworkDeployments/\\{framework_deployment_id}
+        #     Identifier. The name of the framework deployment, in the format
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] target_resource_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceConfig]
-        #     Required. The details of the target resource on which the Framework is to
-        #     be deployed. It can either be an existing target resource or a new target
-        #     resource to be created.
+        #     Required. The details of the target resource that you want to deploy the
+        #     framework to. You can specify an existing resource, or create a new one.
         # @!attribute [r] computed_target_resource
         #   @return [::String]
-        #     Output only. The resource on which the Framework is deployed based on the
-        #     provided TargetResourceConfig in the following format:
-        #     organizations/\\{organization}, folders/\\{folder} or projects/\\{project}
+        #     Output only. The target resource to deploy the framework to, in one  the
+        #     following formats:
+        #
+        #     - `organizations/{organizationID}`
+        #     - `folders/{folderID}`
+        #     - `projects/{projectID}`
         # @!attribute [rw] framework
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkReference]
-        #     Required. Reference to the framework to be deployed.
+        #     Required. A reference to the framework that you're deploying.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. User provided description of the Framework deployment
+        #     Optional. A user-provided description of the framework deployment.
         # @!attribute [rw] cloud_control_metadata
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudControlMetadata>]
-        #     Required. Deployment mode and parameters for each of the Cloud Controls in
-        #     the framework. Every Cloud Control in the framework must have a
-        #     CloudControlMetadata.
+        #     Required. The deployment mode and parameters for each of the cloud controls
+        #     in the framework. Every cloud control in the framework includes metadata.
         # @!attribute [r] deployment_state
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::DeploymentState]
-        #     Output only. State of the Framework Deployment
+        #     Output only. The state for the framework deployment.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which the resource was created.
@@ -61,20 +63,24 @@ module Google
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. To prevent concurrent updates from overwriting each other, always
-        #     provide the `etag` when you update a FrameworkDeployment. You can also
-        #     provide the `etag` when you delete a FrameworkDeployment, to help
+        #     provide the `etag` when you update a framework deployment. You can also
+        #     provide the `etag` when you delete a framework deployment, to help
         #     ensure that you're deleting the intended version of the
-        #     FrameworkDeployment.
+        #     framework deployment.
         # @!attribute [r] target_resource_display_name
         #   @return [::String]
         #     Output only. The display name of the target resource.
         # @!attribute [r] cloud_control_deployment_references
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeploymentReference>]
-        #     Output only. The references to the cloud control deployments. It has all
-        #     the CloudControlDeployments which are either directly added in the
-        #     framework or through a CloudControlGroup. Example: If a framework
-        #     deployment deploys two cloud controls, cc-deployment-1 and cc-deployment-2,
-        #     then the cloud_control_deployment_references will be:
+        #     Output only. The references to the cloud control deployments. The reference
+        #     includes all the cloud control deployments that are in the framework or in
+        #     a cloud control group.
+        #
+        #     For example, if a framework deployment deploys two
+        #     cloud controls, `cc-deployment-1` and `cc-deployment-2`, then the
+        #     references are:
+        #
+        #     ```
         #     {
         #      cloud_control_deployment_reference: {
         #        cloud_control_deployment:
@@ -84,58 +90,63 @@ module Google
         #       cloud_control_deployment:
         #       "organizations/\\{organization}/locations/\\{location}/cloudControlDeployments/cc-deployment-2"
         #      }
+        #     ```
         class FrameworkDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # CloudControlDeployment represents deployment of a CloudControl on a target
-        # resource. Supported target resources are organizations/\\{organization},
-        # folders/\\{folder}, and projects/\\{project}.
+        # A cloud control deployment represents the deployment of a particular cloud
+        # control on a target resource. Supported target resources are
+        # `organizations/{organizationID}`, `folders/{folderID}`, and
+        # `projects/{projectID}`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. CloudControlDeployment name in the following format:
-        #     organizations/\\{organization}/locations/\\{location}/cloudControlDeployments/\\{cloud_control_deployment_id}
+        #     Identifier. The name for the cloud control deployment, in the format
+        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] target_resource_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceConfig]
-        #     Required. The details of the target resource on which the CloudControl is
-        #     to be deployed. It can either be an existing target resource or a new
-        #     target resource to be created.
+        #     Required. The details of the target resource that the cloud control is
+        #     deployed You can use an existing target resource or create a new target.
         # @!attribute [r] target_resource
         #   @return [::String]
-        #     Output only. The resource on which the CloudControl is deployed based on
-        #     the provided TargetResourceConfig in the following format:
-        #     organizations/\\{organization}, folders/\\{folder} or projects/\\{project}.
+        #     Output only. The resource that the cloud control is deployed on, in one of
+        #     the following formats:
+        #
+        #     - `organizations/{organizationID}`
+        #     - `folders/{folderID}`
+        #     - `projects/{projectID}`
         # @!attribute [rw] cloud_control_metadata
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::CloudControlMetadata]
-        #     Required. Deployment mode and parameters for the Cloud Control.
+        #     Required. The deployment mode and parameters for the cloud control.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. User provided description of the CloudControl deployment
+        #     Optional. A friendly description for the cloud control deployment.
         # @!attribute [r] deployment_state
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::DeploymentState]
-        #     Output only. State of the CloudControl deployment
+        #     Output only. The state of the cloud control deployment.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the resource was created.
+        #     Output only. The time when the resource was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the resource last updated.
+        #     Output only. The time when the resource was last updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. To prevent concurrent updates from overwriting each other, always
-        #     provide the `etag` when you update a CloudControlDeployment. You can also
-        #     provide the `etag` when you delete a CloudControlDeployment, to help
+        #     Optional. To prevent concurrent updates from overwriting each other,
+        #     provide the `etag` when you update a cloud control deployment. You can also
+        #     provide the `etag` when you delete a cloud control deployment to help
         #     ensure that you're deleting the intended version of the
-        #     CloudControlDeployment.
+        #     deployment.
         # @!attribute [r] parameter_substituted_cloud_control
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::CloudControl]
-        #     Output only. The CloudControl after substitution of given parameters.
+        #     Output only. The cloud control after the given parameters are substituted.
         # @!attribute [r] framework_deployment_references
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeploymentReference>]
-        #     Output only. The references to the Framework deployments that this Cloud
-        #     Control deployment is part of. A Cloud Control deployment can be part of
-        #     multiple Framework deployments.
+        #     Output only. The references to the framework deployments that this cloud
+        #     control deployment is part of. A cloud control deployment can be part of
+        #     multiple framework deployments.
         # @!attribute [r] target_resource_display_name
         #   @return [::String]
         #     Output only. The display name of the target resource.
@@ -144,18 +155,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # TargetResourceConfig contains either the name of the target_resource or
-        # contains the config to create a new target_resource.
+        # The name of the target resource or the configuration that's required to
+        # create a new target resource.
         # @!attribute [rw] existing_target_resource
         #   @return [::String]
-        #     Optional. CRM node in format organizations/\\{organization},
-        #     folders/\\{folder}, or projects/\\{project}
+        #     Optional. The resource hierarchy node, in one of the following formats:
+        #
+        #     - `organizations/{organizationID}`
+        #     - `folders/{folderID}`
+        #     - `projects/{projectID}`
         #
         #     Note: The following fields are mutually exclusive: `existing_target_resource`, `target_resource_creation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target_resource_creation_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceCreationConfig]
-        #     Optional. Config to create a new resource and use that as the
-        #     target_resource for deployment.
+        #     Optional. The details that are required to create a resource and use
+        #     that resource as the target resource for deployment.
         #
         #     Note: The following fields are mutually exclusive: `target_resource_creation_config`, `existing_target_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TargetResourceConfig
@@ -163,18 +177,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # TargetResourceCreationConfig contains the config to create a new resource to
-        # be used as the target_resource of a deployment.
+        # The configuration that's required to create a target resource.
         # @!attribute [rw] folder_creation_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::FolderCreationConfig]
-        #     Optional. Config to create a new folder to be used as the target_resource
-        #     of a deployment.
+        #     Optional. The configuration that's required to create a folder.
         #
         #     Note: The following fields are mutually exclusive: `folder_creation_config`, `project_creation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] project_creation_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::ProjectCreationConfig]
-        #     Optional. Config to create a new project to be used as the
-        #     target_resource of a deployment.
+        #     Optional. The configuration that's required to create a project.
         #
         #     Note: The following fields are mutually exclusive: `project_creation_config`, `folder_creation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TargetResourceCreationConfig
@@ -182,81 +193,83 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # FolderCreationConfig contains the config to create a new folder to be used
-        # as the target_resource of a deployment.
+        # The configuration that's required to create a folder to be used
+        # as the target resource for a deployment.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent of the folder to be created. It can be an
-        #     organizations/\\{org} or folders/\\{folder}
+        #     Required. The parent of the folder, in the format
+        #     `organizations/{organizationID}` or `folders/{folderID}`.
         # @!attribute [rw] folder_display_name
         #   @return [::String]
-        #     Required. Display name of the folder to be created
+        #     Required. The display name of the folder.
         class FolderCreationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ProjectCreationConfig contains the config to create a new project to be used
-        # as the target_resource of a deployment.
+        # The configuration that's required to create a project to be used
+        # as the target resource of a deployment.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. organizations/\\{org} or folders/\\{folder}
+        #     Required. The parent of the project, in the format
+        #     `organizations/{organizationID}` or `folders/{folderID}`.
         # @!attribute [rw] project_display_name
         #   @return [::String]
-        #     Required. Display name of the project to be created.
+        #     Required. The display name of the project.
         # @!attribute [rw] billing_account_id
         #   @return [::String]
-        #     Required. Billing account id to be used for the project.
+        #     Required. The billing account ID for the project.
         class ProjectCreationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # CloudControlMetadata contains the enforcement mode and parameters of a Cloud
-        # Control Deployment.
+        # The enforcement mode and parameters of a cloud
+        # control deployment.
         # @!attribute [rw] cloud_control_details
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDetails]
-        #     Required. Cloud control name and parameters.
+        #     Required. The cloud control name and parameters.
         # @!attribute [rw] enforcement_mode
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::EnforcementMode]
-        #     Required. Enforcement mode of the cloud control
+        #     Required. The enforcement mode of the cloud control.
         class CloudControlMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for CreateFrameworkDeployment API.
+        # The request message for [CreateFrameworkDeployment][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the FrameworkDeployment in the format:
-        #     organizations/\\{organization}/locations/\\{location}
-        #     Only global location is supported.
+        #     Required. The parent resource of the framework deployment in the format
+        #     `organizations/{organization}/locations/{location}`.
+        #     Only the global location is supported.
         # @!attribute [rw] framework_deployment_id
         #   @return [::String]
-        #     Optional. User provided identifier. It should be unique in scope of a
-        #     parent. This is optional and if not provided, a random UUID will be
+        #     Optional. An identifier for the framework deployment that's unique in scope
+        #     of the parent. If you don't specify a value, then a random UUID is
         #     generated.
         # @!attribute [rw] framework_deployment
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment]
-        #     Required. The FrameworkDeployment to be created.
+        #     Required. The framework deployment that you're creating.
         class CreateFrameworkDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for DeleteFrameworkDeployment.
+        # The request message for [DeleteFrameworkDeployment][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. name of the FrameworkDeployment to be deleted in the following
-        #     format:
-        #     organizations/\\{organization}/locations/\\{location}/frameworkDeployments/\\{framework_deployment_id}
+        #     Required. The name of the framework deployment that you want to delete,
+        #     in the format
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. An opaque identifier for the current version of the resource.
         #
         #     If you provide this value, then it must match the existing value. If the
         #     values don't match, then the request fails with an
-        #     [ABORTED][google.rpc.Code.ABORTED] error.
+        #     [`ABORTED`][google.rpc.Code.ABORTED] error.
         #
         #     If you omit this value, then the resource is deleted regardless of its
         #     current `etag` value.
@@ -265,161 +278,189 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for GetFrameworkDeployment.
+        # The request message for [GetFrameworkDeployment][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. FrameworkDeployment name in the following format:
-        #     organizations/\\{organization}/locations/\\{location}/frameworkDeployments/\\{framework_deployment_id}
+        #     Required. The name of the framework deployment, in the format
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     The only supported location is `global`.
         class GetFrameworkDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for ListFrameworkDeployments.
+        # The request message for [ListFrameworkDeployments][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. parent resource of the FrameworkDeployment in the format:
-        #     organizations/\\{organization}/locations/\\{location}
-        #     Only global location is supported.
+        #     Required. The parent resource of the framework deployment, in the format
+        #     `organizations/{organization}/locations/{location}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server may return fewer items than
-        #     requested. If unspecified, server will pick an appropriate default.
+        #     Optional. The requested page size. The server might return fewer items than
+        #     requested.
+        #     If unspecified, the server picks an appropriate default.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A token identifying a page of results the server should return.
+        #     Optional. A token that identifies a page of results the server should
+        #     return.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter to be applied on the resource, defined by EBNF grammar
-        #     https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+        #     Optional. The filter to be applied on the resource, as defined by
+        #     [AIP-160: Filtering](https://google.aip.dev/160).
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+        #     Optional. The sort order for the results. The following values are
+        #     supported:
+        #
+        #     * `name`
+        #     * `name desc`
+        #
+        #     If you do not specify a value, then the results are not sorted.
         class ListFrameworkDeploymentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for ListFrameworkDeployments.
+        # The response message for [ListFrameworkDeployments][].
         # @!attribute [rw] framework_deployments
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::FrameworkDeployment>]
-        #     The list of FrameworkDeployments.
+        #     The list of framework deployments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A token that identifies the next page of results that the server
+        #     should return.
         class ListFrameworkDeploymentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for GetCloudControlDeployment.
+        # The request message for [GetCloudControlDeployment][].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. CloudControlDeployment name in the following format:
-        #     organizations/\\{organization}/locations/\\{location}/cloudControlDeployments/\\{cloud_control_deployment_id}
+        #     Required. The name for the cloud control deployment, in the format
+        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+        #     The only supported location is `global`.
         class GetCloudControlDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for ListCloudControlDeployments.
+        # The request message for [ListCloudControlDeployments][].
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. parent resource of the CloudControlDeployment in the format:
-        #     organizations/\\{organization}/locations/\\{location}
-        #     Only global location is supported.
+        #     Required. The parent resource for the cloud control deployment, in the
+        #     format `organizations/{organization}/locations/{location}`. The only
+        #     supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server may return fewer items than
-        #     requested. If unspecified, server will pick an appropriate default.
+        #     Optional. The requested page size. The server might return fewer items than
+        #     you requested.
+        #     If unspecified, the server picks an appropriate default.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A token identifying a page of results the server should return.
+        #     Optional. A token that identifies the page of results that the server
+        #     should return.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter to be applied on the resource, defined by EBNF grammar
-        #     https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+        #     Optional. The filter to apply on the resource, as defined by
+        #     [AIP-160: Filtering](https://google.aip.dev/160).
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+        #     Optional. The sort order for the results. The following values are
+        #     supported:
+        #
+        #     * `name`
+        #     * `name desc`
+        #
+        #     If you do not specify a value, then the results are not sorted.
         class ListCloudControlDeploymentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for ListCloudControlDeployments.
+        # The response message for [ListCloudControlDeployments][].
         # @!attribute [rw] cloud_control_deployments
         #   @return [::Array<::Google::Cloud::CloudSecurityCompliance::V1::CloudControlDeployment>]
-        #     The list of CloudControlDeployments.
+        #     The list of cloud control deployments.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A token that identifies the next page of results that the server
+        #     should return.
         class ListCloudControlDeploymentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The reference to a CloudControlDeployment.
+        # The reference to a cloud control deployment.
         # @!attribute [r] cloud_control_deployment
         #   @return [::String]
-        #     Output only. The name of the CloudControlDeployment. The format is:
-        #     organizations/\\{org}/locations/\\{location}/cloudControlDeployments/\\{cloud_control_deployment_id}
+        #     Output only. The name of the CloudControlDeployment. The format is
+        #     `organizations/{org}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+        #     The only supported location is `global`.
         class CloudControlDeploymentReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The reference to a FrameworkDeployment.
+        # The reference to a framework deployment.
         # @!attribute [r] framework_deployment
         #   @return [::String]
-        #     Output only. The name of the FrameworkDeployment. The format is:
-        #     organizations/\\{org}/locations/\\{location}/frameworkDeployments/\\{framework_deployment_id}
+        #     Output only. The name of the framework deployment, in the format
+        #     `organizations/{org}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] framework_reference
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkReference]
-        #     Optional. The reference to the Framework that this deployment is for.
-        #     Example: {
+        #     Optional. The reference to the framework that this deployment is for.
+        #     For example:
+        #
+        #     ```
+        #     {
         #       framework:
         #       "organizations/\\{org}/locations/\\{location}/frameworks/\\{framework}",
         #       major_revision_id: 1
         #     }
+        #     ```
+        #
+        #     The only supported location is `global`.
         # @!attribute [rw] framework_display_name
         #   @return [::String]
-        #     Optional. The display name of the Framework that this FrameworkDeployment
+        #     Optional. The display name of the framework that this framework deployment
         #     is for.
         class FrameworkDeploymentReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # DeploymentState represents the state of the Deployment resource.
+        # The state of the deployment resource.
         module DeploymentState
-          # Unspecified. Invalid state.
+          # Default value. This value is unused.
           DEPLOYMENT_STATE_UNSPECIFIED = 0
 
           # Validating the deployment.
           DEPLOYMENT_STATE_VALIDATING = 1
 
-          # Deployment is in CREATING state.
+          # Deployment is being created.
           DEPLOYMENT_STATE_CREATING = 2
 
-          # Deployment is in DELETING state.
+          # Deployment is being deleted.
           DEPLOYMENT_STATE_DELETING = 3
 
-          # Deployment has failed. All the changes made by the deployment have been
-          # successfully rolled back. A deployment in the FAILED state can be retried
-          # or deleted.
+          # Deployment has failed. All the changes made by the deployment were
+          # successfully rolled back. You can retry or delete a deployment that's
+          # in this state.
           DEPLOYMENT_STATE_FAILED = 4
 
           # Deployment is successful and ready to use.
           DEPLOYMENT_STATE_READY = 5
 
-          # Deployment is partially deployed. All the Cloud Controls were not deployed
-          # successfully. Retrying the operation will resume from the first failed
+          # Deployment is partially deployed. All the cloud controls weren't deployed
+          # successfully. Retrying the operation resumes from the first failed
           # step.
           DEPLOYMENT_STATE_PARTIALLY_DEPLOYED = 6
 
-          # Deployment is partially deleted. All the Cloud Control Deployments were not
-          # deleted successfully. Retrying the operation will resume from the first
+          # Deployment is partially deleted. All the cloud control deployments weren't
+          # deleted successfully. Retrying the operation resumes from the first
           # failed step.
           DEPLOYMENT_STATE_PARTIALLY_DELETED = 7
         end

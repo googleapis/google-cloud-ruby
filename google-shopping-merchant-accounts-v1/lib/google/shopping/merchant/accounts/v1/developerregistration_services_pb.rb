@@ -45,6 +45,8 @@ module Google
               # GCP will still be able to access the API for at most 1 day from the
               # unregister succussful call.
               rpc :UnregisterGcp, ::Google::Shopping::Merchant::Accounts::V1::UnregisterGcpRequest, ::Google::Protobuf::Empty
+              # Retrieves the merchant account that the calling GCP is registered with.
+              rpc :GetAccountForGcpRegistration, ::Google::Protobuf::Empty, ::Google::Shopping::Merchant::Accounts::V1::GetAccountForGcpRegistrationResponse
             end
 
             Stub = Service.rpc_stub_class

@@ -1,5 +1,21 @@
 # Changelog
 
+### 3.0.0 (2025-12-17)
+
+### ⚠ BREAKING CHANGES
+
+* Added proto3 optional to Network primitive fields ([#32255](https://github.com/googleapis/google-cloud-ruby/issues/32255))
+
+#### Bug Fixes
+
+* Added proto3 optional to Network primitive fields ([#32255](https://github.com/googleapis/google-cloud-ruby/issues/32255)) 
+
+### 2.3.0 (2025-11-21)
+
+#### Features
+
+* Added Application resource ([#31802](https://github.com/googleapis/google-cloud-ruby/issues/31802)) 
+
 ### 2.2.0 (2025-10-08)
 
 #### Features

@@ -2209,6 +2209,10 @@ module Google
         #     Optional. By default the virtual machine will keep its existing boot
         #     option. Setting this property will trigger an internal process which will
         #     convert the virtual machine from using the existing boot option to another.
+        # @!attribute [rw] adaptation_modifiers
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AdaptationModifier>]
+        #     Optional. AdaptationModifiers are the set of modifiers used during OS
+        #     adaptation.
         # @!attribute [rw] disk_replica_zones
         #   @return [::Array<::String>]
         #     Optional. Additional replica zones of the target regional disks.
@@ -2220,6 +2224,13 @@ module Google
         #     API](https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources)
         #     for further details about regional vs zonal disks. If not specified, a
         #     zonal disk will be created in the same zone the VM is created.
+        # @!attribute [rw] storage_pool
+        #   @return [::String]
+        #     Optional. If specified this will be the storage pool in which the disk is
+        #     created. This is the full path of the storage pool resource, for example:
+        #     "projects/my-project/zones/us-central1-a/storagePools/my-storage-pool".
+        #     The storage pool must be in the same project and zone as the target disks.
+        #     The storage pool's type must match the disk type.
         class ComputeEngineTargetDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2241,6 +2252,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # AdaptationModifier a modifier to be used for configuration of the OS
+        # adaptation process.
+        # @!attribute [rw] modifier
+        #   @return [::String]
+        #     Optional. The modifier name.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Optional. The value of the modifier.
+        #     The actual value depends on the modifier and can also be empty.
+        class AdaptationModifier
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # ComputeEngineTargetDetails is a collection of details for creating a VM in a
@@ -2314,6 +2339,10 @@ module Google
         #     Optional. By default the virtual machine will keep its existing boot
         #     option. Setting this property will trigger an internal process which will
         #     convert the virtual machine from using the existing boot option to another.
+        # @!attribute [rw] adaptation_modifiers
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AdaptationModifier>]
+        #     Optional. Modifiers to be used as configuration of the OS adaptation
+        #     process.
         # @!attribute [rw] disk_replica_zones
         #   @return [::Array<::String>]
         #     Optional. Additional replica zones of the target regional disks.
@@ -2325,6 +2354,14 @@ module Google
         #     API](https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources)
         #     for further details about regional vs zonal disks. If not specified, a
         #     zonal disk will be created in the same zone the VM is created.
+        # @!attribute [rw] storage_pool
+        #   @return [::String]
+        #     Optional. The storage pool used for the VM disks.
+        #     If specified this will be the storage pool in which the disk is created.
+        #     This is the full path of the storage pool resource, for example:
+        #     "projects/my-project/zones/us-central1-a/storagePools/my-storage-pool".
+        #     The storage pool must be in the same project and zone as the target disks.
+        #     The storage pool's type must match the disk type.
         class ComputeEngineTargetDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4128,12 +4165,28 @@ module Google
         #     this property will trigger an internal process which will convert the
         #     image from using the existing boot option to another.
         #     The size of the boot disk might be increased to allow the conversion
+        # @!attribute [rw] adaptation_modifiers
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AdaptationModifier>]
+        #     Optional. Modifiers to be used as configuration of the OS adaptation
+        #     process.
         class ImageImportOsAdaptationParameters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Mentions that the image import is not using OS adaptation process.
+        # Used when the image import is not using OS adaptation process.
+        # @!attribute [rw] guest_os_features
+        #   @return [::Array<::String>]
+        #     Optional. A list of guest OS features to apply to the imported image. These
+        #     features are flags that are used by Compute Engine to enable certain
+        #     capabilities for virtual machine instances that are created from the image.
+        #
+        #     This field does not change the OS of the image; it only marks the image
+        #     with the specified features. The user must ensure that the OS is
+        #     compatible with the features.
+        #
+        #     For a list of available features, see
+        #     https://cloud.google.com/compute/docs/images/create-custom#guest-os-features.
         class DataDiskImageImport
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

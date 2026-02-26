@@ -56,10 +56,35 @@ module Google
         #     the following format: projects/\\{project}/global/networks/\\{network}
         # @!attribute [rw] cidr
         #   @return [::String]
-        #     Optional. The subnet CIDR range for the Autonmous Database.
+        #     Optional. The subnet CIDR range for the Autonomous Database.
+        # @!attribute [rw] odb_network
+        #   @return [::String]
+        #     Optional. The name of the OdbNetwork associated with the Autonomous
+        #     Database. Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network} It is
+        #     optional but if specified, this should match the parent ODBNetwork of the
+        #     OdbSubnet.
+        # @!attribute [rw] odb_subnet
+        #   @return [::String]
+        #     Optional. The name of the OdbSubnet associated with the Autonomous
+        #     Database. Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
+        # @!attribute [rw] source_config
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig]
+        #     Optional. The source Autonomous Database configuration for the standby
+        #     Autonomous Database. The source Autonomous Database is configured while
+        #     creating the Peer Autonomous Database and can't be updated after creation.
+        # @!attribute [r] peer_autonomous_databases
+        #   @return [::Array<::String>]
+        #     Output only. The peer Autonomous Database names of the given Autonomous
+        #     Database.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time that the Autonomous Database was created.
+        # @!attribute [r] disaster_recovery_supported_locations
+        #   @return [::Array<::String>]
+        #     Output only. List of supported GCP region to clone the Autonomous Database
+        #     for disaster recovery. Format: `project/{project}/locations/{location}`.
         class AutonomousDatabase
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,6 +97,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # The source configuration for the standby Autonomous Database.
+        # @!attribute [rw] autonomous_database
+        #   @return [::String]
+        #     Optional. The name of the primary Autonomous Database that is used to
+        #     create a Peer Autonomous Database from a source.
+        # @!attribute [rw] automatic_backups_replication_enabled
+        #   @return [::Boolean]
+        #     Optional. This field specifies if the replication of automatic backups is
+        #     enabled when creating a Data Guard.
+        class SourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The properties of an Autonomous Database.
@@ -274,12 +313,36 @@ module Google
         # @!attribute [r] next_long_term_backup_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The long term backup schedule of the Autonomous Database.
+        # @!attribute [r] data_guard_role_changed_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The date and time the Autonomous Data Guard role was changed
+        #     for the standby Autonomous Database.
+        # @!attribute [r] disaster_recovery_role_changed_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The date and time the Disaster Recovery role was changed for
+        #     the standby Autonomous Database.
         # @!attribute [r] maintenance_begin_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time when maintenance will begin.
         # @!attribute [r] maintenance_end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time when maintenance will end.
+        # @!attribute [rw] allowlisted_ips
+        #   @return [::Array<::String>]
+        #     Optional. The list of allowlisted IP addresses for the Autonomous Database.
+        # @!attribute [rw] encryption_key
+        #   @return [::Google::Cloud::OracleDatabase::V1::EncryptionKey]
+        #     Optional. The encryption key used to encrypt the Autonomous Database.
+        #     Updating this field will add a new entry in the
+        #     `encryption_key_history_entries` field with the former version.
+        # @!attribute [r] encryption_key_history_entries
+        #   @return [::Array<::Google::Cloud::OracleDatabase::V1::EncryptionKeyHistoryEntry>]
+        #     Output only. The history of the encryption keys used to encrypt the
+        #     Autonomous Database.
+        # @!attribute [r] service_agent_email
+        #   @return [::String]
+        #     Output only. An Oracle-managed Google Cloud service account on which
+        #     customers can grant roles to access resources in the customer project.
         class AutonomousDatabaseProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -447,6 +510,46 @@ module Google
 
             # Snapshot standby role
             SNAPSHOT_STANDBY = 5
+          end
+        end
+
+        # The history of the encryption keys used to encrypt the Autonomous Database.
+        # @!attribute [r] encryption_key
+        #   @return [::Google::Cloud::OracleDatabase::V1::EncryptionKey]
+        #     Output only. The encryption key used to encrypt the Autonomous Database.
+        # @!attribute [r] activation_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The date and time when the encryption key was activated on the
+        #     Autonomous Database..
+        class EncryptionKeyHistoryEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The encryption key used to encrypt the Autonomous Database.
+        # @!attribute [rw] provider
+        #   @return [::Google::Cloud::OracleDatabase::V1::EncryptionKey::Provider]
+        #     Optional. The provider of the encryption key.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. The KMS key used to encrypt the Autonomous Database.
+        #     This field is required if the provider is GOOGLE_MANAGED.
+        #     The name of the KMS key resource in the following format:
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+        class EncryptionKey
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The provider of the encryption key.
+          module Provider
+            # Default unspecified value.
+            PROVIDER_UNSPECIFIED = 0
+
+            # Google Managed KMS key, if selected, please provide the KMS key name.
+            GOOGLE_MANAGED = 1
+
+            # Oracle Managed.
+            ORACLE_MANAGED = 2
           end
         end
 

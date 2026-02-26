@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/cloud_security_compliance/v1/rest"
-      #     client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::Client.new
+      #     client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new
       #
       module V1
         ##

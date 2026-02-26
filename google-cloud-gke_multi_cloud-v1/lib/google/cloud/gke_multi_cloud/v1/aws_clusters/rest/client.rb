@@ -49,6 +49,7 @@ module Google
               #
               # See {::Google::Cloud::GkeMultiCloud::V1::AwsClusters::Rest::Client::Configuration}
               # for a description of the configuration fields.
+              # @deprecated This service is deprecated and may be removed in the next major version update.
               #
               # @example
               #

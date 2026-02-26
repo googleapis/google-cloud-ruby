@@ -671,6 +671,85 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     end
   end
 
+  def test_execute_pipeline
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Firestore::V1::ExecutePipelineResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    database = "hello world"
+    structured_pipeline = {}
+    transaction = "hello world"
+
+    execute_pipeline_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :execute_pipeline, name
+      assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineRequest, request
+      assert_equal "hello world", request["database"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::StructuredPipeline), request["structured_pipeline"]
+      assert_equal :structured_pipeline, request.pipeline_type
+      assert_equal "hello world", request["transaction"]
+      assert_equal :transaction, request.consistency_selector
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_pipeline_client_stub do
+      # Create client
+      client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_pipeline_client_stub.call_rpc_count
+    end
+  end
+
   def test_run_aggregation_query
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new
@@ -1226,5 +1305,25 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Firestore::V1::Firestore::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::Firestore::V1::Firestore::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 end

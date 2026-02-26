@@ -133,6 +133,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_occurrences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_occurrences, name
@@ -141,6 +142,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -151,35 +153,35 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_occurrences parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_occurrences parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_occurrences ::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_occurrences ::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_occurrences({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_occurrences(::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_occurrences(::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -558,6 +560,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_notes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notes, name
@@ -566,6 +569,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -576,35 +580,35 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notes parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_notes parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notes ::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_notes ::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_notes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notes(::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_notes(::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -943,5 +947,25 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
 
     assert_same block_config, config
     assert_kind_of ::Grafeas::V1::Grafeas::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Grafeas::V1::Grafeas::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Grafeas::V1::Grafeas::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 end

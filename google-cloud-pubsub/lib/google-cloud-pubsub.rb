@@ -23,6 +23,7 @@ gem "google-cloud-core"
 require "google/cloud" unless defined? Google::Cloud.new
 require "google/cloud/config"
 require "googleauth"
+require "logger"
 
 module Google
   module Cloud
@@ -76,10 +77,24 @@ module Google
     # @param [String] project_id Project identifier for the Pub/Sub service you
     #   are connecting to. If not present, the default project for the
     #   credentials is used.
-    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
-    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-    #   Google::Auth::Credentials object.
-    #   (See {Google::Cloud::PubSub::Credentials})
+    # @param [Google::Auth::Credentials] credentials A Google::Auth::Credentials
+    #   object. (See {Google::Cloud::PubSub::Credentials})
+    #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+    #     is deprecated. Providing an unvalidated credential configuration to
+    #     Google APIs can compromise the security of your systems and data.
+    #
+    #   @example
+    #
+    #     # The recommended way to provide credentials is to use the `make_creds` method
+    #     # on the appropriate credentials class for your environment.
+    #
+    #     require "googleauth"
+    #
+    #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+    #       json_key_io: ::File.open("/path/to/keyfile.json")
+    #     )
+    #
+    #     pubsub = Google::Cloud::Pubsub.new project_id: "my-project", credentials: credentials
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -128,6 +143,8 @@ Google::Cloud.configure.add_config! :pubsub do |config| # rubocop:disable Metric
     "https://www.googleapis.com/auth/pubsub"
   ]
 
+  default_logger = Logger.new $stdout
+
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
@@ -139,4 +156,5 @@ Google::Cloud.configure.add_config! :pubsub do |config| # rubocop:disable Metric
   config.add_field! :on_error, nil, match: Proc
   config.add_field! :endpoint, nil, match: String
   config.add_field! :universe_domain, nil, match: String
+  config.add_field! :logger, default_logger, match: Logger, allow_nil: true
 end

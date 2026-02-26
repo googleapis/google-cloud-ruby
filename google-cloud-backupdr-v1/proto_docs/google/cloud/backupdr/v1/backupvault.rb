@@ -47,6 +47,10 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Required. The default and minimum enforced retention for each backup within
         #     the backup vault.  The enforced retention for each backup can be extended.
+        # @!attribute [rw] backup_retention_inheritance
+        #   @return [::Google::Cloud::BackupDR::V1::BackupVault::BackupRetentionInheritance]
+        #     Optional. Setting for how a backup's enforced retention end time is
+        #     inherited.
         # @!attribute [r] deletable
         #   @return [::Boolean]
         #     Output only. Set to true when there are no backups nested under this
@@ -86,9 +90,25 @@ module Google
         #
         #     Access restriction for the backup vault.
         #     Default value is WITHIN_ORGANIZATION if not provided during creation.
+        # @!attribute [rw] encryption_config
+        #   @return [::Google::Cloud::BackupDR::V1::BackupVault::EncryptionConfig]
+        #     Optional. The encryption config of the backup vault.
         class BackupVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message describing the EncryptionConfig of backup vault.
+          # This determines how data within the vault is encrypted at rest.
+          # @!attribute [rw] kms_key_name
+          #   @return [::String]
+          #     Optional. The Cloud KMS key name to encrypt backups in this backup vault.
+          #     Must be in the same region as the vault. Some workload backups like
+          #     compute disk backups may use their inherited source key instead. Format:
+          #     projects/\\{project}/locations/\\{location}/keyRings/\\{ring}/cryptoKeys/\\{key}
+          class EncryptionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -106,6 +126,28 @@ module Google
           class AnnotationsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # How a backup's enforced retention end time is inherited.
+          module BackupRetentionInheritance
+            # Inheritance behavior not set. This will default to
+            # `INHERIT_VAULT_RETENTION`.
+            BACKUP_RETENTION_INHERITANCE_UNSPECIFIED = 0
+
+            # The enforced retention end time of a backup will be inherited from the
+            # backup vault's `backup_minimum_enforced_retention_duration` field.
+            #
+            # This is the default behavior.
+            INHERIT_VAULT_RETENTION = 1
+
+            # The enforced retention end time of a backup will always match the expire
+            # time of the backup.
+            #
+            # If this is set, the backup's enforced retention end time will be set to
+            # match the expire time during creation of the backup. When updating, the
+            # ERET and expire time must be updated together and have the same value.
+            # Invalid update requests will be rejected by the server.
+            MATCH_BACKUP_EXPIRE_TIME = 2
           end
 
           # Holds the state of the backup vault resource.
@@ -360,19 +402,25 @@ module Google
         #     ComputeInstanceDataSourceProperties has a subset of Compute Instance
         #     properties that are useful at the Datasource level.
         #
-        #     Note: The following fields are mutually exclusive: `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `alloy_db_cluster_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] cloud_sql_instance_datasource_properties
         #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceDataSourceProperties]
         #     Output only. CloudSqlInstanceDataSourceProperties has a subset of Cloud
         #     SQL Instance properties that are useful at the Datasource level.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_datasource_properties`, `compute_instance_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_datasource_properties`, `compute_instance_datasource_properties`, `alloy_db_cluster_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] alloy_db_cluster_datasource_properties
+        #   @return [::Google::Cloud::BackupDR::V1::AlloyDBClusterDataSourceProperties]
+        #     Output only. AlloyDBClusterDataSourceProperties has a subset of AlloyDB
+        #     cluster properties that are useful at the Datasource level.
+        #
+        #     Note: The following fields are mutually exclusive: `alloy_db_cluster_datasource_properties`, `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `disk_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] disk_datasource_properties
         #   @return [::Google::Cloud::BackupDR::V1::DiskDataSourceProperties]
         #     DiskDataSourceProperties has a subset of Disk properties that are useful
         #     at the Datasource level.
         #
-        #     Note: The following fields are mutually exclusive: `disk_datasource_properties`, `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `disk_datasource_properties`, `compute_instance_datasource_properties`, `cloud_sql_instance_datasource_properties`, `alloy_db_cluster_datasource_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataSourceGcpResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -497,6 +545,10 @@ module Google
         # @!attribute [rw] enforced_retention_end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The backup can not be deleted before this time.
+        # @!attribute [r] backup_retention_inheritance
+        #   @return [::Google::Cloud::BackupDR::V1::BackupVault::BackupRetentionInheritance]
+        #     Output only. Setting for how the enforced retention end time is inherited.
+        #     This value is copied from this backup's BackupVault.
         # @!attribute [rw] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. When this backup is automatically expired.
@@ -522,22 +574,27 @@ module Google
         #   @return [::Google::Cloud::BackupDR::V1::ComputeInstanceBackupProperties]
         #     Output only. Compute Engine specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `alloy_db_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] cloud_sql_instance_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceBackupProperties]
         #     Output only. Cloud SQL specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_backup_properties`, `compute_instance_backup_properties`, `backup_appliance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance_backup_properties`, `compute_instance_backup_properties`, `backup_appliance_backup_properties`, `alloy_db_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_appliance_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::BackupApplianceBackupProperties]
         #     Output only. Backup Appliance specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `backup_appliance_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `backup_appliance_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `alloy_db_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] alloy_db_backup_properties
+        #   @return [::Google::Cloud::BackupDR::V1::AlloyDbClusterBackupProperties]
+        #     Output only. AlloyDB specific backup properties.
+        #
+        #     Note: The following fields are mutually exclusive: `alloy_db_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `disk_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] disk_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::DiskBackupProperties]
         #     Output only. Disk specific backup properties.
         #
-        #     Note: The following fields are mutually exclusive: `disk_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `disk_backup_properties`, `compute_instance_backup_properties`, `cloud_sql_instance_backup_properties`, `backup_appliance_backup_properties`, `alloy_db_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_type
         #   @return [::Google::Cloud::BackupDR::V1::Backup::BackupType]
         #     Output only. Type of the backup, unspecified, scheduled or ondemand.
@@ -553,6 +610,14 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Optional. Output only. Reserved for future use.
+        # @!attribute [r] gcp_resource
+        #   @return [::Google::Cloud::BackupDR::V1::BackupGcpResource]
+        #     Output only. Unique identifier of the GCP resource that is being backed
+        #     up.
+        # @!attribute [r] kms_key_versions
+        #   @return [::Array<::String>]
+        #     Optional. Output only. The list of KMS key versions used to encrypt the
+        #     backup.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -764,6 +829,63 @@ module Google
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
         class FetchUsableBackupVaultsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the FetchBackupsForResourceType method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Datasources are the parent resource for the backups.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backupVaultId}/dataSources/\\{datasourceId}
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     Required. The type of the GCP resource.
+        #     Ex: sqladmin.googleapis.com/Instance
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of Backups to return. The service may
+        #     return fewer than this value. If unspecified, at most 50
+        #     Backups will be returned. The maximum value is 100; values
+        #     above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous call of
+        #     `FetchBackupsForResourceType`.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `FetchBackupsForResourceType` must match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter expression that filters the results fetched in the
+        #     response. The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. Supported
+        #     fields:
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields to order by, sorted in ascending
+        #     order. Use "desc" after a field name for descending.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::BackupDR::V1::BackupView]
+        #     Optional. This parameter is used to specify the view of the backup.
+        #     If not specified, the default view is BASIC.
+        class FetchBackupsForResourceTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the FetchBackupsForResourceType method.
+        # @!attribute [rw] backups
+        #   @return [::Array<::Google::Cloud::BackupDR::V1::Backup>]
+        #     The Backups from the specified parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchBackupsForResourceTypeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1130,6 +1252,20 @@ module Google
         #     Disk properties to be overridden during restore.
         #
         #     Note: The following fields are mutually exclusive: `disk_restore_properties`, `compute_instance_restore_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] clear_overrides_field_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A field mask used to clear server-side default values
+        #     for fields within the `instance_properties` oneof.
+        #
+        #     When a field in this mask is cleared, the server will not apply its
+        #     default logic (like inheriting a value from the source) for that field.
+        #
+        #     The most common current use case is clearing default encryption keys.
+        #
+        #     Examples of field mask paths:
+        #     - Compute Instance Disks:
+        #     `compute_instance_restore_properties.disks.*.disk_encryption_key`
+        #     - Single Disk: `disk_restore_properties.disk_encryption_key`
         class RestoreBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1165,6 +1301,22 @@ module Google
         #     Type of the resource. Use the Unified Resource Type,
         #     eg. compute.googleapis.com/Instance.
         class GcpResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Minimum details to identify a Google Cloud resource for a backup.
+        # @!attribute [rw] gcp_resourcename
+        #   @return [::String]
+        #     Name of the Google Cloud resource.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Location of the resource: <region>/<zone>/"global"/"unspecified".
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Type of the resource. Use the Unified Resource Type,
+        #     eg. compute.googleapis.com/Instance.
+        class BackupGcpResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -69,8 +69,9 @@ module Google
           #     Optional. The Cloud Storage URI of the `requirements.txt` file
           # @!attribute [rw] python_version
           #   @return [::String]
-          #     Optional. The Python version. Currently support 3.8, 3.9, 3.10, 3.11.
-          #     If not specified, default value is 3.10.
+          #     Optional. The Python version. Supported values
+          #     are 3.9, 3.10, 3.11, 3.12, 3.13. If not specified, the default value
+          #     is 3.10.
           class PackageSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,6 +136,13 @@ module Google
           # @!attribute [rw] inline_source
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::InlineSource]
           #     Source code is provided directly in the request.
+          #
+          #     Note: The following fields are mutually exclusive: `inline_source`, `developer_connect_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] developer_connect_source
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::DeveloperConnectSource]
+          #     Source code is in a Git repository managed by Developer Connect.
+          #
+          #     Note: The following fields are mutually exclusive: `developer_connect_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] python_spec
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::PythonSpec]
           #     Configuration for a Python application.
@@ -146,9 +154,40 @@ module Google
             # @!attribute [rw] source_archive
             #   @return [::String]
             #     Required. Input only. The application source code archive, provided as
-            #     a compressed tarball
-            #     (.tar.gz) file.
+            #     a compressed tarball (.tar.gz) file.
             class InlineSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies the configuration for fetching source code from a Git
+            # repository that is managed by Developer Connect. This includes the
+            # repository, revision, and directory to use.
+            # @!attribute [rw] git_repository_link
+            #   @return [::String]
+            #     Required. The Developer Connect Git repository link, formatted as
+            #     `projects/*/locations/*/connections/*/gitRepositoryLink/*`.
+            # @!attribute [rw] dir
+            #   @return [::String]
+            #     Required. Directory, relative to the source root, in which to run the
+            #     build.
+            # @!attribute [rw] revision
+            #   @return [::String]
+            #     Required. The revision to fetch from the Git repository such as a
+            #     branch, a tag, a commit SHA, or any Git ref.
+            class DeveloperConnectConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies source code to be fetched from a Git repository managed through
+            # the Developer Connect service.
+            # @!attribute [rw] config
+            #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::DeveloperConnectConfig]
+            #     Required. The Developer Connect configuration that defines the
+            #     specific repository, revision, and directory to use as the source code
+            #     root.
+            class DeveloperConnectSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

@@ -22,7 +22,7 @@ module Google
     module Events
       module Subscriptions
         module V1beta
-          VERSION = "0.3.0"
+          VERSION = "0.3.1"
         end
       end
     end

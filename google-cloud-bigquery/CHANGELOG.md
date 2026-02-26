@@ -1,5 +1,38 @@
 # Release History
 
+### 1.62.0 (2026-01-06)
+
+#### Features
+
+* Update required Ruby version to 3.1+ ([#32332](https://github.com/googleapis/google-cloud-ruby/issues/32332)) 
+#### Documentation
+
+* Update README and OVERVIEW 
+
+### 1.61.1 (2025-11-21)
+
+#### Bug Fixes
+
+* Fix broken links 
+#### Documentation
+
+* Clarify comments on job error status 
+
+### 1.61.0 (2025-11-04)
+
+#### Features
+
+* Support fine grained ACLs ([#31772](https://github.com/googleapis/google-cloud-ruby/issues/31772)) 
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#32121](https://github.com/googleapis/google-cloud-ruby/issues/32121)) 
+
+### 1.60.0 (2025-10-24)
+
+#### Features
+
+* Exposing reservation field in JobConfiguration ([#31777](https://github.com/googleapis/google-cloud-ruby/issues/31777)) 
+
 ### 1.59.0 (2025-09-17)
 
 #### Features

@@ -88,11 +88,18 @@ client = Google::Cloud::Translate.new version: :v2,
 ```
 
 New (V3):
-```
+```ruby
+require "googleauth"
+require "google/cloud/translate"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
+
 # Call the translation_service method to create a V3 client,
 # and pass a block to configure the client.
 client = Google::Cloud::Translate.translation_service do |config|
-  config.credentials = "/path/to/credentials.json"
+  config.credentials = credentials
 end
 
 # You can omit the block if you're keeping the default configuration

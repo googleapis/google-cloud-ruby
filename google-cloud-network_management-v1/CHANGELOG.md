@@ -1,5 +1,29 @@
 # Changelog
 
+### 2.7.0 (2026-02-04)
+
+#### Features
+
+* add fields and messages for GKE Pods and IP masquerading ([#32387](https://github.com/googleapis/google-cloud-ruby/issues/32387)) 
+#### Documentation
+
+* update comments 
+
+### 2.6.0 (2025-11-03)
+
+#### Features
+
+* Enable organization-level support for VPC Flow Logs 
+#### Documentation
+
+* Various documentation and comment improvements, Enable organization-level support for VPC Flow Logs ([#32134](https://github.com/googleapis/google-cloud-ruby/issues/32134)) 
+
+### 2.5.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 2.5.0 (2025-10-08)
 
 #### Features

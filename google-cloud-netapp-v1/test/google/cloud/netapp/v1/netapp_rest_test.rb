@@ -3396,6 +3396,340 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_restore_backup_files
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    backup = "hello world"
+    file_list = ["hello world"]
+    restore_destination_path = "hello world"
+
+    restore_backup_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_restore_backup_files_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, restore_backup_files_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.restore_backup_files name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.restore_backup_files ::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.restore_backup_files({ name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.restore_backup_files(::Google::Cloud::NetApp::V1::RestoreBackupFilesRequest.new(name: name, backup: backup, file_list: file_list, restore_destination_path: restore_destination_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, restore_backup_files_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_host_groups
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ListHostGroupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_host_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_host_groups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_host_groups_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_host_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_host_groups ::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_host_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_host_groups(::Google::Cloud::NetApp::V1::ListHostGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_host_groups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_host_group
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::HostGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_host_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_host_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_host_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_host_group ::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_host_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_host_group(::Google::Cloud::NetApp::V1::GetHostGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_host_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    host_group = {}
+    host_group_id = "hello world"
+
+    create_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_host_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_host_group parent: parent, host_group: host_group, host_group_id: host_group_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_host_group ::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_host_group({ parent: parent, host_group: host_group, host_group_id: host_group_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_host_group(::Google::Cloud::NetApp::V1::CreateHostGroupRequest.new(parent: parent, host_group: host_group, host_group_id: host_group_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_host_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    host_group = {}
+    update_mask = {}
+
+    update_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_host_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_host_group({ host_group: host_group, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_host_group host_group: host_group, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_host_group ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_host_group({ host_group: host_group, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_host_group(::Google::Cloud::NetApp::V1::UpdateHostGroupRequest.new(host_group: host_group, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_host_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_host_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_host_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_host_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_host_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_host_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_host_group ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_host_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_host_group(::Google::Cloud::NetApp::V1::DeleteHostGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_host_group_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

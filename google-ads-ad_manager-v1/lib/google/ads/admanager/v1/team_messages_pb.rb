@@ -4,11 +4,12 @@
 
 require 'google/protobuf'
 
+require 'google/ads/admanager/v1/team_enums_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n+google/ads/admanager/v1/team_messages.proto\x12\x17google.ads.admanager.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"p\n\x04Team\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08:U\xea\x41R\n\x1d\x61\x64manager.googleapis.com/Team\x12$networks/{network_code}/teams/{team}*\x05teams2\x04teamB\xc5\x01\n\x1b\x63om.google.ads.admanager.v1B\x11TeamMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n+google/ads/admanager/v1/team_messages.proto\x12\x17google.ads.admanager.v1\x1a(google/ads/admanager/v1/team_enums.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x96\x04\n\x04Team\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x1e\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x02H\x00\x88\x01\x01\x12\x1d\n\x0b\x64\x65scription\x18\x04 \x01(\tB\x03\xe0\x41\x01H\x01\x88\x01\x01\x12L\n\x06status\x18\x05 \x01(\x0e\x32\x32.google.ads.admanager.v1.TeamStatusEnum.TeamStatusB\x03\xe0\x41\x03H\x02\x88\x01\x01\x12&\n\x14\x61ll_companies_access\x18\x06 \x01(\x08\x42\x03\xe0\x41\x01H\x03\x88\x01\x01\x12&\n\x14\x61ll_inventory_access\x18\x07 \x01(\x08\x42\x03\xe0\x41\x01H\x04\x88\x01\x01\x12Y\n\x0b\x61\x63\x63\x65ss_type\x18\x08 \x01(\x0e\x32:.google.ads.admanager.v1.TeamAccessTypeEnum.TeamAccessTypeB\x03\xe0\x41\x01H\x05\x88\x01\x01:U\xea\x41R\n\x1d\x61\x64manager.googleapis.com/Team\x12$networks/{network_code}/teams/{team}*\x05teams2\x04teamB\x0f\n\r_display_nameB\x0e\n\x0c_descriptionB\t\n\x07_statusB\x17\n\x15_all_companies_accessB\x17\n\x15_all_inventory_accessB\x0e\n\x0c_access_typeB\xc5\x01\n\x1b\x63om.google.ads.admanager.v1B\x11TeamMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

@@ -1026,7 +1026,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_stateless_suggestion(parent: nil, generator: nil, generator_name: nil, context_references: nil, conversation_context: nil, trigger_events: nil)
+            # @overload generate_stateless_suggestion(parent: nil, generator: nil, generator_name: nil, context_references: nil, conversation_context: nil, trigger_events: nil, security_settings: nil)
             #   Pass arguments to `generate_stateless_suggestion` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1054,6 +1054,15 @@ module Google
             #   @param trigger_events [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
             #     Optional. A list of trigger events. Generator will be triggered only if
             #     it's trigger event is included here.
+            #   @param security_settings [::String]
+            #     Optional. Name of the CX SecuritySettings which is used to redact generated
+            #     response. If this field is empty, try to fetch v2 security_settings, which
+            #     is a project level setting. If this field is empty and no v2
+            #     security_settings set up in this project, no redaction will be done.
+            #
+            #     Format:
+            #     `projects/<Project ID>/locations/<Location ID>/securitySettings/<Security
+            #     Settings ID>`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionResponse]
@@ -1387,8 +1396,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -1397,7 +1404,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

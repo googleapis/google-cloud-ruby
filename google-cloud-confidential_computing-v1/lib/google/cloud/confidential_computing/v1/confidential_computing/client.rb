@@ -324,7 +324,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
+            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, nvidia_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
             #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -337,6 +337,8 @@ module Google
             #     Optional. An SEV-SNP Attestation Report.
             #
             #     Note: The following parameters are mutually exclusive: `sev_snp_attestation`, `td_ccel`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param nvidia_attestation [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation, ::Hash]
+            #     Optional. An Nvidia attestation report for GPU and NVSwitch devices.
             #   @param challenge [::String]
             #     Required. The name of the Challenge whose nonce was used to generate the
             #     attestation, in the format `projects/*/locations/*/challenges/*`. The
@@ -434,7 +436,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_confidential_space(td_ccel: nil, tpm_attestation: nil, challenge: nil, gcp_credentials: nil, signed_entities: nil, gce_shielded_identity: nil, options: nil)
+            # @overload verify_confidential_space(td_ccel: nil, tpm_attestation: nil, challenge: nil, gcp_credentials: nil, signed_entities: nil, gce_shielded_identity: nil, options: nil, nvidia_attestation: nil)
             #   Pass arguments to `verify_confidential_space` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -464,6 +466,9 @@ module Google
             #     this information in the attestation.
             #   @param options [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest::ConfidentialSpaceOptions, ::Hash]
             #     Optional. A collection of fields that modify the token output.
+            #   @param nvidia_attestation [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation, ::Hash]
+            #     Optional. An optional Nvidia attestation report, used to populate hardware
+            #     rooted claims for Nvidia devices.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse]
@@ -543,7 +548,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil)
+            # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil, options: nil)
             #   Pass arguments to `verify_confidential_gke` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -555,6 +560,8 @@ module Google
             #     Required. The name of the Challenge whose nonce was used to generate the
             #     attestation, in the format projects/*/locations/*/challenges/*. The
             #     provided Challenge will be consumed, and cannot be used again.
+            #   @param options [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::ConfidentialGkeOptions, ::Hash]
+            #     Optional. A collection of fields that modify the token output.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse]
@@ -655,8 +662,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -665,7 +670,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

@@ -22,6 +22,7 @@ module Google
     module GkeMultiCloud
       module V1
         # Request message for `AwsClusters.CreateAwsCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent location where this
@@ -56,6 +57,7 @@ module Google
         end
 
         # Request message for `AwsClusters.UpdateAwsCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_cluster
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsCluster]
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
@@ -102,6 +104,7 @@ module Google
         end
 
         # Request message for `AwsClusters.GetAwsCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -119,6 +122,7 @@ module Google
         end
 
         # Request message for `AwsClusters.ListAwsClusters` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent location which owns this collection of
@@ -148,6 +152,7 @@ module Google
         end
 
         # Response message for `AwsClusters.ListAwsClusters` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_clusters
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsCluster>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster} resources
@@ -162,6 +167,7 @@ module Google
         end
 
         # Request message for `AwsClusters.DeleteAwsCluster` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -204,6 +210,7 @@ module Google
         end
 
         # Response message for `AwsClusters.CreateAwsNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsCluster AwsCluster}
@@ -239,6 +246,7 @@ module Google
         end
 
         # Request message for `AwsClusters.UpdateAwsNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_node_pool
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsNodePool]
         #     Required. The {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
@@ -288,6 +296,7 @@ module Google
         end
 
         # Request message for `AwsClusters.RollbackAwsNodePoolUpdate` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -309,6 +318,7 @@ module Google
         end
 
         # Request message for `AwsClusters.GetAwsNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -326,6 +336,7 @@ module Google
         end
 
         # Request message for `AwsClusters.ListAwsNodePools` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent `AwsCluster` which owns this collection of
@@ -356,6 +367,7 @@ module Google
         end
 
         # Response message for `AwsClusters.ListAwsNodePools` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_node_pools
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AwsNodePool>]
         #     A list of {::Google::Cloud::GkeMultiCloud::V1::AwsNodePool AwsNodePool}
@@ -370,6 +382,7 @@ module Google
         end
 
         # Request message for `AwsClusters.DeleteAwsNodePool` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name the
@@ -414,6 +427,7 @@ module Google
 
         # GetAwsOpenIdConfigRequest gets the OIDC discovery document for the
         # cluster. See the OpenID Connect Discovery 1.0 specification for details.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_cluster
         #   @return [::String]
         #     Required. The AwsCluster, which owns the OIDC discovery document.
@@ -428,6 +442,7 @@ module Google
         # cluster to sign token requests. This will be the jwks_uri for the discover
         # document returned by getOpenIDConfig. See the OpenID Connect
         # Discovery 1.0 specification for details.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_cluster
         #   @return [::String]
         #     Required. The AwsCluster, which owns the JsonWebKeys.
@@ -439,6 +454,7 @@ module Google
         end
 
         # GetAwsServerConfigRequest gets the server config of GKE cluster on AWS.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the
@@ -456,6 +472,7 @@ module Google
         end
 
         # Request message for `AwsClusters.GenerateAwsAccessToken` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_cluster
         #   @return [::String]
         #     Required. The name of the
@@ -473,6 +490,7 @@ module Google
         end
 
         # Response message for `AwsClusters.GenerateAwsAccessToken` method.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] access_token
         #   @return [::String]
         #     Output only. Access token to authenticate to k8s api-server.
@@ -484,6 +502,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] aws_cluster
         #   @return [::String]
         #     Required.
@@ -519,6 +538,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] access_token
         #   @return [::String]
         # @!attribute [rw] expires_in

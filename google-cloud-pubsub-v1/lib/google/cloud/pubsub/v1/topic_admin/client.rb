@@ -265,7 +265,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the topic. It must have the format
+            #     Required. Identifier. The name of the topic. It must have the format
             #     `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
             #     and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
             #     underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -485,8 +485,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param topic [::String]
-            #     Required. The messages in the request will be published on this topic.
-            #     Format is `projects/{project}/topics/{topic}`.
+            #     Required. Identifier. The messages in the request will be published on this
+            #     topic. Format is `projects/{project}/topics/{topic}`.
             #   @param messages [::Array<::Google::Cloud::PubSub::V1::PubsubMessage, ::Hash>]
             #     Required. The messages to publish.
             #
@@ -573,7 +573,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param topic [::String]
-            #     Required. The name of the topic to get.
+            #     Required. Identifier. The name of the topic to get.
             #     Format is `projects/{project}/topics/{topic}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -659,7 +659,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. The name of the project in which to list topics.
+            #     Required. Identifier. The name of the project in which to list topics.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of topics to return.
@@ -949,7 +949,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param topic [::String]
-            #     Required. Name of the topic to delete.
+            #     Required. Identifier. Name of the topic to delete.
             #     Format is `projects/{project}/topics/{topic}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1140,8 +1140,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -1150,7 +1148,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

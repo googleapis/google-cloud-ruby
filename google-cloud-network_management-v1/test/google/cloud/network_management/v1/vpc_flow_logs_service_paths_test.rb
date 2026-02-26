@@ -53,6 +53,18 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientPathsTes
     end
   end
 
+  def test_organization_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_location_path organization: "value0", location: "value1"
+      assert_equal "organizations/value0/locations/value1", path
+    end
+  end
+
   def test_vpc_flow_logs_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -62,6 +74,9 @@ class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientPathsTes
 
       path = client.vpc_flow_logs_config_path project: "value0", location: "value1", vpc_flow_logs_config: "value2"
       assert_equal "projects/value0/locations/value1/vpcFlowLogsConfigs/value2", path
+
+      path = client.vpc_flow_logs_config_path organization: "value0", location: "value1", vpc_flow_logs_config: "value2"
+      assert_equal "organizations/value0/locations/value1/vpcFlowLogsConfigs/value2", path
     end
   end
 end

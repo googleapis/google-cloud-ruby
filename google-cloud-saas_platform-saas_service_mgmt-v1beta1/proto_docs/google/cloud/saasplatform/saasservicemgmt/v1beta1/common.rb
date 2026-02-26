@@ -185,6 +185,12 @@ module Google
 
               # Condition type is cancelled.
               TYPE_CANCELLED = 5
+
+              # Indicates if AppHub app has been created.
+              TYPE_APP_CREATED = 6
+
+              # Indicates if services and workloads have been registered with AppHub.
+              TYPE_APP_COMPONENTS_REGISTERED = 7
             end
           end
 

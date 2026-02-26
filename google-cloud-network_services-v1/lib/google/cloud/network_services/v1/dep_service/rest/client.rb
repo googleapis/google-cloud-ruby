@@ -1206,6 +1206,494 @@ module Google
               end
 
               ##
+              # Lists `LbEdgeExtension` resources in a given project and location.
+              #
+              # @overload list_lb_edge_extensions(request, options = nil)
+              #   Pass arguments to `list_lb_edge_extensions` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_lb_edge_extensions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_lb_edge_extensions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location from which the `LbEdgeExtension`
+              #     resources are listed. These values are specified in the following format:
+              #     `projects/{project}/locations/{location}`.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. The server might return fewer items than
+              #     requested. If unspecified, the server picks an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results that the server returns.
+              #   @param filter [::String]
+              #     Optional. Filtering results.
+              #   @param order_by [::String]
+              #     Optional. Hint about how to order the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbEdgeExtension>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbEdgeExtension>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new
+              #
+              #   # Call the list_lb_edge_extensions method.
+              #   result = client.list_lb_edge_extensions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetworkServices::V1::LbEdgeExtension.
+              #     p item
+              #   end
+              #
+              def list_lb_edge_extensions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_lb_edge_extensions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_lb_edge_extensions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_lb_edge_extensions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dep_service_stub.list_lb_edge_extensions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dep_service_stub, :list_lb_edge_extensions, "lb_edge_extensions", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of the specified `LbEdgeExtension` resource.
+              #
+              # @overload get_lb_edge_extension(request, options = nil)
+              #   Pass arguments to `get_lb_edge_extension` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_lb_edge_extension(name: nil)
+              #   Pass arguments to `get_lb_edge_extension` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. A name of the `LbEdgeExtension` resource to get. Must be in the
+              #     format
+              #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::NetworkServices::V1::LbEdgeExtension]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::NetworkServices::V1::LbEdgeExtension]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new
+              #
+              #   # Call the get_lb_edge_extension method.
+              #   result = client.get_lb_edge_extension request
+              #
+              #   # The returned object is of type Google::Cloud::NetworkServices::V1::LbEdgeExtension.
+              #   p result
+              #
+              def get_lb_edge_extension request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_lb_edge_extension.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_lb_edge_extension.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_lb_edge_extension.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dep_service_stub.get_lb_edge_extension request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new `LbEdgeExtension` resource in a given project and location.
+              #
+              # @overload create_lb_edge_extension(request, options = nil)
+              #   Pass arguments to `create_lb_edge_extension` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_lb_edge_extension(parent: nil, lb_edge_extension_id: nil, lb_edge_extension: nil, request_id: nil)
+              #   Pass arguments to `create_lb_edge_extension` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the `LbEdgeExtension` resource. Must be in
+              #     the format `projects/{project}/locations/{location}`.
+              #   @param lb_edge_extension_id [::String]
+              #     Required. User-provided ID of the `LbEdgeExtension` resource to be created.
+              #   @param lb_edge_extension [::Google::Cloud::NetworkServices::V1::LbEdgeExtension, ::Hash]
+              #     Required. `LbEdgeExtension` resource to be created.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server can ignore
+              #     the request if it has already been completed. The server guarantees
+              #     that for 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server ignores the second request This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new
+              #
+              #   # Call the create_lb_edge_extension method.
+              #   result = client.create_lb_edge_extension request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_lb_edge_extension request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_lb_edge_extension.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_lb_edge_extension.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_lb_edge_extension.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dep_service_stub.create_lb_edge_extension request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of the specified `LbEdgeExtension` resource.
+              #
+              # @overload update_lb_edge_extension(request, options = nil)
+              #   Pass arguments to `update_lb_edge_extension` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_lb_edge_extension(update_mask: nil, lb_edge_extension: nil, request_id: nil)
+              #   Pass arguments to `update_lb_edge_extension` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Used to specify the fields to be overwritten in the
+              #     `LbEdgeExtension` resource by the update.
+              #     The fields specified in the `update_mask` are relative to the resource, not
+              #     the full request. A field is overwritten if it is in the mask. If the
+              #     user does not specify a mask, then all fields are overwritten.
+              #   @param lb_edge_extension [::Google::Cloud::NetworkServices::V1::LbEdgeExtension, ::Hash]
+              #     Required. `LbEdgeExtension` resource being updated.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server can ignore
+              #     the request if it has already been completed. The server guarantees
+              #     that for 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server ignores the second request This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new
+              #
+              #   # Call the update_lb_edge_extension method.
+              #   result = client.update_lb_edge_extension request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_lb_edge_extension request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_lb_edge_extension.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_lb_edge_extension.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_lb_edge_extension.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dep_service_stub.update_lb_edge_extension request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified `LbEdgeExtension` resource.
+              #
+              # @overload delete_lb_edge_extension(request, options = nil)
+              #   Pass arguments to `delete_lb_edge_extension` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_lb_edge_extension(name: nil, request_id: nil)
+              #   Pass arguments to `delete_lb_edge_extension` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `LbEdgeExtension` resource to delete. Must be in
+              #     the format
+              #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server can ignore
+              #     the request if it has already been completed. The server guarantees
+              #     that for 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server ignores the second request This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::DepService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new
+              #
+              #   # Call the delete_lb_edge_extension method.
+              #   result = client.delete_lb_edge_extension request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_lb_edge_extension request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_lb_edge_extension.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_lb_edge_extension.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_lb_edge_extension.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dep_service_stub.delete_lb_edge_extension request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists `AuthzExtension` resources in a given project and location.
               #
               # @overload list_authz_extensions(request, options = nil)
@@ -1900,6 +2388,31 @@ module Google
                   #
                   attr_reader :delete_lb_route_extension
                   ##
+                  # RPC-specific configuration for `list_lb_edge_extensions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_lb_edge_extensions
+                  ##
+                  # RPC-specific configuration for `get_lb_edge_extension`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_lb_edge_extension
+                  ##
+                  # RPC-specific configuration for `create_lb_edge_extension`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_lb_edge_extension
+                  ##
+                  # RPC-specific configuration for `update_lb_edge_extension`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_lb_edge_extension
+                  ##
+                  # RPC-specific configuration for `delete_lb_edge_extension`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_lb_edge_extension
+                  ##
                   # RPC-specific configuration for `list_authz_extensions`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1947,6 +2460,16 @@ module Google
                     @update_lb_route_extension = ::Gapic::Config::Method.new update_lb_route_extension_config
                     delete_lb_route_extension_config = parent_rpcs.delete_lb_route_extension if parent_rpcs.respond_to? :delete_lb_route_extension
                     @delete_lb_route_extension = ::Gapic::Config::Method.new delete_lb_route_extension_config
+                    list_lb_edge_extensions_config = parent_rpcs.list_lb_edge_extensions if parent_rpcs.respond_to? :list_lb_edge_extensions
+                    @list_lb_edge_extensions = ::Gapic::Config::Method.new list_lb_edge_extensions_config
+                    get_lb_edge_extension_config = parent_rpcs.get_lb_edge_extension if parent_rpcs.respond_to? :get_lb_edge_extension
+                    @get_lb_edge_extension = ::Gapic::Config::Method.new get_lb_edge_extension_config
+                    create_lb_edge_extension_config = parent_rpcs.create_lb_edge_extension if parent_rpcs.respond_to? :create_lb_edge_extension
+                    @create_lb_edge_extension = ::Gapic::Config::Method.new create_lb_edge_extension_config
+                    update_lb_edge_extension_config = parent_rpcs.update_lb_edge_extension if parent_rpcs.respond_to? :update_lb_edge_extension
+                    @update_lb_edge_extension = ::Gapic::Config::Method.new update_lb_edge_extension_config
+                    delete_lb_edge_extension_config = parent_rpcs.delete_lb_edge_extension if parent_rpcs.respond_to? :delete_lb_edge_extension
+                    @delete_lb_edge_extension = ::Gapic::Config::Method.new delete_lb_edge_extension_config
                     list_authz_extensions_config = parent_rpcs.list_authz_extensions if parent_rpcs.respond_to? :list_authz_extensions
                     @list_authz_extensions = ::Gapic::Config::Method.new list_authz_extensions_config
                     get_authz_extension_config = parent_rpcs.get_authz_extension if parent_rpcs.respond_to? :get_authz_extension

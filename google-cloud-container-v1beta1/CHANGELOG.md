@@ -1,5 +1,32 @@
 # Release History
 
+### 0.52.0 (2026-02-04)
+
+#### Features
+
+* Add GPUDirectConfig to configure GPU Direct for node pools ([#32389](https://github.com/googleapis/google-cloud-ruby/issues/32389)) 
+
+### 0.51.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 0.51.0 (2025-10-24)
+
+#### Features
+
+* add desired_secret_sync_config to ClusterUpdate ([#31793](https://github.com/googleapis/google-cloud-ruby/issues/31793)) 
+#### Documentation
+
+* various documentation fixes 
+
+### 0.50.0 (2025-10-17)
+
+#### Features
+
+* Add SwapConfig to enable and configure swap memory for node pools ([#31771](https://github.com/googleapis/google-cloud-ruby/issues/31771)) 
+
 ### 0.49.1 (2025-09-24)
 
 #### Documentation

@@ -93,6 +93,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The Vertex Multimodal Dataset for the input content.
+        # @!attribute [rw] dataset_name
+        #   @return [::String]
+        #     Required. The resource name of the Vertex Dataset.
+        #     Format: `projects/{project}/locations/{location}/datasets/{dataset}`
+        class VertexMultimodalDatasetSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The details for a Vertex Multimodal Dataset output.
+        # @!attribute [rw] bigquery_destination
+        #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
+        #     Optional. The destination of the underlying BigQuery table that will be
+        #     created for the output Multimodal Dataset. If not specified, the BigQuery
+        #     table will be created in a default BigQuery dataset.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name of the output dataset.
+        class VertexMultimodalDatasetDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The storage details for CSV output content.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]

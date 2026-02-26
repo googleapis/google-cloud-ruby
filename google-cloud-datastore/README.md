@@ -23,11 +23,16 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ## Example
 
 ```ruby
+require "googleauth"
 require "google/cloud/datastore"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
 datastore = Google::Cloud::Datastore.new(
   project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
+  credentials: credentials
 )
 
 # Create a new task to demo datastore

@@ -393,7 +393,8 @@ class MockBigquery < Minitest::Spec
           "writeDisposition" => nil,
           "operationType" => nil
         },
-        "dryRun" => nil
+        "dryRun" => nil,
+        "reservation" => nil
       }
     }
     hash["jobReference"]["location"] = location if location
@@ -610,13 +611,13 @@ class MockBigquery < Minitest::Spec
       routineType: "SCALAR_FUNCTION",
       language: "SQL",
       arguments: [
-        { 
+        {
           name: "arr",
           argumentKind: "FIXED_TYPE",
           mode: "IN",
-          dataType: { 
+          dataType: {
             typeKind: "ARRAY",
-            arrayElementType: { 
+            arrayElementType: {
               typeKind: "STRUCT",
               structType: {
                 fields: [
@@ -637,7 +638,7 @@ class MockBigquery < Minitest::Spec
             }
           }
         },
-        { 
+        {
           name: "out",
           argumentKind: "ANY_TYPE",
           mode: "OUT",
@@ -659,7 +660,7 @@ class MockBigquery < Minitest::Spec
 
   def random_routine_partial_hash dataset, id
     # List representation: etag, routineReference, routineType, creationTime, lastModifiedTime and language.
-    { 
+    {
       etag: "etag123456789",
       routineReference: {
         projectId: project,
@@ -698,7 +699,8 @@ class MockBigquery < Minitest::Spec
       },
       "configuration" => {
         # config call goes here
-        "dryRun" => false
+        "dryRun" => false,
+        "reservation" => nil
       },
       "status" => {
         "state" => state
@@ -951,7 +953,8 @@ class MockBigquery < Minitest::Spec
           "maximumBytesBilled" => nil,
           "userDefinedFunctionResources" => []
         },
-        "dryRun" => dry_run
+        "dryRun" => dry_run,
+        "reservation" => nil
       }
     }
     hash["jobReference"]["location"] = location if location
@@ -978,7 +981,8 @@ class MockBigquery < Minitest::Spec
           "fieldDelimiter" => nil,
           "destinationFormat" => nil
         },
-        "dryRun" => nil
+        "dryRun" => nil,
+        "reservation" => nil
       }
     }
     hash["jobReference"]["location"] = location if location
@@ -1093,7 +1097,8 @@ class MockBigquery < Minitest::Spec
           destination_table: table_reference,
           source_format: source_format
         ),
-        dry_run: nil
+        dry_run: nil,
+        reservation: nil
       )
     )
     unless session_id.nil?
@@ -1122,7 +1127,8 @@ class MockBigquery < Minitest::Spec
           autodetect: true,
           null_marker: "\N"
         ),
-        dry_run: nil
+        dry_run: nil,
+        reservation: nil
       )
     )
   end
@@ -1143,7 +1149,8 @@ class MockBigquery < Minitest::Spec
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
         load: load,
-        dry_run: nil
+        dry_run: nil,
+        reservation: nil
       )
     )
   end

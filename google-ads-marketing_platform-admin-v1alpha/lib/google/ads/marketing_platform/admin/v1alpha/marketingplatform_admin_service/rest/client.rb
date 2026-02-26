@@ -262,6 +262,185 @@ module Google
                 end
 
                 ##
+                # Returns a list of organizations that the user has access to.
+                #
+                # @overload list_organizations(request, options = nil)
+                #   Pass arguments to `list_organizations` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_organizations(page_size: nil, page_token: nil)
+                #   Pass arguments to `list_organizations` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param page_size [::Integer]
+                #     Optional. The maximum number of organizations to return in one call. The
+                #     service may return fewer than this value.
+                #
+                #     If unspecified, at most 50 organizations will be returned. The
+                #     maximum value is 1000; values above 1000 will be coerced to 1000.
+                #   @param page_token [::String]
+                #     Optional. A page token, received from a previous ListOrganizations call.
+                #     Provide this to retrieve the subsequent page.
+                #
+                #     When paginating, all other parameters provided to
+                #     `ListOrganizations` must match the call that provided the page
+                #     token.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization>]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest.new
+                #
+                #   # Call the list_organizations method.
+                #   result = client.list_organizations request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+                #   # over elements, and API calls will be issued to fetch pages as needed.
+                #   result.each do |item|
+                #     # Each element is of type ::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization.
+                #     p item
+                #   end
+                #
+                def list_organizations request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::ListOrganizationsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_organizations.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_organizations.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_organizations.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.list_organizations request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @marketingplatform_admin_service_stub, :list_organizations, "organizations", request, result, options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Returns a list of clients managed by the sales partner organization.
+                #
+                # User needs to be an OrgAdmin/BillingAdmin on the sales partner organization
+                # in order to view the end clients.
+                #
+                # @overload find_sales_partner_managed_clients(request, options = nil)
+                #   Pass arguments to `find_sales_partner_managed_clients` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload find_sales_partner_managed_clients(organization: nil, is_active: nil)
+                #   Pass arguments to `find_sales_partner_managed_clients` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param organization [::String]
+                #     Required. The name of the sales partner organization.
+                #     Format: organizations/\\{org_id}
+                #   @param is_active [::Boolean]
+                #     Optional. If set, only active and just ended clients will be returned.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest.new
+                #
+                #   # Call the find_sales_partner_managed_clients method.
+                #   result = client.find_sales_partner_managed_clients request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsResponse.
+                #   p result
+                #
+                def find_sales_partner_managed_clients request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::FindSalesPartnerManagedClientsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.find_sales_partner_managed_clients.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.find_sales_partner_managed_clients.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.find_sales_partner_managed_clients.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.find_sales_partner_managed_clients request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Lists the Google Analytics accounts link to the specified Google Marketing
                 # Platform organization.
                 #
@@ -618,6 +797,99 @@ module Google
                 end
 
                 ##
+                # Get the usage and billing data for properties within the organization for
+                # the specified month.
+                #
+                # Per direct client org, user needs to be OrgAdmin/BillingAdmin on the
+                # organization in order to view the billing and usage data.
+                #
+                # Per sales partner client org, user needs to be OrgAdmin/BillingAdmin on
+                # the sales partner org in order to view the billing and usage data, or
+                # OrgAdmin/BillingAdmin on the sales partner client org in order to view the
+                # usage data only.
+                #
+                # @overload report_property_usage(request, options = nil)
+                #   Pass arguments to `report_property_usage` via a request object, either of type
+                #   {::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload report_property_usage(organization: nil, month: nil)
+                #   Pass arguments to `report_property_usage` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param organization [::String]
+                #     Required. Specifies the organization whose property usage will be listed.
+                #
+                #     Format: organizations/\\{org_id}
+                #   @param month [::String]
+                #     Required. The target month to list property usages.
+                #
+                #     Format: YYYY-MM. For example, "2025-05"
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/ads/marketing_platform/admin/v1alpha"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest.new
+                #
+                #   # Call the report_property_usage method.
+                #   result = client.report_property_usage request
+                #
+                #   # The returned object is of type Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageResponse.
+                #   p result
+                #
+                def report_property_usage request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::MarketingPlatform::Admin::V1alpha::ReportPropertyUsageRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.report_property_usage.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Ads::MarketingPlatform::Admin::V1alpha::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.report_property_usage.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.report_property_usage.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @marketingplatform_admin_service_stub.report_property_usage request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the MarketingplatformAdminService REST API.
                 #
                 # This class represents the configuration for MarketingplatformAdminService REST,
@@ -769,6 +1041,16 @@ module Google
                     #
                     attr_reader :get_organization
                     ##
+                    # RPC-specific configuration for `list_organizations`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_organizations
+                    ##
+                    # RPC-specific configuration for `find_sales_partner_managed_clients`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :find_sales_partner_managed_clients
+                    ##
                     # RPC-specific configuration for `list_analytics_account_links`
                     # @return [::Gapic::Config::Method]
                     #
@@ -788,11 +1070,20 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :set_property_service_level
+                    ##
+                    # RPC-specific configuration for `report_property_usage`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :report_property_usage
 
                     # @private
                     def initialize parent_rpcs = nil
                       get_organization_config = parent_rpcs.get_organization if parent_rpcs.respond_to? :get_organization
                       @get_organization = ::Gapic::Config::Method.new get_organization_config
+                      list_organizations_config = parent_rpcs.list_organizations if parent_rpcs.respond_to? :list_organizations
+                      @list_organizations = ::Gapic::Config::Method.new list_organizations_config
+                      find_sales_partner_managed_clients_config = parent_rpcs.find_sales_partner_managed_clients if parent_rpcs.respond_to? :find_sales_partner_managed_clients
+                      @find_sales_partner_managed_clients = ::Gapic::Config::Method.new find_sales_partner_managed_clients_config
                       list_analytics_account_links_config = parent_rpcs.list_analytics_account_links if parent_rpcs.respond_to? :list_analytics_account_links
                       @list_analytics_account_links = ::Gapic::Config::Method.new list_analytics_account_links_config
                       create_analytics_account_link_config = parent_rpcs.create_analytics_account_link if parent_rpcs.respond_to? :create_analytics_account_link
@@ -801,6 +1092,8 @@ module Google
                       @delete_analytics_account_link = ::Gapic::Config::Method.new delete_analytics_account_link_config
                       set_property_service_level_config = parent_rpcs.set_property_service_level if parent_rpcs.respond_to? :set_property_service_level
                       @set_property_service_level = ::Gapic::Config::Method.new set_property_service_level_config
+                      report_property_usage_config = parent_rpcs.report_property_usage if parent_rpcs.respond_to? :report_property_usage
+                      @report_property_usage = ::Gapic::Config::Method.new report_property_usage_config
 
                       yield self if block_given?
                     end

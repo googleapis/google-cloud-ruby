@@ -2121,6 +2121,11 @@ module Google
 
             ##
             # Lists Entries within an EntryGroup.
+            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+            # Metastore metadata that is stored in Dataplex Universal Catalog is
+            # changing. For more information, see [Changes to metadata stored in
+            # Dataplex Universal
+            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             #
             # @overload list_entries(request, options = nil)
             #   Pass arguments to `list_entries` via a request object, either of type
@@ -2154,14 +2159,17 @@ module Google
             #
             #     * entry_type
             #     * entry_source.display_name
+            #     * parent_entry
             #
             #     The comparison operators are =, !=, <, >, <=, >=. The service compares
             #     strings according to lexical order.
             #
             #     You can use the logical operators AND, OR, NOT in the filter.
             #
-            #     You can use Wildcard "*", but for entry_type you need to provide the
-            #     full project id or number.
+            #     You can use Wildcard "*", but for entry_type and parent_entry you need to
+            #     provide the full project id or number.
+            #
+            #     You cannot use parent_entry in conjunction with other fields.
             #
             #     Example filter expressions:
             #
@@ -2170,6 +2178,7 @@ module Google
             #     * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
             #     entry_type=projects/another-project/locations/*"
             #     * "NOT entry_source.display_name=AnotherExampleDisplayName"
+            #     * "parent_entry=projects/example-project/locations/us/entryGroups/example-entry-group/entries/example-entry"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Entry>]
@@ -2243,6 +2252,11 @@ module Google
 
             ##
             # Gets an Entry.
+            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+            # Metastore metadata that is stored in Dataplex Universal Catalog is
+            # changing. For more information, see [Changes to metadata stored in
+            # Dataplex Universal
+            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             #
             # @overload get_entry(request, options = nil)
             #   Pass arguments to `get_entry` via a request object, either of type
@@ -2338,6 +2352,11 @@ module Google
 
             ##
             # Looks up an entry by name using the permission on the source system.
+            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
+            # Metastore metadata that is stored in Dataplex Universal Catalog is
+            # changing. For more information, see [Changes to metadata stored in
+            # Dataplex Universal
+            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             #
             # @overload lookup_entry(request, options = nil)
             #   Pass arguments to `lookup_entry` via a request object, either of type
@@ -3249,8 +3268,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -3259,7 +3276,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::Dataplex::V1::CatalogService::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

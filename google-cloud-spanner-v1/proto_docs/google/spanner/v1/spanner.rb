@@ -43,10 +43,10 @@ module Google
         #     Parameters to apply to each created session.
         # @!attribute [rw] session_count
         #   @return [::Integer]
-        #     Required. The number of sessions to be created in this batch call.
-        #     The API can return fewer than the requested number of sessions. If a
-        #     specific number of sessions are desired, the client can make additional
-        #     calls to `BatchCreateSessions` (adjusting
+        #     Required. The number of sessions to be created in this batch call. At least
+        #     one session is created. The API can return fewer than the requested number
+        #     of sessions. If a specific number of sessions are desired, the client can
+        #     make additional calls to `BatchCreateSessions` (adjusting
         #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
         #     as necessary).
         class BatchCreateSessionsRequest
@@ -92,8 +92,8 @@ module Google
         # @!attribute [rw] multiplexed
         #   @return [::Boolean]
         #     Optional. If `true`, specifies a multiplexed session. Use a multiplexed
-        #     session for multiple, concurrent read-only operations. Don't use them for
-        #     read-write transactions, partitioned reads, or partitioned queries. Use
+        #     session for multiple, concurrent operations including any combination of
+        #     read-only and read-write transactions. Use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#create_session `sessions.create`} to create
         #     multiplexed sessions. Don't use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#batch_create_sessions BatchCreateSessions} to
@@ -197,17 +197,41 @@ module Google
         #     A tag used for statistics collection about this transaction.
         #     Both `request_tag` and `transaction_tag` can be specified for a read or
         #     query that belongs to a transaction.
-        #     The value of transaction_tag should be the same for all requests belonging
-        #     to the same transaction.
+        #     To enable tagging on a transaction, `transaction_tag` must be set to the
+        #     same value for all requests belonging to the same transaction, including
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
         #     If this request doesn't belong to any transaction, `transaction_tag` is
         #     ignored.
         #     Legal characters for `transaction_tag` values are all printable characters
         #     (ASCII 32 - 126) and the length of a `transaction_tag` is limited to 50
         #     characters. Values that exceed this limit are truncated.
         #     Any leading underscore (_) characters are removed from the string.
+        # @!attribute [rw] client_context
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions::ClientContext]
+        #     Optional. Optional context that may be needed for some requests.
         class RequestOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Container for various pieces of client-owned context attached to a request.
+          # @!attribute [rw] secure_context
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
+          #     Optional. Map of parameter name to value for this request. These values
+          #     will be returned by any SECURE_CONTEXT() calls invoked by this request
+          #     (e.g., by queries against Parameterized Secure Views).
+          class ClientContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Protobuf::Value]
+            class SecureContextEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # The relative priority for requests. Note that priority isn't applicable
           # for {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
@@ -439,6 +463,14 @@ module Google
         #     be deferred until commit time (for example, validation of unique
         #     constraints). Given this, successful execution of a DML statement shouldn't
         #     be assumed until a subsequent `Commit` call completes successfully.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. If present, it makes the Spanner requests location-aware.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -731,7 +763,8 @@ module Google
         #     operations.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Struct]
-        #     Parameter names and values that bind to placeholders in the SQL string.
+        #     Optional. Parameter names and values that bind to placeholders in the SQL
+        #     string.
         #
         #     A parameter placeholder consists of the `@` character followed by the
         #     parameter name (for example, `@firstName`). Parameter names can contain
@@ -745,9 +778,9 @@ module Google
         #     It's an error to execute a SQL statement with unbound parameters.
         # @!attribute [rw] param_types
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Spanner::V1::Type}]
-        #     It isn't always possible for Cloud Spanner to infer the right SQL type
-        #     from a JSON value. For example, values of type `BYTES` and values
-        #     of type `STRING` both appear in
+        #     Optional. It isn't always possible for Cloud Spanner to infer the right SQL
+        #     type from a JSON value. For example, values of type `BYTES` and values of
+        #     type `STRING` both appear in
         #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
         #
         #     In these cases, `param_types` can be used to specify the exact
@@ -927,6 +960,14 @@ module Google
         #   @return [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
         #     Optional. Lock Hint for the request, it can only be used with read-write
         #     transactions.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. If present, it makes the Spanner requests location-aware.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class ReadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1130,7 +1171,12 @@ module Google
         # @!attribute [rw] commit_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     The commit timestamp of the transaction that applied this batch.
-        #     Present if `status` is `OK`, absent otherwise.
+        #     Present if status is OK and the mutation groups were applied, absent
+        #     otherwise.
+        #
+        #     For mutation groups with conditions, a status=OK and missing
+        #     commit_timestamp means that the mutation groups were not applied due to the
+        #     condition not being satisfied after evaluation.
         class BatchWriteResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,29 @@
 # Changelog
 
+### 0.19.0 (2026-02-08)
+
+#### Features
+
+* Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto 
+#### Documentation
+
+* update reference documentation for `SelectionInput.DROPDOWN` to include dynamic data sources and autosuggestion ([#32413](https://github.com/googleapis/google-cloud-ruby/issues/32413)) 
+
+### 0.18.0 (2025-12-16)
+
+#### Features
+
+* Addition of GMAIL_MESSAGE value for RichLinkType enum in the RichLinkMetadata proto ([#32271](https://github.com/googleapis/google-cloud-ruby/issues/32271)) 
+
+### 0.17.0 (2025-11-21)
+
+#### Features
+
+* Add `Carousel` widget 
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#31779](https://github.com/googleapis/google-cloud-ruby/issues/31779)) 
+
 ### 0.16.0 (2025-09-11)
 
 #### Features

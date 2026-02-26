@@ -448,11 +448,13 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::ClientTest < Minites
 
     # Create request parameters for a unary method.
     name = "hello world"
+    major_revision_id = 42
 
     get_cloud_control_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_cloud_control, name
       assert_kind_of ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal 42, request["major_revision_id"]
       refute_nil options
     end
 
@@ -463,31 +465,31 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::ClientTest < Minites
       end
 
       # Use hash object
-      client.get_cloud_control({ name: name }) do |response, operation|
+      client.get_cloud_control({ name: name, major_revision_id: major_revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cloud_control name: name do |response, operation|
+      client.get_cloud_control name: name, major_revision_id: major_revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name) do |response, operation|
+      client.get_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cloud_control({ name: name }, grpc_options) do |response, operation|
+      client.get_cloud_control({ name: name, major_revision_id: major_revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -694,5 +696,25 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::ClientTest < Minites
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::CloudSecurityCompliance::V1::Config::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::CloudSecurityCompliance::V1::Config::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 end

@@ -58,6 +58,9 @@ module Google
             # Lists all the valid Oracle Grid Infrastructure (GI) versions for the given
             # project and location.
             rpc :ListGiVersions, ::Google::Cloud::OracleDatabase::V1::ListGiVersionsRequest, ::Google::Cloud::OracleDatabase::V1::ListGiVersionsResponse
+            # Lists all the valid minor versions for the given
+            # project, location, gi version and shape family.
+            rpc :ListMinorVersions, ::Google::Cloud::OracleDatabase::V1::ListMinorVersionsRequest, ::Google::Cloud::OracleDatabase::V1::ListMinorVersionsResponse
             # Lists the database system shapes available for the project and location.
             rpc :ListDbSystemShapes, ::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesRequest, ::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesResponse
             # Lists the Autonomous Databases in a given project and location.
@@ -66,6 +69,8 @@ module Google
             rpc :GetAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRequest, ::Google::Cloud::OracleDatabase::V1::AutonomousDatabase
             # Creates a new Autonomous Database in a given project and location.
             rpc :CreateAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::CreateAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single Autonomous Database.
+            rpc :UpdateAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::UpdateAutonomousDatabaseRequest, ::Google::Longrunning::Operation
             # Deletes a single Autonomous Database.
             rpc :DeleteAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::DeleteAutonomousDatabaseRequest, ::Google::Longrunning::Operation
             # Restores a single Autonomous Database.
@@ -85,6 +90,75 @@ module Google
             rpc :StartAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest, ::Google::Longrunning::Operation
             # Restarts an Autonomous Database.
             rpc :RestartAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Initiates a switchover of specified autonomous database to the associated
+            # peer database.
+            rpc :SwitchoverAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::SwitchoverAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Initiates a failover to target autonomous database from the associated
+            # primary database.
+            rpc :FailoverAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::FailoverAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Lists the ODB Networks in a given project and location.
+            rpc :ListOdbNetworks, ::Google::Cloud::OracleDatabase::V1::ListOdbNetworksRequest, ::Google::Cloud::OracleDatabase::V1::ListOdbNetworksResponse
+            # Gets details of a single ODB Network.
+            rpc :GetOdbNetwork, ::Google::Cloud::OracleDatabase::V1::GetOdbNetworkRequest, ::Google::Cloud::OracleDatabase::V1::OdbNetwork
+            # Creates a new ODB Network in a given project and location.
+            rpc :CreateOdbNetwork, ::Google::Cloud::OracleDatabase::V1::CreateOdbNetworkRequest, ::Google::Longrunning::Operation
+            # Deletes a single ODB Network.
+            rpc :DeleteOdbNetwork, ::Google::Cloud::OracleDatabase::V1::DeleteOdbNetworkRequest, ::Google::Longrunning::Operation
+            # Lists all the ODB Subnets in a given ODB Network.
+            rpc :ListOdbSubnets, ::Google::Cloud::OracleDatabase::V1::ListOdbSubnetsRequest, ::Google::Cloud::OracleDatabase::V1::ListOdbSubnetsResponse
+            # Gets details of a single ODB Subnet.
+            rpc :GetOdbSubnet, ::Google::Cloud::OracleDatabase::V1::GetOdbSubnetRequest, ::Google::Cloud::OracleDatabase::V1::OdbSubnet
+            # Creates a new ODB Subnet in a given ODB Network.
+            rpc :CreateOdbSubnet, ::Google::Cloud::OracleDatabase::V1::CreateOdbSubnetRequest, ::Google::Longrunning::Operation
+            # Deletes a single ODB Subnet.
+            rpc :DeleteOdbSubnet, ::Google::Cloud::OracleDatabase::V1::DeleteOdbSubnetRequest, ::Google::Longrunning::Operation
+            # Lists all the Exadb (Exascale) VM Clusters for the given project and
+            # location.
+            rpc :ListExadbVmClusters, ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersRequest, ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersResponse
+            # Gets details of a single Exadb (Exascale) VM Cluster.
+            rpc :GetExadbVmCluster, ::Google::Cloud::OracleDatabase::V1::GetExadbVmClusterRequest, ::Google::Cloud::OracleDatabase::V1::ExadbVmCluster
+            # Creates a new Exadb (Exascale) VM Cluster resource.
+            rpc :CreateExadbVmCluster, ::Google::Cloud::OracleDatabase::V1::CreateExadbVmClusterRequest, ::Google::Longrunning::Operation
+            # Deletes a single Exadb (Exascale) VM Cluster.
+            rpc :DeleteExadbVmCluster, ::Google::Cloud::OracleDatabase::V1::DeleteExadbVmClusterRequest, ::Google::Longrunning::Operation
+            # Updates a single Exadb (Exascale) VM Cluster. To add virtual machines to
+            # existing exadb vm cluster, only pass the node count.
+            rpc :UpdateExadbVmCluster, ::Google::Cloud::OracleDatabase::V1::UpdateExadbVmClusterRequest, ::Google::Longrunning::Operation
+            # Removes virtual machines from an existing exadb vm cluster.
+            rpc :RemoveVirtualMachineExadbVmCluster, ::Google::Cloud::OracleDatabase::V1::RemoveVirtualMachineExadbVmClusterRequest, ::Google::Longrunning::Operation
+            # Lists all the ExascaleDB Storage Vaults for the given project and
+            # location.
+            rpc :ListExascaleDbStorageVaults, ::Google::Cloud::OracleDatabase::V1::ListExascaleDbStorageVaultsRequest, ::Google::Cloud::OracleDatabase::V1::ListExascaleDbStorageVaultsResponse
+            # Gets details of a single ExascaleDB Storage Vault.
+            rpc :GetExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::GetExascaleDbStorageVaultRequest, ::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVault
+            # Creates a new ExascaleDB Storage Vault resource.
+            rpc :CreateExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::CreateExascaleDbStorageVaultRequest, ::Google::Longrunning::Operation
+            # Deletes a single ExascaleDB Storage Vault.
+            rpc :DeleteExascaleDbStorageVault, ::Google::Cloud::OracleDatabase::V1::DeleteExascaleDbStorageVaultRequest, ::Google::Longrunning::Operation
+            # Lists all the DbSystemInitialStorageSizes for the given project and
+            # location.
+            rpc :ListDbSystemInitialStorageSizes, ::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesRequest, ::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesResponse
+            # Lists all the Databases for the given project, location and DbSystem.
+            rpc :ListDatabases, ::Google::Cloud::OracleDatabase::V1::ListDatabasesRequest, ::Google::Cloud::OracleDatabase::V1::ListDatabasesResponse
+            # Gets details of a single Database.
+            rpc :GetDatabase, ::Google::Cloud::OracleDatabase::V1::GetDatabaseRequest, ::Google::Cloud::OracleDatabase::V1::Database
+            # Lists all the PluggableDatabases for the given project, location and
+            # Container Database.
+            rpc :ListPluggableDatabases, ::Google::Cloud::OracleDatabase::V1::ListPluggableDatabasesRequest, ::Google::Cloud::OracleDatabase::V1::ListPluggableDatabasesResponse
+            # Gets details of a single PluggableDatabase.
+            rpc :GetPluggableDatabase, ::Google::Cloud::OracleDatabase::V1::GetPluggableDatabaseRequest, ::Google::Cloud::OracleDatabase::V1::PluggableDatabase
+            # Lists all the DbSystems for the given project and location.
+            rpc :ListDbSystems, ::Google::Cloud::OracleDatabase::V1::ListDbSystemsRequest, ::Google::Cloud::OracleDatabase::V1::ListDbSystemsResponse
+            # Gets details of a single DbSystem.
+            rpc :GetDbSystem, ::Google::Cloud::OracleDatabase::V1::GetDbSystemRequest, ::Google::Cloud::OracleDatabase::V1::DbSystem
+            # Creates a new DbSystem in a given project and location.
+            rpc :CreateDbSystem, ::Google::Cloud::OracleDatabase::V1::CreateDbSystemRequest, ::Google::Longrunning::Operation
+            # Deletes a single DbSystem.
+            rpc :DeleteDbSystem, ::Google::Cloud::OracleDatabase::V1::DeleteDbSystemRequest, ::Google::Longrunning::Operation
+            # List DbVersions for the given project and location.
+            rpc :ListDbVersions, ::Google::Cloud::OracleDatabase::V1::ListDbVersionsRequest, ::Google::Cloud::OracleDatabase::V1::ListDbVersionsResponse
+            # List DatabaseCharacterSets for the given project and location.
+            rpc :ListDatabaseCharacterSets, ::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsRequest, ::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsResponse
           end
 
           Stub = Service.rpc_stub_class

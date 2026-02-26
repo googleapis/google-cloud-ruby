@@ -51,6 +51,14 @@ module Google
                   ["name", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                 ],
                 body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{name}",
+                matches: [
+                  ["name", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                ],
+                body: nil
               )
             ]
             default_config.bindings_override["google.cloud.location.Locations.ListLocations"] = [
@@ -60,6 +68,14 @@ module Google
                 uri_template: "/v1/{name}/locations",
                 matches: [
                   ["name", %r{^projects/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{name}/locations",
+                matches: [
+                  ["name", %r{^organizations/[^/]+/?$}, false]
                 ],
                 body: nil
               )

@@ -85,6 +85,8 @@ module Google
             rpc :GenerateContent, ::Google::Cloud::AIPlatform::V1::GenerateContentRequest, ::Google::Cloud::AIPlatform::V1::GenerateContentResponse
             # Generate content with multimodal inputs with streaming support.
             rpc :StreamGenerateContent, ::Google::Cloud::AIPlatform::V1::GenerateContentRequest, stream(::Google::Cloud::AIPlatform::V1::GenerateContentResponse)
+            # Embed content with multimodal inputs.
+            rpc :EmbedContent, ::Google::Cloud::AIPlatform::V1::EmbedContentRequest, ::Google::Cloud::AIPlatform::V1::EmbedContentResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -146,14 +146,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # KmsConfig is the customer managed encryption key(CMEK) configuration.
+        # KmsConfig is the customer-managed encryption key(CMEK) configuration.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the KmsConfig.
+        #     Format: `projects/{project}/locations/{location}/kmsConfigs/{kms_config}`
         # @!attribute [rw] crypto_key_name
         #   @return [::String]
-        #     Required. Customer managed crypto key resource full name. Format:
-        #     projects/\\{project}/locations/\\{location}/keyRings/\\{key_ring}/cryptoKeys/\\{key}.
+        #     Required. Customer-managed crypto key resource full name. Format:
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetApp::V1::KmsConfig::State]
         #     Output only. State of the KmsConfig.

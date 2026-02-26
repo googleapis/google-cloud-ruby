@@ -150,6 +150,12 @@ module Google
           #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::MessageTransform>]
           #     Optional. Transforms to be applied to messages before they are delivered to
           #     subscribers. Transforms are applied in the order specified.
+          # @!attribute [rw] tags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+          #     resource. For example:
+          #       "123/environment": "production",
+          #       "123/costCenter": "marketing"
           class PubSubSubscription
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -159,6 +165,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::String]
             class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TagsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

@@ -1,5 +1,79 @@
 # Changelog
 
+### 1.36.0 (2026-02-24)
+
+#### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#32443](https://github.com/googleapis/google-cloud-ruby/issues/32443)) 
+* add max_concurrent_active_run_count field to Schedule message 
+
+### 1.35.0 (2026-02-08)
+
+#### Features
+
+* Add `fps` to message `VideoMetadata` 
+#### Documentation
+
+* update documentation of `.google.cloud.aiplatform.v1.DatasetService`, `.google.cloud.aiplatform.v1.Dataset`, and `.google.cloud.aiplatform.v1.DatasetVersion` ([#32408](https://github.com/googleapis/google-cloud-ruby/issues/32408)) 
+
+### 1.34.0 (2026-01-13)
+
+#### Features
+
+* Add Lustre support to the Vertex Training Custom Job API ([#32302](https://github.com/googleapis/google-cloud-ruby/issues/32302)) 
+#### Documentation
+
+* Update comments for machine resources and autoscaling 
+
+### 1.33.0 (2025-12-11)
+
+#### Features
+
+* add streaming function call argument API changes ([#32249](https://github.com/googleapis/google-cloud-ruby/issues/32249)) 
+#### Bug Fixes
+
+* fix issue when using UrlContext tool 
+
+### 1.32.0 (2025-12-03)
+
+#### Features
+
+* Expose zone when creating a FeatureOnlineStore 
+#### Documentation
+
+* update `ReplicatedVoiceConfig.mime_type` comment ([#32229](https://github.com/googleapis/google-cloud-ruby/issues/32229)) 
+
+### 1.31.0 (2025-11-21)
+
+#### Features
+
+* Add support for developer connect based deployment ([#32116](https://github.com/googleapis/google-cloud-ruby/issues/32116)) 
+
+### 1.30.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.30.0 (2025-10-26)
+
+#### Features
+
+* Add EmbedContent method v1 ([#31807](https://github.com/googleapis/google-cloud-ruby/issues/31807)) 
+
+### 1.29.0 (2025-10-22)
+
+#### Features
+
+* add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#31790](https://github.com/googleapis/google-cloud-ruby/issues/31790)) 
+* Continuous Tuning 
+
+### 1.28.0 (2025-10-17)
+
+#### Features
+
+* add aspect_ratio and image_config for v1 version ([#31770](https://github.com/googleapis/google-cloud-ruby/issues/31770)) 
+
 ### 1.27.0 (2025-10-16)
 
 #### Features

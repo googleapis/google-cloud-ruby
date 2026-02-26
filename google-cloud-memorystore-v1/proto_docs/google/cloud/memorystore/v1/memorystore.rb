@@ -74,8 +74,12 @@ module Google
         # @!attribute [r] discovery_endpoints
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Memorystore::V1::DiscoveryEndpoint>]
-        #     Output only. Deprecated: Use the endpoints.connections.psc_auto_connection
-        #     or endpoints.connections.psc_connection values instead.
+        #     Output only. Deprecated: The discovery_endpoints parameter is deprecated.
+        #     As a result, it will not be populated if the connections are created using
+        #     endpoints parameter. Instead of this parameter, for discovery, use
+        #     endpoints.connections.pscConnection and
+        #     endpoints.connections.pscAutoConnection
+        #     with connectionType CONNECTION_TYPE_DISCOVERY.
         # @!attribute [rw] node_type
         #   @return [::Google::Cloud::Memorystore::V1::Instance::NodeType]
         #     Optional. Machine type for individual nodes of the instance.
@@ -112,9 +116,19 @@ module Google
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1::Instance::Mode]
         #     Optional. The mode config for the instance.
+        # @!attribute [rw] simulate_maintenance_event
+        #   @return [::Boolean]
+        #     Optional. Input only. Simulate a maintenance event.
         # @!attribute [rw] ondemand_maintenance
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Optional. Input only. Ondemand maintenance for the instance.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Optional. Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Optional. Output only. Reserved for future use.
         # @!attribute [rw] maintenance_policy
         #   @return [::Google::Cloud::Memorystore::V1::MaintenancePolicy]
         #     Optional. The maintenance policy for the instance. If not provided,
@@ -132,6 +146,12 @@ module Google
         #     customers can be deleted asynchronously. That is, such an instance endpoint
         #     can be de-registered before the forwarding rules in the instance endpoint
         #     are deleted.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. The KMS key used to encrypt the at-rest data of the cluster.
+        # @!attribute [r] encryption_info
+        #   @return [::Google::Cloud::Memorystore::V1::EncryptionInfo]
+        #     Output only. Encryption information of the data at rest of the cluster.
         # @!attribute [r] backup_collection
         #   @return [::String]
         #     Output only. The backup collection full resource name. Example:
@@ -139,6 +159,23 @@ module Google
         # @!attribute [rw] automated_backup_config
         #   @return [::Google::Cloud::Memorystore::V1::AutomatedBackupConfig]
         #     Optional. The automated backup config for the instance.
+        # @!attribute [rw] maintenance_version
+        #   @return [::String]
+        #     Optional. This field can be used to trigger self service update to indicate
+        #     the desired maintenance version. The input to this field can be determined
+        #     by the available_maintenance_versions field.
+        # @!attribute [r] effective_maintenance_version
+        #   @return [::String]
+        #     Output only. This field represents the actual maintenance version of the
+        #     instance.
+        # @!attribute [r] available_maintenance_versions
+        #   @return [::Array<::String>]
+        #     Output only. This field is used to determine the available maintenance
+        #     versions for the self service update.
+        # @!attribute [rw] allow_fewer_zones_deployment
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Boolean]
+        #     Optional. Immutable. Deprecated, do not use.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -382,6 +419,15 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the backup collection was created.
+        # @!attribute [r] total_backup_size_bytes
+        #   @return [::Integer]
+        #     Output only. Total size of all backups in the backup collection.
+        # @!attribute [r] total_backup_count
+        #   @return [::Integer]
+        #     Output only. Total number of backups in the backup collection.
+        # @!attribute [r] last_backup_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last time a backup was created in the backup collection.
         class BackupCollection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -430,6 +476,9 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::Memorystore::V1::Backup::State]
         #     Output only. State of the backup.
+        # @!attribute [r] encryption_info
+        #   @return [::Google::Cloud::Memorystore::V1::EncryptionInfo]
+        #     Output only. Encryption information of the backup.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System assigned unique identifier of the backup.
@@ -1258,6 +1307,71 @@ module Google
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # EncryptionInfo describes the encryption information of a cluster.
+        # @!attribute [r] encryption_type
+        #   @return [::Google::Cloud::Memorystore::V1::EncryptionInfo::Type]
+        #     Output only. Type of encryption.
+        # @!attribute [r] kms_key_versions
+        #   @return [::Array<::String>]
+        #     Output only. KMS key versions that are being used to protect the data
+        #     at-rest.
+        # @!attribute [r] kms_key_primary_state
+        #   @return [::Google::Cloud::Memorystore::V1::EncryptionInfo::KmsKeyState]
+        #     Output only. The state of the primary version of the KMS key perceived by
+        #     the system. This field is not populated in backups.
+        # @!attribute [r] last_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time when the encryption info was updated.
+        class EncryptionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible encryption types.
+          module Type
+            # Encryption type not specified. Defaults to GOOGLE_DEFAULT_ENCRYPTION.
+            TYPE_UNSPECIFIED = 0
+
+            # The data is encrypted at rest with a key that is fully managed by Google.
+            # No key version will be populated. This is the default state.
+            GOOGLE_DEFAULT_ENCRYPTION = 1
+
+            # The data is encrypted at rest with a key that is managed by the customer.
+            # KMS key versions will be populated.
+            CUSTOMER_MANAGED_ENCRYPTION = 2
+          end
+
+          # The state of the KMS key perceived by the system. Refer to the public
+          # documentation for the impact of each state.
+          module KmsKeyState
+            # The default value. This value is unused.
+            KMS_KEY_STATE_UNSPECIFIED = 0
+
+            # The KMS key is enabled and correctly configured.
+            ENABLED = 1
+
+            # Permission denied on the KMS key.
+            PERMISSION_DENIED = 2
+
+            # The KMS key is disabled.
+            DISABLED = 3
+
+            # The KMS key is destroyed.
+            DESTROYED = 4
+
+            # The KMS key is scheduled to be destroyed.
+            DESTROY_SCHEDULED = 5
+
+            # The EKM key is unreachable.
+            EKM_KEY_UNREACHABLE_DETECTED = 6
+
+            # Billing is disabled for the project.
+            BILLING_DISABLED = 7
+
+            # All other unknown failures.
+            UNKNOWN_FAILURE = 8
+          end
         end
 
         # Status of the PSC connection.

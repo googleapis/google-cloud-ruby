@@ -41,6 +41,10 @@ module Google
         # @!attribute [rw] turns
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Session::Turn>]
         #     Turns.
+        # @!attribute [rw] labels
+        #   @return [::Array<::String>]
+        #     Optional. The labels for the session.
+        #     Can be set as filter in ListSessionsRequest.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the session started.
@@ -74,6 +78,14 @@ module Google
           #     API, if
           #     {::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest#include_answer_details GetSessionRequest.include_answer_details}
           #     is set to true, this field will be populated when getting answer query
+          #     session.
+          # @!attribute [r] detailed_assist_answer
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AssistAnswer]
+          #     Output only. In
+          #     {::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#get_session ConversationalSearchService.GetSession}
+          #     API, if
+          #     {::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest#include_answer_details GetSessionRequest.include_answer_details}
+          #     is set to true, this field will be populated when getting assistant
           #     session.
           # @!attribute [rw] query_config
           #   @return [::Google::Protobuf::Map{::String => ::String}]

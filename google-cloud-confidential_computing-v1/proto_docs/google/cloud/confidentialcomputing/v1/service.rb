@@ -70,6 +70,9 @@ module Google
         #     Optional. An SEV-SNP Attestation Report.
         #
         #     Note: The following fields are mutually exclusive: `sev_snp_attestation`, `td_ccel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] nvidia_attestation
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation]
+        #     Optional. An Nvidia attestation report for GPU and NVSwitch devices.
         # @!attribute [rw] challenge
         #   @return [::String]
         #     Required. The name of the Challenge whose nonce was used to generate the
@@ -97,6 +100,116 @@ module Google
         class VerifyAttestationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An Nvidia attestation report for GPU and NVSwitch devices.
+        # Contains necessary attestation evidence that the client collects for
+        # verification.
+        # @!attribute [rw] spt
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::SinglePassthroughAttestation]
+        #     Single GPU Passthrough (SPT) attestation.
+        #
+        #     Note: The following fields are mutually exclusive: `spt`, `ppcie`, `mpt`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ppcie
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::ProtectedPcieAttestation]
+        #     Protected PCIe (PPCIE) attestation.
+        #
+        #     Note: The following fields are mutually exclusive: `ppcie`, `spt`, `mpt`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] mpt
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::MultiGpuSecurePassthroughAttestation]
+        #     Multi-GPU Secure Passthrough (MPT) attestation.
+        #
+        #     Note: The following fields are mutually exclusive: `mpt`, `spt`, `ppcie`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class NvidiaAttestation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # GpuInfo contains the attestation evidence for a GPU device.
+          # @!attribute [rw] uuid
+          #   @return [::String]
+          #     Optional. The UUID of the GPU device.
+          # @!attribute [rw] driver_version
+          #   @return [::String]
+          #     Optional. The driver version of the GPU.
+          # @!attribute [rw] vbios_version
+          #   @return [::String]
+          #     Optional. The vBIOS version of the GPU.
+          # @!attribute [rw] gpu_architecture_type
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::GpuArchitectureType]
+          #     Optional. The GPU architecture type.
+          # @!attribute [rw] attestation_certificate_chain
+          #   @return [::String]
+          #     Optional. The raw attestation certificate chain for the GPU device.
+          # @!attribute [rw] attestation_report
+          #   @return [::String]
+          #     Optional. The raw attestation report for the GPU device.
+          #     This field contains SPDM request/response defined in
+          #     https://www.dmtf.org/sites/default/files/standards/documents/DSP0274_1.1.0.pdf
+          class GpuInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # SwitchInfo contains the attestation evidence for a NVSwitch device.
+          # @!attribute [rw] uuid
+          #   @return [::String]
+          #     Optional. The UUID of the NVSwitch device.
+          # @!attribute [rw] attestation_certificate_chain
+          #   @return [::String]
+          #     Optional. The raw attestation certificate chain for the NVSwitch device.
+          # @!attribute [rw] attestation_report
+          #   @return [::String]
+          #     Optional. The raw attestation report for the NvSwitch device.
+          #     This field contains SPDM request/response defined in
+          #     https://www.dmtf.org/sites/default/files/standards/documents/DSP0274_1.1.0.pdf
+          class SwitchInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Single GPU Passthrough (SPT) attestation.
+          # @!attribute [rw] gpu_quote
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::GpuInfo]
+          #     Optional. Single GPU quote.
+          class SinglePassthroughAttestation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Protected PCIe (PPCIE) attestation.
+          # Eight Hopper GPUs with Four NVSwitch Passthrough.
+          # @!attribute [rw] gpu_quotes
+          #   @return [::Array<::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::GpuInfo>]
+          #     Optional. A list of GPU infos.
+          # @!attribute [rw] switch_quotes
+          #   @return [::Array<::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::SwitchInfo>]
+          #     Optional. A list of SWITCH infos.
+          class ProtectedPcieAttestation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # MultiGpuSecurePassthroughAttestation contains the attestation evidence
+          # for a Multi-GPU Secure Passthrough (MPT) attestation.
+          # @!attribute [rw] gpu_quotes
+          #   @return [::Array<::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation::GpuInfo>]
+          #     Optional. A list of GPU quotes.
+          class MultiGpuSecurePassthroughAttestation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # GpuArchitectureType enumerates the supported GPU architecture types.
+          module GpuArchitectureType
+            # Unspecified GPU architecture type.
+            GPU_ARCHITECTURE_TYPE_UNSPECIFIED = 0
+
+            # Hopper GPU architecture type.
+            GPU_ARCHITECTURE_TYPE_HOPPER = 8
+
+            # Blackwell GPU architecture type.
+            GPU_ARCHITECTURE_TYPE_BLACKWELL = 10
+          end
         end
 
         # A TDX Attestation quote.
@@ -355,6 +468,10 @@ module Google
         # @!attribute [rw] options
         #   @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest::ConfidentialSpaceOptions]
         #     Optional. A collection of fields that modify the token output.
+        # @!attribute [rw] nvidia_attestation
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::NvidiaAttestation]
+        #     Optional. An optional Nvidia attestation report, used to populate hardware
+        #     rooted claims for Nvidia devices.
         class VerifyConfidentialSpaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -431,9 +548,31 @@ module Google
         #     Required. The name of the Challenge whose nonce was used to generate the
         #     attestation, in the format projects/*/locations/*/challenges/*. The
         #     provided Challenge will be consumed, and cannot be used again.
+        # @!attribute [rw] options
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest::ConfidentialGkeOptions]
+        #     Optional. A collection of fields that modify the token output.
         class VerifyConfidentialGkeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Token options for Confidential GKE attestation.
+          # @!attribute [rw] audience
+          #   @return [::String]
+          #     Optional. Optional string to issue the token with a custom audience
+          #     claim. Required if custom nonces are specified.
+          # @!attribute [rw] nonce
+          #   @return [::Array<::String>]
+          #     Optional. Optional parameter to place one or more nonces in the eat_nonce
+          #     claim in the output token. The minimum size for JSON-encoded EATs is 10
+          #     bytes and the maximum size is 74 bytes.
+          # @!attribute [rw] signature_type
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::SignatureType]
+          #     Optional. Optional specification for how to sign the attestation token.
+          #     Defaults to SIGNATURE_TYPE_OIDC if unspecified.
+          class ConfidentialGkeOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # VerifyConfidentialGkeResponse response is returened once a Confidential GKE

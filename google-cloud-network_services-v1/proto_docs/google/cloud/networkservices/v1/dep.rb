@@ -613,6 +613,198 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `LbEdgeExtension` is a resource that lets the extension service influence
+        # the selection of backend services and Cloud CDN cache keys by modifying
+        # request headers.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Identifier. Name of the `LbEdgeExtension` resource in the
+        #     following format:
+        #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the resource was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the resource was updated.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. A human-readable description of the resource.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Set of labels associated with the `LbEdgeExtension` resource.
+        #
+        #     The format must comply with [the requirements for
+        #     labels](https://cloud.google.com/compute/docs/labeling-resources#requirements)
+        #     for Google Cloud resources.
+        # @!attribute [rw] forwarding_rules
+        #   @return [::Array<::String>]
+        #     Required. A list of references to the forwarding rules to which this
+        #     service extension is attached. At least one forwarding rule is required.
+        #     Only one `LbEdgeExtension` resource can be associated with a forwarding
+        #     rule.
+        # @!attribute [rw] extension_chains
+        #   @return [::Array<::Google::Cloud::NetworkServices::V1::ExtensionChain>]
+        #     Required. A set of ordered extension chains that contain the match
+        #     conditions and extensions to execute. Match conditions for each extension
+        #     chain are evaluated in sequence for a given request. The first extension
+        #     chain that has a condition that matches the request is executed.
+        #     Any subsequent extension chains do not execute.
+        #     Limited to 5 extension chains per resource.
+        # @!attribute [rw] load_balancing_scheme
+        #   @return [::Google::Cloud::NetworkServices::V1::LoadBalancingScheme]
+        #     Required. All forwarding rules referenced by this extension must
+        #     share the same load balancing scheme.
+        #     Supported values: `EXTERNAL_MANAGED`.
+        class LbEdgeExtension
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Message for requesting list of `LbEdgeExtension` resources.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The project and location from which the `LbEdgeExtension`
+        #     resources are listed. These values are specified in the following format:
+        #     `projects/{project}/locations/{location}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. The server might return fewer items than
+        #     requested. If unspecified, the server picks an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results that the server returns.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filtering results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Hint about how to order the results.
+        class ListLbEdgeExtensionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing `LbEdgeExtension` resources.
+        # @!attribute [rw] lb_edge_extensions
+        #   @return [::Array<::Google::Cloud::NetworkServices::V1::LbEdgeExtension>]
+        #     The list of `LbEdgeExtension` resources.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results that the server returns.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListLbEdgeExtensionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for getting a `LbEdgeExtension` resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. A name of the `LbEdgeExtension` resource to get. Must be in the
+        #     format
+        #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+        class GetLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for creating a `LbEdgeExtension` resource.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the `LbEdgeExtension` resource. Must be in
+        #     the format `projects/{project}/locations/{location}`.
+        # @!attribute [rw] lb_edge_extension_id
+        #   @return [::String]
+        #     Required. User-provided ID of the `LbEdgeExtension` resource to be created.
+        # @!attribute [rw] lb_edge_extension
+        #   @return [::Google::Cloud::NetworkServices::V1::LbEdgeExtension]
+        #     Required. `LbEdgeExtension` resource to be created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server can ignore
+        #     the request if it has already been completed. The server guarantees
+        #     that for 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server ignores the second request This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for updating a `LbEdgeExtension` resource.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Used to specify the fields to be overwritten in the
+        #     `LbEdgeExtension` resource by the update.
+        #     The fields specified in the `update_mask` are relative to the resource, not
+        #     the full request. A field is overwritten if it is in the mask. If the
+        #     user does not specify a mask, then all fields are overwritten.
+        # @!attribute [rw] lb_edge_extension
+        #   @return [::Google::Cloud::NetworkServices::V1::LbEdgeExtension]
+        #     Required. `LbEdgeExtension` resource being updated.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server can ignore
+        #     the request if it has already been completed. The server guarantees
+        #     that for 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server ignores the second request This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for deleting a `LbEdgeExtension` resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the `LbEdgeExtension` resource to delete. Must be in
+        #     the format
+        #     `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server can ignore
+        #     the request if it has already been completed. The server guarantees
+        #     that for 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server ignores the second request This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteLbEdgeExtensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `AuthzExtension` is a resource that allows traffic forwarding
         # to a callout backend service to make an authorization decision.
         # @!attribute [rw] name

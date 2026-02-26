@@ -248,7 +248,8 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
           "fieldDelimiter" => nil,
           "destinationFormat" => nil
         },
-        "dryRun" => nil
+        "dryRun" => nil,
+        "reservation" => nil
       }
     }.to_json
   end

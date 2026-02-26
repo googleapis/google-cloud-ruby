@@ -1,5 +1,26 @@
 # Release History
 
+### 1.10.0 (2026-01-23)
+
+#### Features
+
+* add the SingleTenantHsm functionality including the management API and resource types ([#32372](https://github.com/googleapis/google-cloud-ruby/issues/32372)) 
+#### Documentation
+
+* A comment for field `crypto_key_backend` in message `.google.cloud.kms.v1.CryptoKey` is expanded to include SingleTenantHsmInstances 
+
+### 1.9.2 (2026-01-13)
+
+#### Documentation
+
+* Marking MODIFIED_CUSTOMER_INITIATED_ACCESS and MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION Key Access Justification codes as deprecated in favor of GOOGLE_RESPONSE_TO_PRODUCTION_ALERT ([#32337](https://github.com/googleapis/google-cloud-ruby/issues/32337)) 
+
+### 1.9.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 1.9.0 (2025-10-08)
 
 #### Features

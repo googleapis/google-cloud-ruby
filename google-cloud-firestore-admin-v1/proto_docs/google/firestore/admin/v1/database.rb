@@ -55,6 +55,10 @@ module Google
           # @!attribute [rw] concurrency_mode
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::ConcurrencyMode]
           #     The concurrency control mode to use for this database.
+          #
+          #     If unspecified in a CreateDatabase request, this will default based on the
+          #     database edition: Optimistic for Enterprise and Pessimistic for all other
+          #     databases.
           # @!attribute [r] version_retention_period
           #   @return [::Google::Protobuf::Duration]
           #     Output only. The period during which past versions of data are retained in
@@ -132,6 +136,21 @@ module Google
           # @!attribute [rw] database_edition
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DatabaseEdition]
           #     Immutable. The edition of the database.
+          # @!attribute [rw] realtime_updates_mode
+          #   @return [::Google::Cloud::Firestore::Admin::V1::RealtimeUpdatesMode]
+          #     Immutable. The default Realtime Updates mode to use for this database.
+          # @!attribute [rw] firestore_data_access_mode
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DataAccessMode]
+          #     Optional. The Firestore API data access mode to use for this database. If
+          #     not set on write:
+          #     - the default value is DATA_ACCESS_MODE_DISABLED for Enterprise Edition.
+          #     - the default value is DATA_ACCESS_MODE_ENABLED for Standard Edition.
+          # @!attribute [rw] mongodb_compatible_data_access_mode
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DataAccessMode]
+          #     Optional. The MongoDB compatible API data access mode to use for this
+          #     database. If not set on write, the default value is
+          #     DATA_ACCESS_MODE_ENABLED for Enterprise Edition. The value is always
+          #     DATA_ACCESS_MODE_DISABLED for Standard Edition.
           class Database
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -194,7 +213,8 @@ module Google
             # Encryption configuration for a new database being created from another
             # source.
             #
-            # The source could be a {::Google::Cloud::Firestore::Admin::V1::Backup Backup} .
+            # The source could be a {::Google::Cloud::Firestore::Admin::V1::Backup Backup} or a
+            # {::Google::Cloud::Firestore::Admin::V1::PitrSnapshot PitrSnapshot}.
             # @!attribute [rw] google_default_encryption
             #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::GoogleDefaultEncryptionOptions]
             #     Use Google default encryption.
@@ -279,20 +299,25 @@ module Google
 
               # Use optimistic concurrency control by default. This mode is available
               # for Cloud Firestore databases.
+              #
+              # This is the default setting for Cloud Firestore Enterprise Edition
+              # databases.
               OPTIMISTIC = 1
 
               # Use pessimistic concurrency control by default. This mode is available
               # for Cloud Firestore databases.
               #
-              # This is the default setting for Cloud Firestore.
+              # This is the default setting for Cloud Firestore Standard Edition
+              # databases.
               PESSIMISTIC = 2
 
               # Use optimistic concurrency control with entity groups by default.
               #
-              # This is the only available mode for Cloud Datastore.
+              # This mode is enabled for some databases that were automatically upgraded
+              # from Cloud Datastore to Cloud Firestore with Datastore Mode.
               #
-              # This mode is also available for Cloud Firestore with Datastore Mode but
-              # is not recommended.
+              # It is not recommended for any new databases, and not supported for
+              # Firestore Native databases.
               OPTIMISTIC_WITH_ENTITY_GROUPS = 3
             end
 
@@ -358,6 +383,18 @@ module Google
 
               # Enterprise edition.
               ENTERPRISE = 2
+            end
+
+            # The data access mode.
+            module DataAccessMode
+              # Not Used.
+              DATA_ACCESS_MODE_UNSPECIFIED = 0
+
+              # Accessing the database through the API is allowed.
+              DATA_ACCESS_MODE_ENABLED = 1
+
+              # Accessing the database through the API is disallowed.
+              DATA_ACCESS_MODE_DISABLED = 2
             end
           end
         end

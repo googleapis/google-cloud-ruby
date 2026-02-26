@@ -1791,6 +1791,12 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} can be created in
         #     this location.
+        # @!attribute [rw] hsm_single_tenant_available
+        #   @return [::Boolean]
+        #     Indicates whether {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}
+        #     can be created in this location.
         class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

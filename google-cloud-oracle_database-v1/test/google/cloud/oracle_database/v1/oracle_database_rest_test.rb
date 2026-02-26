@@ -89,6 +89,8 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
 
     list_cloud_exadata_infrastructures_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +106,27 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
         end
 
         # Use hash object
-        client.list_cloud_exadata_infrastructures({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_cloud_exadata_infrastructures({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cloud_exadata_infrastructures parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_cloud_exadata_infrastructures parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cloud_exadata_infrastructures ::Google::Cloud::OracleDatabase::V1::ListCloudExadataInfrastructuresRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_cloud_exadata_infrastructures ::Google::Cloud::OracleDatabase::V1::ListCloudExadataInfrastructuresRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cloud_exadata_infrastructures({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_cloud_exadata_infrastructures({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cloud_exadata_infrastructures(::Google::Cloud::OracleDatabase::V1::ListCloudExadataInfrastructuresRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_cloud_exadata_infrastructures(::Google::Cloud::OracleDatabase::V1::ListCloudExadataInfrastructuresRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -704,6 +706,7 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_gi_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -719,32 +722,89 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
         end
 
         # Use hash object
-        client.list_gi_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_gi_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_gi_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_gi_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_gi_versions ::Google::Cloud::OracleDatabase::V1::ListGiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_gi_versions ::Google::Cloud::OracleDatabase::V1::ListGiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_gi_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_gi_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_gi_versions(::Google::Cloud::OracleDatabase::V1::ListGiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_gi_versions(::Google::Cloud::OracleDatabase::V1::ListGiVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, list_gi_versions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_minor_versions
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListMinorVersionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_minor_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_minor_versions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_minor_versions_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_minor_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_minor_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_minor_versions ::Google::Cloud::OracleDatabase::V1::ListMinorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_minor_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_minor_versions(::Google::Cloud::OracleDatabase::V1::ListMinorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_minor_versions_client_stub.call_count
       end
     end
   end
@@ -760,6 +820,7 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_db_system_shapes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -775,27 +836,27 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
         end
 
         # Use hash object
-        client.list_db_system_shapes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_db_system_shapes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_db_system_shapes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_db_system_shapes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_db_system_shapes ::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_db_system_shapes ::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_db_system_shapes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_db_system_shapes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_db_system_shapes(::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_db_system_shapes(::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -970,6 +1031,62 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, create_autonomous_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_autonomous_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    autonomous_database = {}
+    request_id = "hello world"
+
+    update_autonomous_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_update_autonomous_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_autonomous_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_autonomous_database({ update_mask: update_mask, autonomous_database: autonomous_database, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_autonomous_database update_mask: update_mask, autonomous_database: autonomous_database, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_autonomous_database ::Google::Cloud::OracleDatabase::V1::UpdateAutonomousDatabaseRequest.new(update_mask: update_mask, autonomous_database: autonomous_database, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_autonomous_database({ update_mask: update_mask, autonomous_database: autonomous_database, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_autonomous_database(::Google::Cloud::OracleDatabase::V1::UpdateAutonomousDatabaseRequest.new(update_mask: update_mask, autonomous_database: autonomous_database, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_autonomous_database_client_stub.call_count
       end
     end
   end
@@ -1469,6 +1586,1740 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, restart_autonomous_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_switchover_autonomous_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_autonomous_database = "hello world"
+
+    switchover_autonomous_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_switchover_autonomous_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, switchover_autonomous_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.switchover_autonomous_database({ name: name, peer_autonomous_database: peer_autonomous_database }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.switchover_autonomous_database name: name, peer_autonomous_database: peer_autonomous_database do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.switchover_autonomous_database ::Google::Cloud::OracleDatabase::V1::SwitchoverAutonomousDatabaseRequest.new(name: name, peer_autonomous_database: peer_autonomous_database) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.switchover_autonomous_database({ name: name, peer_autonomous_database: peer_autonomous_database }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.switchover_autonomous_database(::Google::Cloud::OracleDatabase::V1::SwitchoverAutonomousDatabaseRequest.new(name: name, peer_autonomous_database: peer_autonomous_database), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, switchover_autonomous_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_failover_autonomous_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_autonomous_database = "hello world"
+
+    failover_autonomous_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_failover_autonomous_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, failover_autonomous_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.failover_autonomous_database({ name: name, peer_autonomous_database: peer_autonomous_database }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.failover_autonomous_database name: name, peer_autonomous_database: peer_autonomous_database do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.failover_autonomous_database ::Google::Cloud::OracleDatabase::V1::FailoverAutonomousDatabaseRequest.new(name: name, peer_autonomous_database: peer_autonomous_database) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.failover_autonomous_database({ name: name, peer_autonomous_database: peer_autonomous_database }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.failover_autonomous_database(::Google::Cloud::OracleDatabase::V1::FailoverAutonomousDatabaseRequest.new(name: name, peer_autonomous_database: peer_autonomous_database), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, failover_autonomous_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_odb_networks
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListOdbNetworksResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_odb_networks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_odb_networks_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_odb_networks_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_odb_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_odb_networks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_odb_networks ::Google::Cloud::OracleDatabase::V1::ListOdbNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_odb_networks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_odb_networks(::Google::Cloud::OracleDatabase::V1::ListOdbNetworksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_odb_networks_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_odb_network
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::OdbNetwork.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_odb_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_odb_network_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_odb_network_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_odb_network({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_odb_network name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_odb_network ::Google::Cloud::OracleDatabase::V1::GetOdbNetworkRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_odb_network({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_odb_network(::Google::Cloud::OracleDatabase::V1::GetOdbNetworkRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_odb_network_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_odb_network
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    odb_network_id = "hello world"
+    odb_network = {}
+    request_id = "hello world"
+
+    create_odb_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_create_odb_network_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_odb_network_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_odb_network({ parent: parent, odb_network_id: odb_network_id, odb_network: odb_network, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_odb_network parent: parent, odb_network_id: odb_network_id, odb_network: odb_network, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_odb_network ::Google::Cloud::OracleDatabase::V1::CreateOdbNetworkRequest.new(parent: parent, odb_network_id: odb_network_id, odb_network: odb_network, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_odb_network({ parent: parent, odb_network_id: odb_network_id, odb_network: odb_network, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_odb_network(::Google::Cloud::OracleDatabase::V1::CreateOdbNetworkRequest.new(parent: parent, odb_network_id: odb_network_id, odb_network: odb_network, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_odb_network_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_odb_network
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_odb_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_delete_odb_network_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_odb_network_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_odb_network({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_odb_network name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_odb_network ::Google::Cloud::OracleDatabase::V1::DeleteOdbNetworkRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_odb_network({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_odb_network(::Google::Cloud::OracleDatabase::V1::DeleteOdbNetworkRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_odb_network_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_odb_subnets
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListOdbSubnetsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_odb_subnets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_odb_subnets_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_odb_subnets_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_odb_subnets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_odb_subnets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_odb_subnets ::Google::Cloud::OracleDatabase::V1::ListOdbSubnetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_odb_subnets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_odb_subnets(::Google::Cloud::OracleDatabase::V1::ListOdbSubnetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_odb_subnets_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_odb_subnet
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::OdbSubnet.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_odb_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_odb_subnet_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_odb_subnet_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_odb_subnet({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_odb_subnet name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_odb_subnet ::Google::Cloud::OracleDatabase::V1::GetOdbSubnetRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_odb_subnet({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_odb_subnet(::Google::Cloud::OracleDatabase::V1::GetOdbSubnetRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_odb_subnet_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_odb_subnet
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    odb_subnet_id = "hello world"
+    odb_subnet = {}
+    request_id = "hello world"
+
+    create_odb_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_create_odb_subnet_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_odb_subnet_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_odb_subnet({ parent: parent, odb_subnet_id: odb_subnet_id, odb_subnet: odb_subnet, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_odb_subnet parent: parent, odb_subnet_id: odb_subnet_id, odb_subnet: odb_subnet, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_odb_subnet ::Google::Cloud::OracleDatabase::V1::CreateOdbSubnetRequest.new(parent: parent, odb_subnet_id: odb_subnet_id, odb_subnet: odb_subnet, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_odb_subnet({ parent: parent, odb_subnet_id: odb_subnet_id, odb_subnet: odb_subnet, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_odb_subnet(::Google::Cloud::OracleDatabase::V1::CreateOdbSubnetRequest.new(parent: parent, odb_subnet_id: odb_subnet_id, odb_subnet: odb_subnet, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_odb_subnet_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_odb_subnet
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_odb_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_delete_odb_subnet_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_odb_subnet_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_odb_subnet({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_odb_subnet name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_odb_subnet ::Google::Cloud::OracleDatabase::V1::DeleteOdbSubnetRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_odb_subnet({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_odb_subnet(::Google::Cloud::OracleDatabase::V1::DeleteOdbSubnetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_odb_subnet_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_exadb_vm_clusters
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_exadb_vm_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_exadb_vm_clusters_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_exadb_vm_clusters_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_exadb_vm_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_exadb_vm_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_exadb_vm_clusters ::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_exadb_vm_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_exadb_vm_clusters(::Google::Cloud::OracleDatabase::V1::ListExadbVmClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_exadb_vm_clusters_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_exadb_vm_cluster
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ExadbVmCluster.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_exadb_vm_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_exadb_vm_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_exadb_vm_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_exadb_vm_cluster({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_exadb_vm_cluster name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_exadb_vm_cluster ::Google::Cloud::OracleDatabase::V1::GetExadbVmClusterRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_exadb_vm_cluster({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_exadb_vm_cluster(::Google::Cloud::OracleDatabase::V1::GetExadbVmClusterRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_exadb_vm_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_exadb_vm_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    exadb_vm_cluster_id = "hello world"
+    exadb_vm_cluster = {}
+    request_id = "hello world"
+
+    create_exadb_vm_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_create_exadb_vm_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_exadb_vm_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_exadb_vm_cluster({ parent: parent, exadb_vm_cluster_id: exadb_vm_cluster_id, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_exadb_vm_cluster parent: parent, exadb_vm_cluster_id: exadb_vm_cluster_id, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_exadb_vm_cluster ::Google::Cloud::OracleDatabase::V1::CreateExadbVmClusterRequest.new(parent: parent, exadb_vm_cluster_id: exadb_vm_cluster_id, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_exadb_vm_cluster({ parent: parent, exadb_vm_cluster_id: exadb_vm_cluster_id, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_exadb_vm_cluster(::Google::Cloud::OracleDatabase::V1::CreateExadbVmClusterRequest.new(parent: parent, exadb_vm_cluster_id: exadb_vm_cluster_id, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_exadb_vm_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_exadb_vm_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_exadb_vm_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_delete_exadb_vm_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_exadb_vm_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_exadb_vm_cluster({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_exadb_vm_cluster name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_exadb_vm_cluster ::Google::Cloud::OracleDatabase::V1::DeleteExadbVmClusterRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_exadb_vm_cluster({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_exadb_vm_cluster(::Google::Cloud::OracleDatabase::V1::DeleteExadbVmClusterRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_exadb_vm_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_exadb_vm_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    exadb_vm_cluster = {}
+    request_id = "hello world"
+
+    update_exadb_vm_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_update_exadb_vm_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_exadb_vm_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_exadb_vm_cluster({ update_mask: update_mask, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_exadb_vm_cluster update_mask: update_mask, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_exadb_vm_cluster ::Google::Cloud::OracleDatabase::V1::UpdateExadbVmClusterRequest.new(update_mask: update_mask, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_exadb_vm_cluster({ update_mask: update_mask, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_exadb_vm_cluster(::Google::Cloud::OracleDatabase::V1::UpdateExadbVmClusterRequest.new(update_mask: update_mask, exadb_vm_cluster: exadb_vm_cluster, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_exadb_vm_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_remove_virtual_machine_exadb_vm_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    hostnames = ["hello world"]
+
+    remove_virtual_machine_exadb_vm_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_remove_virtual_machine_exadb_vm_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, remove_virtual_machine_exadb_vm_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.remove_virtual_machine_exadb_vm_cluster({ name: name, request_id: request_id, hostnames: hostnames }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.remove_virtual_machine_exadb_vm_cluster name: name, request_id: request_id, hostnames: hostnames do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.remove_virtual_machine_exadb_vm_cluster ::Google::Cloud::OracleDatabase::V1::RemoveVirtualMachineExadbVmClusterRequest.new(name: name, request_id: request_id, hostnames: hostnames) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.remove_virtual_machine_exadb_vm_cluster({ name: name, request_id: request_id, hostnames: hostnames }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.remove_virtual_machine_exadb_vm_cluster(::Google::Cloud::OracleDatabase::V1::RemoveVirtualMachineExadbVmClusterRequest.new(name: name, request_id: request_id, hostnames: hostnames), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, remove_virtual_machine_exadb_vm_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_exascale_db_storage_vaults
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListExascaleDbStorageVaultsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_exascale_db_storage_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_exascale_db_storage_vaults_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_exascale_db_storage_vaults_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_exascale_db_storage_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_exascale_db_storage_vaults parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_exascale_db_storage_vaults ::Google::Cloud::OracleDatabase::V1::ListExascaleDbStorageVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_exascale_db_storage_vaults({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_exascale_db_storage_vaults(::Google::Cloud::OracleDatabase::V1::ListExascaleDbStorageVaultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_exascale_db_storage_vaults_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_exascale_db_storage_vault
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ExascaleDbStorageVault.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_exascale_db_storage_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_exascale_db_storage_vault_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_exascale_db_storage_vault_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_exascale_db_storage_vault({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_exascale_db_storage_vault name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_exascale_db_storage_vault ::Google::Cloud::OracleDatabase::V1::GetExascaleDbStorageVaultRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_exascale_db_storage_vault({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_exascale_db_storage_vault(::Google::Cloud::OracleDatabase::V1::GetExascaleDbStorageVaultRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_exascale_db_storage_vault_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_exascale_db_storage_vault
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    exascale_db_storage_vault_id = "hello world"
+    exascale_db_storage_vault = {}
+    request_id = "hello world"
+
+    create_exascale_db_storage_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_create_exascale_db_storage_vault_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_exascale_db_storage_vault_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_exascale_db_storage_vault({ parent: parent, exascale_db_storage_vault_id: exascale_db_storage_vault_id, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_exascale_db_storage_vault parent: parent, exascale_db_storage_vault_id: exascale_db_storage_vault_id, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_exascale_db_storage_vault ::Google::Cloud::OracleDatabase::V1::CreateExascaleDbStorageVaultRequest.new(parent: parent, exascale_db_storage_vault_id: exascale_db_storage_vault_id, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_exascale_db_storage_vault({ parent: parent, exascale_db_storage_vault_id: exascale_db_storage_vault_id, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_exascale_db_storage_vault(::Google::Cloud::OracleDatabase::V1::CreateExascaleDbStorageVaultRequest.new(parent: parent, exascale_db_storage_vault_id: exascale_db_storage_vault_id, exascale_db_storage_vault: exascale_db_storage_vault, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_exascale_db_storage_vault_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_exascale_db_storage_vault
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_exascale_db_storage_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_delete_exascale_db_storage_vault_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_exascale_db_storage_vault_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_exascale_db_storage_vault({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_exascale_db_storage_vault name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_exascale_db_storage_vault ::Google::Cloud::OracleDatabase::V1::DeleteExascaleDbStorageVaultRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_exascale_db_storage_vault({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_exascale_db_storage_vault(::Google::Cloud::OracleDatabase::V1::DeleteExascaleDbStorageVaultRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_exascale_db_storage_vault_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_db_system_initial_storage_sizes
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_db_system_initial_storage_sizes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_db_system_initial_storage_sizes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_db_system_initial_storage_sizes_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_db_system_initial_storage_sizes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_db_system_initial_storage_sizes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_db_system_initial_storage_sizes ::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_db_system_initial_storage_sizes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_db_system_initial_storage_sizes(::Google::Cloud::OracleDatabase::V1::ListDbSystemInitialStorageSizesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_db_system_initial_storage_sizes_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_databases
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListDatabasesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_databases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_databases_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_databases_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_databases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_databases ::Google::Cloud::OracleDatabase::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_databases(::Google::Cloud::OracleDatabase::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_databases_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_database
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::Database.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_database({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_database name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_database ::Google::Cloud::OracleDatabase::V1::GetDatabaseRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_database({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_database(::Google::Cloud::OracleDatabase::V1::GetDatabaseRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_pluggable_databases
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListPluggableDatabasesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_pluggable_databases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_pluggable_databases_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_pluggable_databases_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_pluggable_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_pluggable_databases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_pluggable_databases ::Google::Cloud::OracleDatabase::V1::ListPluggableDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_pluggable_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_pluggable_databases(::Google::Cloud::OracleDatabase::V1::ListPluggableDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_pluggable_databases_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_pluggable_database
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::PluggableDatabase.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_pluggable_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_pluggable_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_pluggable_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_pluggable_database({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_pluggable_database name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_pluggable_database ::Google::Cloud::OracleDatabase::V1::GetPluggableDatabaseRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_pluggable_database({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_pluggable_database(::Google::Cloud::OracleDatabase::V1::GetPluggableDatabaseRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_pluggable_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_db_systems
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListDbSystemsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_db_systems_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_db_systems_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_db_systems_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_db_systems({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_db_systems parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_db_systems ::Google::Cloud::OracleDatabase::V1::ListDbSystemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_db_systems({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_db_systems(::Google::Cloud::OracleDatabase::V1::ListDbSystemsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_db_systems_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_db_system
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::DbSystem.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_db_system_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_db_system_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_db_system_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_db_system({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_db_system name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_db_system ::Google::Cloud::OracleDatabase::V1::GetDbSystemRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_db_system({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_db_system(::Google::Cloud::OracleDatabase::V1::GetDbSystemRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_db_system_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_db_system
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    db_system_id = "hello world"
+    db_system = {}
+    request_id = "hello world"
+
+    create_db_system_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_create_db_system_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_db_system_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_db_system({ parent: parent, db_system_id: db_system_id, db_system: db_system, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_db_system parent: parent, db_system_id: db_system_id, db_system: db_system, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_db_system ::Google::Cloud::OracleDatabase::V1::CreateDbSystemRequest.new(parent: parent, db_system_id: db_system_id, db_system: db_system, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_db_system({ parent: parent, db_system_id: db_system_id, db_system: db_system, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_db_system(::Google::Cloud::OracleDatabase::V1::CreateDbSystemRequest.new(parent: parent, db_system_id: db_system_id, db_system: db_system, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_db_system_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_db_system
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_db_system_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_delete_db_system_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_db_system_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_db_system({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_db_system name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_db_system ::Google::Cloud::OracleDatabase::V1::DeleteDbSystemRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_db_system({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_db_system(::Google::Cloud::OracleDatabase::V1::DeleteDbSystemRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_db_system_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_db_versions
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListDbVersionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_db_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_db_versions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_db_versions_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_db_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_db_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_db_versions ::Google::Cloud::OracleDatabase::V1::ListDbVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_db_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_db_versions(::Google::Cloud::OracleDatabase::V1::ListDbVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_db_versions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_database_character_sets
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_database_character_sets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_list_database_character_sets_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_database_character_sets_client_stub do
+        # Create client
+        client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_database_character_sets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_database_character_sets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_database_character_sets ::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_database_character_sets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_database_character_sets(::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_database_character_sets_client_stub.call_count
       end
     end
   end

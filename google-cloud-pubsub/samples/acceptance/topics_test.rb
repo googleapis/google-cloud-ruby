@@ -406,9 +406,10 @@ describe "topics" do
                                                            topic: @topic.name
 
     # pubsub_publish
-    assert_output "Message published asynchronously.\n" do
+    out, _err = capture_io do
       publish_message_async topic_id: topic_id
     end
+    assert_includes out, "Message published asynchronously."
 
     messages = []
     expect_with_retry "pubsub_publish" do
@@ -505,9 +506,10 @@ describe "topics" do
                                                            topic: @topic.name
 
     # pubsub_publisher_concurrency_control
-    assert_output "Message published asynchronously.\n" do
+    out, _err = capture_io do
       publish_messages_async_with_concurrency_control topic_id: topic_id
     end
+    assert_includes out, "Message published asynchronously."
 
     messages = []
     expect_with_retry "pubsub_publisher_concurrency_control" do

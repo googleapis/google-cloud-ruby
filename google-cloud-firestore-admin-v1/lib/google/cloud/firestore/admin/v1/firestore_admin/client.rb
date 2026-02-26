@@ -999,8 +999,8 @@ module Google
               #     Required. Database to export. Should be of the form:
               #     `projects/{project_id}/databases/{database_id}`.
               #   @param collection_ids [::Array<::String>]
-              #     Which collection IDs to export. Unspecified means all collections. Each
-              #     collection ID in this list must be unique.
+              #     IDs of the collection groups to export. Unspecified means all
+              #     collection groups. Each collection group in this list must be unique.
               #   @param output_uri_prefix [::String]
               #     The output URI. Currently only supports Google Cloud Storage URIs of the
               #     form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name
@@ -1125,8 +1125,9 @@ module Google
               #     Required. Database to import into. Should be of the form:
               #     `projects/{project_id}/databases/{database_id}`.
               #   @param collection_ids [::Array<::String>]
-              #     Which collection IDs to import. Unspecified means all collections included
-              #     in the import. Each collection ID in this list must be unique.
+              #     IDs of the collection groups to import. Unspecified means all collection
+              #     groups that were included in the export. Each collection group in this list
+              #     must be unique.
               #   @param input_uri_prefix [::String]
               #     Location of the exported files.
               #     This must match the output_uri_prefix of an ExportDocumentsResponse from
@@ -1363,7 +1364,7 @@ module Google
               #     with first character a letter and the last a letter or a number. Must not
               #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
               #
-              #     "(default)" database ID is also valid.
+              #     "(default)" database ID is also valid if the database is Standard edition.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -2743,7 +2744,7 @@ module Google
               #     with first character a letter and the last a letter or a number. Must not
               #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
               #
-              #     "(default)" database ID is also valid.
+              #     "(default)" database ID is also valid if the database is Standard edition.
               #   @param backup [::String]
               #     Required. Backup to restore from. Must be from the same project as the
               #     parent.
@@ -3324,7 +3325,7 @@ module Google
               #     with first character a letter and the last a letter or a number. Must not
               #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
               #
-              #     "(default)" database ID is also valid.
+              #     "(default)" database ID is also valid if the database is Standard edition.
               #   @param pitr_snapshot [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot, ::Hash]
               #     Required. Specification of the PITR data to clone from. The source database
               #     must exist.
@@ -3460,8 +3461,6 @@ module Google
               #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
-              #    *  (`String`) The path to a service account key file in JSON format
-              #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
               #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -3470,7 +3469,26 @@ module Google
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
               #
-              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+              #     is deprecated. Providing an unvalidated credential configuration to
+              #     Google APIs can compromise the security of your systems and data.
+              #
+              #   @example
+              #
+              #     # The recommended way to provide credentials is to use the `make_creds` method
+              #     # on the appropriate credentials class for your environment.
+              #
+              #     require "googleauth"
+              #
+              #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+              #       json_key_io: ::File.open("/path/to/keyfile.json")
+              #     )
+              #
+              #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new do |config|
+              #       config.credentials = credentials
+              #     end
+              #
+              #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
               #   external source for authentication to Google Cloud, you must validate it before
               #   providing it to a Google API client library. Providing an unvalidated credential
               #   configuration to Google APIs can compromise the security of your systems and data.

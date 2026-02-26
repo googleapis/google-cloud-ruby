@@ -1,5 +1,45 @@
 # Changelog
 
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* add ClarificationMessage, thought-signature, formatted-data ([#32410](https://github.com/googleapis/google-cloud-ruby/issues/32410)) 
+
+### 0.6.0 (2026-01-13)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* add LookerGoldenQuery to Context 
+* added sync APIs for the CRUD operations of Data Agent ([#32297](https://github.com/googleapis/google-cloud-ruby/issues/32297)) 
+
+### 0.5.1 (2025-12-16)
+
+#### Documentation
+
+* specify the data sources supported only by the QueryData API ([#32275](https://github.com/googleapis/google-cloud-ruby/issues/32275)) 
+
+### 0.5.0 (2025-12-16)
+
+#### Features
+
+* A new message `AgentContextReference` is added 
+* add a QueryData API for NL2SQL conversion ([#32258](https://github.com/googleapis/google-cloud-ruby/issues/32258)) 
+
+### 0.4.0 (2025-11-12)
+
+#### Features
+
+* Adding a new SchemaRelationship message to define relationships between table schema ([#32165](https://github.com/googleapis/google-cloud-ruby/issues/32165)) 
+* Adding a new TextType PROGRESS to provide informational messages about an agent's progress for supporting more granular Agent RAG tools 
+
+### 0.3.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 0.3.0 (2025-10-08)
 
 #### Features

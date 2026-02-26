@@ -52,8 +52,8 @@ module Google
         # @!attribute [r] daos_version
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Output only. Deprecated 'daos_version' field.
-        #     Output only. The version of DAOS software running in the instance.
+        #     Output only. Deprecated: The version of DAOS software running in the
+        #     instance.
         # @!attribute [r] access_points
         #   @return [::Array<::String>]
         #     Output only. A list of IPv4 addresses used for client side configuration.
@@ -138,6 +138,57 @@ module Google
           end
         end
 
+        # Transfer metadata options for the instance.
+        # @!attribute [rw] uid
+        #   @return [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions::Uid]
+        #     Optional. The UID preservation behavior.
+        # @!attribute [rw] gid
+        #   @return [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions::Gid]
+        #     Optional. The GID preservation behavior.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions::Mode]
+        #     Optional. The mode preservation behavior.
+        class TransferMetadataOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The UID preservation behavior.
+          module Uid
+            # default is UID_NUMBER_PRESERVE.
+            UID_UNSPECIFIED = 0
+
+            # Do not preserve UID during a transfer job.
+            UID_SKIP = 1
+
+            # Preserve UID that is in number format during a transfer job.
+            UID_NUMBER_PRESERVE = 2
+          end
+
+          # The GID preservation behavior.
+          module Gid
+            # default is GID_NUMBER_PRESERVE.
+            GID_UNSPECIFIED = 0
+
+            # Do not preserve GID during a transfer job.
+            GID_SKIP = 1
+
+            # Preserve GID that is in number format during a transfer job.
+            GID_NUMBER_PRESERVE = 2
+          end
+
+          # The mode preservation behavior.
+          module Mode
+            # default is MODE_PRESERVE.
+            MODE_UNSPECIFIED = 0
+
+            # Do not preserve mode during a transfer job.
+            MODE_SKIP = 1
+
+            # Preserve mode during a transfer job.
+            MODE_PRESERVE = 2
+          end
+        end
+
         # List instances request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -215,8 +266,8 @@ module Google
         #     ignore the request if it has already been completed. The server will
         #     guarantee that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -245,8 +296,8 @@ module Google
         #     ignore the request if it has already been completed. The server will
         #     guarantee that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -269,8 +320,8 @@ module Google
         #     ignore the request if it has already been completed. The server will
         #     guarantee that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -372,8 +423,8 @@ module Google
         #     ignore the request if it has already been completed. The server will
         #     guarantee that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -393,6 +444,9 @@ module Google
         #
         #     If unspecified, the Parallelstore service agent is used:
         #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+        # @!attribute [rw] metadata_options
+        #   @return [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions]
+        #     Optional. The transfer metadata options for the import data.
         class ImportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -415,8 +469,8 @@ module Google
         #     ignore the request if it has already been completed. The server will
         #     guarantee that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -435,6 +489,9 @@ module Google
         #
         #     If unspecified, the Parallelstore service agent is used:
         #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+        # @!attribute [rw] metadata_options
+        #   @return [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions]
+        #     Optional. The metadata options for the export data.
         class ExportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -612,10 +669,10 @@ module Google
         #     Bytes that are copied to the data destination.
         # @!attribute [rw] objects_failed
         #   @return [::Integer]
-        #     Objects that are failed to write to the data destination.
+        #     Objects that failed to be written to the data destination.
         # @!attribute [rw] bytes_failed
         #   @return [::Integer]
-        #     Bytes that are failed to write to the data destination.
+        #     Bytes that failed to be written to the data destination.
         class TransferCounters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

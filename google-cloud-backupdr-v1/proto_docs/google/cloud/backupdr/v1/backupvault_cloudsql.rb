@@ -57,10 +57,16 @@ module Google
         #     Output only. The source instance of the backup.
         #     Format:
         #     projects/\\{project}/instances/\\{instance}
+        # @!attribute [r] instance_create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The instance creation timestamp.
         # @!attribute [r] instance_tier
         #   @return [::String]
         #     Output only. The tier (or machine type) for this instance. Example:
         #     `db-custom-1-3840`
+        # @!attribute [r] instance_delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The instance delete timestamp.
         class CloudSqlInstanceBackupProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

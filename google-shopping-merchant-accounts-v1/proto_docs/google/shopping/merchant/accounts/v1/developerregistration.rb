@@ -50,7 +50,9 @@ module Google
           #     updated to have the new "API notifications" preference. If the developer
           #     email provided is not associated with any user we will just add it as a
           #     contact. The email preference corresponding to that contact will have the
-          #     new "API notifications" preference
+          #     new "API notifications" preference. Make sure the email used is associated
+          #     with a Google Account (Google Workspace account or Gmail account)
+          #     and is not a service account as service accounts can't receive emails.
           class RegisterGcpRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,6 +74,15 @@ module Google
           #   @return [::String]
           #     Required. The `name` (ID) of the developer registration.
           class GetDeveloperRegistrationRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for the GetAccountForGcpRegistration method.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the merchant account id that the GCP is registered with.
+          class GetAccountForGcpRegistrationResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.6.0 (2026-01-23)
+
+#### Features
+
+* add instances client library ([#32369](https://github.com/googleapis/google-cloud-ruby/issues/32369)) 
+#### Documentation
+
+* add instances description 
+
 ### 1.5.1 (2025-09-12)
 
 #### Documentation

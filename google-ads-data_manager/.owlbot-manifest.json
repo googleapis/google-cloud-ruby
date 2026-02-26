@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-ads-data_manager.gemspec",
+    "lib/google-ads-data_manager.rb",
+    "lib/google/ads/data_manager.rb",
+    "lib/google/ads/data_manager/version.rb",
+    "test/google/ads/data_manager/client_test.rb",
+    "test/google/ads/data_manager/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/network_security"
 
-client = Google::Cloud::NetworkSecurity.network_security do |config|
+client = Google::Cloud::NetworkSecurity.dns_threat_detector_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::NetworkSecurity.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::NetworkSecurity.network_security
+client = Google::Cloud::NetworkSecurity.dns_threat_detector_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/network_security"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::NetworkSecurity.network_security
+client = Google::Cloud::NetworkSecurity.dns_threat_detector_service
 ```
 
 ### Local ADC file

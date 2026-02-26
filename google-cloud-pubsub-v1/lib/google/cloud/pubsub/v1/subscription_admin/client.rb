@@ -310,7 +310,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the subscription. It must have the format
+            #     Required. Identifier. The name of the subscription. It must have the format
             #     `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
             #     start with a letter, and contain only letters (`[A-Za-z]`), numbers
             #     (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
@@ -513,7 +513,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param subscription [::String]
-            #     Required. The name of the subscription to get.
+            #     Required. Identifier. The name of the subscription to get.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -689,8 +689,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. The name of the project in which to list subscriptions.
-            #     Format is `projects/{project-id}`.
+            #     Required. Identifier. The name of the project in which to list
+            #     subscriptions. Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of subscriptions to return.
             #   @param page_token [::String]
@@ -791,7 +791,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param subscription [::String]
-            #     Required. The subscription to delete.
+            #     Required. Identifier. The subscription to delete.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1359,7 +1359,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param snapshot [::String]
-            #     Required. The name of the snapshot to get.
+            #     Required. Identifier. The name of the snapshot to get.
             #     Format is `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1449,7 +1449,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. The name of the project in which to list snapshots.
+            #     Required. Identifier. The name of the project in which to list snapshots.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of snapshots to return.
@@ -1562,10 +1562,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. User-provided name for this snapshot. If the name is not provided
-            #     in the request, the server will assign a random name for this snapshot on
-            #     the same project as the subscription. Note that for REST API requests, you
-            #     must specify a name.  See the [resource name
+            #     Required. Identifier. User-provided name for this snapshot. If the name is
+            #     not provided in the request, the server will assign a random name for this
+            #     snapshot on the same project as the subscription. Note that for REST API
+            #     requests, you must specify a name.  See the [resource name
             #     rules](https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
             #     Format is `projects/{project}/snapshots/{snap}`.
             #   @param subscription [::String]
@@ -1771,7 +1771,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param snapshot [::String]
-            #     Required. The name of the snapshot to delete.
+            #     Required. Identifier. The name of the snapshot to delete.
             #     Format is `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1984,8 +1984,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -1994,7 +1992,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

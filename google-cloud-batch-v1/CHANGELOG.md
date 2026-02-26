@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.5.0 (2025-11-19)
+
+#### Features
+
+* added new provisioning models ([#32207](https://github.com/googleapis/google-cloud-ruby/issues/32207)) 
+
+### 1.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 1.4.0 (2025-10-08)
 
 #### Features

@@ -18,7 +18,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
     - name: Install Ruby 3.4
       uses: ruby/setup-ruby@v1
       with:
@@ -28,4 +28,7 @@ jobs:
         gem install --no-document toys
     - name: Delete-library
       run: |
-        toys delete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
+        toys delete-library -v --fork ${GITHUB_EVENT_INPUTS_FLAGS} ${GITHUB_EVENT_INPUTS_GEM}
+      env:
+        GITHUB_EVENT_INPUTS_FLAGS: ${{ github.event.inputs.flags }}
+        GITHUB_EVENT_INPUTS_GEM: ${{ github.event.inputs.gem }}

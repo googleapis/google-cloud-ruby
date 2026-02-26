@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-hypercompute_cluster.gemspec",
+    "lib/google-cloud-hypercompute_cluster.rb",
+    "lib/google/cloud/hypercompute_cluster.rb",
+    "lib/google/cloud/hypercompute_cluster/version.rb",
+    "test/google/cloud/hypercompute_cluster/client_test.rb",
+    "test/google/cloud/hypercompute_cluster/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

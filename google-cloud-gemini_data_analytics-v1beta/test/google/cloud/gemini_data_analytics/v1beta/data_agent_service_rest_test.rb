@@ -308,6 +308,63 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     end
   end
 
+  def test_create_data_agent_sync
+    # Create test objects.
+    client_result = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    data_agent_id = "hello world"
+    data_agent = {}
+    request_id = "hello world"
+
+    create_data_agent_sync_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_create_data_agent_sync_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_data_agent_sync_client_stub do
+        # Create client
+        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_data_agent_sync({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_data_agent_sync parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_data_agent_sync({ parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest.new(parent: parent, data_agent_id: data_agent_id, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_data_agent_sync_client_stub.call_count
+      end
+    end
+  end
+
   def test_update_data_agent
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -364,6 +421,62 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
     end
   end
 
+  def test_update_data_agent_sync
+    # Create test objects.
+    client_result = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    data_agent = {}
+    request_id = "hello world"
+
+    update_data_agent_sync_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_update_data_agent_sync_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_data_agent_sync_client_stub do
+        # Create client
+        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_data_agent_sync({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_data_agent_sync update_mask: update_mask, data_agent: data_agent, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_data_agent_sync({ update_mask: update_mask, data_agent: data_agent, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest.new(update_mask: update_mask, data_agent: data_agent, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_data_agent_sync_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_data_agent
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -415,6 +528,61 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Clie
 
         # Verify method calls
         assert_equal 5, delete_data_agent_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_data_agent_sync
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_data_agent_sync_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::ServiceStub.stub :transcode_delete_data_agent_sync_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_data_agent_sync_client_stub do
+        # Create client
+        client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_data_agent_sync({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_data_agent_sync name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_data_agent_sync ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_data_agent_sync({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_data_agent_sync(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_data_agent_sync_client_stub.call_count
       end
     end
   end

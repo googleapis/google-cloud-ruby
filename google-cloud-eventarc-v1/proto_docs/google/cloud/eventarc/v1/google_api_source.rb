@@ -67,9 +67,46 @@ module Google
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Eventarc::V1::LoggingConfig]
         #     Optional. Config to control Platform logging for the GoogleApiSource.
+        # @!attribute [rw] organization_subscription
+        #   @return [::Google::Cloud::Eventarc::V1::GoogleApiSource::OrganizationSubscription]
+        #     Optional. Config to enable subscribing to events from all projects in the
+        #     GoogleApiSource's org.
+        #
+        #     Note: The following fields are mutually exclusive: `organization_subscription`, `project_subscriptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] project_subscriptions
+        #   @return [::Google::Cloud::Eventarc::V1::GoogleApiSource::ProjectSubscriptions]
+        #     Optional. Config to enable subscribing to all events from a list of
+        #     projects.
+        #
+        #     All the projects must be in the same org as the GoogleApiSource.
+        #
+        #     Note: The following fields are mutually exclusive: `project_subscriptions`, `organization_subscription`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GoogleApiSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Config to enable subscribing to all events from a list of projects.
+          # @!attribute [rw] list
+          #   @return [::Array<::String>]
+          #     Required. A list of projects to receive events from.
+          #
+          #     All the projects must be in the same org. The listed projects should have
+          #     the format project/\\{identifier} where identifier can be either the
+          #     project id for project number. A single list may contain both formats. At
+          #     most 100 projects can be listed.
+          class ProjectSubscriptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config to enabled subscribing to events from other projects in the org.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Required. Enable org level subscription.
+          class OrganizationSubscription
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

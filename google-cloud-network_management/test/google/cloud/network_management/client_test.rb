@@ -82,4 +82,25 @@ class Google::Cloud::NetworkManagement::ClientConstructionMinitest < Minitest::T
       assert_kind_of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::Client, client
     end
   end
+
+  def test_organization_vpc_flow_logs_service_grpc
+    skip unless Google::Cloud::NetworkManagement.organization_vpc_flow_logs_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::NetworkManagement.organization_vpc_flow_logs_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Client, client
+    end
+  end
+
+  def test_organization_vpc_flow_logs_service_rest
+    skip unless Google::Cloud::NetworkManagement.organization_vpc_flow_logs_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::NetworkManagement.organization_vpc_flow_logs_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::NetworkManagement::V1::OrganizationVpcFlowLogsService::Rest::Client, client
+    end
+  end
 end

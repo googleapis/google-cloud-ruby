@@ -1,5 +1,26 @@
 # Changelog
 
+### 2.8.0 (2026-01-23)
+
+#### Features
+
+* Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#32365](https://github.com/googleapis/google-cloud-ruby/issues/32365)) 
+#### Documentation
+
+* A comment for field `backup_retention_policy` in message `.google.cloud.netapp.v1.BackupVault` is changed 
+
+### 2.7.0 (2025-11-21)
+
+#### Features
+
+* Add Squash Mode to Export Policy ([#32216](https://github.com/googleapis/google-cloud-ruby/issues/32216)) 
+
+### 2.6.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 2.6.0 (2025-10-08)
 
 #### Features

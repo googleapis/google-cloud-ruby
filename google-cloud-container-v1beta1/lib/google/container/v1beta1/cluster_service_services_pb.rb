@@ -24,8 +24,6 @@ module Google
     module Container
       module V1beta1
         module ClusterManager
-          # LINT: LEGACY_NAMES
-          #
           # Google Kubernetes Engine Cluster Manager v1beta1
           class Service
 
@@ -48,7 +46,7 @@ module Google
             # network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
             #
             # One firewall is added for the cluster. After cluster creation,
-            # the Kubelet creates routes for each node to allow the containers
+            # the kubelet creates routes for each node to allow the containers
             # on that node to communicate with all other instances in the
             # cluster.
             #
@@ -142,6 +140,9 @@ module Google
             rpc :FetchClusterUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchClusterUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::ClusterUpgradeInfo
             # Fetch upgrade information of a specific nodepool.
             rpc :FetchNodePoolUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchNodePoolUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::NodePoolUpgradeInfo
+            # CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
+            # performing the step two upgrade for a specific cluster.
+            rpc :CompleteControlPlaneUpgrade, ::Google::Cloud::Container::V1beta1::CompleteControlPlaneUpgradeRequest, ::Google::Cloud::Container::V1beta1::Operation
           end
 
           Stub = Service.rpc_stub_class

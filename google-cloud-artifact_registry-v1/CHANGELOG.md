@@ -1,5 +1,39 @@
 # Changelog
 
+### 1.11.0 (2026-02-18)
+
+#### Features
+
+* add DIRSUM_SHA256 hash type ([#32417](https://github.com/googleapis/google-cloud-ruby/issues/32417)) 
+
+### 1.10.0 (2026-01-13)
+
+#### Features
+
+* add Fingerprint to Artifact Registry Version resource ([#32303](https://github.com/googleapis/google-cloud-ruby/issues/32303)) 
+#### Documentation
+
+* update the description of ExportArtifact 
+
+### 1.9.0 (2025-12-10)
+
+#### Features
+
+* add ExportArtifact API ([#32236](https://github.com/googleapis/google-cloud-ruby/issues/32236)) 
+
+### 1.8.0 (2025-11-18)
+
+#### Features
+
+* add artifact_type field in DockerImage 
+* add image_manifest field in DockerImage ([#32178](https://github.com/googleapis/google-cloud-ruby/issues/32178)) 
+
+### 1.7.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 1.7.0 (2025-10-08)
 
 #### Features

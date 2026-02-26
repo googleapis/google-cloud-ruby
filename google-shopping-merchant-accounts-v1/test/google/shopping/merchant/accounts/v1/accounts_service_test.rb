@@ -132,6 +132,7 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
     account = {}
     user = [{}]
     service = [{}]
+    set_alias = [{}]
 
     create_and_configure_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_and_configure_account, name
@@ -139,6 +140,7 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Accounts::V1::Account), request["account"]
       assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::AddUser, request["user"].first
       assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::AddAccountService, request["service"].first
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::SetAliasForRelationship, request["set_alias"].first
       refute_nil options
     end
 
@@ -149,31 +151,31 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
       end
 
       # Use hash object
-      client.create_and_configure_account({ account: account, user: user, service: service }) do |response, operation|
+      client.create_and_configure_account({ account: account, user: user, service: service, set_alias: set_alias }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_and_configure_account account: account, user: user, service: service do |response, operation|
+      client.create_and_configure_account account: account, user: user, service: service, set_alias: set_alias do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_and_configure_account ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service) do |response, operation|
+      client.create_and_configure_account ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service, set_alias: set_alias) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_and_configure_account({ account: account, user: user, service: service }, grpc_options) do |response, operation|
+      client.create_and_configure_account({ account: account, user: user, service: service, set_alias: set_alias }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_and_configure_account(::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service), grpc_options) do |response, operation|
+      client.create_and_configure_account(::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest.new(account: account, user: user, service: service, set_alias: set_alias), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -454,5 +456,25 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountsService::ClientTest < 
 
     assert_same block_config, config
     assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 end

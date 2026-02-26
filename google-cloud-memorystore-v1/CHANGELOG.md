@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.5.0 (2025-12-16)
+
+#### Features
+
+* A new field `Instance.simulate_maintenance_event` is added to message `.google.cloud.memorystore.v1.` ([#32274](https://github.com/googleapis/google-cloud-ruby/issues/32274)) 
+* A new field `satisfies_pzs` is added to message `.google.cloud.memorystore.v1.Instance` 
+
 ### 1.4.0 (2025-10-08)
 
 #### Features

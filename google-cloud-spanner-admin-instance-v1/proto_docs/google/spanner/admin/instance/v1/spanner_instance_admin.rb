@@ -341,10 +341,22 @@ module Google
               # The autoscaling targets for an instance.
               # @!attribute [rw] high_priority_cpu_utilization_percent
               #   @return [::Integer]
-              #     Required. The target high priority cpu utilization percentage that the
+              #     Optional. The target high priority cpu utilization percentage that the
               #     autoscaler should be trying to achieve for the instance. This number is
               #     on a scale from 0 (no utilization) to 100 (full utilization). The valid
-              #     range is [10, 90] inclusive.
+              #     range is [10, 90] inclusive. If not specified or set to 0, the autoscaler
+              #     skips scaling based on high priority CPU utilization.
+              # @!attribute [rw] total_cpu_utilization_percent
+              #   @return [::Integer]
+              #     Optional. The target total CPU utilization percentage that the autoscaler
+              #     should be trying to achieve for the instance. This number is on a scale
+              #     from 0 (no utilization) to 100 (full utilization). The valid range is
+              #     [10, 90] inclusive. If not specified or set to 0, the autoscaler skips
+              #     scaling based on total CPU utilization. If both
+              #     `high_priority_cpu_utilization_percent` and
+              #     `total_cpu_utilization_percent` are specified, the autoscaler provisions
+              #     the larger of the two required compute capacities to satisfy both
+              #     targets.
               # @!attribute [rw] storage_utilization_percent
               #   @return [::Integer]
               #     Required. The target storage utilization percentage that the autoscaler
@@ -383,6 +395,57 @@ module Google
                 #     Optional. If specified, overrides the autoscaling target
                 #     high_priority_cpu_utilization_percent in the top-level autoscaling
                 #     configuration for the selected replicas.
+                # @!attribute [rw] autoscaling_target_total_cpu_utilization_percent
+                #   @return [::Integer]
+                #     Optional. If specified, overrides the
+                #     autoscaling target `total_cpu_utilization_percent`
+                #     in the top-level autoscaling configuration for the selected replicas.
+                # @!attribute [rw] disable_high_priority_cpu_autoscaling
+                #   @return [::Boolean]
+                #     Optional. If true, disables high priority CPU autoscaling for the
+                #     selected replicas and ignores
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingTargets#high_priority_cpu_utilization_percent high_priority_cpu_utilization_percent}
+                #     in the top-level autoscaling configuration.
+                #
+                #     When setting this field to true, setting
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#autoscaling_target_high_priority_cpu_utilization_percent autoscaling_target_high_priority_cpu_utilization_percent}
+                #     field to a non-zero value for the same replica is not supported.
+                #
+                #     If false, the
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#autoscaling_target_high_priority_cpu_utilization_percent autoscaling_target_high_priority_cpu_utilization_percent}
+                #     field in the replica will be used if set to a non-zero value.
+                #     Otherwise, the
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingTargets#high_priority_cpu_utilization_percent high_priority_cpu_utilization_percent}
+                #     field in the top-level autoscaling configuration will be used.
+                #
+                #     Setting both
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#disable_high_priority_cpu_autoscaling disable_high_priority_cpu_autoscaling}
+                #     and
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#disable_total_cpu_autoscaling disable_total_cpu_autoscaling}
+                #     to true for the same replica is not supported.
+                # @!attribute [rw] disable_total_cpu_autoscaling
+                #   @return [::Boolean]
+                #     Optional. If true, disables total CPU autoscaling for the selected
+                #     replicas and ignores
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingTargets#total_cpu_utilization_percent total_cpu_utilization_percent}
+                #     in the top-level autoscaling configuration.
+                #
+                #     When setting this field to true, setting
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#autoscaling_target_total_cpu_utilization_percent autoscaling_target_total_cpu_utilization_percent}
+                #     field to a non-zero value for the same replica is not supported.
+                #
+                #     If false, the
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#autoscaling_target_total_cpu_utilization_percent autoscaling_target_total_cpu_utilization_percent}
+                #     field in the replica will be used if set to a non-zero value.
+                #     Otherwise, the
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingTargets#total_cpu_utilization_percent total_cpu_utilization_percent}
+                #     field in the top-level autoscaling configuration will be used.
+                #
+                #     Setting both
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#disable_high_priority_cpu_autoscaling disable_high_priority_cpu_autoscaling}
+                #     and
+                #     {::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides#disable_total_cpu_autoscaling disable_total_cpu_autoscaling}
+                #     to true for the same replica is not supported.
                 class AutoscalingConfigOverrides
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1116,6 +1179,12 @@ module Google
             #     yet in the `READY` state.
             #
             #     Note: The following fields are mutually exclusive: `processing_units`, `node_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] autoscaling_config
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig]
+            #     Optional. The autoscaling configuration. Autoscaling is enabled if this
+            #     field is set. When autoscaling is enabled, fields in compute_capacity are
+            #     treated as OUTPUT_ONLY fields and reflect the current compute capacity
+            #     allocated to the instance partition.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition::State]
             #     Output only. The current instance partition state.

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 0.4.0 (2025-10-08)
 
 #### Features

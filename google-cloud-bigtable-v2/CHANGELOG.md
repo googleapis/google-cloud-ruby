@@ -1,5 +1,17 @@
 # Release History
 
+### 1.11.0 (2025-11-18)
+
+#### Features
+
+* add PeerInfo proto in Bigtable API ([#32167](https://github.com/googleapis/google-cloud-ruby/issues/32167)) 
+
+### 1.10.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 1.10.0 (2025-09-11)
 
 #### Features

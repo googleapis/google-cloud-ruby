@@ -455,8 +455,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -568,8 +568,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -676,8 +676,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -771,7 +771,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_data(source_gcs_bucket: nil, destination_parallelstore: nil, name: nil, request_id: nil, service_account: nil)
+            # @overload import_data(source_gcs_bucket: nil, destination_parallelstore: nil, name: nil, request_id: nil, service_account: nil, metadata_options: nil)
             #   Pass arguments to `import_data` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -788,8 +788,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -808,6 +808,8 @@ module Google
             #
             #     If unspecified, the Parallelstore service agent is used:
             #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+            #   @param metadata_options [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions, ::Hash]
+            #     Optional. The transfer metadata options for the import data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -895,7 +897,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload export_data(source_parallelstore: nil, destination_gcs_bucket: nil, name: nil, request_id: nil, service_account: nil)
+            # @overload export_data(source_parallelstore: nil, destination_gcs_bucket: nil, name: nil, request_id: nil, service_account: nil, metadata_options: nil)
             #   Pass arguments to `export_data` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -912,8 +914,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -931,6 +933,8 @@ module Google
             #
             #     If unspecified, the Parallelstore service agent is used:
             #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+            #   @param metadata_options [::Google::Cloud::Parallelstore::V1::TransferMetadataOptions, ::Hash]
+            #     Optional. The metadata options for the export data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1040,8 +1044,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -1050,7 +1052,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::Parallelstore::V1::Parallelstore::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

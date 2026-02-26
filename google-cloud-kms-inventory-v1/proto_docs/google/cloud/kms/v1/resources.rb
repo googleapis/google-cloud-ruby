@@ -134,7 +134,12 @@ module Google
         #     if {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} have a
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC}, with the
-        #     resource name in the format `projects/*/locations/*/ekmConnections/*`.
+        #     resource name in the format `projects/*/locations/*/ekmConnections/*`. Only
+        #     applicable if {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}
+        #     have a {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT},
+        #     with the resource name in the format
+        #     `projects/*/locations/*/singleTenantHsmInstances/*`.
         #     Note, this list is non-exhaustive and may apply to additional
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels} in the future.
         # @!attribute [rw] key_access_justifications_policy
@@ -566,12 +571,39 @@ module Google
             KEM_XWING = 63
 
             # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 1. Randomized version.
+            PQ_SIGN_ML_DSA_44 = 68
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
             # security level 3. Randomized version.
             PQ_SIGN_ML_DSA_65 = 56
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 5. Randomized version.
+            PQ_SIGN_ML_DSA_87 = 69
 
             # The post-quantum stateless hash-based digital signature algorithm, at
             # security level 1. Randomized version.
             PQ_SIGN_SLH_DSA_SHA2_128S = 57
+
+            # The post-quantum stateless hash-based digital signature algorithm, at
+            # security level 1. Randomized pre-hash version supporting SHA256 digests.
+            PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 1. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 3. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67
+
+            # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+            # security level 5. Randomized version supporting externally-computed
+            # message representatives.
+            PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
           end
 
           # The state of a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
@@ -867,6 +899,15 @@ module Google
         #     Only present if the chosen
         #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod ImportMethod} is one with a
         #     protection level of {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM}.
+        # @!attribute [rw] crypto_key_backend
+        #   @return [::String]
+        #     Immutable. The resource name of the backend environment where the key
+        #     material for the wrapping key resides and where all related cryptographic
+        #     operations are performed. Currently, this field is only populated for keys
+        #     stored in HSM_SINGLE_TENANT. Note, this list is non-exhaustive and may
+        #     apply to additional {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels}
+        #     in the future. Supported resources:
+        #     * `"projects/*/locations/*/singleTenantHsmInstances/*"`
         class ImportJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1000,6 +1041,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A RetiredResource resource represents the record of a deleted
+        # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Its purpose is to provide
+        # visibility into retained user data and to prevent reuse of these names for
+        # new {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. The resource name for this
+        #     {::Google::Cloud::Kms::V1::RetiredResource RetiredResource} in the format
+        #     `projects/*/locations/*/retiredResources/*`.
+        # @!attribute [r] original_resource
+        #   @return [::String]
+        #     Output only. The full resource name of the original
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} that was deleted in the format
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        # @!attribute [r] resource_type
+        #   @return [::String]
+        #     Output only. The resource type of the original deleted resource.
+        # @!attribute [r] delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the original resource was deleted and this
+        #     RetiredResource record was created.
+        class RetiredResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} specifies how
         # cryptographic operations are performed. For more information, see [Protection
         # levels] (https://cloud.google.com/kms/docs/algorithms#protection_levels).
@@ -1018,6 +1085,9 @@ module Google
 
           # Crypto operations are performed in an EKM-over-VPC backend.
           EXTERNAL_VPC = 4
+
+          # Crypto operations are performed in a single-tenant HSM.
+          HSM_SINGLE_TENANT = 5
         end
 
         # Describes the reason for a data access. Please refer to
@@ -1050,6 +1120,12 @@ module Google
           # No reason is expected for this key request.
           REASON_NOT_EXPECTED = 7
 
+          # Deprecated: This code is no longer generated by
+          # Google Cloud. The GOOGLE_RESPONSE_TO_PRODUCTION_ALERT justification codes
+          # available in both Key Access Justifications and Access Transparency logs
+          # provide customer-visible signals of emergency access in more precise
+          # contexts.
+          #
           # Customer uses their account to perform any access to their own data which
           # their IAM policy authorizes, and one of the following is true:
           #
@@ -1060,6 +1136,12 @@ module Google
           #   within the past 7 days.
           MODIFIED_CUSTOMER_INITIATED_ACCESS = 8
 
+          # Deprecated: This code is no longer generated by
+          # Google Cloud. The GOOGLE_RESPONSE_TO_PRODUCTION_ALERT justification codes
+          # available in both Key Access Justifications and Access Transparency logs
+          # provide customer-visible signals of emergency access in more precise
+          # contexts.
+          #
           # Google systems access customer data to help optimize the structure of the
           # data or quality for future uses by the customer, and one of the following
           # is true:

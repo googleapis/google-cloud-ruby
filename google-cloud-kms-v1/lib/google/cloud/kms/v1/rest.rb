@@ -19,6 +19,7 @@
 require "google/cloud/kms/v1/autokey/rest"
 require "google/cloud/kms/v1/autokey_admin/rest"
 require "google/cloud/kms/v1/ekm_service/rest"
+require "google/cloud/kms/v1/hsm_management/rest"
 require "google/cloud/kms/v1/key_management_service/rest"
 require "google/cloud/kms/v1/bindings_override"
 require "google/cloud/kms/v1/version"

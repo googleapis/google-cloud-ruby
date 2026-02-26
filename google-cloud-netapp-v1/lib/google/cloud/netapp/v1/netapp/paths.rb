@@ -103,6 +103,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified HostGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/hostGroups/{host_group}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param host_group [String]
+            #
+            # @return [::String]
+            def host_group_path project:, location:, host_group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/hostGroups/#{host_group}"
+            end
+
+            ##
             # Create a fully-qualified KmsConfig resource string.
             #
             # The resource will be in the following format:

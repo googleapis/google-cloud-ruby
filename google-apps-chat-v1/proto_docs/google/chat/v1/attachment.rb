@@ -24,8 +24,9 @@ module Google
         # An attachment in Google Chat.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Resource name of the attachment, in the form
-        #     `spaces/{space}/messages/{message}/attachments/{attachment}`.
+        #     Identifier. Resource name of the attachment.
+        #
+        #     Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
         # @!attribute [r] content_name
         #   @return [::String]
         #     Output only. The original file name for the content, not the full path.

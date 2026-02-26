@@ -14,11 +14,16 @@ your code or via environment variables. Read more about the options for
 connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ```ruby
+require "googleauth"
 require "google/cloud/datastore"
+
+credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+  json_key_io: ::File.open("/path/to/keyfile.json")
+)
 
 datastore = Google::Cloud::Datastore.new(
   project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
+  credentials: credentials
 )
 
 task = datastore.find "Task", "sampleTask"

@@ -388,10 +388,10 @@ module Google
             #   @param session_template [::Google::Cloud::Spanner::V1::Session, ::Hash]
             #     Parameters to apply to each created session.
             #   @param session_count [::Integer]
-            #     Required. The number of sessions to be created in this batch call.
-            #     The API can return fewer than the requested number of sessions. If a
-            #     specific number of sessions are desired, the client can make additional
-            #     calls to `BatchCreateSessions` (adjusting
+            #     Required. The number of sessions to be created in this batch call. At least
+            #     one session is created. The API can return fewer than the requested number
+            #     of sessions. If a specific number of sessions are desired, the client can
+            #     make additional calls to `BatchCreateSessions` (adjusting
             #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
             #     as necessary).
             #
@@ -771,7 +771,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil)
+            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil, routing_hint: nil)
             #   Pass arguments to `execute_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -867,6 +867,13 @@ module Google
             #     be deferred until commit time (for example, validation of unique
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -952,7 +959,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil)
+            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil, routing_hint: nil)
             #   Pass arguments to `execute_streaming_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1048,6 +1055,13 @@ module Google
             #     be deferred until commit time (for example, validation of unique
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1272,7 +1286,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil)
+            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil, routing_hint: nil)
             #   Pass arguments to `read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1349,6 +1363,13 @@ module Google
             #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -1431,7 +1452,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil)
+            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, order_by: nil, lock_hint: nil, routing_hint: nil)
             #   Pass arguments to `streaming_read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1508,6 +1529,13 @@ module Google
             #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. If present, it makes the Spanner requests location-aware.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1957,7 +1985,8 @@ module Google
             #     a `PartitionedDml` transaction for large, partition-friendly DML
             #     operations.
             #   @param params [::Google::Protobuf::Struct, ::Hash]
-            #     Parameter names and values that bind to placeholders in the SQL string.
+            #     Optional. Parameter names and values that bind to placeholders in the SQL
+            #     string.
             #
             #     A parameter placeholder consists of the `@` character followed by the
             #     parameter name (for example, `@firstName`). Parameter names can contain
@@ -1970,9 +1999,9 @@ module Google
             #
             #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It isn't always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value. For example, values of type `BYTES` and values
-            #     of type `STRING` both appear in
+            #     Optional. It isn't always possible for Cloud Spanner to infer the right SQL
+            #     type from a JSON value. For example, values of type `BYTES` and values of
+            #     type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
             #
             #     In these cases, `param_types` can be used to specify the exact
@@ -2317,8 +2346,6 @@ module Google
             #   @return [::String,nil]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
-            #    *  (`String`) The path to a service account key file in JSON format
-            #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
             #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -2327,7 +2354,26 @@ module Google
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
             #
-            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+            #     is deprecated. Providing an unvalidated credential configuration to
+            #     Google APIs can compromise the security of your systems and data.
+            #
+            #   @example
+            #
+            #     # The recommended way to provide credentials is to use the `make_creds` method
+            #     # on the appropriate credentials class for your environment.
+            #
+            #     require "googleauth"
+            #
+            #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+            #       json_key_io: ::File.open("/path/to/keyfile.json")
+            #     )
+            #
+            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+            #       config.credentials = credentials
+            #     end
+            #
+            #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
             #   external source for authentication to Google Cloud, you must validate it before
             #   providing it to a Google API client library. Providing an unvalidated credential
             #   configuration to Google APIs can compromise the security of your systems and data.

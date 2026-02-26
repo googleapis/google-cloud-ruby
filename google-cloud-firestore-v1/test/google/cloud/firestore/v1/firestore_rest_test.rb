@@ -587,6 +587,62 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     end
   end
 
+  def test_execute_pipeline
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::V1::ExecutePipelineResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    database = "hello world"
+    structured_pipeline = {}
+    transaction = "hello world"
+
+    execute_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::V1::Firestore::Rest::ServiceStub.stub :transcode_execute_pipeline_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_pipeline_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use named arguments
+        client.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object
+        client.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use hash object with options
+        client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object with options
+        client.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Verify method calls
+        assert_equal 5, execute_pipeline_client_stub.call_count
+      end
+    end
+  end
+
   def test_run_aggregation_query
     # Create test objects.
     client_result = ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse.new

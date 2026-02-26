@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.14.0 (2025-12-16)
+
+#### Features
+
+* [DIREGAPIC] Update v1 API definitions to revision 20251202 ([#32270](https://github.com/googleapis/google-cloud-ruby/issues/32270)) 
+
+### 1.13.0 (2025-12-11)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20251031 ([#32244](https://github.com/googleapis/google-cloud-ruby/issues/32244)) 
+
 ### 1.12.0 (2025-10-16)
 
 #### Features

@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/network_security/v1beta1"
 
-client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
-request = ::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRequest.new # (request fields as keyword arguments...)
-response = client.list_authorization_policies request
+client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new
+request = ::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest.new # (request fields as keyword arguments...)
+response = client.list_dns_threat_detectors request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/network_security/v1beta1"
 require "logger"
 
-client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new do |config|
+client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

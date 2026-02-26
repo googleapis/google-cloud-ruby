@@ -82,6 +82,122 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
+            # Create a fully-qualified Database resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/databases/{database}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param database [String]
+            #
+            # @return [::String]
+            def database_path project:, location:, database:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/databases/#{database}"
+            end
+
+            ##
+            # Create a fully-qualified DbSystem resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dbSystems/{db_system}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param db_system [String]
+            #
+            # @return [::String]
+            def db_system_path project:, location:, db_system:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dbSystems/#{db_system}"
+            end
+
+            ##
+            # Create a fully-qualified ExadbVmCluster resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/exadbVmClusters/{exadb_vm_cluster}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param exadb_vm_cluster [String]
+            #
+            # @return [::String]
+            def exadb_vm_cluster_path project:, location:, exadb_vm_cluster:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/exadbVmClusters/#{exadb_vm_cluster}"
+            end
+
+            ##
+            # Create a fully-qualified ExascaleDbStorageVault resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/exascaleDbStorageVaults/{exascale_db_storage_vault}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param exascale_db_storage_vault [String]
+            #
+            # @return [::String]
+            def exascale_db_storage_vault_path project:, location:, exascale_db_storage_vault:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/exascaleDbStorageVaults/#{exascale_db_storage_vault}"
+            end
+
+            ##
+            # Create a fully-qualified GiVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/giVersions/{gi_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param gi_version [String]
+            #
+            # @return [::String]
+            def gi_version_path project:, location:, gi_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/giVersions/#{gi_version}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -113,6 +229,65 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/global/networks/#{network}"
+            end
+
+            ##
+            # Create a fully-qualified OdbNetwork resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/odbNetworks/{odb_network}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param odb_network [String]
+            #
+            # @return [::String]
+            def odb_network_path project:, location:, odb_network:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/odbNetworks/#{odb_network}"
+            end
+
+            ##
+            # Create a fully-qualified OdbSubnet resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/odbNetworks/{odb_network}/odbSubnets/{odb_subnet}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param odb_network [String]
+            # @param odb_subnet [String]
+            #
+            # @return [::String]
+            def odb_subnet_path project:, location:, odb_network:, odb_subnet:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "odb_network cannot contain /" if odb_network.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/odbNetworks/#{odb_network}/odbSubnets/#{odb_subnet}"
+            end
+
+            ##
+            # Create a fully-qualified PluggableDatabase resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/pluggableDatabases/{pluggable_database}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param pluggable_database [String]
+            #
+            # @return [::String]
+            def pluggable_database_path project:, location:, pluggable_database:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/pluggableDatabases/#{pluggable_database}"
             end
 
             extend self

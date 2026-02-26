@@ -5,6 +5,54 @@
   "protoPackage": "google.cloud.cloudsecuritycompliance.v1",
   "libraryPackage": "::Google::Cloud::CloudSecurityCompliance::V1",
   "services": {
+    "Audit": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client",
+          "rpcs": {
+            "GenerateFrameworkAuditScopeReport": {
+              "methods": [
+                "generate_framework_audit_scope_report"
+              ]
+            },
+            "CreateFrameworkAudit": {
+              "methods": [
+                "create_framework_audit"
+              ]
+            },
+            "ListFrameworkAudits": {
+              "methods": [
+                "list_framework_audits"
+              ]
+            },
+            "GetFrameworkAudit": {
+              "methods": [
+                "get_framework_audit"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmEnrollmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::CmEnrollmentService::Client",
+          "rpcs": {
+            "UpdateCmEnrollment": {
+              "methods": [
+                "update_cm_enrollment"
+              ]
+            },
+            "CalculateEffectiveCmEnrollment": {
+              "methods": [
+                "calculate_effective_cm_enrollment"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Config": {
       "clients": {
         "grpc": {
@@ -97,6 +145,40 @@
             "ListCloudControlDeployments": {
               "methods": [
                 "list_cloud_control_deployments"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Monitoring": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client",
+          "rpcs": {
+            "ListFrameworkComplianceSummaries": {
+              "methods": [
+                "list_framework_compliance_summaries"
+              ]
+            },
+            "ListFindingSummaries": {
+              "methods": [
+                "list_finding_summaries"
+              ]
+            },
+            "FetchFrameworkComplianceReport": {
+              "methods": [
+                "fetch_framework_compliance_report"
+              ]
+            },
+            "ListControlComplianceSummaries": {
+              "methods": [
+                "list_control_compliance_summaries"
+              ]
+            },
+            "AggregateFrameworkComplianceReport": {
+              "methods": [
+                "aggregate_framework_compliance_report"
               ]
             }
           }

@@ -1,5 +1,24 @@
 # Release History
 
+### 1.12.0 (2026-02-04)
+
+#### Features
+
+* Add SwapConfig to enable and configure swap memory for node pools ([#32388](https://github.com/googleapis/google-cloud-ruby/issues/32388)) 
+
+### 1.11.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.11.0 (2025-10-24)
+
+#### Features
+
+* add network_tier_config field to NodeNetworkConfig 
+* add node_kernel_module_loading field to LinuxNodeConfig ([#31794](https://github.com/googleapis/google-cloud-ruby/issues/31794)) 
+
 ### 1.10.1 (2025-09-24)
 
 #### Documentation

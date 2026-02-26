@@ -15,6 +15,16 @@
                 "get_organization"
               ]
             },
+            "ListOrganizations": {
+              "methods": [
+                "list_organizations"
+              ]
+            },
+            "FindSalesPartnerManagedClients": {
+              "methods": [
+                "find_sales_partner_managed_clients"
+              ]
+            },
             "ListAnalyticsAccountLinks": {
               "methods": [
                 "list_analytics_account_links"
@@ -33,6 +43,11 @@
             "SetPropertyServiceLevel": {
               "methods": [
                 "set_property_service_level"
+              ]
+            },
+            "ReportPropertyUsage": {
+              "methods": [
+                "report_property_usage"
               ]
             }
           }

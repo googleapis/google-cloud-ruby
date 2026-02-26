@@ -42,22 +42,63 @@ module Google
             end
 
             ##
-            # Create a fully-qualified VpcFlowLogsConfig resource string.
+            # Create a fully-qualified OrganizationLocation resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+            # `organizations/{organization}/locations/{location}`
             #
-            # @param project [String]
+            # @param organization [String]
             # @param location [String]
-            # @param vpc_flow_logs_config [String]
             #
             # @return [::String]
-            def vpc_flow_logs_config_path project:, location:, vpc_flow_logs_config:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def organization_location_path organization:, location:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/vpcFlowLogsConfigs/#{vpc_flow_logs_config}"
+              "organizations/#{organization}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified VpcFlowLogsConfig resource string.
+            #
+            # @overload vpc_flow_logs_config_path(project:, location:, vpc_flow_logs_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param vpc_flow_logs_config [String]
+            #
+            # @overload vpc_flow_logs_config_path(organization:, location:, vpc_flow_logs_config:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param vpc_flow_logs_config [String]
+            #
+            # @return [::String]
+            def vpc_flow_logs_config_path **args
+              resources = {
+                "location:project:vpc_flow_logs_config" => (proc do |project:, location:, vpc_flow_logs_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/vpcFlowLogsConfigs/#{vpc_flow_logs_config}"
+                end),
+                "location:organization:vpc_flow_logs_config" => (proc do |organization:, location:, vpc_flow_logs_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/vpcFlowLogsConfigs/#{vpc_flow_logs_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

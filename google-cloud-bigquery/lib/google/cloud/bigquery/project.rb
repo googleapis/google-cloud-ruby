@@ -178,6 +178,12 @@ module Google
         #   * The key portion of a label must be unique. However, you can use the
         #     same key with multiple resources.
         #   * Keys must start with a lowercase letter or international character.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -199,9 +205,11 @@ module Google
         #
         # @!group Data
         #
-        def copy_job source_table, destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil
+        def copy_job source_table, destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil,
+                     reservation: nil
           ensure_service!
-          options = { create: create, write: write, labels: labels, job_id: job_id, prefix: prefix }
+          options = { create: create, write: write, labels: labels, job_id: job_id, prefix: prefix,
+            reservation: reservation }
 
           updater = CopyJob::Updater.from_options(
             service,
@@ -258,6 +266,12 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -276,8 +290,8 @@ module Google
         #
         # @!group Data
         #
-        def copy source_table, destination_table, create: nil, write: nil, &block
-          job = copy_job source_table, destination_table, create: create, write: write, &block
+        def copy source_table, destination_table, create: nil, write: nil, reservation: nil, &block
+          job = copy_job source_table, destination_table, create: create, write: write, reservation: reservation, &block
           job.wait_until_done!
           ensure_job_succeeded! job
           true
@@ -479,6 +493,12 @@ module Google
         #   The default value is false.
         # @param [String] session_id The ID of an existing session. See also the
         #   `create_session` param and {Job#session_id}.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting query options.
@@ -631,7 +651,8 @@ module Google
                       labels: nil,
                       udfs: nil,
                       create_session: nil,
-                      session_id: nil
+                      session_id: nil,
+                      reservation: nil
           ensure_service!
           project ||= self.project
           options = {
@@ -657,7 +678,8 @@ module Google
             labels: labels,
             udfs: udfs,
             create_session: create_session,
-            session_id: session_id
+            session_id: session_id,
+            reservation: reservation
           }
 
           updater = QueryJob::Updater.from_options service, query, options
@@ -785,6 +807,11 @@ module Google
         #   `create_session` param in {#query_job} and {Job#session_id}.
         # @param [Boolean] format_options_use_int64_timestamp Output timestamp
         #   as usec int64. Default is true.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
@@ -933,6 +960,7 @@ module Google
                   legacy_sql: nil,
                   session_id: nil,
                   format_options_use_int64_timestamp: true,
+                  reservation: nil,
                   &block
           job = query_job query,
                           params: params,
@@ -944,6 +972,7 @@ module Google
                           standard_sql: standard_sql,
                           legacy_sql: legacy_sql,
                           session_id: session_id,
+                          reservation: reservation,
                           &block
           job.wait_until_done!
 
@@ -1152,6 +1181,20 @@ module Google
         #     and reorders columns to match the field names in the schema.
         # @param [String] time_zone The time zone used when parsing timestamp
         #   values.
+        # @param [String] reference_file_schema_uri The URI of the reference
+        #   file with the reader schema. This file is only loaded if it is part
+        #   of source URIs, but is not loaded otherwise. It is enabled for the
+        #   following formats: `AVRO`, `PARQUET`, `ORC`.
+        # @param [Boolean] preserve_ascii_control_characters When source_format
+        #   is set to `CSV`, indicates if the embedded ASCII control characters
+        #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
+        #   are preserved. By default, ASCII control characters are not
+        #   preserved.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
@@ -1178,7 +1221,8 @@ module Google
                      skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
                      null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil,
                      date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
-                     null_markers: nil, source_column_match: nil, time_zone: nil, &block
+                     null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
+                     preserve_ascii_control_characters: nil, reservation: nil, &block
           ensure_service!
           dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
           session_dataset = dataset dataset_id, skip_lookup: true, project_id: project_id
@@ -1193,7 +1237,9 @@ module Google
                           session_id: session_id, date_format: date_format, datetime_format: datetime_format,
                           time_format: time_format, timestamp_format: timestamp_format,
                           null_markers: null_markers, source_column_match: source_column_match,
-                          time_zone: time_zone, &block
+                          time_zone: time_zone, reference_file_schema_uri: reference_file_schema_uri,
+                          preserve_ascii_control_characters: preserve_ascii_control_characters,
+                          reservation: reservation, &block
         end
 
         ##
@@ -1348,6 +1394,20 @@ module Google
         #     and reorders columns to match the field names in the schema.
         # @param [String] time_zone The time zone used when parsing timestamp
         #   values.
+        # @param [String] reference_file_schema_uri The URI of the reference
+        #   file with the reader schema. This file is only loaded if it is part
+        #   of source URIs, but is not loaded otherwise. It is enabled for the
+        #   following formats: `AVRO`, `PARQUET`, `ORC`.
+        # @param [Boolean] preserve_ascii_control_characters When source_format
+        #   is set to `CSV`, indicates if the embedded ASCII control characters
+        #   (the first 32 characters in the ASCII-table, from `\x00` to `\x1F`)
+        #   are preserved. By default, ASCII control characters are not
+        #   preserved.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -1379,7 +1439,8 @@ module Google
                  delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                  skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil,
                  date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
-                 null_markers: nil, source_column_match: nil, time_zone: nil, &block
+                 null_markers: nil, source_column_match: nil, time_zone: nil, reference_file_schema_uri: nil,
+                 preserve_ascii_control_characters: nil, reservation: nil, &block
           job = load_job table_id, files, dataset_id: dataset_id,
                         format: format, create: create, write: write, projection_fields: projection_fields,
                         jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
@@ -1388,7 +1449,10 @@ module Google
                         null_marker: null_marker, session_id: session_id, date_format: date_format,
                         datetime_format: datetime_format, time_format: time_format,
                         timestamp_format: timestamp_format, null_markers: null_markers,
-                        source_column_match: source_column_match, time_zone: time_zone, &block
+                        source_column_match: source_column_match, time_zone: time_zone,
+                        reference_file_schema_uri: reference_file_schema_uri,
+                        preserve_ascii_control_characters: preserve_ascii_control_characters, reservation: reservation,
+                         &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -1472,6 +1536,13 @@ module Google
         #   mapped to
         #   [IAM Policy version](https://cloud.google.com/iam/docs/policies#versions)
         #   and will be used to set policy in IAM.
+        # @param [String] dataset_view The dataset_view parameter is an optional
+        #   field in the GetDatasetRequest used to specify which information
+        #   about a BigQuery dataset should be returned in the response. By
+        #   controlling this parameter, users can request a partial or full
+        #   response, which helps enforce fine-grained access control based on
+        #   their permissions. {Google::Cloud::Bigquery::DatasetView} provides
+        #   constants for this parameter.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -1499,12 +1570,13 @@ module Google
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
-        def dataset dataset_id, skip_lookup: nil, project_id: nil, access_policy_version: nil
+        def dataset dataset_id, skip_lookup: nil, project_id: nil, access_policy_version: nil, dataset_view: nil
           ensure_service!
           project_id ||= project
           return Dataset.new_reference project_id, dataset_id, service if skip_lookup
-          gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: access_policy_version
-          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version
+          gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: access_policy_version,
+dataset_view: dataset_view
+          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version, dataset_view: dataset_view
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -1537,6 +1609,14 @@ module Google
         #   mapped to
         #   [IAM Policy version](https://cloud.google.com/iam/docs/policies#versions)
         #   and will be used to set policy in IAM.
+        # @param [String] dataset_view The dataset_view parameter is an optional
+        #   field in the GetDatasetRequest used to specify which information
+        #   about a BigQuery dataset should be returned in the response. By
+        #   controlling this parameter, users can request a partial or full
+        #   response, which helps enforce fine-grained access control based on
+        #   their permissions. {Google::Cloud::Bigquery::DatasetView} provides
+        #   constants for this parameter.
+        #
         # @yield [access] a block for setting rules
         # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object
         #   accepting rules
@@ -1569,7 +1649,8 @@ module Google
         #   end
         #
         def create_dataset dataset_id, name: nil, description: nil,
-                           expiration: nil, location: nil, access_policy_version: nil
+                           expiration: nil, location: nil, access_policy_version: nil,
+                           dataset_view: nil
           ensure_service!
 
           new_ds = Google::Apis::BigqueryV2::Dataset.new(
@@ -1593,7 +1674,7 @@ module Google
           end
 
           gapi = service.insert_dataset new_ds, access_policy_version: access_policy_version
-          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version
+          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version, dataset_view: dataset_view
         end
 
         ##
@@ -2091,6 +2172,12 @@ module Google
         #   * The key portion of a label must be unique. However, you can use the
         #     same key with multiple resources.
         #   * Keys must start with a lowercase letter or international character.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -2119,10 +2206,10 @@ module Google
         # @!group Data
         #
         def extract_job source, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil,
-                        prefix: nil, labels: nil
+                        prefix: nil, labels: nil, reservation: nil
           ensure_service!
           options = { format: format, compression: compression, delimiter: delimiter, header: header, job_id: job_id,
-                      prefix: prefix, labels: labels }
+                      prefix: prefix, labels: labels, reservation: reservation }
           source_ref = if source.respond_to? :model_ref
                          source.model_ref
                        else
@@ -2189,6 +2276,12 @@ module Google
         #   models.
         # @param [Boolean] header Whether to print out a header row in table
         #   exports. Default is `true`. Not applicable when extracting models.
+        # @param [String] reservation The reservation that job would use. User
+        #    can specify a reservation to execute the job. If reservation is not
+        #    set, reservation is determined based on the rules defined by the
+        #    reservation assignments. The expected format is
+        #    `projects/`project`/locations/`location`/reservations/`reservation``.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -2214,12 +2307,14 @@ module Google
         #
         # @!group Data
         #
-        def extract source, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, &block
+        def extract source, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, reservation: nil,
+                    &block
           job = extract_job source, extract_url,
                             format:      format,
                             compression: compression,
                             delimiter:   delimiter,
                             header:      header,
+                            reservation: reservation,
                             &block
           job.wait_until_done!
           ensure_job_succeeded! job

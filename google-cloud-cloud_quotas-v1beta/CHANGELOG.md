@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* Hierarchical Quota Adjuster ([#32406](https://github.com/googleapis/google-cloud-ruby/issues/32406)) 
+
+### 0.6.2 (2026-01-23)
+
+#### Documentation
+
+* Correct typo in comment for field `quota_id` ([#32374](https://github.com/googleapis/google-cloud-ruby/issues/32374)) 
+
+### 0.6.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 0.6.0 (2025-09-11)
 
 #### Features

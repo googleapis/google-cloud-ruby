@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/shopping/merchant/quota/v1"
 
-client = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new do |config|
+client = ::Google::Shopping::Merchant::Quota::V1::AccountLimitsService::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/shopping/merchant/quota/v1"
 
-::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.configure do |config|
+::Google::Shopping::Merchant::Quota::V1::AccountLimitsService::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new
+client = ::Google::Shopping::Merchant::Quota::V1::AccountLimitsService::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/shopping/merchant/quota/v1"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Shopping::Merchant::Quota::V1::QuotaService::Client.new
+client = ::Google::Shopping::Merchant::Quota::V1::AccountLimitsService::Client.new
 ```
 
 ### Local ADC file

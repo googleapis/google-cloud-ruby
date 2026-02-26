@@ -121,7 +121,8 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
           "writeDisposition" => nil,
           "operationType" => "SNAPSHOT"
         },
-        "dryRun" => nil
+        "dryRun" => nil,
+        "reservation" => nil
       }
     }.to_json
   end

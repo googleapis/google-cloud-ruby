@@ -41,7 +41,11 @@ def list_networks
   # Call the list_networks method.
   result = client.list_networks request
 
-  # The returned object is of type Google::Ads::AdManager::V1::ListNetworksResponse.
-  p result
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
+    # Each element is of type ::Google::Ads::AdManager::V1::Network.
+    p item
+  end
 end
 # [END admanager_v1_generated_NetworkService_ListNetworks_sync]

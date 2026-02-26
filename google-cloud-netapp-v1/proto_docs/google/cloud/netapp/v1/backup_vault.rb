@@ -63,7 +63,20 @@ module Google
         #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`
         # @!attribute [rw] backup_retention_policy
         #   @return [::Google::Cloud::NetApp::V1::BackupVault::BackupRetentionPolicy]
-        #     Optional. Backup retention policy defining the retenton of backups.
+        #     Optional. Backup retention policy defining the retention of backups.
+        # @!attribute [rw] kms_config
+        #   @return [::String]
+        #     Optional. Specifies the Key Management System (KMS) configuration to be
+        #     used for backup encryption. Format:
+        #     `projects/{project}/locations/{location}/kmsConfigs/{kms_config}`
+        # @!attribute [r] encryption_state
+        #   @return [::Google::Cloud::NetApp::V1::BackupVault::EncryptionState]
+        #     Output only. Field indicating encryption state of CMEK backups.
+        # @!attribute [r] backups_crypto_key_version
+        #   @return [::String]
+        #     Output only. The crypto key version used to encrypt the backup vault.
+        #     Format:
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}`
         class BackupVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,6 +151,24 @@ module Google
 
             # BackupVault type is CROSS_REGION.
             CROSS_REGION = 2
+          end
+
+          # Encryption state of customer-managed encryption keys (CMEK) backups.
+          module EncryptionState
+            # Encryption state not set.
+            ENCRYPTION_STATE_UNSPECIFIED = 0
+
+            # Encryption state is pending.
+            ENCRYPTION_STATE_PENDING = 1
+
+            # Encryption is complete.
+            ENCRYPTION_STATE_COMPLETED = 2
+
+            # Encryption is in progress.
+            ENCRYPTION_STATE_IN_PROGRESS = 3
+
+            # Encryption has failed.
+            ENCRYPTION_STATE_FAILED = 4
           end
         end
 

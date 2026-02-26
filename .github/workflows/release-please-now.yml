@@ -21,7 +21,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install Ruby 3.3
         uses: ruby/setup-ruby@v1
         with:
@@ -33,4 +33,6 @@ jobs:
         run: |
           toys release label-please -v \
             --github-event-name=${{ github.event_name }} \
-            ${{ github.event.inputs.args }}
+            ${GITHUB_EVENT_INPUTS_ARGS}
+        env:
+          GITHUB_EVENT_INPUTS_ARGS: ${{ github.event.inputs.args }}

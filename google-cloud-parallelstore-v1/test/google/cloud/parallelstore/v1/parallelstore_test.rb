@@ -406,6 +406,7 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
     name = "hello world"
     request_id = "hello world"
     service_account = "hello world"
+    metadata_options = {}
 
     import_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_data, name
@@ -417,6 +418,7 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
       assert_equal "hello world", request["service_account"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Parallelstore::V1::TransferMetadataOptions), request["metadata_options"]
       refute_nil options
     end
 
@@ -427,35 +429,35 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account }) do |response, operation|
+      client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_data source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account do |response, operation|
+      client.import_data source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_data ::Google::Cloud::Parallelstore::V1::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account) do |response, operation|
+      client.import_data ::Google::Cloud::Parallelstore::V1::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account }, grpc_options) do |response, operation|
+      client.import_data({ source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_data(::Google::Cloud::Parallelstore::V1::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account), grpc_options) do |response, operation|
+      client.import_data(::Google::Cloud::Parallelstore::V1::ImportDataRequest.new(source_gcs_bucket: source_gcs_bucket, destination_parallelstore: destination_parallelstore, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -479,6 +481,7 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
     name = "hello world"
     request_id = "hello world"
     service_account = "hello world"
+    metadata_options = {}
 
     export_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_data, name
@@ -490,6 +493,7 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
       assert_equal "hello world", request["service_account"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Parallelstore::V1::TransferMetadataOptions), request["metadata_options"]
       refute_nil options
     end
 
@@ -500,35 +504,35 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account }) do |response, operation|
+      client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_data source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account do |response, operation|
+      client.export_data source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_data ::Google::Cloud::Parallelstore::V1::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account) do |response, operation|
+      client.export_data ::Google::Cloud::Parallelstore::V1::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account }, grpc_options) do |response, operation|
+      client.export_data({ source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_data(::Google::Cloud::Parallelstore::V1::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account), grpc_options) do |response, operation|
+      client.export_data(::Google::Cloud::Parallelstore::V1::ExportDataRequest.new(source_parallelstore: source_parallelstore, destination_gcs_bucket: destination_gcs_bucket, name: name, request_id: request_id, service_account: service_account, metadata_options: metadata_options), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -556,6 +560,26 @@ class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Parallelstore::V1::Parallelstore::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Parallelstore::V1::Parallelstore::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::Parallelstore::V1::Parallelstore::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 
   def test_operations_client

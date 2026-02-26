@@ -1,5 +1,34 @@
 # Changelog
 
+### 0.18.0 (2026-02-24)
+
+#### Features
+
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+* Add support for project level key usage tracking ([#32447](https://github.com/googleapis/google-cloud-ruby/issues/32447)) 
+* Added DeleteCryptoKey and DeleteCryptoKeyVersion RPCs to permanently remove resources 
+
+### 0.17.0 (2026-01-23)
+
+#### Features
+
+* add the SingleTenantHsm functionality including the management API and resource types ([#32373](https://github.com/googleapis/google-cloud-ruby/issues/32373)) 
+#### Documentation
+
+* A comment for field `crypto_key_backend` in message `.google.cloud.kms.v1.CryptoKey` is expanded to include SingleTenantHsmInstances 
+
+### 0.16.2 (2026-01-13)
+
+#### Documentation
+
+* Marking MODIFIED_CUSTOMER_INITIATED_ACCESS and MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION Key Access Justification codes as deprecated in favor of GOOGLE_RESPONSE_TO_PRODUCTION_ALERT ([#32338](https://github.com/googleapis/google-cloud-ruby/issues/32338)) 
+
+### 0.16.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 0.16.0 (2025-09-11)
 
 #### Features

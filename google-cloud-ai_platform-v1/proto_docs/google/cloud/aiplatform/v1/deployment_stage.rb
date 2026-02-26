@@ -49,6 +49,12 @@ module Google
 
           # The deployment has terminated.
           DEPLOYMENT_TERMINATED = 10
+
+          # The deployment has succeeded.
+          SUCCESSFULLY_DEPLOYED = 11
+
+          # The deployment has failed.
+          FAILED_TO_DEPLOY = 12
         end
       end
     end

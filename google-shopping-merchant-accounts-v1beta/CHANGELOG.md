@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.12.2 (2025-11-19)
+
+#### Documentation
+
+* A comment for enum `AccessRight` is changed ([#32202](https://github.com/googleapis/google-cloud-ruby/issues/32202)) 
+* A comment for enum value `API_DEVELOPER` in enum `AccessRight` is changed 
+
+### 0.12.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 0.12.0 (2025-09-11)
 
 #### Features

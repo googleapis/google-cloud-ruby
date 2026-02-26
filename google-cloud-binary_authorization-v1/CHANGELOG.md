@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.5.0 (2026-02-24)
+
+#### Features
+
+* A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#32452](https://github.com/googleapis/google-cloud-ruby/issues/32452)) 
+
+### 1.4.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
 ### 1.4.0 (2025-09-11)
 
 #### Features

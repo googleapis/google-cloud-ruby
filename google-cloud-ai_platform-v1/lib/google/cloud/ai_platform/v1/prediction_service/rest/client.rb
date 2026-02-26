@@ -1147,6 +1147,98 @@ module Google
               end
 
               ##
+              # Embed content with multimodal inputs.
+              #
+              # @overload embed_content(request, options = nil)
+              #   Pass arguments to `embed_content` via a request object, either of type
+              #   {::Google::Cloud::AIPlatform::V1::EmbedContentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AIPlatform::V1::EmbedContentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload embed_content(model: nil, content: nil, title: nil, task_type: nil, output_dimensionality: nil, auto_truncate: nil)
+              #   Pass arguments to `embed_content` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param model [::String]
+              #     Required. The name of the publisher model requested to serve the
+              #     prediction. Format:
+              #     `projects/{project}/locations/{location}/publishers/*/models/*`
+              #   @param content [::Google::Cloud::AIPlatform::V1::Content, ::Hash]
+              #     Required. Input content to be embedded. Required.
+              #   @param title [::String]
+              #     Optional. An optional title for the text.
+              #   @param task_type [::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbeddingTaskType]
+              #     Optional. The task type of the embedding.
+              #   @param output_dimensionality [::Integer]
+              #     Optional. Optional reduced dimension for the output embedding. If set,
+              #     excessive values in the output embedding are truncated from the end.
+              #   @param auto_truncate [::Boolean]
+              #     Optional. Whether to silently truncate the input content if it's longer
+              #     than the maximum sequence length.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AIPlatform::V1::EmbedContentResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AIPlatform::V1::EmbedContentResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ai_platform/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AIPlatform::V1::EmbedContentRequest.new
+              #
+              #   # Call the embed_content method.
+              #   result = client.embed_content request
+              #
+              #   # The returned object is of type Google::Cloud::AIPlatform::V1::EmbedContentResponse.
+              #   p result
+              #
+              def embed_content request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::EmbedContentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.embed_content.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.embed_content.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.embed_content.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @prediction_service_stub.embed_content request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the PredictionService REST API.
               #
               # This class represents the configuration for PredictionService REST,
@@ -1344,6 +1436,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :stream_generate_content
+                  ##
+                  # RPC-specific configuration for `embed_content`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :embed_content
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1365,6 +1462,8 @@ module Google
                     @generate_content = ::Gapic::Config::Method.new generate_content_config
                     stream_generate_content_config = parent_rpcs.stream_generate_content if parent_rpcs.respond_to? :stream_generate_content
                     @stream_generate_content = ::Gapic::Config::Method.new stream_generate_content_config
+                    embed_content_config = parent_rpcs.embed_content if parent_rpcs.respond_to? :embed_content
+                    @embed_content = ::Gapic::Config::Method.new embed_content_config
 
                     yield self if block_given?
                   end

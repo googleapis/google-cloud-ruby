@@ -21,7 +21,7 @@ end
 
 gem "autotest-suffix", "~> 1.1"
 gem "avro", "~> 1.12"
-gem "bigdecimal", "~> 3.2"
+gem "bigdecimal", ">= 3.2", "< 5"
 gem "google-style", "~> 1.31.1"
 gem "minitest", "~> 5.25"
 gem "minitest-autotest", "~> 1.1"

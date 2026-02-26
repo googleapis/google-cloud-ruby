@@ -228,6 +228,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Agent Coaching context that customer can configure.
+        # @!attribute [rw] overarching_guidance
+        #   @return [::String]
+        #     Optional. The overarching guidance for the agent coaching. This should be
+        #     set only for v1.5 and later versions.
+        # @!attribute [rw] instructions
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::AgentCoachingInstruction>]
+        #     Optional. Customized instructions for agent coaching.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional. Version of the feature. If not set, default to latest version.
+        #     Current candidates are ["1.2"].
+        # @!attribute [rw] output_language_code
+        #   @return [::String]
+        #     Optional. Output language code.
+        class AgentCoachingContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the section of summarization.
         # @!attribute [rw] key
         #   @return [::String]
@@ -332,12 +352,17 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::FreeFormContext]
         #     Input of free from generator to LLM.
         #
-        #     Note: The following fields are mutually exclusive: `free_form_context`, `summarization_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `free_form_context`, `agent_coaching_context`, `summarization_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] agent_coaching_context
+        #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingContext]
+        #     Input of prebuilt Agent Coaching feature.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_coaching_context`, `free_form_context`, `summarization_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_context
         #   @return [::Google::Cloud::Dialogflow::V2::SummarizationContext]
         #     Input of prebuilt Summarization feature.
         #
-        #     Note: The following fields are mutually exclusive: `summarization_context`, `free_form_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `summarization_context`, `free_form_context`, `agent_coaching_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inference_parameter
         #   @return [::Google::Cloud::Dialogflow::V2::InferenceParameter]
         #     Optional. Inference parameters for this generator.
@@ -358,6 +383,14 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Update time of this generator.
+        # @!attribute [rw] tools
+        #   @return [::Array<::String>]
+        #     Optional. Resource names of the tools that the generator can choose from.
+        #     Format: `projects/<Project ID>/locations/<Location ID>/tools/<tool ID>`.
+        # @!attribute [rw] suggestion_deduping_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionDedupingConfig]
+        #     Optional. Configuration for suggestion deduping. This is only applicable to
+        #     AI Coach feature.
         class Generator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -393,20 +426,203 @@ module Google
           end
         end
 
+        # Suggestion for coaching agents.
+        # @!attribute [rw] applicable_instructions
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::AgentCoachingInstruction>]
+        #     Optional. Instructions applicable based on the current context.
+        # @!attribute [rw] agent_action_suggestions
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::AgentActionSuggestion>]
+        #     Optional. Suggested actions for the agent to take.
+        # @!attribute [rw] sample_responses
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::SampleResponse>]
+        #     Optional. Sample response for the Agent.
+        class AgentCoachingSuggestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Sources for the suggestion.
+          # @!attribute [r] instruction_indexes
+          #   @return [::Array<::Integer>]
+          #     Output only. Source instruction indexes for the suggestion. This is the
+          #     index of the applicable_instructions field.
+          class Sources
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Duplication check for the suggestion.
+          # @!attribute [r] duplicate_suggestions
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::DuplicateCheckResult::DuplicateSuggestion>]
+          #     Output only. The duplicate suggestions.
+          class DuplicateCheckResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The duplicate suggestion details.
+            # Keeping answer_record and sources together as they are identifiers for
+            # duplicate suggestions.
+            # @!attribute [r] answer_record
+            #   @return [::String]
+            #     Output only. The answer record id of the past duplicate suggestion.
+            # @!attribute [r] sources
+            #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::Sources]
+            #     Output only. Sources for the suggestion.
+            # @!attribute [r] suggestion_index
+            #   @return [::Integer]
+            #     Output only. The index of the duplicate suggestion in the past
+            #     suggestion list.
+            # @!attribute [r] similarity_score
+            #   @return [::Float]
+            #     Output only. The similarity score of between the past and current
+            #     suggestion.
+            class DuplicateSuggestion
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Actions suggested for the agent. This is based on applicable instructions.
+          # @!attribute [rw] agent_action
+          #   @return [::String]
+          #     Optional. The suggested action for the agent.
+          # @!attribute [r] sources
+          #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::Sources]
+          #     Output only. Sources for the agent action suggestion.
+          # @!attribute [r] duplicate_check_result
+          #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::DuplicateCheckResult]
+          #     Output only. Duplicate check result for the agent action suggestion.
+          class AgentActionSuggestion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Sample response that the agent can use. This could be based on applicable
+          # instructions and ingested data from other systems.
+          # @!attribute [rw] response_text
+          #   @return [::String]
+          #     Optional. Sample response for Agent in text.
+          # @!attribute [r] sources
+          #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::Sources]
+          #     Output only. Sources for the Sample Response.
+          # @!attribute [r] duplicate_check_result
+          #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion::DuplicateCheckResult]
+          #     Output only. Duplicate check result for the sample response.
+          class SampleResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Suggestion generated using a Generator.
         # @!attribute [rw] free_form_suggestion
         #   @return [::Google::Cloud::Dialogflow::V2::FreeFormSuggestion]
         #     Optional. Free form suggestion.
         #
-        #     Note: The following fields are mutually exclusive: `free_form_suggestion`, `summary_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `free_form_suggestion`, `summary_suggestion`, `agent_coaching_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summary_suggestion
         #   @return [::Google::Cloud::Dialogflow::V2::SummarySuggestion]
         #     Optional. Suggested summary.
         #
-        #     Note: The following fields are mutually exclusive: `summary_suggestion`, `free_form_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `summary_suggestion`, `free_form_suggestion`, `agent_coaching_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] agent_coaching_suggestion
+        #   @return [::Google::Cloud::Dialogflow::V2::AgentCoachingSuggestion]
+        #     Optional. Suggestion to coach the agent.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_coaching_suggestion`, `free_form_suggestion`, `summary_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] tool_call_info
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::GeneratorSuggestion::ToolCallInfo>]
+        #     Optional. List of request and response for tool calls executed.
         class GeneratorSuggestion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Request and response for a tool call.
+          # @!attribute [rw] tool_call
+          #   @return [::Google::Cloud::Dialogflow::V2::ToolCall]
+          #     Required. Request for a tool call.
+          # @!attribute [rw] tool_call_result
+          #   @return [::Google::Cloud::Dialogflow::V2::ToolCallResult]
+          #     Required. Response for a tool call.
+          class ToolCallInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Config for suggestion deduping.
+        # NEXT_ID: 3
+        # @!attribute [rw] enable_deduping
+        #   @return [::Boolean]
+        #     Optional. Whether to enable suggestion deduping.
+        # @!attribute [rw] similarity_threshold
+        #   @return [::Float]
+        #     Optional. The threshold for similarity between two suggestions.
+        #     Acceptable value is [0.0, 1.0], default to 0.8
+        class SuggestionDedupingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings for Responsible AI checks.
+        # @!attribute [rw] rai_category_configs
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::RaiSettings::RaiCategoryConfig>]
+        #     Configuration for a set of RAI categories.
+        class RaiSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for a specific RAI category.
+          # @!attribute [rw] category
+          #   @return [::Google::Cloud::Dialogflow::V2::RaiSettings::RaiCategoryConfig::RaiCategory]
+          #     Optional. The RAI category.
+          # @!attribute [rw] sensitivity_level
+          #   @return [::Google::Cloud::Dialogflow::V2::RaiSettings::RaiCategoryConfig::SensitivityLevel]
+          #     Optional. The sensitivity level for this category.
+          class RaiCategoryConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum for RAI category.
+            module RaiCategory
+              # Default value.
+              RAI_CATEGORY_UNSPECIFIED = 0
+
+              # Dangerous content.
+              DANGEROUS_CONTENT = 1
+
+              # Sexually explicit content.
+              SEXUALLY_EXPLICIT = 2
+
+              # Harassment content.
+              HARASSMENT = 3
+
+              # Hate speech content.
+              HATE_SPEECH = 4
+            end
+
+            # Enum for user-configurable sensitivity levels.
+            module SensitivityLevel
+              # Default value.
+              # If unspecified, the default behavior is:
+              # - DANGEROUS_CONTENT: BLOCK_FEW
+              # - SEXUALLY_EXPLICIT: BLOCK_SOME
+              # - HARASSMENT: BLOCK_SOME
+              # - HATE_SPEECH: BLOCK_SOME
+              SENSITIVITY_LEVEL_UNSPECIFIED = 0
+
+              # Block most potentially sensitive responses.
+              BLOCK_MOST = 1
+
+              # Block some potentially sensitive responses.
+              BLOCK_SOME = 2
+
+              # Block a few potentially sensitive responses.
+              BLOCK_FEW = 3
+
+              # No filtering for this category.
+              BLOCK_NONE = 4
+            end
+          end
         end
 
         # The event that triggers the generator and LLM execution.

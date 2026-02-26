@@ -291,7 +291,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_and_configure_account(account: nil, user: nil, service: nil)
+              # @overload create_and_configure_account(account: nil, user: nil, service: nil, set_alias: nil)
               #   Pass arguments to `create_and_configure_account` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -308,6 +308,10 @@ module Google
               #     used to create a sub-account under an existing advanced account through
               #     this method. Additional `account_management` or
               #     `product_management` services may be provided.
+              #   @param set_alias [::Array<::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::SetAliasForRelationship, ::Hash>]
+              #     Optional. If a relationship is created with a provider, you can set an
+              #     alias for it with this field. The calling user must be an admin on the
+              #     provider to be able to set an alias.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1::Account]
@@ -368,10 +372,13 @@ module Google
               ##
               # Deletes the specified account regardless of its type: standalone, advanced
               # account or sub-account. Deleting an advanced account leads to the deletion
-              # of all of its sub-accounts. Executing this method requires admin access.
-              # The deletion succeeds only if the account does not provide services
-              # to any other account and has no processed offers. You can use the `force`
-              # parameter to override this.
+              # of all of its sub-accounts. This also deletes the account's [developer
+              # registration
+              # entity](/merchant/api/reference/rest/accounts_v1/accounts.developerRegistration)
+              # and any associated GCP project to the account. Executing this method
+              # requires admin access. The deletion succeeds only if the account does not
+              # provide services to any other account and has no processed offers. You can
+              # use the `force` parameter to override this.
               #
               # @overload delete_account(request, options = nil)
               #   Pass arguments to `delete_account` via a request object, either of type
@@ -797,8 +804,6 @@ module Google
               #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
-              #    *  (`String`) The path to a service account key file in JSON format
-              #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
               #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -807,7 +812,26 @@ module Google
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
               #
-              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+              #     is deprecated. Providing an unvalidated credential configuration to
+              #     Google APIs can compromise the security of your systems and data.
+              #
+              #   @example
+              #
+              #     # The recommended way to provide credentials is to use the `make_creds` method
+              #     # on the appropriate credentials class for your environment.
+              #
+              #     require "googleauth"
+              #
+              #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+              #       json_key_io: ::File.open("/path/to/keyfile.json")
+              #     )
+              #
+              #     client = ::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client.new do |config|
+              #       config.credentials = credentials
+              #     end
+              #
+              #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
               #   external source for authentication to Google Cloud, you must validate it before
               #   providing it to a Google API client library. Providing an unvalidated credential
               #   configuration to Google APIs can compromise the security of your systems and data.

@@ -32,12 +32,12 @@ module Google
         #     Format:
         #     projects/\\{project}/locations/\\{location}/internalRanges/\\{internal_range}
         #     See: https://google.aip.dev/122#fields-representing-resource-names
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the internal range was created.
-        # @!attribute [rw] update_time
+        #     Output only. Time when the internal range was created.
+        # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the internal range was updated.
+        #     Output only. Time when the internal range was updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User-defined labels.
@@ -79,10 +79,11 @@ module Google
         # @!attribute [rw] target_cidr_range
         #   @return [::Array<::String>]
         #     Optional. Can be set to narrow down or pick a different address space while
-        #     searching for a free range. If not set, defaults to the "10.0.0.0/8"
-        #     address space. This can be used to search in other rfc-1918 address
-        #     spaces like "172.16.0.0/12" and "192.168.0.0/16" or non-rfc-1918
-        #     address spaces used in the VPC.
+        #     searching for a free range. If not set, defaults to the ["10.0.0.0/8",
+        #     "172.16.0.0/12", "192.168.0.0/16"] address space (for auto-mode networks,
+        #     the "10.0.0.0/9" range is used instead of "10.0.0.0/8"). This can be used
+        #     to target the search in other rfc-1918 address spaces like "172.16.0.0/12"
+        #     and "192.168.0.0/16" or non-rfc-1918 address spaces used in the VPC.
         # @!attribute [r] users
         #   @return [::Array<::String>]
         #     Output only. The list of resources that refer to this internal range.

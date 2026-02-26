@@ -107,6 +107,14 @@ module Google
           # @!attribute [rw] environment
           #   @return [::Google::Cloud::AIPlatform::V1::Tool::ComputerUse::Environment]
           #     Required. The environment being operated.
+          # @!attribute [rw] excluded_predefined_functions
+          #   @return [::Array<::String>]
+          #     Optional. By default, [predefined
+          #     functions](https://cloud.google.com/vertex-ai/generative-ai/docs/computer-use#supported-actions)
+          #     are included in the final model call. Some of them can be explicitly
+          #     excluded from being automatically included. This can serve two purposes:
+          #     1. Using a more restricted / different action space.
+          #     2. Improving the definitions / instructions of predefined functions.
           class ComputerUse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -227,13 +235,126 @@ module Google
         # containing the parameters and their values.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the function to call.
+        #     Optional. The name of the function to call.
         #     Matches [FunctionDeclaration.name].
         # @!attribute [rw] args
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. Required. The function parameters and values in JSON object
-        #     format. See [FunctionDeclaration.parameters] for parameter details.
+        #     Optional. The function parameters and values in JSON object format.
+        #     See [FunctionDeclaration.parameters] for parameter details.
+        # @!attribute [rw] partial_args
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PartialArg>]
+        #     Optional. The partial argument value of the function call.
+        #     If provided, represents the arguments/fields that are streamed
+        #     incrementally.
+        # @!attribute [rw] will_continue
+        #   @return [::Boolean]
+        #     Optional. Whether this is the last part of the FunctionCall.
+        #     If true, another partial message for the current FunctionCall is expected
+        #     to follow.
         class FunctionCall
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Partial argument value of the function call.
+        # @!attribute [rw] null_value
+        #   @return [::Google::Protobuf::NullValue]
+        #     Optional. Represents a null value.
+        #
+        #     Note: The following fields are mutually exclusive: `null_value`, `number_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] number_value
+        #   @return [::Float]
+        #     Optional. Represents a double value.
+        #
+        #     Note: The following fields are mutually exclusive: `number_value`, `null_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] string_value
+        #   @return [::String]
+        #     Optional. Represents a string value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `null_value`, `number_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bool_value
+        #   @return [::Boolean]
+        #     Optional. Represents a boolean value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `null_value`, `number_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] json_path
+        #   @return [::String]
+        #     Required. A JSON Path (RFC 9535) to the argument being streamed.
+        #     https://datatracker.ietf.org/doc/html/rfc9535. e.g. "$.foo.bar[0].data".
+        # @!attribute [rw] will_continue
+        #   @return [::Boolean]
+        #     Optional. Whether this is not the last part of the same json_path.
+        #     If true, another PartialArg message for the current json_path is expected
+        #     to follow.
+        class PartialArg
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A datatype containing media that is part of a `FunctionResponse` message.
+        #
+        # A `FunctionResponsePart` consists of data which has an associated datatype. A
+        # `FunctionResponsePart` can only contain one of the accepted types in
+        # `FunctionResponsePart.data`.
+        #
+        # A `FunctionResponsePart` must have a fixed IANA MIME type identifying the
+        # type and subtype of the media if the `inline_data` field is filled with raw
+        # bytes.
+        # @!attribute [rw] inline_data
+        #   @return [::Google::Cloud::AIPlatform::V1::FunctionResponseBlob]
+        #     Inline media bytes.
+        #
+        #     Note: The following fields are mutually exclusive: `inline_data`, `file_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] file_data
+        #   @return [::Google::Cloud::AIPlatform::V1::FunctionResponseFileData]
+        #     URI based data.
+        #
+        #     Note: The following fields are mutually exclusive: `file_data`, `inline_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class FunctionResponsePart
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Raw media bytes for function response.
+        #
+        # Text should not be sent as raw bytes, use the 'text' field.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     Required. The IANA standard MIME type of the source data.
+        # @!attribute [rw] data
+        #   @return [::String]
+        #     Required. Raw bytes.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name of the blob.
+        #
+        #     Used to provide a label or filename to distinguish blobs.
+        #
+        #     This field is only returned in PromptMessage for prompt management.
+        #     It is currently used in the Gemini GenerateContent calls only when server
+        #     side tools (code_execution, google_search, and url_context) are enabled.
+        class FunctionResponseBlob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # URI based data for function response.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     Required. The IANA standard MIME type of the source data.
+        # @!attribute [rw] file_uri
+        #   @return [::String]
+        #     Required. URI.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. Display name of the file data.
+        #
+        #     Used to provide a label or filename to distinguish file datas.
+        #
+        #     This field is only returned in PromptMessage for prompt management.
+        #     It is currently used in the Gemini GenerateContent calls only when server
+        #     side tools (code_execution, google_search, and url_context) are enabled.
+        class FunctionResponseFileData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -252,6 +373,10 @@ module Google
         #     Use "output" key to specify function output and "error" key to specify
         #     error details (if any). If "output" and "error" keys are not specified,
         #     then whole "response" is treated as function output.
+        # @!attribute [rw] parts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::FunctionResponsePart>]
+        #     Optional. Ordered `Parts` that constitute a function response. Parts may
+        #     have different IANA MIME types.
         class FunctionResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -500,6 +625,11 @@ module Google
         #     Optional. Function names to call. Only set when the Mode is ANY. Function
         #     names should match [FunctionDeclaration.name]. With mode set to ANY, model
         #     will predict a function call from the set of function names provided.
+        # @!attribute [rw] stream_function_call_arguments
+        #   @return [::Boolean]
+        #     Optional. When set to true, arguments of a single function call will be
+        #     streamed out in multiple parts/contents/responses. Partial parameter
+        #     results will be returned in the [FunctionCall.partial_args] field.
         class FunctionCallingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

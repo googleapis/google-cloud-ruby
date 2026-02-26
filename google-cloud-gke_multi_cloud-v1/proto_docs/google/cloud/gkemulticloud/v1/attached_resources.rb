@@ -121,19 +121,24 @@ module Google
         #     Optional. Security Posture configuration for this cluster.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Input only. Tag keys/values directly bound to this resource.
+        #     Optional. Input only. Tag keys and values directly bound to this resource.
         #
-        #     Tag key must be specified in the format <tag namespace>/<tag key name>
+        #     The tag key must be specified in the format
+        #     `<tag namespace>/<tag key name>,`
         #     where the tag namespace is the ID of the organization or name of the
-        #     project that the tag key is defined in.
-        #     The short name of a tag key or value can have a maximum length of 256
-        #     characters. The permitted character set for the short name includes UTF-8
-        #     encoded Unicode characters except single quotes ('), double quotes ("),
-        #     backslashes (\), and forward slashes (/).
+        #     project that the tag key is defined in. The short name of a tag key or
+        #     value can have a maximum length of 256 characters. The permitted character
+        #     set for the short name includes UTF-8 encoded Unicode characters except
+        #     single quotation marks (`'`), double quotation marks (`"`), backslashes
+        #     (`\`), and forward slashes (`/`).
         #
         #     See
         #     [Tags](https://cloud.google.com/resource-manager/docs/tags/tags-overview)
         #     for more details on Google Cloud Platform tags.
+        # @!attribute [rw] system_components_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::SystemComponentsConfig]
+        #     Optional. Kubernetes configurations for auto-installed components on the
+        #     cluster.
         class AttachedCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -270,6 +275,24 @@ module Google
         # @!attribute [rw] version
         #   @return [::String]
         #     Platform version name.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. True if the version is available for attachedcluster creation. If
+        #     a version is enabled, it can be used to attach new clusters.
+        # @!attribute [rw] end_of_life
+        #   @return [::Boolean]
+        #     Optional. True if this cluster version belongs to a minor version that has
+        #     reached its end of life and is no longer in scope to receive security and
+        #     bug fixes.
+        # @!attribute [rw] end_of_life_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The estimated date (in Pacific Time) when this cluster version
+        #     will reach its end of life. Or if this version is no longer supported (the
+        #     `end_of_life` field is true), this is the actual date (in Pacific time)
+        #     when the version reached its end of life.
+        # @!attribute [rw] release_date
+        #   @return [::Google::Type::Date]
+        #     Optional. The date (in Pacific Time) when the cluster version was released.
         class AttachedPlatformVersionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,6 +330,78 @@ module Google
         #   @return [::String]
         #     Namespace in which the kubernetes secret is stored.
         class KubernetesSecret
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SystemComponentsConfig defines the fields for customizing configurations for
+        # auto-installed components.
+        # @!attribute [rw] tolerations
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::Toleration>]
+        #     Sets custom tolerations for pods created by auto-installed components.
+        # @!attribute [rw] labels
+        #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::Label>]
+        #     Sets custom labels for pods created by auto-installed components.
+        class SystemComponentsConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Toleration defines the fields for tolerations for pods created by
+        # auto-installed components.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     Key is the taint key that the toleration applies to.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Value is the taint value that the toleration applies to.
+        # @!attribute [rw] key_operator
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::Toleration::KeyOperator]
+        #     KeyOperator represents a key's relationship to the value e.g. 'Exist'.
+        # @!attribute [rw] effect
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::Toleration::Effect]
+        #     Effect indicates the taint effect to match e.g. 'NoSchedule'
+        class Toleration
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # KeyOperator represents a key's relationship to the value e.g. 'Equal'.
+          module KeyOperator
+            # Operator is not specified.
+            KEY_OPERATOR_UNSPECIFIED = 0
+
+            # Operator maps to 'Equal'.
+            KEY_OPERATOR_EQUAL = 1
+
+            # Operator maps to 'Exists'.
+            KEY_OPERATOR_EXISTS = 2
+          end
+
+          # Effect indicates the taint effect to match e.g. 'NoSchedule'.
+          module Effect
+            # Effect is not specified.
+            EFFECT_UNSPECIFIED = 0
+
+            # Effect maps to 'NoSchedule'.
+            EFFECT_NO_SCHEDULE = 1
+
+            # Effect maps to 'PreferNoSchedule'.
+            EFFECT_PREFER_NO_SCHEDULE = 2
+
+            # Effect maps to 'NoExecute'.
+            EFFECT_NO_EXECUTE = 3
+          end
+        end
+
+        # Label defines the additional fields for labels for pods created by
+        # auto-installed components.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     This is the key of the label.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     This is the value of the label.
+        class Label
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

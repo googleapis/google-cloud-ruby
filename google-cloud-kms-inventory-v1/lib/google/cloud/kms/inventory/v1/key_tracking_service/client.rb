@@ -191,10 +191,16 @@ module Google
 
               ##
               # Returns aggregate information about the resources protected by the given
-              # Cloud KMS {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Only resources within
-              # the same Cloud organization as the key will be returned. The project that
-              # holds the key must be part of an organization in order for this call to
-              # succeed.
+              # Cloud KMS {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. By default,
+              # summary of resources within the same Cloud organization as the key will be
+              # returned, which requires the KMS organization service account to be
+              # configured(refer
+              # https://docs.cloud.google.com/kms/docs/view-key-usage#required-roles).
+              # If the KMS organization service account is not configured or key's project
+              # is not part of an organization, set
+              # {::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest#fallback_scope fallback_scope}
+              # to `FALLBACK_SCOPE_PROJECT` to retrieve a summary of protected resources
+              # within the key's project.
               #
               # @overload get_protected_resources_summary(request, options = nil)
               #   Pass arguments to `get_protected_resources_summary` via a request object, either of type
@@ -206,7 +212,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload get_protected_resources_summary(name: nil)
+              # @overload get_protected_resources_summary(name: nil, fallback_scope: nil)
               #   Pass arguments to `get_protected_resources_summary` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -214,6 +220,9 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+              #   @param fallback_scope [::Google::Cloud::Kms::Inventory::V1::FallbackScope]
+              #     Optional. The scope to use if the kms organization service account is not
+              #     configured.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Kms::Inventory::V1::ProtectedResourcesSummary]
@@ -281,7 +290,8 @@ module Google
 
               ##
               # Returns metadata about the resources protected by the given Cloud KMS
-              # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} in the given Cloud organization.
+              # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} in the given Cloud
+              # organization/project.
               #
               # @overload search_protected_resources(request, options = nil)
               #   Pass arguments to `search_protected_resources` via a request object, either of type
@@ -299,8 +309,14 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param scope [::String]
-              #     Required. Resource name of the organization.
-              #     Example: organizations/123
+              #     Required. A scope can be an organization or a project. Resources protected
+              #     by the crypto key in provided scope will be returned.
+              #
+              #     The following values are allowed:
+              #
+              #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+              #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+              #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
               #   @param crypto_key [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
@@ -438,8 +454,6 @@ module Google
               #   @return [::String,nil]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
-              #    *  (`String`) The path to a service account key file in JSON format
-              #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
               #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
@@ -448,7 +462,26 @@ module Google
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
               #
-              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+              #     is deprecated. Providing an unvalidated credential configuration to
+              #     Google APIs can compromise the security of your systems and data.
+              #
+              #   @example
+              #
+              #     # The recommended way to provide credentials is to use the `make_creds` method
+              #     # on the appropriate credentials class for your environment.
+              #
+              #     require "googleauth"
+              #
+              #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+              #       json_key_io: ::File.open("/path/to/keyfile.json")
+              #     )
+              #
+              #     client = ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client.new do |config|
+              #       config.credentials = credentials
+              #     end
+              #
+              #   @note Warning: If you accept a credential configuration (JSON file or Hash) from an
               #   external source for authentication to Google Cloud, you must validate it before
               #   providing it to a Google API client library. Providing an unvalidated credential
               #   configuration to Google APIs can compromise the security of your systems and data.

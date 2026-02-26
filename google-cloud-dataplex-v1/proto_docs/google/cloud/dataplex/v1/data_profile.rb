@@ -52,6 +52,10 @@ module Google
         #
         #     If specified, the fields will be excluded from data profile, regardless of
         #     `include_fields` value.
+        # @!attribute [rw] catalog_publishing_enabled
+        #   @return [::Boolean]
+        #     Optional. If set, the latest DataScan job result will be published as
+        #     Dataplex Universal Catalog metadata.
         class DataProfileSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,6 +111,10 @@ module Google
         # @!attribute [r] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::PostScanActionsResult]
         #     Output only. The result of post scan actions.
+        # @!attribute [r] catalog_publishing_status
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanCatalogPublishingStatus]
+        #     Output only. The status of publishing the data scan as Dataplex Universal
+        #     Catalog metadata.
         class DataProfileResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

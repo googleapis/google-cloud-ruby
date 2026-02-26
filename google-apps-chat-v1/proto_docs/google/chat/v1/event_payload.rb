@@ -114,7 +114,7 @@ module Google
         # Event type: `google.workspace.chat.message.v1.deleted`
         # @!attribute [rw] message
         #   @return [::Google::Apps::Chat::V1::Message]
-        #     The deleted message. Only the `name`, `createTime`, `deleteTime`, and
+        #     The deleted message. Only the `name`, `createTime`, and
         #     `deletionMetadata` fields are populated.
         class MessageDeletedEventData
           include ::Google::Protobuf::MessageExts

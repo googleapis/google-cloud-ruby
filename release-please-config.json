@@ -19,6 +19,14 @@
       "component": "google-ads-ad_manager-v1",
       "version_file": "lib/google/ads/ad_manager/v1/version.rb"
     },
+    "google-ads-data_manager": {
+      "component": "google-ads-data_manager",
+      "version_file": "lib/google/ads/data_manager/version.rb"
+    },
+    "google-ads-data_manager-v1": {
+      "component": "google-ads-data_manager-v1",
+      "version_file": "lib/google/ads/data_manager/v1/version.rb"
+    },
     "google-ads-marketing_platform-admin": {
       "component": "google-ads-marketing_platform-admin",
       "version_file": "lib/google/ads/marketing_platform/admin/version.rb"
@@ -146,6 +154,14 @@
     "google-cloud-api_keys-v2": {
       "component": "google-cloud-api_keys-v2",
       "version_file": "lib/google/cloud/api_keys/v2/version.rb"
+    },
+    "google-cloud-api_registry": {
+      "component": "google-cloud-api_registry",
+      "version_file": "lib/google/cloud/api_registry/version.rb"
+    },
+    "google-cloud-api_registry-v1beta": {
+      "component": "google-cloud-api_registry-v1beta",
+      "version_file": "lib/google/cloud/api_registry/v1beta/version.rb"
     },
     "google-cloud-apigee_connect": {
       "component": "google-cloud-apigee_connect",
@@ -583,6 +599,14 @@
       "component": "google-cloud-data_labeling-v1beta1",
       "version_file": "lib/google/cloud/data_labeling/v1beta1/version.rb"
     },
+    "google-cloud-database_center": {
+      "component": "google-cloud-database_center",
+      "version_file": "lib/google/cloud/database_center/version.rb"
+    },
+    "google-cloud-database_center-v1beta": {
+      "component": "google-cloud-database_center-v1beta",
+      "version_file": "lib/google/cloud/database_center/v1beta/version.rb"
+    },
     "google-cloud-dataflow": {
       "component": "google-cloud-dataflow",
       "version_file": "lib/google/cloud/dataflow/version.rb"
@@ -911,6 +935,14 @@
       "component": "google-cloud-gsuite_add_ons-v1",
       "version_file": "lib/google/cloud/gsuite_add_ons/v1/version.rb"
     },
+    "google-cloud-hypercompute_cluster": {
+      "component": "google-cloud-hypercompute_cluster",
+      "version_file": "lib/google/cloud/hypercompute_cluster/version.rb"
+    },
+    "google-cloud-hypercompute_cluster-v1beta": {
+      "component": "google-cloud-hypercompute_cluster-v1beta",
+      "version_file": "lib/google/cloud/hypercompute_cluster/v1beta/version.rb"
+    },
     "google-cloud-iap": {
       "component": "google-cloud-iap",
       "version_file": "lib/google/cloud/iap/version.rb"
@@ -1006,6 +1038,10 @@
     "google-cloud-maintenance-api": {
       "component": "google-cloud-maintenance-api",
       "version_file": "lib/google/cloud/maintenance/api/version.rb"
+    },
+    "google-cloud-maintenance-api-v1": {
+      "component": "google-cloud-maintenance-api-v1",
+      "version_file": "lib/google/cloud/maintenance/api/v1/version.rb"
     },
     "google-cloud-maintenance-api-v1beta": {
       "component": "google-cloud-maintenance-api-v1beta",

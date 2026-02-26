@@ -29,7 +29,7 @@ def run
 end
 
 def list_blobs
-  capture(["gsutil", "ls", "gs://docs-staging-v2"]).split("\n")
+  capture(["gcloud", "storage", "ls", "gs://docs-staging-v2"]).split("\n")
 end
 
 def filter_blobs blobs

@@ -93,8 +93,9 @@ module Google
         # @!attribute [rw] blob_assets
         #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::BlobAsset>]
         #     Optional. The blob assets in this document. This is used to store the
-        #     content of the inline blobs in this document, e.g. image bytes, such that
-        #     it can be referenced by other fields in the document via asset id.
+        #     content of the inline blobs in this document, for example, image bytes,
+        #     such that it can be referenced by other fields in the document via asset
+        #     id.
         # @!attribute [rw] entity_validation_output
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput]
         #     The entity validation output for the document. This is the validation
@@ -106,7 +107,7 @@ module Google
         #     entity extraction results at different stages of the processing.
         # @!attribute [rw] entities_revision_id
         #   @return [::String]
-        #     The entity revision id that `document.entities` field is based on.
+        #     The entity revision ID that `document.entities` field is based on.
         #     If this field is set and `entities_revisions` is not empty, the entities in
         #     `document.entities` field are the entities in the entity revision with this
         #     id and `document.entity_validation_output` field is the
@@ -231,7 +232,7 @@ module Google
           #     A list of visually detected tokens on the page.
           # @!attribute [rw] visual_elements
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::VisualElement>]
-          #     A list of detected non-text visual elements e.g. checkbox,
+          #     A list of detected non-text visual elements, for example, checkbox,
           #     signature etc. on the page.
           # @!attribute [rw] tables
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::Table>]
@@ -322,9 +323,9 @@ module Google
             #   @return [::Float]
             #     Confidence of the current
             #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout Layout} within
-            #     context of the object this layout is for. e.g. confidence can be for a
-            #     single token, a table, a visual element, etc. depending on context.
-            #     Range `[0, 1]`.
+            #     context of the object this layout is for. For example, confidence can
+            #     be for a single token, a table, a visual element, etc. depending on
+            #     context. Range `[0, 1]`.
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1beta3::BoundingPoly]
             #     The bounding polygon for the
@@ -530,8 +531,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Detected non-text visual elements e.g. checkbox, signature etc. on the
-            # page.
+            # Detected non-text visual elements, for example, checkbox, signature etc.
+            # on the page.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout]
             #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout Layout} for
@@ -604,7 +605,8 @@ module Google
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout]
             #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout Layout} for the
             #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::FormField FormField}
-            #     name. e.g. `Address`, `Email`, `Grand total`, `Phone number`, etc.
+            #     name. For example, `Address`, `Email`, `Grand total`, `Phone number`,
+            #     etc.
             # @!attribute [rw] field_value
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout]
             #     {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout Layout} for the
@@ -715,10 +717,11 @@ module Google
           #     {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
-          #     Required. Entity type from a schema e.g. `Address`.
+          #     Required. Entity type from a schema, for example, `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
-          #     Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
+          #     Optional. Text value of the entity, for example, `1600 Amphitheatre
+          #     Pkwy`.
           # @!attribute [rw] mention_id
           #   @return [::String]
           #     Optional. Deprecated.  Use `id` field instead.
@@ -736,9 +739,9 @@ module Google
           # @!attribute [rw] normalized_value
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Entity::NormalizedValue]
           #     Optional. Normalized entity value. Absent if the extracted value could
-          #     not be converted or the type (e.g. address) is not supported for certain
-          #     parsers. This field is also only populated for certain supported document
-          #     types.
+          #     not be converted or the type (for example, address) is not supported for
+          #     certain parsers. This field is also only populated for certain supported
+          #     document types.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Entity>]
           #     Optional. Entities can be nested to form a hierarchical data structure
@@ -1090,7 +1093,7 @@ module Google
             # Human Review information of the document.
             # @!attribute [rw] state
             #   @return [::String]
-            #     Human review state. e.g. `requested`, `succeeded`, `rejected`.
+            #     Human review state. For example, `requested`, `succeeded`, `rejected`.
             # @!attribute [rw] state_message
             #   @return [::String]
             #     A message providing more details about the current state of processing.
@@ -1422,7 +1425,7 @@ module Google
               end
 
               # The chunk field in the chunk. A chunk field could be one of the various
-              # types (e.g. image, table) supported.
+              # types (for example, image, table) supported.
               # @!attribute [rw] image_chunk_field
               #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::ChunkedDocument::Chunk::ImageChunkField]
               #     The image chunk field in the chunk.
@@ -1441,14 +1444,14 @@ module Google
           end
 
           # Represents a blob asset. It's used to store the content of the inline blob
-          # in this document, e.g. image bytes, such that it can be referenced by
-          # other fields in the document via asset id.
+          # in this document, for example, image bytes, such that it can be referenced
+          # by other fields in the document via asset ID.
           # @!attribute [rw] asset_id
           #   @return [::String]
           #     Optional. The id of the blob asset.
           # @!attribute [rw] content
           #   @return [::String]
-          #     Optional. The content of the blob asset, e.g. image bytes.
+          #     Optional. The content of the blob asset, for example, image bytes.
           # @!attribute [rw] mime_type
           #   @return [::String]
           #     The mime type of the blob asset.
@@ -1474,7 +1477,7 @@ module Google
             # Validation result for a single validation rule.
             # @!attribute [rw] rule_name
             #   @return [::String]
-            #     The name of the validation rule.
+            #     The display name of the validation rule.
             # @!attribute [rw] rule_description
             #   @return [::String]
             #     The description of the validation rule.
@@ -1519,6 +1522,9 @@ module Google
           # @!attribute [rw] entity_validation_output
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput]
           #     The entity validation output for this revision.
+          # @!attribute [rw] provenance
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
+          #     Optional. The history of this revision.
           class EntitiesRevision
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

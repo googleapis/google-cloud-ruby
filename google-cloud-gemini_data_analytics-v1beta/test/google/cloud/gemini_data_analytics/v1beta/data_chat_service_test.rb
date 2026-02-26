@@ -207,6 +207,64 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
     end
   end
 
+  def test_delete_conversation
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_conversation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_conversation, name
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_conversation_client_stub do
+      # Create client
+      client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_conversation({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_conversation name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_conversation ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_conversation({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_conversation(::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteConversationRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_conversation_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_conversation
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GeminiDataAnalytics::V1beta::Conversation.new
@@ -403,6 +461,70 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
     end
   end
 
+  def test_query_data
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    prompt = "hello world"
+    context = {}
+    generation_options = {}
+
+    query_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_data, name
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["prompt"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataContext), request["context"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::GenerationOptions), request["generation_options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_data_client_stub do
+      # Create client
+      client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.query_data({ parent: parent, prompt: prompt, context: context, generation_options: generation_options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.query_data parent: parent, prompt: prompt, context: context, generation_options: generation_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.query_data ::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new(parent: parent, prompt: prompt, context: context, generation_options: generation_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.query_data({ parent: parent, prompt: prompt, context: context, generation_options: generation_options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.query_data(::Google::Cloud::GeminiDataAnalytics::V1beta::QueryDataRequest.new(parent: parent, prompt: prompt, context: context, generation_options: generation_options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_data_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -420,5 +542,25 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client::Configuration, config
+  end
+
+  def test_credentials
+    key = OpenSSL::PKey::RSA.new 2048
+    cred_json = {
+      "private_key" => key.to_pem,
+      "client_email" => "app@developer.gserviceaccount.com",
+      "type" => "service_account"
+    }
+    key_file = StringIO.new cred_json.to_json
+    creds = Google::Auth::ServiceAccountCredentials.make_creds({ json_key_io: key_file })
+
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client.new do |config|
+        config.credentials = creds
+      end
+      assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client, client
+      assert_equal creds, client.configure.credentials
+    end
   end
 end

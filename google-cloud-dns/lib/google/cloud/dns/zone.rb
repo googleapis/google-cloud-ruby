@@ -256,7 +256,7 @@ module Google
         # @param [String] name Return only records with this domain or subdomain
         #   name.
         # @param [String] type Return only records with this [record
-        #   type](https://cloud.google.com/dns/what-is-cloud-dns). If present,
+        #   type](https://cloud.google.com/dns/docs/records-overview). If present,
         #   the `name` parameter must also be present.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
@@ -505,7 +505,7 @@ module Google
         # @param [String] name The owner of the record. For example:
         #   `example.com.`.
         # @param [String] type The identifier of a [supported record
-        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   type](https://cloud.google.com/dns/docs/records-overview).
         #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         # @param [Integer] ttl The number of seconds that the record can be
         #   cached by resolvers.
@@ -547,7 +547,7 @@ module Google
         # @param [String] name The owner of the record. For example:
         #   `example.com.`.
         # @param [String] type The identifier of a [supported record
-        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   type](https://cloud.google.com/dns/docs/records-overview).
         #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         # @param [Boolean] skip_soa Do not automatically update the SOA record
         #   serial number. See {#update} for details.
@@ -581,7 +581,7 @@ module Google
         # @param [String] name The owner of the record. For example:
         #   `example.com.`.
         # @param [String] type The identifier of a [supported record
-        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   type](https://cloud.google.com/dns/docs/records-overview).
         #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         # @param [Integer] ttl The number of seconds that the record can be
         #   cached by resolvers.
@@ -627,7 +627,7 @@ module Google
         # @param [String] name The owner of the record. For example:
         #   `example.com.`.
         # @param [String] type The identifier of a [supported record
-        #   type](https://cloud.google.com/dns/what-is-cloud-dns).
+        #   type](https://cloud.google.com/dns/docs/records-overview).
         #   For example: `A`, `AAAA`, `CNAME`, `MX`, or `TXT`.
         # @param [Boolean] skip_soa Do not automatically update the SOA record
         #   serial number. See {#update} for details.

@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/ads/datamanager/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-ads-data_manager/$1

@@ -60,6 +60,9 @@ module Google
         # @!attribute [rw] total_cpu_core_count
         #   @return [::Integer]
         #     Total CPU core count of the database node.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The date and time that the database node was created.
         class DbNodeProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

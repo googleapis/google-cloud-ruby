@@ -688,6 +688,35 @@
         }
       }
     },
+    "GeneratorEvaluations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client",
+          "rpcs": {
+            "CreateGeneratorEvaluation": {
+              "methods": [
+                "create_generator_evaluation"
+              ]
+            },
+            "GetGeneratorEvaluation": {
+              "methods": [
+                "get_generator_evaluation"
+              ]
+            },
+            "ListGeneratorEvaluations": {
+              "methods": [
+                "list_generator_evaluations"
+              ]
+            },
+            "DeleteGeneratorEvaluation": {
+              "methods": [
+                "delete_generator_evaluation"
+              ]
+            }
+          }
+        }
+      }
+    },
     "KnowledgeBases": {
       "clients": {
         "grpc": {
@@ -716,6 +745,74 @@
             "UpdateKnowledgeBase": {
               "methods": [
                 "update_knowledge_base"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SipTrunks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::SipTrunks::Client",
+          "rpcs": {
+            "CreateSipTrunk": {
+              "methods": [
+                "create_sip_trunk"
+              ]
+            },
+            "DeleteSipTrunk": {
+              "methods": [
+                "delete_sip_trunk"
+              ]
+            },
+            "ListSipTrunks": {
+              "methods": [
+                "list_sip_trunks"
+              ]
+            },
+            "GetSipTrunk": {
+              "methods": [
+                "get_sip_trunk"
+              ]
+            },
+            "UpdateSipTrunk": {
+              "methods": [
+                "update_sip_trunk"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Tools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Tools::Client",
+          "rpcs": {
+            "CreateTool": {
+              "methods": [
+                "create_tool"
+              ]
+            },
+            "GetTool": {
+              "methods": [
+                "get_tool"
+              ]
+            },
+            "ListTools": {
+              "methods": [
+                "list_tools"
+              ]
+            },
+            "DeleteTool": {
+              "methods": [
+                "delete_tool"
+              ]
+            },
+            "UpdateTool": {
+              "methods": [
+                "update_tool"
               ]
             }
           }

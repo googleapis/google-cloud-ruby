@@ -42,10 +42,16 @@ module Google
             rpc :GetDataAgent, ::Google::Cloud::GeminiDataAnalytics::V1beta::GetDataAgentRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent
             # Creates a new DataAgent in a given project and location.
             rpc :CreateDataAgent, ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest, ::Google::Longrunning::Operation
+            # Creates a new DataAgent in a given project and location synchronously.
+            rpc :CreateDataAgentSync, ::Google::Cloud::GeminiDataAnalytics::V1beta::CreateDataAgentRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent
             # Updates the parameters of a single DataAgent.
             rpc :UpdateDataAgent, ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single DataAgent synchronously.
+            rpc :UpdateDataAgentSync, ::Google::Cloud::GeminiDataAnalytics::V1beta::UpdateDataAgentRequest, ::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent
             # Deletes a single DataAgent.
             rpc :DeleteDataAgent, ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest, ::Google::Longrunning::Operation
+            # Deletes a single DataAgent synchronously.
+            rpc :DeleteDataAgentSync, ::Google::Cloud::GeminiDataAnalytics::V1beta::DeleteDataAgentRequest, ::Google::Protobuf::Empty
             # Gets the IAM policy for DataAgent
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the IAM policy for a DataAgent.

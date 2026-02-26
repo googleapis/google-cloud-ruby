@@ -29,13 +29,13 @@ module Google
         #     Insert new rows in a table. If any of the rows already exist,
         #     the write or transaction fails with error `ALREADY_EXISTS`.
         #
-        #     Note: The following fields are mutually exclusive: `insert`, `update`, `insert_or_update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `insert`, `update`, `insert_or_update`, `replace`, `delete`, `send`, `ack`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Update existing rows in a table. If any of the rows does not
         #     already exist, the transaction fails with error `NOT_FOUND`.
         #
-        #     Note: The following fields are mutually exclusive: `update`, `insert`, `insert_or_update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `update`, `insert`, `insert_or_update`, `replace`, `delete`, `send`, `ack`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] insert_or_update
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row
@@ -48,7 +48,7 @@ module Google
         #     columns in the table must be given a value. This holds true even when the
         #     row already exists and will therefore actually be updated.
         #
-        #     Note: The following fields are mutually exclusive: `insert_or_update`, `insert`, `update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `insert_or_update`, `insert`, `update`, `replace`, `delete`, `send`, `ack`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] replace
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row
@@ -62,13 +62,23 @@ module Google
         #     also deletes the child rows. Otherwise, you must delete the
         #     child rows before you replace the parent row.
         #
-        #     Note: The following fields are mutually exclusive: `replace`, `insert`, `update`, `insert_or_update`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `replace`, `insert`, `update`, `insert_or_update`, `delete`, `send`, `ack`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Delete]
         #     Delete rows from a table. Succeeds whether or not the named
         #     rows were present.
         #
-        #     Note: The following fields are mutually exclusive: `delete`, `insert`, `update`, `insert_or_update`, `replace`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `delete`, `insert`, `update`, `insert_or_update`, `replace`, `send`, `ack`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] send
+        #   @return [::Google::Cloud::Spanner::V1::Mutation::Send]
+        #     Send a message to a queue.
+        #
+        #     Note: The following fields are mutually exclusive: `send`, `insert`, `update`, `insert_or_update`, `replace`, `delete`, `ack`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ack
+        #   @return [::Google::Cloud::Spanner::V1::Mutation::Ack]
+        #     Ack a message from a queue.
+        #
+        #     Note: The following fields are mutually exclusive: `ack`, `insert`, `update`, `insert_or_update`, `replace`, `delete`, `send`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Mutation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,6 +128,46 @@ module Google
           #     used to create the table). Delete is idempotent. The transaction will
           #     succeed even if some or all rows do not exist.
           class Delete
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Arguments to {::Google::Cloud::Spanner::V1::Mutation#send send} operations.
+          # @!attribute [rw] queue
+          #   @return [::String]
+          #     Required. The queue to which the message will be sent.
+          # @!attribute [rw] key
+          #   @return [::Google::Protobuf::ListValue]
+          #     Required. The primary key of the message to be sent.
+          # @!attribute [rw] deliver_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which Spanner will begin attempting to deliver the message.
+          #     If `deliver_time` is not set, Spanner will deliver the message
+          #     immediately. If `deliver_time` is in the past, Spanner will replace it
+          #     with a value closer to the current time.
+          # @!attribute [rw] payload
+          #   @return [::Google::Protobuf::Value]
+          #     The payload of the message.
+          class Send
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Arguments to {::Google::Cloud::Spanner::V1::Mutation#ack ack} operations.
+          # @!attribute [rw] queue
+          #   @return [::String]
+          #     Required. The queue where the message to be acked is stored.
+          # @!attribute [rw] key
+          #   @return [::Google::Protobuf::ListValue]
+          #     Required. The primary key of the message to be acked.
+          # @!attribute [rw] ignore_not_found
+          #   @return [::Boolean]
+          #     By default, an attempt to ack a message that does not exist will fail
+          #     with a `NOT_FOUND` error. With `ignore_not_found` set to true, the ack
+          #     will succeed even if the message does not exist. This is useful for
+          #     unconditionally acking a message, even if it is missing or has already
+          #     been acked.
+          class Ack
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -1,5 +1,32 @@
 # Release History
 
+### 3.2.0 (2026-01-30)
+
+#### Features
+
+* Support adhoc debug logging ([#32404](https://github.com/googleapis/google-cloud-ruby/issues/32404)) 
+
+### 3.1.1 (2025-12-16)
+
+#### Bug Fixes
+
+* Remove get_topic lookup when publishing via lazy loading ([#32273](https://github.com/googleapis/google-cloud-ruby/issues/32273)) 
+
+### 3.1.0 (2025-12-12)
+
+#### Features
+
+* Add skip_lookup to Project#publisher to enable lazy loading ([#32263](https://github.com/googleapis/google-cloud-ruby/issues/32263)) 
+#### Documentation
+
+* Fix overview documentation URL 
+
+### 3.0.3 (2025-11-04)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials ([#32121](https://github.com/googleapis/google-cloud-ruby/issues/32121)) 
+
 ### 3.0.2 (2025-08-12)
 
 #### Bug Fixes

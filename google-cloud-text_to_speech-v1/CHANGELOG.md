@@ -1,5 +1,17 @@
 # Release History
 
+### 1.15.1 (2025-10-27)
+
+#### Documentation
+
+* add warning about loading unvalidated credentials 
+
+### 1.15.0 (2025-10-22)
+
+#### Features
+
+* add `relax_safety_filters` proto field for Gemini TTS ([#31788](https://github.com/googleapis/google-cloud-ruby/issues/31788)) 
+
 ### 1.14.0 (2025-10-08)
 
 #### Features

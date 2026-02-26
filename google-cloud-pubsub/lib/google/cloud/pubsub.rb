@@ -14,6 +14,7 @@
 
 
 require "google-cloud-pubsub"
+require "google/cloud/pubsub/internal_logger"
 require "google/cloud/pubsub/project"
 require "google/cloud/config"
 require "google/cloud/env"
@@ -43,9 +44,24 @@ module Google
       # @param [String] project_id Project identifier for the Pub/Sub service
       #   you are connecting to. If not present, the default project for the
       #   credentials is used.
-      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
-      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {PubSub::Credentials})
+      # @param [Google::Auth::Credentials] credentials A Google::Auth::Credentials
+      #   object. (See {PubSub::Credentials})
+      #   @note Warning: Passing a `String` to a keyfile path or a `Hash` of credentials
+      #     is deprecated. Providing an unvalidated credential configuration to
+      #     Google APIs can compromise the security of your systems and data.
+      #
+      #   @example
+      #
+      #     # The recommended way to provide credentials is to use the `make_creds` method
+      #     # on the appropriate credentials class for your environment.
+      #
+      #     require "googleauth"
+      #
+      #     credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
+      #       json_key_io: ::File.open("/path/to/keyfile.json")
+      #     )
+      #
+      #     pubsub = Google::Cloud::Pubsub.new project_id: "my-project", credentials: credentials
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -55,11 +71,16 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/pubsub`
       # @param [Numeric] timeout Default timeout to use in requests. Optional.
+      # @param [String] universe_domain A custom universe domain. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
-      # @param universe_domain [String] A custom universe domain. Optional.
+      # @param [Logger] logger Optional Logger instance for emitting
+      #   library-level debug logs. If not provided, it will default to
+      #   configure.logger, which defaults to Logger.new STDOUT if not set. To
+      #   enable logging, set environment variable GOOGLE_SDK_RUBY_LOGGING_GEMS
+      #   to "all" or a comma separated list of gem names, including "pubsub".
       #
       # @return [Google::Cloud::PubSub::Project]
       #
@@ -77,13 +98,15 @@ module Google
                    timeout: nil,
                    universe_domain: nil,
                    endpoint: nil,
-                   emulator_host: nil
+                   emulator_host: nil,
+                   logger: nil
         project_id ||= default_project_id
         scope ||= configure.scope
         timeout ||= configure.timeout
         endpoint ||= configure.endpoint
         universe_domain ||= configure.universe_domain
         emulator_host ||= configure.emulator_host
+        logger ||= configure.logger
 
         if emulator_host
           credentials = :this_channel_is_insecure
@@ -99,10 +122,12 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
+        logger = Google::Cloud::PubSub::InternalLogger.new logger
         service = PubSub::Service.new project_id, credentials,
                                       host: endpoint,
                                       timeout: timeout,
-                                      universe_domain: universe_domain
+                                      universe_domain: universe_domain,
+                                      logger: logger
         PubSub::Project.new service
       end
 

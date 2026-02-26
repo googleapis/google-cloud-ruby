@@ -420,6 +420,7 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
 
     # Create request parameters for a unary method.
     name = "hello world"
+    major_revision_id = 42
 
     get_cloud_control_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -435,27 +436,27 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::Rest::ClientTest < M
         end
 
         # Use hash object
-        client.get_cloud_control({ name: name }) do |_result, response|
+        client.get_cloud_control({ name: name, major_revision_id: major_revision_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cloud_control name: name do |_result, response|
+        client.get_cloud_control name: name, major_revision_id: major_revision_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name) do |_result, response|
+        client.get_cloud_control ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cloud_control({ name: name }, call_options) do |_result, response|
+        client.get_cloud_control({ name: name, major_revision_id: major_revision_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name), call_options) do |_result, response|
+        client.get_cloud_control(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlRequest.new(name: name, major_revision_id: major_revision_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
