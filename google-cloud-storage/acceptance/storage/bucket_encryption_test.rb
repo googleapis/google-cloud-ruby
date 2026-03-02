@@ -115,5 +115,12 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
       _(bucket.customer_managed_encryption_enforcement_config).must_be :nil?
     end
 
+    it "can update its customer supplied encryption config to nil without changing the kms key" do
+      kms_key_before = bucket.default_kms_key
+      bucket.customer_supplied_encryption_enforcement_config = nil
+      bucket.reload!
+      _(bucket.default_kms_key).must_equal kms_key_before
+    end
+
   end
 end
