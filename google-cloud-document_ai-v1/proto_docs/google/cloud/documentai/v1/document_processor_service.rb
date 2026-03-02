@@ -68,6 +68,12 @@ module Google
           #   @return [::Boolean]
           #     Optional. Whether to include bounding boxes in layout parser processor
           #     response.
+          # @!attribute [rw] enable_image_annotation
+          #   @return [::Boolean]
+          #     Optional. Whether to include image annotations in layout parser response.
+          # @!attribute [rw] enable_table_annotation
+          #   @return [::Boolean]
+          #     Optional. Whether to include table annotations in layout parser response.
           class LayoutConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
