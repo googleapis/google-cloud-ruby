@@ -91,31 +91,25 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
       _(bucket.customer_supplied_encryption_enforcement_config).must_be_nil
     end
 
-    # it "gets, sets and clears customer managed encryption enforcement config" do
-    #   # set customer managed encryption enforcement config to bucket   
-    #   bucket.customer_managed_encryption_enforcement_config = customer_managed_config
-    #   bucket.reload!
-    #   # get customer managed encryption enforcement config from bucket and verify its values
-    #   _(bucket.customer_managed_encryption_enforcement_config).wont_be_nil
-    #   _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
-    #   # clear customer managed encryption enforcement config from bucket
-    #   bucket.customer_managed_encryption_enforcement_config = nil
-    #   bucket.reload!
-    #   _(bucket.customer_managed_encryption_enforcement_config).must_be_nil
-    # end
+    it "gets, sets and clears customer managed encryption enforcement config" do
+      # get customer managed encryption enforcement config from bucket and verify its values
+      _(bucket.customer_managed_encryption_enforcement_config).wont_be_nil
+      _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+      # clear customer managed encryption enforcement config from bucket
+      bucket.customer_managed_encryption_enforcement_config = nil
+      bucket.reload!
+      _(bucket.customer_managed_encryption_enforcement_config).must_be_nil
+    end
 
-    # it "gets, sets and clears google managed encryption enforcement config" do
-    #   # set google managed encryption enforcement config to bucket    
-    #   bucket.google_managed_encryption_enforcement_config = google_managed_config
-    #   bucket.reload!
-    #   # get google managed encryption enforcement config from bucket and verify its values
-    #   _(bucket.google_managed_encryption_enforcement_config).wont_be_nil
-    #   _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
-    #   # clear google managed encryption enforcement config from bucket
-    #   bucket.google_managed_encryption_enforcement_config = nil
-    #   bucket.reload!
-    #   _(bucket.google_managed_encryption_enforcement_config).must_be_nil
-    # end
+    it "gets, sets and clears google managed encryption enforcement config" do
+      # get google managed encryption enforcement config from bucket and verify its values
+      _(bucket.google_managed_encryption_enforcement_config).wont_be_nil
+      _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+      # clear google managed encryption enforcement config from bucket
+      bucket.google_managed_encryption_enforcement_config = nil
+      bucket.reload!
+      _(bucket.google_managed_encryption_enforcement_config).must_be_nil
+    end
 
     it "raises error when setting invalid encryption enforcement config" do
       expect {bucket.customer_supplied_encryption_enforcement_config = customer_supplied_config1}.must_raise Google::Cloud::InvalidArgumentError
