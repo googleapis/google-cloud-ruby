@@ -31,8 +31,12 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     b
   end
 
+  before do
+    # always create the bucket
+    bucket
+  end
 
-  after(:all) do
+  after do
     bucket.files.all &:delete
     safe_gcs_execute { bucket.delete }
   end
