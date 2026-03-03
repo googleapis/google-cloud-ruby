@@ -1927,6 +1927,16 @@
               "methods": [
                 "corroborate_content"
               ]
+            },
+            "AskContexts": {
+              "methods": [
+                "ask_contexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "async_retrieve_contexts"
+              ]
             }
           }
         }

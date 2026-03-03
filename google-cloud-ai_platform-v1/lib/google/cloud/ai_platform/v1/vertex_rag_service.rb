@@ -24,6 +24,7 @@ require "google/cloud/ai_platform/v1/version"
 
 require "google/cloud/ai_platform/v1/vertex_rag_service/credentials"
 require "google/cloud/ai_platform/v1/vertex_rag_service/paths"
+require "google/cloud/ai_platform/v1/vertex_rag_service/operations"
 require "google/cloud/ai_platform/v1/vertex_rag_service/client"
 require "google/cloud/ai_platform/v1/vertex_rag_service/rest"
 

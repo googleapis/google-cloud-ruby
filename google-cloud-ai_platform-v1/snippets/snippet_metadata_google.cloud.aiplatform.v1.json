@@ -13052,6 +13052,86 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_AskContexts_sync",
+      "title": "Snippet for the ask_contexts call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#ask_contexts.",
+      "file": "vertex_rag_service/ask_contexts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ask_contexts",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#ask_contexts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AskContextsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::AskContextsResponse",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "AskContexts",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.AskContexts",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_AsyncRetrieveContexts_sync",
+      "title": "Snippet for the async_retrieve_contexts call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#async_retrieve_contexts.",
+      "file": "vertex_rag_service/async_retrieve_contexts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "async_retrieve_contexts",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#async_retrieve_contexts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "AsyncRetrieveContexts",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.AsyncRetrieveContexts",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_VizierService_CreateStudy_sync",
       "title": "Snippet for the create_study call in the VizierService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VizierService::Client#create_study.",
