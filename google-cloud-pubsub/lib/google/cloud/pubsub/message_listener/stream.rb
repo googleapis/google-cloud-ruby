@@ -145,9 +145,8 @@ module Google
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
-            removed_items = {}
             synchronize do
-              removed_items = @inventory.remove ack_ids
+              @inventory.remove ack_ids
               @subscriber.buffer.acknowledge ack_ids, callback
             end
 
@@ -160,9 +159,8 @@ module Google
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
-            removed_items = {}
             synchronize do
-              removed_items = @inventory.remove mod_ack_ids
+              @inventory.remove mod_ack_ids
               @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
 
