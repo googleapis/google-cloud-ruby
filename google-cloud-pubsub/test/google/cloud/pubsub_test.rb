@@ -249,7 +249,7 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
             Google::Cloud::PubSub::Service.stub :new, stubbed_service do
-              pubsub = Google::Cloud::PubSub.new timeout: timeout
+              Google::Cloud::PubSub.new timeout: timeout
             end
           end
         end

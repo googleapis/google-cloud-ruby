@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
 
     expected_messages_hash = {
       "" => [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".b)
       ]
     }
     published_messages_hash = publisher.service.mocked_topic_admin.message_hash
@@ -129,7 +129,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg0", result.msg_id
-      assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
+      assert_equal "\xE3\x81\x82".b, result.data
       callback_called = true
     end
 
@@ -146,7 +146,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
 
     expected_messages_hash = {
       "" => [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), message_id: "msg0")
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".b, message_id: "msg0")
       ]
     }
     published_messages_hash = publisher.service.mocked_topic_admin.message_hash
@@ -170,7 +170,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
         assert_kind_of Google::Cloud::PubSub::PublishResult, result
         assert result.succeeded?
         assert_equal "msg0", result.msg_id
-        assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
+        assert_equal "\xE3\x81\x82".b, result.data
         callback_called = true
       end
     end
@@ -188,7 +188,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
 
     expected_messages_hash = {
       "" => [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), message_id: "msg0")
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".b, message_id: "msg0")
       ]
     }
     published_messages_hash = publisher.service.mocked_topic_admin.message_hash
@@ -207,7 +207,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg0", result.msg_id
-      assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
+      assert_equal "async-message".b, result.data
       assert_equal "text", result.attributes["format"]
       callback_called = true
     end
@@ -225,7 +225,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
 
     expected_messages_hash = {
       "" => [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"}, message_id: "msg0")
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".b, attributes: {"format" => "text"}, message_id: "msg0")
       ]
     }
     published_messages_hash = publisher.service.mocked_topic_admin.message_hash
@@ -257,7 +257,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
 
       expected_messages_hash = {
         "" => [
-          Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+          Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".b)
         ]
       }
       published_messages_hash = publisher.service.mocked_topic_admin.message_hash
@@ -275,7 +275,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
         assert_kind_of Google::Cloud::PubSub::PublishResult, result
         assert result.succeeded?
         assert_equal "msg0", result.msg_id
-        assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
+        assert_equal "async-message".b, result.data
         assert_equal "text", result.attributes["format"]
         callback_called = true
       end
@@ -293,7 +293,7 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
 
       expected_messages_hash = {
         "" => [
-          Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" }, message_id: "msg0")
+          Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".b, attributes: { "format" => "text" }, message_id: "msg0")
         ]
       }
       published_messages_hash = publisher.service.mocked_topic_admin.message_hash

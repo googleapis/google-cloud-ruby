@@ -14,7 +14,6 @@
 
 
 require "google/cloud/pubsub/service"
-require "google/cloud/pubsub/subscriber"
 require "google/cloud/pubsub/message_listener/stream"
 require "google/cloud/pubsub/message_listener/timed_unary_buffer"
 require "monitor"

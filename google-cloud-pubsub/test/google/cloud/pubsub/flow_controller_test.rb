@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
 
   it "raises when limit_exceeded_behavior is illegal value" do
     expect do
-      flow_controller = Google::Cloud::PubSub::FlowController.new(
+      Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
         byte_limit: 10_000_000,
         limit_exceeded_behavior: :badvalue
@@ -226,7 +226,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
 
     it "raises when a single message is > message_limit" do
       expect do
-        flow_controller = Google::Cloud::PubSub::FlowController.new(
+        Google::Cloud::PubSub::FlowController.new(
           message_limit: 0, # Non-sane setting
           byte_limit: 10_000_000,
           limit_exceeded_behavior: :block
@@ -386,7 +386,6 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       adding_2_done = Concurrent::Event.new
       adding_3_done = Concurrent::Event.new
       adding_4_done = Concurrent::Event.new
-      releasing_1_done = Concurrent::Event.new
 
       run_in_thread flow_controller, :acquire, 3, adding_1_done
       assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
@@ -567,7 +566,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
           flow_controller.send action, msg
         end
         all_done_event.set
-      rescue Google::Cloud::PubSub::FlowControlLimitError => e
+      rescue Google::Cloud::PubSub::FlowControlLimitError
         error_event.set if error_event
       end
     end
