@@ -20,6 +20,8 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
+  let(:kms_key) { "path/to/encryption_key_name" }
+
 
   describe "customer-supplied encryption key (CSEK)" do
     let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
@@ -70,11 +72,9 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
   end
 
   describe "KMS customer-managed encryption key (CMEK)" do
-    let(:kms_key) { "path/to/encryption_key_name" }
-
     it "gets and sets its encryption config" do
       mock = Minitest::Mock.new
-      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(kms_key)
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(key_name: kms_key)
       mock.expect :patch_bucket, patch_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
       bucket.service.mocked_service = mock
@@ -88,11 +88,12 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
     it "sets its encryption config to nil" do
       bucket_gapi_with_key = bucket_gapi.dup
-      bucket_gapi_with_key.encryption = encryption_gapi(kms_key)
+      bucket_gapi_with_key.encryption = encryption_gapi(key_name: kms_key)
       bucket_with_key = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi_with_key, storage.service
-      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(nil)
       mock = Minitest::Mock.new
-      mock.expect :patch_bucket, bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
+      mock.expect :patch_bucket, bucket_gapi do |name, patch_obj, **args|
+        name == bucket_name && patch_obj.encryption&.default_kms_key_name.nil?
+      end
 
       bucket_with_key.service.mocked_service = mock
 
@@ -121,7 +122,6 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
       end
     end
   end
-
 
   def create_file_gapi bucket=nil, name = nil
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
