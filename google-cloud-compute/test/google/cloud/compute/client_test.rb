@@ -640,6 +640,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_health_aggregation_policies_rest
+    skip unless Google::Cloud::Compute.region_health_aggregation_policies_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_health_aggregation_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionHealthAggregationPolicies::Rest::Client, client
+    end
+  end
+
   def test_region_health_check_services_rest
     skip unless Google::Cloud::Compute.region_health_check_services_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -847,6 +857,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client, client
+    end
+  end
+
+  def test_reservation_slots_rest
+    skip unless Google::Cloud::Compute.reservation_slots_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.reservation_slots do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ReservationSlots::Rest::Client, client
     end
   end
 
