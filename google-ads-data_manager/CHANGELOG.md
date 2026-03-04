@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2026-03-04)
+
+#### Features
+
+* add `UserListService` for creating and managing user lists ([#32774](https://github.com/googleapis/google-cloud-ruby/issues/32774)) 
+
 ### 0.1.0 (2025-10-29)
 
 #### Features
