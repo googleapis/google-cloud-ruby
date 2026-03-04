@@ -465,7 +465,7 @@ module Google
         #     be assumed until a subsequent `Commit` call completes successfully.
         # @!attribute [rw] routing_hint
         #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
-        #     Optional. If present, it makes the Spanner requests location-aware.
+        #     Optional. Makes the Spanner requests location-aware if present.
         #
         #     It gives the server hints that can be used to route the request
         #     to an appropriate server, potentially significantly decreasing latency and
@@ -962,7 +962,7 @@ module Google
         #     transactions.
         # @!attribute [rw] routing_hint
         #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
-        #     Optional. If present, it makes the Spanner requests location-aware.
+        #     Optional. Makes the Spanner requests location-aware if present.
         #
         #     It gives the server hints that can be used to route the request
         #     to an appropriate server, potentially significantly decreasing latency and
@@ -1059,6 +1059,14 @@ module Google
         #     that commit mutations but don't perform any reads or queries. You must
         #     randomly select one of the mutations from the mutation set and send it as a
         #     part of this request.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. Makes the Spanner requests location-aware if present.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class BeginTransactionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1112,6 +1120,14 @@ module Google
         #     session, then you must include the precommit token with the highest
         #     sequence number received in this transaction attempt. Failing to do so
         #     results in a `FailedPrecondition` error.
+        # @!attribute [rw] routing_hint
+        #   @return [::Google::Cloud::Spanner::V1::RoutingHint]
+        #     Optional. Makes the Spanner requests location-aware if present.
+        #
+        #     It gives the server hints that can be used to route the request
+        #     to an appropriate server, potentially significantly decreasing latency and
+        #     improving throughput. To achieve improved performance, most fields must be
+        #     filled in with accurate values.
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
