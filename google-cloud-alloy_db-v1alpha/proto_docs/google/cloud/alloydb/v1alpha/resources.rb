@@ -560,6 +560,9 @@ module Google
         #     created per-cluster per-project, and is different from the per-project
         #     service account. The per-cluster service account naming format is subject
         #     to change.
+        # @!attribute [rw] dataplex_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::DataplexConfig]
+        #     Optional. Configuration for Dataplex integration.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -638,6 +641,17 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     grace end time of the cluster.
           class TrialMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for Dataplex integration.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Dataplex is enabled by default for resources such as clusters and
+          #     instances. This flag controls the integration of AlloyDB PG
+          #     resources (like databases, schemas, and tables) with Dataplex."
+          class DataplexConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
