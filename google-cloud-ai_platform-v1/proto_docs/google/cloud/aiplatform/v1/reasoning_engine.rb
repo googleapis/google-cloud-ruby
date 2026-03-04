@@ -146,6 +146,13 @@ module Google
           # @!attribute [rw] python_spec
           #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::PythonSpec]
           #     Configuration for a Python application.
+          #
+          #     Note: The following fields are mutually exclusive: `python_spec`, `image_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] image_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec::ImageSpec]
+          #     Optional. Configuration for building an image with custom config file.
+          #
+          #     Note: The following fields are mutually exclusive: `image_spec`, `python_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SourceCodeSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -158,6 +165,26 @@ module Google
             class InlineSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The image spec for building an image (within a single build step), based
+            # on the config file (i.e. Dockerfile) in the source directory.
+            # @!attribute [rw] build_args
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. Build arguments to be used. They will be passed through
+            #     --build-arg flags.
+            class ImageSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class BuildArgsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # Specifies the configuration for fetching source code from a Git
