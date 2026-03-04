@@ -1,5 +1,11 @@
 # Release History
 
+### 3.2.1 (2026-03-04)
+
+#### Bug Fixes
+
+* clean up warnings for pubsub veneer ([#32785](https://github.com/googleapis/google-cloud-ruby/issues/32785)) 
+
 ### 3.2.0 (2026-01-30)
 
 #### Features
