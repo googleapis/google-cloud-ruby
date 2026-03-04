@@ -46,8 +46,9 @@ module Google
             # Creates a GitRepositoryLink. Upon linking a Git Repository, Developer
             # Connect will configure the Git Repository to send webhook events to
             # Developer Connect. Connections that use Firebase GitHub Application will
-            # have events forwarded to the Firebase service. All other Connections will
-            # have events forwarded to Cloud Build.
+            # have events forwarded to the Firebase service. Connections that use Gemini
+            # Code Assist will have events forwarded to Gemini Code Assist service. All
+            # other Connections will have events forwarded to Cloud Build.
             rpc :CreateGitRepositoryLink, ::Google::Cloud::DeveloperConnect::V1::CreateGitRepositoryLinkRequest, ::Google::Longrunning::Operation
             # Deletes a single GitRepositoryLink.
             rpc :DeleteGitRepositoryLink, ::Google::Cloud::DeveloperConnect::V1::DeleteGitRepositoryLinkRequest, ::Google::Longrunning::Operation
@@ -89,6 +90,10 @@ module Google
             rpc :FetchSelf, ::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest, ::Google::Cloud::DeveloperConnect::V1::User
             # Delete the User based on the user credentials.
             rpc :DeleteSelf, ::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest, ::Google::Longrunning::Operation
+            # Starts OAuth flow for an account connector.
+            rpc :StartOAuth, ::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest, ::Google::Cloud::DeveloperConnect::V1::StartOAuthResponse
+            # Finishes OAuth flow for an account connector.
+            rpc :FinishOAuth, ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest, ::Google::Cloud::DeveloperConnect::V1::FinishOAuthResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -23,13 +23,20 @@ module Google
       module V1
         # The InsightsConfig resource is the core configuration object to capture
         # events from your Software Development Lifecycle. It acts as the central hub
-        # for managing how Developer connect understands your application, its runtime
+        # for managing how Developer Connect understands your application, its runtime
         # environments, and the artifacts deployed within them.
         # @!attribute [rw] app_hub_application
         #   @return [::String]
         #     Optional. The name of the App Hub Application.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/applications/\\{application}
+        #
+        #     Note: The following fields are mutually exclusive: `app_hub_application`, `projects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] projects
+        #   @return [::Google::Cloud::Developerconnect::V1::Projects]
+        #     Optional. The projects to track with the InsightsConfig.
+        #
+        #     Note: The following fields are mutually exclusive: `projects`, `app_hub_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The name of the InsightsConfig.
@@ -37,10 +44,10 @@ module Google
         #     projects/\\{project}/locations/\\{location}/insightsConfigs/\\{insightsConfig}
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. [Output only] Create timestamp
+        #     Output only. Create timestamp.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. [Output only] Update timestamp
+        #     Output only. Update timestamp.
         # @!attribute [r] runtime_configs
         #   @return [::Array<::Google::Cloud::Developerconnect::V1::RuntimeConfig>]
         #     Output only. The runtime configurations where the application is deployed.
@@ -109,14 +116,38 @@ module Google
           end
         end
 
+        # Projects represents the projects to track with the InsightsConfig.
+        # @!attribute [rw] project_ids
+        #   @return [::Array<::String>]
+        #     Optional. The project IDs.
+        #     Format: \\{project}
+        class Projects
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # RuntimeConfig represents the runtimes where the application is
         # deployed.
         # @!attribute [r] gke_workload
         #   @return [::Google::Cloud::Developerconnect::V1::GKEWorkload]
         #     Output only. Google Kubernetes Engine runtime.
+        #
+        #     Note: The following fields are mutually exclusive: `gke_workload`, `google_cloud_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] google_cloud_run
+        #   @return [::Google::Cloud::Developerconnect::V1::GoogleCloudRun]
+        #     Output only. Cloud Run runtime.
+        #
+        #     Note: The following fields are mutually exclusive: `google_cloud_run`, `gke_workload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] app_hub_workload
         #   @return [::Google::Cloud::Developerconnect::V1::AppHubWorkload]
         #     Output only. App Hub Workload.
+        #
+        #     Note: The following fields are mutually exclusive: `app_hub_workload`, `app_hub_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] app_hub_service
+        #   @return [::Google::Cloud::Developerconnect::V1::AppHubService]
+        #     Output only. App Hub Service.
+        #
+        #     Note: The following fields are mutually exclusive: `app_hub_service`, `app_hub_workload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uri
         #   @return [::String]
         #     Required. Immutable. The URI of the runtime configuration.
@@ -159,6 +190,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # GoogleCloudRun represents the Cloud Run runtime.
+        # @!attribute [rw] service_uri
+        #   @return [::String]
+        #     Required. Immutable. The name of the Cloud Run service.
+        #     Format:
+        #     `projects/{project}/locations/{location}/services/{service}`.
+        class GoogleCloudRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # AppHubWorkload represents the App Hub Workload.
         # @!attribute [r] workload
         #   @return [::String]
@@ -176,10 +218,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AppHubService represents the App Hub Service.
+        # @!attribute [r] apphub_service
+        #   @return [::String]
+        #     Required. Output only. Immutable. The name of the App Hub Service.
+        #     Format:
+        #     `projects/{project}/locations/{location}/applications/{application}/services/{service}`.
+        # @!attribute [r] criticality
+        #   @return [::String]
+        #     Output only. The criticality of the App Hub Service.
+        # @!attribute [r] environment
+        #   @return [::String]
+        #     Output only. The environment of the App Hub Service.
+        class AppHubService
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The artifact config of the artifact that is deployed.
         # @!attribute [rw] google_artifact_registry
         #   @return [::Google::Cloud::Developerconnect::V1::GoogleArtifactRegistry]
-        #     Optional. Set if the artifact is stored in Artifact regsitry.
+        #     Optional. Set if the artifact is stored in Artifact registry.
         # @!attribute [rw] google_artifact_analysis
         #   @return [::Google::Cloud::Developerconnect::V1::GoogleArtifactAnalysis]
         #     Optional. Set if the artifact metadata is stored in Artifact analysis.
@@ -211,6 +270,150 @@ module Google
         #   @return [::String]
         #     Required. Immutable. The name of the artifact registry package.
         class GoogleArtifactRegistry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The DeploymentEvent resource represents the deployment of the artifact within
+        # the InsightsConfig resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the DeploymentEvent. This name is provided by
+        #     Developer Connect insights. Format:
+        #     projects/\\{project}/locations/\\{location}/insightsConfigs/\\{insights_config}/deploymentEvents/\\{uuid}
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The create time of the DeploymentEvent.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The update time of the DeploymentEvent.
+        # @!attribute [r] runtime_config
+        #   @return [::Google::Cloud::Developerconnect::V1::RuntimeConfig]
+        #     Output only. The runtime configurations where the DeploymentEvent happened.
+        # @!attribute [r] runtime_deployment_uri
+        #   @return [::String]
+        #     Output only. The runtime assigned URI of the DeploymentEvent.
+        #     For GKE, this is the fully qualified replica set uri.
+        #     e.g.
+        #     container.googleapis.com/projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/k8s/namespaces/\\{namespace}/apps/replicasets/\\{replica-set-id}
+        #     For Cloud Run, this is the revision name.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Developerconnect::V1::DeploymentEvent::State]
+        #     Output only. The state of the DeploymentEvent.
+        # @!attribute [r] artifact_deployments
+        #   @return [::Array<::Google::Cloud::Developerconnect::V1::ArtifactDeployment>]
+        #     Output only. The artifact deployments of the DeploymentEvent. Each artifact
+        #     deployment contains the artifact uri and the runtime configuration uri. For
+        #     GKE, this would be all the containers images that are deployed in the pod.
+        # @!attribute [r] deploy_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the DeploymentEvent was deployed.
+        #     This would be the min of all ArtifactDeployment deploy_times.
+        # @!attribute [r] undeploy_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the DeploymentEvent was undeployed, all
+        #     artifacts are considered undeployed once this time is set. This would be
+        #     the max of all ArtifactDeployment undeploy_times. If any ArtifactDeployment
+        #     is still active (i.e. does not have an undeploy_time), this field will be
+        #     empty.
+        class DeploymentEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The state of the DeploymentEvent.
+          module State
+            # No state specified.
+            STATE_UNSPECIFIED = 0
+
+            # The deployment is active in the runtime.
+            STATE_ACTIVE = 1
+
+            # The deployment is not in the runtime.
+            STATE_INACTIVE = 2
+          end
+        end
+
+        # Request for getting a DeploymentEvent.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the deployment event to retrieve.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/insightsConfigs/\\{insights_config}/deploymentEvents/\\{uuid}
+        class GetDeploymentEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for requesting list of DeploymentEvents.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent insights config that owns this collection of
+        #     deployment events. Format:
+        #     projects/\\{project}/locations/\\{location}/insightsConfigs/\\{insights_config}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of deployment events to return. The service
+        #     may return fewer than this value. If unspecified, at most 50 deployment
+        #     events will be returned. The maximum value is 1000; values above 1000 will
+        #     be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListDeploymentEvents`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListDeploymentEvents`
+        #     must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter expression that matches a subset of the DeploymentEvents.
+        #     https://google.aip.dev/160.
+        class ListDeploymentEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response to listing DeploymentEvents.
+        # @!attribute [rw] deployment_events
+        #   @return [::Array<::Google::Cloud::Developerconnect::V1::DeploymentEvent>]
+        #     The list of DeploymentEvents.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDeploymentEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The ArtifactDeployment resource represents the deployment of the artifact
+        # within the InsightsConfig resource.
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. Unique identifier of `ArtifactDeployment`.
+        # @!attribute [r] artifact_reference
+        #   @return [::String]
+        #     Output only. The artifact that is deployed.
+        # @!attribute [r] artifact_alias
+        #   @return [::String]
+        #     Output only. The artifact alias in the deployment spec, with Tag/SHA.
+        #     e.g. us-docker.pkg.dev/my-project/my-repo/image:1.0.0
+        # @!attribute [r] source_commit_uris
+        #   @return [::Array<::String>]
+        #     Output only. The source commits at which this artifact was built. Extracted
+        #     from provenance.
+        # @!attribute [r] deploy_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the deployment was deployed.
+        # @!attribute [r] undeploy_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the deployment was undeployed, all artifacts
+        #     are considered undeployed once this time is set.
+        # @!attribute [r] container_status_summary
+        #   @return [::String]
+        #     Output only. The summary of container status of the artifact deployment.
+        #     Format as `ContainerStatusState-Reason : restartCount`
+        #     e.g. "Waiting-ImagePullBackOff : 3"
+        class ArtifactDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
