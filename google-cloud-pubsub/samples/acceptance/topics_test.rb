@@ -142,7 +142,6 @@ describe "emulator" do
     end
   end
 
-  focus
   it "supports pubsub_create_topic_with_smt" do
     # pubsub_create_topic_with_smt
     assert_output "Created topic with SMT: projects/#{pubsub.project}/topics/#{topic_id}\n" do
