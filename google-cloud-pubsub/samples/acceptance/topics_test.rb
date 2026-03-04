@@ -45,6 +45,7 @@ require_relative "../pubsub_set_topic_policy.rb"
 require_relative "../pubsub_test_topic_permissions.rb"
 require_relative "../pubsub_update_topic_type.rb"
 require_relative "../pubsub_create_topic_with_schema_revisions.rb"
+require_relative "../pubsub_create_topic_with_smt.rb"
 
 describe "emulator" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -138,6 +139,13 @@ describe "emulator" do
                         consumer_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111",
                         aws_role_arn: aws_role_arn,
                         gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_smt" do
+    # pubsub_create_topic_with_smt
+    assert_output "Created topic with SMT: projects/#{pubsub.project}/topics/#{topic_id}\n" do
+      create_topic_with_smt topic_id: topic_id
     end
   end
 

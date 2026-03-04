@@ -33,6 +33,7 @@ require_relative "../pubsub_get_topic_policy.rb"
 require_relative "../pubsub_test_subscription_permissions.rb"
 require_relative "../pubsub_detach_subscription.rb"
 require_relative "../pubsub_delete_subscription.rb"
+require_relative "../pubsub_create_subscription_with_smt.rb"
 require "google/cloud/bigquery"
 
 describe "subscriptions" do
@@ -265,6 +266,18 @@ describe "subscriptions" do
                                                      subscription_id: subscription_id
     end
   end 
+
+  it "supports creating subscription with SMT" do
+    project_id = pubsub.project
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
+
+    assert_output "Created subscription with SMT: projects/#{pubsub.project}/subscriptions/#{subscription_id}\n" do     
+      create_subscription_with_smt topic_id: topic_id,
+                                   subscription_id: subscription_id
+    end
+  end
 
   it "supports creating bigquery subscription" do
     project_id = pubsub.project
