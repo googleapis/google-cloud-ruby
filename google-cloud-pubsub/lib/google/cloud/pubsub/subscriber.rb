@@ -325,6 +325,10 @@ module Google
         #       messages ({ReceivedMessage#nack!},
         #       {ReceivedMessage#modify_ack_deadline!}). Default is 4.
         #
+        # @param [Symbol] shutdown_behavior Defines how active messages are treated during a stop. Use `:wait_for_processing`
+        #   to wait for tasks to finish, or `:nack_immediately` to skip waiting and drop them. Default is `:wait_for_processing`.
+        # @param [Integer] shutdown_timeout Specifies precisely how long the wind-down state holds. Defaults to Nil. Optional.
+        #
         # @yield [received_message] a block for processing new messages
         # @yieldparam [ReceivedMessage] received_message the newly received
         #   message
@@ -408,13 +412,16 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   listener.stop!
         #
-        def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {}, &block
+        def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {},
+                   shutdown_behavior: :wait_for_processing, shutdown_timeout: nil, &block
           ensure_service!
           deadline ||= self.deadline
           message_ordering = message_ordering? if message_ordering.nil?
 
           MessageListener.new name, block, deadline: deadline, streams: streams, inventory: inventory,
-                                      message_ordering: message_ordering, threads: threads, service: service
+                                      message_ordering: message_ordering, threads: threads,
+                                      shutdown_behavior: shutdown_behavior, shutdown_timeout: shutdown_timeout,
+                                      service: service
         end
 
         ##
