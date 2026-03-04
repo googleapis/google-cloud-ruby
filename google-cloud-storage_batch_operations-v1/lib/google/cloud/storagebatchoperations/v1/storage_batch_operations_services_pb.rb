@@ -46,6 +46,10 @@ module Google
             rpc :DeleteJob, ::Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest, ::Google::Protobuf::Empty
             # Cancels a batch job.
             rpc :CancelJob, ::Google::Cloud::StorageBatchOperations::V1::CancelJobRequest, ::Google::Cloud::StorageBatchOperations::V1::CancelJobResponse
+            # Lists BucketOperations in a given project and job.
+            rpc :ListBucketOperations, ::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsRequest, ::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsResponse
+            # Gets a BucketOperation.
+            rpc :GetBucketOperation, ::Google::Cloud::StorageBatchOperations::V1::GetBucketOperationRequest, ::Google::Cloud::StorageBatchOperations::V1::BucketOperation
           end
 
           Stub = Service.rpc_stub_class

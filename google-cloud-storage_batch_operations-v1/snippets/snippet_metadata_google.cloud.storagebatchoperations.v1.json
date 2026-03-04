@@ -210,6 +210,86 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_ListBucketOperations_sync",
+      "title": "Snippet for the list_bucket_operations call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#list_bucket_operations.",
+      "file": "storage_batch_operations/list_bucket_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_bucket_operations",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#list_bucket_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageBatchOperations::V1::ListBucketOperationsResponse",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "ListBucketOperations",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.ListBucketOperations",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_GetBucketOperation_sync",
+      "title": "Snippet for the get_bucket_operation call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#get_bucket_operation.",
+      "file": "storage_batch_operations/get_bucket_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_bucket_operation",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#get_bucket_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::GetBucketOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageBatchOperations::V1::BucketOperation",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "GetBucketOperation",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.GetBucketOperation",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

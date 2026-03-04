@@ -121,6 +121,12 @@ module Google
         #     `request_id` will be ignored for at least 60 minutes since the first
         #     request. The request ID must be a valid UUID with the exception that zero
         #     UUID is not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any child bucket operations of the job will also
+        #     be deleted. Highly recommended to be set to true by all clients. Users
+        #     cannot mutate bucket operations directly, so only the jobs.delete
+        #     permission is required to delete a job (and its child bucket operations).
         class DeleteJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -128,6 +134,53 @@ module Google
 
         # Message for response to cancel Job.
         class CancelJobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for request to list BucketOperations
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: projects/\\{project_id}/locations/global/jobs/\\{job_id}.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filters results as defined by https://google.aip.dev/160.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The list page size. Default page size is 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The list page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to sort by. Supported fields are name, create_time.
+        class ListBucketOperationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing BucketOperations
+        # @!attribute [rw] bucket_operations
+        #   @return [::Array<::Google::Cloud::StorageBatchOperations::V1::BucketOperation>]
+        #     A list of storage batch bucket operations.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListBucketOperationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for getting a BucketOperation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. `name` of the bucket operation to retrieve.
+        #     Format:
+        #     projects/\\{project_id}/locations/global/jobs/\\{job_id}/bucketOperations/\\{bucket_operation_id}.
+        class GetBucketOperationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
