@@ -1,5 +1,11 @@
 # Release History
 
+### 1.15.0 (2026-03-05)
+
+#### Features
+
+* include cache updates and routing hint into BeginTransaction and Commit request/response respectively ([#32790](https://github.com/googleapis/google-cloud-ruby/issues/32790)) 
+
 ### 1.14.0 (2026-02-18)
 
 #### Features
