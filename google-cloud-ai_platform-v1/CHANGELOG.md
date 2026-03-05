@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.37.0 (2026-03-05)
+
+#### Features
+
+* add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([#32776](https://github.com/googleapis/google-cloud-ruby/issues/32776)) 
+
 ### 1.36.0 (2026-02-24)
 
 #### Features
