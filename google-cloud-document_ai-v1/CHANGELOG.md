@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.0 (2026-03-05)
+
+#### Features
+
+* Added a field for enabling image and table annotation for layout parser processor ([#32782](https://github.com/googleapis/google-cloud-ruby/issues/32782)) 
+
 ### 1.10.2 (2026-02-04)
 
 #### Documentation
