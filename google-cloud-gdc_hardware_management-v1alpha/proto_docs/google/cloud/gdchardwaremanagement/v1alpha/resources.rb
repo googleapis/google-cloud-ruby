@@ -771,6 +771,9 @@ module Google
             # The Zone is ready for site turnup.
             READY_FOR_SITE_TURNUP = 6
 
+            # The Zone is offline.
+            OFFLINE = 9
+
             # The Zone failed in factory turnup checks.
             CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED = 7
 
