@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.2.0 (2026-03-05)
+
+#### Features
+
+* Add transcription fields to Session Service ([#32775](https://github.com/googleapis/google-cloud-ruby/issues/32775)) 
+
 ### 2.1.1 (2025-09-12)
 
 #### Documentation
