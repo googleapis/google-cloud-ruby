@@ -30,6 +30,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   let(:user_val) { "user-test@example.com" }
 
   before do
+    skip PAP_SKIP_MESSAGE
     # always create the bucket and set default acl to auth
     safe_gcs_execute { bucket.default_acl.auth! }
   end

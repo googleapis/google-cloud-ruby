@@ -324,6 +324,7 @@ describe "Files Snippets" do
   end
 
   it "make_public" do
+    skip PAP_SKIP_MESSAGE
     bucket.create_file local_file, remote_file_name
     response = Net::HTTP.get URI(bucket.file(remote_file_name).public_url)
     refute_equal File.read(local_file), response
