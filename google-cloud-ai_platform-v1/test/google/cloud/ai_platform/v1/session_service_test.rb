@@ -73,12 +73,14 @@ class ::Google::Cloud::AIPlatform::V1::SessionService::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     parent = "hello world"
     session = {}
+    session_id = "hello world"
 
     create_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_session, name
       assert_kind_of ::Google::Cloud::AIPlatform::V1::CreateSessionRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::Session), request["session"]
+      assert_equal "hello world", request["session_id"]
       refute_nil options
     end
 
@@ -89,35 +91,35 @@ class ::Google::Cloud::AIPlatform::V1::SessionService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.create_session({ parent: parent, session: session }) do |response, operation|
+      client.create_session({ parent: parent, session: session, session_id: session_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_session parent: parent, session: session do |response, operation|
+      client.create_session parent: parent, session: session, session_id: session_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_session ::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session) do |response, operation|
+      client.create_session ::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_session({ parent: parent, session: session }, grpc_options) do |response, operation|
+      client.create_session({ parent: parent, session: session, session_id: session_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_session(::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session), grpc_options) do |response, operation|
+      client.create_session(::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -88,6 +88,7 @@ class ::Google::Cloud::AIPlatform::V1::SessionService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     parent = "hello world"
     session = {}
+    session_id = "hello world"
 
     create_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -103,27 +104,27 @@ class ::Google::Cloud::AIPlatform::V1::SessionService::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.create_session({ parent: parent, session: session }) do |_result, response|
+        client.create_session({ parent: parent, session: session, session_id: session_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_session parent: parent, session: session do |_result, response|
+        client.create_session parent: parent, session: session, session_id: session_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_session ::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session) do |_result, response|
+        client.create_session ::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_session({ parent: parent, session: session }, call_options) do |_result, response|
+        client.create_session({ parent: parent, session: session, session_id: session_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_session(::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session), call_options) do |_result, response|
+        client.create_session(::Google::Cloud::AIPlatform::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

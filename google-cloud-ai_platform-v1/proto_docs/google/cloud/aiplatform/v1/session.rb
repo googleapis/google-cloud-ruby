@@ -109,6 +109,9 @@ module Google
         # @!attribute [rw] event_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::EventMetadata]
         #     Optional. Metadata relating to this event.
+        # @!attribute [rw] raw_event
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Weakly typed raw event data in proto struct format.
         class SessionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
