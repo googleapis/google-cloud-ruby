@@ -237,7 +237,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_session(parent: nil, session: nil)
+              # @overload create_session(parent: nil, session: nil, session_id: nil)
               #   Pass arguments to `create_session` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -248,6 +248,14 @@ module Google
               #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
               #   @param session [::Google::Cloud::AIPlatform::V1::Session, ::Hash]
               #     Required. The session to create.
+              #   @param session_id [::String]
+              #     Optional. The user defined ID to use for session, which will become the
+              #     final component of the session resource name. If not provided, Vertex AI
+              #     will generate a value for this ID.
+              #
+              #     This value may be up to 63 characters, and valid characters are
+              #     `[a-z0-9-]`. The first character must be a letter, and the last character
+              #     must be a letter or number.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
