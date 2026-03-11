@@ -1439,7 +1439,23 @@ module Google
         #   Only applicable if delimiter is set to '/'.
         # @param [Boolean] soft_deleted If true, only soft-deleted object
         #   versions will be listed. The default is false.
+        # @param [String] filter An optional string for filtering listed objects.
+        #   Currently only supported for the contexts field.
+        #   If delimiter is set, the returned prefixes are exempt from this filter
+        #  List any object that has a context with the specified key attached
+        #  filter = "contexts.\"KEY\":*";
         #
+        #  List any object that has a context with the specified key attached and value attached
+        #  filter = "contexts.\"keyA\"=\"valueA\""
+        #
+        #  List any object that does not have a context with the specified key attached
+        #  filter = "-contexts.\"KEY\":*";
+        #
+        #  List any object that has a context with the specified key and value attached
+        #  filter = "contexts.\"KEY\"=\"VALUE\"";
+        #
+        #  List any object that does not have a context with the specified key and value attached
+        #  filter = "-contexts.\"KEY\"=\"VALUE\"";
         # @return [Array<Google::Cloud::Storage::File>] (See
         #   {Google::Cloud::Storage::File::List})
         #
@@ -1465,9 +1481,18 @@ module Google
         #     puts file.name
         #   end
         #
+        # @example Filter files by context:
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   files = bucket.files filter: "contexts.\"myKey\"=\"myValue\""
+        #   files.each do |file|
+        #     puts file.name
+        #   end
+        #
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
                   versions: nil, match_glob: nil, include_folders_as_prefixes: nil,
-                  soft_deleted: nil
+                  soft_deleted: nil, filter: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
                                           token: token, max: max,
@@ -1475,13 +1500,15 @@ module Google
                                           user_project: user_project,
                                           match_glob: match_glob,
                                           include_folders_as_prefixes: include_folders_as_prefixes,
-                                          soft_deleted: soft_deleted
+                                          soft_deleted: soft_deleted,
+                                          filter: filter
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions,
                                user_project: user_project,
                                match_glob: match_glob,
                                include_folders_as_prefixes: include_folders_as_prefixes,
-                               soft_deleted: soft_deleted
+                               soft_deleted: soft_deleted,
+                               filter: filter
         end
         alias find_files files
 

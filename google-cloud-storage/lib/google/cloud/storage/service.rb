@@ -372,7 +372,7 @@ module Google
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
                        prefix: nil, versions: nil, user_project: nil,
                        match_glob: nil, include_folders_as_prefixes: nil,
-                       soft_deleted: nil, options: {}
+                       soft_deleted: nil, filter: nil, options: {}
           execute do
             service.list_objects \
               bucket_name, delimiter: delimiter, max_results: max,
@@ -382,6 +382,7 @@ module Google
                            match_glob: match_glob,
                            include_folders_as_prefixes: include_folders_as_prefixes,
                            soft_deleted: soft_deleted,
+                           filter: filter,
                            options: options
           end
         end

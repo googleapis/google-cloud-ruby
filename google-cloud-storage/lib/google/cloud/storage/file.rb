@@ -371,6 +371,45 @@ module Google
         end
 
         ##
+        # User-defined or system-defined object contexts. Each object context is a key-
+        # payload pair, where the key provides the identification and the payload holds
+        # the associated value and additional metadata.
+        # Object contexts are used to provide additional information about an object and its
+        # @return [Google::Apis::StorageV1::Object::Contexts, nil] The object contexts, or `nil` if there are none.
+        
+        def contexts
+          @gapi.contexts
+        end
+
+         ##
+        # Sets the object context.
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        # @param [Google::Apis::StorageV1::Object::Contexts] contexts The object contexts to set.
+        # @see https://docs.cloud.google.com/storage/docs/use-object-contexts#attach-modify-contexts Object Contexts documentation
+        # @example
+        #   require "google/cloud/storage"
+        #  storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #   payload = Google::Apis::StorageV1::ObjectCustomContextPayload.new(
+        #     value: "your-custom-context-value"
+        #   )
+        #   custom_hash = {
+        #     "your-custom-context-key" => payload
+        #   }
+        #   contexts = Google::Apis::StorageV1::Object::Contexts.new(
+        #     custom: custom_hash
+        #   )
+        #   file.update do |file|
+        #     file.contexts = contexts
+        #   en
+        def contexts= contexts
+          @gapi.contexts = contexts
+          update_gapi! :contexts
+        end
+
+        ##
         # A custom time specified by the user for the file, or `nil`.
         #
         # @return [DateTime, nil]

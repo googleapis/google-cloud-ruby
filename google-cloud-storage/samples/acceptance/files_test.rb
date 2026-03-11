@@ -20,6 +20,7 @@ require_relative "../storage_copy_file"
 require_relative "../storage_copy_file_archived_generation"
 require_relative "../storage_delete_file"
 require_relative "../storage_delete_file_archived_generation"
+require_relative "../storage_delete_object_contexts"
 require_relative "../storage_download_byte_range"
 require_relative "../storage_download_encrypted_file"
 require_relative "../storage_download_file"
@@ -31,6 +32,8 @@ require_relative "../storage_generate_signed_post_policy_v4"
 require_relative "../storage_generate_signed_url_v4"
 require_relative "../storage_generate_upload_signed_url_v4"
 require_relative "../storage_get_metadata"
+require_relative "../storage_get_object_contexts"
+require_relative "../storage_list_object_contexts"
 require_relative "../storage_list_files"
 require_relative "../storage_list_files_with_prefix"
 require_relative "../storage_list_file_archived_generations"
@@ -40,6 +43,7 @@ require_relative "../storage_object_csek_to_cmek"
 require_relative "../storage_release_event_based_hold"
 require_relative "../storage_release_temporary_hold"
 require_relative "../storage_rotate_encryption_key"
+require_relative "../storage_set_object_contexts"
 require_relative "../storage_set_event_based_hold"
 require_relative "../storage_set_metadata"
 require_relative "../storage_set_temporary_hold"
@@ -293,6 +297,7 @@ describe "Files Snippets" do
       md5_hash: #{file.md5}
       Cache-control: #{file.cache_control}
       Content-type: #{file.content_type}
+      Contexts: #{file.contexts}
       Content-disposition: #{file.content_disposition}
       Content-encoding: #{file.content_encoding}
       Content-language: #{file.content_language}
@@ -307,6 +312,75 @@ describe "Files Snippets" do
     assert_output expected_output do
       get_metadata bucket_name: bucket.name,
                    file_name:   remote_file_name
+    end
+  end
+
+  it "set_object_contexts" do
+    bucket.create_file local_file, remote_file_name
+    custom_context_key = "your-custom-context-key"
+    custom_context_value = "your-custom-context-value"
+    assert_output "Contexts for #{remote_file_name} has been updated.\n" do
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: custom_context_value
+    end
+  end
+
+  it "get_object_contexts" do
+    bucket.create_file local_file, remote_file_name
+    custom_context_key = "my-custom-key"
+    custom_context_value = "my-custom-value"
+    set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: custom_context_value
+    assert_output "Custom Contexts for #{remote_file_name} are: #{custom_context_key} with value: #{custom_context_value}\n" do
+      get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
+    end
+  end
+
+  describe "list_object_contexts" do
+    let(:custom_context_key1) { "my-custom-key" }
+    let(:custom_context_value1) { "my-custom-value" }
+    let(:custom_context_key2) { "my-custom-key-2" }
+    let(:custom_context_value2) { "my-custom-value-2" }
+
+    before(:all) do
+      bucket.create_file local_file, remote_file_name
+      bucket.create_file local_file, remote_file_name+"2"
+      
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name+"2", custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+    end
+
+    it "filters out files on the basis of custom context key" do
+      assert_output "File: #{remote_file_name} has context key: #{custom_context_key1}\n" do
+        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
+      end
+    end
+
+    it "filters out files on the basis of custom context key and value" do
+      assert_output "File: #{remote_file_name+"2"} has context key: #{custom_context_key2}\n" do
+        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      end
+    end
+
+  end
+
+  describe "delete object contexts" do
+    let(:custom_context_key) { "my-custom-key" }
+    let(:custom_context_value) { "my-custom-value" }
+    let(:custom_context_key2) { "my-custom-key-2" }
+    let(:custom_context_value2) { "my-custom-value-2" }
+
+    before(:all) do
+      bucket.create_file local_file, remote_file_name
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: custom_context_value
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+    end
+
+    it "deletes the custom object contexts when nil is passed in value" do
+      assert_output "Contexts for #{remote_file_name} has been deleted.\n" do
+        delete_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: nil
+      end
+
+      assert_nil bucket.file(remote_file_name).contexts.custom[custom_context_key]
+      refute_nil bucket.file(remote_file_name).contexts.custom[custom_context_key2]
     end
   end
 
