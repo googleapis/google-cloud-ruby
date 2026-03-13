@@ -818,6 +818,51 @@ module Google
           end
 
           ##
+          # @private
+          # Determines if the query can be run as a stateless query.
+          def stateless_query?
+            # Check denylist of settings not supported by jobs.query.
+            q = @gapi.configuration.query
+            return false if q.destination_table
+            return false if q.create_disposition
+            return false if q.write_disposition
+            return false if q.priority == "BATCH"
+            return false if q.allow_large_results
+            return false if q.flatten_results == false
+            return false if q.user_defined_function_resources && q.user_defined_function_resources.any?
+            return false if q.clustering
+            return false if q.time_partitioning
+            return false if q.range_partitioning
+            return false if q.schema_update_options
+            return false if q.table_definitions && q.table_definitions.any?
+            true
+          end
+
+          ##
+          # @private
+          # Converts the current configuration to a Google::Apis::BigqueryV2::QueryRequest object.
+          def to_query_request_gapi
+            q = @gapi.configuration.query
+            Google::Apis::BigqueryV2::QueryRequest.new(
+              query: q.query,
+              default_dataset: q.default_dataset,
+              use_query_cache: q.use_query_cache,
+              dry_run: @gapi.configuration.dry_run,
+              use_legacy_sql: q.use_legacy_sql,
+              parameter_mode: q.parameter_mode,
+              query_parameters: q.query_parameters,
+              job_creation_mode: "JOB_CREATION_OPTIONAL",
+              location: @gapi.job_reference&.location,
+              maximum_bytes_billed: q.maximum_bytes_billed,
+              connection_properties: q.connection_properties,
+              labels: @gapi.configuration.labels,
+              destination_encryption_configuration: q.destination_encryption_configuration,
+              create_session: q.create_session,
+              reservation: @gapi.configuration.reservation
+            )
+          end
+
+          ##
           # Sets the geographic location where the job should run. Required
           # except for US and EU.
           #

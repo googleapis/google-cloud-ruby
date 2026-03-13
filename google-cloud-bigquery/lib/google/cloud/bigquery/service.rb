@@ -445,9 +445,29 @@ access_policy_version: access_policy_version, update_mode: update_mode
           end
         end
 
+        ##
+        # Inserts a BigQuery job.
+        #
+        # @param [Google::Apis::BigqueryV2::Job] query_job_gapi The job
+        #   configuration to insert.
+        #
+        # @return [Google::Apis::BigqueryV2::Job] The inserted job.
         def query_job query_job_gapi
           execute backoff: true do
             service.insert_job @project, query_job_gapi
+          end
+        end
+
+        ##
+        # Runs a stateless query.
+        #
+        # @param [Google::Apis::BigqueryV2::QueryRequest] query_request_gapi The
+        #   query request to execute.
+        #
+        # @return [Google::Apis::BigqueryV2::QueryResponse] The query response.
+        def query query_request_gapi
+          execute backoff: true do
+            service.query_job @project, query_request_gapi
           end
         end
 

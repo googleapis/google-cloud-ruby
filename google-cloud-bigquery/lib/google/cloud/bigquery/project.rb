@@ -962,18 +962,30 @@ module Google
                   format_options_use_int64_timestamp: true,
                   reservation: nil,
                   &block
-          job = query_job query,
-                          params: params,
-                          types: types,
-                          external: external,
-                          cache: cache,
-                          dataset: dataset,
-                          project: project,
-                          standard_sql: standard_sql,
-                          legacy_sql: legacy_sql,
-                          session_id: session_id,
-                          reservation: reservation,
-                          &block
+          ensure_service!
+          options = {
+            params: params, types: types, external: external, cache: cache,
+            dataset: dataset, project: project, standard_sql: standard_sql,
+            legacy_sql: legacy_sql, session_id: session_id, reservation: reservation
+          }
+
+          updater = QueryJob::Updater.from_options service, query, options
+          yield updater if block_given?
+
+          if updater.stateless_query?
+            resp = service.query updater.to_query_request_gapi
+            if resp.job_complete
+              table_gapi = Google::Apis::BigqueryV2::Table.new schema: resp.schema
+              return Data.from_gapi_json JSON.parse(resp.to_json, symbolize_names: true),
+                                         table_gapi, nil, service,
+                                         format_options_use_int64_timestamp
+            end
+            job_ref = resp.job_reference
+            job = Job.from_gapi service.get_job(job_ref.job_id, location: job_ref.location), service
+          else
+            job = query_job query, **options, &block
+          end
+
           job.wait_until_done!
 
           if job.failed?
