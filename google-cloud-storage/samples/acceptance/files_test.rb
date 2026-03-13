@@ -20,7 +20,6 @@ require_relative "../storage_copy_file"
 require_relative "../storage_copy_file_archived_generation"
 require_relative "../storage_delete_file"
 require_relative "../storage_delete_file_archived_generation"
-require_relative "../storage_delete_object_contexts"
 require_relative "../storage_download_byte_range"
 require_relative "../storage_download_encrypted_file"
 require_relative "../storage_download_file"
@@ -360,28 +359,6 @@ describe "Files Snippets" do
       end
     end
 
-  end
-
-  describe "delete object contexts" do
-    let(:custom_context_key) { "my-custom-key" }
-    let(:custom_context_value) { "my-custom-value" }
-    let(:custom_context_key2) { "my-custom-key-2" }
-    let(:custom_context_value2) { "my-custom-value-2" }
-
-    before(:all) do
-      bucket.create_file local_file, remote_file_name
-      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: custom_context_value
-      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
-    end
-
-    it "deletes the custom object contexts when nil is passed in value" do
-      assert_output "Contexts for #{remote_file_name} has been deleted.\n" do
-        delete_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: nil
-      end
-
-      assert_nil bucket.file(remote_file_name).contexts.custom[custom_context_key]
-      refute_nil bucket.file(remote_file_name).contexts.custom[custom_context_key2]
-    end
   end
 
   it "set_metadata" do

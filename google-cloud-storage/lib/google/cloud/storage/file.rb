@@ -371,10 +371,10 @@ module Google
         end
 
         ##
-        # User-defined or system-defined object contexts. Each object context is a key-
+        # User-defined object contexts. Each object context is a key-
         # payload pair, where the key provides the identification and the payload holds
         # the associated value and additional metadata.
-        # Object contexts are used to provide additional information about an object and its
+        # Object contexts are used to provide additional information about an object
         # @return [Google::Apis::StorageV1::Object::Contexts, nil] The object contexts, or `nil` if there are none.
         
         def contexts
@@ -403,7 +403,7 @@ module Google
         #   )
         #   file.update do |file|
         #     file.contexts = contexts
-        #   en
+        #   end
         def contexts= contexts
           @gapi.contexts = contexts
           update_gapi! :contexts

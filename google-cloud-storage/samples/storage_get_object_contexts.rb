@@ -31,9 +31,13 @@ def get_object_contexts bucket_name:, file_name:
   file    = bucket.file file_name
 
   contexts = file.contexts
-  custom_context_key = contexts.custom.keys.first
-  custom_context_value = contexts.custom[custom_context_key].value
-  puts "Custom Contexts for #{file_name} are: #{custom_context_key} with value: #{custom_context_value}"
+  if contexts&.custom&.any?
+    custom_context_key = contexts.custom.keys.first
+    custom_context_value = contexts.custom[custom_context_key].value
+    puts "Custom Contexts for #{file_name} are: #{custom_context_key} with value: #{custom_context_value}"
+  else
+    puts "No custom contexts found for #{file_name}."
+  end
 end
 # [END storage_get_object_contexts]
 

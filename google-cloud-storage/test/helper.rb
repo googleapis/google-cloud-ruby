@@ -176,7 +176,6 @@ class MockStorage < Minitest::Spec
                        custom_context_key: nil,
                        custom_context_value: nil
 
-    # binding.pry
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",

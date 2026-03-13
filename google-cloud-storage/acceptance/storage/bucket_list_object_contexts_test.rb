@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "storage_helper"
-require 'pry'
 
 describe Google::Cloud::Storage::Bucket, :contexts, :storage do
   let(:bucket_name) { $bucket_names[0] }

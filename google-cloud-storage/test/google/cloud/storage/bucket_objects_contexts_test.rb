@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "pry"
 
 describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
@@ -66,6 +65,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     let(:file_name) { "my-file" }
     let(:file_gapi) { create_file_gapi bucket.name, file_name }
     let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
+
     it "sets contexts for a file" do
       expected_contexts = context_custom_hash custom_context_key: custom_context_key1,
                                               custom_context_value: custom_context_value1
@@ -78,6 +78,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
           patch_obj.contexts == expected_contexts &&
           args[:options][:retries].zero?
       end
+
       bucket.service.mocked_service = mock
       file.contexts = expected_contexts
       mock.verify
@@ -106,9 +107,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
 
-  def create_file_gapi_with_contexts bucket = nil, name = nil, _custom_context_key = nil, _custom_context_value = nil
-    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name, custom_context_key1,
-                                                               custom_context_value1).to_json
+    def create_file_gapi_with_contexts bucket = nil, name = nil, custom_context_key = nil, custom_context_value = nil
+    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name, custom_context_key: custom_context_key,
+                                                               custom_context_value: custom_context_value).to_json
   end
 
   def empty_file_gapi cache_control: nil, content_disposition: nil,

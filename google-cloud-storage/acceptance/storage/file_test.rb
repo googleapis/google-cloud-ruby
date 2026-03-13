@@ -1052,7 +1052,6 @@ describe Google::Cloud::Storage::File, :storage do
     let(:custom_context_value2) { "my-custom-value-2" }
     let(:local_file) { "acceptance/data/CloudPlatform_128px_Retina.png" }
     let(:file_name) { "CloudLogo1" }
-    let(:file_name2) { "CloudLogo2" }
 
     before do
       bucket.create_file local_file, file_name
@@ -1067,7 +1066,59 @@ describe Google::Cloud::Storage::File, :storage do
       _(file.contexts.custom[custom_context_key1].value).must_equal custom_context_value1
     end
 
-    it "overwrites existing custom context key and value" do
+    it "rejects special characters in custom context key and value" do
+      invalid_key = 'my"-invalid-key'
+      custom_value = 'my-custom-value'
+
+      file = bucket.file file_name
+
+      err = _ {
+        file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
+          custom: context_custom_hash(custom_context_key: invalid_key, custom_context_value: custom_value)
+        )
+      }.must_raise Google::Cloud::InvalidArgumentError
+
+      _(err.message).must_match(/Object context key cannot contain/)
+
+      invalid_key = 'my-custom-key'
+      custom_value = 'my-invalid/value'
+
+      err = _ {
+        file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
+          custom: context_custom_hash(custom_context_key: invalid_key, custom_context_value: custom_value)
+        )
+      }.must_raise Google::Cloud::InvalidArgumentError
+
+      _(err.message).must_match(/Object context value cannot contain/)
+
+    end
+
+    it "rejects unicode characters in keys and values" do
+      invalid_key = '🚀-launcher'
+      custom_value = 'my-custom-value'
+      file = bucket.file file_name
+      err = _ {
+        file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
+          custom: context_custom_hash(custom_context_key: invalid_key, custom_context_value: custom_value)
+        )
+      }.must_raise Google::Cloud::InvalidArgumentError
+
+      # Optional: Verify the message matches what you saw
+      _(err.message).must_match(/Object context key must start with an alphanumeric character./)
+
+      invalid_key = "my-custom-key"
+      custom_value = '✨-sparkle'
+
+      err = _ {
+        file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
+          custom: context_custom_hash(custom_context_key: invalid_key, custom_context_value: custom_value)
+        )
+      }.must_raise Google::Cloud::InvalidArgumentError
+
+      _(err.message).must_match(/Object context value must start with an alphanumeric character./)
+    end
+
+    it "modifies existing custom context key and value" do
       file = bucket.file file_name
       file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
         custom: context_custom_hash(custom_context_key: custom_context_key1 ,custom_context_value: custom_context_value1)
@@ -1082,22 +1133,38 @@ describe Google::Cloud::Storage::File, :storage do
       _(file.contexts.custom[custom_context_key1].value).must_equal custom_context_value2
     end
 
+    it "overwrites existing context key and value" do
+      file = bucket.file file_name
+      file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
+        custom: context_custom_hash(custom_context_key: custom_context_key1 ,custom_context_value: custom_context_value1)
+      )
+      file.reload!
+      _(file.contexts.custom[custom_context_key1].value).must_equal custom_context_value1
+
+      file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
+        custom: context_custom_hash(custom_context_key: custom_context_key2 ,custom_context_value: custom_context_value2)
+      )
+      file.reload!
+      _(file.contexts.custom[custom_context_key2].value).must_equal custom_context_value2
+    end
+
     it "sets and retrieves multiple custom context keys and values" do
       file = bucket.file file_name
       custom_hash1 = context_custom_hash custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       custom_hash2 = context_custom_hash custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      
       file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
-        custom: {
-          custom_context_key1 => custom_hash1[custom_context_key1],
-          custom_context_key2 => custom_hash2[custom_context_key2]
-        }
-      )
-      file.reload!
-      _(file.contexts.custom[custom_context_key1].value).must_equal custom_context_value1
-      _(file.contexts.custom[custom_context_key2].value).must_equal custom_context_value2
+          custom: {
+            custom_context_key1 => custom_hash1[custom_context_key1],
+            custom_context_key2 => custom_hash2[custom_context_key2]
+          }
+        )
+        file.reload!
+        _(file.contexts.custom[custom_context_key1].value).must_equal custom_context_value1
+        _(file.contexts.custom[custom_context_key2].value).must_equal custom_context_value2
     end
 
-    it "deletes custom context keys and values" do
+    it "removes individual context" do
       file = bucket.file file_name
       custom_hash1 = context_custom_hash custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       custom_hash2 = context_custom_hash custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
@@ -1121,7 +1188,7 @@ describe Google::Cloud::Storage::File, :storage do
       _(file.contexts.custom[custom_context_key2].value).must_equal custom_context_value2
     end
 
-    it "deletes object contexts" do
+    it "clears all contexts" do
       file = bucket.file file_name
       custom_hash1 = context_custom_hash custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       file.contexts = Google::Apis::StorageV1::Object::Contexts.new(
