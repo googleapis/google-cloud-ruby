@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "cgi"
 
 
 describe Google::Cloud::Storage::Bucket, :signed_url, :mock_storage do

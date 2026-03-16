@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "cgi"
 
 describe Google::Cloud::Storage::File, :signed_url, :v2, :lazy, :mock_storage do
   let(:bucket_name) { "bucket" }
