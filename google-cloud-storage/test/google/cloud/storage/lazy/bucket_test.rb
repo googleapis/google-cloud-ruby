@@ -276,7 +276,6 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
         [bucket.name, empty_file_gapi(checksum: false, content: tmpfile.read)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
-
       bucket.create_file tmpfile, new_file_name, checksum: false
       mock.verify
     end
