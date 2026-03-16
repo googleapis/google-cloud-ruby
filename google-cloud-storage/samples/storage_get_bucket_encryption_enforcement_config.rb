@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_get_encryption_enforcement_config]
-def get_encryption_enforcement_config bucket_name:
+# [START storage_get_bucket_encryption_enforcement_config]
+def get_bucket_encryption_enforcement_config bucket_name:
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -29,8 +29,8 @@ def get_encryption_enforcement_config bucket_name:
   puts "Google-managed encryption enforcement config restriction mode: " \
        "#{bucket.google_managed_encryption_enforcement_config&.restriction_mode}"
 end
-# [END storage_get_encryption_enforcement_config]
+# [END storage_get_bucket_encryption_enforcement_config]
 
 if $PROGRAM_NAME == __FILE__
-  get_encryption_enforcement_config bucket_name: ARGV.shift
+  get_bucket_encryption_enforcement_config bucket_name: ARGV.shift
 end

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_remove_all_encryption_enforcement_config]
-def remove_all_encryption_enforcement_config bucket_name:
+# [START storage_remove_all_bucket_encryption_enforcement_config]
+def remove_all_bucket_encryption_enforcement_config bucket_name:
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -27,8 +27,8 @@ def remove_all_encryption_enforcement_config bucket_name:
   end
   puts "Removed Encryption Enforcement Config from bucket #{bucket.name}."
 end
-# [END storage_remove_all_encryption_enforcement_config]
+# [END storage_remove_all_bucket_encryption_enforcement_config]
 
 if $PROGRAM_NAME == __FILE__
-  remove_all_encryption_enforcement_config bucket_name: ARGV.shift
+  remove_all_bucket_encryption_enforcement_config bucket_name: ARGV.shift
 end
