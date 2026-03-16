@@ -287,7 +287,6 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world!"
       tmpfile.rewind
-
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
         [bucket.name, empty_file_gapi(checksum: true, crc32c: "e5jnUQ==")], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
