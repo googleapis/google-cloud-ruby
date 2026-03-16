@@ -210,8 +210,8 @@ module Google
         #     OPTIONAL
         # @!attribute [rw] container
         #   @return [::String]
-        #     Specifies where the resource is created. For GCP, it is the full name of
-        #     the project.
+        #     Specifies where the resource is created. For Google Cloud resources, it is
+        #     the full name of the project.
         class SubResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -530,19 +530,19 @@ module Google
           # value.
           SIGNAL_TYPE_LAST_BACKUP_OLD = 7
 
-          # Represents if a resource violates CIS GCP Foundation 2.0.
+          # Represents if a resource violates CIS Google Cloud Platform Foundation 2.0.
           SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_2_0 = 8
 
-          # Represents if a resource violates CIS GCP Foundation 1.3.
+          # Represents if a resource violates CIS Google Cloud Platform Foundation 1.3.
           SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_3 = 9
 
-          # Represents if a resource violates CIS GCP Foundation 1.2.
+          # Represents if a resource violates CIS Google Cloud Platform Foundation 1.2.
           SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_2 = 10
 
-          # Represents if a resource violates CIS GCP Foundation 1.1.
+          # Represents if a resource violates CIS Google Cloud Platform Foundation 1.1.
           SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_1 = 11
 
-          # Represents if a resource violates CIS GCP Foundation 1.0.
+          # Represents if a resource violates CIS Google Cloud Platform Foundation 1.0.
           SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_0 = 12
 
           # Represents if a resource violates CIS Controls 8.0.

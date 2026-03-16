@@ -28,13 +28,17 @@ module Google
           #   @return [::String]
           #     Required. The resource name of the
           #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+          # @!attribute [rw] fallback_scope
+          #   @return [::Google::Cloud::Kms::Inventory::V1::FallbackScope]
+          #     Optional. The scope to use if the kms organization service account is not
+          #     configured.
           class GetProtectedResourcesSummaryRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Aggregate information about the resources protected by a Cloud KMS key in the
-          # same Cloud organization as the key.
+          # same Cloud organization/project as the key.
           # @!attribute [rw] name
           #   @return [::String]
           #     The full name of the ProtectedResourcesSummary resource.
@@ -57,6 +61,12 @@ module Google
           # @!attribute [rw] locations
           #   @return [::Google::Protobuf::Map{::String => ::Integer}]
           #     The number of resources protected by the key grouped by region.
+          # @!attribute [rw] warnings
+          #   @return [::Array<::Google::Cloud::Kms::Inventory::V1::Warning>]
+          #     Warning messages for the state of response
+          #     {::Google::Cloud::Kms::Inventory::V1::ProtectedResourcesSummary ProtectedResourcesSummary}
+          #     For example, if the organization service account is not configured,
+          #     INSUFFICIENT_PERMISSIONS_PARTIAL_DATA warning will be returned.
           class ProtectedResourcesSummary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,8 +103,14 @@ module Google
           # {::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources KeyTrackingService.SearchProtectedResources}.
           # @!attribute [rw] scope
           #   @return [::String]
-          #     Required. Resource name of the organization.
-          #     Example: organizations/123
+          #     Required. A scope can be an organization or a project. Resources protected
+          #     by the crypto key in provided scope will be returned.
+          #
+          #     The following values are allowed:
+          #
+          #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+          #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+          #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
           # @!attribute [rw] crypto_key
           #   @return [::String]
           #     Required. The resource name of the
@@ -208,6 +224,56 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # A warning message that indicates potential problems with the response data.
+          # @!attribute [rw] warning_code
+          #   @return [::Google::Cloud::Kms::Inventory::V1::Warning::WarningCode]
+          #     The specific warning code for the displayed message.
+          # @!attribute [rw] display_message
+          #   @return [::String]
+          #     The literal message providing context and details about the warnings.
+          class Warning
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Different types of warnings that can be returned to the user.
+            # The display_message contains detailed information regarding the
+            # warning_code.
+            module WarningCode
+              # Default value. This value is unused.
+              WARNING_CODE_UNSPECIFIED = 0
+
+              # Indicates that the caller or service agent lacks necessary permissions
+              # to view some of the requested data. The response may be partial.
+              # Example:
+              # - KMS organization service agent \\{service_agent_name} lacks the
+              #   `cloudasset.assets.searchAllResources` permission on the scope.
+              INSUFFICIENT_PERMISSIONS_PARTIAL_DATA = 1
+
+              # Indicates that a resource limit has been exceeded, resulting in partial
+              # data. Example:
+              # - The project has more than 10,000 assets (resources,
+              #   crypto keys, key handles, IAM policies, etc).
+              RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA = 2
+
+              # Indicates that the project exists outside of an organization resource.
+              # Thus the analysis is only done for the project level data and results
+              # might be partial.
+              ORG_LESS_PROJECT_PARTIAL_DATA = 3
+            end
+          end
+
+          # Specifies the scope to use if the organization service agent is not
+          # configured.
+          module FallbackScope
+            # Unspecified scope type.
+            FALLBACK_SCOPE_UNSPECIFIED = 0
+
+            # If set to `FALLBACK_SCOPE_PROJECT`, the API will fall back to using key's
+            # project as request scope if the kms organization service account is not
+            # configured.
+            FALLBACK_SCOPE_PROJECT = 1
           end
         end
       end

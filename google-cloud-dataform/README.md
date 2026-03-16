@@ -38,8 +38,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dataform"
 
 client = Google::Cloud::Dataform.dataform
-request = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new # (request fields as keyword arguments...)
-response = client.list_repositories request
+request = ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new # (request fields as keyword arguments...)
+response = client.get_team_folder request
 ```
 
 ## Debug Logging

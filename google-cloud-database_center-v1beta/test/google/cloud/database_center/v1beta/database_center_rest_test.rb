@@ -311,6 +311,65 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     end
   end
 
+  def test_query_issues
+    # Create test objects.
+    client_result = ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    signal_products_filters = [{}]
+    order_by = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    query_issues_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_query_issues_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_issues_client_stub do
+        # Create client
+        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.query_issues parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.query_issues ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.query_issues(::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_issues_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

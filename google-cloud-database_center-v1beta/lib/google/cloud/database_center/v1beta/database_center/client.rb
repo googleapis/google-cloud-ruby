@@ -331,10 +331,10 @@ module Google
             #     expression, parentheses must be appropriately used to group the
             #     combinations.
             #
-            #     Example: location="us-east1"
-            #     Example: container="projects/123" OR container="projects/456"
-            #     Example: (container="projects/123" OR
-            #               container="projects/456") AND location="us-east1"
+            #     Example: `location="us-east1"`
+            #     Example: `container="projects/123" OR container="projects/456"`
+            #     Example: `(container="projects/123" OR
+            #               container="projects/456") AND location="us-east1"`
             #   @param group_by [::String]
             #     Optional. A field that statistics are grouped by.
             #     Valid values are any combination of the following:
@@ -364,9 +364,10 @@ module Google
             #     descending order. Add "ASC" after the field name to indicate ascending
             #     order. It supports ordering using multiple fields.
             #     For example:
-            #      order_by = "resource_groups_count" sorts response in ascending order
-            #      order_by = "resource_groups_count DESC" sorts response in descending order
-            #      order_by = "product.type, product.version DESC, location" orders by type
+            #      `order_by = "resource_groups_count"` sorts response in ascending order
+            #      `order_by = "resource_groups_count DESC"` sorts response in descending
+            #      order
+            #      `order_by = "product.type, product.version DESC, location"` orders by type
             #      in ascending order, version in descending order and location in ascending
             #      order
             #   @param page_size [::Integer]
@@ -498,12 +499,12 @@ module Google
             #     expression, parentheses must be appropriately used to group the
             #     combinations.
             #
-            #     Example: location="us-east1"
-            #     Example: container="projects/123" OR container="projects/456"
-            #     Example: (container="projects/123" OR
-            #               container="projects/456") AND location="us-east1"
-            #     Example: full_resource_name=~"test"
-            #     Example: full_resource_name=~"test.*master"
+            #     Example: `location="us-east1"`
+            #     Example: `container="projects/123" OR container="projects/456"`
+            #     Example: `(container="projects/123" OR
+            #               container="projects/456") AND location="us-east1"`
+            #     Example: `full_resource_name=~"test"`
+            #     Example: `full_resource_name=~"test.*master"`
             #   @param signal_type_groups [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup, ::Hash>]
             #     Optional. Groups of signal types that are requested.
             #   @param signal_filters [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalFilter, ::Hash>]
@@ -544,12 +545,13 @@ module Google
             #     order. It only supports a single field at a time.
             #
             #     For example:
-            #      order_by = "full_resource_name" sorts response in ascending order
-            #      order_by = "full_resource_name DESC" sorts response in descending order
-            #      order_by = "issue_count DESC" sorts response in descending order of
+            #      `order_by = "full_resource_name"` sorts response in ascending order
+            #      `order_by = "full_resource_name DESC"` sorts response in descending order
+            #      `order_by = "issue_count DESC"` sorts response in descending order of
             #      count of all issues associated with a resource.
             #
-            #     More explicitly, order_by = "full_resource_name, product" is not supported.
+            #     More explicitly, `order_by = "full_resource_name, product"` is not
+            #     supported.
             #   @param page_size [::Integer]
             #     Optional. If unspecified, at most 50 resource groups will be returned.
             #     The maximum value is 1000; values above 1000 will be coerced to 1000.
@@ -662,10 +664,10 @@ module Google
             #     expression, parentheses must be appropriately used to group the
             #     combinations.
             #
-            #     Example: location="us-east1"
-            #     Example: container="projects/123" OR container="projects/456"
-            #     Example: (container="projects/123" OR
-            #               container="projects/456") AND location="us-east1"
+            #     Example: `location="us-east1"`
+            #     Example: `container="projects/123" OR container="projects/456"`
+            #     Example: `(container="projects/123" OR
+            #               container="projects/456") AND location="us-east1"`
             #   @param signal_type_groups [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalTypeGroup, ::Hash>]
             #     Optional. Lists of signal types that are issues.
             #   @param baseline_date [::Google::Type::Date, ::Hash]
@@ -724,6 +726,128 @@ module Google
 
               @database_center_stub.call_rpc :aggregate_issue_stats, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # QueryIssues provides a list of issues and recommendations
+            # that a user has access to and that are within the requested scope.
+            #
+            # @overload query_issues(request, options = nil)
+            #   Pass arguments to `query_issues` via a request object, either of type
+            #   {::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_issues(parent: nil, filter: nil, signal_products_filters: nil, order_by: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `query_issues` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent can be a project, a folder, or an organization. The list
+            #     is limited to the one attached to resources within the `scope` that a user
+            #     has access to.
+            #
+            #     The allowed values are:
+            #
+            #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+            #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+            #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+            #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+            #   @param filter [::String]
+            #     Optional.
+            #     Supported fields are:
+            #     'product',
+            #     `location`,
+            #     `issue_severity`,
+            #     'tags',
+            #     'labels',
+            #   @param signal_products_filters [::Array<::Google::Cloud::DatabaseCenter::V1beta::SignalProductsFilters, ::Hash>]
+            #     Optional. Filters based on signal and product. The filter list will be ORed
+            #     across pairs and ANDed within a signal and products pair.
+            #   @param order_by [::String]
+            #     Optional. Following fields are sortable:
+            #     SignalType
+            #     Product
+            #     Location
+            #     IssueSeverity
+            #
+            #     The default order is ascending. Add "DESC" after the field name to indicate
+            #     descending order. Add "ASC" after the field name to indicate ascending
+            #     order. It only supports a single field at a time.
+            #   @param page_size [::Integer]
+            #     Optional. If unspecified, at most 50 issues will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `QueryIssues` call.
+            #     Provide this to retrieve the subsequent page.
+            #     All parameters except page size should match the parameters used in the
+            #     call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DatabaseCenter::V1beta::DatabaseResourceIssue>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::DatabaseCenter::V1beta::DatabaseResourceIssue>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/database_center/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new
+            #
+            #   # Call the query_issues method.
+            #   result = client.query_issues request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DatabaseCenter::V1beta::DatabaseResourceIssue.
+            #     p item
+            #   end
+            #
+            def query_issues request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_issues.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DatabaseCenter::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.query_issues.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_issues.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @database_center_stub.call_rpc :query_issues, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @database_center_stub, :query_issues, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -932,6 +1056,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :aggregate_issue_stats
+                ##
+                # RPC-specific configuration for `query_issues`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_issues
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -943,6 +1072,8 @@ module Google
                   @query_database_resource_groups = ::Gapic::Config::Method.new query_database_resource_groups_config
                   aggregate_issue_stats_config = parent_rpcs.aggregate_issue_stats if parent_rpcs.respond_to? :aggregate_issue_stats
                   @aggregate_issue_stats = ::Gapic::Config::Method.new aggregate_issue_stats_config
+                  query_issues_config = parent_rpcs.query_issues if parent_rpcs.respond_to? :query_issues
+                  @query_issues = ::Gapic::Config::Method.new query_issues_config
 
                   yield self if block_given?
                 end

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.0 (2026-03-05)
+
+#### Features
+
+* Add a new field to support Dataplex integration configuration ([#32788](https://github.com/googleapis/google-cloud-ruby/issues/32788)) 
+
 ### 0.18.0 (2026-01-13)
 
 #### Features

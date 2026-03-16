@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-ai_platform-v1",
-    "version": "1.34.0",
+    "version": "1.37.0",
     "language": "RUBY",
     "apis": [
       {
@@ -10772,6 +10772,286 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_SessionService_CreateSession_sync",
+      "title": "Snippet for the create_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#create_session.",
+      "file": "session_service/create_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#create_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "CreateSession",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.CreateSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_SessionService_GetSession_sync",
+      "title": "Snippet for the get_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#get_session.",
+      "file": "session_service/get_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#get_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "GetSession",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.GetSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_SessionService_ListSessions_sync",
+      "title": "Snippet for the list_sessions call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#list_sessions.",
+      "file": "session_service/list_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sessions",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#list_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListSessionsResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "ListSessions",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.ListSessions",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_SessionService_UpdateSession_sync",
+      "title": "Snippet for the update_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#update_session.",
+      "file": "session_service/update_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_session",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#update_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSession",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.UpdateSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_SessionService_DeleteSession_sync",
+      "title": "Snippet for the delete_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#delete_session.",
+      "file": "session_service/delete_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#delete_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSession",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.DeleteSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_SessionService_ListEvents_sync",
+      "title": "Snippet for the list_events call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#list_events.",
+      "file": "session_service/list_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_events",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#list_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListEventsResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "ListEvents",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.ListEvents",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_SessionService_AppendEvent_sync",
+      "title": "Snippet for the append_event call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SessionService::Client#append_event.",
+      "file": "session_service/append_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "append_event",
+        "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client#append_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AppendEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::AppendEventResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "AppendEvent",
+          "full_name": "google.cloud.aiplatform.v1.SessionService.AppendEvent",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.aiplatform.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_SpecialistPoolService_CreateSpecialistPool_sync",
       "title": "Snippet for the create_specialist_pool call in the SpecialistPoolService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client#create_specialist_pool.",
@@ -12767,6 +13047,86 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_AskContexts_sync",
+      "title": "Snippet for the ask_contexts call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#ask_contexts.",
+      "file": "vertex_rag_service/ask_contexts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "ask_contexts",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#ask_contexts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AskContextsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::AskContextsResponse",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "AskContexts",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.AskContexts",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_AsyncRetrieveContexts_sync",
+      "title": "Snippet for the async_retrieve_contexts call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#async_retrieve_contexts.",
+      "file": "vertex_rag_service/async_retrieve_contexts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "async_retrieve_contexts",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#async_retrieve_contexts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AsyncRetrieveContextsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "AsyncRetrieveContexts",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.AsyncRetrieveContexts",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

@@ -595,6 +595,8 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should copy an existing file" do
+    skip PAP_SKIP_MESSAGE
+    
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en"
     _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
     _(uploaded.content_language).must_equal "en"
@@ -627,6 +629,7 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should copy an existing file, with updates" do
+    skip PAP_SKIP_MESSAGE
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
     _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
     _(uploaded.content_language).must_equal "en"
@@ -663,6 +666,7 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should copy an existing file, with force_copy_metadata set to true" do
+    skip PAP_SKIP_MESSAGE
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
     _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
     _(uploaded.content_language).must_equal "en"

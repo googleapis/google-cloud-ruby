@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "The Database Center API provides access to an organization-wide, cross-product database fleet health platform. It aggregates health, security, and compliance signals from various Google Cloud databases, offering a single pane of glass to identify and manage issues."
-  gem.summary       = "Database Center provides an organization-wide, cross-product fleet health platform to eliminate the overhead, complexity, and risk associated with aggregating and summarizing health signals through custom dashboards. Through Database Center’s fleet health dashboard and API, database platform teams that are responsible for reliability, compliance, security, cost, and administration of database fleets will now have a single pane of glass that pinpoints issues relevant to each team."
+  gem.summary       = "Database Center offers a comprehensive, organization-wide platform for monitoring database fleet health across various products. It simplifies management and reduces risk by automatically aggregating and summarizing key health signals, removing the need for custom dashboards. The platform provides a unified view through its dashboard and API, enabling teams focused on reliability, compliance, security, cost, and administration to quickly identify and address relevant issues within their database fleets."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

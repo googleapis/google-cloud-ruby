@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-02-08)
+
+#### Features
+
+* Hierarchical Quota Adjuster ([#32406](https://github.com/googleapis/google-cloud-ruby/issues/32406)) 
+
 ### 0.6.2 (2026-01-23)
 
 #### Documentation

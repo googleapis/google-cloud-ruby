@@ -78,7 +78,7 @@ module Google
         #     Vault Service Account.
         # @!attribute [rw] log_retention_days
         #   @return [::Integer]
-        #     Optional. Applicable only for CloudSQL resource_type.
+        #     Optional. Applicable only for CloudSQL and AlloyDB resource_type.
         #
         #     Configures how long logs will be stored. It is defined in “days”. This
         #     value should be greater than or equal to minimum enforced log retention

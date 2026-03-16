@@ -40,24 +40,29 @@ module Google
         #   @return [::Google::Cloud::StorageBatchOperations::V1::PutObjectHold]
         #     Changes object hold status.
         #
-        #     Note: The following fields are mutually exclusive: `put_object_hold`, `delete_object`, `put_metadata`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `put_object_hold`, `delete_object`, `put_metadata`, `rewrite_object`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_object
         #   @return [::Google::Cloud::StorageBatchOperations::V1::DeleteObject]
         #     Delete objects.
         #
-        #     Note: The following fields are mutually exclusive: `delete_object`, `put_object_hold`, `put_metadata`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `delete_object`, `put_object_hold`, `put_metadata`, `rewrite_object`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] put_metadata
         #   @return [::Google::Cloud::StorageBatchOperations::V1::PutMetadata]
         #     Updates object metadata. Allows updating fixed-key and custom metadata
         #     and fixed-key metadata i.e. Cache-Control, Content-Disposition,
         #     Content-Encoding, Content-Language, Content-Type, Custom-Time.
         #
-        #     Note: The following fields are mutually exclusive: `put_metadata`, `put_object_hold`, `delete_object`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `put_metadata`, `put_object_hold`, `delete_object`, `rewrite_object`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rewrite_object
         #   @return [::Google::Cloud::StorageBatchOperations::V1::RewriteObject]
         #     Rewrite the object and updates metadata like KMS key.
         #
-        #     Note: The following fields are mutually exclusive: `rewrite_object`, `put_object_hold`, `delete_object`, `put_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `rewrite_object`, `put_object_hold`, `delete_object`, `put_metadata`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] update_object_custom_context
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::UpdateObjectCustomContext]
+        #     Update object custom context.
+        #
+        #     Note: The following fields are mutually exclusive: `update_object_custom_context`, `put_object_hold`, `delete_object`, `put_metadata`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::StorageBatchOperations::V1::LoggingConfig]
         #     Optional. Logging configuration.
@@ -84,6 +89,10 @@ module Google
         #     Optional. If true, the job will run in dry run mode, returning the total
         #     object count and, if the object configuration is a prefix list, the bytes
         #     found from source. No transformations will be performed.
+        # @!attribute [r] is_multi_bucket_job
+        #   @return [::Boolean]
+        #     Output only. If true, this Job operates on multiple buckets. Multibucket
+        #     jobs are subject to different quota limits than single-bucket jobs.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +113,99 @@ module Google
 
             # Terminated due to an unrecoverable failure.
             FAILED = 4
+
+            # Queued but not yet started.
+            QUEUED = 5
+          end
+        end
+
+        # BucketOperation represents a bucket-level breakdown of a Job.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the BucketOperation. This is defined by
+        #     the service. Format:
+        #     projects/\\{project}/locations/global/jobs/\\{job_id}/bucketOperations/\\{bucket_operation}.
+        # @!attribute [rw] bucket_name
+        #   @return [::String]
+        #     The bucket name of the objects to be transformed in the BucketOperation.
+        # @!attribute [rw] prefix_list
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::PrefixList]
+        #     Specifies objects matching a prefix set.
+        #
+        #     Note: The following fields are mutually exclusive: `prefix_list`, `manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] manifest
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::Manifest]
+        #     Specifies objects in a manifest file.
+        #
+        #     Note: The following fields are mutually exclusive: `manifest`, `prefix_list`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] put_object_hold
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::PutObjectHold]
+        #     Changes object hold status.
+        #
+        #     Note: The following fields are mutually exclusive: `put_object_hold`, `delete_object`, `put_metadata`, `rewrite_object`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] delete_object
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::DeleteObject]
+        #     Delete objects.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_object`, `put_object_hold`, `put_metadata`, `rewrite_object`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] put_metadata
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::PutMetadata]
+        #     Updates object metadata. Allows updating fixed-key and custom metadata
+        #     and fixed-key metadata i.e. Cache-Control, Content-Disposition,
+        #     Content-Encoding, Content-Language, Content-Type, Custom-Time.
+        #
+        #     Note: The following fields are mutually exclusive: `put_metadata`, `put_object_hold`, `delete_object`, `rewrite_object`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] rewrite_object
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::RewriteObject]
+        #     Rewrite the object and updates metadata like KMS key.
+        #
+        #     Note: The following fields are mutually exclusive: `rewrite_object`, `put_object_hold`, `delete_object`, `put_metadata`, `update_object_custom_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] update_object_custom_context
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::UpdateObjectCustomContext]
+        #     Update object custom context.
+        #
+        #     Note: The following fields are mutually exclusive: `update_object_custom_context`, `put_object_hold`, `delete_object`, `put_metadata`, `rewrite_object`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time that the BucketOperation was created.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time that the BucketOperation was started.
+        # @!attribute [r] complete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time that the BucketOperation was completed.
+        # @!attribute [r] counters
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::Counters]
+        #     Output only. Information about the progress of the bucket operation.
+        # @!attribute [r] error_summaries
+        #   @return [::Array<::Google::Cloud::StorageBatchOperations::V1::ErrorSummary>]
+        #     Output only. Summarizes errors encountered with sample error log entries.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::BucketOperation::State]
+        #     Output only. State of the BucketOperation.
+        class BucketOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes state of the BucketOperation.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # Created but not yet started.
+            QUEUED = 1
+
+            # In progress.
+            RUNNING = 2
+
+            # Completed successfully.
+            SUCCEEDED = 3
+
+            # Cancelled by the user.
+            CANCELED = 4
+
+            # Terminated due to an unrecoverable failure.
+            FAILED = 5
           end
         end
 
@@ -318,6 +420,59 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Describes the payload of a user defined object custom context.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     The value of the object custom context.
+        #     If set, `value` must NOT be an empty string since it is a required field in
+        #     custom context. If unset, `value` will be ignored and no changes will be
+        #     made to the `value` field of the custom context payload.
+        class ObjectCustomContextPayload
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a collection of updates to apply to custom contexts identified
+        # by key.
+        # @!attribute [rw] updates
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::StorageBatchOperations::V1::ObjectCustomContextPayload}]
+        #     Optional. Insert or update the existing custom contexts.
+        # @!attribute [rw] keys_to_clear
+        #   @return [::Array<::String>]
+        #     Optional. Custom contexts to clear by key.
+        #     A key cannot be present in both `updates` and `keys_to_clear`.
+        class CustomContextUpdates
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::StorageBatchOperations::V1::ObjectCustomContextPayload]
+          class UpdatesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Describes options to update object custom contexts.
+        # @!attribute [rw] custom_context_updates
+        #   @return [::Google::Cloud::StorageBatchOperations::V1::CustomContextUpdates]
+        #     A collection of updates to apply to specific custom contexts.
+        #     Use this to add, update or delete individual contexts by key.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_context_updates`, `clear_all`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] clear_all
+        #   @return [::Boolean]
+        #     If set, must be set to true and all existing object custom contexts will
+        #     be deleted.
+        #
+        #     Note: The following fields are mutually exclusive: `clear_all`, `custom_context_updates`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class UpdateObjectCustomContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A summary of errors by error code, plus a count and sample error log

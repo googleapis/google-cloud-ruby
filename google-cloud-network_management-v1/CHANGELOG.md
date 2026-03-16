@@ -1,5 +1,20 @@
 # Changelog
 
+### 2.8.0 (2026-03-05)
+
+#### Features
+
+* Add API fields related to GKE Pods and Network Policies ([#32779](https://github.com/googleapis/google-cloud-ruby/issues/32779)) 
+
+### 2.7.0 (2026-02-04)
+
+#### Features
+
+* add fields and messages for GKE Pods and IP masquerading ([#32387](https://github.com/googleapis/google-cloud-ruby/issues/32387)) 
+#### Documentation
+
+* update comments 
+
 ### 2.6.0 (2025-11-03)
 
 #### Features

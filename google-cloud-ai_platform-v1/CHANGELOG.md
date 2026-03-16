@@ -1,5 +1,27 @@
 # Changelog
 
+### 1.37.0 (2026-03-05)
+
+#### Features
+
+* add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([#32776](https://github.com/googleapis/google-cloud-ruby/issues/32776)) 
+
+### 1.36.0 (2026-02-24)
+
+#### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#32443](https://github.com/googleapis/google-cloud-ruby/issues/32443)) 
+* add max_concurrent_active_run_count field to Schedule message 
+
+### 1.35.0 (2026-02-08)
+
+#### Features
+
+* Add `fps` to message `VideoMetadata` 
+#### Documentation
+
+* update documentation of `.google.cloud.aiplatform.v1.DatasetService`, `.google.cloud.aiplatform.v1.Dataset`, and `.google.cloud.aiplatform.v1.DatasetVersion` ([#32408](https://github.com/googleapis/google-cloud-ruby/issues/32408)) 
+
 ### 1.34.0 (2026-01-13)
 
 #### Features

@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.0 (2026-02-18)
+
+#### Features
+
+* Add support for AlloyDB backup and restore ([#32401](https://github.com/googleapis/google-cloud-ruby/issues/32401)) 
+
 ### 1.7.0 (2026-01-13)
 
 #### Features

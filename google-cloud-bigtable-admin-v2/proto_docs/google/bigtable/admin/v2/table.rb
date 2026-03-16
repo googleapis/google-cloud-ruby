@@ -95,6 +95,15 @@ module Google
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::AutomatedBackupPolicy]
           #     If specified, automated backups are enabled for this table.
           #     Otherwise, automated backups are disabled.
+          # @!attribute [rw] tiered_storage_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::TieredStorageConfig]
+          #     Rules to specify what data is stored in each storage tier.
+          #     Different tiers store data differently, providing different trade-offs
+          #     between cost and performance. Different parts of a table can be stored
+          #     separately on different tiers.
+          #     If a config is specified, tiered storage is enabled for this table.
+          #     Otherwise, tiered storage is disabled.
+          #     Only SSD instances can configure tiered storage.
           # @!attribute [rw] row_key_schema
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Struct]
           #     The row key schema for this table. The schema is used to decode the raw row
@@ -639,6 +648,30 @@ module Google
           #     are of the form:
           #     projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>
           class BackupInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config for tiered storage.
+          # A valid config must have a valid TieredStorageRule. Otherwise the whole
+          # TieredStorageConfig must be unset.
+          # By default all data is stored in the SSD tier (only SSD instances can
+          # configure tiered storage).
+          # @!attribute [rw] infrequent_access
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::TieredStorageRule]
+          #     Rule to specify what data is stored in the infrequent access(IA) tier.
+          #     The IA tier allows storing more data per node with reduced performance.
+          class TieredStorageConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Rule to specify what data is stored in a storage tier.
+          # @!attribute [rw] include_if_older_than
+          #   @return [::Google::Protobuf::Duration]
+          #     Include cells older than the given age.
+          #     For the infrequent access tier, this value must be at least 30 days.
+          class TieredStorageRule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

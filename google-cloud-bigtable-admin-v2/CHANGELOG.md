@@ -1,5 +1,11 @@
 # Release History
 
+### 1.16.0 (2026-02-08)
+
+#### Features
+
+* add TieredStorageConfig to table admin api ([#32409](https://github.com/googleapis/google-cloud-ruby/issues/32409)) 
+
 ### 1.15.1 (2025-10-27)
 
 #### Documentation

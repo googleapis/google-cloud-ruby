@@ -193,6 +193,13 @@ module Google
                                                               ["scope", %r{^organizations/[^/]+/?$}, false]
                                                             ]
                                                           )
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1/{scope}/protectedResources:search",
+                                                            matches: [
+                                                              ["scope", %r{^projects/[^/]+/?$}, false]
+                                                            ]
+                                                          )
                   transcoder.transcode request_pb
                 end
               end

@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2026-03-05)
+
+#### Features
+
+* add new transformation `update_object_custom_context` ([#32449](https://github.com/googleapis/google-cloud-ruby/issues/32449)) 
+* add QUEUED state to Storage Batch Operations API 
+
 ### 0.5.0 (2025-12-16)
 
 #### Features

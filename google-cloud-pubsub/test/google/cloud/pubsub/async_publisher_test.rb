@@ -230,7 +230,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
   it "publishes multiple batches when message count limit is reached" do
     # break messages up into batches of 10
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, max_messages: 10, interval: 10
-    messages = [
+    _messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1, message_id: "msg0")
     ]
     callback_count = 0
@@ -265,7 +265,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
   it "publishes multiple batches when message size limit is reached" do
     # 250 is slightly bigger than 10 messages, and less than 11.
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 250, interval: 10
-    messages = [
+    _messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1, message_id: "msg0")
     ]
     callback_count = 0

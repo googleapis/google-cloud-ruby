@@ -24,6 +24,10 @@ require "securerandom"
 require "uri"
 require "ostruct"
 
+PAP_SKIP_MESSAGE = "Skipping this test due to a change in GCS behavior that disallows copying " \
+                   "files with ACLs that include allUsers or allAuthenticatedUsers when public " \
+                   "access prevention is enforced. See " \
+                   "https://cloud.google.com/storage/docs/public-access-prevention for more details.".freeze
 
 def fixture_bucket
   storage_client = Google::Cloud::Storage.new

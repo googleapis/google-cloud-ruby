@@ -47,7 +47,6 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#get_dataset DatasetService.GetDataset}.
-        # Next ID: 4
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the Dataset resource.
@@ -286,7 +285,6 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#get_dataset_version DatasetService.GetDatasetVersion}.
-        # Next ID: 4
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Dataset version to delete.

@@ -87,6 +87,7 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::ClientTest 
 
     # Create request parameters for a unary method.
     name = "hello world"
+    fallback_scope = :FALLBACK_SCOPE_UNSPECIFIED
 
     get_protected_resources_summary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -102,27 +103,27 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Rest::ClientTest 
         end
 
         # Use hash object
-        client.get_protected_resources_summary({ name: name }) do |_result, response|
+        client.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_protected_resources_summary name: name do |_result, response|
+        client.get_protected_resources_summary name: name, fallback_scope: fallback_scope do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_protected_resources_summary ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name) do |_result, response|
+        client.get_protected_resources_summary ::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_protected_resources_summary({ name: name }, call_options) do |_result, response|
+        client.get_protected_resources_summary({ name: name, fallback_scope: fallback_scope }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_protected_resources_summary(::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name), call_options) do |_result, response|
+        client.get_protected_resources_summary(::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest.new(name: name, fallback_scope: fallback_scope), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

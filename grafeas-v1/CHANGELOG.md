@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2026-02-18)
+
+#### Features
+
+* A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#32397](https://github.com/googleapis/google-cloud-ruby/issues/32397)) 
+
 ### 1.6.0 (2026-01-13)
 
 #### Features

@@ -67,6 +67,9 @@ module Grafeas
     # @!attribute [rw] files
     #   @return [::Array<::Grafeas::V1::DiscoveryOccurrence::File>]
     #     Files that make up the resource described by the occurrence.
+    # @!attribute [rw] last_vulnerability_update_time
+    #   @return [::Google::Protobuf::Timestamp]
+    #     The last time vulnerability scan results changed.
     class DiscoveryOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

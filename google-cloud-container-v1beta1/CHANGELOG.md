@@ -1,5 +1,11 @@
 # Release History
 
+### 0.52.0 (2026-02-04)
+
+#### Features
+
+* Add GPUDirectConfig to configure GPU Direct for node pools ([#32389](https://github.com/googleapis/google-cloud-ruby/issues/32389)) 
+
 ### 0.51.1 (2025-10-27)
 
 #### Documentation

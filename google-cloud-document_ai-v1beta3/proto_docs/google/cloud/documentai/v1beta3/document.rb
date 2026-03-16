@@ -110,7 +110,7 @@ module Google
         #     The entity revision ID that `document.entities` field is based on.
         #     If this field is set and `entities_revisions` is not empty, the entities in
         #     `document.entities` field are the entities in the entity revision with this
-        #     ID and `document.entity_validation_output` field is the
+        #     id and `document.entity_validation_output` field is the
         #     `entity_validation_output` field in this entity revision.
         class Document
           include ::Google::Protobuf::MessageExts
@@ -232,7 +232,7 @@ module Google
           #     A list of visually detected tokens on the page.
           # @!attribute [rw] visual_elements
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::VisualElement>]
-          #     A list of detected non-text visual elements for example, checkbox,
+          #     A list of detected non-text visual elements, for example, checkbox,
           #     signature etc. on the page.
           # @!attribute [rw] tables
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::Table>]
@@ -531,7 +531,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Detected non-text visual elements, for example, checkbox, signature, etc.
+            # Detected non-text visual elements, for example, checkbox, signature etc.
             # on the page.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout]
@@ -717,10 +717,11 @@ module Google
           #     {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
-          #     Required. Entity type from a schema for example, `Address`.
+          #     Required. Entity type from a schema, for example, `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
-          #     Optional. Text value of the entity for example, `1600 Amphitheatre Pkwy`.
+          #     Optional. Text value of the entity, for example, `1600 Amphitheatre
+          #     Pkwy`.
           # @!attribute [rw] mention_id
           #   @return [::String]
           #     Optional. Deprecated.  Use `id` field instead.
@@ -733,7 +734,7 @@ module Google
           #     the page where it was found.
           # @!attribute [rw] id
           #   @return [::String]
-          #     Optional. Canonical ID. This will be a unique value in the entity list
+          #     Optional. Canonical id. This will be a unique value in the entity list
           #     for this document.
           # @!attribute [rw] normalized_value
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Entity::NormalizedValue]
@@ -843,10 +844,10 @@ module Google
           # {::Google::Cloud::DocumentAI::V1beta3::Document::Entity Entities}.
           # @!attribute [rw] subject_id
           #   @return [::String]
-          #     Subject entity ID.
+          #     Subject entity id.
           # @!attribute [rw] object_id
           #   @return [::String]
-          #     Object entity ID.
+          #     Object entity id.
           # @!attribute [rw] relation
           #   @return [::String]
           #     Relationship description.
@@ -986,7 +987,7 @@ module Google
           # @!attribute [rw] id
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Integer]
-          #     The ID of this operation.  Needs to be unique within the scope of the
+          #     The Id of this operation.  Needs to be unique within the scope of the
           #     revision.
           # @!attribute [rw] parents
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Provenance::Parent>]
@@ -1010,7 +1011,7 @@ module Google
             # @!attribute [rw] id
             #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::Integer]
-            #     The ID of the parent provenance.
+            #     The id of the parent provenance.
             class Parent
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1053,7 +1054,7 @@ module Google
           # Contains past or forward revisions of this document.
           # @!attribute [rw] agent
           #   @return [::String]
-          #     If the change was made by a person specify the name or ID of that
+          #     If the change was made by a person specify the name or id of that
           #     person.
           #
           #     Note: The following fields are mutually exclusive: `agent`, `processor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -1065,7 +1066,7 @@ module Google
           #     Note: The following fields are mutually exclusive: `processor`, `agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] id
           #   @return [::String]
-          #     ID of the revision, internally generated by doc proto storage.
+          #     Id of the revision, internally generated by doc proto storage.
           #     Unique within the context of the document.
           # @!attribute [rw] parent
           #   @deprecated This field is deprecated and may be removed in the next major version update.
@@ -1075,7 +1076,7 @@ module Google
           #     index into the `revisions` field.
           # @!attribute [rw] parent_ids
           #   @return [::Array<::String>]
-          #     The revisions that this revision is based on. Must include all the IDs
+          #     The revisions that this revision is based on. Must include all the ids
           #     that have anything to do with this revision - eg. there are
           #     `provenance.parent.revision` fields that index into this field.
           # @!attribute [rw] create_time
@@ -1279,22 +1280,22 @@ module Google
               # Represents an image type block.
               # @!attribute [rw] blob_asset_id
               #   @return [::String]
-              #     Optional. Asset ID of the inline image. If set, find the image
+              #     Optional. Asset id of the inline image. If set, find the image
               #     content in the blob_assets field.
               #
               #     Note: The following fields are mutually exclusive: `blob_asset_id`, `gcs_uri`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] gcs_uri
               #   @return [::String]
-              #     Optional. Google Cloud Storage URI of the image.
+              #     Optional. Google Cloud Storage uri of the image.
               #
               #     Note: The following fields are mutually exclusive: `gcs_uri`, `blob_asset_id`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] data_uri
               #   @return [::String]
-              #     Optional. Data URI of the image.
+              #     Optional. Data uri of the image.
               #     It is composed of four parts: a prefix (data:), a MIME type
               #     indicating the type of data, an optional base64 token if
               #     non-textual, and the data itself:
-              #     data:[<mediatype>][;base64],<data>.
+              #     data:[<mediatype>][;base64],<data>
               #
               #     Note: The following fields are mutually exclusive: `data_uri`, `blob_asset_id`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] mime_type
@@ -1388,22 +1389,22 @@ module Google
               # The image chunk field in the chunk.
               # @!attribute [rw] blob_asset_id
               #   @return [::String]
-              #     Optional. Asset ID of the inline image. If set, find the image
+              #     Optional. Asset id of the inline image. If set, find the image
               #     content in the blob_assets field.
               #
               #     Note: The following fields are mutually exclusive: `blob_asset_id`, `gcs_uri`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] gcs_uri
               #   @return [::String]
-              #     Optional. Google Cloud Storage URI of the image.
+              #     Optional. Google Cloud Storage uri of the image.
               #
               #     Note: The following fields are mutually exclusive: `gcs_uri`, `blob_asset_id`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] data_uri
               #   @return [::String]
-              #     Optional. Data URI of the image.
+              #     Optional. Data uri of the image.
               #     It is composed of four parts: a prefix (data:), a MIME type
               #     indicating the type of data, an optional base64 token if
               #     non-textual, and the data itself:
-              #     data:[<mediatype>][;base64],<data>.
+              #     data:[<mediatype>][;base64],<data>
               #
               #     Note: The following fields are mutually exclusive: `data_uri`, `blob_asset_id`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] annotations
@@ -1447,7 +1448,7 @@ module Google
           # by other fields in the document via asset ID.
           # @!attribute [rw] asset_id
           #   @return [::String]
-          #     Optional. The ID of the blob asset.
+          #     Optional. The id of the blob asset.
           # @!attribute [rw] content
           #   @return [::String]
           #     Optional. The content of the blob asset, for example, image bytes.
@@ -1476,7 +1477,7 @@ module Google
             # Validation result for a single validation rule.
             # @!attribute [rw] rule_name
             #   @return [::String]
-            #     The name of the validation rule.
+            #     The display name of the validation rule.
             # @!attribute [rw] rule_description
             #   @return [::String]
             #     The description of the validation rule.
@@ -1514,13 +1515,16 @@ module Google
           # Entity revision.
           # @!attribute [rw] revision_id
           #   @return [::String]
-          #     The revision ID.
+          #     The revision id.
           # @!attribute [rw] entities
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Entity>]
           #     The entities in this revision.
           # @!attribute [rw] entity_validation_output
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::EntityValidationOutput]
           #     The entity validation output for this revision.
+          # @!attribute [rw] provenance
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
+          #     Optional. The history of this revision.
           class EntitiesRevision
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1535,7 +1539,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `revision_case`, `revision_id`, `latest_processor_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] revision_id
         #   @return [::String]
-        #     Reads the revision given by the ID.
+        #     Reads the revision given by the id.
         #
         #     Note: The following fields are mutually exclusive: `revision_id`, `revision_case`, `latest_processor_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] latest_processor_version

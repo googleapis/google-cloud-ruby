@@ -1638,6 +1638,125 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
     end
   end
 
+  def test_start_o_auth
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::StartOAuthResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    account_connector = "hello world"
+
+    start_o_auth_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :start_o_auth, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest, request
+      assert_equal "hello world", request["account_connector"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, start_o_auth_client_stub do
+      # Create client
+      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.start_o_auth({ account_connector: account_connector }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.start_o_auth account_connector: account_connector do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.start_o_auth ::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new(account_connector: account_connector) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.start_o_auth({ account_connector: account_connector }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.start_o_auth(::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new(account_connector: account_connector), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, start_o_auth_client_stub.call_rpc_count
+    end
+  end
+
+  def test_finish_o_auth
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DeveloperConnect::V1::FinishOAuthResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    oauth_params = {}
+    account_connector = "hello world"
+
+    finish_o_auth_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :finish_o_auth, name
+      assert_kind_of ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest::OAuthParams), request["oauth_params"]
+      assert_equal :oauth_params, request.params
+      assert_equal "hello world", request["account_connector"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, finish_o_auth_client_stub do
+      # Create client
+      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.finish_o_auth({ oauth_params: oauth_params, account_connector: account_connector }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.finish_o_auth oauth_params: oauth_params, account_connector: account_connector do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.finish_o_auth ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new(oauth_params: oauth_params, account_connector: account_connector) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.finish_o_auth({ oauth_params: oauth_params, account_connector: account_connector }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.finish_o_auth(::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new(oauth_params: oauth_params, account_connector: account_connector), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, finish_o_auth_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

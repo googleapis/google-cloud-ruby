@@ -1,5 +1,12 @@
 # Release History
 
+### 1.10.0 (2026-02-08)
+
+#### Features
+
+* Expose the `Database.firestore_data_access_mode` parameter ([#32415](https://github.com/googleapis/google-cloud-ruby/issues/32415)) 
+* Expose the `Database.mongodb_compatible_data_access_mode` parameter 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

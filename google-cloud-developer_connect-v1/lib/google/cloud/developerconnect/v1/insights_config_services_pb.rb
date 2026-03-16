@@ -28,7 +28,7 @@ module Google
           #
           # The InsightsConfig resource is the core configuration object to capture
           # events from your Software Development Lifecycle. It acts as the central hub
-          # for managing how Developer connect understands your application, its runtime
+          # for managing how Developer Connect understands your application, its runtime
           # environments, and the artifacts deployed within them.
           # A user can create an InsightsConfig, list previously-requested
           # InsightsConfigs or get InsightsConfigs by their ID to determine the status of
@@ -49,8 +49,12 @@ module Google
             rpc :GetInsightsConfig, ::Google::Cloud::Developerconnect::V1::GetInsightsConfigRequest, ::Google::Cloud::Developerconnect::V1::InsightsConfig
             # Updates the parameters of a single InsightsConfig.
             rpc :UpdateInsightsConfig, ::Google::Cloud::Developerconnect::V1::UpdateInsightsConfigRequest, ::Google::Longrunning::Operation
-            # Delete a single Insight.
+            # Deletes a single Insight.
             rpc :DeleteInsightsConfig, ::Google::Cloud::Developerconnect::V1::DeleteInsightsConfigRequest, ::Google::Longrunning::Operation
+            # Gets a single Deployment Event.
+            rpc :GetDeploymentEvent, ::Google::Cloud::Developerconnect::V1::GetDeploymentEventRequest, ::Google::Cloud::Developerconnect::V1::DeploymentEvent
+            # Lists Deployment Events in a given insights config.
+            rpc :ListDeploymentEvents, ::Google::Cloud::Developerconnect::V1::ListDeploymentEventsRequest, ::Google::Cloud::Developerconnect::V1::ListDeploymentEventsResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -868,7 +868,7 @@ module Google
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1056,7 +1056,7 @@ module Google
             #     constraints). Given this, successful execution of a DML statement shouldn't
             #     be assumed until a subsequent `Commit` call completes successfully.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1364,7 +1364,7 @@ module Google
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1530,7 +1530,7 @@ module Google
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
             #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
-            #     Optional. If present, it makes the Spanner requests location-aware.
+            #     Optional. Makes the Spanner requests location-aware if present.
             #
             #     It gives the server hints that can be used to route the request
             #     to an appropriate server, potentially significantly decreasing latency and
@@ -1621,7 +1621,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(session: nil, options: nil, request_options: nil, mutation_key: nil)
+            # @overload begin_transaction(session: nil, options: nil, request_options: nil, mutation_key: nil, routing_hint: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1641,6 +1641,13 @@ module Google
             #     that commit mutations but don't perform any reads or queries. You must
             #     randomly select one of the mutations from the mutation set and send it as a
             #     part of this request.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. Makes the Spanner requests location-aware if present.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Transaction]
@@ -1732,7 +1739,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil, precommit_token: nil)
+            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil, precommit_token: nil, routing_hint: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1776,6 +1783,13 @@ module Google
             #     session, then you must include the precommit token with the highest
             #     sequence number received in this transaction attempt. Failing to do so
             #     results in a `FailedPrecondition` error.
+            #   @param routing_hint [::Google::Cloud::Spanner::V1::RoutingHint, ::Hash]
+            #     Optional. Makes the Spanner requests location-aware if present.
+            #
+            #     It gives the server hints that can be used to route the request
+            #     to an appropriate server, potentially significantly decreasing latency and
+            #     improving throughput. To achieve improved performance, most fields must be
+            #     filled in with accurate values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::CommitResponse]
@@ -1985,7 +1999,8 @@ module Google
             #     a `PartitionedDml` transaction for large, partition-friendly DML
             #     operations.
             #   @param params [::Google::Protobuf::Struct, ::Hash]
-            #     Parameter names and values that bind to placeholders in the SQL string.
+            #     Optional. Parameter names and values that bind to placeholders in the SQL
+            #     string.
             #
             #     A parameter placeholder consists of the `@` character followed by the
             #     parameter name (for example, `@firstName`). Parameter names can contain
@@ -1998,9 +2013,9 @@ module Google
             #
             #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It isn't always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value. For example, values of type `BYTES` and values
-            #     of type `STRING` both appear in
+            #     Optional. It isn't always possible for Cloud Spanner to infer the right SQL
+            #     type from a JSON value. For example, values of type `BYTES` and values of
+            #     type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
             #
             #     In these cases, `param_types` can be used to specify the exact

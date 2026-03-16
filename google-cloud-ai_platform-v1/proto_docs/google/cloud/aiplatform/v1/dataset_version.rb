@@ -25,6 +25,8 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Identifier. The resource name of the DatasetVersion.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this DatasetVersion was created.

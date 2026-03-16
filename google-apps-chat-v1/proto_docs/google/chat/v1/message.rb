@@ -267,7 +267,80 @@ module Google
         #
         #     If `last_update_time` doesn't match the latest version of the quoted
         #     message, the request fails.
+        # @!attribute [rw] quote_type
+        #   @return [::Google::Apps::Chat::V1::QuotedMessageMetadata::QuoteType]
+        #     Optional. Specifies the quote type. If not set, defaults to REPLY in the
+        #     message read/write path for backward compatibility.
+        # @!attribute [r] quoted_message_snapshot
+        #   @return [::Google::Apps::Chat::V1::QuotedMessageSnapshot]
+        #     Output only. A snapshot of the quoted message's content.
+        # @!attribute [r] forwarded_metadata
+        #   @return [::Google::Apps::Chat::V1::ForwardedMetadata]
+        #     Output only. Metadata about the source space of the quoted message.
+        #     Populated only for FORWARD quote type.
         class QuotedMessageMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The quote type of the quoted message.
+          module QuoteType
+            # Reserved. This value is unused.
+            QUOTE_TYPE_UNSPECIFIED = 0
+
+            # If quote_type is `REPLY`, you can do the following:
+            #
+            # * If you're replying in a thread, you can quote another message in that
+            # thread.
+            #
+            # * If you're creating a root message, you can quote another root message
+            # in that space.
+            #
+            # You can't quote a message reply from a different thread.
+            REPLY = 1
+          end
+        end
+
+        # Provides a snapshot of the content of the quoted message at the time of
+        # quoting or forwarding
+        # @!attribute [r] sender
+        #   @return [::String]
+        #     Output only. The quoted message's author name.
+        #     Populated for both REPLY & FORWARD quote types.
+        # @!attribute [r] text
+        #   @return [::String]
+        #     Output only. Snapshot of the quoted message's text content.
+        # @!attribute [r] formatted_text
+        #   @return [::String]
+        #     Output only. Contains the quoted message `text` with markups added to
+        #     support rich formatting like hyperlinks,custom emojis, markup, etc.
+        #     Populated only for FORWARD quote type.
+        # @!attribute [r] annotations
+        #   @return [::Array<::Google::Apps::Chat::V1::Annotation>]
+        #     Output only. Annotations parsed from the text body of the quoted message.
+        #     Populated only for FORWARD quote type.
+        # @!attribute [r] attachments
+        #   @return [::Array<::Google::Apps::Chat::V1::Attachment>]
+        #     Output only. Attachments that were part of the quoted message. These are
+        #     copies of the quoted message's attachment metadata. Populated only for
+        #     FORWARD quote type.
+        class QuotedMessageSnapshot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata about the source space from which a message was forwarded.
+        # @!attribute [r] space
+        #   @return [::String]
+        #     Output only. The resource name of the source space.
+        #     Format: spaces/\\{space}
+        # @!attribute [r] space_display_name
+        #   @return [::String]
+        #     Output only. The display name of the source space or DM at the time of
+        #     forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this
+        #     is the other participant's name (e.g., "User A"). For `GROUP_CHAT`, this is
+        #     a generated name based on members' first names, limited to 5 including the
+        #     creator (e.g., "User A, User B").
+        class ForwardedMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
