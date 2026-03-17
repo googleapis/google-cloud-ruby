@@ -26,6 +26,7 @@ require "google/cloud/storage"
 require "cgi"
 require "cgi/util"
 
+
 ##
 # Monkey-Patch Google API Client to support Mocks
 module Google::Apis::Core::Hashable
