@@ -24,8 +24,6 @@ require "base64"
 require "uri"
 require "google/cloud/storage"
 require "cgi"
-require "cgi/util"
-
 
 ##
 # Monkey-Patch Google API Client to support Mocks
