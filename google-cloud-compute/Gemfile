@@ -20,6 +20,7 @@ local_dependencies.each do |name|
 end
 
 gem "google-style", "~> 1.32.0"
+gem "irb", "~> 1.17"
 gem "minitest", "~> 6.0.2"
 gem "minitest-focus", "~> 1.4"
 gem "minitest-mock", "~> 5.27"
