@@ -1,0 +1,17 @@
+{
+    "api_id": "rapidmigrationassessment.googleapis.com",
+    "api_shortname": "rapidmigrationassessment",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-rapid_migration_assessment/latest",
+    "distribution_name": "google-cloud-rapid_migration_assessment",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "rapidmigrationassessment",
+    "name_pretty": "Rapid Migration Assessment API",
+    "product_documentation": "https://cloud.google.com/migration-center/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Rapid Migration Assessment service is our first-party migration assessment and planning tool.",
+    "ruby-cloud-product-url": "https://cloud.google.com/migration-center/docs",
+    "library_type": "GAPIC_AUTO"
+}
