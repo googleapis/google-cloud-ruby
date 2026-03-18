@@ -1,0 +1,12 @@
+--no-private
+--title="Last Mile Fleet Solution Delivery V1 API"
+--exclude _pb\.rb$
+--markup markdown
+--markup-provider redcarpet
+
+./lib/**/*.rb
+./proto_docs/**/*.rb
+-
+README.md
+LICENSE.md
+AUTHENTICATION.md
