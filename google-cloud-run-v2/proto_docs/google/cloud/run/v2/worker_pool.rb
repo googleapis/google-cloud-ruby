@@ -290,8 +290,9 @@ module Google
         #     Output only. Indicates whether Cloud Run Threat Detection monitoring is
         #     enabled for the parent project of this worker pool.
         # @!attribute [rw] custom_audiences
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::String>]
-        #     Not supported, and ignored by Cloud Run.
+        #     Deprecated: Not supported, and ignored by Cloud Run.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
