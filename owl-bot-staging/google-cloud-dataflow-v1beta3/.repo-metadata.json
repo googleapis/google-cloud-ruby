@@ -1,0 +1,19 @@
+{
+    "api_id": "dataflow.googleapis.com",
+    "api_shortname": "dataflow",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest",
+    "distribution_name": "google-cloud-dataflow-v1beta3",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "dataflow",
+    "name_pretty": "Dataflow V1beta3 API",
+    "product_documentation": "https://cloud.google.com/dataflow",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Dataflow is a managed service for executing a wide variety of data processing patterns. Note that google-cloud-dataflow-v1beta3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataflow instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "DATAFLOW",
+    "ruby-cloud-product-url": "https://cloud.google.com/dataflow",
+    "ruby-cloud-service-override": "JobsV1Beta3=Jobs;MessagesV1Beta3=Messages;MetricsV1Beta3=Metrics;SnapshotsV1Beta3=Snapshots",
+    "library_type": "GAPIC_AUTO"
+}
