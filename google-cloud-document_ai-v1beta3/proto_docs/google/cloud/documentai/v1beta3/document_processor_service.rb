@@ -899,6 +899,13 @@ module Google
           #     Optional. The multiplier to apply to the recommended learning rate. Valid
           #     values are between 0.1 and 10. If not provided, recommended learning rate
           #     will be used.
+          # @!attribute [rw] previous_fine_tuned_processor_version_name
+          #   @return [::String]
+          #     Optional. Resource name of a previously fine tuned version id to copy the
+          #     overwritten configs from. The base_processor_version should be newer than
+          #     the base processor version used to fine tune this provided processor
+          #     version. Format:
+          #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
           class FoundationModelTuningOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
