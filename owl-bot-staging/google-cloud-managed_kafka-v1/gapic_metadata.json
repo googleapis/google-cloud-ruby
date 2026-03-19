@@ -1,0 +1,202 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.managedkafka.v1",
+  "libraryPackage": "::Google::Cloud::ManagedKafka::V1",
+  "services": {
+    "ManagedKafka": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client",
+          "rpcs": {
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "ListTopics": {
+              "methods": [
+                "list_topics"
+              ]
+            },
+            "GetTopic": {
+              "methods": [
+                "get_topic"
+              ]
+            },
+            "CreateTopic": {
+              "methods": [
+                "create_topic"
+              ]
+            },
+            "UpdateTopic": {
+              "methods": [
+                "update_topic"
+              ]
+            },
+            "DeleteTopic": {
+              "methods": [
+                "delete_topic"
+              ]
+            },
+            "ListConsumerGroups": {
+              "methods": [
+                "list_consumer_groups"
+              ]
+            },
+            "GetConsumerGroup": {
+              "methods": [
+                "get_consumer_group"
+              ]
+            },
+            "UpdateConsumerGroup": {
+              "methods": [
+                "update_consumer_group"
+              ]
+            },
+            "DeleteConsumerGroup": {
+              "methods": [
+                "delete_consumer_group"
+              ]
+            },
+            "ListAcls": {
+              "methods": [
+                "list_acls"
+              ]
+            },
+            "GetAcl": {
+              "methods": [
+                "get_acl"
+              ]
+            },
+            "CreateAcl": {
+              "methods": [
+                "create_acl"
+              ]
+            },
+            "UpdateAcl": {
+              "methods": [
+                "update_acl"
+              ]
+            },
+            "DeleteAcl": {
+              "methods": [
+                "delete_acl"
+              ]
+            },
+            "AddAclEntry": {
+              "methods": [
+                "add_acl_entry"
+              ]
+            },
+            "RemoveAclEntry": {
+              "methods": [
+                "remove_acl_entry"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ManagedKafkaConnect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client",
+          "rpcs": {
+            "ListConnectClusters": {
+              "methods": [
+                "list_connect_clusters"
+              ]
+            },
+            "GetConnectCluster": {
+              "methods": [
+                "get_connect_cluster"
+              ]
+            },
+            "CreateConnectCluster": {
+              "methods": [
+                "create_connect_cluster"
+              ]
+            },
+            "UpdateConnectCluster": {
+              "methods": [
+                "update_connect_cluster"
+              ]
+            },
+            "DeleteConnectCluster": {
+              "methods": [
+                "delete_connect_cluster"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "list_connectors"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "get_connector"
+              ]
+            },
+            "CreateConnector": {
+              "methods": [
+                "create_connector"
+              ]
+            },
+            "UpdateConnector": {
+              "methods": [
+                "update_connector"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "delete_connector"
+              ]
+            },
+            "PauseConnector": {
+              "methods": [
+                "pause_connector"
+              ]
+            },
+            "ResumeConnector": {
+              "methods": [
+                "resume_connector"
+              ]
+            },
+            "RestartConnector": {
+              "methods": [
+                "restart_connector"
+              ]
+            },
+            "StopConnector": {
+              "methods": [
+                "stop_connector"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

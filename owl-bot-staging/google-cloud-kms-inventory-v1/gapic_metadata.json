@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.kms.inventory.v1",
+  "libraryPackage": "::Google::Cloud::Kms::Inventory::V1",
+  "services": {
+    "KeyDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client",
+          "rpcs": {
+            "ListCryptoKeys": {
+              "methods": [
+                "list_crypto_keys"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "KeyTrackingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client",
+          "rpcs": {
+            "GetProtectedResourcesSummary": {
+              "methods": [
+                "get_protected_resources_summary"
+              ]
+            },
+            "SearchProtectedResources": {
+              "methods": [
+                "search_protected_resources"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
