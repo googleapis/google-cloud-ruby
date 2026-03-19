@@ -75,6 +75,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
     project = "hello world"
     parent = "hello world"
     messages = [{}]
+    thinking_mode = :THINKING_MODE_UNSPECIFIED
 
     chat_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :chat, name
@@ -84,6 +85,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["parent"]
       assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, request["messages"].first
+      assert_equal :THINKING_MODE_UNSPECIFIED, request["thinking_mode"]
       refute_nil options
     end
 
@@ -94,7 +96,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use hash object
-      client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages }) do |response, operation|
+      client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -103,7 +105,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use named arguments
-      client.chat inline_context: inline_context, project: project, parent: parent, messages: messages do |response, operation|
+      client.chat inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -112,7 +114,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use protobuf object
-      client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages) do |response, operation|
+      client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -121,7 +123,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use hash object with options
-      client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages }, grpc_options) do |response, operation|
+      client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -130,7 +132,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages), grpc_options) do |response, operation|
+      client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
