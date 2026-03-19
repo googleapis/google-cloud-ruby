@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.cloudtrace.v1",
+  "libraryPackage": "::Google::Cloud::Trace::V1",
+  "services": {
+    "TraceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Trace::V1::TraceService::Client",
+          "rpcs": {
+            "ListTraces": {
+              "methods": [
+                "list_traces"
+              ]
+            },
+            "GetTrace": {
+              "methods": [
+                "get_trace"
+              ]
+            },
+            "PatchTraces": {
+              "methods": [
+                "patch_traces"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
