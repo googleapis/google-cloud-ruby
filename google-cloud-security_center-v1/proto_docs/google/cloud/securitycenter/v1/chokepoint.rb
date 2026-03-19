@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,29 +21,17 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Contains details about groups of which this finding is a member. A group is a
-        # collection of findings that are related in some way.
-        # @!attribute [rw] group_type
-        #   @return [::Google::Cloud::SecurityCenter::V1::GroupMembership::GroupType]
-        #     Type of group.
-        # @!attribute [rw] group_id
-        #   @return [::String]
-        #     ID of the group.
-        class GroupMembership
+        # Contains details about a chokepoint, which is a resource or resource group
+        # where high-risk attack paths converge, based on [attack path simulations]
+        # (https://cloud.google.com/security-command-center/docs/attack-exposure-learn#attack_path_simulations).
+        # @!attribute [rw] related_findings
+        #   @return [::Array<::String>]
+        #     List of resource names of findings associated with this chokepoint.
+        #     For example, organizations/123/sources/456/findings/789.
+        #     This list will have at most 100 findings.
+        class Chokepoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Possible types of groups.
-          module GroupType
-            # Default value.
-            GROUP_TYPE_UNSPECIFIED = 0
-
-            # Group represents a toxic combination.
-            GROUP_TYPE_TOXIC_COMBINATION = 1
-
-            # Group represents a chokepoint.
-            GROUP_TYPE_CHOKEPOINT = 3
-          end
         end
       end
     end
