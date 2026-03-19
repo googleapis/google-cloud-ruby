@@ -1,0 +1,335 @@
+{
+  "client_library": {
+    "name": "google-cloud-gke_hub-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.gkehub.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_ListMemberships_sync",
+      "title": "Snippet for the list_memberships call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#list_memberships.",
+      "file": "gke_hub_membership_service/list_memberships.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_memberships",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#list_memberships",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeHub::V1beta1::ListMembershipsResponse",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "ListMemberships",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.ListMemberships",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_GetMembership_sync",
+      "title": "Snippet for the get_membership call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#get_membership.",
+      "file": "gke_hub_membership_service/get_membership.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_membership",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#get_membership",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::GetMembershipRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeHub::V1beta1::Membership",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "GetMembership",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.GetMembership",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_CreateMembership_sync",
+      "title": "Snippet for the create_membership call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#create_membership.",
+      "file": "gke_hub_membership_service/create_membership.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_membership",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#create_membership",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "CreateMembership",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.CreateMembership",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_DeleteMembership_sync",
+      "title": "Snippet for the delete_membership call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#delete_membership.",
+      "file": "gke_hub_membership_service/delete_membership.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_membership",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#delete_membership",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMembership",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.DeleteMembership",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_UpdateMembership_sync",
+      "title": "Snippet for the update_membership call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#update_membership.",
+      "file": "gke_hub_membership_service/update_membership.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_membership",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#update_membership",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "UpdateMembership",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.UpdateMembership",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_GenerateConnectManifest_sync",
+      "title": "Snippet for the generate_connect_manifest call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_connect_manifest.",
+      "file": "gke_hub_membership_service/generate_connect_manifest.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_connect_manifest",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_connect_manifest",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestResponse",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "GenerateConnectManifest",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.GenerateConnectManifest",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_ValidateExclusivity_sync",
+      "title": "Snippet for the validate_exclusivity call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#validate_exclusivity.",
+      "file": "gke_hub_membership_service/validate_exclusivity.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "validate_exclusivity",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#validate_exclusivity",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityResponse",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "ValidateExclusivity",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.ValidateExclusivity",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkehub_v1beta1_generated_GkeHubMembershipService_GenerateExclusivityManifest_sync",
+      "title": "Snippet for the generate_exclusivity_manifest call in the GkeHubMembershipService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_exclusivity_manifest.",
+      "file": "gke_hub_membership_service/generate_exclusivity_manifest.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_exclusivity_manifest",
+        "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_exclusivity_manifest",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestResponse",
+        "client": {
+          "short_name": "GkeHubMembershipService::Client",
+          "full_name": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client"
+        },
+        "method": {
+          "short_name": "GenerateExclusivityManifest",
+          "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService.GenerateExclusivityManifest",
+          "service": {
+            "short_name": "GkeHubMembershipService",
+            "full_name": "google.cloud.gkehub.v1beta1.GkeHubMembershipService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
