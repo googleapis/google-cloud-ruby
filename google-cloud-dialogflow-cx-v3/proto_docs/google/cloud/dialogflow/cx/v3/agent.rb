@@ -89,10 +89,27 @@ module Google
           #     Speech recognition related settings.
           # @!attribute [rw] start_flow
           #   @return [::String]
-          #     Immutable. Name of the start flow in this agent. A start flow will be
-          #     automatically created when the agent is created, and can only be deleted by
-          #     deleting the agent. Format:
+          #     Name of the start flow in this agent. A start flow will be automatically
+          #     created when the agent is created, and can only be deleted by deleting
+          #     the agent.
+          #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
+          #     Currently only the default start flow with id
+          #     "00000000-0000-0000-0000-000000000000" is allowed.
+          #
+          #     Note: The following fields are mutually exclusive: `start_flow`, `start_playbook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] start_playbook
+          #   @return [::String]
+          #     Name of the start playbook in this agent. A start playbook will be
+          #     automatically created when the agent is created, and can only be deleted
+          #     by deleting the agent.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
+          #     Currently only the
+          #      default playbook with id
+          #      "00000000-0000-0000-0000-000000000000" is allowed.
+          #
+          #     Note: The following fields are mutually exclusive: `start_playbook`, `start_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] security_settings
           #   @return [::String]
           #     Name of the

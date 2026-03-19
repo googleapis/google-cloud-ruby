@@ -113,6 +113,18 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::ClientPathsTest < Minitest::T
     end
   end
 
+  def test_playbook_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.playbook_path project: "value0", location: "value1", agent: "value2", playbook: "value3"
+      assert_equal "projects/value0/locations/value1/agents/value2/playbooks/value3", path
+    end
+  end
+
   def test_secret_version_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
