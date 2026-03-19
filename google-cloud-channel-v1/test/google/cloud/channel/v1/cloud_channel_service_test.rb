@@ -1060,6 +1060,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     purchase_order_id = "hello world"
     request_id = "hello world"
     billing_account = "hello world"
+    price_reference_id = "hello world"
 
     change_offer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :change_offer, name
@@ -1070,6 +1071,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       assert_equal "hello world", request["purchase_order_id"]
       assert_equal "hello world", request["request_id"]
       assert_equal "hello world", request["billing_account"]
+      assert_equal "hello world", request["price_reference_id"]
       refute_nil options
     end
 
@@ -1080,35 +1082,35 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }) do |response, operation|
+      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account do |response, operation|
+      client.change_offer name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account) do |response, operation|
+      client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account }, grpc_options) do |response, operation|
+      client.change_offer({ name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account), grpc_options) do |response, operation|
+      client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id, billing_account: billing_account, price_reference_id: price_reference_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2991,12 +2993,15 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     # Create request parameters for a unary method.
     account = "hello world"
     service_account = "hello world"
+    integrator = "hello world"
 
     register_subscriber_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :register_subscriber, name
       assert_kind_of ::Google::Cloud::Channel::V1::RegisterSubscriberRequest, request
       assert_equal "hello world", request["account"]
       assert_equal "hello world", request["service_account"]
+      assert_equal "hello world", request["integrator"]
+      assert request.has_integrator?
       refute_nil options
     end
 
@@ -3007,31 +3012,31 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.register_subscriber({ account: account, service_account: service_account }) do |response, operation|
+      client.register_subscriber({ account: account, service_account: service_account, integrator: integrator }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.register_subscriber account: account, service_account: service_account do |response, operation|
+      client.register_subscriber account: account, service_account: service_account, integrator: integrator do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account) do |response, operation|
+      client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.register_subscriber({ account: account, service_account: service_account }, grpc_options) do |response, operation|
+      client.register_subscriber({ account: account, service_account: service_account, integrator: integrator }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.register_subscriber(::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options) do |response, operation|
+      client.register_subscriber(::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3051,12 +3056,15 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     # Create request parameters for a unary method.
     account = "hello world"
     service_account = "hello world"
+    integrator = "hello world"
 
     unregister_subscriber_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :unregister_subscriber, name
       assert_kind_of ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest, request
       assert_equal "hello world", request["account"]
       assert_equal "hello world", request["service_account"]
+      assert_equal "hello world", request["integrator"]
+      assert request.has_integrator?
       refute_nil options
     end
 
@@ -3067,31 +3075,31 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.unregister_subscriber({ account: account, service_account: service_account }) do |response, operation|
+      client.unregister_subscriber({ account: account, service_account: service_account, integrator: integrator }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.unregister_subscriber account: account, service_account: service_account do |response, operation|
+      client.unregister_subscriber account: account, service_account: service_account, integrator: integrator do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account) do |response, operation|
+      client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.unregister_subscriber({ account: account, service_account: service_account }, grpc_options) do |response, operation|
+      client.unregister_subscriber({ account: account, service_account: service_account, integrator: integrator }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.unregister_subscriber(::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options) do |response, operation|
+      client.unregister_subscriber(::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account, integrator: integrator), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3112,6 +3120,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     account = "hello world"
     page_size = 42
     page_token = "hello world"
+    integrator = "hello world"
 
     list_subscribers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_subscribers, name
@@ -3119,6 +3128,8 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       assert_equal "hello world", request["account"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["integrator"]
+      assert request.has_integrator?
       refute_nil options
     end
 
@@ -3129,31 +3140,31 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.list_subscribers({ account: account, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_subscribers({ account: account, page_size: page_size, page_token: page_token, integrator: integrator }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_subscribers account: account, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_subscribers account: account, page_size: page_size, page_token: page_token, integrator: integrator do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token, integrator: integrator) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_subscribers({ account: account, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_subscribers({ account: account, page_size: page_size, page_token: page_token, integrator: integrator }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_subscribers(::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_subscribers(::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token, integrator: integrator), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
