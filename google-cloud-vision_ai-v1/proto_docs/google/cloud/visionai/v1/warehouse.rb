@@ -2723,7 +2723,7 @@ module Google
         #     If negative, INVALID_ARGUMENT error will be returned.
         #     If unspecified or 0, API will pick a default size, which is 10.
         #     If the requested page size is larger than the maximum size, API will pick
-        #     the maximum size, which is 100.
+        #     the maximum size, which is 200.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The continuation token to fetch the next page. If empty, it means it is
@@ -2839,8 +2839,8 @@ module Google
         #     image query).
         #     By default this represents cosine similarity between the query and the
         #     retrieved media content. The value is in the range of [-1, 1].
-        #     Note that search ranking is not only decided by this relevance score,
-        #     but also other factors such as the match of annotations.
+        #     Note that search ranking is not only decided by this relevance score, but
+        #     also other factors such as the match of annotations.
         # @!attribute [rw] requested_annotations
         #   @return [::Array<::Google::Cloud::VisionAI::V1::Annotation>]
         #     Search result annotations specified by result_annotation_keys in search
