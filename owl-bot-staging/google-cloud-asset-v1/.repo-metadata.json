@@ -1,0 +1,18 @@
+{
+    "api_id": "cloudasset.googleapis.com",
+    "api_shortname": "cloudasset",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-asset-v1/latest",
+    "distribution_name": "google-cloud-asset-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudasset",
+    "name_pretty": "Cloud Asset V1 API",
+    "product_documentation": "https://cloud.google.com/asset-inventory/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services. Note that google-cloud-asset-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-asset instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "ASSET",
+    "ruby-cloud-product-url": "https://cloud.google.com/asset-inventory/",
+    "library_type": "GAPIC_AUTO"
+}
