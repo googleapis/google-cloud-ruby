@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-binary_authorization-v1", "~> 1.2"
   gem.add_dependency "google-cloud-core", "~> 1.6"
