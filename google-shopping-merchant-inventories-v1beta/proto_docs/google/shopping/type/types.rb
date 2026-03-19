@@ -114,6 +114,25 @@ module Google
 
           # [YouTube Shopping](https://support.google.com/merchants/answer/12362804).
           YOUTUBE_SHOPPING = 6
+
+          # Youtube shopping checkout.
+          YOUTUBE_SHOPPING_CHECKOUT = 7
+
+          # [Youtube Affiliate](https://support.google.com/youtube/answer/13376398).
+          YOUTUBE_AFFILIATE = 8
+
+          # [Free vehicle
+          # listings](https://support.google.com/merchants/answer/11189169).
+          FREE_VEHICLE_LISTINGS = 9
+
+          # [Vehicle ads](https://support.google.com/merchants/answer/11189169).
+          VEHICLE_ADS = 10
+
+          # [Cloud retail](https://cloud.google.com/solutions/retail).
+          CLOUD_RETAIL = 11
+
+          # [Local cloud retail](https://cloud.google.com/solutions/retail).
+          LOCAL_CLOUD_RETAIL = 12
         end
       end
 
@@ -166,6 +185,10 @@ module Google
           # listings](https://support.google.com/merchants/answer/9199328).
           FREE_LISTINGS = 7
 
+          # [Free product listings on UCP
+          # checkout](https://developers.google.com/merchant/ucp).
+          FREE_LISTINGS_UCP_CHECKOUT = 19
+
           # [Free local product
           # listings](https://support.google.com/merchants/answer/9825611).
           FREE_LOCAL_LISTINGS = 8
@@ -173,6 +196,9 @@ module Google
           # [Free local vehicle
           # listings](https://support.google.com/merchants/answer/11544533).
           FREE_LOCAL_VEHICLE_LISTINGS = 9
+
+          # [Youtube Affiliate](https://support.google.com/youtube/answer/13376398).
+          YOUTUBE_AFFILIATE = 18
 
           # [YouTube
           # Shopping](https://support.google.com/merchants/answer/13478370).
@@ -183,6 +209,18 @@ module Google
 
           # [Local cloud retail](https://cloud.google.com/solutions/retail).
           LOCAL_CLOUD_RETAIL = 12
+
+          # [Product
+          # Reviews](https://support.google.com/merchants/answer/14620732).
+          PRODUCT_REVIEWS = 15
+
+          # [Merchant
+          # Reviews](https://developers.google.com/merchant-review-feeds).
+          MERCHANT_REVIEWS = 16
+
+          # YouTube Checkout
+          # .
+          YOUTUBE_CHECKOUT = 17
         end
       end
 
