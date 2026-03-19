@@ -33,12 +33,6 @@ credentials, there are several methods available to you.
 
 Credentials are accepted in the following ways, in the following order or precedence:
 
-> [!WARNING]
-> If you accept a credential configuration (JSON file or Hash) from an
-> external source for authentication to Google Cloud, you must validate it before
-> providing it to a Google API client library. Providing an unvalidated credential
-> configuration to Google APIs can compromise the security of your systems and data.
-
 1. Credentials specified in method arguments
 2. Credentials specified in configuration
 3. Credentials pointed to or included in environment variables
@@ -60,30 +54,20 @@ whenever possible.
 To configure a credentials file for an individual client initialization:
 
 ```ruby
-require "googleauth"
 require "google/cloud/translate"
 
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
-
 client = Google::Cloud::Translate.translation_service do |config|
-  config.credentials = credentials
+  config.credentials = "path/to/credentialfile.json"
 end
 ```
 
 To configure a credentials file globally for all clients:
 
 ```ruby
-require "googleauth"
 require "google/cloud/translate"
 
-credentials = ::Google::Auth::ServiceAccountCredentials.make_creds(
-  json_key_io: ::File.open("/path/to/keyfile.json")
-)
-
 Google::Cloud::Translate.configure do |config|
-  config.credentials = credentials
+  config.credentials = "path/to/credentialfile.json"
 end
 
 client = Google::Cloud::Translate.translation_service
