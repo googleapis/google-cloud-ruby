@@ -204,6 +204,7 @@ module Google
                   config.quota_project = @quota_project_id
                   config.endpoint = @live_video_analytics_stub.endpoint
                   config.universe_domain = @live_video_analytics_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
                   config.logger = @live_video_analytics_stub.logger if config.respond_to? :logger=
                 end
 
@@ -2072,6 +2073,13 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
                 config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private

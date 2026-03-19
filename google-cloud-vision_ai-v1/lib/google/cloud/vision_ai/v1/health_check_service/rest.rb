@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/vision_ai/v1/version"
+require "google/cloud/vision_ai/v1/bindings_override"
 
 require "google/cloud/vision_ai/v1/health_check_service/credentials"
 require "google/cloud/vision_ai/v1/health_check_service/paths"
