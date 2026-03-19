@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.12.0 (2026-03-19)
+
+#### Features
+
+* Add irb as explicit dependency for Ruby 4.0 compatibility ([#32881](https://github.com/googleapis/google-cloud-ruby/issues/32881)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32849](https://github.com/googleapis/google-cloud-ruby/issues/32849)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32850](https://github.com/googleapis/google-cloud-ruby/issues/32850)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32851](https://github.com/googleapis/google-cloud-ruby/issues/32851)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32853](https://github.com/googleapis/google-cloud-ruby/issues/32853)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32854](https://github.com/googleapis/google-cloud-ruby/issues/32854)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32855](https://github.com/googleapis/google-cloud-ruby/issues/32855)) 
+
 ### 0.11.1 (2025-10-27)
 
 #### Documentation
