@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.security.publicca.v1beta1",
+  "libraryPackage": "::Google::Cloud::Security::PublicCA::V1beta1",
+  "services": {
+    "PublicCertificateAuthorityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client",
+          "rpcs": {
+            "CreateExternalAccountKey": {
+              "methods": [
+                "create_external_account_key"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
