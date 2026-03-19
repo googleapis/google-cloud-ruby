@@ -41,8 +41,7 @@ module Google
               rpc :CreateUser, ::Google::Shopping::Merchant::Accounts::V1::CreateUserRequest, ::Google::Shopping::Merchant::Accounts::V1::User
               # Deletes a Merchant Center account user. Executing this method requires
               # admin access. The user to be deleted can't be the last admin user of that
-              # account. Also a user is protected from deletion if it
-              # is managed by Business Manager"
+              # account.
               rpc :DeleteUser, ::Google::Shopping::Merchant::Accounts::V1::DeleteUserRequest, ::Google::Protobuf::Empty
               # Updates a Merchant Center account user. Executing this method requires
               # admin access.
