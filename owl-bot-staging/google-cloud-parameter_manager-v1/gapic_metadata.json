@@ -1,0 +1,73 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.parametermanager.v1",
+  "libraryPackage": "::Google::Cloud::ParameterManager::V1",
+  "services": {
+    "ParameterManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ParameterManager::V1::ParameterManager::Client",
+          "rpcs": {
+            "ListParameters": {
+              "methods": [
+                "list_parameters"
+              ]
+            },
+            "GetParameter": {
+              "methods": [
+                "get_parameter"
+              ]
+            },
+            "CreateParameter": {
+              "methods": [
+                "create_parameter"
+              ]
+            },
+            "UpdateParameter": {
+              "methods": [
+                "update_parameter"
+              ]
+            },
+            "DeleteParameter": {
+              "methods": [
+                "delete_parameter"
+              ]
+            },
+            "ListParameterVersions": {
+              "methods": [
+                "list_parameter_versions"
+              ]
+            },
+            "GetParameterVersion": {
+              "methods": [
+                "get_parameter_version"
+              ]
+            },
+            "RenderParameterVersion": {
+              "methods": [
+                "render_parameter_version"
+              ]
+            },
+            "CreateParameterVersion": {
+              "methods": [
+                "create_parameter_version"
+              ]
+            },
+            "UpdateParameterVersion": {
+              "methods": [
+                "update_parameter_version"
+              ]
+            },
+            "DeleteParameterVersion": {
+              "methods": [
+                "delete_parameter_version"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
