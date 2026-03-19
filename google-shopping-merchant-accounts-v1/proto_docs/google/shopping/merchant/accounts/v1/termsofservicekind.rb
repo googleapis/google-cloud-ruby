@@ -27,7 +27,7 @@ module Google
             # Default value. This value is unused.
             TERMS_OF_SERVICE_KIND_UNSPECIFIED = 0
 
-            # Merchant Center application.
+            # Terms of service for the Merchant Center application.
             MERCHANT_CENTER = 1
           end
         end
