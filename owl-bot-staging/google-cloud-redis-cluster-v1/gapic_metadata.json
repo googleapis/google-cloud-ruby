@@ -1,0 +1,88 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.redis.cluster.v1",
+  "libraryPackage": "::Google::Cloud::Redis::Cluster::V1",
+  "services": {
+    "CloudRedisCluster": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::Client",
+          "rpcs": {
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "GetClusterCertificateAuthority": {
+              "methods": [
+                "get_cluster_certificate_authority"
+              ]
+            },
+            "RescheduleClusterMaintenance": {
+              "methods": [
+                "reschedule_cluster_maintenance"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "list_backup_collections"
+              ]
+            },
+            "GetBackupCollection": {
+              "methods": [
+                "get_backup_collection"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "export_backup"
+              ]
+            },
+            "BackupCluster": {
+              "methods": [
+                "backup_cluster"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
