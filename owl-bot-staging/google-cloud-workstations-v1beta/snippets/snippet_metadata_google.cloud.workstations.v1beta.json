@@ -1,0 +1,815 @@
+{
+  "client_library": {
+    "name": "google-cloud-workstations-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.workstations.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_GetWorkstationCluster_sync",
+      "title": "Snippet for the get_workstation_cluster call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#get_workstation_cluster.",
+      "file": "workstations/get_workstation_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workstation_cluster",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#get_workstation_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::GetWorkstationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::WorkstationCluster",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "GetWorkstationCluster",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.GetWorkstationCluster",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_ListWorkstationClusters_sync",
+      "title": "Snippet for the list_workstation_clusters call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#list_workstation_clusters.",
+      "file": "workstations/list_workstation_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workstation_clusters",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#list_workstation_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::ListWorkstationClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::ListWorkstationClustersResponse",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "ListWorkstationClusters",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.ListWorkstationClusters",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_CreateWorkstationCluster_sync",
+      "title": "Snippet for the create_workstation_cluster call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#create_workstation_cluster.",
+      "file": "workstations/create_workstation_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workstation_cluster",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#create_workstation_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::CreateWorkstationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkstationCluster",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.CreateWorkstationCluster",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_UpdateWorkstationCluster_sync",
+      "title": "Snippet for the update_workstation_cluster call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#update_workstation_cluster.",
+      "file": "workstations/update_workstation_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workstation_cluster",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#update_workstation_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::UpdateWorkstationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkstationCluster",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.UpdateWorkstationCluster",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_DeleteWorkstationCluster_sync",
+      "title": "Snippet for the delete_workstation_cluster call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#delete_workstation_cluster.",
+      "file": "workstations/delete_workstation_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workstation_cluster",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#delete_workstation_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::DeleteWorkstationClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkstationCluster",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.DeleteWorkstationCluster",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_GetWorkstationConfig_sync",
+      "title": "Snippet for the get_workstation_config call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#get_workstation_config.",
+      "file": "workstations/get_workstation_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workstation_config",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#get_workstation_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::GetWorkstationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::WorkstationConfig",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "GetWorkstationConfig",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.GetWorkstationConfig",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_ListWorkstationConfigs_sync",
+      "title": "Snippet for the list_workstation_configs call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#list_workstation_configs.",
+      "file": "workstations/list_workstation_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workstation_configs",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#list_workstation_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::ListWorkstationConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::ListWorkstationConfigsResponse",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "ListWorkstationConfigs",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.ListWorkstationConfigs",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_ListUsableWorkstationConfigs_sync",
+      "title": "Snippet for the list_usable_workstation_configs call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#list_usable_workstation_configs.",
+      "file": "workstations/list_usable_workstation_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_usable_workstation_configs",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#list_usable_workstation_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::ListUsableWorkstationConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::ListUsableWorkstationConfigsResponse",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "ListUsableWorkstationConfigs",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.ListUsableWorkstationConfigs",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_CreateWorkstationConfig_sync",
+      "title": "Snippet for the create_workstation_config call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#create_workstation_config.",
+      "file": "workstations/create_workstation_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workstation_config",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#create_workstation_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::CreateWorkstationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkstationConfig",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.CreateWorkstationConfig",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_UpdateWorkstationConfig_sync",
+      "title": "Snippet for the update_workstation_config call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#update_workstation_config.",
+      "file": "workstations/update_workstation_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workstation_config",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#update_workstation_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::UpdateWorkstationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkstationConfig",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.UpdateWorkstationConfig",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_DeleteWorkstationConfig_sync",
+      "title": "Snippet for the delete_workstation_config call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#delete_workstation_config.",
+      "file": "workstations/delete_workstation_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workstation_config",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#delete_workstation_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::DeleteWorkstationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkstationConfig",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.DeleteWorkstationConfig",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_GetWorkstation_sync",
+      "title": "Snippet for the get_workstation call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#get_workstation.",
+      "file": "workstations/get_workstation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workstation",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#get_workstation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::GetWorkstationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::Workstation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "GetWorkstation",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.GetWorkstation",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_ListWorkstations_sync",
+      "title": "Snippet for the list_workstations call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#list_workstations.",
+      "file": "workstations/list_workstations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workstations",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#list_workstations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::ListWorkstationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::ListWorkstationsResponse",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "ListWorkstations",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.ListWorkstations",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_ListUsableWorkstations_sync",
+      "title": "Snippet for the list_usable_workstations call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#list_usable_workstations.",
+      "file": "workstations/list_usable_workstations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_usable_workstations",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#list_usable_workstations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::ListUsableWorkstationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::ListUsableWorkstationsResponse",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "ListUsableWorkstations",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.ListUsableWorkstations",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_CreateWorkstation_sync",
+      "title": "Snippet for the create_workstation call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#create_workstation.",
+      "file": "workstations/create_workstation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workstation",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#create_workstation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::CreateWorkstationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkstation",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.CreateWorkstation",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_UpdateWorkstation_sync",
+      "title": "Snippet for the update_workstation call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#update_workstation.",
+      "file": "workstations/update_workstation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workstation",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#update_workstation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::UpdateWorkstationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkstation",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.UpdateWorkstation",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_DeleteWorkstation_sync",
+      "title": "Snippet for the delete_workstation call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#delete_workstation.",
+      "file": "workstations/delete_workstation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workstation",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#delete_workstation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::DeleteWorkstationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkstation",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.DeleteWorkstation",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_StartWorkstation_sync",
+      "title": "Snippet for the start_workstation call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#start_workstation.",
+      "file": "workstations/start_workstation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_workstation",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#start_workstation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::StartWorkstationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "StartWorkstation",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.StartWorkstation",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_StopWorkstation_sync",
+      "title": "Snippet for the stop_workstation call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#stop_workstation.",
+      "file": "workstations/stop_workstation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_workstation",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#stop_workstation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::StopWorkstationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "StopWorkstation",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.StopWorkstation",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_GenerateAccessToken_sync",
+      "title": "Snippet for the generate_access_token call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#generate_access_token.",
+      "file": "workstations/generate_access_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_access_token",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#generate_access_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::GenerateAccessTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Workstations::V1beta::GenerateAccessTokenResponse",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "GenerateAccessToken",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.GenerateAccessToken",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

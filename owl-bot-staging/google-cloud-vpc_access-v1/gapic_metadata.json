@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.vpcaccess.v1",
+  "libraryPackage": "::Google::Cloud::VpcAccess::V1",
+  "services": {
+    "VpcAccessService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::VpcAccess::V1::VpcAccessService::Client",
+          "rpcs": {
+            "CreateConnector": {
+              "methods": [
+                "create_connector"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "get_connector"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "list_connectors"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "delete_connector"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
