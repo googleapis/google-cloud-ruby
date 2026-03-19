@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-cloud-monitoring-metrics_scope-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.monitoring.metricsscope.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "monitoring_v1_generated_MetricsScopes_GetMetricsScope_sync",
+      "title": "Snippet for the get_metrics_scope call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#get_metrics_scope.",
+      "file": "metrics_scopes/get_metrics_scope.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_metrics_scope",
+        "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#get_metrics_scope",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::MetricsScope::V1::GetMetricsScopeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScope",
+        "client": {
+          "short_name": "MetricsScopes::Client",
+          "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client"
+        },
+        "method": {
+          "short_name": "GetMetricsScope",
+          "full_name": "google.monitoring.metricsscope.v1.MetricsScopes.GetMetricsScope",
+          "service": {
+            "short_name": "MetricsScopes",
+            "full_name": "google.monitoring.metricsscope.v1.MetricsScopes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_MetricsScopes_ListMetricsScopesByMonitoredProject_sync",
+      "title": "Snippet for the list_metrics_scopes_by_monitored_project call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#list_metrics_scopes_by_monitored_project.",
+      "file": "metrics_scopes/list_metrics_scopes_by_monitored_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_metrics_scopes_by_monitored_project",
+        "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#list_metrics_scopes_by_monitored_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::MetricsScope::V1::ListMetricsScopesByMonitoredProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::MetricsScope::V1::ListMetricsScopesByMonitoredProjectResponse",
+        "client": {
+          "short_name": "MetricsScopes::Client",
+          "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client"
+        },
+        "method": {
+          "short_name": "ListMetricsScopesByMonitoredProject",
+          "full_name": "google.monitoring.metricsscope.v1.MetricsScopes.ListMetricsScopesByMonitoredProject",
+          "service": {
+            "short_name": "MetricsScopes",
+            "full_name": "google.monitoring.metricsscope.v1.MetricsScopes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_MetricsScopes_CreateMonitoredProject_sync",
+      "title": "Snippet for the create_monitored_project call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#create_monitored_project.",
+      "file": "metrics_scopes/create_monitored_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_monitored_project",
+        "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#create_monitored_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::MetricsScope::V1::CreateMonitoredProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MetricsScopes::Client",
+          "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client"
+        },
+        "method": {
+          "short_name": "CreateMonitoredProject",
+          "full_name": "google.monitoring.metricsscope.v1.MetricsScopes.CreateMonitoredProject",
+          "service": {
+            "short_name": "MetricsScopes",
+            "full_name": "google.monitoring.metricsscope.v1.MetricsScopes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v1_generated_MetricsScopes_DeleteMonitoredProject_sync",
+      "title": "Snippet for the delete_monitored_project call in the MetricsScopes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#delete_monitored_project.",
+      "file": "metrics_scopes/delete_monitored_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_monitored_project",
+        "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#delete_monitored_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::MetricsScope::V1::DeleteMonitoredProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MetricsScopes::Client",
+          "full_name": "::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client"
+        },
+        "method": {
+          "short_name": "DeleteMonitoredProject",
+          "full_name": "google.monitoring.metricsscope.v1.MetricsScopes.DeleteMonitoredProject",
+          "service": {
+            "short_name": "MetricsScopes",
+            "full_name": "google.monitoring.metricsscope.v1.MetricsScopes"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
