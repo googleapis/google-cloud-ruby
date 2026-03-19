@@ -1,5 +1,25 @@
 # Release History
 
+### 1.11.0 (2026-03-19)
+
+#### Features
+
+* Add irb as explicit dependency for Ruby 4.0 compatibility ([#32446](https://github.com/googleapis/google-cloud-ruby/issues/32446)) 
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+* Add more post-quantum (PQ) signature algorithms to CryptoKeyVersion 
+* Added DeleteCryptoKey and DeleteCryptoKeyVersion RPCs to permanently remove resources 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32849](https://github.com/googleapis/google-cloud-ruby/issues/32849)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32851](https://github.com/googleapis/google-cloud-ruby/issues/32851)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32853](https://github.com/googleapis/google-cloud-ruby/issues/32853)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32854](https://github.com/googleapis/google-cloud-ruby/issues/32854)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32855](https://github.com/googleapis/google-cloud-ruby/issues/32855)) 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* Clarify supported resources for the crypto_key_backend field in ImportJob 
+* Update documentation for AutokeyAdmin service and messages to support folder and project-level configurations 
+
 ### 1.10.0 (2026-01-23)
 
 #### Features
