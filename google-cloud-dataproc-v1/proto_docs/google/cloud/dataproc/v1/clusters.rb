@@ -90,6 +90,9 @@ module Google
         end
 
         # The cluster config.
+        # @!attribute [rw] cluster_type
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::ClusterType]
+        #     Optional. The type of the cluster.
         # @!attribute [rw] cluster_tier
         #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::ClusterTier]
         #     Optional. The cluster tier.
@@ -181,6 +184,22 @@ module Google
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the cluster.
+          module ClusterType
+            # Not set.
+            CLUSTER_TYPE_UNSPECIFIED = 0
+
+            # Standard dataproc cluster with a minimum of two primary workers.
+            STANDARD = 1
+
+            # https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/single-node-clusters
+            SINGLE_NODE = 2
+
+            # Clusters that can use only secondary workers and be scaled down to zero
+            # secondary worker nodes.
+            ZERO_SCALE = 3
+          end
 
           # The cluster tier.
           module ClusterTier
