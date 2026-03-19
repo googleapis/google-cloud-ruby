@@ -25,6 +25,7 @@ require "google/cloud/kms/v1/bindings_override"
 
 require "google/cloud/kms/v1/key_management_service/credentials"
 require "google/cloud/kms/v1/key_management_service/paths"
+require "google/cloud/kms/v1/key_management_service/rest/operations"
 require "google/cloud/kms/v1/key_management_service/rest/client"
 
 module Google

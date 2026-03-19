@@ -212,6 +212,14 @@ module Google
                                                             ["autokey_config.name", %r{^folders/[^/]+/autokeyConfig/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{autokey_config.name}",
+                                                          body: "autokey_config",
+                                                          matches: [
+                                                            ["autokey_config.name", %r{^projects/[^/]+/autokeyConfig/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -231,6 +239,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^folders/[^/]+/autokeyConfig/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/autokeyConfig/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
