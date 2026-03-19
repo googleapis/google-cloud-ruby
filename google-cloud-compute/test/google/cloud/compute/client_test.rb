@@ -620,6 +620,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_composite_health_checks_rest
+    skip unless Google::Cloud::Compute.region_composite_health_checks_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_composite_health_checks do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client, client
+    end
+  end
+
   def test_region_disk_types_rest
     skip unless Google::Cloud::Compute.region_disk_types_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -667,6 +677,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionHealthChecks::Rest::Client, client
+    end
+  end
+
+  def test_region_health_sources_rest
+    skip unless Google::Cloud::Compute.region_health_sources_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.region_health_sources do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionHealthSources::Rest::Client, client
     end
   end
 
