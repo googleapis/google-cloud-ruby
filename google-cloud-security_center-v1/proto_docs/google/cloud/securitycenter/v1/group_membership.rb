@@ -40,6 +40,9 @@ module Google
 
             # Group represents a toxic combination.
             GROUP_TYPE_TOXIC_COMBINATION = 1
+
+            # Group represents a chokepoint.
+            GROUP_TYPE_CHOKEPOINT = 3
           end
         end
       end
