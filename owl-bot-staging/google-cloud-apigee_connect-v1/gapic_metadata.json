@@ -1,0 +1,37 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.apigeeconnect.v1",
+  "libraryPackage": "::Google::Cloud::ApigeeConnect::V1",
+  "services": {
+    "ConnectionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client",
+          "rpcs": {
+            "ListConnections": {
+              "methods": [
+                "list_connections"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Tether": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApigeeConnect::V1::Tether::Client",
+          "rpcs": {
+            "Egress": {
+              "methods": [
+                "egress"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
