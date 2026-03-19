@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.1"
+  gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "gapic-common", "~> 1.2"
   gem.add_dependency "google-apps-script-type", "> 0.0", "< 2.a"
