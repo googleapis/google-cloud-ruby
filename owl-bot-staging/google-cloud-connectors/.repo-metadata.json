@@ -1,0 +1,15 @@
+{
+    "api_id": "connectors.googleapis.com",
+    "api_shortname": "connectors",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-connectors/latest",
+    "distribution_name": "google-cloud-connectors",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "connectors",
+    "name_pretty": "Connectors API",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Enables users to create and manage connections to Google Cloud services and third-party business applications using the Connectors interface.",
+    "library_type": "GAPIC_AUTO"
+}
