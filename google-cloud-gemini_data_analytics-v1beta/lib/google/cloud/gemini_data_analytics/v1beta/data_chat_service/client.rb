@@ -220,7 +220,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload chat(inline_context: nil, conversation_reference: nil, data_agent_context: nil, client_managed_resource_context: nil, project: nil, parent: nil, messages: nil)
+            # @overload chat(inline_context: nil, conversation_reference: nil, data_agent_context: nil, client_managed_resource_context: nil, project: nil, parent: nil, messages: nil, thinking_mode: nil)
             #   Pass arguments to `chat` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -255,6 +255,9 @@ module Google
             #     Pattern: `projects/{project}/locations/{location}`
             #   @param messages [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::Message, ::Hash>]
             #     Required. Content of current conversation.
+            #   @param thinking_mode [::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest::ThinkingMode]
+            #     Optional. The thinking mode to use for the agent loop.
+            #     Defaults to THINKING_MODE_UNSPECIFIED if not specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::GeminiDataAnalytics::V1beta::Message>]
