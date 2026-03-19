@@ -52,6 +52,10 @@ module Google
             rpc :ListCryptoKeyVersions, ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest, ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse
             # Lists [ImportJobs][google.cloud.kms.v1.ImportJob].
             rpc :ListImportJobs, ::Google::Cloud::Kms::V1::ListImportJobsRequest, ::Google::Cloud::Kms::V1::ListImportJobsResponse
+            # Lists the [RetiredResources][google.cloud.kms.v1.RetiredResource] which are
+            # the records of deleted [CryptoKeys][google.cloud.kms.v1.CryptoKey].
+            # RetiredResources prevent the reuse of these resource names after deletion.
+            rpc :ListRetiredResources, ::Google::Cloud::Kms::V1::ListRetiredResourcesRequest, ::Google::Cloud::Kms::V1::ListRetiredResourcesResponse
             # Returns metadata for a given [KeyRing][google.cloud.kms.v1.KeyRing].
             rpc :GetKeyRing, ::Google::Cloud::Kms::V1::GetKeyRingRequest, ::Google::Cloud::Kms::V1::KeyRing
             # Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as
@@ -70,6 +74,10 @@ module Google
             rpc :GetPublicKey, ::Google::Cloud::Kms::V1::GetPublicKeyRequest, ::Google::Cloud::Kms::V1::PublicKey
             # Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].
             rpc :GetImportJob, ::Google::Cloud::Kms::V1::GetImportJobRequest, ::Google::Cloud::Kms::V1::ImportJob
+            # Retrieves a specific [RetiredResource][google.cloud.kms.v1.RetiredResource]
+            # resource, which represents the record of a deleted
+            # [CryptoKey][google.cloud.kms.v1.CryptoKey].
+            rpc :GetRetiredResource, ::Google::Cloud::Kms::V1::GetRetiredResourceRequest, ::Google::Cloud::Kms::V1::RetiredResource
             # Create a new [KeyRing][google.cloud.kms.v1.KeyRing] in a given Project and
             # Location.
             rpc :CreateKeyRing, ::Google::Cloud::Kms::V1::CreateKeyRingRequest, ::Google::Cloud::Kms::V1::KeyRing
@@ -87,6 +95,25 @@ module Google
             # [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to
             # [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED].
             rpc :CreateCryptoKeyVersion, ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest, ::Google::Cloud::Kms::V1::CryptoKeyVersion
+            # Permanently deletes the given [CryptoKey][google.cloud.kms.v1.CryptoKey].
+            # All child [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] must
+            # have been previously deleted using
+            # [KeyManagementService.DeleteCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersion].
+            # The specified crypto key will be immediately and permanently deleted upon
+            # calling this method. This action cannot be undone.
+            rpc :DeleteCryptoKey, ::Google::Cloud::Kms::V1::DeleteCryptoKeyRequest, ::Google::Longrunning::Operation
+            # Permanently deletes the given
+            # [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. Only possible if
+            # the version has not been previously imported and if its
+            # [state][google.cloud.kms.v1.CryptoKeyVersion.state] is one of
+            # [DESTROYED][CryptoKeyVersionState.DESTROYED],
+            # [IMPORT_FAILED][CryptoKeyVersionState.IMPORT_FAILED], or
+            # [GENERATION_FAILED][CryptoKeyVersionState.GENERATION_FAILED].
+            # Successfully imported
+            # [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] cannot be deleted
+            # at this time. The specified version will be immediately and permanently
+            # deleted upon calling this method. This action cannot be undone.
+            rpc :DeleteCryptoKeyVersion, ::Google::Cloud::Kms::V1::DeleteCryptoKeyVersionRequest, ::Google::Longrunning::Operation
             # Import wrapped key material into a
             # [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].
             #
