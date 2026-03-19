@@ -1,0 +1,18 @@
+{
+    "api_id": "language.googleapis.com",
+    "api_shortname": "language",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-language/latest",
+    "distribution_name": "google-cloud-language",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "language",
+    "name_pretty": "Cloud Natural Language API",
+    "product_documentation": "https://cloud.google.com/natural-language",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.",
+    "ruby-cloud-env-prefix": "LANGUAGE",
+    "ruby-cloud-product-url": "https://cloud.google.com/natural-language",
+    "library_type": "GAPIC_AUTO"
+}
