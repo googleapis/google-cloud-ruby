@@ -2,7 +2,7 @@
 
 Build event-driven applications on Google Cloud Platform.
 
-Eventarc lets you asynchronously deliver events from Google services, SaaS, and your own apps using loosely coupled services that react to state changes. Eventarc requires no infrastructure management — you can optimize productivity and costs while building a modern, event-driven solution.
+Eventarc lets you asynchronously deliver events from Google services, SaaS, and your own apps using loosely coupled services that react to state changes. Eventarc requires no infrastructure management ??? you can optimize productivity and costs while building a modern, event-driven solution.
 
 https://github.com/googleapis/google-cloud-ruby
 
