@@ -24,6 +24,7 @@ require "google/cloud/kms/v1/version"
 
 require "google/cloud/kms/v1/key_management_service/credentials"
 require "google/cloud/kms/v1/key_management_service/paths"
+require "google/cloud/kms/v1/key_management_service/operations"
 require "google/cloud/kms/v1/key_management_service/client"
 require "google/cloud/kms/v1/key_management_service/rest"
 

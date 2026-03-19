@@ -25,13 +25,15 @@ module Google
       module V1
         module AutokeyAdmin
           # Provides interfaces for managing [Cloud KMS
-          # Autokey](https://cloud.google.com/kms/help/autokey) folder-level
-          # configurations. A configuration is inherited by all descendent projects. A
-          # configuration at one folder overrides any other configurations in its
-          # ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
-          # Autokey, so that users working in a descendant project can request
-          # provisioned [CryptoKeys][google.cloud.kms.v1.CryptoKey], ready for Customer
-          # Managed Encryption Key (CMEK) use, on-demand.
+          # Autokey](https://cloud.google.com/kms/help/autokey) folder-level or
+          # project-level configurations. A configuration is inherited by all descendent
+          # folders and projects. A configuration at a folder or project overrides any
+          # other configurations in its ancestry. Setting a configuration on a folder is
+          # a prerequisite for Cloud KMS Autokey, so that users working in a descendant
+          # project can request provisioned [CryptoKeys][google.cloud.kms.v1.CryptoKey],
+          # ready for Customer Managed Encryption Key (CMEK) use, on-demand when using
+          # the dedicated key project mode. This is not required when using the delegated
+          # key management mode for same-project keys.
           class Service
 
             include ::GRPC::GenericService
@@ -40,16 +42,16 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.kms.v1.AutokeyAdmin'
 
-            # Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a
-            # folder. The caller must have both `cloudkms.autokeyConfigs.update`
+            # Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder
+            # or a project. The caller must have both `cloudkms.autokeyConfigs.update`
             # permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy`
             # permission on the provided key project. A
             # [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's
             # descendant projects will use this configuration to determine where to
             # create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].
             rpc :UpdateAutokeyConfig, ::Google::Cloud::Kms::V1::UpdateAutokeyConfigRequest, ::Google::Cloud::Kms::V1::AutokeyConfig
-            # Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a
-            # folder.
+            # Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder
+            # or project.
             rpc :GetAutokeyConfig, ::Google::Cloud::Kms::V1::GetAutokeyConfigRequest, ::Google::Cloud::Kms::V1::AutokeyConfig
             # Returns the effective Cloud KMS Autokey configuration for a given project.
             rpc :ShowEffectiveAutokeyConfig, ::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigRequest, ::Google::Cloud::Kms::V1::ShowEffectiveAutokeyConfigResponse
