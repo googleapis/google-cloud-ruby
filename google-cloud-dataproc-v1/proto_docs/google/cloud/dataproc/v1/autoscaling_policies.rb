@@ -58,6 +58,10 @@ module Google
         #     characters, and must conform to [RFC
         #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
         #     associated with an autoscaling policy.
+        # @!attribute [rw] cluster_type
+        #   @return [::Google::Cloud::Dataproc::V1::AutoscalingPolicy::ClusterType]
+        #     Optional. The type of the clusters for which this autoscaling policy is to
+        #     be configured.
         class AutoscalingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -69,6 +73,20 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of the clusters for which this autoscaling policy is to be
+          # configured.
+          module ClusterType
+            # Not set.
+            CLUSTER_TYPE_UNSPECIFIED = 0
+
+            # Standard dataproc cluster with a minimum of two primary workers.
+            STANDARD = 1
+
+            # Clusters that can use only secondary workers and be scaled down to zero
+            # secondary worker nodes.
+            ZERO_SCALE = 2
           end
         end
 
