@@ -293,7 +293,7 @@ module Google
                 #     `account_aggregation` and `accounts.createAndConfigure` method can be
                 #     used to create a sub-account under an existing advanced account through
                 #     this method. Additional `account_management` or
-                #     `product_management` services may be provided.
+                #     `products_management` services may be provided.
                 #   @param set_alias [::Array<::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::SetAliasForRelationship, ::Hash>]
                 #     Optional. If a relationship is created with a provider, you can set an
                 #     alias for it with this field. The calling user must be an admin on the
@@ -350,6 +350,100 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @accounts_service_stub.create_and_configure_account request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Creates a Merchant Center test account.
+                #
+                # Test accounts are intended for development and testing purposes, such as
+                # validating API integrations or new feature behavior.
+                #
+                # Key characteristics and limitations of test accounts:
+                # - Immutable Type: A test account cannot be converted into a regular
+                #   (live) Merchant Center account. Likewise, a regular account cannot be
+                #   converted into a test account.
+                # - Non-Serving Products: Any products, offers, or data created within a
+                #   test account will not be published or made visible to end-users on any
+                #   Google surfaces. They are strictly for testing environments.
+                # - Separate Environment: Test accounts operate in a sandbox-like manner,
+                #   isolated from live serving and real user traffic.
+                #
+                # @overload create_test_account(request, options = nil)
+                #   Pass arguments to `create_test_account` via a request object, either of type
+                #   {::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_test_account(parent: nil, account: nil)
+                #   Pass arguments to `create_test_account` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The account resource name to create the test account under.
+                #     Format: accounts/\\{account}
+                #   @param account [::Google::Shopping::Merchant::Accounts::V1::Account, ::Hash]
+                #     Required. The account to be created.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Shopping::Merchant::Accounts::V1::Account]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Shopping::Merchant::Accounts::V1::Account]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/shopping/merchant/accounts/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Shopping::Merchant::Accounts::V1::AccountsService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest.new
+                #
+                #   # Call the create_test_account method.
+                #   result = client.create_test_account request
+                #
+                #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1::Account.
+                #   p result
+                #
+                def create_test_account request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_test_account.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Shopping::Merchant::Accounts::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_test_account.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_test_account.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @accounts_service_stub.create_test_account request, options do |result, operation|
                     yield result, operation if block_given?
                   end
                 rescue ::Gapic::Rest::Error => e
@@ -893,6 +987,11 @@ module Google
                     #
                     attr_reader :create_and_configure_account
                     ##
+                    # RPC-specific configuration for `create_test_account`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_test_account
+                    ##
                     # RPC-specific configuration for `delete_account`
                     # @return [::Gapic::Config::Method]
                     #
@@ -919,6 +1018,8 @@ module Google
                       @get_account = ::Gapic::Config::Method.new get_account_config
                       create_and_configure_account_config = parent_rpcs.create_and_configure_account if parent_rpcs.respond_to? :create_and_configure_account
                       @create_and_configure_account = ::Gapic::Config::Method.new create_and_configure_account_config
+                      create_test_account_config = parent_rpcs.create_test_account if parent_rpcs.respond_to? :create_test_account
+                      @create_test_account = ::Gapic::Config::Method.new create_test_account_config
                       delete_account_config = parent_rpcs.delete_account if parent_rpcs.respond_to? :delete_account
                       @delete_account = ::Gapic::Config::Method.new delete_account_config
                       update_account_config = parent_rpcs.update_account if parent_rpcs.respond_to? :update_account

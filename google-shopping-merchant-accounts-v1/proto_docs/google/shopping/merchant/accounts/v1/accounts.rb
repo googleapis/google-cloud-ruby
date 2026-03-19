@@ -44,10 +44,12 @@ module Google
           #     Output only. The ID of the account.
           # @!attribute [rw] account_name
           #   @return [::String]
-          #     Required. A human-readable name of the account. See
-          #     [store name](https://support.google.com/merchants/answer/160556) and
-          #     [business name](https://support.google.com/merchants/answer/12159159) for
-          #     more information.
+          #     Required. A human-readable name of the account. Don't use punctuation,
+          #     capitalization, or non-alphanumeric symbols such as the "/" or "_" symbols.
+          #     See
+          #     [Adding a business
+          #     name](https://support.google.com/merchants/answer/12159159) for more
+          #     information.
           # @!attribute [rw] adult_content
           #   @return [::Boolean]
           #     Optional. Whether this account contains adult content.
@@ -100,7 +102,7 @@ module Google
           #     `account_aggregation` and `accounts.createAndConfigure` method can be
           #     used to create a sub-account under an existing advanced account through
           #     this method. Additional `account_management` or
-          #     `product_management` services may be provided.
+          #     `products_management` services may be provided.
           # @!attribute [rw] set_alias
           #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest::SetAliasForRelationship>]
           #     Optional. If a relationship is created with a provider, you can set an
@@ -207,6 +209,19 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Request message for the CreateTestAccount RPC
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The account resource name to create the test account under.
+          #     Format: accounts/\\{account}
+          # @!attribute [rw] account
+          #   @return [::Google::Shopping::Merchant::Accounts::V1::Account]
+          #     Required. The account to be created.
+          class CreateTestAccountRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for the `DeleteAccount` method.

@@ -41,6 +41,21 @@ module Google
               # Creates a Merchant Center account with additional configuration. Adds the
               # user that makes the request as an admin for the new account.
               rpc :CreateAndConfigureAccount, ::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest, ::Google::Shopping::Merchant::Accounts::V1::Account
+              # Creates a Merchant Center test account.
+              #
+              # Test accounts are intended for development and testing purposes, such as
+              # validating API integrations or new feature behavior.
+              #
+              # Key characteristics and limitations of test accounts:
+              # - Immutable Type: A test account cannot be converted into a regular
+              #   (live) Merchant Center account. Likewise, a regular account cannot be
+              #   converted into a test account.
+              # - Non-Serving Products: Any products, offers, or data created within a
+              #   test account will not be published or made visible to end-users on any
+              #   Google surfaces. They are strictly for testing environments.
+              # - Separate Environment: Test accounts operate in a sandbox-like manner,
+              #   isolated from live serving and real user traffic.
+              rpc :CreateTestAccount, ::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest, ::Google::Shopping::Merchant::Accounts::V1::Account
               # Deletes the specified account regardless of its type: standalone, advanced
               # account or sub-account. Deleting an advanced account leads to the deletion
               # of all of its sub-accounts. This also deletes the account's [developer
