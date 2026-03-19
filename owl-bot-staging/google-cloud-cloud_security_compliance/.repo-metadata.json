@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudsecuritycompliance.googleapis.com",
+    "api_shortname": "cloudsecuritycompliance",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_security_compliance/latest",
+    "distribution_name": "google-cloud-cloud_security_compliance",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudsecuritycompliance",
+    "name_pretty": "Cloud Security Compliance API",
+    "product_documentation": "https://cloud.google.com/security-command-center/docs/compliance-manager-overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-cloud_security_compliance is the official client library for the Cloud Security Compliance API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/security-command-center/docs/compliance-manager-overview",
+    "library_type": "GAPIC_AUTO"
+}
