@@ -1,0 +1,15 @@
+{
+    "api_id": "batch.googleapis.com",
+    "api_shortname": "batch",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-batch-v1/latest",
+    "distribution_name": "google-cloud-batch-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "batch",
+    "name_pretty": "Batch V1 API",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Google Cloud Batch is a fully managed service used by scientists, VFX artists, developers to easily and efficiently run batch workloads on Google Cloud. This service manages provisioning of resources to satisfy the requirements of the batch jobs for a variety of workloads including ML, HPC, VFX rendering, transcoding, genomics and others. Note that google-cloud-batch-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-batch instead. See the readme for more details.",
+    "library_type": "GAPIC_AUTO"
+}
