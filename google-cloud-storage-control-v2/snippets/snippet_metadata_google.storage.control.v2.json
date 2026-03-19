@@ -212,6 +212,46 @@
       ]
     },
     {
+      "region_tag": "storage_v2_generated_StorageControl_DeleteFolderRecursive_sync",
+      "title": "Snippet for the delete_folder_recursive call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#delete_folder_recursive.",
+      "file": "storage_control/delete_folder_recursive.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_folder_recursive",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#delete_folder_recursive",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "DeleteFolderRecursive",
+          "full_name": "google.storage.control.v2.StorageControl.DeleteFolderRecursive",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "storage_v2_generated_StorageControl_GetStorageLayout_sync",
       "title": "Snippet for the get_storage_layout call in the StorageControl service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#get_storage_layout.",
