@@ -23,7 +23,7 @@ group :test do
   gem "google-cloud-storage"
   gem "google-cloud-pubsub"
   gem "google-style", "~> 1.25.1"
-  gem "minitest", "~> 5.14"
+  gem "minitest", ">= 5.14", "< 7"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-hooks", "~> 1.5"
   gem "rake"

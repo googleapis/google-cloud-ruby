@@ -23,7 +23,7 @@ gem "autotest-suffix", "~> 1.1"
 gem "avro", "~> 1.12"
 gem "bigdecimal", ">= 3.2", "< 5"
 gem "google-style", "~> 1.31.1"
-gem "minitest", "~> 5.25"
+gem "minitest", ">= 5.25", "< 7"
 gem "minitest-autotest", "~> 1.1"
 gem "minitest-focus", "~> 1.4"
 gem "minitest-reporters", "~> 1.7.0", require: false
