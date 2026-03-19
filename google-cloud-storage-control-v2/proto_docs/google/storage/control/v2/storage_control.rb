@@ -221,6 +221,29 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for DeleteFolderRecursive.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of the folder being deleted, however all of its contents
+          #     will be deleted too. Format:
+          #     `projects/{project}/buckets/{bucket}/folders/{folder}`
+          # @!attribute [rw] if_metageneration_match
+          #   @return [::Integer]
+          #     Optional. Makes the operation only succeed conditional on whether the root
+          #     folder's current metageneration matches the given value.
+          # @!attribute [rw] if_metageneration_not_match
+          #   @return [::Integer]
+          #     Optional. Makes the operation only succeed conditional on whether the root
+          #     folder's current metageneration does not match the given value.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class DeleteFolderRecursiveRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The message contains metadata that is common to all Storage Control
           # long-running operations, present in its `google.longrunning.Operation`
           # messages, and accessible via `metadata.common_metadata`.
@@ -260,6 +283,19 @@ module Google
           #   @return [::String]
           #     The path of the destination folder.
           class RenameFolderMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # DeleteFolderRecursive operations.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] folder_id
+          #   @return [::String]
+          #     The path of the folder recursively deleted.
+          class DeleteFolderRecursiveMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
