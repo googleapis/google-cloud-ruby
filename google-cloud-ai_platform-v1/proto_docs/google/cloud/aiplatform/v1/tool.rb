@@ -652,6 +652,14 @@ module Google
             # Model will not predict any function calls. Model behavior is same as when
             # not passing any function declarations.
             NONE = 3
+
+            # Model is constrained to predict either function calls or natural language
+            # response.
+            # If [allowed_function_names][FunctionCallingConfig.allowed_function_names]
+            # are set, the predicted function calls will be limited to any one of
+            # `allowed_function_names`, else the predicted function calls will be any
+            # one of the provided [FunctionDeclaration].
+            VALIDATED = 5
           end
         end
 

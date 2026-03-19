@@ -1080,6 +1080,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     task_type = :UNSPECIFIED
     output_dimensionality = 42
     auto_truncate = true
+    embed_content_config = {}
 
     embed_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :embed_content, name
@@ -1096,6 +1097,8 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       assert request.has_output_dimensionality?
       assert_equal true, request["auto_truncate"]
       assert request.has_auto_truncate?
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::EmbedContentRequest::EmbedContentConfig), request["embed_content_config"]
+      assert request.has_embed_content_config?
       refute_nil options
     end
 
@@ -1106,31 +1109,31 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate }) do |response, operation|
+      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate do |response, operation|
+      client.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate) do |response, operation|
+      client.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate }, grpc_options) do |response, operation|
+      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate), grpc_options) do |response, operation|
+      client.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
