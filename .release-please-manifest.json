@@ -251,7 +251,7 @@
   "google-cloud-config_delivery+FILLER": "0.0.0",
   "google-cloud-config_delivery-v1": "0.3.1",
   "google-cloud-config_delivery-v1+FILLER": "0.0.0",
-  "google-cloud-config_service": "2.0.2",
+  "google-cloud-config_service": "2.1.0",
   "google-cloud-config_service+FILLER": "0.0.0",
   "google-cloud-config_service-v1": "2.7.0",
   "google-cloud-config_service-v1+FILLER": "0.0.0",
