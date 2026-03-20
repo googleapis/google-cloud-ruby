@@ -413,11 +413,18 @@ module Google
           #     Required. Full resource name of
           #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, such as
           #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+          #     The path must include the project number, project id is not supported for
+          #     this field.
           # @!attribute [rw] filter
           #   @return [::String]
           #     Optional. Filter specification to filter documents in the data store
           #     specified by data_store field. For more information on filtering, see
           #     [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+          # @!attribute [rw] boost_spec
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::BoostSpec]
+          #     Optional. Boost specification to boost certain documents.
+          #     For more information on boosting, see
+          #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
           class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
