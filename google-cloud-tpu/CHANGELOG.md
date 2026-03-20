@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.0 (2026-03-19)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0
+
 ### 1.4.2 (2025-09-12)
 
 #### Documentation
