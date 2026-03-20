@@ -22,7 +22,7 @@ module Google
     module Security
       module PublicCA
         module V1beta1
-          VERSION = "0.10.1"
+          VERSION = "0.11.0"
         end
       end
     end
