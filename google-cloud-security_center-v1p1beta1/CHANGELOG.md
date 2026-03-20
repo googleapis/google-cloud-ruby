@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.20.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.19.1 (2025-10-27)
 
 #### Documentation
