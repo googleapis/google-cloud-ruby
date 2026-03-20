@@ -1,5 +1,19 @@
 # Release History
 
+### 1.11.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+* Add more post-quantum (PQ) signature algorithms to CryptoKeyVersion 
+* Added DeleteCryptoKey and DeleteCryptoKeyVersion RPCs to permanently remove resources 
+* upgrade protobuf from v25.7 to v31.0 
+#### Documentation
+
+* Clarify supported resources for the crypto_key_backend field in ImportJob 
+* Update documentation for AutokeyAdmin service and messages to support folder and project-level configurations 
+
 ### 1.10.0 (2026-01-23)
 
 #### Features
