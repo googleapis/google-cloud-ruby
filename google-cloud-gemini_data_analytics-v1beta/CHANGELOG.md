@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.8.0 (2026-03-19)
+
+#### Features
+
+* add `ParameterizedSecureViewParameters` message and field for PSV support 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 0.7.0 (2026-02-08)
 
 #### Features
