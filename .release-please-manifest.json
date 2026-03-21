@@ -255,7 +255,7 @@
   "google-cloud-config_service+FILLER": "0.0.0",
   "google-cloud-config_service-v1": "2.6.0",
   "google-cloud-config_service-v1+FILLER": "0.0.0",
-  "google-cloud-connectors": "2.0.2",
+  "google-cloud-connectors": "2.1.0",
   "google-cloud-connectors+FILLER": "0.0.0",
   "google-cloud-connectors-v1": "1.4.0",
   "google-cloud-connectors-v1+FILLER": "0.0.0",
