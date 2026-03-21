@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.38.0 (2026-03-19)
+
+#### Features
+
+* Add custom session id field to create session v1 ([#32806](https://github.com/googleapis/google-cloud-ruby/issues/32806)) 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 1.37.0 (2026-03-05)
 
 #### Features
