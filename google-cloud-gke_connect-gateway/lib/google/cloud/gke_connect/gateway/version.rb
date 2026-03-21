@@ -21,7 +21,7 @@ module Google
   module Cloud
     module GkeConnect
       module Gateway
-        VERSION = "2.1.2"
+        VERSION = "2.2.0"
       end
     end
   end
