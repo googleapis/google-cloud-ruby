@@ -1,5 +1,12 @@
 # Release History
 
+### 0.48.0 (2026-03-19)
+
+#### Features
+
+* Add a field for upgrading previous processor version when fine tuning 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.47.0 (2026-03-04)
 
 ### ⚠ BREAKING CHANGES
