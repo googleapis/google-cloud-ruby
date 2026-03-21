@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Datastream
       module V1alpha1
-        VERSION = "0.13.1"
+        VERSION = "0.14.0"
       end
     end
   end
