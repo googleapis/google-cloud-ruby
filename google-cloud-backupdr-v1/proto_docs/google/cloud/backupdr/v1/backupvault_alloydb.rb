@@ -54,6 +54,15 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Properties for an AlloyDB cluster backup plan association.
+        # @!attribute [r] cluster_uid
+        #   @return [::String]
+        #     Output only. The cluster UID of the AlloyDB cluster.
+        class AlloyDBClusterBackupPlanAssociationProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
