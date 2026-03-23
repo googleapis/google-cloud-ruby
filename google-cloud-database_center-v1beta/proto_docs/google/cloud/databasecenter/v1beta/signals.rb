@@ -841,6 +841,9 @@ module Google
 
           # Resource version is in extended support.
           SIGNAL_TYPE_EXTENDED_SUPPORT = 102
+
+          # Represents a database version nearing end of life.
+          SIGNAL_TYPE_VERSION_NEARING_END_OF_LIFE = 104
         end
       end
     end
