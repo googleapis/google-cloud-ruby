@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the GeneratorEvaluations API.
           module Paths
             ##
+            # Create a fully-qualified App resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/apps/{app}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param app [String]
+            #
+            # @return [::String]
+            def app_path project:, location:, app:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/apps/#{app}"
+            end
+
+            ##
             # Create a fully-qualified Generator resource string.
             #
             # The resource will be in the following format:
@@ -67,20 +86,67 @@ module Google
             ##
             # Create a fully-qualified Tool resource string.
             #
+            # @overload tool_path(project:, location:, tool:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/tools/{tool}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param tool [String]
+            #
+            # @overload tool_path(project:, location:, app:, tool:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/apps/{app}/tools/{tool}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param app [String]
+            #   @param tool [String]
+            #
+            # @return [::String]
+            def tool_path **args
+              resources = {
+                "location:project:tool" => (proc do |project:, location:, tool:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/tools/#{tool}"
+                end),
+                "app:location:project:tool" => (proc do |project:, location:, app:, tool:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "app cannot contain /" if app.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/apps/#{app}/tools/#{tool}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Toolset resource string.
+            #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/tools/{tool}`
+            # `projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}`
             #
             # @param project [String]
             # @param location [String]
-            # @param tool [String]
+            # @param app [String]
+            # @param toolset [String]
             #
             # @return [::String]
-            def tool_path project:, location:, tool:
+            def toolset_path project:, location:, app:, toolset:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "app cannot contain /" if app.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/tools/#{tool}"
+              "projects/#{project}/locations/#{location}/apps/#{app}/toolsets/#{toolset}"
             end
 
             extend self

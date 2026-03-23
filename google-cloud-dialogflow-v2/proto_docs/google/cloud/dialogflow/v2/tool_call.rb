@@ -27,6 +27,29 @@ module Google
         #     Optional. The {::Google::Cloud::Dialogflow::V2::Tool tool} associated with
         #     this call. Format:
         #     `projects/<ProjectID>/locations/<LocationID>/tools/<ToolID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `tool`, `ces_tool`, `ces_toolset`, `ces_app`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ces_tool
+        #   @return [::String]
+        #     Optional. CES tool name for this call.
+        #     Format:
+        #     `projects/<ProjectID>/locations/<LocationID>/apps/<AppID>/tools/<ToolID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `ces_tool`, `tool`, `ces_toolset`, `ces_app`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ces_toolset
+        #   @return [::String]
+        #     Optional. CES toolset name for this call.
+        #     Format:
+        #     `projects/<ProjectID>/locations/<LocationID>/apps/<AppID>/toolsets/ToolsetID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `ces_toolset`, `tool`, `ces_tool`, `ces_app`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ces_app
+        #   @return [::String]
+        #     Optional. CES app name for this call.
+        #     Format:
+        #     `projects/<ProjectID>/locations/<LocationID>/apps/<AppID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `ces_app`, `tool`, `ces_tool`, `ces_toolset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_display_name
         #   @return [::String]
         #     Optional. A human readable short name of the tool, to be shown on the UI.
@@ -71,6 +94,29 @@ module Google
         #     Optional. The {::Google::Cloud::Dialogflow::V2::Tool tool} associated with
         #     this call. Format:
         #     `projects/<ProjectID>/locations/<LocationID>/tools/<ToolID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `tool`, `ces_toolset`, `ces_tool`, `ces_app`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ces_toolset
+        #   @return [::String]
+        #     Optional. CES toolset name for this call.
+        #     Format:
+        #     `projects/<ProjectID>/locations/<LocationID>/apps/<AppID>/toolsets/ToolsetID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `ces_toolset`, `tool`, `ces_tool`, `ces_app`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ces_tool
+        #   @return [::String]
+        #     Optional. CES tool name for this call.
+        #     Format:
+        #     `projects/<ProjectID>/locations/<LocationID>/apps/<AppID>/tools/<ToolID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `ces_tool`, `tool`, `ces_toolset`, `ces_app`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ces_app
+        #   @return [::String]
+        #     Optional. CES app name for this call.
+        #     Format:
+        #     `projects/<ProjectID>/locations/<LocationID>/apps/<AppID>`.
+        #
+        #     Note: The following fields are mutually exclusive: `ces_app`, `tool`, `ces_toolset`, `ces_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] action
         #   @return [::String]
         #     Optional. The name of the tool's action associated with this call.

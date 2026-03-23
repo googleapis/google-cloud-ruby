@@ -522,6 +522,11 @@ module Google
         #     is not enabled, response stream still contains only one final response even
         #     if some `Fulfillment`s in Dialogflow CX agent have been configured to
         #     return partial responses.
+        # @!attribute [rw] output_multiple_utterances
+        #   @return [::Boolean]
+        #     Optional. If multiple uttereances are detected in the audio stream, process
+        #     them individually instead of stitching them together to form a single
+        #     utterance.
         # @!attribute [rw] enable_debugging_info
         #   @return [::Boolean]
         #     If true, `StreamingAnalyzeContentResponse.debugging_info` will get
@@ -1237,6 +1242,235 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Debug information related to ingested context reference.
+        # @!attribute [rw] project_not_allowlisted
+        #   @return [::Boolean]
+        #     Indicates if the project is allowlisted to use ingested context
+        #     reference.
+        # @!attribute [rw] context_reference_retrieved
+        #   @return [::Boolean]
+        #     The status of context_reference retrieval from database.
+        # @!attribute [rw] ingested_parameters_debug_info
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo::IngestedParameterDebugInfo>]
+        #     Parameters ingested from the context reference.
+        class IngestedContextReferenceDebugInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Debug information related to ingested parameters from context reference.
+          # @!attribute [rw] parameter
+          #   @return [::String]
+          #     The name of the parameter in the context reference.
+          # @!attribute [rw] ingestion_status
+          #   @return [::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo::IngestedParameterDebugInfo::IngestionStatus]
+          #     The ingestion status for this specific parameter.
+          class IngestedParameterDebugInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum representing the various states of parameter ingestion.
+            module IngestionStatus
+              # Default value, indicates that the ingestion status is not specified.
+              INGESTION_STATUS_UNSPECIFIED = 0
+
+              # Indicates that the parameter was successfully ingested.
+              INGESTION_STATUS_SUCCEEDED = 1
+
+              # Indicates that the parameter was not available for ingestion.
+              INGESTION_STATUS_CONTEXT_NOT_AVAILABLE = 2
+
+              # Indicates that there was a failure parsing the parameter content.
+              INGESTION_STATUS_PARSE_FAILED = 3
+
+              # Indicates that the context reference had an unexpected number of
+              # content entries as Context reference should only have one entry.
+              INGESTION_STATUS_INVALID_ENTRY = 4
+
+              # Indicates that the context reference content was not in the expected
+              # format (e.g., JSON).
+              INGESTION_STATUS_INVALID_FORMAT = 5
+
+              # Indicates that the context reference language does not match the
+              # conversation language.
+              INGESTION_STATUS_LANGUAGE_MISMATCH = 6
+            end
+          end
+        end
+
+        # Message to represent the latency of the service.
+        # @!attribute [rw] internal_service_latencies
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::ServiceLatency::InternalServiceLatency>]
+        #     A list of internal service latencies.
+        class ServiceLatency
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message to represent the latency of an internal service.
+          # @!attribute [rw] step
+          #   @return [::String]
+          #     The name of the internal service.
+          # @!attribute [rw] latency_ms
+          #   @return [::Float]
+          #     The latency of the internal service in milliseconds.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The start time of the internal service.
+          # @!attribute [rw] complete_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The completion time of the internal service.
+          class InternalServiceLatency
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Debug information related to Knowledge Assist feature.
+        # @!attribute [rw] query_generation_failure_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::QueryGenerationFailureReason]
+        #     Reason for query generation.
+        # @!attribute [rw] query_categorization_failure_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::QueryCategorizationFailureReason]
+        #     Reason for query categorization.
+        # @!attribute [rw] datastore_response_reason
+        #   @return [::Google::Cloud::Dialogflow::V2::DatastoreResponseReason]
+        #     Response reason from datastore which indicates data serving status or
+        #     answer quality degradation.
+        # @!attribute [rw] knowledge_assist_behavior
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo::KnowledgeAssistBehavior]
+        #     Configured behaviors for Knowedge Assist.
+        # @!attribute [rw] ingested_context_reference_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::IngestedContextReferenceDebugInfo]
+        #     Information about parameters ingested for search knowledge.
+        # @!attribute [rw] service_latency
+        #   @return [::Google::Cloud::Dialogflow::V2::ServiceLatency]
+        #     The latency of the service.
+        class KnowledgeAssistDebugInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configured behaviors for Knowedge Assist.
+          # @!attribute [rw] answer_generation_rewriter_on
+          #   @return [::Boolean]
+          #     Whether data store agent rewriter was turned off for the request.
+          # @!attribute [rw] end_user_metadata_included
+          #   @return [::Boolean]
+          #     Whether end_user_metadata is included in the data store agent call.
+          # @!attribute [rw] return_query_only
+          #   @return [::Boolean]
+          #     Whether customers configured to return query only in the
+          #     conversation profile.
+          # @!attribute [rw] use_pubsub_delivery
+          #   @return [::Boolean]
+          #     Whether customers configured to use pubsub to deliver.
+          # @!attribute [rw] disable_sync_delivery
+          #   @return [::Boolean]
+          #     Whether customers configured to disable the synchronous delivery of
+          #     Knowedge Assist response.
+          # @!attribute [rw] previous_queries_included
+          #   @return [::Boolean]
+          #     Whether previously suggested queries are included in the query generation
+          #     process.
+          # @!attribute [rw] use_translated_message
+          #   @return [::Boolean]
+          #     Translated message is included in query generation process.
+          # @!attribute [rw] use_custom_safety_filter_level
+          #   @return [::Boolean]
+          #     Safety filter is adjusted by user.
+          # @!attribute [rw] conversation_transcript_has_mixed_languages
+          #   @return [::Boolean]
+          #     Conversation transcript has mixed languages.
+          # @!attribute [rw] query_generation_agent_language_mismatch
+          #   @return [::Boolean]
+          #     Whether the agent language from the translation generator mismatches the
+          #     end-user language.
+          # @!attribute [rw] query_generation_end_user_language_mismatch
+          #   @return [::Boolean]
+          #     Whether the end-user language from the translation generator mismatches
+          #     the end-user language.
+          # @!attribute [rw] third_party_connector_allowed
+          #   @return [::Boolean]
+          #     This field indicates whether third party connectors are enabled for the
+          #     project
+          # @!attribute [rw] multiple_queries_generated
+          #   @return [::Boolean]
+          #     Indicates that the query generation model generated multiple queries.
+          # @!attribute [rw] query_contained_search_context
+          #   @return [::Boolean]
+          #     Indicates that the generated query contains search context.
+          # @!attribute [rw] invalid_items_query_suggestion_skipped
+          #   @return [::Boolean]
+          #     Indicates that invalid items were skipped when parsing the LLM response.
+          # @!attribute [rw] primary_query_redacted_and_replaced
+          #   @return [::Boolean]
+          #     True if the primary suggested query was redacted and replaced by an
+          #     additional query.
+          # @!attribute [rw] appended_search_context_count
+          #   @return [::Integer]
+          #     The number of search contexts appended to the query.
+          class KnowledgeAssistBehavior
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Reason for query generation failure.
+          module QueryGenerationFailureReason
+            # Default value.
+            QUERY_GENERATION_FAILURE_REASON_UNSPECIFIED = 0
+
+            # Query generation is blocked due to out of quota.
+            QUERY_GENERATION_OUT_OF_QUOTA = 1
+
+            # Call to Knowedge Assist query generation model fails.
+            QUERY_GENERATION_FAILED = 2
+
+            # Query generation model decides that there is no new topic change or
+            # there has been similar queries generated in the previous turns.
+            QUERY_GENERATION_NO_QUERY_GENERATED = 3
+
+            # Knowedge Assist generated query is blocked by RAI (Responsible AI).
+            QUERY_GENERATION_RAI_FAILED = 4
+
+            # Query generation is blocked by Knowledge Assist conversation profile
+            # level / agent id level filtering.
+            NOT_IN_ALLOWLIST = 5
+
+            # The generated query is blocked due to redaction.
+            QUERY_GENERATION_QUERY_REDACTED = 6
+
+            # Query generation failed due to LLM response parse failure.
+            QUERY_GENERATION_LLM_RESPONSE_PARSE_FAILED = 10
+
+            # The conversation has no messages.
+            QUERY_GENERATION_EMPTY_CONVERSATION = 11
+
+            # The last message in the conversation is empty.
+            QUERY_GENERATION_EMPTY_LAST_MESSAGE = 12
+
+            # The trigger event condition is not met.
+            # This occurs in the following scenarios:
+            # 1. The trigger_event is CUSTOMER_MESSAGE or UNSPECIFIED, but the last
+            #    message is not from the customer.
+            # 2. The trigger_event is AGENT_MESSAGE, but the last message is not from
+            #    the agent.
+            QUERY_GENERATION_TRIGGERING_EVENT_CONDITION_NOT_MET = 13
+          end
+
+          # Reason for query categorization failure.
+          module QueryCategorizationFailureReason
+            # Default value.
+            QUERY_CATEGORIZATION_FAILURE_REASON_UNSPECIFIED = 0
+
+            # Vertex AI Search config supplied for query categorization is invalid.
+            QUERY_CATEGORIZATION_INVALID_CONFIG = 1
+
+            # Vertex AI Search result does not contain a query categorization result.
+            QUERY_CATEGORIZATION_RESULT_NOT_FOUND = 2
+
+            # Vertex AI Search call fails.
+            QUERY_CATEGORIZATION_FAILED = 3
+          end
+        end
+
         # Represents a Knowledge Assist answer.
         # @!attribute [rw] suggested_query
         #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::SuggestedQuery]
@@ -1251,6 +1485,9 @@ module Google
         #     The name of the answer record.
         #     Format: `projects/<Project ID>/locations/<location ID>/answer
         #     Records/<Answer Record ID>`.
+        # @!attribute [rw] knowledge_assist_debug_info
+        #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistDebugInfo]
+        #     Debug information related to Knowledge Assist feature.
         class KnowledgeAssistAnswer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1320,6 +1557,40 @@ module Google
               end
             end
           end
+        end
+
+        # Response reason from datastore which indicates data serving status or
+        # answer quality degradation.
+        module DatastoreResponseReason
+          # Default value.
+          DATASTORE_RESPONSE_REASON_UNSPECIFIED = 0
+
+          # No specific response reason from datastore.
+          NONE = 1
+
+          # Search is blocked due to out of quota.
+          SEARCH_OUT_OF_QUOTA = 2
+
+          # Search returns empty results.
+          SEARCH_EMPTY_RESULTS = 3
+
+          # Generative AI is disabled.
+          ANSWER_GENERATION_GEN_AI_DISABLED = 4
+
+          # Answer generation is blocked due to out of quota.
+          ANSWER_GENERATION_OUT_OF_QUOTA = 5
+
+          # Answer generation encounters an error.
+          ANSWER_GENERATION_ERROR = 6
+
+          # Answer generation does not have enough information to generate answer.
+          ANSWER_GENERATION_NOT_ENOUGH_INFO = 7
+
+          # Answer generation is blocked by RAI (Responsible AI) failure.
+          ANSWER_GENERATION_RAI_FAILED = 8
+
+          # Answer generation is not grounded on reliable sources.
+          ANSWER_GENERATION_NOT_GROUNDED = 9
         end
       end
     end
