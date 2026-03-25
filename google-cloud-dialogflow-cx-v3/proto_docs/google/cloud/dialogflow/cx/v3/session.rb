@@ -1041,6 +1041,12 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals]
           #     Optional. Data store connection feature output signals.
           #     Filled only when data stores are involved in serving the query.
+          # @!attribute [rw] trace_blocks
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::TraceBlock>]
+          #     Optional. Contains the sequence of trace blocks from the current
+          #     conversation turn. Trace blocks are ordered chronologically and contain
+          #     detailed traces of runtime behavior such as tool calls, LLM calls, flow and
+          #     playbook invocations, agent utterances and user utterances.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1338,7 +1344,7 @@ module Google
 
             # Default response view omits the following fields:
             # -
-            # [QueryResult.trace_blocks][google.cloud.dialogflow.cx.v3.QueryResult.trace_blocks]
+            # {::Google::Cloud::Dialogflow::CX::V3::QueryResult#trace_blocks QueryResult.trace_blocks}
             DETECT_INTENT_RESPONSE_VIEW_DEFAULT = 3
           end
         end

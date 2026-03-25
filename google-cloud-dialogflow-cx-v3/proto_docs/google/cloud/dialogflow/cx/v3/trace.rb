@@ -22,6 +22,83 @@ module Google
     module Dialogflow
       module CX
         module V3
+          # The trace block tracks a sequence of actions taken by the agent in a flow or
+          # a playbook.
+          # @!attribute [rw] playbook_trace_metadata
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::PlaybookTraceMetadata]
+          #     Metadata of the playbook trace.
+          #
+          #     Note: The following fields are mutually exclusive: `playbook_trace_metadata`, `flow_trace_metadata`, `speech_processing_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] flow_trace_metadata
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::FlowTraceMetadata]
+          #     Metadata of the flow trace.
+          #
+          #     Note: The following fields are mutually exclusive: `flow_trace_metadata`, `playbook_trace_metadata`, `speech_processing_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] speech_processing_metadata
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SpeechProcessingMetadata]
+          #     Metadata of the speech-to-text and speech-to-text processing.
+          #
+          #     Note: The following fields are mutually exclusive: `speech_processing_metadata`, `playbook_trace_metadata`, `flow_trace_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] actions
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Action>]
+          #     The actions performed by the agent and the user during this session.
+          # @!attribute [r] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Timestamp of the start of the trace block.
+          # @!attribute [r] complete_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Timestamp of the end of the trace block.
+          # @!attribute [rw] input_parameters
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. A list of input parameters of the trace block.
+          # @!attribute [rw] output_parameters
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. A list of output parameters of the trace block.
+          # @!attribute [r] end_state
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::OutputState]
+          #     Optional. Output only. The end state of the trace block.
+          class TraceBlock
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata of the speech-to-text and text-to-speech processing.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The display name of the speech processing.
+          class SpeechProcessingMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata of the playbook trace.
+          # @!attribute [rw] playbook
+          #   @return [::String]
+          #     Required. The unique identifier of the playbook.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The display name of the playbook.
+          class PlaybookTraceMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata of the flow trace.
+          # @!attribute [rw] flow
+          #   @return [::String]
+          #     Required. The unique identifier of the flow.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The display name of the flow.
+          class FlowTraceMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Input of the playbook.
           # @!attribute [rw] preceding_conversation_summary
           #   @return [::String]
