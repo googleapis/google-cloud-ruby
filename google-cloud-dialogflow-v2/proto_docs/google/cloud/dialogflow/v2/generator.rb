@@ -391,6 +391,15 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestionDedupingConfig]
         #     Optional. Configuration for suggestion deduping. This is only applicable to
         #     AI Coach feature.
+        # @!attribute [rw] toolset_tools
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::ToolsetTool>]
+        #     Optional. List of CES toolset specs that the generator can choose from.
+        # @!attribute [rw] ces_tool_specs
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::CesToolSpec>]
+        #     Optional. List of CES tool specs that the generator can choose from.
+        # @!attribute [rw] ces_app_specs
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::CesAppSpec>]
+        #     Optional. List of CES app specs that the generator can choose from.
         class Generator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
