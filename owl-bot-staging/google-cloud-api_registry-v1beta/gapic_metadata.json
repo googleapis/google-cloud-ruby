@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.apiregistry.v1beta",
+  "libraryPackage": "::Google::Cloud::ApiRegistry::V1beta",
+  "services": {
+    "CloudApiRegistry": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiRegistry::V1beta::CloudApiRegistry::Client",
+          "rpcs": {
+            "GetMcpServer": {
+              "methods": [
+                "get_mcp_server"
+              ]
+            },
+            "ListMcpServers": {
+              "methods": [
+                "list_mcp_servers"
+              ]
+            },
+            "GetMcpTool": {
+              "methods": [
+                "get_mcp_tool"
+              ]
+            },
+            "ListMcpTools": {
+              "methods": [
+                "list_mcp_tools"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
