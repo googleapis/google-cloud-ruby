@@ -45,7 +45,7 @@ require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
 require_relative "../storage_list_buckets_with_partial_success"
 require_relative "../storage_lock_retention_policy"
-require_relative "../storage_remove_all_bucket_encryption_enforcement_config"
+require_relative "../storage_update_bucket_encryption_enforcement_config"
 require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
@@ -193,6 +193,15 @@ describe "Buckets Snippets" do
       retry_resource_exhaustion do
         assert_output expected do
           get_bucket_encryption_enforcement_config bucket_name: bucket_name
+        end
+      end
+
+      # update encryption enforcement config
+      expected = "Updated google_managed_config to NotRestricted for bucket #{bucket_name}.\n"
+
+      retry_resource_exhaustion do
+        assert_output expected do
+          update_bucket_encryption_enforcement_config bucket_name: bucket_name, bucket_encryption_type: "google_managed_config", restriction_mode: "NotRestricted"
         end
       end
 
