@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.webrisk.v1beta1",
+  "libraryPackage": "::Google::Cloud::WebRisk::V1beta1",
+  "services": {
+    "WebRiskServiceV1Beta1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client",
+          "rpcs": {
+            "ComputeThreatListDiff": {
+              "methods": [
+                "compute_threat_list_diff"
+              ]
+            },
+            "SearchUris": {
+              "methods": [
+                "search_uris"
+              ]
+            },
+            "SearchHashes": {
+              "methods": [
+                "search_hashes"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
