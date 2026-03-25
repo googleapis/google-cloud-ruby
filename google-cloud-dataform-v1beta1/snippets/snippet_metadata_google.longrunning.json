@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataform-v1beta1",
-    "version": "",
+    "version": "0.14.1",
     "language": "RUBY",
     "apis": [
       {

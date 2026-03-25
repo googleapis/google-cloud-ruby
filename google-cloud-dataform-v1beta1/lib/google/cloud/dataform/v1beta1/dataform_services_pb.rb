@@ -34,6 +34,35 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.dataform.v1beta1.Dataform'
 
+            # Fetches a single TeamFolder.
+            rpc :GetTeamFolder, ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest, ::Google::Cloud::Dataform::V1beta1::TeamFolder
+            # Creates a new TeamFolder in a given project and location.
+            rpc :CreateTeamFolder, ::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest, ::Google::Cloud::Dataform::V1beta1::TeamFolder
+            # Updates a single TeamFolder.
+            rpc :UpdateTeamFolder, ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest, ::Google::Cloud::Dataform::V1beta1::TeamFolder
+            # Deletes a single TeamFolder.
+            rpc :DeleteTeamFolder, ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest, ::Google::Protobuf::Empty
+            # Returns the contents of a given TeamFolder.
+            rpc :QueryTeamFolderContents, ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse
+            # Returns all TeamFolders in a given location that the caller has access to
+            # and match the provided filter.
+            rpc :SearchTeamFolders, ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest, ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse
+            # Fetches a single Folder.
+            rpc :GetFolder, ::Google::Cloud::Dataform::V1beta1::GetFolderRequest, ::Google::Cloud::Dataform::V1beta1::Folder
+            # Creates a new Folder in a given project and location.
+            rpc :CreateFolder, ::Google::Cloud::Dataform::V1beta1::CreateFolderRequest, ::Google::Cloud::Dataform::V1beta1::Folder
+            # Updates a single Folder.
+            rpc :UpdateFolder, ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest, ::Google::Cloud::Dataform::V1beta1::Folder
+            # Deletes a single Folder.
+            rpc :DeleteFolder, ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest, ::Google::Protobuf::Empty
+            # Returns the contents of a given Folder.
+            rpc :QueryFolderContents, ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse
+            # Returns the contents of a caller's root folder in a given location.
+            # The root folder contains all resources that are created by the user and not
+            # contained in any other folder.
+            rpc :QueryUserRootContents, ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse
+            # Moves a Folder to a new Folder, TeamFolder, or the root location.
+            rpc :MoveFolder, ::Google::Cloud::Dataform::V1beta1::MoveFolderRequest, ::Google::Longrunning::Operation
             # Lists Repositories in a given project and location.
             #
             # **Note:** *This method can return repositories not shown in the [Dataform
@@ -52,6 +81,8 @@ module Google
             rpc :UpdateRepository, ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Deletes a single Repository.
             rpc :DeleteRepository, ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest, ::Google::Protobuf::Empty
+            # Moves a Repository to a new location.
+            rpc :MoveRepository, ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest, ::Google::Longrunning::Operation
             # Applies a Git commit to a Repository. The Repository must not have a value
             # for `git_remote_settings.url`.
             rpc :CommitRepositoryChanges, ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest, ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse
@@ -170,6 +201,23 @@ module Google
             # as a bad request, and when the `field_mask` is omitted, the request is
             # treated as a full update on all modifiable fields.*
             rpc :UpdateConfig, ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest, ::Google::Cloud::Dataform::V1beta1::Config
+            # Gets the access control policy for a resource.
+            # Returns an empty policy if the resource exists and does not have a policy
+            # set.
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Sets the access control policy on the specified resource. Replaces any
+            # existing policy.
+            #
+            # Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Returns permissions that a caller has on the specified resource.
+            # If the resource does not exist, this will return an empty set of
+            # permissions, not a `NOT_FOUND` error.
+            #
+            # Note: This operation is designed to be used for building permission-aware
+            # UIs and command-line tools, not for authorization checking. This operation
+            # may "fail open" without warning.
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
