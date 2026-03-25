@@ -22,7 +22,7 @@ module Google
     module Maintenance
       module Api
         module V1beta
-          VERSION = "0.2.1"
+          VERSION = "0.3.0"
         end
       end
     end

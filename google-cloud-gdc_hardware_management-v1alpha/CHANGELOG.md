@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.13.0 (2026-03-19)
+
+#### Features
+
+* Add `OFFLINE` state to Zone resources ([#32804](https://github.com/googleapis/google-cloud-ruby/issues/32804)) 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.12.1 (2025-10-27)
 
 #### Documentation

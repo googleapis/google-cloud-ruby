@@ -59,6 +59,40 @@
         }
       }
     },
+    "Tools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Tools::Client",
+          "rpcs": {
+            "CreateTool": {
+              "methods": [
+                "create_tool"
+              ]
+            },
+            "GetTool": {
+              "methods": [
+                "get_tool"
+              ]
+            },
+            "ListTools": {
+              "methods": [
+                "list_tools"
+              ]
+            },
+            "DeleteTool": {
+              "methods": [
+                "delete_tool"
+              ]
+            },
+            "UpdateTool": {
+              "methods": [
+                "update_tool"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Generators": {
       "clients": {
         "grpc": {
@@ -779,40 +813,6 @@
             "UpdateSipTrunk": {
               "methods": [
                 "update_sip_trunk"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "Tools": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dialogflow::V2::Tools::Client",
-          "rpcs": {
-            "CreateTool": {
-              "methods": [
-                "create_tool"
-              ]
-            },
-            "GetTool": {
-              "methods": [
-                "get_tool"
-              ]
-            },
-            "ListTools": {
-              "methods": [
-                "list_tools"
-              ]
-            },
-            "DeleteTool": {
-              "methods": [
-                "delete_tool"
-              ]
-            },
-            "UpdateTool": {
-              "methods": [
-                "update_tool"
               ]
             }
           }

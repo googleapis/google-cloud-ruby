@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,20 @@
 
 module Google
   module Cloud
-    module Notebooks
+    module Dialogflow
       module V2
-        VERSION = "1.4.0"
+        # Spec of CES app that the generator can choose from.
+        # @!attribute [rw] ces_app
+        #   @return [::String]
+        #     Optional. Format: `projects/<Project ID>/locations/<Location ID>/apps/<app
+        #     ID>`.
+        # @!attribute [rw] confirmation_requirement
+        #   @return [::Google::Cloud::Dialogflow::V2::Tool::ConfirmationRequirement]
+        #     Optional. Indicates whether the app requires human confirmation.
+        class CesAppSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
