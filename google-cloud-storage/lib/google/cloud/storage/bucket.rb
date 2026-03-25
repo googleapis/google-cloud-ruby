@@ -749,9 +749,26 @@ module Google
         def customer_managed_encryption_enforcement_config= new_customer_managed_encryption_enforcement_config
           @gapi.encryption ||= API::Bucket::Encryption.new
           @gapi.encryption.customer_managed_encryption_enforcement_config =
-            new_customer_managed_encryption_enforcement_config
+            new_customer_managed_encryption_enforcement_config || {}
           patch_gapi! :encryption
         end
+
+        def update_bucket_encryption_enforcement_config incoming_config
+          attr_name = case incoming_config
+                      when Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig
+                        :google_managed_encryption_enforcement_config
+                      when Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig
+                        :customer_managed_encryption_enforcement_config
+                      when Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig
+                        :customer_supplied_encryption_enforcement_config
+                      else
+                        raise ArgumentError, "Unsupported config type: #{incoming_config.class}"
+                      end
+          encryption_patch = Google::Apis::StorageV1::Bucket::Encryption.new
+          encryption_patch.public_send "#{attr_name}=", incoming_config
+          patch_gapi! :encryption, bucket_encryption_config: encryption_patch
+        end
+
 
         ##
         # The bucket's encryption configuration for customer-supplied encryption keys. This configuration defines the
@@ -788,7 +805,7 @@ module Google
         def customer_supplied_encryption_enforcement_config= new_customer_supplied_encryption_enforcement_config
           @gapi.encryption ||= API::Bucket::Encryption.new
           @gapi.encryption.customer_supplied_encryption_enforcement_config =
-            new_customer_supplied_encryption_enforcement_config
+            new_customer_supplied_encryption_enforcement_config || {}
           patch_gapi! :encryption
         end
 
@@ -828,7 +845,7 @@ module Google
         def google_managed_encryption_enforcement_config= new_google_managed_encryption_enforcement_config
           @gapi.encryption ||= API::Bucket::Encryption.new
           @gapi.encryption.google_managed_encryption_enforcement_config =
-            new_google_managed_encryption_enforcement_config
+            new_google_managed_encryption_enforcement_config || {}
           patch_gapi! :encryption
         end
 
@@ -3367,13 +3384,18 @@ module Google
 
         def patch_gapi! attributes,
                         if_metageneration_match: nil,
-                        if_metageneration_not_match: nil
+                        if_metageneration_not_match: nil,
+                        bucket_encryption_config: nil
           attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
           patch_args = attributes.to_h do |attr|
-            [attr, @gapi.send(attr)]
+            if bucket_encryption_config
+              [attr, bucket_encryption_config]
+            else
+              [attr, @gapi.send(attr)]
+            end
           end
           patch_gapi = API::Bucket.new(**patch_args)
           @gapi = service.patch_bucket name,
