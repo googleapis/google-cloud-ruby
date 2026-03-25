@@ -155,7 +155,7 @@
   "google-cloud-bigquery-data_policies-v1+FILLER": "0.0.0",
   "google-cloud-bigquery-data_policies-v1beta1": "0.10.0",
   "google-cloud-bigquery-data_policies-v1beta1+FILLER": "0.0.0",
-  "google-cloud-bigquery-data_transfer": "1.7.3",
+  "google-cloud-bigquery-data_transfer": "1.8.0",
   "google-cloud-bigquery-data_transfer+FILLER": "0.0.0",
   "google-cloud-bigquery-data_transfer-v1": "1.5.1",
   "google-cloud-bigquery-data_transfer-v1+FILLER": "0.0.0",
