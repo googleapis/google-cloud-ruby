@@ -1531,6 +1531,106 @@ module Google
               end
 
               ##
+              # Establish volume peering. This is used to establish cluster and svm
+              # peerings between the GCNV and OnPrem clusters.
+              #
+              # @overload establish_volume_peering(request, options = nil)
+              #   Pass arguments to `establish_volume_peering` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload establish_volume_peering(name: nil, peer_cluster_name: nil, peer_svm_name: nil, peer_ip_addresses: nil, peer_volume_name: nil)
+              #   Pass arguments to `establish_volume_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The volume resource name, in the format
+              #     `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+              #   @param peer_cluster_name [::String]
+              #     Required. Name of the user's local source cluster to be peered with the
+              #     destination cluster.
+              #   @param peer_svm_name [::String]
+              #     Required. Name of the user's local source vserver svm to be peered with the
+              #     destination vserver svm.
+              #   @param peer_ip_addresses [::Array<::String>]
+              #     Optional. List of IPv4 ip addresses to be used for peering.
+              #   @param peer_volume_name [::String]
+              #     Required. Name of the user's local source volume to be peered with the
+              #     destination volume.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new
+              #
+              #   # Call the establish_volume_peering method.
+              #   result = client.establish_volume_peering request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def establish_volume_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.establish_volume_peering.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.establish_volume_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.establish_volume_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.establish_volume_peering request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns descriptions of all snapshots for a volume.
               #
               # @overload list_snapshots(request, options = nil)
@@ -6298,6 +6398,362 @@ module Google
               end
 
               ##
+              # `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+              # `StoragePool` cluster.
+              #
+              # @overload execute_ontap_post(request, options = nil)
+              #   Pass arguments to `execute_ontap_post` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_ontap_post(body: nil, ontap_path: nil)
+              #   Pass arguments to `execute_ontap_post` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param body [::Google::Protobuf::Struct, ::Hash]
+              #     Required. The raw `JSON` body of the request.
+              #     The body should be in the format of the ONTAP resource.
+              #     For example:
+              #     ```
+              #     {
+              #       "body": {
+              #         "field1": "value1",
+              #         "field2": "value2",
+              #       }
+              #     }
+              #     ```
+              #   @param ontap_path [::String]
+              #     Required. The resource path of the ONTAP resource.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+              #     For example:
+              #     `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new
+              #
+              #   # Call the execute_ontap_post method.
+              #   result = client.execute_ontap_post request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::ExecuteOntapPostResponse.
+              #   p result
+              #
+              def execute_ontap_post request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_ontap_post.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_ontap_post.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_ontap_post.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.execute_ontap_post request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+              # `StoragePool` cluster.
+              #
+              # @overload execute_ontap_get(request, options = nil)
+              #   Pass arguments to `execute_ontap_get` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_ontap_get(ontap_path: nil)
+              #   Pass arguments to `execute_ontap_get` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param ontap_path [::String]
+              #     Required. The resource path of the ONTAP resource.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+              #     For example:
+              #     `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new
+              #
+              #   # Call the execute_ontap_get method.
+              #   result = client.execute_ontap_get request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::ExecuteOntapGetResponse.
+              #   p result
+              #
+              def execute_ontap_get request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_ontap_get.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_ontap_get.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_ontap_get.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.execute_ontap_get request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+              # `StoragePool` cluster.
+              #
+              # @overload execute_ontap_delete(request, options = nil)
+              #   Pass arguments to `execute_ontap_delete` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_ontap_delete(ontap_path: nil)
+              #   Pass arguments to `execute_ontap_delete` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param ontap_path [::String]
+              #     Required. The resource path of the ONTAP resource.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+              #     For example:
+              #     `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new
+              #
+              #   # Call the execute_ontap_delete method.
+              #   result = client.execute_ontap_delete request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse.
+              #   p result
+              #
+              def execute_ontap_delete request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_ontap_delete.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_ontap_delete.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_ontap_delete.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.execute_ontap_delete request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+              # `StoragePool` cluster.
+              #
+              # @overload execute_ontap_patch(request, options = nil)
+              #   Pass arguments to `execute_ontap_patch` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_ontap_patch(body: nil, ontap_path: nil)
+              #   Pass arguments to `execute_ontap_patch` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param body [::Google::Protobuf::Struct, ::Hash]
+              #     Required. The raw `JSON` body of the request.
+              #     The body should be in the format of the ONTAP resource.
+              #     For example:
+              #     ```
+              #     {
+              #       "body": {
+              #         "field1": "value1",
+              #         "field2": "value2",
+              #       }
+              #     }
+              #     ```
+              #   @param ontap_path [::String]
+              #     Required. The resource path of the ONTAP resource.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
+              #     For example:
+              #     `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new
+              #
+              #   # Call the execute_ontap_patch method.
+              #   result = client.execute_ontap_patch request
+              #
+              #   # The returned object is of type Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse.
+              #   p result
+              #
+              def execute_ontap_patch request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_ontap_patch.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_ontap_patch.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_ontap_patch.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.execute_ontap_patch request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the NetApp REST API.
               #
               # This class represents the configuration for NetApp REST,
@@ -6515,6 +6971,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :revert_volume
+                  ##
+                  # RPC-specific configuration for `establish_volume_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :establish_volume_peering
                   ##
                   # RPC-specific configuration for `list_snapshots`
                   # @return [::Gapic::Config::Method]
@@ -6780,6 +7241,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_host_group
+                  ##
+                  # RPC-specific configuration for `execute_ontap_post`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_ontap_post
+                  ##
+                  # RPC-specific configuration for `execute_ontap_get`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_ontap_get
+                  ##
+                  # RPC-specific configuration for `execute_ontap_delete`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_ontap_delete
+                  ##
+                  # RPC-specific configuration for `execute_ontap_patch`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_ontap_patch
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -6809,6 +7290,8 @@ module Google
                     @delete_volume = ::Gapic::Config::Method.new delete_volume_config
                     revert_volume_config = parent_rpcs.revert_volume if parent_rpcs.respond_to? :revert_volume
                     @revert_volume = ::Gapic::Config::Method.new revert_volume_config
+                    establish_volume_peering_config = parent_rpcs.establish_volume_peering if parent_rpcs.respond_to? :establish_volume_peering
+                    @establish_volume_peering = ::Gapic::Config::Method.new establish_volume_peering_config
                     list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots
                     @list_snapshots = ::Gapic::Config::Method.new list_snapshots_config
                     get_snapshot_config = parent_rpcs.get_snapshot if parent_rpcs.respond_to? :get_snapshot
@@ -6915,6 +7398,14 @@ module Google
                     @update_host_group = ::Gapic::Config::Method.new update_host_group_config
                     delete_host_group_config = parent_rpcs.delete_host_group if parent_rpcs.respond_to? :delete_host_group
                     @delete_host_group = ::Gapic::Config::Method.new delete_host_group_config
+                    execute_ontap_post_config = parent_rpcs.execute_ontap_post if parent_rpcs.respond_to? :execute_ontap_post
+                    @execute_ontap_post = ::Gapic::Config::Method.new execute_ontap_post_config
+                    execute_ontap_get_config = parent_rpcs.execute_ontap_get if parent_rpcs.respond_to? :execute_ontap_get
+                    @execute_ontap_get = ::Gapic::Config::Method.new execute_ontap_get_config
+                    execute_ontap_delete_config = parent_rpcs.execute_ontap_delete if parent_rpcs.respond_to? :execute_ontap_delete
+                    @execute_ontap_delete = ::Gapic::Config::Method.new execute_ontap_delete_config
+                    execute_ontap_patch_config = parent_rpcs.execute_ontap_patch if parent_rpcs.respond_to? :execute_ontap_patch
+                    @execute_ontap_patch = ::Gapic::Config::Method.new execute_ontap_patch_config
 
                     yield self if block_given?
                   end

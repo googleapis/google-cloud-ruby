@@ -906,6 +906,77 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
     end
   end
 
+  def test_establish_volume_peering
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_cluster_name = "hello world"
+    peer_svm_name = "hello world"
+    peer_ip_addresses = ["hello world"]
+    peer_volume_name = "hello world"
+
+    establish_volume_peering_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :establish_volume_peering, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["peer_cluster_name"]
+      assert_equal "hello world", request["peer_svm_name"]
+      assert_equal ["hello world"], request["peer_ip_addresses"]
+      assert_equal "hello world", request["peer_volume_name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, establish_volume_peering_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.establish_volume_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.establish_volume_peering ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.establish_volume_peering(::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, establish_volume_peering_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_snapshots
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::NetApp::V1::ListSnapshotsResponse.new
@@ -4334,6 +4405,242 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_host_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_execute_ontap_post
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    ontap_path = "hello world"
+
+    execute_ontap_post_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_ontap_post, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["body"]
+      assert_equal "hello world", request["ontap_path"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_ontap_post_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_ontap_post({ body: body, ontap_path: ontap_path }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_ontap_post body: body, ontap_path: ontap_path do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_ontap_post ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_ontap_post({ body: body, ontap_path: ontap_path }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_ontap_post(::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_ontap_post_client_stub.call_rpc_count
+    end
+  end
+
+  def test_execute_ontap_get
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    ontap_path = "hello world"
+
+    execute_ontap_get_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_ontap_get, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest, request
+      assert_equal "hello world", request["ontap_path"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_ontap_get_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_ontap_get({ ontap_path: ontap_path }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_ontap_get ontap_path: ontap_path do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_ontap_get ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_ontap_get({ ontap_path: ontap_path }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_ontap_get(::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_ontap_get_client_stub.call_rpc_count
+    end
+  end
+
+  def test_execute_ontap_delete
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    ontap_path = "hello world"
+
+    execute_ontap_delete_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_ontap_delete, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest, request
+      assert_equal "hello world", request["ontap_path"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_ontap_delete_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_ontap_delete({ ontap_path: ontap_path }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_ontap_delete ontap_path: ontap_path do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_ontap_delete ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_ontap_delete({ ontap_path: ontap_path }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_ontap_delete(::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_ontap_delete_client_stub.call_rpc_count
+    end
+  end
+
+  def test_execute_ontap_patch
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    ontap_path = "hello world"
+
+    execute_ontap_patch_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_ontap_patch, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["body"]
+      assert_equal "hello world", request["ontap_path"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_ontap_patch_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_ontap_patch({ body: body, ontap_path: ontap_path }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_ontap_patch body: body, ontap_path: ontap_path do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_ontap_patch ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_ontap_patch({ body: body, ontap_path: ontap_path }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_ontap_patch(::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_ontap_patch_client_stub.call_rpc_count
     end
   end
 
