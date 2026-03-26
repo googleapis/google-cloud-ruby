@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 1.3.1 (2025-09-12)
 
 #### Documentation

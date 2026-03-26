@@ -1,5 +1,12 @@
 # Release History
 
+### 1.8.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Support Chokepoint and external exposure in findings Proto 
+
 ### 1.7.1 (2025-10-27)
 
 #### Documentation

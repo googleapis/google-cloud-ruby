@@ -42,7 +42,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the {::Google::Cloud::Kms::V1::AutokeyConfig AutokeyConfig}
-        #     resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig`.
+        #     resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig` or
+        #     `projects/{PROJECT_NUMBER}/autokeyConfig`.
         class GetAutokeyConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52,7 +53,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the {::Google::Cloud::Kms::V1::AutokeyConfig AutokeyConfig}
-        #     resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig`.
+        #     resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig` or
+        #     `projects/{PROJECT_NUMBER}/autokeyConfig`.
         # @!attribute [rw] key_project
         #   @return [::String]
         #     Optional. Name of the key project, e.g. `projects/{PROJECT_ID}` or
@@ -75,6 +77,11 @@ module Google
         #     fields. This may be sent on update requests to ensure that the client has
         #     an up-to-date value before proceeding. The request will be rejected with an
         #     ABORTED error on a mismatched etag.
+        # @!attribute [rw] key_project_resolution_mode
+        #   @return [::Google::Cloud::Kms::V1::AutokeyConfig::KeyProjectResolutionMode]
+        #     Optional. KeyProjectResolutionMode for the AutokeyConfig.
+        #     Valid values are `DEDICATED_KEY_PROJECT`, `RESOURCE_PROJECT`, or
+        #     `DISABLED`.
         class AutokeyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,6 +101,40 @@ module Google
             # The AutokeyConfig is not yet initialized or has been reset to its default
             # uninitialized state.
             UNINITIALIZED = 3
+
+            # The service account lacks the necessary permissions in the key project to
+            # configure Autokey.
+            KEY_PROJECT_PERMISSION_DENIED = 4
+          end
+
+          # Defines the resolution mode enum for the key project.
+          # The
+          # {::Google::Cloud::Kms::V1::AutokeyConfig::KeyProjectResolutionMode KeyProjectResolutionMode}
+          # determines the mechanism by which
+          # {::Google::Cloud::Kms::V1::AutokeyConfig AutokeyConfig} identifies a
+          # {::Google::Cloud::Kms::V1::AutokeyConfig#key_project key_project} at its
+          # specific configuration node. This parameter also determines if Autokey can
+          # be used within this project or folder.
+          module KeyProjectResolutionMode
+            # Default value. KeyProjectResolutionMode when not specified will act as
+            # `DEDICATED_KEY_PROJECT`.
+            KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED = 0
+
+            # Keys are created in a dedicated project specified by `key_project`.
+            DEDICATED_KEY_PROJECT = 1
+
+            # Keys are created in the same project as the resource requesting the key.
+            # The `key_project` must not be set when this mode is used.
+            RESOURCE_PROJECT = 2
+
+            # Disables the AutokeyConfig. When this mode is set, any AutokeyConfig
+            # from higher levels in the resource hierarchy are ignored for this
+            # resource and its descendants. This setting can be overridden
+            # by a more specific configuration at a lower level. For example,
+            # if Autokey is disabled on a folder, it can be re-enabled on a sub-folder
+            # or project within that folder by setting a different mode (e.g.,
+            # DEDICATED_KEY_PROJECT or RESOURCE_PROJECT).
+            DISABLED = 3
           end
         end
 

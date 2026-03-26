@@ -692,6 +692,46 @@
       ]
     },
     {
+      "region_tag": "merchantapi_v1_generated_AccountsService_CreateTestAccount_sync",
+      "title": "Snippet for the create_test_account call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#create_test_account.",
+      "file": "accounts_service/create_test_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_test_account",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#create_test_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateTestAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Account",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "CreateTestAccount",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.CreateTestAccount",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "merchantapi_v1_generated_AccountsService_DeleteAccount_sync",
       "title": "Snippet for the delete_account call in the AccountsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#delete_account.",

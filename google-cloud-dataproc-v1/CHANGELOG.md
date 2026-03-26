@@ -1,5 +1,13 @@
 # Release History
 
+### 1.10.0 (2026-03-19)
+
+#### Features
+
+* Add `ClusterType` to support creating Zero-Scale clusters 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 1.9.1 (2025-10-27)
 
 #### Documentation

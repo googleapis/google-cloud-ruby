@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-v2",
-    "version": "1.13.0",
+    "version": "1.14.0",
     "language": "RUBY",
     "apis": [
       {
@@ -358,6 +358,206 @@
           "service": {
             "short_name": "Agents",
             "full_name": "google.cloud.dialogflow.v2.Agents"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_CreateTool_sync",
+      "title": "Snippet for the create_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#create_tool.",
+      "file": "tools/create_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#create_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::CreateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "CreateTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.CreateTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_GetTool_sync",
+      "title": "Snippet for the get_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#get_tool.",
+      "file": "tools/get_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#get_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::GetToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "GetTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.GetTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_ListTools_sync",
+      "title": "Snippet for the list_tools call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#list_tools.",
+      "file": "tools/list_tools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tools",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#list_tools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::ListToolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::ListToolsResponse",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "ListTools",
+          "full_name": "google.cloud.dialogflow.v2.Tools.ListTools",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_DeleteTool_sync",
+      "title": "Snippet for the delete_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#delete_tool.",
+      "file": "tools/delete_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#delete_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::DeleteToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "DeleteTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.DeleteTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v2_generated_Tools_UpdateTool_sync",
+      "title": "Snippet for the update_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#update_tool.",
+      "file": "tools/update_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tool",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#update_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::UpdateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
+        },
+        "method": {
+          "short_name": "UpdateTool",
+          "full_name": "google.cloud.dialogflow.v2.Tools.UpdateTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.v2.Tools"
           }
         }
       },
@@ -4798,206 +4998,6 @@
           "service": {
             "short_name": "SipTrunks",
             "full_name": "google.cloud.dialogflow.v2.SipTrunks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Tools_CreateTool_sync",
-      "title": "Snippet for the create_tool call in the Tools service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#create_tool.",
-      "file": "tools/create_tool.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_tool",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#create_tool",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::CreateToolRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
-        "client": {
-          "short_name": "Tools::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
-        },
-        "method": {
-          "short_name": "CreateTool",
-          "full_name": "google.cloud.dialogflow.v2.Tools.CreateTool",
-          "service": {
-            "short_name": "Tools",
-            "full_name": "google.cloud.dialogflow.v2.Tools"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Tools_GetTool_sync",
-      "title": "Snippet for the get_tool call in the Tools service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#get_tool.",
-      "file": "tools/get_tool.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_tool",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#get_tool",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::GetToolRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
-        "client": {
-          "short_name": "Tools::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
-        },
-        "method": {
-          "short_name": "GetTool",
-          "full_name": "google.cloud.dialogflow.v2.Tools.GetTool",
-          "service": {
-            "short_name": "Tools",
-            "full_name": "google.cloud.dialogflow.v2.Tools"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Tools_ListTools_sync",
-      "title": "Snippet for the list_tools call in the Tools service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#list_tools.",
-      "file": "tools/list_tools.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_tools",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#list_tools",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::ListToolsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::ListToolsResponse",
-        "client": {
-          "short_name": "Tools::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
-        },
-        "method": {
-          "short_name": "ListTools",
-          "full_name": "google.cloud.dialogflow.v2.Tools.ListTools",
-          "service": {
-            "short_name": "Tools",
-            "full_name": "google.cloud.dialogflow.v2.Tools"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Tools_DeleteTool_sync",
-      "title": "Snippet for the delete_tool call in the Tools service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#delete_tool.",
-      "file": "tools/delete_tool.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_tool",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#delete_tool",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::DeleteToolRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Protobuf::Empty",
-        "client": {
-          "short_name": "Tools::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
-        },
-        "method": {
-          "short_name": "DeleteTool",
-          "full_name": "google.cloud.dialogflow.v2.Tools.DeleteTool",
-          "service": {
-            "short_name": "Tools",
-            "full_name": "google.cloud.dialogflow.v2.Tools"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v2_generated_Tools_UpdateTool_sync",
-      "title": "Snippet for the update_tool call in the Tools service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::V2::Tools::Client#update_tool.",
-      "file": "tools/update_tool.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "update_tool",
-        "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client#update_tool",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::V2::UpdateToolRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::V2::Tool",
-        "client": {
-          "short_name": "Tools::Client",
-          "full_name": "::Google::Cloud::Dialogflow::V2::Tools::Client"
-        },
-        "method": {
-          "short_name": "UpdateTool",
-          "full_name": "google.cloud.dialogflow.v2.Tools.UpdateTool",
-          "service": {
-            "short_name": "Tools",
-            "full_name": "google.cloud.dialogflow.v2.Tools"
           }
         }
       },

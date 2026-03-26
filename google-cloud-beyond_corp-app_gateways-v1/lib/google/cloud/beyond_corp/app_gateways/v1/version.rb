@@ -22,7 +22,7 @@ module Google
     module BeyondCorp
       module AppGateways
         module V1
-          VERSION = "0.10.1"
+          VERSION = "0.11.0"
         end
       end
     end

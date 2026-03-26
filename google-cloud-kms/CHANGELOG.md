@@ -1,5 +1,12 @@
 # Release History
 
+### 2.11.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations 
+
 ### 2.10.0 (2026-01-23)
 
 #### Features

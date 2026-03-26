@@ -117,6 +117,10 @@ module Grafeas
     #   @return [::Grafeas::V1::LayerDetails]
     #     Each package found in a file should have its own layer metadata (that is,
     #     information from the origin layer of the package).
+    # @!attribute [rw] line_number
+    #   @return [::Integer]
+    #     Line number in the file where the package was found.
+    #     Optional field that only applies to source repository scanning.
     class FileLocation
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

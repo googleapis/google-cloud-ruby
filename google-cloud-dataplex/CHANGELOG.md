@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.3.0 (2026-03-19)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* add DataProductService to manage data products and underlying data assets 
+
 ### 2.2.0 (2025-09-12)
 
 #### Features

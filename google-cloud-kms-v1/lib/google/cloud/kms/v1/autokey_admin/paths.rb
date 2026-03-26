@@ -27,15 +27,34 @@ module Google
             ##
             # Create a fully-qualified AutokeyConfig resource string.
             #
-            # The resource will be in the following format:
+            # @overload autokey_config_path(folder:)
+            #   The resource will be in the following format:
             #
-            # `folders/{folder}/autokeyConfig`
+            #   `folders/{folder}/autokeyConfig`
             #
-            # @param folder [String]
+            #   @param folder [String]
+            #
+            # @overload autokey_config_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/autokeyConfig`
+            #
+            #   @param project [String]
             #
             # @return [::String]
-            def autokey_config_path folder:
-              "folders/#{folder}/autokeyConfig"
+            def autokey_config_path **args
+              resources = {
+                "folder" => (proc do |folder:|
+                  "folders/#{folder}/autokeyConfig"
+                end),
+                "project" => (proc do |project:|
+                  "projects/#{project}/autokeyConfig"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

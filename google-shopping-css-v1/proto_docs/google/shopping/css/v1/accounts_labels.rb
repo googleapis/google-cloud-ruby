@@ -24,7 +24,7 @@ module Google
         # Label assigned by CSS domain or CSS group to one of its sub-accounts.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the label.
+        #     Identifier. The resource name of the label.
         #     Format: accounts/\\{account}/labels/\\{label}
         # @!attribute [r] label_id
         #   @return [::Integer]

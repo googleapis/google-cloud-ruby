@@ -55,33 +55,155 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The rule to exclude image findings based on spatial relationships with
+        # other image findings. For example, exclude an image finding if it overlaps
+        # with another image finding.
+        # This rule is silently ignored if the content being inspected is not an image.
+        # @!attribute [rw] info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+        #     A list of image-supported infoTypes—excluding [document
+        #      infoTypes](https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference#documents)—to
+        #      be used as context for the exclusion rule. A finding is excluded if
+        #      its bounding box has the specified spatial relationship (defined by
+        #      `image_containment_type`) with a finding of an infoType in this list.
+        #
+        #      For example, if `InspectionRuleSet.info_types` includes
+        #      `OBJECT_TYPE/PERSON` and this `exclusion_rule` specifies `info_types` as
+        #      `OBJECT_TYPE/PERSON/PASSPORT` with `image_containment_type` set to
+        #      `encloses`, then `OBJECT_TYPE/PERSON` findings will be excluded if they
+        #      are fully contained within the bounding box of an
+        #      `OBJECT_TYPE/PERSON/PASSPORT` finding.
+        # @!attribute [rw] image_containment_type
+        #   @return [::Google::Cloud::Dlp::V2::ImageContainmentType]
+        #     Specifies the required spatial relationship between the bounding boxes
+        #     of the target finding and the context infoType findings.
+        class ExcludeByImageFindings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The rule that specifies conditions when findings of infoTypes specified in
         # `InspectionRuleSet` are removed from results.
         # @!attribute [rw] dictionary
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     Dictionary which defines the rule.
         #
-        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `exclude_info_types`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `exclude_info_types`, `exclude_by_hotword`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression which defines the rule.
         #
-        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `exclude_info_types`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `exclude_info_types`, `exclude_by_hotword`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclude_info_types
         #   @return [::Google::Cloud::Dlp::V2::ExcludeInfoTypes]
         #     Set of infoTypes for which findings would affect this rule.
         #
-        #     Note: The following fields are mutually exclusive: `exclude_info_types`, `dictionary`, `regex`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `exclude_info_types`, `dictionary`, `regex`, `exclude_by_hotword`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclude_by_hotword
         #   @return [::Google::Cloud::Dlp::V2::ExcludeByHotword]
         #     Drop if the hotword rule is contained in the proximate context. For
         #     tabular data, the context includes the column name.
         #
-        #     Note: The following fields are mutually exclusive: `exclude_by_hotword`, `dictionary`, `regex`, `exclude_info_types`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `exclude_by_hotword`, `dictionary`, `regex`, `exclude_info_types`, `exclude_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] exclude_by_image_findings
+        #   @return [::Google::Cloud::Dlp::V2::ExcludeByImageFindings]
+        #     Exclude findings based on image containment rules. For example, exclude
+        #     an image finding if it overlaps with another image finding.
+        #
+        #     Note: The following fields are mutually exclusive: `exclude_by_image_findings`, `dictionary`, `regex`, `exclude_info_types`, `exclude_by_hotword`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] matching_type
         #   @return [::Google::Cloud::Dlp::V2::MatchingType]
         #     How the rule is applied, see MatchingType documentation for details.
         class ExclusionRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdjustmentRule condition for matching infoTypes.
+        # @!attribute [rw] info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+        #     Sensitive Data Protection adjusts the likelihood of a finding if that
+        #     finding also matches one of these infoTypes.
+        #
+        #     For example, you can create a rule to adjust the likelihood of a
+        #     `PHONE_NUMBER` finding if the string is found within a document that is
+        #     classified as `DOCUMENT_TYPE/HR/RESUME`. To configure this, set
+        #     `PHONE_NUMBER` in `InspectionRuleSet.info_types`. Add an `adjustment_rule`
+        #     with an `adjust_by_matching_info_types.info_types` that contains
+        #     `DOCUMENT_TYPE/HR/RESUME`. In this case, the likelihood of the
+        #     `PHONE_NUMBER` finding is adjusted, but the likelihood of the
+        #     `DOCUMENT_TYPE/HR/RESUME` finding is not.
+        # @!attribute [rw] min_likelihood
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
+        #     Required. Minimum likelihood of the
+        #     `adjust_by_matching_info_types.info_types` finding. If the likelihood is
+        #     lower than this value, Sensitive Data Protection doesn't adjust the
+        #     likelihood of the `InspectionRuleSet.info_types` finding.
+        # @!attribute [rw] matching_type
+        #   @return [::Google::Cloud::Dlp::V2::MatchingType]
+        #     How the adjustment rule is applied.
+        #
+        #     Only `MATCHING_TYPE_PARTIAL_MATCH` is supported:
+        #
+        #     - Partial match: adjusts the findings of infoTypes specified in the
+        #     inspection rule when they have a nonempty intersection with a finding of an
+        #     infoType specified in this adjustment rule.
+        class AdjustByMatchingInfoTypes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdjustmentRule condition for image findings.
+        # This rule is silently ignored if the content being inspected is not an image.
+        # @!attribute [rw] info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+        #     A list of image-supported infoTypes—excluding [document
+        #     infoTypes](https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference#documents)—to
+        #     be used as context for the adjustment rule. Sensitive Data Protection
+        #     adjusts the likelihood of an image finding if its bounding box has the
+        #     specified spatial relationship (defined by `image_containment_type`) with a
+        #     finding of an infoType in this list.
+        #
+        #     For example, you can create a rule to adjust the likelihood of a
+        #     `US_PASSPORT` finding if it is enclosed by a finding of
+        #     `OBJECT_TYPE/PERSON/PASSPORT`. To configure this, set `US_PASSPORT` in
+        #     `InspectionRuleSet.info_types`. Add an `adjustment_rule` with an
+        #     `adjust_by_image_findings.info_types` that contains
+        #     `OBJECT_TYPE/PERSON/PASSPORT` and `image_containment_type` set
+        #     to `encloses`. In this case, the likelihood of the `US_PASSPORT` finding is
+        #     adjusted, but the likelihood of the `OBJECT_TYPE/PERSON/PASSPORT`
+        #     finding is not.
+        # @!attribute [rw] min_likelihood
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
+        #     Required. Minimum likelihood of the
+        #     `adjust_by_image_findings.info_types` finding. If the likelihood is
+        #     lower than this value, Sensitive Data Protection doesn't adjust the
+        #     likelihood of the `InspectionRuleSet.info_types` finding.
+        # @!attribute [rw] image_containment_type
+        #   @return [::Google::Cloud::Dlp::V2::ImageContainmentType]
+        #     Specifies the required spatial relationship between the bounding boxes
+        #     of the target finding and the context infoType findings.
+        class AdjustByImageFindings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Rule that specifies conditions when a certain infoType's finding details
+        # should be adjusted.
+        # @!attribute [rw] adjust_by_matching_info_types
+        #   @return [::Google::Cloud::Dlp::V2::AdjustByMatchingInfoTypes]
+        #     Set of infoTypes for which findings would affect this rule.
+        #
+        #     Note: The following fields are mutually exclusive: `adjust_by_matching_info_types`, `adjust_by_image_findings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] adjust_by_image_findings
+        #   @return [::Google::Cloud::Dlp::V2::AdjustByImageFindings]
+        #     AdjustmentRule condition for image findings.
+        #
+        #     Note: The following fields are mutually exclusive: `adjust_by_image_findings`, `adjust_by_matching_info_types`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] likelihood_adjustment
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+        #     Likelihood adjustment to apply to the infoType.
+        class AdjustmentRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -92,12 +214,17 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
         #     Hotword-based detection rule.
         #
-        #     Note: The following fields are mutually exclusive: `hotword_rule`, `exclusion_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `hotword_rule`, `exclusion_rule`, `adjustment_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclusion_rule
         #   @return [::Google::Cloud::Dlp::V2::ExclusionRule]
         #     Exclusion rule.
         #
-        #     Note: The following fields are mutually exclusive: `exclusion_rule`, `hotword_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `exclusion_rule`, `hotword_rule`, `adjustment_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] adjustment_rule
+        #   @return [::Google::Cloud::Dlp::V2::AdjustmentRule]
+        #     Adjustment rule.
+        #
+        #     Note: The following fields are mutually exclusive: `adjustment_rule`, `hotword_rule`, `exclusion_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class InspectionRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,7 +313,8 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::InspectionRuleSet>]
         #     Set of rules to apply to the findings for this InspectConfig.
         #     Exclusion rules, contained in the set are executed in the end, other
-        #     rules are executed in the order they are specified for each info type.
+        #     rules are executed in the order they are specified for each info type. Not
+        #     supported for the `metadata_key_value_expression` CustomInfoType.
         class InspectConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -562,6 +690,13 @@ module Google
         # @!attribute [rw] storage_label
         #   @return [::Google::Cloud::Dlp::V2::StorageMetadataLabel]
         #     Storage metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_label`, `key_value_metadata_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] key_value_metadata_label
+        #   @return [::Google::Cloud::Dlp::V2::KeyValueMetadataLabel]
+        #     Metadata key that contains the finding.
+        #
+        #     Note: The following fields are mutually exclusive: `key_value_metadata_label`, `storage_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MetadataLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -572,6 +707,20 @@ module Google
         #   @return [::String]
         #     Label name.
         class StorageMetadataLabel
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata key that contains a finding.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     The metadata key. The format depends on the source of the metadata.
+        #
+        #     Example:
+        #
+        #     - `MSIP_Label_122709e3-8f6b-4860-985f-7f722a94f61e_Enabled` (a Microsoft
+        #       Purview Information Protection key example)
+        class KeyValueMetadataLabel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1308,9 +1457,27 @@ module Google
         #     General infoTypes are infoTypes that encompass multiple specific infoTypes.
         #     For example, the "GEOGRAPHIC_DATA" general infoType would have set for this
         #     field "LOCATION", "LOCATION_COORDINATES", and "STREET_ADDRESS".
+        # @!attribute [rw] launch_status
+        #   @return [::Google::Cloud::Dlp::V2::InfoTypeDescription::InfoTypeLaunchStatus]
+        #     The launch status of the infoType.
         class InfoTypeDescription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The launch status of an infoType.
+          module InfoTypeLaunchStatus
+            # Unspecified.
+            INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED = 0
+
+            # InfoType is generally available.
+            GENERAL_AVAILABILITY = 1
+
+            # InfoType is in public preview.
+            PUBLIC_PREVIEW = 2
+
+            # InfoType is in private preview.
+            PRIVATE_PREVIEW = 3
+          end
         end
 
         # Classification of infoTypes to organize them according to geographic
@@ -6748,6 +6915,48 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Specifies the relationship between bounding boxes for image findings.
+        # @!attribute [rw] encloses
+        #   @return [::Google::Cloud::Dlp::V2::Encloses]
+        #     The context finding's bounding box must fully contain the target
+        #     finding's bounding box.
+        #
+        #     Note: The following fields are mutually exclusive: `encloses`, `fully_inside`, `overlaps`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] fully_inside
+        #   @return [::Google::Cloud::Dlp::V2::FullyInside]
+        #     The context finding's bounding box must be fully inside the target
+        #     finding's bounding box.
+        #
+        #     Note: The following fields are mutually exclusive: `fully_inside`, `encloses`, `overlaps`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] overlaps
+        #   @return [::Google::Cloud::Dlp::V2::Overlap]
+        #     The context finding's bounding box and the target finding's bounding box
+        #     must have a non-zero intersection.
+        #
+        #     Note: The following fields are mutually exclusive: `overlaps`, `encloses`, `fully_inside`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ImageContainmentType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a condition for overlapping bounding boxes.
+        class Overlap
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a condition where one bounding box encloses another.
+        class Encloses
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines a condition where one bounding box is fully inside another.
+        class FullyInside
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to list the profiles generated for a given organization or project.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -8316,7 +8525,7 @@ module Google
           end
 
           # The signal used to determine the category.
-          # This list may increase over time.
+          # New values may be added in the future.
           module Signal
             # Unused.
             SIGNAL_UNSPECIFIED = 0
@@ -8324,8 +8533,13 @@ module Google
             # One or more machine learning models are present.
             MODEL = 1
 
-            # A table appears to be a text embedding.
+            # A table appears to contain text embeddings.
             TEXT_EMBEDDING = 2
+
+            # A table appears to contain embeddings of any type (for example, text,
+            # image, multimodal). The `TEXT_EMBEDDING` signal might also be present if
+            # the table contains text embeddings.
+            EMBEDDING = 7
 
             # The [Cloud SQL Vertex
             # AI](https://cloud.google.com/sql/docs/postgres/integrate-cloud-sql-with-vertex-ai)
@@ -8578,6 +8792,18 @@ module Google
           # - Regex: finding doesn't match the regex
           # - Exclude infoType: no intersection with affecting infoTypes findings
           MATCHING_TYPE_INVERSE_MATCH = 3
+
+          # Rule-specific match.
+          #
+          # The matching logic is based on the specific rule being used. This is
+          # required for rules where the matching behavior is not a simple string
+          # comparison (e.g., image containment). This matching type can only be
+          # used with the `ExcludeByImageFindings` rule.
+          #
+          # - Exclude by image findings: The matching logic is defined within
+          #   `ExcludeByImageFindings` based on spatial relationships between bounding
+          #   boxes.
+          MATCHING_TYPE_RULE_SPECIFIC = 4
         end
 
         # Deprecated and unused.
@@ -8599,6 +8825,9 @@ module Google
 
           # General file metadata provided by Cloud Storage.
           STORAGE_METADATA = 2
+
+          # Metadata extracted from the files.
+          CONTENT_METADATA = 3
         end
 
         # Parts of the APIs which use certain infoTypes.
