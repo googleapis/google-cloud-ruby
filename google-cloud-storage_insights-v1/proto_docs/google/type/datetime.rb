@@ -32,8 +32,8 @@ module Google
     #
     # The date is relative to the Proleptic Gregorian Calendar.
     #
-    # If year is 0, the DateTime is considered not to have a specific year. month
-    # and day must have valid, non-zero values.
+    # If year, month, or day are 0, the DateTime is considered not to have a
+    # specific year, month, or day respectively.
     #
     # This type may also be used to represent a physical time if all the date and
     # time fields are set and either case of the `time_offset` oneof is set.
@@ -49,27 +49,28 @@ module Google
     #     datetime without a year.
     # @!attribute [rw] month
     #   @return [::Integer]
-    #     Required. Month of year. Must be from 1 to 12.
+    #     Optional. Month of year. Must be from 1 to 12, or 0 if specifying a
+    #     datetime without a month.
     # @!attribute [rw] day
     #   @return [::Integer]
-    #     Required. Day of month. Must be from 1 to 31 and valid for the year and
-    #     month.
+    #     Optional. Day of month. Must be from 1 to 31 and valid for the year and
+    #     month, or 0 if specifying a datetime without a day.
     # @!attribute [rw] hours
     #   @return [::Integer]
-    #     Required. Hours of day in 24 hour format. Should be from 0 to 23. An API
-    #     may choose to allow the value "24:00:00" for scenarios like business
-    #     closing time.
+    #     Optional. Hours of day in 24 hour format. Should be from 0 to 23, defaults
+    #     to 0 (midnight). An API may choose to allow the value "24:00:00" for
+    #     scenarios like business closing time.
     # @!attribute [rw] minutes
     #   @return [::Integer]
-    #     Required. Minutes of hour of day. Must be from 0 to 59.
+    #     Optional. Minutes of hour of day. Must be from 0 to 59, defaults to 0.
     # @!attribute [rw] seconds
     #   @return [::Integer]
-    #     Required. Seconds of minutes of the time. Must normally be from 0 to 59. An
-    #     API may allow the value 60 if it allows leap-seconds.
+    #     Optional. Seconds of minutes of the time. Must normally be from 0 to 59,
+    #     defaults to 0. An API may allow the value 60 if it allows leap-seconds.
     # @!attribute [rw] nanos
     #   @return [::Integer]
-    #     Required. Fractions of seconds in nanoseconds. Must be from 0 to
-    #     999,999,999.
+    #     Optional. Fractions of seconds in nanoseconds. Must be from 0 to
+    #     999,999,999, defaults to 0.
     # @!attribute [rw] utc_offset
     #   @return [::Google::Protobuf::Duration]
     #     UTC offset. Must be whole seconds, between -18 hours and +18 hours.
@@ -91,10 +92,10 @@ module Google
     # [IANA Time Zone Database](https://www.iana.org/time-zones).
     # @!attribute [rw] id
     #   @return [::String]
-    #     IANA Time Zone Database time zone, e.g. "America/New_York".
+    #     IANA Time Zone Database time zone. For example "America/New_York".
     # @!attribute [rw] version
     #   @return [::String]
-    #     Optional. IANA Time Zone Database version number, e.g. "2019a".
+    #     Optional. IANA Time Zone Database version number. For example "2019a".
     class TimeZone
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
