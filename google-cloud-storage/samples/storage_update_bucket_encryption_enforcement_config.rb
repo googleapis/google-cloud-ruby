@@ -20,7 +20,8 @@ def remove_all_bucket_encryption_enforcement_config bucket_name:
   # bucket_name = "your-unique-bucket-name"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name do |b|
+  bucket = storage.bucket bucket_name
+  bucket.update do |b|
     b.customer_managed_encryption_enforcement_config = nil
     b.customer_supplied_encryption_enforcement_config = nil
     b.google_managed_encryption_enforcement_config = nil
@@ -42,13 +43,18 @@ def update_bucket_encryption_enforcement_config bucket_name:, bucket_encryption_
   # assuming bucket_encryption_type = google_managed_config
   bucket.update_bucket_encryption_enforcement_config google_managed_config
 
-  puts "Updated #{bucket_encryption_type} to #{bucket.google_managed_encryption_enforcement_config.restriction_mode} for bucket #{bucket.name}."
+  puts "Updated #{bucket_encryption_type} to " \
+       "#{bucket.google_managed_encryption_enforcement_config.restriction_mode} " \
+       "for bucket #{bucket.name}."
 end
 # [END storage_update_bucket_encryption_enforcement_config]
 
 if $PROGRAM_NAME == __FILE__
-  remove_all_bucket_encryption_enforcement_config bucket_name: ARGV.shift
-end
-if $PROGRAM_NAME == __FILE__
-  update_bucket_encryption_enforcement_config bucket_name: ARGV.shift, bucket_encryption_type: ARGV.shift, restriction_mode: ARGV.shift
+  case ARGV.length
+  when 1
+    remove_all_bucket_encryption_enforcement_config bucket_name: ARGV.shift
+  when 3
+    update_bucket_encryption_enforcement_config bucket_name: ARGV.shift, bucket_encryption_type: ARGV.shift,
+                                                restriction_mode: ARGV.shift
+  end
 end
