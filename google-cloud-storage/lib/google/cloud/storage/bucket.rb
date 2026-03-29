@@ -753,6 +753,22 @@ module Google
           patch_gapi! :encryption
         end
 
+        ##
+        # Updates the bucket's encryption enforcement configuration.
+        #
+        # @param [Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig, Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig, Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig] incoming_config The new encryption enforcement configuration to apply.
+        #
+        # @raise [ArgumentError] If the provided config type is unsupported.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   new_config = Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"
+        #   bucket.update_bucket_encryption_enforcement_config new_config
+        #
         def update_bucket_encryption_enforcement_config incoming_config
           attr_name = case incoming_config
                       when Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig
