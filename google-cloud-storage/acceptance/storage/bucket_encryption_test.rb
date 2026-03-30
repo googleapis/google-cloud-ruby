@@ -118,7 +118,6 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
         b.customer_supplied_encryption_enforcement_config = customer_supplied_config
         b.google_managed_encryption_enforcement_config = google_managed_config
       end
-
       _(bucket.customer_managed_encryption_enforcement_config).wont_be :nil?
       _(bucket.customer_supplied_encryption_enforcement_config).wont_be :nil?
       _(bucket.google_managed_encryption_enforcement_config).wont_be :nil?
