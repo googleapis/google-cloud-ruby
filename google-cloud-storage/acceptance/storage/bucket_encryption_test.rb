@@ -113,6 +113,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     end
 
     it "deletes all encryption enforcement configs" do
+      # For the update, need to specify all three configs
       bucket.update do |b|
         b.customer_supplied_encryption_enforcement_config = customer_supplied_config
         b.google_managed_encryption_enforcement_config = google_managed_config
