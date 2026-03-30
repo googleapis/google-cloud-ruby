@@ -810,7 +810,7 @@ module Google
         # @param [Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig, nil] new_customer_supplied_encryption_enforcement_config The bucket's encryption configuration, or `nil` to delete the encryption configuration.
         # @example
         #   require "google/cloud/storage"
-        #   #
+        #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   new_config = Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"
