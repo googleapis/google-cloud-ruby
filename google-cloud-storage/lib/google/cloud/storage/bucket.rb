@@ -785,7 +785,6 @@ module Google
           patch_gapi! :encryption, bucket_encryption_config: encryption_patch
         end
 
-
         ##
         # The bucket's encryption configuration for customer-supplied encryption keys. This configuration defines the
         # default encryption behavior for the bucket and its files, and it can be used to enforce encryption requirements
