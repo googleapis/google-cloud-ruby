@@ -381,7 +381,7 @@ module Google
           @gapi.contexts
         end
 
-         ##
+        ##
         # Sets the object context.
         # To pass generation and/or metageneration preconditions, call this
         # method within a block passed to {#update}.
