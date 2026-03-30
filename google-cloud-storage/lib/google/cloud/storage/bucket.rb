@@ -834,7 +834,7 @@ module Google
         # The bucket's encryption configuration, or `nil` if no encryption configuration has been set.
         # @example
         #   require "google/cloud/storage"
-        #   #
+        #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   bucket.google_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new
