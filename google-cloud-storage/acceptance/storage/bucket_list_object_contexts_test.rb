@@ -24,7 +24,6 @@ describe Google::Cloud::Storage::Bucket, :contexts, :storage do
   let(:custom_context_value1) { "my-custom-value" }
   let(:custom_context_key2) { "my-custom-key-2" }
   let(:custom_context_value2) { "my-custom-value-2" }
-
   let(:local_file) { "acceptance/data/CloudPlatform_128px_Retina.png" }
   let(:file_name) { "CloudLogo1" }
   let(:file_name2) { "CloudLogo2" }
