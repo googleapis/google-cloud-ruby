@@ -135,8 +135,8 @@ module Google
       #
       # ## About Jobs
       #
-      # Provides a method to create and modify Google Cloud Dataflow jobs.
-      # A Job is a multi-stage computation graph run by the Cloud Dataflow service.
+      # Provides a method to create and modify Dataflow jobs.
+      # A Job is a multi-stage computation graph run by the Dataflow service.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
@@ -206,8 +206,7 @@ module Google
       #
       # ## About Messages
       #
-      # The Dataflow Messages API is used for monitoring the progress of
-      # Dataflow jobs.
+      # The Dataflow Messages API is used to monitor the progress of Dataflow jobs.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
@@ -277,8 +276,7 @@ module Google
       #
       # ## About Metrics
       #
-      # The Dataflow Metrics API lets you monitor the progress of Dataflow
-      # jobs.
+      # The Dataflow Metrics API lets you monitor the progress of Dataflow jobs.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.
