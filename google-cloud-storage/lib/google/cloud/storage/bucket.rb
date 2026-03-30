@@ -716,7 +716,7 @@ module Google
             default_kms_key_name: new_default_kms_key
           patch_gapi! :encryption
         end
-
+        ##
         # The bucket's encryption configuration for customer-managed encryption keys.
         # This configuration defines the
         # default encryption behavior for the bucket and its files, and it can be used to enforce encryption requirements for the bucket.
@@ -734,7 +734,7 @@ module Google
         def customer_managed_encryption_enforcement_config
           @gapi.encryption&.customer_managed_encryption_enforcement_config
         end
-
+        ##
         # Sets the bucket's encryption configuration for customer-managed encryption that will be used to protect files.
         # @param [Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig, nil] new_customer_managed_encryption_enforcement_config The bucket's encryption configuration, or `nil` to delete the encryption configuration.
         # @example
@@ -854,8 +854,7 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   new_config = Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"
-        #   bucket.google_managed_encryption_enforcement_config = new_config
+        #   new_config = Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"        #   bucket.google_managed_encryption_enforcement_config = new_config
         #   The value for `restriction_mode` can be either "NotRestricted" or "FullyRestricted"
 
         def google_managed_encryption_enforcement_config= new_google_managed_encryption_enforcement_config

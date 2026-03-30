@@ -33,15 +33,22 @@ def update_bucket_encryption_enforcement_config bucket_name:, bucket_encryption_
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
-  google_managed_config =
-    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
-      restriction_mode: restriction_mode
-    )
+  config_class = case bucket_encryption_type
+                 when "google_managed_config"
+                   Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig
+                 when "customer_managed_config"
+                   Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig
+                 when "customer_supplied_config"
+                   Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig
+                 else
+                   puts "Unsupported bucket_encryption_type: #{bucket_encryption_type}"
+                   return
+                 end
+  new_config = config_class.new restriction_mode: restriction_mode
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
-  # assuming bucket_encryption_type = google_managed_config
-  bucket.update_bucket_encryption_enforcement_config google_managed_config
+  bucket.update_bucket_encryption_enforcement_config new_config
 
   puts "Updated #{bucket_encryption_type} to " \
        "#{bucket.google_managed_encryption_enforcement_config.restriction_mode} " \

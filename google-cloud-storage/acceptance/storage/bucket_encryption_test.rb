@@ -25,18 +25,21 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     ENV["GCLOUD_TEST_STORAGE_KMS_KEY_2"] ||
       "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/kms-kr/cryptoKeys/key2"
   }
-  let(:customer_managed_config) {Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
-                                    restriction_mode: "NotRestricted"
-                                  )
-                                }
-  let(:customer_supplied_config) {Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
-                                    restriction_mode: "FullyRestricted"
-                                  )
-                                 }
-  let(:google_managed_config) {Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
-                                  restriction_mode: "FullyRestricted"
-                                )
-                              }
+  let(:customer_managed_config) do
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
+  end
+  let(:customer_supplied_config) do
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+    )
+  end
+  let(:google_managed_config) do
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+    )
+  end
 
   let :bucket do
     b = safe_gcs_execute { storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location) }
