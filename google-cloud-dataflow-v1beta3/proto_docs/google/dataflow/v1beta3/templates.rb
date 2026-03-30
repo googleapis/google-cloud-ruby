@@ -249,6 +249,9 @@ module Google
         #     case. For more information, see
         #     [Set the pipeline streaming
         #     mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
+        # @!attribute [rw] additional_pipeline_options
+        #   @return [::Array<::String>]
+        #     Optional. Additional pipeline option flags for the job.
         class FlexTemplateRuntimeEnvironment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -378,6 +381,9 @@ module Google
         #     case. For more information, see
         #     [Set the pipeline streaming
         #     mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
+        # @!attribute [rw] additional_pipeline_options
+        #   @return [::Array<::String>]
+        #     Optional. Additional pipeline option flags for the job.
         class RuntimeEnvironment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -526,6 +532,9 @@ module Google
 
             # Go.
             GO = 3
+
+            # YAML.
+            YAML = 4
           end
         end
 

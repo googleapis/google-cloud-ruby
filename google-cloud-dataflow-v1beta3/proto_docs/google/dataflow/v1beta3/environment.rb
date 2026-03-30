@@ -67,7 +67,7 @@ module Google
         #     specified in order for the job to have workers.
         # @!attribute [rw] user_agent
         #   @return [::Google::Protobuf::Struct]
-        #     A description of the process that generated the request.
+        #     Optional. A description of the process that generated the request.
         # @!attribute [rw] version
         #   @return [::Google::Protobuf::Struct]
         #     A structure describing which components and their versions of the service
@@ -130,6 +130,9 @@ module Google
         #     case. For more information, see
         #     [Set the pipeline streaming
         #     mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
+        # @!attribute [rw] use_public_ips
+        #   @return [::Boolean]
+        #     Optional. True when any worker pool that uses public IPs is present.
         class Environment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -412,6 +415,12 @@ module Google
         #   @return [::String]
         #     Type of root disk for VMs.  If empty or unspecified, the service will
         #     attempt to choose a reasonable default.
+        # @!attribute [rw] disk_provisioned_iops
+        #   @return [::Integer]
+        #     Optional. IOPS provisioned for the root disk for VMs.
+        # @!attribute [rw] disk_provisioned_throughput_mibps
+        #   @return [::Integer]
+        #     Optional. Throughput provisioned for the root disk for VMs.
         # @!attribute [rw] disk_source_image
         #   @return [::String]
         #     Fully qualified source image for disks.
