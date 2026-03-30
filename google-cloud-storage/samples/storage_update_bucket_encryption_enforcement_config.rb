@@ -15,53 +15,28 @@
 require "google/cloud/storage"
 
 # [START storage_update_bucket_encryption_enforcement_config]
-def remove_all_bucket_encryption_enforcement_config bucket_name:
+
+def update_bucket_encryption_enforcement_config bucket_name:
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
-  bucket.update do |b|
-    b.customer_managed_encryption_enforcement_config = nil
-    b.customer_supplied_encryption_enforcement_config = nil
-    b.google_managed_encryption_enforcement_config = nil
-  end
-  puts "Removed Encryption Enforcement Config from bucket #{bucket.name}."
-end
+  
+  # Update a specific type (e.g., change GMEK to NotRestricted)
+  google_managed_config =
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
 
-def update_bucket_encryption_enforcement_config bucket_name:, bucket_encryption_type:, restriction_mode:
-  # The ID to give your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
+  bucket.update_bucket_encryption_enforcement_config google_managed_config
 
-  config_class = case bucket_encryption_type
-                 when "google_managed_config"
-                   Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig
-                 when "customer_managed_config"
-                   Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig
-                 when "customer_supplied_config"
-                   Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig
-                 else
-                   puts "Unsupported bucket_encryption_type: #{bucket_encryption_type}"
-                   return
-                 end
-  new_config = config_class.new restriction_mode: restriction_mode
-
-  storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
-  bucket.update_bucket_encryption_enforcement_config new_config
-
-  puts "Updated #{bucket_encryption_type} to " \
+  puts "Updated google_managed_config to " \
        "#{bucket.google_managed_encryption_enforcement_config.restriction_mode} " \
        "for bucket #{bucket.name}."
 end
 # [END storage_update_bucket_encryption_enforcement_config]
 
 if $PROGRAM_NAME == __FILE__
-  case ARGV.length
-  when 1
-    remove_all_bucket_encryption_enforcement_config bucket_name: ARGV.shift
-  when 3
-    update_bucket_encryption_enforcement_config bucket_name: ARGV.shift, bucket_encryption_type: ARGV.shift,
-                                                restriction_mode: ARGV.shift
-  end
+  update_bucket_encryption_enforcement_config bucket_name: ARGV.shift
 end

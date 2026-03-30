@@ -175,7 +175,7 @@ describe "Buckets Snippets" do
   describe "storage_bucket_encryption_enforcement_config" do
     bucket_name = random_bucket_name
 
-    it "gets, sets and clears bucket encryption enforcement config" do
+    it "gets, sets and updates bucket encryption enforcement config" do
       # creates bucket with encryption enforcement config
       expected = "Created bucket #{bucket_name} with Encryption Enforcement Config.\n"
 
@@ -201,16 +201,7 @@ describe "Buckets Snippets" do
 
       retry_resource_exhaustion do
         assert_output expected do
-          update_bucket_encryption_enforcement_config bucket_name: bucket_name, bucket_encryption_type: "google_managed_config", restriction_mode: "NotRestricted"
-        end
-      end
-
-      # clears encryption enforcement config
-      expected = "Removed Encryption Enforcement Config from bucket #{bucket_name}.\n"
-
-      retry_resource_exhaustion do
-        assert_output expected do
-          remove_all_bucket_encryption_enforcement_config bucket_name: bucket_name
+          update_bucket_encryption_enforcement_config bucket_name: bucket_name
         end
       end
 

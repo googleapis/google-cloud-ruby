@@ -16,14 +16,14 @@ require "storage_helper"
 
 describe Google::Cloud::Storage::Bucket, :encryption, :storage do
   let(:bucket_name) { "#{$bucket_names[1]}-encryption" }
-  let(:bucket_location) { "us-west1" }
+  let(:bucket_location) { "us-central1" }
   let(:kms_key) {
     ENV["GCLOUD_TEST_STORAGE_KMS_KEY_1"] ||
-      "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/kms-kr/cryptoKeys/key1"
+      "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1"
   }
   let(:kms_key_2) {
     ENV["GCLOUD_TEST_STORAGE_KMS_KEY_2"] ||
-      "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/kms-kr/cryptoKeys/key2"
+      "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2"
   }
   let(:customer_managed_config) do
     Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(

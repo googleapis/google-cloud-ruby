@@ -1090,7 +1090,6 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(buckets.unreachable).must_be :nil?
   end
 
-
   def bucket_with_location created_bucket,
                            location_type: bucket_location_type
     resp_bucket = created_bucket.dup
