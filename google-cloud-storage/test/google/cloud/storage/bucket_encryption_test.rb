@@ -22,7 +22,6 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
   let(:kms_key) { "path/to/encryption_key_name" }
 
-
   describe "customer-supplied encryption key (CSEK)" do
     let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
     let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
