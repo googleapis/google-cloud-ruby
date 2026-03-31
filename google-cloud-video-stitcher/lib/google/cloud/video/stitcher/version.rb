@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Video
       module Stitcher
-        VERSION = "1.1.2"
+        VERSION = "1.2.0"
       end
     end
   end
