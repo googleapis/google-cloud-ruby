@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.25.0 (2026-03-31)
+
+#### Features
+
+* Update DataStoreSpec and add BoostSpec to SearchService ([#33322](https://github.com/googleapis/google-cloud-ruby/issues/33322)) 
+
 ### 0.24.0 (2026-03-19)
 
 #### Features
