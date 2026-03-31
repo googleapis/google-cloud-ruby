@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.13.0 (2026-03-31)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32849](https://github.com/googleapis/google-cloud-ruby/issues/32849)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32851](https://github.com/googleapis/google-cloud-ruby/issues/32851)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32853](https://github.com/googleapis/google-cloud-ruby/issues/32853)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32854](https://github.com/googleapis/google-cloud-ruby/issues/32854)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32855](https://github.com/googleapis/google-cloud-ruby/issues/32855)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32867](https://github.com/googleapis/google-cloud-ruby/issues/32867)) 
+
 ### 0.12.1 (2025-10-27)
 
 #### Documentation
