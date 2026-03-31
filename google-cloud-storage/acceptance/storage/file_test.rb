@@ -1159,7 +1159,7 @@ describe Google::Cloud::Storage::File, :storage do
             custom_context_key2 => custom_hash2[custom_context_key2]
           }
         )
-        file.reload!
+      file.reload!
         _(file.contexts.custom[custom_context_key1].value).must_equal custom_context_value1
         _(file.contexts.custom[custom_context_key2].value).must_equal custom_context_value2
     end
