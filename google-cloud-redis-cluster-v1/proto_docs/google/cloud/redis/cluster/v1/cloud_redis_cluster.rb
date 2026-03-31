@@ -426,6 +426,17 @@ module Google
           # @!attribute [r] encryption_info
           #   @return [::Google::Cloud::Redis::Cluster::V1::EncryptionInfo]
           #     Output only. Encryption information of the data at rest of the cluster.
+          # @!attribute [rw] server_ca_mode
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ServerCaMode]
+          #     Optional. Server CA mode for the cluster.
+          # @!attribute [rw] server_ca_pool
+          #   @return [::String]
+          #     Optional. Customer-managed CA pool for the cluster. Only applicable for
+          #     BYOCA i.e. if server_ca_mode is SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA.
+          #     Format: "projects/\\{project}/locations/\\{region}/caPools/\\{ca_pool}".
+          # @!attribute [rw] rotate_server_certificate
+          #   @return [::Boolean]
+          #     Optional. Input only. Rotate the server certificates.
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -950,6 +961,51 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Shared regional certificate authority
+          # @!attribute [rw] managed_server_ca
+          #   @return [::Google::Cloud::Redis::Cluster::V1::SharedRegionalCertificateAuthority::RegionalManagedCertificateAuthority]
+          #     CA certificate chains for redis managed server authentication.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Unique name of the resource in this scope including project and
+          #     location using the form:
+          #         `projects/{project}/locations/{location}/sharedRegionalCertificateAuthority`
+          class SharedRegionalCertificateAuthority
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # CA certificate chains for redis managed server authentication.
+            # @!attribute [rw] ca_certs
+            #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::SharedRegionalCertificateAuthority::RegionalManagedCertificateAuthority::RegionalCertChain>]
+            #     The PEM encoded CA certificate chains for redis managed
+            #     server authentication
+            class RegionalManagedCertificateAuthority
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The certificates that form the CA chain, from leaf to root order.
+              # @!attribute [rw] certificates
+              #   @return [::Array<::String>]
+              #     The certificates that form the CA chain, from leaf to root order.
+              class RegionalCertChain
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # Request for
+          # [GetSharedRegionalCertificateAuthority][CloudRedis.GetSharedRegionalCertificateAuthority].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Regional certificate authority resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/sharedRegionalCertificateAuthority`
+          #     where `location_id` refers to a Google Cloud region.
+          class GetSharedRegionalCertificateAuthorityRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Pre-defined metadata fields.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -1278,6 +1334,21 @@ module Google
 
             # Use server managed encryption for in-transit encryption.
             TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION = 2
+          end
+
+          # Server CA mode for the cluster.
+          module ServerCaMode
+            # Server CA mode not specified.
+            SERVER_CA_MODE_UNSPECIFIED = 0
+
+            # Each cluster has its own Google managed CA.
+            SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA = 1
+
+            # The cluster uses Google managed shared CA in the region.
+            SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA = 2
+
+            # The cluster uses customer managed CA from CAS.
+            SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA = 3
           end
 
           # Type of a PSC connection, for cluster access purpose.
