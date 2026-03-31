@@ -1045,6 +1045,6 @@
   "help+FILLER": "0.0.0",
   "stackdriver": "0.23.0",
   "stackdriver+FILLER": "0.0.0",
-  "stackdriver-core": "1.7.0",
+  "stackdriver-core": "1.8.0",
   "stackdriver-core+FILLER": "0.0.0"
 }
