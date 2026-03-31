@@ -28,7 +28,6 @@ def update_bucket_encryption_enforcement_config bucket_name:
     Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
       restriction_mode: "NotRestricted"
     )
-
   bucket.update_bucket_encryption_enforcement_config google_managed_config
 
   puts "Updated google_managed_config to " \
