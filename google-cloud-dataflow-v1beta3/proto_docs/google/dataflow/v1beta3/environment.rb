@@ -158,6 +158,12 @@ module Google
         #
         #       storage.googleapis.com/\\{bucket}
         #       bucket.storage.googleapis.com/
+        # @!attribute [rw] sha256
+        #   @return [::String]
+        #     Optional. The hex-encoded SHA256 checksum of the package.
+        #     If the checksum is provided, the worker will verify the checksum of the
+        #     package before using it. If the checksum does not match, the worker will
+        #     fail to start.
         class Package
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
