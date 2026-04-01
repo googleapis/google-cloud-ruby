@@ -5,13 +5,7 @@
 #### Features
 
 * Add CreateTestAccount RPC to Accounts service for creating test-only Merchant Center accounts 
-* Add irb as explicit dependency for Ruby 4.0 compatibility ([#32877](https://github.com/googleapis/google-cloud-ruby/issues/32877)) 
-* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32849](https://github.com/googleapis/google-cloud-ruby/issues/32849)) 
-* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32851](https://github.com/googleapis/google-cloud-ruby/issues/32851)) 
-* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32853](https://github.com/googleapis/google-cloud-ruby/issues/32853)) 
-* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32854](https://github.com/googleapis/google-cloud-ruby/issues/32854)) 
-* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32855](https://github.com/googleapis/google-cloud-ruby/issues/32855)) 
-* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32869](https://github.com/googleapis/google-cloud-ruby/issues/32869)) 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
 
 ### 0.4.0 (2025-12-03)
 
