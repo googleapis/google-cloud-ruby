@@ -53,6 +53,7 @@
     "snippets/memorystore/get_backup_collection.rb",
     "snippets/memorystore/get_certificate_authority.rb",
     "snippets/memorystore/get_instance.rb",
+    "snippets/memorystore/get_shared_regional_certificate_authority.rb",
     "snippets/memorystore/list_backup_collections.rb",
     "snippets/memorystore/list_backups.rb",
     "snippets/memorystore/list_instances.rb",
