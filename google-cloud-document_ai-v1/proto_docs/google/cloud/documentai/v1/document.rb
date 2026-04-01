@@ -88,6 +88,12 @@ module Google
         # @!attribute [rw] chunked_document
         #   @return [::Google::Cloud::DocumentAI::V1::Document::ChunkedDocument]
         #     Document chunked based on chunking config.
+        # @!attribute [rw] blob_assets
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::BlobAsset>]
+        #     Optional. The blob assets in this document. This is used to store the
+        #     content of the inline blobs in this document, for example, image bytes,
+        #     such that it can be referenced by other fields in the document via asset
+        #     id.
         # @!attribute [rw] entity_validation_output
         #   @return [::Google::Cloud::DocumentAI::V1::Document::EntityValidationOutput]
         #     The entity validation output for the document. This is the validation
@@ -102,7 +108,7 @@ module Google
         #     The entity revision ID that `document.entities` field is based on.
         #     If this field is set and `entities_revisions` is not empty, the entities in
         #     `document.entities` field are the entities in the entity revision with this
-        #     ID and `document.entity_validation_output` field is the
+        #     id and `document.entity_validation_output` field is the
         #     `entity_validation_output` field in this entity revision.
         class Document
           include ::Google::Protobuf::MessageExts
@@ -222,7 +228,7 @@ module Google
           #     A list of visually detected tokens on the page.
           # @!attribute [rw] visual_elements
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::VisualElement>]
-          #     A list of detected non-text visual elements e.g. checkbox,
+          #     A list of detected non-text visual elements, for example, checkbox,
           #     signature etc. on the page.
           # @!attribute [rw] tables
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Page::Table>]
@@ -313,9 +319,9 @@ module Google
             #   @return [::Float]
             #     Confidence of the current
             #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} within
-            #     context of the object this layout is for. e.g. confidence can be for a
-            #     single token, a table, a visual element, etc. depending on context.
-            #     Range `[0, 1]`.
+            #     context of the object this layout is for. For example, confidence can
+            #     be for a single token, a table, a visual element, etc. depending on
+            #     context. Range `[0, 1]`.
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1::BoundingPoly]
             #     The bounding polygon for the
@@ -521,8 +527,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Detected non-text visual elements e.g. checkbox, signature etc. on the
-            # page.
+            # Detected non-text visual elements, for example, checkbox, signature etc.
+            # on the page.
             # @!attribute [rw] layout
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
             #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for
@@ -595,7 +601,7 @@ module Google
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
             #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for the
             #     {::Google::Cloud::DocumentAI::V1::Document::Page::FormField FormField} name.
-            #     e.g. `Address`, `Email`, `Grand total`, `Phone number`, etc.
+            #     For example, `Address`, `Email`, `Grand total`, `Phone number`, etc.
             # @!attribute [rw] field_value
             #   @return [::Google::Cloud::DocumentAI::V1::Document::Page::Layout]
             #     {::Google::Cloud::DocumentAI::V1::Document::Page::Layout Layout} for the
@@ -705,10 +711,11 @@ module Google
           #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
-          #     Required. Entity type from a schema e.g. `Address`.
+          #     Required. Entity type from a schema, for example, `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
-          #     Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
+          #     Optional. Text value of the entity, for example, `1600 Amphitheatre
+          #     Pkwy`.
           # @!attribute [rw] mention_id
           #   @return [::String]
           #     Optional. Deprecated.  Use `id` field instead.
@@ -726,9 +733,9 @@ module Google
           # @!attribute [rw] normalized_value
           #   @return [::Google::Cloud::DocumentAI::V1::Document::Entity::NormalizedValue]
           #     Optional. Normalized entity value. Absent if the extracted value could
-          #     not be converted or the type (e.g. address) is not supported for certain
-          #     parsers. This field is also only populated for certain supported document
-          #     types.
+          #     not be converted or the type (for example, address) is not supported for
+          #     certain parsers. This field is also only populated for certain supported
+          #     document types.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::Entity>]
           #     Optional. Entities can be nested to form a hierarchical data structure
@@ -790,6 +797,9 @@ module Google
             #     Note: The following fields are mutually exclusive: `float_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] signature_value
             #   @return [::Boolean]
+            #     A signature - a graphical representation of a person's name,
+            #     often used to sign a document.
+            #
             #     Note: The following fields are mutually exclusive: `signature_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] text
             #   @return [::String]
@@ -1076,7 +1086,7 @@ module Google
             # Human Review information of the document.
             # @!attribute [rw] state
             #   @return [::String]
-            #     Human review state. e.g. `requested`, `succeeded`, `rejected`.
+            #     Human review state. For example, `requested`, `succeeded`, `rejected`.
             # @!attribute [rw] state_message
             #   @return [::String]
             #     A message providing more details about the current state of processing.
@@ -1108,6 +1118,15 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Represents the annotation of a block or a chunk.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     The description of the content with this annotation.
+          class Annotations
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents the parsed layout of a document as a collection of blocks that
           # the document is divided into.
           # @!attribute [rw] blocks
@@ -1123,17 +1142,22 @@ module Google
             #   @return [::Google::Cloud::DocumentAI::V1::Document::DocumentLayout::DocumentLayoutBlock::LayoutTextBlock]
             #     Block consisting of text content.
             #
-            #     Note: The following fields are mutually exclusive: `text_block`, `table_block`, `list_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `text_block`, `table_block`, `list_block`, `image_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] table_block
             #   @return [::Google::Cloud::DocumentAI::V1::Document::DocumentLayout::DocumentLayoutBlock::LayoutTableBlock]
             #     Block consisting of table content/structure.
             #
-            #     Note: The following fields are mutually exclusive: `table_block`, `text_block`, `list_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `table_block`, `text_block`, `list_block`, `image_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] list_block
             #   @return [::Google::Cloud::DocumentAI::V1::Document::DocumentLayout::DocumentLayoutBlock::LayoutListBlock]
             #     Block consisting of list content/structure.
             #
-            #     Note: The following fields are mutually exclusive: `list_block`, `text_block`, `table_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `list_block`, `text_block`, `table_block`, `image_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] image_block
+            #   @return [::Google::Cloud::DocumentAI::V1::Document::DocumentLayout::DocumentLayoutBlock::LayoutImageBlock]
+            #     Block consisting of image content.
+            #
+            #     Note: The following fields are mutually exclusive: `image_block`, `text_block`, `table_block`, `list_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] block_id
             #   @return [::String]
             #     ID of the block.
@@ -1172,6 +1196,9 @@ module Google
               #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::DocumentLayout::DocumentLayoutBlock>]
               #     A text block could further have child blocks.
               #     Repeated blocks support further hierarchies and nested blocks.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::Annotations]
+              #     Annotation of the text block.
               class LayoutTextBlock
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1187,6 +1214,9 @@ module Google
               # @!attribute [rw] caption
               #   @return [::String]
               #     Table caption/title.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::Annotations]
+              #     Annotation of the table block.
               class LayoutTableBlock
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1239,6 +1269,43 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+
+              # Represents an image type block.
+              # @!attribute [rw] blob_asset_id
+              #   @return [::String]
+              #     Optional. Asset id of the inline image. If set, find the image
+              #     content in the blob_assets field.
+              #
+              #     Note: The following fields are mutually exclusive: `blob_asset_id`, `gcs_uri`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] gcs_uri
+              #   @return [::String]
+              #     Optional. Google Cloud Storage uri of the image.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_uri`, `blob_asset_id`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] data_uri
+              #   @return [::String]
+              #     Optional. Data uri of the image.
+              #     It is composed of four parts: a prefix (data:), a MIME type
+              #     indicating the type of data, an optional base64 token if
+              #     non-textual, and the data itself:
+              #     data:[<mediatype>][;base64],<data>
+              #
+              #     Note: The following fields are mutually exclusive: `data_uri`, `blob_asset_id`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] mime_type
+              #   @return [::String]
+              #     Mime type of the image. An IANA published [media type (MIME type)]
+              #     (https://www.iana.org/assignments/media-types/media-types.xhtml).
+              # @!attribute [rw] image_text
+              #   @return [::String]
+              #     Text extracted from the image using OCR or alt text describing the
+              #     image.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::Annotations]
+              #     Annotation of the image block.
+              class LayoutImageBlock
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
 
@@ -1269,6 +1336,9 @@ module Google
             # @!attribute [rw] page_footers
             #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::ChunkedDocument::Chunk::ChunkPageFooter>]
             #     Page footers associated with the chunk.
+            # @!attribute [rw] chunk_fields
+            #   @return [::Array<::Google::Cloud::DocumentAI::V1::Document::ChunkedDocument::Chunk::ChunkField>]
+            #     Chunk fields inside this chunk.
             class Chunk
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1308,7 +1378,81 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+
+              # The image chunk field in the chunk.
+              # @!attribute [rw] blob_asset_id
+              #   @return [::String]
+              #     Optional. Asset id of the inline image. If set, find the image
+              #     content in the blob_assets field.
+              #
+              #     Note: The following fields are mutually exclusive: `blob_asset_id`, `gcs_uri`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] gcs_uri
+              #   @return [::String]
+              #     Optional. Google Cloud Storage uri of the image.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_uri`, `blob_asset_id`, `data_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] data_uri
+              #   @return [::String]
+              #     Optional. Data uri of the image.
+              #     It is composed of four parts: a prefix (data:), a MIME type
+              #     indicating the type of data, an optional base64 token if
+              #     non-textual, and the data itself:
+              #     data:[<mediatype>][;base64],<data>
+              #
+              #     Note: The following fields are mutually exclusive: `data_uri`, `blob_asset_id`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::Annotations]
+              #     Annotation of the image chunk field.
+              class ImageChunkField
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # The table chunk field in the chunk.
+              # @!attribute [rw] annotations
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::Annotations]
+              #     Annotation of the table chunk field.
+              class TableChunkField
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # The chunk field in the chunk. A chunk field could be one of the various
+              # types (for example, image, table) supported.
+              # @!attribute [rw] image_chunk_field
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::ChunkedDocument::Chunk::ImageChunkField]
+              #     The image chunk field in the chunk.
+              #
+              #     Note: The following fields are mutually exclusive: `image_chunk_field`, `table_chunk_field`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] table_chunk_field
+              #   @return [::Google::Cloud::DocumentAI::V1::Document::ChunkedDocument::Chunk::TableChunkField]
+              #     The table chunk field in the chunk.
+              #
+              #     Note: The following fields are mutually exclusive: `table_chunk_field`, `image_chunk_field`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class ChunkField
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
+          end
+
+          # Represents a blob asset. It's used to store the content of the inline blob
+          # in this document, for example, image bytes, such that it can be referenced
+          # by other fields in the document via asset ID.
+          # @!attribute [rw] asset_id
+          #   @return [::String]
+          #     Optional. The id of the blob asset.
+          # @!attribute [rw] content
+          #   @return [::String]
+          #     Optional. The content of the blob asset, for example, image bytes.
+          # @!attribute [rw] mime_type
+          #   @return [::String]
+          #     The mime type of the blob asset.
+          #     An IANA published [media type (MIME
+          #     type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
+          class BlobAsset
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The output of the validation given the document and the validation rules.
