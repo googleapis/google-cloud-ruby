@@ -25,6 +25,13 @@ module Google
         # @!attribute [rw] source_code_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::SourceCodeSpec]
         #     Deploy from source code files with a defined entrypoint.
+        #
+        #     Note: The following fields are mutually exclusive: `source_code_spec`, `container_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] container_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::ContainerSpec]
+        #     Deploy from a container image with a defined entrypoint and commands.
+        #
+        #     Note: The following fields are mutually exclusive: `container_spec`, `source_code_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account that the Reasoning Engine artifact runs as.
@@ -246,6 +253,17 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Specification for deploying from a container image.
+          # @!attribute [rw] image_uri
+          #   @return [::String]
+          #     Required. The Artifact Registry Docker image URI (e.g.,
+          #     us-central1-docker.pkg.dev/my-project/my-repo/my-image:tag) of the
+          #     container image that is to be run on each worker replica.
+          class ContainerSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
