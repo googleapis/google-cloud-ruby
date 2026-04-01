@@ -97,17 +97,29 @@ module Google
             # The TTL (time-to-live) configuration for documents that have this `Field`
             # set.
             #
-            # Storing a timestamp value into a TTL-enabled field will be treated as
-            # the document's absolute expiration time. For Enterprise edition databases,
-            # the timestamp value may also be stored in an array value in the
-            # TTL-enabled field.
+            # A timestamp stored in a TTL-enabled field will be used to determine the
+            # expiration time of the document. The expiration time is the sum
+            # of the timestamp value and the `expiration_offset`.
             #
-            # Timestamp values in the past indicate that the document is eligible for
+            # For Enterprise edition databases, the timestamp value may alternatively be
+            # stored in an array value in the TTL-enabled field.
+            #
+            # An expiration time in the past indicates that the document is eligible for
             # immediate expiration. Using any other data type or leaving the field absent
             # will disable expiration for the individual document.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Firestore::Admin::V1::Field::TtlConfig::State]
             #     Output only. The state of the TTL configuration.
+            # @!attribute [rw] expiration_offset
+            #   @return [::Google::Protobuf::Duration]
+            #     Optional. The offset, relative to the timestamp value from the
+            #     TTL-enabled field, used to determine the document's expiration time.
+            #
+            #     `expiration_offset.seconds` must be between 0 and 2,147,483,647
+            #     inclusive. Values more precise than seconds are rejected.
+            #
+            #     If unset, defaults to 0, in which case the expiration time is the same
+            #     as the timestamp value from the TTL-enabled field.
             class TtlConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

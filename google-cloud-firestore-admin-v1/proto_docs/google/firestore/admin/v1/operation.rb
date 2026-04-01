@@ -113,6 +113,10 @@ module Google
             # @!attribute [rw] change_type
             #   @return [::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::TtlConfigDelta::ChangeType]
             #     Specifies how the TTL configuration is changing.
+            # @!attribute [rw] expiration_offset
+            #   @return [::Google::Protobuf::Duration]
+            #     The offset, relative to the timestamp value in the TTL-enabled field,
+            #     used determine the document's expiration time.
             class TtlConfigDelta
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
