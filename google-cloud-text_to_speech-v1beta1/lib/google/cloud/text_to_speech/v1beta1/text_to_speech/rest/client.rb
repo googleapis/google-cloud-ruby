@@ -294,7 +294,7 @@ module Google
               #   @param enable_time_pointing [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
               #     Whether and what timepoints are returned in the response.
               #   @param advanced_voice_options [::Google::Cloud::TextToSpeech::V1beta1::AdvancedVoiceOptions, ::Hash]
-              #     Optional. Advanced voice options.
+              #     Advanced voice options.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

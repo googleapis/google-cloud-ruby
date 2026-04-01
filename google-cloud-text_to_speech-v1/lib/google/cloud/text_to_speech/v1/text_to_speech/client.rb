@@ -298,7 +298,7 @@ module Google
             #   @param audio_config [::Google::Cloud::TextToSpeech::V1::AudioConfig, ::Hash]
             #     Required. The configuration of the synthesized audio.
             #   @param advanced_voice_options [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions, ::Hash]
-            #     Optional. Advanced voice options.
+            #     Advanced voice options.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse]
