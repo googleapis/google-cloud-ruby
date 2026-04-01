@@ -1,0 +1,18 @@
+{
+    "api_id": "osconfig.googleapis.com",
+    "api_shortname": "osconfig",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1alpha/latest",
+    "distribution_name": "google-cloud-os_config-v1alpha",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "osconfig",
+    "name_pretty": "Cloud OS Config V1alpha API",
+    "product_documentation": "https://cloud.google.com/compute/docs/manage-os",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud OS Config provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances. Note that google-cloud-os_config-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-os_config instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "OS_CONFIG",
+    "ruby-cloud-product-url": "https://cloud.google.com/compute/docs/manage-os",
+    "library_type": "GAPIC_AUTO"
+}
