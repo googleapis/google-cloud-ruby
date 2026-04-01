@@ -1,0 +1,895 @@
+{
+  "client_library": {
+    "name": "google-cloud-talent-v4",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.talent.v4",
+        "version": "v4"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "jobs_v4_generated_CompanyService_CreateCompany_sync",
+      "title": "Snippet for the create_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#create_company.",
+      "file": "company_service/create_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_company",
+        "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client#create_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::CreateCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Company",
+        "client": {
+          "short_name": "CompanyService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client"
+        },
+        "method": {
+          "short_name": "CreateCompany",
+          "full_name": "google.cloud.talent.v4.CompanyService.CreateCompany",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.cloud.talent.v4.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_CompanyService_GetCompany_sync",
+      "title": "Snippet for the get_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#get_company.",
+      "file": "company_service/get_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_company",
+        "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client#get_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::GetCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Company",
+        "client": {
+          "short_name": "CompanyService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client"
+        },
+        "method": {
+          "short_name": "GetCompany",
+          "full_name": "google.cloud.talent.v4.CompanyService.GetCompany",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.cloud.talent.v4.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_CompanyService_UpdateCompany_sync",
+      "title": "Snippet for the update_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#update_company.",
+      "file": "company_service/update_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_company",
+        "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client#update_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::UpdateCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Company",
+        "client": {
+          "short_name": "CompanyService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCompany",
+          "full_name": "google.cloud.talent.v4.CompanyService.UpdateCompany",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.cloud.talent.v4.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_CompanyService_DeleteCompany_sync",
+      "title": "Snippet for the delete_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#delete_company.",
+      "file": "company_service/delete_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_company",
+        "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client#delete_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::DeleteCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CompanyService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCompany",
+          "full_name": "google.cloud.talent.v4.CompanyService.DeleteCompany",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.cloud.talent.v4.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_CompanyService_ListCompanies_sync",
+      "title": "Snippet for the list_companies call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::CompanyService::Client#list_companies.",
+      "file": "company_service/list_companies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_companies",
+        "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client#list_companies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::ListCompaniesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::ListCompaniesResponse",
+        "client": {
+          "short_name": "CompanyService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::CompanyService::Client"
+        },
+        "method": {
+          "short_name": "ListCompanies",
+          "full_name": "google.cloud.talent.v4.CompanyService.ListCompanies",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.cloud.talent.v4.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_Completion_CompleteQuery_sync",
+      "title": "Snippet for the complete_query call in the Completion service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::Completion::Client#complete_query.",
+      "file": "completion/complete_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "complete_query",
+        "full_name": "::Google::Cloud::Talent::V4::Completion::Client#complete_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::CompleteQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::CompleteQueryResponse",
+        "client": {
+          "short_name": "Completion::Client",
+          "full_name": "::Google::Cloud::Talent::V4::Completion::Client"
+        },
+        "method": {
+          "short_name": "CompleteQuery",
+          "full_name": "google.cloud.talent.v4.Completion.CompleteQuery",
+          "service": {
+            "short_name": "Completion",
+            "full_name": "google.cloud.talent.v4.Completion"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_EventService_CreateClientEvent_sync",
+      "title": "Snippet for the create_client_event call in the EventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::EventService::Client#create_client_event.",
+      "file": "event_service/create_client_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_client_event",
+        "full_name": "::Google::Cloud::Talent::V4::EventService::Client#create_client_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::CreateClientEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::ClientEvent",
+        "client": {
+          "short_name": "EventService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::EventService::Client"
+        },
+        "method": {
+          "short_name": "CreateClientEvent",
+          "full_name": "google.cloud.talent.v4.EventService.CreateClientEvent",
+          "service": {
+            "short_name": "EventService",
+            "full_name": "google.cloud.talent.v4.EventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_CreateJob_sync",
+      "title": "Snippet for the create_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#create_job.",
+      "file": "job_service/create_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_job",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#create_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::CreateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Job",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "CreateJob",
+          "full_name": "google.cloud.talent.v4.JobService.CreateJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_BatchCreateJobs_sync",
+      "title": "Snippet for the batch_create_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#batch_create_jobs.",
+      "file": "job_service/batch_create_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_jobs",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#batch_create_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::BatchCreateJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateJobs",
+          "full_name": "google.cloud.talent.v4.JobService.BatchCreateJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_GetJob_sync",
+      "title": "Snippet for the get_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#get_job.",
+      "file": "job_service/get_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#get_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::GetJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Job",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "GetJob",
+          "full_name": "google.cloud.talent.v4.JobService.GetJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_UpdateJob_sync",
+      "title": "Snippet for the update_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#update_job.",
+      "file": "job_service/update_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_job",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#update_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::UpdateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Job",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "UpdateJob",
+          "full_name": "google.cloud.talent.v4.JobService.UpdateJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_BatchUpdateJobs_sync",
+      "title": "Snippet for the batch_update_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#batch_update_jobs.",
+      "file": "job_service/batch_update_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_jobs",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#batch_update_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::BatchUpdateJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateJobs",
+          "full_name": "google.cloud.talent.v4.JobService.BatchUpdateJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_DeleteJob_sync",
+      "title": "Snippet for the delete_job call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#delete_job.",
+      "file": "job_service/delete_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_job",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#delete_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::DeleteJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "DeleteJob",
+          "full_name": "google.cloud.talent.v4.JobService.DeleteJob",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_BatchDeleteJobs_sync",
+      "title": "Snippet for the batch_delete_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#batch_delete_jobs.",
+      "file": "job_service/batch_delete_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_jobs",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#batch_delete_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::BatchDeleteJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteJobs",
+          "full_name": "google.cloud.talent.v4.JobService.BatchDeleteJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_ListJobs_sync",
+      "title": "Snippet for the list_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#list_jobs.",
+      "file": "job_service/list_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_jobs",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#list_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::ListJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::ListJobsResponse",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "ListJobs",
+          "full_name": "google.cloud.talent.v4.JobService.ListJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_SearchJobs_sync",
+      "title": "Snippet for the search_jobs call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#search_jobs.",
+      "file": "job_service/search_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_jobs",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#search_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::SearchJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::SearchJobsResponse",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "SearchJobs",
+          "full_name": "google.cloud.talent.v4.JobService.SearchJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_JobService_SearchJobsForAlert_sync",
+      "title": "Snippet for the search_jobs_for_alert call in the JobService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::JobService::Client#search_jobs_for_alert.",
+      "file": "job_service/search_jobs_for_alert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_jobs_for_alert",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#search_jobs_for_alert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::SearchJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::SearchJobsResponse",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "SearchJobsForAlert",
+          "full_name": "google.cloud.talent.v4.JobService.SearchJobsForAlert",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_TenantService_CreateTenant_sync",
+      "title": "Snippet for the create_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#create_tenant.",
+      "file": "tenant_service/create_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tenant",
+        "full_name": "::Google::Cloud::Talent::V4::TenantService::Client#create_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::CreateTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Tenant",
+        "client": {
+          "short_name": "TenantService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::TenantService::Client"
+        },
+        "method": {
+          "short_name": "CreateTenant",
+          "full_name": "google.cloud.talent.v4.TenantService.CreateTenant",
+          "service": {
+            "short_name": "TenantService",
+            "full_name": "google.cloud.talent.v4.TenantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_TenantService_GetTenant_sync",
+      "title": "Snippet for the get_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#get_tenant.",
+      "file": "tenant_service/get_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tenant",
+        "full_name": "::Google::Cloud::Talent::V4::TenantService::Client#get_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::GetTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Tenant",
+        "client": {
+          "short_name": "TenantService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::TenantService::Client"
+        },
+        "method": {
+          "short_name": "GetTenant",
+          "full_name": "google.cloud.talent.v4.TenantService.GetTenant",
+          "service": {
+            "short_name": "TenantService",
+            "full_name": "google.cloud.talent.v4.TenantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_TenantService_UpdateTenant_sync",
+      "title": "Snippet for the update_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#update_tenant.",
+      "file": "tenant_service/update_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tenant",
+        "full_name": "::Google::Cloud::Talent::V4::TenantService::Client#update_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::UpdateTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::Tenant",
+        "client": {
+          "short_name": "TenantService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::TenantService::Client"
+        },
+        "method": {
+          "short_name": "UpdateTenant",
+          "full_name": "google.cloud.talent.v4.TenantService.UpdateTenant",
+          "service": {
+            "short_name": "TenantService",
+            "full_name": "google.cloud.talent.v4.TenantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_TenantService_DeleteTenant_sync",
+      "title": "Snippet for the delete_tenant call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#delete_tenant.",
+      "file": "tenant_service/delete_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tenant",
+        "full_name": "::Google::Cloud::Talent::V4::TenantService::Client#delete_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::DeleteTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "TenantService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::TenantService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTenant",
+          "full_name": "google.cloud.talent.v4.TenantService.DeleteTenant",
+          "service": {
+            "short_name": "TenantService",
+            "full_name": "google.cloud.talent.v4.TenantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "jobs_v4_generated_TenantService_ListTenants_sync",
+      "title": "Snippet for the list_tenants call in the TenantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Talent::V4::TenantService::Client#list_tenants.",
+      "file": "tenant_service/list_tenants.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tenants",
+        "full_name": "::Google::Cloud::Talent::V4::TenantService::Client#list_tenants",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::ListTenantsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Talent::V4::ListTenantsResponse",
+        "client": {
+          "short_name": "TenantService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::TenantService::Client"
+        },
+        "method": {
+          "short_name": "ListTenants",
+          "full_name": "google.cloud.talent.v4.TenantService.ListTenants",
+          "service": {
+            "short_name": "TenantService",
+            "full_name": "google.cloud.talent.v4.TenantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
