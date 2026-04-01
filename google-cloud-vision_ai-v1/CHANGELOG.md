@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.4.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 1.3.1 (2025-10-27)
 
 #### Documentation
