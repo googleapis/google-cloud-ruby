@@ -45,6 +45,9 @@ module Google
             rpc :DeleteInstance, ::Google::Cloud::Memorystore::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Gets details about the certificate authority for an Instance.
             rpc :GetCertificateAuthority, ::Google::Cloud::Memorystore::V1::GetCertificateAuthorityRequest, ::Google::Cloud::Memorystore::V1::CertificateAuthority
+            # Gets the details of shared regional certificate authority information for
+            # Memorystore instance.
+            rpc :GetSharedRegionalCertificateAuthority, ::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest, ::Google::Cloud::Memorystore::V1::SharedRegionalCertificateAuthority
             # Reschedules upcoming maintenance event.
             rpc :RescheduleMaintenance, ::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
             # Lists all backup collections owned by a consumer project in either the
