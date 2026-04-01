@@ -804,6 +804,87 @@ module Google
               end
 
               ##
+              # Gets the details of shared regional certificate authority information for
+              # Memorystore instance.
+              #
+              # @overload get_shared_regional_certificate_authority(request, options = nil)
+              #   Pass arguments to `get_shared_regional_certificate_authority` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_shared_regional_certificate_authority(name: nil)
+              #   Pass arguments to `get_shared_regional_certificate_authority` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Regional certificate authority resource name using the form:
+              #         `projects/{project}/locations/{location}/sharedRegionalCertificateAuthority`
+              #     where `location_id` refers to a Google Cloud region.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1::SharedRegionalCertificateAuthority]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1::SharedRegionalCertificateAuthority]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest.new
+              #
+              #   # Call the get_shared_regional_certificate_authority method.
+              #   result = client.get_shared_regional_certificate_authority request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1::SharedRegionalCertificateAuthority.
+              #   p result
+              #
+              def get_shared_regional_certificate_authority request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_shared_regional_certificate_authority.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_shared_regional_certificate_authority.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_shared_regional_certificate_authority.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_shared_regional_certificate_authority request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Reschedules upcoming maintenance event.
               #
               # @overload reschedule_maintenance(request, options = nil)
@@ -1724,6 +1805,11 @@ module Google
                   #
                   attr_reader :get_certificate_authority
                   ##
+                  # RPC-specific configuration for `get_shared_regional_certificate_authority`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_shared_regional_certificate_authority
+                  ##
                   # RPC-specific configuration for `reschedule_maintenance`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1778,6 +1864,8 @@ module Google
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                     get_certificate_authority_config = parent_rpcs.get_certificate_authority if parent_rpcs.respond_to? :get_certificate_authority
                     @get_certificate_authority = ::Gapic::Config::Method.new get_certificate_authority_config
+                    get_shared_regional_certificate_authority_config = parent_rpcs.get_shared_regional_certificate_authority if parent_rpcs.respond_to? :get_shared_regional_certificate_authority
+                    @get_shared_regional_certificate_authority = ::Gapic::Config::Method.new get_shared_regional_certificate_authority_config
                     reschedule_maintenance_config = parent_rpcs.reschedule_maintenance if parent_rpcs.respond_to? :reschedule_maintenance
                     @reschedule_maintenance = ::Gapic::Config::Method.new reschedule_maintenance_config
                     list_backup_collections_config = parent_rpcs.list_backup_collections if parent_rpcs.respond_to? :list_backup_collections
