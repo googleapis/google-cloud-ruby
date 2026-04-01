@@ -272,9 +272,33 @@ module Google
         #   @return [::Array<::Google::Cloud::NetApp::V1::BlockDevice>]
         #     Optional. Block devices for the volume.
         #     Currently, only one block device is permitted per Volume.
+        # @!attribute [r] clone_details
+        #   @return [::Google::Cloud::NetApp::V1::Volume::CloneDetails]
+        #     Output only. If this volume is a clone, this field contains details about
+        #     the clone.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Details about a clone volume.
+          # @!attribute [r] source_snapshot
+          #   @return [::String]
+          #     Output only. Specifies the full resource name of the source snapshot from
+          #     which this volume was cloned. Format:
+          #     projects/\\{project}/locations/\\{location}/volumes/\\{volume}/snapshots/\\{snapshot}
+          # @!attribute [r] source_volume
+          #   @return [::String]
+          #     Output only. Full name of the source volume resource.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/volumes/\\{volume}
+          # @!attribute [r] shared_space_gib
+          #   @return [::Integer]
+          #     Output only. Shared space in GiB. Determined at volume creation time
+          #     based on size of source snapshot.
+          class CloneDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -536,8 +560,10 @@ module Google
         # @!attribute [rw] source_backup
         #   @return [::String]
         #     Full name of the backup resource.
-        #     Format:
+        #     Format for standard backup:
         #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault_id}/backups/\\{backup_id}
+        #     Format for BackupDR backup:
+        #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault}/dataSources/\\{data_source}/backups/\\{backup}
         #
         #     Note: The following fields are mutually exclusive: `source_backup`, `source_snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RestoreParameters
@@ -854,6 +880,32 @@ module Google
 
         # RestoreBackupFilesResponse is the result of RestoreBackupFilesRequest.
         class RestoreBackupFilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # EstablishVolumePeeringRequest establishes cluster and svm peerings between
+        # the source and destination clusters.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The volume resource name, in the format
+        #     `projects/{project_id}/locations/{location}/volumes/{volume_id}`
+        # @!attribute [rw] peer_cluster_name
+        #   @return [::String]
+        #     Required. Name of the user's local source cluster to be peered with the
+        #     destination cluster.
+        # @!attribute [rw] peer_svm_name
+        #   @return [::String]
+        #     Required. Name of the user's local source vserver svm to be peered with the
+        #     destination vserver svm.
+        # @!attribute [rw] peer_ip_addresses
+        #   @return [::Array<::String>]
+        #     Optional. List of IPv4 ip addresses to be used for peering.
+        # @!attribute [rw] peer_volume_name
+        #   @return [::String]
+        #     Required. Name of the user's local source volume to be peered with the
+        #     destination volume.
+        class EstablishVolumePeeringRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

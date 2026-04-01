@@ -110,9 +110,6 @@ module Google
 
           # Storage pool type is unified.
           UNIFIED = 2
-
-          # Storage pool type is unified large capacity.
-          UNIFIED_LARGE_CAPACITY = 3
         end
 
         # Schedule for Hybrid Replication.

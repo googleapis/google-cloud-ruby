@@ -532,6 +532,46 @@
       ]
     },
     {
+      "region_tag": "netapp_v1_generated_NetApp_EstablishVolumePeering_sync",
+      "title": "Snippet for the establish_volume_peering call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#establish_volume_peering.",
+      "file": "netapp/establish_volume_peering.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "establish_volume_peering",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#establish_volume_peering",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "EstablishVolumePeering",
+          "full_name": "google.cloud.netapp.v1.NetApp.EstablishVolumePeering",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "netapp_v1_generated_NetApp_ListSnapshots_sync",
       "title": "Snippet for the list_snapshots call in the NetApp service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_snapshots.",
@@ -2647,6 +2687,166 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ExecuteOntapPost_sync",
+      "title": "Snippet for the execute_ontap_post call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_post.",
+      "file": "netapp/execute_ontap_post.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_ontap_post",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_post",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ExecuteOntapPost",
+          "full_name": "google.cloud.netapp.v1.NetApp.ExecuteOntapPost",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ExecuteOntapGet_sync",
+      "title": "Snippet for the execute_ontap_get call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_get.",
+      "file": "netapp/execute_ontap_get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_ontap_get",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ExecuteOntapGet",
+          "full_name": "google.cloud.netapp.v1.NetApp.ExecuteOntapGet",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ExecuteOntapDelete_sync",
+      "title": "Snippet for the execute_ontap_delete call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_delete.",
+      "file": "netapp/execute_ontap_delete.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_ontap_delete",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_delete",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ExecuteOntapDelete",
+          "full_name": "google.cloud.netapp.v1.NetApp.ExecuteOntapDelete",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ExecuteOntapPatch_sync",
+      "title": "Snippet for the execute_ontap_patch call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_patch.",
+      "file": "netapp/execute_ontap_patch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_ontap_patch",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#execute_ontap_patch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ExecuteOntapPatch",
+          "full_name": "google.cloud.netapp.v1.NetApp.ExecuteOntapPatch",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

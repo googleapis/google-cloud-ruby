@@ -75,6 +75,11 @@
                 "revert_volume"
               ]
             },
+            "EstablishVolumePeering": {
+              "methods": [
+                "establish_volume_peering"
+              ]
+            },
             "ListSnapshots": {
               "methods": [
                 "list_snapshots"
@@ -338,6 +343,26 @@
             "DeleteHostGroup": {
               "methods": [
                 "delete_host_group"
+              ]
+            },
+            "ExecuteOntapPost": {
+              "methods": [
+                "execute_ontap_post"
+              ]
+            },
+            "ExecuteOntapGet": {
+              "methods": [
+                "execute_ontap_get"
+              ]
+            },
+            "ExecuteOntapDelete": {
+              "methods": [
+                "execute_ontap_delete"
+              ]
+            },
+            "ExecuteOntapPatch": {
+              "methods": [
+                "execute_ontap_patch"
               ]
             }
           }

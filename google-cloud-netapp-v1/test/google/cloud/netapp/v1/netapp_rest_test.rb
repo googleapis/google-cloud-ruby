@@ -797,6 +797,64 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_establish_volume_peering
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_cluster_name = "hello world"
+    peer_svm_name = "hello world"
+    peer_ip_addresses = ["hello world"]
+    peer_volume_name = "hello world"
+
+    establish_volume_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_establish_volume_peering_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, establish_volume_peering_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.establish_volume_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.establish_volume_peering ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.establish_volume_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.establish_volume_peering(::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, establish_volume_peering_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_snapshots
     # Create test objects.
     client_result = ::Google::Cloud::NetApp::V1::ListSnapshotsResponse.new
@@ -3726,6 +3784,224 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, delete_host_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_post
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    ontap_path = "hello world"
+
+    execute_ontap_post_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_post_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_post_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_ontap_post({ body: body, ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_ontap_post body: body, ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_ontap_post ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_ontap_post({ body: body, ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_ontap_post(::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest.new(body: body, ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_post_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_get
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    ontap_path = "hello world"
+
+    execute_ontap_get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_get_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_get_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_ontap_get({ ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_ontap_get ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_ontap_get ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_ontap_get({ ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_ontap_get(::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest.new(ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_get_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_delete
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    ontap_path = "hello world"
+
+    execute_ontap_delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_delete_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_delete_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_ontap_delete({ ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_ontap_delete ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_ontap_delete ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_ontap_delete({ ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_ontap_delete(::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest.new(ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_delete_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_ontap_patch
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    ontap_path = "hello world"
+
+    execute_ontap_patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_execute_ontap_patch_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_ontap_patch_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_ontap_patch({ body: body, ontap_path: ontap_path }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_ontap_patch body: body, ontap_path: ontap_path do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_ontap_patch ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_ontap_patch({ body: body, ontap_path: ontap_path }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_ontap_patch(::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest.new(body: body, ontap_path: ontap_path), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_ontap_patch_client_stub.call_count
       end
     end
   end

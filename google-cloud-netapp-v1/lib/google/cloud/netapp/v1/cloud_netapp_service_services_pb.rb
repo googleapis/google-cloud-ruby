@@ -63,6 +63,9 @@ module Google
             # Warning! This operation will permanently revert all changes made after the
             # snapshot was created.
             rpc :RevertVolume, ::Google::Cloud::NetApp::V1::RevertVolumeRequest, ::Google::Longrunning::Operation
+            # Establish volume peering. This is used to establish cluster and svm
+            # peerings between the GCNV and OnPrem clusters.
+            rpc :EstablishVolumePeering, ::Google::Cloud::NetApp::V1::EstablishVolumePeeringRequest, ::Google::Longrunning::Operation
             # Returns descriptions of all snapshots for a volume.
             rpc :ListSnapshots, ::Google::Cloud::NetApp::V1::ListSnapshotsRequest, ::Google::Cloud::NetApp::V1::ListSnapshotsResponse
             # Describe a snapshot for a volume.
@@ -177,6 +180,18 @@ module Google
             rpc :UpdateHostGroup, ::Google::Cloud::NetApp::V1::UpdateHostGroupRequest, ::Google::Longrunning::Operation
             # Deletes a host group.
             rpc :DeleteHostGroup, ::Google::Cloud::NetApp::V1::DeleteHostGroupRequest, ::Google::Longrunning::Operation
+            # `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapPost, ::Google::Cloud::NetApp::V1::ExecuteOntapPostRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapPostResponse
+            # `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapGet, ::Google::Cloud::NetApp::V1::ExecuteOntapGetRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapGetResponse
+            # `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapDelete, ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapDeleteResponse
+            # `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+            # `StoragePool` cluster.
+            rpc :ExecuteOntapPatch, ::Google::Cloud::NetApp::V1::ExecuteOntapPatchRequest, ::Google::Cloud::NetApp::V1::ExecuteOntapPatchResponse
           end
 
           Stub = Service.rpc_stub_class

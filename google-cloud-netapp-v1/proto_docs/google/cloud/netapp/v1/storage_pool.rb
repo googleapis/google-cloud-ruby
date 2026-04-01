@@ -238,9 +238,13 @@ module Google
         #   @return [::Google::Cloud::NetApp::V1::StoragePoolType]
         #     Optional. Type of the storage pool. This field is used to control whether
         #     the pool supports `FILE` based volumes only or `UNIFIED` (both `FILE` and
-        #     `BLOCK`) volumes or `UNIFIED_LARGE_CAPACITY` (both `FILE` and `BLOCK`)
-        #     volumes with large capacity. If not specified during creation, it defaults
-        #     to `FILE`.
+        #     `BLOCK`) volumes. If not specified during creation, it defaults to `FILE`.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::NetApp::V1::Mode]
+        #     Optional. Mode of the storage pool. This field is used to control whether
+        #     the user can perform the ONTAP operations on the storage pool using the
+        #     GCNV ONTAP Mode APIs. If not specified during creation, it defaults to
+        #     `DEFAULT`.
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -293,6 +297,19 @@ module Google
         class ValidateDirectoryServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `Mode` of the storage pool or volume. This field is used to control whether
+        # the resource is managed by the GCNV APIs or the GCNV ONTAP Mode APIs.
+        module Mode
+          # The `Mode` is not specified.
+          MODE_UNSPECIFIED = 0
+
+          # The resource is managed by the GCNV APIs.
+          DEFAULT = 1
+
+          # The resource is managed by the GCNV ONTAP Mode APIs.
+          ONTAP = 2
         end
       end
     end
