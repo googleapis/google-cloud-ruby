@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2026-03-31)
+
+#### Features
+
+* Add CreateTestAccount RPC to Accounts service for creating test-only Merchant Center accounts 
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.4.0 (2025-12-03)
 
 #### Features
