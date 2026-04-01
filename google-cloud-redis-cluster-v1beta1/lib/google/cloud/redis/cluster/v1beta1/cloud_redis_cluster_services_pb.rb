@@ -80,6 +80,9 @@ module Google
               rpc :CreateCluster, ::Google::Cloud::Redis::Cluster::V1beta1::CreateClusterRequest, ::Google::Longrunning::Operation
               # Gets the details of certificate authority information for Redis cluster.
               rpc :GetClusterCertificateAuthority, ::Google::Cloud::Redis::Cluster::V1beta1::GetClusterCertificateAuthorityRequest, ::Google::Cloud::Redis::Cluster::V1beta1::CertificateAuthority
+              # Gets the details of regional certificate authority information for Redis
+              # cluster.
+              rpc :GetSharedRegionalCertificateAuthority, ::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest, ::Google::Cloud::Redis::Cluster::V1beta1::SharedRegionalCertificateAuthority
               # Reschedules upcoming maintenance event.
               rpc :RescheduleClusterMaintenance, ::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest, ::Google::Longrunning::Operation
               # Lists all backup collections owned by a consumer project in either the
