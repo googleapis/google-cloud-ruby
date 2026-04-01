@@ -277,14 +277,14 @@ module Google
             #   @param parent [::String]
             #     Required. Parent value for ListInstancesRequest.
             #   @param page_size [::Integer]
-            #     Requested page size. Server may return fewer items than requested.
-            #     If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, server will pick an appropriate default.
             #   @param page_token [::String]
-            #     A token identifying a page of results the server should return.
+            #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
-            #     Filter for filtering results.
+            #     Optional. Filter for filtering results.
             #   @param order_by [::String]
-            #     Hint for how to order the results.
+            #     Optional. Hint for how to order the results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Instance>]
@@ -566,7 +566,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_instance(name: nil, request_id: nil)
+            # @overload delete_instance(name: nil, request_id: nil, force: nil)
             #   Pass arguments to `delete_instance` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -587,6 +587,8 @@ module Google
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param force [::Boolean]
+            #     Optional. If set to true, will force the deletion of the instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -685,10 +687,10 @@ module Google
             #   @param parent [::String]
             #     Required. Parent value for ListRepositoriesRequest.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
-            #     A token identifying a page of results the server should return.
+            #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
             #     Optional. Filter results.
             #   @param instance [::String]
@@ -1183,8 +1185,8 @@ module Google
             #   @param parent [::String]
             #     Required. Parent value for ListHooksRequest.
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #
@@ -1467,7 +1469,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
             #     hook resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field will be overwritten if it is in the mask.
@@ -2037,7 +2039,10 @@ module Google
             #
             #   @param parent [::String]
             #   @param page_size [::Integer]
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::BranchRule>]
@@ -2219,7 +2224,7 @@ module Google
             #     Optional. If set, validate the request and preview the review, but do not
             #     actually post it.  (https://google.aip.dev/163, for declarative friendly)
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
             #     branchRule resource by the update.
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field will be overwritten if it is in the mask.
@@ -2600,8 +2605,8 @@ module Google
             #     Required. The repository in which to list pull requests. Format:
             #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #
@@ -3086,8 +3091,8 @@ module Google
             #     Format:
             #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #
@@ -3560,8 +3565,8 @@ module Google
             #     Required. The repository in which to list issues. Format:
             #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
@@ -4146,9 +4151,8 @@ module Google
             #     Required. The pull request in which to list pull request comments. Format:
             #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. If unspecified, at most 100 pull request
-            #     comments will be returned. The maximum value is 100; values above 100 will
-            #     be coerced to 100.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #
@@ -4522,7 +4526,7 @@ module Google
             # Batch creates pull request comments. This function is used to create
             # multiple PullRequestComments for code review. There needs to be exactly one
             # PullRequestComment of type Review, and at most 100 PullRequestComments of
-            # type Code per request. The Postition of the code comments must be unique
+            # type Code per request. The Position of the code comments must be unique
             # within the request.
             #
             # @overload batch_create_pull_request_comments(request, options = nil)
@@ -5043,8 +5047,8 @@ module Google
             #     Required. The issue in which to list the comments. Format:
             #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
             #   @param page_size [::Integer]
-            #     Optional. Requested page size. Server may return fewer items than
-            #     requested. If unspecified, server will pick an appropriate default.
+            #     Optional. Requested page size. If unspecified, a default size of 30 will be
+            #     used. The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #
