@@ -45,6 +45,9 @@ module Google
             rpc :DeleteInstance, ::Google::Cloud::Memorystore::V1beta::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Gets details about the certificate authority for an Instance.
             rpc :GetCertificateAuthority, ::Google::Cloud::Memorystore::V1beta::GetCertificateAuthorityRequest, ::Google::Cloud::Memorystore::V1beta::CertificateAuthority
+            # Gets the details of shared regional certificate authority information for
+            # Memorystore instance.
+            rpc :GetSharedRegionalCertificateAuthority, ::Google::Cloud::Memorystore::V1beta::GetSharedRegionalCertificateAuthorityRequest, ::Google::Cloud::Memorystore::V1beta::SharedRegionalCertificateAuthority
           end
 
           Stub = Service.rpc_stub_class

@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the Memorystore API.
           module Paths
             ##
+            # Create a fully-qualified CaPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/caPools/{ca_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ca_pool [String]
+            #
+            # @return [::String]
+            def ca_pool_path project:, location:, ca_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/caPools/#{ca_pool}"
+            end
+
+            ##
             # Create a fully-qualified ForwardingRule resource string.
             #
             # The resource will be in the following format:
@@ -113,6 +132,23 @@ module Google
               raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}/serviceAttachments/#{service_attachment}"
+            end
+
+            ##
+            # Create a fully-qualified SharedRegionalCertificateAuthority resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/sharedRegionalCertificateAuthority`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def shared_regional_certificate_authority_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/sharedRegionalCertificateAuthority"
             end
 
             extend self
