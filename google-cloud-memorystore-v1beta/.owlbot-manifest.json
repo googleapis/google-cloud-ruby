@@ -46,6 +46,7 @@
     "snippets/memorystore/delete_instance.rb",
     "snippets/memorystore/get_certificate_authority.rb",
     "snippets/memorystore/get_instance.rb",
+    "snippets/memorystore/get_shared_regional_certificate_authority.rb",
     "snippets/memorystore/list_instances.rb",
     "snippets/memorystore/update_instance.rb",
     "snippets/snippet_metadata_google.cloud.memorystore.v1beta.json",

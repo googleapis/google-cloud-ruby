@@ -250,6 +250,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "memorystore_v1beta_generated_Memorystore_GetSharedRegionalCertificateAuthority_sync",
+      "title": "Snippet for the get_shared_regional_certificate_authority call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client#get_shared_regional_certificate_authority.",
+      "file": "memorystore/get_shared_regional_certificate_authority.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_shared_regional_certificate_authority",
+        "full_name": "::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client#get_shared_regional_certificate_authority",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1beta::GetSharedRegionalCertificateAuthorityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1beta::SharedRegionalCertificateAuthority",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetSharedRegionalCertificateAuthority",
+          "full_name": "google.cloud.memorystore.v1beta.Memorystore.GetSharedRegionalCertificateAuthority",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1beta.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

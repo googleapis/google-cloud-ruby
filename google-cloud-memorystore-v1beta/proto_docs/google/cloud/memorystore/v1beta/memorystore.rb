@@ -93,6 +93,17 @@ module Google
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1beta::Instance::Mode]
         #     Optional. The mode config for the instance.
+        # @!attribute [rw] server_ca_mode
+        #   @return [::Google::Cloud::Memorystore::V1beta::Instance::ServerCaMode]
+        #     Optional. Immutable. The Server CA mode for the instance.
+        # @!attribute [rw] server_ca_pool
+        #   @return [::String]
+        #     Optional. Immutable. The customer-managed CA pool for the instance. Only
+        #     applicable if the Server CA mode is CUSTOMER_MANAGED_CAS_CA. Format:
+        #     "projects/\\{project}/locations/\\{region}/caPools/\\{ca_pool}".
+        # @!attribute [rw] rotate_server_certificate
+        #   @return [::Boolean]
+        #     Optional. Input only. Rotate the server certificates.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -240,6 +251,30 @@ module Google
 
             # Cluster mode is disabled for the instance.
             CLUSTER_DISABLED = 4
+          end
+
+          # The Server CA mode for the instance.
+          module ServerCaMode
+            # Server CA mode not specified.
+            SERVER_CA_MODE_UNSPECIFIED = 0
+
+            # Each instance has its own Google-managed CA.
+            GOOGLE_MANAGED_PER_INSTANCE_CA = 1
+
+            # The instance uses a Google-managed shared CA for the instance's region.
+            GOOGLE_MANAGED_SHARED_CA = 2
+
+            # The instance uses a customer-managed CA from CAS.
+            CUSTOMER_MANAGED_CAS_CA = 3
+
+            # Deprecated: Use GOOGLE_MANAGED_PER_INSTANCE_CA instead.
+            SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA = 1
+
+            # Deprecated: Use GOOGLE_MANAGED_SHARED_CA instead.
+            SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA = 2
+
+            # Deprecated: Use CUSTOMER_MANAGED_CAS_CA instead.
+            SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA = 3
           end
         end
 
@@ -656,6 +691,51 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
+        end
+
+        # Shared regional certificate authority for an instance.
+        # @!attribute [rw] managed_server_ca
+        #   @return [::Google::Cloud::Memorystore::V1beta::SharedRegionalCertificateAuthority::RegionalManagedCertificateAuthority]
+        #     CA certificate chains for memorystore managed server authentication.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Unique name of the resource in this scope including project and
+        #     location using the form:
+        #         `projects/{project}/locations/{location}/sharedRegionalCertificateAuthority`
+        class SharedRegionalCertificateAuthority
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # CA certificate chains for memorystore managed server authentication.
+          # @!attribute [rw] ca_certs
+          #   @return [::Array<::Google::Cloud::Memorystore::V1beta::SharedRegionalCertificateAuthority::RegionalManagedCertificateAuthority::RegionalCertChain>]
+          #     The PEM encoded CA certificate chains for memorystore managed
+          #     server authentication
+          class RegionalManagedCertificateAuthority
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The certificates that form the CA chain, from leaf to root order.
+            # @!attribute [rw] certificates
+            #   @return [::Array<::String>]
+            #     The certificates that form the CA chain, from leaf to root order.
+            class RegionalCertChain
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # Request for
+        # {::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Regional certificate authority resource name using the form:
+        #         `projects/{project}/locations/{location}/sharedRegionalCertificateAuthority`
+        #     where `location_id` refers to a Google Cloud region.
+        class GetSharedRegionalCertificateAuthorityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the metadata of a long-running operation.
