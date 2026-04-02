@@ -1,5 +1,12 @@
 # Release History
 
+### 1.12.0 (2026-04-02)
+
+#### Features
+
+* add `expiration_offset` to `Field` ([#33446](https://github.com/googleapis/google-cloud-ruby/issues/33446)) 
+* publish client batch config schema ([#33434](https://github.com/googleapis/google-cloud-ruby/issues/33434)) 
+
 ### 1.11.0 (2026-03-19)
 
 #### Features
