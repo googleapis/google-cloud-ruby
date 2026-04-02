@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.6.0 (2026-04-02)
+
+#### Features
+
+* Add CustomHostConfig to configure custom hostnames for private instances ([#33445](https://github.com/googleapis/google-cloud-ruby/issues/33445)) 
+* publish client batch config schema ([#33438](https://github.com/googleapis/google-cloud-ruby/issues/33438)) 
+
 ### 2.5.0 (2026-03-19)
 
 #### Features
