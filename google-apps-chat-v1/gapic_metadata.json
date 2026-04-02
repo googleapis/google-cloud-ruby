@@ -184,6 +184,41 @@
               "methods": [
                 "update_space_notification_setting"
               ]
+            },
+            "CreateSection": {
+              "methods": [
+                "create_section"
+              ]
+            },
+            "DeleteSection": {
+              "methods": [
+                "delete_section"
+              ]
+            },
+            "UpdateSection": {
+              "methods": [
+                "update_section"
+              ]
+            },
+            "ListSections": {
+              "methods": [
+                "list_sections"
+              ]
+            },
+            "PositionSection": {
+              "methods": [
+                "position_section"
+              ]
+            },
+            "ListSectionItems": {
+              "methods": [
+                "list_section_items"
+              ]
+            },
+            "MoveSectionItem": {
+              "methods": [
+                "move_section_item"
+              ]
             }
           }
         }
