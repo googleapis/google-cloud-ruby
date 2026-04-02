@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.39.0 (2026-04-02)
+
+#### Features
+
+* Add container_spec to Reasoning Engine public protos ([#33456](https://github.com/googleapis/google-cloud-ruby/issues/33456)) 
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
 ### 1.38.0 (2026-03-19)
 
 #### Features
