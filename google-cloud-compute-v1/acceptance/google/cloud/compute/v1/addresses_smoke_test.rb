@@ -69,5 +69,6 @@ class AddressesSmokeTest < Minitest::Test
   def wait_for_regional_op operation, op_type
     $stdout.puts "Waiting for regional #{op_type} operation #{operation.name}."
     operation.wait_until_done!
+    $stdout.puts "Operation failed: #{operation.error.message}" if operation.error
   end
 end
