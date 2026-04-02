@@ -1,5 +1,11 @@
 # Release History
 
+### 0.29.0 (2026-04-02)
+
+#### Features
+
+* Support safety settings for Gemini voices and deprecate `relax_safety_filters` ([#33464](https://github.com/googleapis/google-cloud-ruby/issues/33464)) 
+
 ### 0.28.0 (2026-03-19)
 
 #### Features
