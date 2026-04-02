@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.3.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33443](https://github.com/googleapis/google-cloud-ruby/issues/33443)) 
+#### Documentation
+
+* update API common type documentation ([#33450](https://github.com/googleapis/google-cloud-ruby/issues/33450)) 
+
 ### 0.2.1 (2025-10-27)
 
 #### Documentation
