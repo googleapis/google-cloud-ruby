@@ -55,6 +55,8 @@ module Google
               "https://www.googleapis.com/auth/chat.spaces.readonly",
               "https://www.googleapis.com/auth/chat.users.readstate",
               "https://www.googleapis.com/auth/chat.users.readstate.readonly",
+              "https://www.googleapis.com/auth/chat.users.sections",
+              "https://www.googleapis.com/auth/chat.users.sections.readonly",
               "https://www.googleapis.com/auth/chat.users.spacesettings"
             ]
             self.env_vars = [
