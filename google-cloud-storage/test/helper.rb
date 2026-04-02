@@ -244,6 +244,24 @@ class MockStorage < Minitest::Spec
     OpenStruct.new(header: headers)
   end
 
+  def customer_managed_encryption
+     Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+     )   
+  end
+
+  def customer_supplied_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+     )
+  end
+
+  def google_managed_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+     )
+  end
+
   def encryption_gapi(key_name: nil, 
                     customer_managed_config_restriction_mode: nil, 
                     customer_supplied_config_restriction_mode: nil, 
@@ -258,7 +276,7 @@ class MockStorage < Minitest::Spec
       customer_managed_encryption_enforcement_config: cm_config,
       customer_supplied_encryption_enforcement_config: cs_config,
       google_managed_encryption_enforcement_config: gm_config
-    }.compact # This removes the nil values so the API doesn't get empty configs
+    }.compact
 
     Google::Apis::StorageV1::Bucket::Encryption.new(**params)
   end
