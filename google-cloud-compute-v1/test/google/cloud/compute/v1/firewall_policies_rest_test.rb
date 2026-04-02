@@ -644,6 +644,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     call_options = {}
 
     # Create request parameters for a unary method.
+    include_inherited_policies = true
     target_resource = "hello world"
 
     list_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -660,27 +661,27 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.list_associations({ target_resource: target_resource }) do |_result, response|
+        client.list_associations({ include_inherited_policies: include_inherited_policies, target_resource: target_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_associations target_resource: target_resource do |_result, response|
+        client.list_associations include_inherited_policies: include_inherited_policies, target_resource: target_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_associations ::Google::Cloud::Compute::V1::ListAssociationsFirewallPolicyRequest.new(target_resource: target_resource) do |_result, response|
+        client.list_associations ::Google::Cloud::Compute::V1::ListAssociationsFirewallPolicyRequest.new(include_inherited_policies: include_inherited_policies, target_resource: target_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_associations({ target_resource: target_resource }, call_options) do |_result, response|
+        client.list_associations({ include_inherited_policies: include_inherited_policies, target_resource: target_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_associations(::Google::Cloud::Compute::V1::ListAssociationsFirewallPolicyRequest.new(target_resource: target_resource), call_options) do |_result, response|
+        client.list_associations(::Google::Cloud::Compute::V1::ListAssociationsFirewallPolicyRequest.new(include_inherited_policies: include_inherited_policies, target_resource: target_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

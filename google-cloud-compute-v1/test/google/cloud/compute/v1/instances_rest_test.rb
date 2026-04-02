@@ -2749,6 +2749,7 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
+    discard_local_ssd = true
     instance = "hello world"
     instance_resource = {}
     minimal_action = "hello world"
@@ -2771,27 +2772,27 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.update({ instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        client.update({ discard_local_ssd: discard_local_ssd, instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone do |_result, response|
+        client.update discard_local_ssd: discard_local_ssd, instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update ::Google::Cloud::Compute::V1::UpdateInstanceRequest.new(instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone) do |_result, response|
+        client.update ::Google::Cloud::Compute::V1::UpdateInstanceRequest.new(discard_local_ssd: discard_local_ssd, instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update({ instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        client.update({ discard_local_ssd: discard_local_ssd, instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update(::Google::Cloud::Compute::V1::UpdateInstanceRequest.new(instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        client.update(::Google::Cloud::Compute::V1::UpdateInstanceRequest.new(discard_local_ssd: discard_local_ssd, instance: instance, instance_resource: instance_resource, minimal_action: minimal_action, most_disruptive_allowed_action: most_disruptive_allowed_action, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
