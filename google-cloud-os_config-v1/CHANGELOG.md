@@ -1,5 +1,14 @@
 # Release History
 
+### 1.8.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33437](https://github.com/googleapis/google-cloud-ruby/issues/33437)) 
+#### Documentation
+
+* update API common type documentation ([#33448](https://github.com/googleapis/google-cloud-ruby/issues/33448)) 
+
 ### 1.7.0 (2026-03-19)
 
 #### Features
