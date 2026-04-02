@@ -116,6 +116,9 @@ module Google
         #
         #     Users starting the pipeline must have the `iam.serviceAccounts.actAs`
         #     permission on this service account.
+        # @!attribute [r] evaluate_dataset_runs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::EvaluateDatasetRun>]
+        #     Output only. Evaluation runs for the Tuning Job.
         class TuningJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -324,6 +327,9 @@ module Google
         #     Optional. If set to true, disable intermediate checkpoints for SFT and only
         #     the last checkpoint will be exported. Otherwise, enable intermediate
         #     checkpoints for SFT. Default is false.
+        # @!attribute [rw] evaluation_config
+        #   @return [::Google::Cloud::AIPlatform::V1::EvaluationConfig]
+        #     Optional. Evaluation Config for Tuning Job.
         class SupervisedTuningSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -348,6 +354,50 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `pipeline_job`, `tuned_model`, `tuning_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TunedModelRef
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Evaluation Config for Tuning Job.
+        # @!attribute [rw] metrics
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Metric>]
+        #     Required. The metrics used for evaluation.
+        # @!attribute [rw] output_config
+        #   @return [::Google::Cloud::AIPlatform::V1::OutputConfig]
+        #     Required. Config for evaluation output.
+        # @!attribute [rw] autorater_config
+        #   @return [::Google::Cloud::AIPlatform::V1::AutoraterConfig]
+        #     Optional. Autorater config for evaluation.
+        # @!attribute [rw] inference_generation_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig]
+        #     Optional. Configuration options for inference generation and outputs.
+        #     If not set, default generation parameters are used.
+        class EvaluationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Evaluate Dataset Run Result for Tuning Job.
+        # @!attribute [r] operation_name
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::String]
+        #     Output only. Deprecated: The updated architecture uses evaluation_run
+        #     instead.
+        # @!attribute [r] evaluation_run
+        #   @return [::String]
+        #     Output only. The resource name of the evaluation run. Format:
+        #     `projects/{project}/locations/{location}/evaluationRuns/{evaluation_run_id}`.
+        # @!attribute [r] checkpoint_id
+        #   @return [::String]
+        #     Output only. The checkpoint id used in the evaluation run. Only populated
+        #     when evaluating checkpoints.
+        # @!attribute [r] evaluate_dataset_response
+        #   @return [::Google::Cloud::AIPlatform::V1::EvaluateDatasetResponse]
+        #     Output only. Results for EvaluationService.
+        # @!attribute [r] error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The error of the evaluation run if any.
+        class EvaluateDatasetRun
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
