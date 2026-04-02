@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.16.0 (2026-04-02)
+
+#### Features
+
+* Add Pausing/Yaml capabilities to public protos 
+* add sha256 field to Package proto ([#33454](https://github.com/googleapis/google-cloud-ruby/issues/33454)) 
+* publish client batch config schema ([#33432](https://github.com/googleapis/google-cloud-ruby/issues/33432)) 
+
 ### 0.15.0 (2026-03-19)
 
 #### Features
