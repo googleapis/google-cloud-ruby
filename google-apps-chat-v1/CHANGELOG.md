@@ -7,6 +7,13 @@
 * Addition of Section and SectionItem APIs 
 * Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
 
+### 0.22.0 (2026-04-03)
+
+#### Features
+
+* Addition of Section and SectionItem APIs 
+* Support app authentication with admin-consent scopes for Chat API ListMessages, GetMessage, GetSpaceEvent and ListSpaceEvents ([#33662](https://github.com/googleapis/google-cloud-ruby/issues/33662)) 
+
 ### 0.21.0 (2026-04-02)
 
 #### Features
