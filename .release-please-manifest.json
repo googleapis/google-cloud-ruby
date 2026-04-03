@@ -797,7 +797,7 @@
   "google-cloud-storage-control-v2+FILLER": "0.0.0",
   "google-cloud-storage_batch_operations": "0.3.0",
   "google-cloud-storage_batch_operations+FILLER": "0.0.0",
-  "google-cloud-storage_batch_operations-v1": "0.8.0",
+  "google-cloud-storage_batch_operations-v1": "0.8.1",
   "google-cloud-storage_batch_operations-v1+FILLER": "0.0.0",
   "google-cloud-storage_insights": "2.1.0",
   "google-cloud-storage_insights+FILLER": "0.0.0",
