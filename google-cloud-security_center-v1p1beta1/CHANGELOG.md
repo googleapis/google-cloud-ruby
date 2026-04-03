@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.21.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33481](https://github.com/googleapis/google-cloud-ruby/issues/33481)) 
+
 ### 0.21.0 (2026-04-02)
 
 #### Features
