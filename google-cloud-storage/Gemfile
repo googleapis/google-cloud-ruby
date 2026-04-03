@@ -21,7 +21,7 @@ end
 
 gem "google-cloud-pubsub", path: "../google-cloud-pubsub"
 gem "google-cloud-pubsub-v1", path: "../google-cloud-pubsub-v1"
-gem "minitest-reporters", "~> 1.5.0", require: false
+gem "minitest-reporters", ">= 1.5.0", "< 1.8.1", require: false
 gem "rake"
 # The following gems have been removed from ruby core and are required for testing.
 gem "ostruct"

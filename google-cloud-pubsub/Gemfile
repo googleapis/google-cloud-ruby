@@ -26,7 +26,7 @@ gem "google-style", "~> 1.31.1"
 gem "minitest", "~> 5.25"
 gem "minitest-autotest", "~> 1.1"
 gem "minitest-focus", "~> 1.4"
-gem "minitest-reporters", "~> 1.7.0", require: false
+gem "minitest-reporters", ">= 1.7.0", "< 1.9", require: false
 gem "minitest-rg", "~> 5.3"
 gem "ostruct", "~> 0.6"
 gem "pry", "~> 0.15.2"
