@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Spanner
       module V1
-        VERSION = "1.17.0"
+        VERSION = "1.17.1"
       end
     end
   end
