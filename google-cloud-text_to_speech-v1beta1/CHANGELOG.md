@@ -1,5 +1,11 @@
 # Release History
 
+### 0.30.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+
 ### 0.29.0 (2026-04-02)
 
 #### Features
