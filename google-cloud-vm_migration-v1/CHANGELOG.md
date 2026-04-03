@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.8.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33483](https://github.com/googleapis/google-cloud-ruby/issues/33483)) 
+
 ### 2.7.0 (2026-03-31)
 
 #### Features
