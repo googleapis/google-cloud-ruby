@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.40.0 (2026-04-03)
+
+#### Features
+
+* add evaluation metrics and autorater configuration to the AI Platform v1 API ([#33660](https://github.com/googleapis/google-cloud-ruby/issues/33660)) 
+
 ### 1.39.0 (2026-04-02)
 
 #### Features
