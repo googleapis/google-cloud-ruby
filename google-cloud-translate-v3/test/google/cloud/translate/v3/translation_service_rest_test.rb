@@ -1498,6 +1498,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     dataset = "hello world"
     content = ["hello world"]
+    mime_type = "hello world"
     reference_sentence_config = {}
     glossary_config = {}
 
@@ -1515,27 +1516,27 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }) do |_result, response|
+        client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.adaptive_mt_translate parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config do |_result, response|
+        client.adaptive_mt_translate parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config) do |_result, response|
+        client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }, call_options) do |_result, response|
+        client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config), call_options) do |_result, response|
+        client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
