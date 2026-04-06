@@ -797,8 +797,9 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.customer_supplied_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new
-        #     restriction_mode: "NotRestricted"
+        #   
+        #   new_config = Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new restriction_mode: "NotRestricted"
+        #   bucket.customer_supplied_encryption_enforcement_config = new_config
         #   The value for `restriction_mode` can be either "NotRestricted" or "FullyRestricted".
 
         def customer_supplied_encryption_enforcement_config
@@ -837,8 +838,8 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.google_managed_encryption_enforcement_config #=> Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new
-        #     restriction_mode: "NotRestricted"
+        #   new_config= Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: "NotRestricted"
+        #   bucket.google_managed_encryption_enforcement_config = new_config
         #   The value for `restriction_mode` can be either "NotRestricted" or "FullyRestricted".
 
         def google_managed_encryption_enforcement_config
@@ -853,7 +854,8 @@ module Google
         #   #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #   new_config = Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"        #   bucket.google_managed_encryption_enforcement_config = new_config
+        #   new_config = Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new restriction_mode: "FullyRestricted"
+        #   bucket.google_managed_encryption_enforcement_config = new_config
         #   The value for `restriction_mode` can be either "NotRestricted" or "FullyRestricted"
 
         def google_managed_encryption_enforcement_config= new_google_managed_encryption_enforcement_config
