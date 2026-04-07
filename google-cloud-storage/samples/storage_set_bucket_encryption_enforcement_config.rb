@@ -21,18 +21,9 @@ def set_bucket_encryption_enforcement_config bucket_name:
 
   storage = Google::Cloud::Storage.new
 
-  customer_managed_config =
-    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
-      restriction_mode: "NotRestricted"
-    )
-  customer_supplied_config =
-    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
-      restriction_mode: "FullyRestricted"
-    )
-  google_managed_config =
-    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
-      restriction_mode: "FullyRestricted"
-    )
+  customer_managed_config = { restriction_mode: "NotRestricted" }
+  customer_supplied_config = { restriction_mode: "FullyRestricted" }
+  google_managed_config = { restriction_mode: "FullyRestricted" }
 
   bucket = storage.create_bucket bucket_name do |b|
     b.customer_managed_encryption_enforcement_config = customer_managed_config

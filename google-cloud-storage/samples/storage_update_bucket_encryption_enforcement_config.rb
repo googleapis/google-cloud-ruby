@@ -22,12 +22,11 @@ def update_bucket_encryption_enforcement_config bucket_name:
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
-  
   # Update a specific type (e.g., change GMEK to NotRestricted)
-  google_managed_config =
-    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
-      restriction_mode: "NotRestricted"
-    )
+  google_managed_config =  {
+    google_managed_encryption_enforcement_config: { restriction_mode: "NotRestricted" }
+  }
+  
   bucket.update_bucket_encryption_enforcement_config google_managed_config
 
   puts "Updated google_managed_config to " \

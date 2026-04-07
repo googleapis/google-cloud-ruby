@@ -25,20 +25,17 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     ENV["GCLOUD_TEST_STORAGE_KMS_KEY_2"] ||
       "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2"
   }
+
   let(:customer_managed_config) do
-    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
-      restriction_mode: "NotRestricted"
-    )
+    { restriction_mode: "NotRestricted" }
   end
+
   let(:customer_supplied_config) do
-    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
-      restriction_mode: "FullyRestricted"
-    )
+    { restriction_mode: "FullyRestricted" }
   end
+
   let(:google_managed_config) do
-    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
-      restriction_mode: "FullyRestricted"
-    )
+    { restriction_mode: "FullyRestricted" }
   end
 
   let :bucket do
@@ -90,6 +87,10 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
   end
 
   describe "Encryption Enforcement Config" do
+    let(:google_managed_config_complete) do
+      {google_managed_encryption_enforcement_config: { restriction_mode: "FullyRestricted" } }
+    end
+
     it "knows its encryption enforcement config" do
       _(bucket.customer_managed_encryption_enforcement_config).wont_be :nil?
       _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
@@ -103,8 +104,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
 
       bucket.customer_supplied_encryption_enforcement_config = customer_supplied_config
       _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
-
-      bucket.update_bucket_encryption_enforcement_config google_managed_config
+      bucket.update_bucket_encryption_enforcement_config  google_managed_config_complete
       _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
 
       bucket.reload!
