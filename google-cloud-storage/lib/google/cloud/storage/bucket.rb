@@ -761,30 +761,50 @@ module Google
           patch_gapi! :encryption
         end
 
-       # Updates the bucket's encryption enforcement configuration.
-       #
-       # This method applies a patch to the bucket's encryption settings using the 
-       # provided configuration.
-       #
-       # @param incoming_config [Hash, Google::Apis::StorageV1::Bucket::Encryption] 
-       #   The encryption configuration to apply. If a Hash is provided, it should 
-       #   contain keys corresponding to the encryption enforcement types.
-       #
-       # @example Updating to Google-Managed Encryption
-       #   storage = Google::Cloud::Storage.new
-       #   bucket = storage.bucket "my-bucket"
-       #
-       #   new_config = {
-       #     google_managed_encryption_enforcement_config: { restriction_mode: "NotRestricted" }
-       #   }
-       #
-       #   bucket.update_bucket_encryption_enforcement_config new_config
-       #
-       # @return [void]
-       # @raise [Google::Cloud::Error] If the API request fails (e.g., insufficient permissions).
-       def update_bucket_encryption_enforcement_config incoming_config
-         patch_gapi! :encryption, bucket_encryption_config: incoming_config
-       end
+        # Updates the bucket's encryption enforcement configuration.
+        #
+        # This method applies a patch to the bucket's encryption settings using the 
+        # provided configuration.
+        #
+        # @param incoming_config [Hash, Google::Apis::StorageV1::Bucket::Encryption] 
+        #   The encryption configuration to apply. If a Hash is provided, it should 
+        #   contain keys corresponding to the encryption enforcement types.
+        #
+        # @example Updating to Google-Managed Encryption
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   new_config = {
+        #     google_managed_encryption_enforcement_config: { restriction_mode: "NotRestricted" }
+        #   }
+        #
+        #   bucket.update_bucket_encryption_enforcement_config new_config
+        #
+        # @return [void]
+        # @raise [Google::Cloud::Error] If the API request fails (e.g., insufficient permissions).
+        def update_bucket_encryption_enforcement_config incoming_config
+          allowed_keys = [
+            :google_managed_encryption_enforcement_config,
+            :customer_managed_encryption_enforcement_config,
+            :customer_supplied_encryption_enforcement_config
+          ]
+          # binding.pry
+          if incoming_config.is_a? Hash
+            input_keys = incoming_config.keys
+
+            raise ArgumentError, "Config cannot be empty" if input_keys.empty?
+
+            extra_keys = input_keys - allowed_keys
+            unless extra_keys.empty?
+              raise ArgumentError, "Invalid config detected: #{extra_keys.join(', ')}. " \
+                                  "Only #{allowed_keys.join(', ')} are allowed."
+            end
+          else
+            raise ArgumentError, "incoming_config must be a Hash"
+          end
+
+          patch_gapi! :encryption, bucket_encryption_config: incoming_config
+        end
 
         ##
         # The bucket's encryption configuration for customer-supplied encryption keys.

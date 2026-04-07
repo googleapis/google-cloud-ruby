@@ -177,6 +177,25 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
       mock.verify
     end
 
+    it "raises error when invalid config is provided for update " do
+      config = { 
+        wrongconfig: { restriction_mode: "NotRestricted" }
+      }
+      err = assert_raises(ArgumentError) do
+        bucket.update_bucket_encryption_enforcement_config(config)
+      end
+      assert_match /Invalid config detected: wrongconfig/, err.message
+
+    end
+
+    it "raises error when a Hash in not provided for update " do
+      config = "wrongconfig"
+      err = assert_raises(ArgumentError) do
+        bucket.update_bucket_encryption_enforcement_config(config)
+      end
+      assert /incoming_config must be a Hash/
+
+    end
 
     it "deletes all encryption enforcement configs together and preserves default_kms_key" do
       mock = Minitest::Mock.new
