@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2026-04-08)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
 ### 0.8.0 (2026-04-02)
 
 #### Features
