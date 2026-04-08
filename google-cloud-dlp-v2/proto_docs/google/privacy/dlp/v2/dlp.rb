@@ -488,7 +488,19 @@ module Google
         #     Content data to inspect or redact. Replaces `type` and `data`.
         #
         #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] content_metadata
+        #   @return [::Google::Cloud::Dlp::V2::ContentMetadata]
+        #     User provided metadata for the content.
         class ContentItem
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata on content to be scanned.
+        # @!attribute [rw] properties
+        #   @return [::Array<::Google::Cloud::Dlp::V2::KeyValueMetadataProperty>]
+        #     User provided key-value pairs of content metadata.
+        class ContentMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -514,6 +526,18 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # A key-value pair in the Metadata.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     The key of the property.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     The value of the property.
+        class KeyValueMetadataProperty
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # All the findings for a single scanned item.
@@ -8828,6 +8852,9 @@ module Google
 
           # Metadata extracted from the files.
           CONTENT_METADATA = 3
+
+          # Metadata provided by the client.
+          CLIENT_PROVIDED_METADATA = 4
         end
 
         # Parts of the APIs which use certain infoTypes.
