@@ -752,7 +752,19 @@ module Google
         #   new_config = { restriction_mode: "FullyRestricted" }
         #   bucket.customer_managed_encryption_enforcement_config = new_config
         #
-        # @return [Hash] The updated configuration hash.
+        # @example Setting via Request Object (Google API Client)
+        #   require "google/apis/storage_v1"
+        #
+        #   # Create the enforcement config sub-object
+        #   enforcement_config = { restriction_mode: "FullyRestricted" }
+        #   
+        #   # Initialize the parent Encryption request object
+        #   request_obj = Google::Apis::StorageV1::Bucket::Encryption.new(
+        #     customer_managed_encryption_enforcement_config: enforcement_config
+        #   )
+        #   bucket.customer_managed_encryption_enforcement_config = request_obj
+        #
+        # @return [Hash, Google::Apis::StorageV1::Bucket::Encryption] The updated configuration.
         # @raise [Google::Cloud::Error] If the update fails due to permissions or invalid arguments.
         def customer_managed_encryption_enforcement_config= new_customer_managed_encryption_enforcement_config
           @gapi.encryption ||= API::Bucket::Encryption.new
@@ -780,31 +792,42 @@ module Google
         #
         #   bucket.update_bucket_encryption_enforcement_config new_config
         #
-        # @return [void]
-        # @raise [Google::Cloud::Error] If the API request fails (e.g., insufficient permissions).
+        # @example Passing a Request Object
+        #   require "google/apis/storage_v1"
+        #   config_obj = Google::Apis::StorageV1::Bucket::Encryption.new(
+        #     google_managed_encryption_enforcement_config: { restriction_mode: "NotRestricted" }
+        #   )
+        #   bucket.update_bucket_encryption_enforcement_config config_obj
+        # @raise [ArgumentError] If the config is empty, contains invalid keys, or is the wrong type.
         def update_bucket_encryption_enforcement_config incoming_config
-          allowed_keys = [
-            :google_managed_encryption_enforcement_config,
-            :customer_managed_encryption_enforcement_config,
-            :customer_supplied_encryption_enforcement_config
-          ]
-          # binding.pry
-          if incoming_config.is_a? Hash
-            input_keys = incoming_config.keys
+  allowed_keys = [
+    :google_managed_encryption_enforcement_config,
+    :customer_managed_encryption_enforcement_config,
+    :customer_supplied_encryption_enforcement_config
+  ]
 
-            raise ArgumentError, "Config cannot be empty" if input_keys.empty?
+  if incoming_config.is_a? Hash
+    input_keys = incoming_config.keys
+    raise ArgumentError, "Config cannot be empty" if input_keys.empty?
 
-            extra_keys = input_keys - allowed_keys
-            unless extra_keys.empty?
-              raise ArgumentError, "Invalid config detected: #{extra_keys.join(', ')}. " \
-                                  "Only #{allowed_keys.join(', ')} are allowed."
-            end
-          else
-            raise ArgumentError, "incoming_config must be a Hash"
-          end
+    extra_keys = input_keys - allowed_keys
+    unless extra_keys.empty?
+      raise ArgumentError, "Invalid config detected: #{extra_keys.join(', ')}. " \
+                           "Only #{allowed_keys.join(', ')} are allowed."
+    end
 
-          patch_gapi! :encryption, bucket_encryption_config: incoming_config
-        end
+  elsif incoming_config.is_a? Google::Apis::StorageV1::Bucket::Encryption
+    # For objects, ensure at least one of the allowed enforcement configs is present
+    has_any_config = allowed_keys.any? { |key| !incoming_config.send(key).nil? }
+    binding.pry
+    raise ArgumentError, "Encryption request object must have at least one enforcement config set" unless has_any_config
+    
+  else
+    raise ArgumentError, "incoming_config must be a Hash or Google::Apis::StorageV1::Bucket::Encryption"
+  end
+
+  patch_gapi! :encryption, bucket_encryption_config: incoming_config
+end
 
         ##
         # The bucket's encryption configuration for customer-supplied encryption keys.
@@ -838,7 +861,20 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   new_config = { restriction_mode: "FullyRestricted" }
         #   bucket.customer_supplied_encryption_enforcement_config = new_config
-        # @return [Hash] The updated configuration hash.
+        #
+        # @example Setting via Request Object (Google API Client)
+        #   require "google/apis/storage_v1"
+        #
+        #   # Create the enforcement config sub-object
+        #   enforcement_config = { restriction_mode: "FullyRestricted" }
+        #   
+        #   # Initialize the parent Encryption request object
+        #   request_obj = Google::Apis::StorageV1::Bucket::Encryption.new(
+        #     customer_supplied_encryption_enforcement_config: enforcement_config
+        #   )
+        #   bucket.customer_supplied_encryption_enforcement_config = request_obj
+        #
+        # @return [Hash, Google::Apis::StorageV1::Bucket::Encryption] The updated configuration.
         # @raise [Google::Cloud::Error] If the update fails due to permissions or invalid arguments.
 
         def customer_supplied_encryption_enforcement_config= new_customer_supplied_encryption_enforcement_config
@@ -887,7 +923,19 @@ module Google
         #   new_config = { restriction_mode: "FullyRestricted" }
         #   bucket.new_google_managed_encryption_enforcement_config = new_config
         #
-        # @return [Hash] The updated configuration hash.
+        # @example Setting via Request Object (Google API Client)
+        #   require "google/apis/storage_v1"
+        #
+        #   # Create the enforcement config sub-object
+        #   enforcement_config = { restriction_mode: "FullyRestricted" }
+        #   
+        #   # Initialize the parent Encryption request object
+        #   request_obj = Google::Apis::StorageV1::Bucket::Encryption.new(
+        #     google_managed_encryption_enforcement_config: enforcement_config
+        #   )
+        #   bucket.google_managed_encryption_enforcement_config = request_obj
+        #
+        # @return [Hash, Google::Apis::StorageV1::Bucket::Encryption] The updated configuration.
         # @raise [Google::Cloud::Error] If the update fails due to permissions or invalid arguments.
 
         def google_managed_encryption_enforcement_config= new_google_managed_encryption_enforcement_config
