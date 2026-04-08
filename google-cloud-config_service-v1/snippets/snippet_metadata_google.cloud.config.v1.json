@@ -1170,6 +1170,366 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_GetDeploymentGroup_sync",
+      "title": "Snippet for the get_deployment_group call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_deployment_group.",
+      "file": "config/get_deployment_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment_group",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#get_deployment_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::DeploymentGroup",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetDeploymentGroup",
+          "full_name": "google.cloud.config.v1.Config.GetDeploymentGroup",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_CreateDeploymentGroup_sync",
+      "title": "Snippet for the create_deployment_group call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#create_deployment_group.",
+      "file": "config/create_deployment_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deployment_group",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#create_deployment_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "CreateDeploymentGroup",
+          "full_name": "google.cloud.config.v1.Config.CreateDeploymentGroup",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_UpdateDeploymentGroup_sync",
+      "title": "Snippet for the update_deployment_group call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#update_deployment_group.",
+      "file": "config/update_deployment_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_deployment_group",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#update_deployment_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeploymentGroup",
+          "full_name": "google.cloud.config.v1.Config.UpdateDeploymentGroup",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_DeleteDeploymentGroup_sync",
+      "title": "Snippet for the delete_deployment_group call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#delete_deployment_group.",
+      "file": "config/delete_deployment_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_deployment_group",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#delete_deployment_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeploymentGroup",
+          "full_name": "google.cloud.config.v1.Config.DeleteDeploymentGroup",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ListDeploymentGroups_sync",
+      "title": "Snippet for the list_deployment_groups call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_deployment_groups.",
+      "file": "config/list_deployment_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployment_groups",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#list_deployment_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::ListDeploymentGroupsResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListDeploymentGroups",
+          "full_name": "google.cloud.config.v1.Config.ListDeploymentGroups",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ProvisionDeploymentGroup_sync",
+      "title": "Snippet for the provision_deployment_group call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#provision_deployment_group.",
+      "file": "config/provision_deployment_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "provision_deployment_group",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#provision_deployment_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ProvisionDeploymentGroup",
+          "full_name": "google.cloud.config.v1.Config.ProvisionDeploymentGroup",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_DeprovisionDeploymentGroup_sync",
+      "title": "Snippet for the deprovision_deployment_group call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#deprovision_deployment_group.",
+      "file": "config/deprovision_deployment_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deprovision_deployment_group",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#deprovision_deployment_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "DeprovisionDeploymentGroup",
+          "full_name": "google.cloud.config.v1.Config.DeprovisionDeploymentGroup",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_GetDeploymentGroupRevision_sync",
+      "title": "Snippet for the get_deployment_group_revision call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#get_deployment_group_revision.",
+      "file": "config/get_deployment_group_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment_group_revision",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#get_deployment_group_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::DeploymentGroupRevision",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "GetDeploymentGroupRevision",
+          "full_name": "google.cloud.config.v1.Config.GetDeploymentGroupRevision",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "inframanager_v1_generated_Config_ListDeploymentGroupRevisions_sync",
+      "title": "Snippet for the list_deployment_group_revisions call in the Config service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfigService::V1::Config::Client#list_deployment_group_revisions.",
+      "file": "config/list_deployment_group_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployment_group_revisions",
+        "full_name": "::Google::Cloud::ConfigService::V1::Config::Client#list_deployment_group_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsResponse",
+        "client": {
+          "short_name": "Config::Client",
+          "full_name": "::Google::Cloud::ConfigService::V1::Config::Client"
+        },
+        "method": {
+          "short_name": "ListDeploymentGroupRevisions",
+          "full_name": "google.cloud.config.v1.Config.ListDeploymentGroupRevisions",
+          "service": {
+            "short_name": "Config",
+            "full_name": "google.cloud.config.v1.Config"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

@@ -255,6 +255,10 @@ module Google
         # @!attribute [rw] input_values
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ConfigService::V1::TerraformVariable}]
         #     Optional. Input variable values for the Terraform blueprint.
+        # @!attribute [rw] external_values
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ConfigService::V1::ExternalValueSource}]
+        #     Optional. Map of input variable names in this blueprint to configurations
+        #     for importing values from external sources.
         class TerraformBlueprint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,6 +271,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::ConfigService::V1::ExternalValueSource]
+          class ExternalValuesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A Terraform input variable.
@@ -274,6 +287,31 @@ module Google
         #   @return [::Google::Protobuf::Value]
         #     Optional. Input variable value.
         class TerraformVariable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a source of an external value.
+        # @!attribute [rw] deployment_source
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentSource]
+        #     A source from a Deployment.
+        class ExternalValueSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a value sourced from a Deployment.
+        # @!attribute [rw] deployment
+        #   @return [::String]
+        #     Required. The resource name of the source Deployment to import the output
+        #     from. Format:
+        #     projects/\\{project}/locations/\\{location}/deployments/\\{deployment} The source
+        #     deployment must be in the same project and location.
+        # @!attribute [rw] output_name
+        #   @return [::String]
+        #     Required. The name of the output variable in the source deployment's latest
+        #     successfully applied revision.
+        class DeploymentSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -490,6 +528,134 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request to create a deployment group
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent in whose context the Deployment Group is created. The
+        #     parent value is in the format: 'projects/\\{project_id}/locations/\\{location}'
+        # @!attribute [rw] deployment_group_id
+        #   @return [::String]
+        #     Required. The deployment group ID.
+        # @!attribute [rw] deployment_group
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentGroup]
+        #     Required. [Deployment Group][] resource to create
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateDeploymentGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for updating a deployment group
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask used to specify the fields to be overwritten in the
+        #     Deployment Group resource by the update.
+        #
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] deployment_group
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentGroup]
+        #     Required. {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup} to
+        #     update.
+        #
+        #     The deployment group's `name` field is used to identify the resource to be
+        #     updated. Format:
+        #     `projects/{project}/locations/{location}/deploymentGroups/{deployment_group_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateDeploymentGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for Delete DeploymentGroup
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of DeploymentGroup in the format
+        #     projects/\\{project_id}/locations/\\{location_id}/deploymentGroups/\\{deploymentGroup}
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request ID,
+        #     the server can check if original operation with the same request ID was
+        #     received, and if so, will ignore the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any revisions for this deployment group will also
+        #     be deleted. (Otherwise, the request will only work if the deployment group
+        #     has no revisions.)
+        # @!attribute [rw] deployment_reference_policy
+        #   @return [::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest::DeploymentReferencePolicy]
+        #     Optional. Policy on how to handle referenced deployments when deleting the
+        #     DeploymentGroup.
+        #     If unspecified, the default behavior is to fail the deletion if any
+        #     deployments currently referenced in the `deployment_units` of the
+        #     DeploymentGroup or in the latest revision are not deleted.
+        class DeleteDeploymentGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Policy on how to handle referenced deployments when deleting the
+          # DeploymentGroup.
+          module DeploymentReferencePolicy
+            # The default behavior. If unspecified, the system will act as if
+            # `FAIL_IF_ANY_REFERENCES_EXIST` is specified.
+            DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED = 0
+
+            # Fail the deletion if any deployments currently referenced in the
+            # `deployment_units` of the DeploymentGroup or in the latest revision
+            # are not deleted.
+            FAIL_IF_ANY_REFERENCES_EXIST = 1
+
+            # Fail the deletion only if any deployments currently referenced in the
+            # `deployment_units` of the DeploymentGroup are not deleted.
+            # The deletion will proceed even if the deployments in the latest revision
+            # of the DeploymentGroup are not deleted.
+            FAIL_IF_METADATA_REFERENCES_EXIST = 2
+
+            # Ignore any deployments currently referenced in the
+            # `deployment_units` of the DeploymentGroup or in the latest revision.
+            IGNORE_DEPLOYMENT_REFERENCES = 3
+          end
+        end
+
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Field mask used to specify the fields to be overwritten in the
@@ -576,12 +742,17 @@ module Google
         #   @return [::Google::Cloud::ConfigService::V1::DeploymentOperationMetadata]
         #     Output only. Metadata about the deployment operation state.
         #
-        #     Note: The following fields are mutually exclusive: `deployment_metadata`, `preview_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `deployment_metadata`, `preview_metadata`, `provision_deployment_group_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] preview_metadata
         #   @return [::Google::Cloud::ConfigService::V1::PreviewOperationMetadata]
         #     Output only. Metadata about the preview operation state.
         #
-        #     Note: The following fields are mutually exclusive: `preview_metadata`, `deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `preview_metadata`, `deployment_metadata`, `provision_deployment_group_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] provision_deployment_group_metadata
+        #   @return [::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupOperationMetadata]
+        #     Output only. Metadata about ProvisionDeploymentGroup operation state.
+        #
+        #     Note: The following fields are mutually exclusive: `provision_deployment_group_metadata`, `deployment_metadata`, `preview_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the operation was created.
@@ -2005,6 +2176,510 @@ module Google
         #   @return [::Google::Cloud::ConfigService::V1::AutoMigrationConfig]
         #     Required. The AutoMigrationConfig to update.
         class UpdateAutoMigrationConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A DeploymentGroup is a collection of DeploymentUnits that in a DAG-like
+        # structure.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the deployment group.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the deployment group was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the deployment group was last updated.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User-defined metadata for the deployment group.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Arbitrary key-value metadata storage e.g. to help client tools
+        #     identify deployment group during automation. See
+        #     https://google.aip.dev/148#annotations for details on format and size
+        #     limitations.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentGroup::State]
+        #     Output only. Current state of the deployment group.
+        # @!attribute [r] state_description
+        #   @return [::String]
+        #     Output only. Additional information regarding the current state.
+        # @!attribute [rw] deployment_units
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::DeploymentUnit>]
+        #     The deployment units of the deployment group in a DAG like structure.
+        #     When a deployment group is being provisioned, the deployment units are
+        #     deployed in a DAG order.
+        #     The provided units must be in a DAG order, otherwise an error will be
+        #     returned.
+        # @!attribute [r] provisioning_state
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentGroup::ProvisioningState]
+        #     Output only. The provisioning state of the deployment group.
+        # @!attribute [r] provisioning_state_description
+        #   @return [::String]
+        #     Output only. Additional information regarding the current provisioning
+        #     state.
+        # @!attribute [r] provisioning_error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The error status of the deployment group provisioning or
+        #     deprovisioning.
+        class DeploymentGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states of a deployment group.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # The deployment group is being created.
+            CREATING = 1
+
+            # The deployment group is healthy.
+            ACTIVE = 2
+
+            # The deployment group is being updated.
+            UPDATING = 3
+
+            # The deployment group is being deleted.
+            DELETING = 4
+
+            # The deployment group has encountered an unexpected error.
+            FAILED = 5
+
+            # The deployment group is no longer being actively reconciled.
+            # This may be the result of recovering the project after deletion.
+            SUSPENDED = 6
+
+            # The deployment group has been deleted.
+            DELETED = 7
+          end
+
+          # Possible provisioning states of a deployment group.
+          module ProvisioningState
+            # Unspecified provisioning state.
+            PROVISIONING_STATE_UNSPECIFIED = 0
+
+            # The deployment group is being provisioned.
+            PROVISIONING = 1
+
+            # The deployment group is provisioned.
+            PROVISIONED = 2
+
+            # The deployment group failed to be provisioned.
+            FAILED_TO_PROVISION = 3
+
+            # The deployment group is being deprovisioned.
+            DEPROVISIONING = 4
+
+            # The deployment group is deprovisioned.
+            DEPROVISIONED = 5
+
+            # The deployment group failed to be deprovisioned.
+            FAILED_TO_DEPROVISION = 6
+          end
+        end
+
+        # A DeploymentUnit is a container for a deployment and its dependencies.
+        # An existing deployment can be provided directly in the unit, or the unit
+        # can act as a placeholder to define the DAG, with the deployment specs
+        # supplied in a `provisionDeploymentRequest`.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     The id of the deployment unit. Must be unique within the deployment group.
+        # @!attribute [rw] deployment
+        #   @return [::String]
+        #     Optional. The name of the deployment to be provisioned.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deployments/\\{deployment}'.
+        # @!attribute [rw] dependencies
+        #   @return [::Array<::String>]
+        #     Required. The IDs of the deployment units within the deployment group that
+        #     this unit depends on.
+        class DeploymentUnit
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spec for a deployment to be created.
+        # @!attribute [rw] deployment_id
+        #   @return [::String]
+        #     Required. The id of the deployment to be created which doesn't include the
+        #     project id and location.
+        # @!attribute [rw] deployment
+        #   @return [::Google::Cloud::ConfigService::V1::Deployment]
+        #     Required. The deployment to be created.
+        class DeploymentSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetDeploymentGroup method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the deployment group to retrieve.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+        class GetDeploymentGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListDeploymentGroups method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of deployment groups.
+        #     Format: 'projects/\\{project_id}/locations/\\{location}'.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a page of resources, 'page_size' specifies number
+        #     of resources to return. If unspecified, at most 500 will be returned. The
+        #     maximum value is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to 'ListDeploymentGroups' which
+        #     specifies the position in the list from where to continue listing the
+        #     deployment groups.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the DeploymentGroups that match the filter expression. A
+        #     filter expression filters the deployment groups listed in the response. The
+        #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+        #     operators: '<', '>',
+        #     '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+        #     operator which is roughly synonymous with equality). \\{field} can refer to a
+        #     proto or JSON field, or a synthetic field. Field names can be camelCase or
+        #     snake_case.
+        #
+        #     Examples:
+        #     - Filter by name:
+        #       name = "projects/foo/locations/us-central1/deploymentGroups/bar"
+        #
+        #     - Filter by labels:
+        #       - Resources that have a key called 'foo'
+        #         labels.foo:*
+        #       - Resources that have a key called 'foo' whose value is 'bar'
+        #         labels.foo = bar
+        #
+        #     - Filter by state:
+        #       - DeploymentGroups in CREATING state.
+        #         state=CREATING
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to use to sort the list.
+        class ListDeploymentGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the ListDeploymentGroups method.
+        # @!attribute [rw] deployment_groups
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::DeploymentGroup>]
+        #     The deployment groups from the specified collection.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to be supplied to the next ListDeploymentGroups request via
+        #     `page_token` to obtain the next set of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListDeploymentGroupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ProvisionDeploymentGroup method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the deployment group to provision.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+        # @!attribute [rw] deployment_specs
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ConfigService::V1::DeploymentSpec}]
+        #     Optional. The deployment specs of the deployment units to be created within
+        #     the same project and location of the deployment group. The key is the unit
+        #     ID, and the value is the `DeploymentSpec`. Provisioning will fail if a
+        #     `deployment_spec` has a `deployment_id` that matches an existing deployment
+        #     in the same project and location. If an existing deployment was part of the
+        #     last successful revision but is no longer in the current DeploymentGroup's
+        #     `deployment_units`, it will be recreated if included in `deployment_specs`.
+        class ProvisionDeploymentGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::ConfigService::V1::DeploymentSpec]
+          class DeploymentSpecsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The request message for the DeprovisionDeploymentGroup method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the deployment group to deprovision.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, this option is propagated to the deletion of each
+        #     deployment in the group. This corresponds to the 'force' field
+        #     in DeleteDeploymentRequest.
+        # @!attribute [rw] delete_policy
+        #   @return [::Google::Cloud::ConfigService::V1::DeleteDeploymentRequest::DeletePolicy]
+        #     Optional. Policy on how resources within each deployment should be handled
+        #     during deletion. This policy is applied globally to the deletion of all
+        #     deployments in this group. This corresponds to the 'delete_policy' field
+        #     in DeleteDeploymentRequest.
+        class DeprovisionDeploymentGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The summary of the deployment operation.
+        # @!attribute [r] deployment_step
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentOperationMetadata::DeploymentStep]
+        #     Output only. The current step the deployment operation is running.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. Cloud Build instance UUID associated with this operation.
+        # @!attribute [r] logs
+        #   @return [::String]
+        #     Output only. Location of Deployment operations logs in
+        #     `gs://{bucket}/{object}` format.
+        # @!attribute [r] content
+        #   @return [::String]
+        #     Output only. Location of Deployment operations content in
+        #     `gs://{bucket}/{object}` format.
+        # @!attribute [r] artifacts
+        #   @return [::String]
+        #     Output only. Location of Deployment operations artifacts in
+        #     `gs://{bucket}/{object}` format.
+        class DeploymentOperationSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The progress of a deployment unit provisioning or deprovisioning.
+        # @!attribute [r] unit_id
+        #   @return [::String]
+        #     Output only. The unit id of the deployment unit to be provisioned.
+        # @!attribute [r] deployment
+        #   @return [::String]
+        #     Output only. The name of the deployment to be provisioned.
+        #     Format:
+        #     'projects/\\{project}/locations/\\{location}/deployments/\\{deployment}'.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentUnitProgress::State]
+        #     Output only. The current step of the deployment unit provisioning.
+        # @!attribute [r] state_description
+        #   @return [::String]
+        #     Output only. Additional information regarding the current state.
+        # @!attribute [r] deployment_operation_summary
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentOperationSummary]
+        #     Output only. The summary of the deployment operation.
+        # @!attribute [r] error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. Holds the error status of the deployment unit provisioning.
+        # @!attribute [r] intent
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentUnitProgress::Intent]
+        #     Output only. The intent of the deployment unit.
+        class DeploymentUnitProgress
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The possible steps a deployment unit provisioning may be running.
+          module State
+            # The default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The deployment unit is queued for deployment creation or update.
+            QUEUED = 1
+
+            # The underlying deployment of the unit is being created or updated.
+            APPLYING_DEPLOYMENT = 2
+
+            # The underlying deployment operation of the unit has succeeded.
+            SUCCEEDED = 4
+
+            # The underlying deployment operation of the unit has failed.
+            FAILED = 5
+
+            # The deployment unit was aborted, likely due to failures in other
+            # dependent deployment units.
+            ABORTED = 6
+
+            # The deployment unit was skipped because there were no changes to apply.
+            SKIPPED = 7
+
+            # The deployment is being deleted.
+            DELETING_DEPLOYMENT = 8
+
+            # The deployment is being previewed.
+            PREVIEWING_DEPLOYMENT = 9
+          end
+
+          # The possible intents of a deployment unit.
+          module Intent
+            # Unspecified intent.
+            INTENT_UNSPECIFIED = 0
+
+            # Create deployment in the unit from the deployment spec.
+            CREATE_DEPLOYMENT = 1
+
+            # Update deployment in the unit.
+            UPDATE_DEPLOYMENT = 2
+
+            # Delete deployment in the unit.
+            DELETE_DEPLOYMENT = 3
+
+            # Recreate deployment in the unit.
+            RECREATE_DEPLOYMENT = 4
+
+            # Delete deployment in latest successful revision while no longer
+            # referenced in any deployment unit in the current deployment group.
+            CLEAN_UP = 5
+
+            # Expected to be unchanged.
+            UNCHANGED = 6
+          end
+        end
+
+        # Operation metadata for `ProvisionDeploymentGroup` and
+        # `DeprovisionDeploymentGroup` long-running operations.
+        # @!attribute [r] step
+        #   @return [::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupOperationMetadata::ProvisionDeploymentGroupStep]
+        #     Output only. The current step of the deployment group operation.
+        # @!attribute [r] deployment_unit_progresses
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::DeploymentUnitProgress>]
+        #     Output only. Progress information for each deployment unit within the
+        #     operation.
+        class ProvisionDeploymentGroupOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible steps during a deployment group provisioning or deprovisioning
+          # operation.
+          module ProvisionDeploymentGroupStep
+            # Unspecified step.
+            PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED = 0
+
+            # Validating the deployment group.
+            VALIDATING_DEPLOYMENT_GROUP = 1
+
+            # Locking the deployments to the deployment group for atomic actuation.
+            ASSOCIATING_DEPLOYMENTS_TO_DEPLOYMENT_GROUP = 2
+
+            # Provisioning the deployment units.
+            PROVISIONING_DEPLOYMENT_UNITS = 3
+
+            # Unlocking the deployments from the deployment group after actuation.
+            DISASSOCIATING_DEPLOYMENTS_FROM_DEPLOYMENT_GROUP = 4
+
+            # The operation has succeeded.
+            SUCCEEDED = 5
+
+            # The operation has failed.
+            FAILED = 6
+
+            # Deprovisioning the deployment units.
+            DEPROVISIONING_DEPLOYMENT_UNITS = 7
+          end
+        end
+
+        # A DeploymentGroupRevision represents a snapshot of a
+        # {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup} at a given point in
+        # time, created when a DeploymentGroup is provisioned or deprovisioned.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the deployment group revision.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}/revisions/\\{revision}'.
+        # @!attribute [r] snapshot
+        #   @return [::Google::Cloud::ConfigService::V1::DeploymentGroup]
+        #     Output only. The snapshot of the deployment group at this revision.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the deployment group revision was created.
+        # @!attribute [r] alternative_ids
+        #   @return [::Array<::String>]
+        #     Output only. The alternative IDs of the deployment group revision.
+        class DeploymentGroupRevision
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetDeploymentGroupRevision method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the deployment group revision to retrieve.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}/revisions/\\{revision}'.
+        class GetDeploymentGroupRevisionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListDeploymentGroupRevisions method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of deployment group
+        #     revisions. Format:
+        #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a page of resources, 'page_size' specifies number
+        #     of resources to return. If unspecified, a sensible default will be used by
+        #     the server. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to 'ListDeploymentGroupRevisions'
+        #     which specifies the position in the list from where to continue listing the
+        #     deployment group revisions. All other parameters provided to
+        #     `ListDeploymentGroupRevisions` must match the call that provided the page
+        #     token.
+        class ListDeploymentGroupRevisionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the ListDeploymentGroupRevisions method.
+        # @!attribute [rw] deployment_group_revisions
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::DeploymentGroupRevision>]
+        #     The deployment group revisions from the specified collection.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to be supplied to the next ListDeploymentGroupRevisions request via
+        #     `page_token` to obtain the next set of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that could not be reached.
+        class ListDeploymentGroupRevisionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

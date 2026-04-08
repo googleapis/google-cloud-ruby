@@ -3162,6 +3162,993 @@ module Google
             end
 
             ##
+            # Get a DeploymentGroup for a given project and location.
+            #
+            # @overload get_deployment_group(request, options = nil)
+            #   Pass arguments to `get_deployment_group` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_deployment_group(name: nil)
+            #   Pass arguments to `get_deployment_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the deployment group to retrieve.
+            #     Format:
+            #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ConfigService::V1::DeploymentGroup]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ConfigService::V1::DeploymentGroup]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest.new
+            #
+            #   # Call the get_deployment_group method.
+            #   result = client.get_deployment_group request
+            #
+            #   # The returned object is of type Google::Cloud::ConfigService::V1::DeploymentGroup.
+            #   p result
+            #
+            def get_deployment_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_deployment_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_deployment_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_deployment_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :get_deployment_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup}
+            # The newly created DeploymentGroup will be in the `CREATING` state
+            # and can be retrieved via Get and List calls.
+            #
+            # @overload create_deployment_group(request, options = nil)
+            #   Pass arguments to `create_deployment_group` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_deployment_group(parent: nil, deployment_group_id: nil, deployment_group: nil, request_id: nil)
+            #   Pass arguments to `create_deployment_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent in whose context the Deployment Group is created. The
+            #     parent value is in the format: 'projects/\\{project_id}/locations/\\{location}'
+            #   @param deployment_group_id [::String]
+            #     Required. The deployment group ID.
+            #   @param deployment_group [::Google::Cloud::ConfigService::V1::DeploymentGroup, ::Hash]
+            #     Required. [Deployment Group][] resource to create
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request ID,
+            #     the server can check if original operation with the same request ID was
+            #     received, and if so, will ignore the second request. This prevents clients
+            #     from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest.new
+            #
+            #   # Call the create_deployment_group method.
+            #   result = client.create_deployment_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_deployment_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_deployment_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_deployment_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_deployment_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :create_deployment_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup}
+            #
+            # @overload update_deployment_group(request, options = nil)
+            #   Pass arguments to `update_deployment_group` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_deployment_group(update_mask: nil, deployment_group: nil, request_id: nil)
+            #   Pass arguments to `update_deployment_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask used to specify the fields to be overwritten in the
+            #     Deployment Group resource by the update.
+            #
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param deployment_group [::Google::Cloud::ConfigService::V1::DeploymentGroup, ::Hash]
+            #     Required. {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup} to
+            #     update.
+            #
+            #     The deployment group's `name` field is used to identify the resource to be
+            #     updated. Format:
+            #     `projects/{project}/locations/{location}/deploymentGroups/{deployment_group_id}`
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request ID,
+            #     the server can check if original operation with the same request ID was
+            #     received, and if so, will ignore the second request. This prevents clients
+            #     from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest.new
+            #
+            #   # Call the update_deployment_group method.
+            #   result = client.update_deployment_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_deployment_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_deployment_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.deployment_group&.name
+                header_params["deployment_group.name"] = request.deployment_group.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_deployment_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_deployment_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :update_deployment_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup}
+            #
+            # @overload delete_deployment_group(request, options = nil)
+            #   Pass arguments to `delete_deployment_group` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_deployment_group(name: nil, request_id: nil, force: nil, deployment_reference_policy: nil)
+            #   Pass arguments to `delete_deployment_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of DeploymentGroup in the format
+            #     projects/\\{project_id}/locations/\\{location_id}/deploymentGroups/\\{deploymentGroup}
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request ID,
+            #     the server can check if original operation with the same request ID was
+            #     received, and if so, will ignore the second request. This prevents clients
+            #     from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param force [::Boolean]
+            #     Optional. If set to true, any revisions for this deployment group will also
+            #     be deleted. (Otherwise, the request will only work if the deployment group
+            #     has no revisions.)
+            #   @param deployment_reference_policy [::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest::DeploymentReferencePolicy]
+            #     Optional. Policy on how to handle referenced deployments when deleting the
+            #     DeploymentGroup.
+            #     If unspecified, the default behavior is to fail the deletion if any
+            #     deployments currently referenced in the `deployment_units` of the
+            #     DeploymentGroup or in the latest revision are not deleted.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest.new
+            #
+            #   # Call the delete_deployment_group method.
+            #   result = client.delete_deployment_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_deployment_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_deployment_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_deployment_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_deployment_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :delete_deployment_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List DeploymentGroups for a given project and location.
+            #
+            # @overload list_deployment_groups(request, options = nil)
+            #   Pass arguments to `list_deployment_groups` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_deployment_groups(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_deployment_groups` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of deployment groups.
+            #     Format: 'projects/\\{project_id}/locations/\\{location}'.
+            #   @param page_size [::Integer]
+            #     Optional. When requesting a page of resources, 'page_size' specifies number
+            #     of resources to return. If unspecified, at most 500 will be returned. The
+            #     maximum value is 1000.
+            #   @param page_token [::String]
+            #     Optional. Token returned by previous call to 'ListDeploymentGroups' which
+            #     specifies the position in the list from where to continue listing the
+            #     deployment groups.
+            #   @param filter [::String]
+            #     Optional. Lists the DeploymentGroups that match the filter expression. A
+            #     filter expression filters the deployment groups listed in the response. The
+            #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+            #     operators: '<', '>',
+            #     '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+            #     operator which is roughly synonymous with equality). \\{field} can refer to a
+            #     proto or JSON field, or a synthetic field. Field names can be camelCase or
+            #     snake_case.
+            #
+            #     Examples:
+            #     - Filter by name:
+            #       name = "projects/foo/locations/us-central1/deploymentGroups/bar"
+            #
+            #     - Filter by labels:
+            #       - Resources that have a key called 'foo'
+            #         labels.foo:*
+            #       - Resources that have a key called 'foo' whose value is 'bar'
+            #         labels.foo = bar
+            #
+            #     - Filter by state:
+            #       - DeploymentGroups in CREATING state.
+            #         state=CREATING
+            #   @param order_by [::String]
+            #     Optional. Field to use to sort the list.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ConfigService::V1::DeploymentGroup>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ConfigService::V1::DeploymentGroup>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest.new
+            #
+            #   # Call the list_deployment_groups method.
+            #   result = client.list_deployment_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::ConfigService::V1::DeploymentGroup.
+            #     p item
+            #   end
+            #
+            def list_deployment_groups request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_deployment_groups.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_deployment_groups.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_deployment_groups.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :list_deployment_groups, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @config_stub, :list_deployment_groups, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Provisions a deployment group.
+            #
+            # NOTE: As a first step of this operation, Infra Manager will
+            # automatically delete any Deployments that were part of the
+            # *last successful*
+            # {::Google::Cloud::ConfigService::V1::DeploymentGroupRevision DeploymentGroupRevision}
+            # but are *no longer* included in the *current*
+            # {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup} definition (e.g.,
+            # following an `UpdateDeploymentGroup` call), along with their actuated
+            # resources.
+            #
+            # @overload provision_deployment_group(request, options = nil)
+            #   Pass arguments to `provision_deployment_group` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload provision_deployment_group(name: nil, deployment_specs: nil)
+            #   Pass arguments to `provision_deployment_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the deployment group to provision.
+            #     Format:
+            #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+            #   @param deployment_specs [::Hash{::String => ::Google::Cloud::ConfigService::V1::DeploymentSpec, ::Hash}]
+            #     Optional. The deployment specs of the deployment units to be created within
+            #     the same project and location of the deployment group. The key is the unit
+            #     ID, and the value is the `DeploymentSpec`. Provisioning will fail if a
+            #     `deployment_spec` has a `deployment_id` that matches an existing deployment
+            #     in the same project and location. If an existing deployment was part of the
+            #     last successful revision but is no longer in the current DeploymentGroup's
+            #     `deployment_units`, it will be recreated if included in `deployment_specs`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest.new
+            #
+            #   # Call the provision_deployment_group method.
+            #   result = client.provision_deployment_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def provision_deployment_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.provision_deployment_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.provision_deployment_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.provision_deployment_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :provision_deployment_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deprovisions a deployment group.
+            #
+            # NOTE: As a first step of this operation, Infra Manager will
+            # automatically delete any Deployments that were part of the
+            # *last successful*
+            # {::Google::Cloud::ConfigService::V1::DeploymentGroupRevision DeploymentGroupRevision}
+            # but are *no longer* included in the *current*
+            # {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup} definition (e.g.,
+            # following an `UpdateDeploymentGroup` call), along with their actuated
+            # resources.
+            #
+            # @overload deprovision_deployment_group(request, options = nil)
+            #   Pass arguments to `deprovision_deployment_group` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload deprovision_deployment_group(name: nil, force: nil, delete_policy: nil)
+            #   Pass arguments to `deprovision_deployment_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the deployment group to deprovision.
+            #     Format:
+            #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+            #   @param force [::Boolean]
+            #     Optional. If set to true, this option is propagated to the deletion of each
+            #     deployment in the group. This corresponds to the 'force' field
+            #     in DeleteDeploymentRequest.
+            #   @param delete_policy [::Google::Cloud::ConfigService::V1::DeleteDeploymentRequest::DeletePolicy]
+            #     Optional. Policy on how resources within each deployment should be handled
+            #     during deletion. This policy is applied globally to the deletion of all
+            #     deployments in this group. This corresponds to the 'delete_policy' field
+            #     in DeleteDeploymentRequest.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest.new
+            #
+            #   # Call the deprovision_deployment_group method.
+            #   result = client.deprovision_deployment_group request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def deprovision_deployment_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.deprovision_deployment_group.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.deprovision_deployment_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.deprovision_deployment_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :deprovision_deployment_group, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details about a
+            # {::Google::Cloud::ConfigService::V1::DeploymentGroupRevision DeploymentGroupRevision}.
+            #
+            # @overload get_deployment_group_revision(request, options = nil)
+            #   Pass arguments to `get_deployment_group_revision` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_deployment_group_revision(name: nil)
+            #   Pass arguments to `get_deployment_group_revision` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the deployment group revision to retrieve.
+            #     Format:
+            #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}/revisions/\\{revision}'.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ConfigService::V1::DeploymentGroupRevision]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ConfigService::V1::DeploymentGroupRevision]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest.new
+            #
+            #   # Call the get_deployment_group_revision method.
+            #   result = client.get_deployment_group_revision request
+            #
+            #   # The returned object is of type Google::Cloud::ConfigService::V1::DeploymentGroupRevision.
+            #   p result
+            #
+            def get_deployment_group_revision request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_deployment_group_revision.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_deployment_group_revision.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_deployment_group_revision.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :get_deployment_group_revision, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists
+            # {::Google::Cloud::ConfigService::V1::DeploymentGroupRevision DeploymentGroupRevision}s
+            # in a given {::Google::Cloud::ConfigService::V1::DeploymentGroup DeploymentGroup}.
+            #
+            # @overload list_deployment_group_revisions(request, options = nil)
+            #   Pass arguments to `list_deployment_group_revisions` via a request object, either of type
+            #   {::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_deployment_group_revisions(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_deployment_group_revisions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of deployment group
+            #     revisions. Format:
+            #     'projects/\\{project_id}/locations/\\{location}/deploymentGroups/\\{deployment_group}'.
+            #   @param page_size [::Integer]
+            #     Optional. When requesting a page of resources, 'page_size' specifies number
+            #     of resources to return. If unspecified, a sensible default will be used by
+            #     the server. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
+            #   @param page_token [::String]
+            #     Optional. Token returned by previous call to 'ListDeploymentGroupRevisions'
+            #     which specifies the position in the list from where to continue listing the
+            #     deployment group revisions. All other parameters provided to
+            #     `ListDeploymentGroupRevisions` must match the call that provided the page
+            #     token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ConfigService::V1::DeploymentGroupRevision>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ConfigService::V1::DeploymentGroupRevision>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/config_service/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ConfigService::V1::Config::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest.new
+            #
+            #   # Call the list_deployment_group_revisions method.
+            #   result = client.list_deployment_group_revisions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::ConfigService::V1::DeploymentGroupRevision.
+            #     p item
+            #   end
+            #
+            def list_deployment_group_revisions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_deployment_group_revisions.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ConfigService::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_deployment_group_revisions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_deployment_group_revisions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_stub.call_rpc :list_deployment_group_revisions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @config_stub, :list_deployment_group_revisions, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Config API.
             #
             # This class represents the configuration for Config,
@@ -3489,6 +4476,51 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_auto_migration_config
+                ##
+                # RPC-specific configuration for `get_deployment_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_deployment_group
+                ##
+                # RPC-specific configuration for `create_deployment_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_deployment_group
+                ##
+                # RPC-specific configuration for `update_deployment_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_deployment_group
+                ##
+                # RPC-specific configuration for `delete_deployment_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_deployment_group
+                ##
+                # RPC-specific configuration for `list_deployment_groups`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_deployment_groups
+                ##
+                # RPC-specific configuration for `provision_deployment_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :provision_deployment_group
+                ##
+                # RPC-specific configuration for `deprovision_deployment_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :deprovision_deployment_group
+                ##
+                # RPC-specific configuration for `get_deployment_group_revision`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_deployment_group_revision
+                ##
+                # RPC-specific configuration for `list_deployment_group_revisions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_deployment_group_revisions
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3550,6 +4582,24 @@ module Google
                   @get_auto_migration_config = ::Gapic::Config::Method.new get_auto_migration_config_config
                   update_auto_migration_config_config = parent_rpcs.update_auto_migration_config if parent_rpcs.respond_to? :update_auto_migration_config
                   @update_auto_migration_config = ::Gapic::Config::Method.new update_auto_migration_config_config
+                  get_deployment_group_config = parent_rpcs.get_deployment_group if parent_rpcs.respond_to? :get_deployment_group
+                  @get_deployment_group = ::Gapic::Config::Method.new get_deployment_group_config
+                  create_deployment_group_config = parent_rpcs.create_deployment_group if parent_rpcs.respond_to? :create_deployment_group
+                  @create_deployment_group = ::Gapic::Config::Method.new create_deployment_group_config
+                  update_deployment_group_config = parent_rpcs.update_deployment_group if parent_rpcs.respond_to? :update_deployment_group
+                  @update_deployment_group = ::Gapic::Config::Method.new update_deployment_group_config
+                  delete_deployment_group_config = parent_rpcs.delete_deployment_group if parent_rpcs.respond_to? :delete_deployment_group
+                  @delete_deployment_group = ::Gapic::Config::Method.new delete_deployment_group_config
+                  list_deployment_groups_config = parent_rpcs.list_deployment_groups if parent_rpcs.respond_to? :list_deployment_groups
+                  @list_deployment_groups = ::Gapic::Config::Method.new list_deployment_groups_config
+                  provision_deployment_group_config = parent_rpcs.provision_deployment_group if parent_rpcs.respond_to? :provision_deployment_group
+                  @provision_deployment_group = ::Gapic::Config::Method.new provision_deployment_group_config
+                  deprovision_deployment_group_config = parent_rpcs.deprovision_deployment_group if parent_rpcs.respond_to? :deprovision_deployment_group
+                  @deprovision_deployment_group = ::Gapic::Config::Method.new deprovision_deployment_group_config
+                  get_deployment_group_revision_config = parent_rpcs.get_deployment_group_revision if parent_rpcs.respond_to? :get_deployment_group_revision
+                  @get_deployment_group_revision = ::Gapic::Config::Method.new get_deployment_group_revision_config
+                  list_deployment_group_revisions_config = parent_rpcs.list_deployment_group_revisions if parent_rpcs.respond_to? :list_deployment_group_revisions
+                  @list_deployment_group_revisions = ::Gapic::Config::Method.new list_deployment_group_revisions_config
 
                   yield self if block_given?
                 end
