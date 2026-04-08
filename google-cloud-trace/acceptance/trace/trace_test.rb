@@ -23,9 +23,10 @@ describe Google::Cloud::Trace, :trace do
       trace = wait_until do
         tracer.get_trace orig_trace.trace_id
       end
-      trace.must_equal orig_trace
+      _(trace).must_equal orig_trace
     end
 
+    focus
     it "writes traces and lists them" do
       start_time = Time.now.utc - 2
       trace1 = simple_trace
@@ -43,8 +44,8 @@ describe Google::Cloud::Trace, :trace do
                                  page_size: 4
         res.size == 3 ? res : nil
       end
-      all_results.to_a.must_equal [trace1, trace2, trace3]
-      all_results.results_pending?.must_equal false
+      _(all_results.to_a).must_equal [trace1, trace2, trace3]
+      _(all_results.results_pending?).must_equal false
       page1 = wait_until do
         res = tracer.list_traces start_time, end_time,
                                  view: :COMPLETE,
@@ -53,11 +54,11 @@ describe Google::Cloud::Trace, :trace do
                                  page_size: 2
         res.to_a == [trace1, trace2] ? res : nil
       end
-      page1.to_a.must_equal [trace1, trace2]
-      page1.results_pending?.must_equal true
+      _(page1.to_a).must_equal [trace1, trace2]
+      _(page1.results_pending?).must_equal true
       page2 = page1.next_page
-      page2.to_a.must_equal [trace3]
-      page2.results_pending?.must_equal false
+      _(page2.to_a).must_equal [trace3]
+      _(page2.results_pending?).must_equal false
     end
   end
 end
