@@ -170,6 +170,726 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_MarketingDataInsightsService_RetrieveInsights_sync",
+      "title": "Snippet for the retrieve_insights call in the MarketingDataInsightsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::MarketingDataInsightsService::Client#retrieve_insights.",
+      "file": "marketing_data_insights_service/retrieve_insights.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_insights",
+        "full_name": "::Google::Ads::DataManager::V1::MarketingDataInsightsService::Client#retrieve_insights",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::RetrieveInsightsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::RetrieveInsightsResponse",
+        "client": {
+          "short_name": "MarketingDataInsightsService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::MarketingDataInsightsService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveInsights",
+          "full_name": "google.ads.datamanager.v1.MarketingDataInsightsService.RetrieveInsights",
+          "service": {
+            "short_name": "MarketingDataInsightsService",
+            "full_name": "google.ads.datamanager.v1.MarketingDataInsightsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_PartnerLinkService_CreatePartnerLink_sync",
+      "title": "Snippet for the create_partner_link call in the PartnerLinkService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::PartnerLinkService::Client#create_partner_link.",
+      "file": "partner_link_service/create_partner_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_partner_link",
+        "full_name": "::Google::Ads::DataManager::V1::PartnerLinkService::Client#create_partner_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::CreatePartnerLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::PartnerLink",
+        "client": {
+          "short_name": "PartnerLinkService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::PartnerLinkService::Client"
+        },
+        "method": {
+          "short_name": "CreatePartnerLink",
+          "full_name": "google.ads.datamanager.v1.PartnerLinkService.CreatePartnerLink",
+          "service": {
+            "short_name": "PartnerLinkService",
+            "full_name": "google.ads.datamanager.v1.PartnerLinkService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_PartnerLinkService_DeletePartnerLink_sync",
+      "title": "Snippet for the delete_partner_link call in the PartnerLinkService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::PartnerLinkService::Client#delete_partner_link.",
+      "file": "partner_link_service/delete_partner_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_partner_link",
+        "full_name": "::Google::Ads::DataManager::V1::PartnerLinkService::Client#delete_partner_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::DeletePartnerLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "PartnerLinkService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::PartnerLinkService::Client"
+        },
+        "method": {
+          "short_name": "DeletePartnerLink",
+          "full_name": "google.ads.datamanager.v1.PartnerLinkService.DeletePartnerLink",
+          "service": {
+            "short_name": "PartnerLinkService",
+            "full_name": "google.ads.datamanager.v1.PartnerLinkService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_PartnerLinkService_SearchPartnerLinks_sync",
+      "title": "Snippet for the search_partner_links call in the PartnerLinkService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::PartnerLinkService::Client#search_partner_links.",
+      "file": "partner_link_service/search_partner_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_partner_links",
+        "full_name": "::Google::Ads::DataManager::V1::PartnerLinkService::Client#search_partner_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::SearchPartnerLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::SearchPartnerLinksResponse",
+        "client": {
+          "short_name": "PartnerLinkService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::PartnerLinkService::Client"
+        },
+        "method": {
+          "short_name": "SearchPartnerLinks",
+          "full_name": "google.ads.datamanager.v1.PartnerLinkService.SearchPartnerLinks",
+          "service": {
+            "short_name": "PartnerLinkService",
+            "full_name": "google.ads.datamanager.v1.PartnerLinkService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListDirectLicenseService_CreateUserListDirectLicense_sync",
+      "title": "Snippet for the create_user_list_direct_license call in the UserListDirectLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#create_user_list_direct_license.",
+      "file": "user_list_direct_license_service/create_user_list_direct_license.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user_list_direct_license",
+        "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#create_user_list_direct_license",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::CreateUserListDirectLicenseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserListDirectLicense",
+        "client": {
+          "short_name": "UserListDirectLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client"
+        },
+        "method": {
+          "short_name": "CreateUserListDirectLicense",
+          "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService.CreateUserListDirectLicense",
+          "service": {
+            "short_name": "UserListDirectLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListDirectLicenseService_GetUserListDirectLicense_sync",
+      "title": "Snippet for the get_user_list_direct_license call in the UserListDirectLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#get_user_list_direct_license.",
+      "file": "user_list_direct_license_service/get_user_list_direct_license.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_list_direct_license",
+        "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#get_user_list_direct_license",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::GetUserListDirectLicenseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserListDirectLicense",
+        "client": {
+          "short_name": "UserListDirectLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client"
+        },
+        "method": {
+          "short_name": "GetUserListDirectLicense",
+          "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService.GetUserListDirectLicense",
+          "service": {
+            "short_name": "UserListDirectLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListDirectLicenseService_UpdateUserListDirectLicense_sync",
+      "title": "Snippet for the update_user_list_direct_license call in the UserListDirectLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#update_user_list_direct_license.",
+      "file": "user_list_direct_license_service/update_user_list_direct_license.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user_list_direct_license",
+        "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#update_user_list_direct_license",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::UpdateUserListDirectLicenseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserListDirectLicense",
+        "client": {
+          "short_name": "UserListDirectLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client"
+        },
+        "method": {
+          "short_name": "UpdateUserListDirectLicense",
+          "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService.UpdateUserListDirectLicense",
+          "service": {
+            "short_name": "UserListDirectLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListDirectLicenseService_ListUserListDirectLicenses_sync",
+      "title": "Snippet for the list_user_list_direct_licenses call in the UserListDirectLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#list_user_list_direct_licenses.",
+      "file": "user_list_direct_license_service/list_user_list_direct_licenses.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_list_direct_licenses",
+        "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client#list_user_list_direct_licenses",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::ListUserListDirectLicensesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::ListUserListDirectLicensesResponse",
+        "client": {
+          "short_name": "UserListDirectLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListDirectLicenseService::Client"
+        },
+        "method": {
+          "short_name": "ListUserListDirectLicenses",
+          "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService.ListUserListDirectLicenses",
+          "service": {
+            "short_name": "UserListDirectLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListDirectLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListGlobalLicenseService_CreateUserListGlobalLicense_sync",
+      "title": "Snippet for the create_user_list_global_license call in the UserListGlobalLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#create_user_list_global_license.",
+      "file": "user_list_global_license_service/create_user_list_global_license.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user_list_global_license",
+        "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#create_user_list_global_license",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::CreateUserListGlobalLicenseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserListGlobalLicense",
+        "client": {
+          "short_name": "UserListGlobalLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client"
+        },
+        "method": {
+          "short_name": "CreateUserListGlobalLicense",
+          "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService.CreateUserListGlobalLicense",
+          "service": {
+            "short_name": "UserListGlobalLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListGlobalLicenseService_UpdateUserListGlobalLicense_sync",
+      "title": "Snippet for the update_user_list_global_license call in the UserListGlobalLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#update_user_list_global_license.",
+      "file": "user_list_global_license_service/update_user_list_global_license.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user_list_global_license",
+        "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#update_user_list_global_license",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::UpdateUserListGlobalLicenseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserListGlobalLicense",
+        "client": {
+          "short_name": "UserListGlobalLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client"
+        },
+        "method": {
+          "short_name": "UpdateUserListGlobalLicense",
+          "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService.UpdateUserListGlobalLicense",
+          "service": {
+            "short_name": "UserListGlobalLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListGlobalLicenseService_GetUserListGlobalLicense_sync",
+      "title": "Snippet for the get_user_list_global_license call in the UserListGlobalLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#get_user_list_global_license.",
+      "file": "user_list_global_license_service/get_user_list_global_license.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_list_global_license",
+        "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#get_user_list_global_license",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::GetUserListGlobalLicenseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserListGlobalLicense",
+        "client": {
+          "short_name": "UserListGlobalLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client"
+        },
+        "method": {
+          "short_name": "GetUserListGlobalLicense",
+          "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService.GetUserListGlobalLicense",
+          "service": {
+            "short_name": "UserListGlobalLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListGlobalLicenseService_ListUserListGlobalLicenses_sync",
+      "title": "Snippet for the list_user_list_global_licenses call in the UserListGlobalLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#list_user_list_global_licenses.",
+      "file": "user_list_global_license_service/list_user_list_global_licenses.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_list_global_licenses",
+        "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#list_user_list_global_licenses",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::ListUserListGlobalLicensesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::ListUserListGlobalLicensesResponse",
+        "client": {
+          "short_name": "UserListGlobalLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client"
+        },
+        "method": {
+          "short_name": "ListUserListGlobalLicenses",
+          "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService.ListUserListGlobalLicenses",
+          "service": {
+            "short_name": "UserListGlobalLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListGlobalLicenseService_ListUserListGlobalLicenseCustomerInfos_sync",
+      "title": "Snippet for the list_user_list_global_license_customer_infos call in the UserListGlobalLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#list_user_list_global_license_customer_infos.",
+      "file": "user_list_global_license_service/list_user_list_global_license_customer_infos.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_list_global_license_customer_infos",
+        "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client#list_user_list_global_license_customer_infos",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::ListUserListGlobalLicenseCustomerInfosRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::ListUserListGlobalLicenseCustomerInfosResponse",
+        "client": {
+          "short_name": "UserListGlobalLicenseService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListGlobalLicenseService::Client"
+        },
+        "method": {
+          "short_name": "ListUserListGlobalLicenseCustomerInfos",
+          "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService.ListUserListGlobalLicenseCustomerInfos",
+          "service": {
+            "short_name": "UserListGlobalLicenseService",
+            "full_name": "google.ads.datamanager.v1.UserListGlobalLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListService_GetUserList_sync",
+      "title": "Snippet for the get_user_list call in the UserListService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListService::Client#get_user_list.",
+      "file": "user_list_service/get_user_list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_list",
+        "full_name": "::Google::Ads::DataManager::V1::UserListService::Client#get_user_list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::GetUserListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserList",
+        "client": {
+          "short_name": "UserListService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListService::Client"
+        },
+        "method": {
+          "short_name": "GetUserList",
+          "full_name": "google.ads.datamanager.v1.UserListService.GetUserList",
+          "service": {
+            "short_name": "UserListService",
+            "full_name": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListService_ListUserLists_sync",
+      "title": "Snippet for the list_user_lists call in the UserListService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListService::Client#list_user_lists.",
+      "file": "user_list_service/list_user_lists.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_lists",
+        "full_name": "::Google::Ads::DataManager::V1::UserListService::Client#list_user_lists",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::ListUserListsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::ListUserListsResponse",
+        "client": {
+          "short_name": "UserListService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListService::Client"
+        },
+        "method": {
+          "short_name": "ListUserLists",
+          "full_name": "google.ads.datamanager.v1.UserListService.ListUserLists",
+          "service": {
+            "short_name": "UserListService",
+            "full_name": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListService_CreateUserList_sync",
+      "title": "Snippet for the create_user_list call in the UserListService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListService::Client#create_user_list.",
+      "file": "user_list_service/create_user_list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user_list",
+        "full_name": "::Google::Ads::DataManager::V1::UserListService::Client#create_user_list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::CreateUserListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserList",
+        "client": {
+          "short_name": "UserListService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListService::Client"
+        },
+        "method": {
+          "short_name": "CreateUserList",
+          "full_name": "google.ads.datamanager.v1.UserListService.CreateUserList",
+          "service": {
+            "short_name": "UserListService",
+            "full_name": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListService_UpdateUserList_sync",
+      "title": "Snippet for the update_user_list call in the UserListService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListService::Client#update_user_list.",
+      "file": "user_list_service/update_user_list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user_list",
+        "full_name": "::Google::Ads::DataManager::V1::UserListService::Client#update_user_list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::UpdateUserListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::DataManager::V1::UserList",
+        "client": {
+          "short_name": "UserListService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListService::Client"
+        },
+        "method": {
+          "short_name": "UpdateUserList",
+          "full_name": "google.ads.datamanager.v1.UserListService.UpdateUserList",
+          "service": {
+            "short_name": "UserListService",
+            "full_name": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datamanager_v1_generated_UserListService_DeleteUserList_sync",
+      "title": "Snippet for the delete_user_list call in the UserListService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::DataManager::V1::UserListService::Client#delete_user_list.",
+      "file": "user_list_service/delete_user_list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user_list",
+        "full_name": "::Google::Ads::DataManager::V1::UserListService::Client#delete_user_list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::DataManager::V1::DeleteUserListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "UserListService::Client",
+          "full_name": "::Google::Ads::DataManager::V1::UserListService::Client"
+        },
+        "method": {
+          "short_name": "DeleteUserList",
+          "full_name": "google.ads.datamanager.v1.UserListService.DeleteUserList",
+          "service": {
+            "short_name": "UserListService",
+            "full_name": "google.ads.datamanager.v1.UserListService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
