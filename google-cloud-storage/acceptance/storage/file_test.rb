@@ -1090,7 +1090,6 @@ describe Google::Cloud::Storage::File, :storage do
       }.must_raise Google::Cloud::InvalidArgumentError
 
       _(err.message).must_match(/Object context value cannot contain/)
-
     end
 
     it "rejects unicode characters in keys and values" do
