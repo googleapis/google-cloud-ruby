@@ -323,13 +323,24 @@ describe "Files Snippets" do
     end
   end
 
-  it "get_object_contexts" do
-    bucket.create_file local_file, remote_file_name
-    custom_context_key = "my-custom-key"
-    custom_context_value = "my-custom-value"
-    set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key, custom_context_value: custom_context_value
-    assert_output "Custom Contexts for #{remote_file_name} are: #{custom_context_key} with value: #{custom_context_value}\n" do
-      get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
+  describe "get_object_contexts" do
+    let(:custom_context_key1) { "my-custom-key" }
+    let(:custom_context_value1) { "my-custom-value" }
+    let(:custom_context_key2) { "my-custom-key-2" }
+    let(:custom_context_value2) { "my-custom-value-2" }
+
+    before(:each) do
+      bucket.create_file local_file, remote_file_name
+      bucket.create_file local_file, remote_file_name+"2"
+      
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+    end
+    it "fetches all object contexts" do
+
+      assert_output "Custom Contexts for #{remote_file_name} are:\nKey: #{custom_context_key1}, Value: #{custom_context_value1}\nKey: #{custom_context_key2}, Value: #{custom_context_value2}\n" do
+        get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
+      end
     end
   end
 
@@ -339,7 +350,7 @@ describe "Files Snippets" do
     let(:custom_context_key2) { "my-custom-key-2" }
     let(:custom_context_value2) { "my-custom-value-2" }
 
-    before(:all) do
+    before(:each) do
       bucket.create_file local_file, remote_file_name
       bucket.create_file local_file, remote_file_name+"2"
       

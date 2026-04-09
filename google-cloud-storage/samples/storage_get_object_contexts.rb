@@ -22,19 +22,16 @@ def get_object_contexts bucket_name:, file_name:
   # The ID of your GCS object
   # file_name = "your-file-name"
 
-  # The key and value of the custom context to be added
-  # custom_context_key = "your-custom-context-key"
-  # custom_context_value = "your-custom-context-value"
-
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
   file    = bucket.file file_name
 
   contexts = file.contexts
   if contexts&.custom&.any?
-    custom_context_key = contexts.custom.keys.first
-    custom_context_value = contexts.custom[custom_context_key].value
-    puts "Custom Contexts for #{file_name} are: #{custom_context_key} with value: #{custom_context_value}"
+    puts "Custom Contexts for #{file_name} are:"
+    contexts.custom.each do |key, context_obj|
+      puts "Key: #{key}, Value: #{context_obj.value}"
+    end
   else
     puts "No custom contexts found for #{file_name}."
   end
@@ -44,4 +41,3 @@ end
 if $PROGRAM_NAME == __FILE__
   get_object_contexts bucket_name: ARGV.shift, file_name: ARGV.shift
 end
-

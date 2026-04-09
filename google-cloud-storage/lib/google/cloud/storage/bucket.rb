@@ -1440,7 +1440,7 @@ module Google
         # @param [Boolean] soft_deleted If true, only soft-deleted object
         #   versions will be listed. The default is false.
         # @param [String] filter An optional string for filtering listed objects.
-        #   Currently only supported for the contexts field.
+        #   Supported fields: contexts
         #   If delimiter is set, the returned prefixes are exempt from this filter
         #  List any object that has a context with the specified key attached
         #  filter = "contexts.\"KEY\":*";
