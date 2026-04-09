@@ -1064,6 +1064,45 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Lookup Context using permissions in the source system.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The project to which the request should be attributed in the
+        #     following form: `projects/{project}/locations/{location}`.
+        # @!attribute [rw] resources
+        #   @return [::Array<::String>]
+        #     Required. The entry names to lookup context for. The request should have
+        #     max 10 of those.
+        #
+        #     ## Examples:
+        #
+        #     projects/\\{project}/locations/\\{location}/entryGroups/\\{entry_group}/entries/\\{entry}
+        # @!attribute [rw] options
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Allows to configure the context.
+        class LookupContextRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class OptionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Lookup Context response.
+        # @!attribute [rw] context
+        #   @return [::String]
+        #     LLM generated context for the resources.
+        class LookupContextResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The project to which the request should be attributed in the
@@ -1769,10 +1808,16 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the Entry Link was last updated.
+        # @!attribute [rw] aspects
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataplex::V1::Aspect}]
+        #     Optional. The aspects that are attached to the entry link.
+        #     The format of the aspect key has to be the following:
+        #     `{project_id_or_number}.{location_id}.{aspect_type_id}`
+        #     Currently, only a single aspect of a Dataplex-owned Aspect Type is allowed.
         # @!attribute [rw] entry_references
         #   @return [::Array<::Google::Cloud::Dataplex::V1::EntryLink::EntryReference>]
-        #     Required. Specifies the Entries referenced in the Entry Link. There should
-        #     be exactly two entry references.
+        #     Required. Immutable. Specifies the Entries referenced in the Entry Link.
+        #     There should be exactly two entry references.
         class EntryLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1808,6 +1853,15 @@ module Google
               TARGET = 3
             end
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dataplex::V1::Aspect]
+          class AspectsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request message for CreateEntryLink.
@@ -1831,6 +1885,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for UpdateEntryLink method.
+        # @!attribute [rw] entry_link
+        #   @return [::Google::Cloud::Dataplex::V1::EntryLink]
+        #     Required. Entry Link resource.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true and the entry link doesn't exist, the service will
+        #     create it.
+        # @!attribute [rw] aspect_keys
+        #   @return [::Array<::String>]
+        #     Optional. The map keys of the Aspects which the service should modify.
+        #     It should be the aspect type reference in the format
+        #     `{project_id_or_number}.{location_id}.{aspect_type_id}`.
+        #
+        #     If this field is left empty, the service treats it as specifying
+        #     exactly those Aspects present in the request.
+        class UpdateEntryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for DeleteEntryLink.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1841,12 +1916,296 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for LookupEntryLinks.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The project to which the request should be attributed to
+        #     Format: `projects/{project_id_or_number}/locations/{location_id}`.
+        # @!attribute [rw] entry
+        #   @return [::String]
+        #     Required. The resource name of the referred Entry.
+        #     Format:
+        #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+        #     Entry Links which references this entry will be returned in the response.
+        # @!attribute [rw] entry_mode
+        #   @return [::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest::EntryMode]
+        #     Mode of entry reference.
+        # @!attribute [rw] entry_link_types
+        #   @return [::Array<::String>]
+        #     Entry link types to filter the response by. If empty, all entry link types
+        #     will be returned. At most 10 entry link types can be specified.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Maximum number of EntryLinks to return. The service may return fewer
+        #     than this value. If unspecified, at most 10 EntryLinks will be returned.
+        #     The maximum value is 10; values above 10 will be coerced to 10.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Page token received from a previous `LookupEntryLinks` call. Provide this
+        #     to retrieve the subsequent page. When paginating, all other parameters that
+        #     are provided to the `LookupEntryLinks` request must match the call that
+        #     provided the page token.
+        class LookupEntryLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode of entry reference.
+          module EntryMode
+            # Unspecified entry mode. Returns both directional and non-directional
+            # entry links which references the entry.
+            ENTRY_MODE_UNSPECIFIED = 0
+
+            # Returns all directed entry links which references the entry as source.
+            SOURCE = 1
+
+            # Return all directed entry links which references the entry as target.
+            TARGET = 2
+          end
+        end
+
+        # Response message for LookupEntryLinks.
+        # @!attribute [rw] entry_links
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::EntryLink>]
+        #     List of entry links that reference the specified entry.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        class LookupEntryLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetEntryLink.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Entry Link:
         #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
         class GetEntryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # MetadataFeed contains information related to the metadata feed.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the metadata feed, in the format
+        #     `projects/{project_id_or_number}/locations/{location_id}/metadataFeeds/{metadata_feed_id}`.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. A system-generated, globally unique ID for the metadata job.
+        #     If the metadata job is deleted and then re-created with the same name, this
+        #     ID is different.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataFeed::Scope]
+        #     Required. The scope of the metadata feed.
+        #     Only the in scope changes are published.
+        # @!attribute [rw] filters
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataFeed::Filters]
+        #     Optional. The filters of the metadata feed.
+        #     Only the changes that match the filters are published.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the feed was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the feed was updated.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User-defined labels.
+        # @!attribute [rw] pubsub_topic
+        #   @return [::String]
+        #     Optional. The pubsub topic that you want the metadata feed messages to
+        #     publish to. Please grant Dataplex service account the permission to
+        #     publish messages to the topic. The service account is:
+        #     service-\\{PROJECT_NUMBER}@gcp-sa-dataplex.iam.gserviceaccount.com.
+        class MetadataFeed
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Scope defines the scope of the metadata feed.
+          # Scopes are exclusive. Only one of the scopes can be specified.
+          # @!attribute [rw] organization_level
+          #   @return [::Boolean]
+          #     Optional. Whether the metadata feed is at the organization-level.
+          #
+          #     - If `true`, all changes happened to the entries in the same
+          #     organization as the feed are published.
+          #     - If `false`, you must specify a list of projects or a list of entry
+          #     groups whose entries you want to listen to.
+          #
+          #     The default is `false`.
+          # @!attribute [rw] projects
+          #   @return [::Array<::String>]
+          #     Optional. The projects whose entries you want to listen to.
+          #     Must be in the same organization as the feed.
+          #     Must be in the format: `projects/{project_id_or_number}`.
+          # @!attribute [rw] entry_groups
+          #   @return [::Array<::String>]
+          #     Optional. The entry groups whose entries you want to listen to.
+          #     Must be in the format:
+          #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+          class Scope
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Filters defines the type of changes that you want to listen to.
+          # You can have multiple entry type filters and multiple aspect type filters.
+          # All of the entry type filters are OR'ed together.
+          # All of the aspect type filters are OR'ed together.
+          # All of the entry type filters and aspect type filters are AND'ed together.
+          # @!attribute [rw] entry_types
+          #   @return [::Array<::String>]
+          #     Optional. The entry types that you want to listen to, specified as
+          #     relative resource names in the format
+          #     `projects/{project_id_or_number}/locations/{location}/entryTypes/{entry_type_id}`.
+          #     Only entries that belong to the specified entry types are published.
+          # @!attribute [rw] aspect_types
+          #   @return [::Array<::String>]
+          #     Optional. The aspect types that you want to listen to. Depending on how
+          #     the aspect is attached to the entry, in the format:
+          #     `projects/{project_id_or_number}/locations/{location}/aspectTypes/{aspect_type_id}`.
+          # @!attribute [rw] change_types
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::MetadataFeed::Filters::ChangeType>]
+          #     Optional. The type of change that you want to listen to.
+          #     If not specified, all changes are published.
+          class Filters
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of change that you want to listen to.
+            module ChangeType
+              # Unspecified change type. Defaults to UNSPECIFIED.
+              CHANGE_TYPE_UNSPECIFIED = 0
+
+              # The change is a create event.
+              CREATE = 1
+
+              # The change is an update event.
+              UPDATE = 2
+
+              # The change is a delete event.
+              DELETE = 3
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for CreateMetadataFeed.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent location, in the format
+        #     `projects/{project_id_or_number}/locations/{location_id}`
+        # @!attribute [rw] metadata_feed
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataFeed]
+        #     Required. The metadata job resource.
+        # @!attribute [rw] metadata_feed_id
+        #   @return [::String]
+        #     Optional. The metadata job ID. If not provided, a unique ID is generated
+        #     with the prefix `metadata-job-`.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. The service validates the request without performing any
+        #     mutations. The default is false.
+        class CreateMetadataFeedRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetMetadataFeed.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the metadata feed, in the format
+        #     `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+        class GetMetadataFeedRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListMetadataFeedsRequest.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent location, in the format
+        #     `projects/{project_id_or_number}/locations/{location_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of metadata feeds to return. The service
+        #     might return fewer feeds than this value. If unspecified, at most 10 feeds
+        #     are returned. The maximum value is 1,000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token received from a previous `ListMetadataFeeds` call.
+        #     Provide this token to retrieve the subsequent page of results. When
+        #     paginating, all other parameters that are provided to the
+        #     `ListMetadataFeeds` request must match the call that provided the
+        #     page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter request. Filters are case-sensitive.
+        #     The service supports the following formats:
+        #
+        #     * `labels.key1 = "value1"`
+        #     * `labels:key1`
+        #     * `name = "value"`
+        #
+        #     You can combine filters with `AND`, `OR`, and `NOT` operators.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The field to sort the results by, either `name` or `create_time`.
+        #     If not specified, the ordering is undefined.
+        class ListMetadataFeedsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListMetadataFeeds.
+        # @!attribute [rw] metadata_feeds
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::MetadataFeed>]
+        #     List of metadata feeds under the specified parent location.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results. If there are no more results
+        #     in the list, the value is empty.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that the service couldn't reach.
+        class ListMetadataFeedsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteMetadataFeed.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the metadata feed, in the format
+        #     `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+        class DeleteMetadataFeedRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateMetadataFeed.
+        # @!attribute [rw] metadata_feed
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataFeed]
+        #     Required. Update description.
+        #     Only fields specified in `update_mask` are updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Mask of fields to update.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is false.
+        class UpdateMetadataFeedRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1867,6 +2226,8 @@ module Google
           # aspects exceeds 100, the first 100 will be returned.
           CUSTOM = 3
 
+          # Returns all aspects. If the number of aspects exceeds 100, the first
+          # 100 will be returned.
           ALL = 4
         end
 

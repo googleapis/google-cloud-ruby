@@ -22,9 +22,35 @@ module Google
     module Dataplex
       module V1
         # DataDocumentation scan related spec.
+        # @!attribute [rw] catalog_publishing_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether to publish result to Dataplex Catalog.
+        # @!attribute [rw] generation_scopes
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataDocumentationSpec::GenerationScope>]
+        #     Optional. Specifies which components of the data documentation to generate.
+        #     Any component that is required to generate the specified components will
+        #     also be generated. If no generation scope is specified, all available
+        #     documentation components will be generated.
         class DataDocumentationSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The data documentation generation scope. This field contains the possible
+          # components of a data documentation scan which can be selectively generated.
+          module GenerationScope
+            # Unspecified generation scope. If no generation scope is specified, all
+            # available documentation components will be generated.
+            GENERATION_SCOPE_UNSPECIFIED = 0
+
+            # All the possible results will be generated.
+            ALL = 1
+
+            # Table and column descriptions will be generated.
+            TABLE_AND_COLUMN_DESCRIPTIONS = 2
+
+            # SQL queries will be generated.
+            SQL_QUERIES = 3
+          end
         end
 
         # The output of a DataDocumentation scan.
