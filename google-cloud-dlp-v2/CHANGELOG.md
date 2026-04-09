@@ -1,5 +1,11 @@
 # Release History
 
+### 1.17.0 (2026-04-09)
+
+#### Features
+
+* added support for detecting key-value pairs in client provided metadata ([#33807](https://github.com/googleapis/google-cloud-ruby/issues/33807)) 
+
 ### 1.16.1 (2026-04-02)
 
 #### Documentation
