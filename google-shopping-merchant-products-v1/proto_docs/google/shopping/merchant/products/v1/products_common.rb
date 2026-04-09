@@ -222,8 +222,14 @@ module Google
           #     The handling cutoff times for shipping.
           # @!attribute [rw] shipping_label
           #   @return [::String]
-          #     The shipping label of the product, used to group product in account-level
-          #     shipping rules.
+          #     The shipping label of the product, used to group products in account-level
+          #     shipping rules. Max. 100 characters. For more information, see
+          #     [Shipping label](https://support.google.com/merchants/answer/6324504).
+          # @!attribute [rw] return_policy_label
+          #   @return [::String]
+          #     The return label of the product, used to group products in account-level
+          #     return policies. Max. 100 characters. For more information, see
+          #     [Return policy label](https://support.google.com/merchants/answer/9445425).
           # @!attribute [rw] transit_time_label
           #   @return [::String]
           #     The transit time label of the product, used to group product in
