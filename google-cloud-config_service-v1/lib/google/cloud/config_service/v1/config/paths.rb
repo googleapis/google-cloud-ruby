@@ -61,6 +61,46 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DeploymentGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deploymentGroups/{deployment_group}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param deployment_group [String]
+            #
+            # @return [::String]
+            def deployment_group_path project:, location:, deployment_group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deploymentGroups/#{deployment_group}"
+            end
+
+            ##
+            # Create a fully-qualified DeploymentGroupRevision resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deploymentGroups/{deployment_group}/revisions/{revision}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param deployment_group [String]
+            # @param revision [String]
+            #
+            # @return [::String]
+            def deployment_group_revision_path project:, location:, deployment_group:, revision:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "deployment_group cannot contain /" if deployment_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deploymentGroups/#{deployment_group}/revisions/#{revision}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

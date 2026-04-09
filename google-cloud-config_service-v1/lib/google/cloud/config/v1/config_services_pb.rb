@@ -98,6 +98,47 @@ module Google
             rpc :GetAutoMigrationConfig, ::Google::Cloud::ConfigService::V1::GetAutoMigrationConfigRequest, ::Google::Cloud::ConfigService::V1::AutoMigrationConfig
             # Updates the AutoMigrationConfig for a given project and location.
             rpc :UpdateAutoMigrationConfig, ::Google::Cloud::ConfigService::V1::UpdateAutoMigrationConfigRequest, ::Google::Longrunning::Operation
+            # Get a DeploymentGroup for a given project and location.
+            rpc :GetDeploymentGroup, ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest, ::Google::Cloud::ConfigService::V1::DeploymentGroup
+            # Creates a [DeploymentGroup][google.cloud.config.v1.DeploymentGroup]
+            # The newly created DeploymentGroup will be in the `CREATING` state
+            # and can be retrieved via Get and List calls.
+            rpc :CreateDeploymentGroup, ::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest, ::Google::Longrunning::Operation
+            # Updates a [DeploymentGroup][google.cloud.config.v1.DeploymentGroup]
+            rpc :UpdateDeploymentGroup, ::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest, ::Google::Longrunning::Operation
+            # Deletes a [DeploymentGroup][google.cloud.config.v1.DeploymentGroup]
+            rpc :DeleteDeploymentGroup, ::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest, ::Google::Longrunning::Operation
+            # List DeploymentGroups for a given project and location.
+            rpc :ListDeploymentGroups, ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest, ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsResponse
+            # Provisions a deployment group.
+            #
+            # NOTE: As a first step of this operation, Infra Manager will
+            # automatically delete any Deployments that were part of the
+            # *last successful*
+            # [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision]
+            # but are *no longer* included in the *current*
+            # [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] definition (e.g.,
+            # following an `UpdateDeploymentGroup` call), along with their actuated
+            # resources.
+            rpc :ProvisionDeploymentGroup, ::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest, ::Google::Longrunning::Operation
+            # Deprovisions a deployment group.
+            #
+            # NOTE: As a first step of this operation, Infra Manager will
+            # automatically delete any Deployments that were part of the
+            # *last successful*
+            # [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision]
+            # but are *no longer* included in the *current*
+            # [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] definition (e.g.,
+            # following an `UpdateDeploymentGroup` call), along with their actuated
+            # resources.
+            rpc :DeprovisionDeploymentGroup, ::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest, ::Google::Longrunning::Operation
+            # Gets details about a
+            # [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision].
+            rpc :GetDeploymentGroupRevision, ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest, ::Google::Cloud::ConfigService::V1::DeploymentGroupRevision
+            # Lists
+            # [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision]s
+            # in a given [DeploymentGroup][google.cloud.config.v1.DeploymentGroup].
+            rpc :ListDeploymentGroupRevisions, ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest, ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsResponse
           end
 
           Stub = Service.rpc_stub_class

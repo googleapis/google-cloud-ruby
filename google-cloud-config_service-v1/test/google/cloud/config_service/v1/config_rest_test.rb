@@ -1690,6 +1690,509 @@ class ::Google::Cloud::ConfigService::V1::Config::Rest::ClientTest < Minitest::T
     end
   end
 
+  def test_get_deployment_group
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::DeploymentGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_deployment_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_get_deployment_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_deployment_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_deployment_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_deployment_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_deployment_group ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_deployment_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_deployment_group(::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_deployment_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_deployment_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    deployment_group_id = "hello world"
+    deployment_group = {}
+    request_id = "hello world"
+
+    create_deployment_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_create_deployment_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_deployment_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_deployment_group({ parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_deployment_group parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_deployment_group ::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest.new(parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_deployment_group({ parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_deployment_group(::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest.new(parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_deployment_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_deployment_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    deployment_group = {}
+    request_id = "hello world"
+
+    update_deployment_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_update_deployment_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_deployment_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_deployment_group({ update_mask: update_mask, deployment_group: deployment_group, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_deployment_group update_mask: update_mask, deployment_group: deployment_group, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_deployment_group ::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest.new(update_mask: update_mask, deployment_group: deployment_group, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_deployment_group({ update_mask: update_mask, deployment_group: deployment_group, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_deployment_group(::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest.new(update_mask: update_mask, deployment_group: deployment_group, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_deployment_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_deployment_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+    deployment_reference_policy = :DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED
+
+    delete_deployment_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_delete_deployment_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_deployment_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_deployment_group({ name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_deployment_group name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_deployment_group ::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest.new(name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_deployment_group({ name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_deployment_group(::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest.new(name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_deployment_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_deployment_groups
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_deployment_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_list_deployment_groups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_deployment_groups_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_deployment_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_deployment_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_deployment_groups ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_deployment_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_deployment_groups(::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_deployment_groups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_provision_deployment_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    deployment_specs = {}
+
+    provision_deployment_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_provision_deployment_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, provision_deployment_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.provision_deployment_group({ name: name, deployment_specs: deployment_specs }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.provision_deployment_group name: name, deployment_specs: deployment_specs do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.provision_deployment_group ::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest.new(name: name, deployment_specs: deployment_specs) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.provision_deployment_group({ name: name, deployment_specs: deployment_specs }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.provision_deployment_group(::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest.new(name: name, deployment_specs: deployment_specs), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, provision_deployment_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_deprovision_deployment_group
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+    delete_policy = :DELETE_POLICY_UNSPECIFIED
+
+    deprovision_deployment_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_deprovision_deployment_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, deprovision_deployment_group_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.deprovision_deployment_group({ name: name, force: force, delete_policy: delete_policy }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.deprovision_deployment_group name: name, force: force, delete_policy: delete_policy do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.deprovision_deployment_group ::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest.new(name: name, force: force, delete_policy: delete_policy) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.deprovision_deployment_group({ name: name, force: force, delete_policy: delete_policy }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.deprovision_deployment_group(::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest.new(name: name, force: force, delete_policy: delete_policy), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, deprovision_deployment_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_deployment_group_revision
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::DeploymentGroupRevision.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_deployment_group_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_get_deployment_group_revision_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_deployment_group_revision_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_deployment_group_revision({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_deployment_group_revision name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_deployment_group_revision ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_deployment_group_revision({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_deployment_group_revision(::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_deployment_group_revision_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_deployment_group_revisions
+    # Create test objects.
+    client_result = ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_deployment_group_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ConfigService::V1::Config::Rest::ServiceStub.stub :transcode_list_deployment_group_revisions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_deployment_group_revisions_client_stub do
+        # Create client
+        client = ::Google::Cloud::ConfigService::V1::Config::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_deployment_group_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_deployment_group_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_deployment_group_revisions ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_deployment_group_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_deployment_group_revisions(::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_deployment_group_revisions_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
