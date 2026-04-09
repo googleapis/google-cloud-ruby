@@ -369,7 +369,6 @@ describe "Files Snippets" do
         list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
       end
     end
-
   end
 
   it "set_metadata" do
