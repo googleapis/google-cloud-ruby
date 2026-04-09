@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 (2026-04-09)
+
+#### Features
+
+* A new field `mime_type` is added to message `.google.cloud.translation.v3.AdaptiveMtTranslateRequest` ([#33808](https://github.com/googleapis/google-cloud-ruby/issues/33808)) 
+
 ### 1.8.0 (2026-03-31)
 
 #### Features
