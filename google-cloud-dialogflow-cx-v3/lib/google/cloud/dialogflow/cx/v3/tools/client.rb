@@ -157,7 +157,7 @@ module Google
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
                 @tools_stub = ::Gapic::ServiceStub.new(
-                  ::Google::Cloud::Dialogflow::Cx::V3::Tools::Stub,
+                  ::Google::Cloud::Dialogflow::CX::V3::Tools::Stub,
                   credentials: credentials,
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,

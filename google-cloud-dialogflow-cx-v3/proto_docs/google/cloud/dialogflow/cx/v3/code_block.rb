@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           # Represents a code block.
           # @!attribute [rw] code

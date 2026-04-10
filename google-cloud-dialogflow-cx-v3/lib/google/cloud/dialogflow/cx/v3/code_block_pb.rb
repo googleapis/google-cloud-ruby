@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n.google/cloud/dialogflow/cx/v3/code_block.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3\x1a\x1fgoogle/api/field_behavior.proto\"\x1e\n\tCodeBlock\x12\x11\n\x04\x63ode\x18\x01 \x01(\tB\x03\xe0\x41\x01\x42\x8d\x01\n!com.google.cloud.dialogflow.cx.v3B\x0e\x43odeBlockProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3b\x06proto3"
+descriptor_data = "\n.google/cloud/dialogflow/cx/v3/code_block.proto\x12\x1dgoogle.cloud.dialogflow.cx.v3\x1a\x1fgoogle/api/field_behavior.proto\"\x1e\n\tCodeBlock\x12\x11\n\x04\x63ode\x18\x01 \x01(\tB\x03\xe0\x41\x01\x42\xb1\x01\n!com.google.cloud.dialogflow.cx.v3B\x0e\x43odeBlockProtoP\x01Z1cloud.google.com/go/dialogflow/cx/apiv3/cxpb;cxpb\xa2\x02\x02\x44\x46\xaa\x02\x1dGoogle.Cloud.Dialogflow.Cx.V3\xea\x02!Google::Cloud::Dialogflow::CX::V3b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
@@ -15,7 +15,7 @@ pool.add_serialized_file(descriptor_data)
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           CodeBlock = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.CodeBlock").msgclass
         end

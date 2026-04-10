@@ -164,7 +164,7 @@ module Google
                 end
 
                 @playbooks_stub = ::Gapic::ServiceStub.new(
-                  ::Google::Cloud::Dialogflow::Cx::V3::Playbooks::Stub,
+                  ::Google::Cloud::Dialogflow::CX::V3::Playbooks::Stub,
                   credentials: credentials,
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,

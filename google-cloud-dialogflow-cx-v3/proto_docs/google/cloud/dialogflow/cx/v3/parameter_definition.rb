@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           # Defines the properties of a parameter.
           # Used to define parameters used in the agent and the

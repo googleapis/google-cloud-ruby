@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dialogflow
-      module Cx
+      module CX
         module V3
           # The request message for
           # {::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#create_playbook Playbooks.CreatePlaybook}.
