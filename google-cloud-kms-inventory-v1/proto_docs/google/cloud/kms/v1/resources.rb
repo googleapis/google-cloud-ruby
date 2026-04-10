@@ -152,6 +152,10 @@ module Google
         #     justification codes.
         #     https://cloud.google.com/assured-workloads/key-access-justifications/docs/justification-codes
         #     By default, this field is absent, and all justification codes are allowed.
+        #     If the
+        #     `key_access_justifications_policy.allowed_access_reasons`
+        #     is empty (zero allowed justification code), all encrypt, decrypt, and sign
+        #     operations will fail.
         class CryptoKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1028,14 +1032,18 @@ module Google
         # {::Google::Cloud::Kms::V1::KeyAccessJustificationsPolicy KeyAccessJustificationsPolicy}
         # specifies zero or more allowed
         # {::Google::Cloud::Kms::V1::AccessReason AccessReason} values for encrypt, decrypt,
-        # and sign operations on a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+        # and sign operations on a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} or
+        # [KeyAccessJustificationsPolicyConfig][google.cloud.kms.v1.KeyAccessJustificationsPolicyConfig]
+        # (the default Key Access Justifications policy).
         # @!attribute [rw] allowed_access_reasons
         #   @return [::Array<::Google::Cloud::Kms::V1::AccessReason>]
         #     The list of allowed reasons for access to a
-        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Zero allowed access reasons
-        #     means all encrypt, decrypt, and sign operations for the
-        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with this policy will
-        #     fail.
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Note that empty
+        #     allowed_access_reasons has a different meaning depending on where this
+        #     message appears. If this is under
+        #     [KeyAccessJustificationsPolicyConfig][google.cloud.kms.v1.KeyAccessJustificationsPolicyConfig],
+        #     it means allow-all. If this is under
+        #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}, it means deny-all.
         class KeyAccessJustificationsPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
