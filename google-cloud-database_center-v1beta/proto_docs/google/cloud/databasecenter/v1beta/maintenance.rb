@@ -62,6 +62,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Upcoming maintenance window for the database resource.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Start time of the upcoming maintenance.
+        #     Start time is always populated when an upcoming maintenance is
+        #     scheduled.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. End time of the upcoming maintenance. This is only populated
+        #     for an engine, if end time is public for the engine.
+        class UpcomingMaintenance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # MaintenanceInfo to capture the maintenance details of database resource.
         # @!attribute [rw] maintenance_schedule
         #   @return [::Google::Cloud::DatabaseCenter::V1beta::ResourceMaintenanceSchedule]
@@ -73,6 +88,32 @@ module Google
         #   @return [::String]
         #     Output only. Current Maintenance version of the database resource. Example:
         #     "MYSQL_8_0_41.R20250531.01_15"
+        # @!attribute [r] current_version_release_date
+        #   @return [::Google::Type::Date]
+        #     Output only. The date when the maintenance version was released.
+        # @!attribute [r] upcoming_maintenance
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::UpcomingMaintenance]
+        #     Output only. Upcoming maintenance window for the database resource. This is
+        #     only populated for an engine, if upcoming maintenance is scheduled for the
+        #     resource. This schedule is generated per engine and engine version, and
+        #     there is only one upcoming maintenance window at any given time. In case of
+        #     upcoming maintenance, the maintenance_state will be set to SCHEDULED first,
+        #     and then IN_PROGRESS when the maintenance window starts.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::MaintenanceState]
+        #     Output only. Resource maintenance state. This is to capture the current
+        #     state of the maintenance.
+        # @!attribute [r] possible_failure_reasons
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::PossibleFailureReason>]
+        #     Output only. List of possible reasons why the maintenance is not completed.
+        #     This is an optional field and is only populated if there are any
+        #     reasons for failures recorded for the maintenance by DB Center.
+        #     FAILURE maintenance status may not always have a failure reason.
+        # @!attribute [r] previous_maintenance_version
+        #   @return [::String]
+        #     Output only. Previous maintenance version of the database resource.
+        #     Example: "MYSQL_8_0_41.R20250531.01_15". This is available once a minor
+        #     version maintenance is complete on a database resource.
         class MaintenanceInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -98,6 +139,38 @@ module Google
 
           # Any phase.
           PHASE_ANY = 4
+        end
+
+        # Resource maintenance state.
+        module MaintenanceState
+          # Status is unspecified.
+          MAINTENANCE_STATE_UNSPECIFIED = 0
+
+          # Maintenance is scheduled.
+          MAINTENANCE_STATE_SCHEDULED = 1
+
+          # Maintenance is in progress.
+          MAINTENANCE_STATE_IN_PROGRESS = 2
+
+          # Maintenance is completed.
+          MAINTENANCE_STATE_COMPLETED = 3
+
+          # Maintenance has failed.
+          MAINTENANCE_STATE_FAILED = 4
+        end
+
+        # Possible reasons why the maintenance is not completed.
+        # STATE_FAILED maintenance state may not always have a failure reason.
+        module PossibleFailureReason
+          # Failure reason is unspecified.
+          POSSIBLE_FAILURE_REASON_UNSPECIFIED = 0
+
+          # Maintenance may not be completed because there is a deny policy
+          # overlapping with upcoming maintenance schedule.
+          POSSIBLE_FAILURE_REASON_DENY_POLICY_CONFLICT = 1
+
+          # Maintenance may not be completed because the instance is stopped.
+          POSSIBLE_FAILURE_REASON_INSTANCE_IN_STOPPED_STATE = 2
         end
       end
     end

@@ -32,6 +32,14 @@ module Google
         # @!attribute [rw] vcpu_count
         #   @return [::Float]
         #     Optional. The number of vCPUs (if applicable).
+        # @!attribute [rw] baseline_slot_count
+        #   @return [::Integer]
+        #     Optional. Baseline slots for BigQuery Reservations. Baseline slots are in
+        #     increments of 50.
+        # @!attribute [rw] max_reservation_slot_count
+        #   @return [::Integer]
+        #     Optional. Max slots for BigQuery Reservations. Max slots are in increments
+        #     of 50.
         class MachineConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
