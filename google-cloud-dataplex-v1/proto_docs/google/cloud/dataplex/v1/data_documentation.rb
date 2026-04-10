@@ -54,14 +54,37 @@ module Google
         end
 
         # The output of a DataDocumentation scan.
+        # @!attribute [r] dataset_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::DatasetResult]
+        #     Output only. Insights for a Dataset resource.
+        #
+        #     Note: The following fields are mutually exclusive: `dataset_result`, `table_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] table_result
         #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::TableResult]
-        #     Output only. Table result for insights.
+        #     Output only. Insights for a Table resource.
+        #
+        #     Note: The following fields are mutually exclusive: `table_result`, `dataset_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataDocumentationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Generated metadata about the table.
+          # Insights for a dataset resource.
+          # @!attribute [r] overview
+          #   @return [::String]
+          #     Output only. Generated Dataset description.
+          # @!attribute [r] schema_relationships
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataDocumentationResult::SchemaRelationship>]
+          #     Output only. Relationships suggesting how tables in the dataset are
+          #     related to each other, based on their schema.
+          # @!attribute [r] queries
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataDocumentationResult::Query>]
+          #     Output only. Sample SQL queries for the dataset.
+          class DatasetResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Insights for a table resource.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The service-qualified full resource name of the cloud
@@ -80,6 +103,73 @@ module Google
           class TableResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details of the relationship between the schema of two resources.
+          # @!attribute [r] left_schema_paths
+          #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::SchemaRelationship::SchemaPaths]
+          #     Output only. An ordered list of fields for the join from the first table.
+          #     The size of this list must be the same as `right_schema_paths`.
+          #     Each field at index i in this list must correspond to a field at the same
+          #     index in the `right_schema_paths` list.
+          # @!attribute [r] right_schema_paths
+          #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::SchemaRelationship::SchemaPaths]
+          #     Output only. An ordered list of fields for the join from the second
+          #     table. The size of this list must be the same as `left_schema_paths`.
+          #     Each field at index i in this list must correspond to a field at the same
+          #     index in the `left_schema_paths` list.
+          # @!attribute [r] sources
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataDocumentationResult::SchemaRelationship::Source>]
+          #     Output only. Sources which generated the schema relation edge.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::Dataplex::V1::DataDocumentationResult::SchemaRelationship::Type]
+          #     Output only. The type of relationship between the schema paths.
+          class SchemaRelationship
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents an ordered set of paths within a table's schema.
+            # @!attribute [r] table_fqn
+            #   @return [::String]
+            #     Output only. The service-qualified full resource name of the table
+            #     Ex:
+            #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            # @!attribute [r] paths
+            #   @return [::Array<::String>]
+            #     Output only. An ordered set of Paths to fields within the schema of the
+            #     table. For fields nested within a top level field of type record, use
+            #     '.' to separate field names. Examples: Top level field - `top_level`
+            #     Nested field - `top_level.child.sub_field`
+            class SchemaPaths
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Source which generated the schema relation edge.
+            module Source
+              # The source of the schema relationship is unspecified.
+              SOURCE_UNSPECIFIED = 0
+
+              # The source of the schema relationship is agent.
+              AGENT = 4
+
+              # The source of the schema relationship is query history from the source
+              # system.
+              QUERY_HISTORY = 5
+
+              # The source of the schema relationship is table constraints added in
+              # the source system.
+              TABLE_CONSTRAINTS = 6
+            end
+
+            # The type of relationship.
+            module Type
+              # The type of the schema relationship is unspecified.
+              TYPE_UNSPECIFIED = 0
+
+              # Indicates a join relationship between the schema fields.
+              SCHEMA_JOIN = 1
+            end
           end
 
           # A sample SQL query in data documentation.
