@@ -3452,6 +3452,206 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v3_generated_Examples_CreateExample_sync",
+      "title": "Snippet for the create_example call in the Examples service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Examples::Client#create_example.",
+      "file": "examples/create_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_example",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client#create_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreateExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Example",
+        "client": {
+          "short_name": "Examples::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client"
+        },
+        "method": {
+          "short_name": "CreateExample",
+          "full_name": "google.cloud.dialogflow.cx.v3.Examples.CreateExample",
+          "service": {
+            "short_name": "Examples",
+            "full_name": "google.cloud.dialogflow.cx.v3.Examples"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Examples_DeleteExample_sync",
+      "title": "Snippet for the delete_example call in the Examples service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Examples::Client#delete_example.",
+      "file": "examples/delete_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_example",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client#delete_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeleteExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Examples::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client"
+        },
+        "method": {
+          "short_name": "DeleteExample",
+          "full_name": "google.cloud.dialogflow.cx.v3.Examples.DeleteExample",
+          "service": {
+            "short_name": "Examples",
+            "full_name": "google.cloud.dialogflow.cx.v3.Examples"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Examples_ListExamples_sync",
+      "title": "Snippet for the list_examples call in the Examples service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Examples::Client#list_examples.",
+      "file": "examples/list_examples.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_examples",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client#list_examples",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListExamplesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListExamplesResponse",
+        "client": {
+          "short_name": "Examples::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client"
+        },
+        "method": {
+          "short_name": "ListExamples",
+          "full_name": "google.cloud.dialogflow.cx.v3.Examples.ListExamples",
+          "service": {
+            "short_name": "Examples",
+            "full_name": "google.cloud.dialogflow.cx.v3.Examples"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Examples_GetExample_sync",
+      "title": "Snippet for the get_example call in the Examples service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Examples::Client#get_example.",
+      "file": "examples/get_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_example",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client#get_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Example",
+        "client": {
+          "short_name": "Examples::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client"
+        },
+        "method": {
+          "short_name": "GetExample",
+          "full_name": "google.cloud.dialogflow.cx.v3.Examples.GetExample",
+          "service": {
+            "short_name": "Examples",
+            "full_name": "google.cloud.dialogflow.cx.v3.Examples"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Examples_UpdateExample_sync",
+      "title": "Snippet for the update_example call in the Examples service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Examples::Client#update_example.",
+      "file": "examples/update_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_example",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client#update_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdateExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Example",
+        "client": {
+          "short_name": "Examples::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Examples::Client"
+        },
+        "method": {
+          "short_name": "UpdateExample",
+          "full_name": "google.cloud.dialogflow.cx.v3.Examples.UpdateExample",
+          "service": {
+            "short_name": "Examples",
+            "full_name": "google.cloud.dialogflow.cx.v3.Examples"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v3_generated_Experiments_ListExperiments_sync",
       "title": "Snippet for the list_experiments call in the Experiments service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments.",
@@ -3932,6 +4132,486 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v3_generated_Playbooks_CreatePlaybook_sync",
+      "title": "Snippet for the create_playbook call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#create_playbook.",
+      "file": "playbooks/create_playbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_playbook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#create_playbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Playbook",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "CreatePlaybook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.CreatePlaybook",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_DeletePlaybook_sync",
+      "title": "Snippet for the delete_playbook call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#delete_playbook.",
+      "file": "playbooks/delete_playbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_playbook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#delete_playbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "DeletePlaybook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.DeletePlaybook",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_ListPlaybooks_sync",
+      "title": "Snippet for the list_playbooks call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#list_playbooks.",
+      "file": "playbooks/list_playbooks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_playbooks",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#list_playbooks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListPlaybooksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListPlaybooksResponse",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "ListPlaybooks",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.ListPlaybooks",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_GetPlaybook_sync",
+      "title": "Snippet for the get_playbook call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#get_playbook.",
+      "file": "playbooks/get_playbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_playbook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#get_playbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetPlaybookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Playbook",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "GetPlaybook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.GetPlaybook",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_ExportPlaybook_sync",
+      "title": "Snippet for the export_playbook call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#export_playbook.",
+      "file": "playbooks/export_playbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_playbook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#export_playbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ExportPlaybookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "ExportPlaybook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.ExportPlaybook",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_ImportPlaybook_sync",
+      "title": "Snippet for the import_playbook call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#import_playbook.",
+      "file": "playbooks/import_playbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_playbook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#import_playbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ImportPlaybookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "ImportPlaybook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.ImportPlaybook",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_UpdatePlaybook_sync",
+      "title": "Snippet for the update_playbook call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#update_playbook.",
+      "file": "playbooks/update_playbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_playbook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#update_playbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdatePlaybookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Playbook",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "UpdatePlaybook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.UpdatePlaybook",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_CreatePlaybookVersion_sync",
+      "title": "Snippet for the create_playbook_version call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#create_playbook_version.",
+      "file": "playbooks/create_playbook_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_playbook_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#create_playbook_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreatePlaybookVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::PlaybookVersion",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "CreatePlaybookVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.CreatePlaybookVersion",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_GetPlaybookVersion_sync",
+      "title": "Snippet for the get_playbook_version call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#get_playbook_version.",
+      "file": "playbooks/get_playbook_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_playbook_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#get_playbook_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetPlaybookVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::PlaybookVersion",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "GetPlaybookVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.GetPlaybookVersion",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_RestorePlaybookVersion_sync",
+      "title": "Snippet for the restore_playbook_version call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#restore_playbook_version.",
+      "file": "playbooks/restore_playbook_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_playbook_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#restore_playbook_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::RestorePlaybookVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::RestorePlaybookVersionResponse",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "RestorePlaybookVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.RestorePlaybookVersion",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_ListPlaybookVersions_sync",
+      "title": "Snippet for the list_playbook_versions call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#list_playbook_versions.",
+      "file": "playbooks/list_playbook_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_playbook_versions",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#list_playbook_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListPlaybookVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListPlaybookVersionsResponse",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "ListPlaybookVersions",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.ListPlaybookVersions",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Playbooks_DeletePlaybookVersion_sync",
+      "title": "Snippet for the delete_playbook_version call in the Playbooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#delete_playbook_version.",
+      "file": "playbooks/delete_playbook_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_playbook_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client#delete_playbook_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeletePlaybookVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Playbooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Playbooks::Client"
+        },
+        "method": {
+          "short_name": "DeletePlaybookVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Playbooks.DeletePlaybookVersion",
+          "service": {
+            "short_name": "Playbooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Playbooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v3_generated_SecuritySettingsService_CreateSecuritySettings_sync",
       "title": "Snippet for the create_security_settings call in the SecuritySettingsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#create_security_settings.",
@@ -4118,6 +4798,406 @@
           "service": {
             "short_name": "SecuritySettingsService",
             "full_name": "google.cloud.dialogflow.cx.v3.SecuritySettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_CreateTool_sync",
+      "title": "Snippet for the create_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#create_tool.",
+      "file": "tools/create_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tool",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#create_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "CreateTool",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.CreateTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_ListTools_sync",
+      "title": "Snippet for the list_tools call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#list_tools.",
+      "file": "tools/list_tools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tools",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#list_tools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListToolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListToolsResponse",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "ListTools",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.ListTools",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_GetTool_sync",
+      "title": "Snippet for the get_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#get_tool.",
+      "file": "tools/get_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tool",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#get_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "GetTool",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.GetTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_UpdateTool_sync",
+      "title": "Snippet for the update_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#update_tool.",
+      "file": "tools/update_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tool",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#update_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Tool",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "UpdateTool",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.UpdateTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_DeleteTool_sync",
+      "title": "Snippet for the delete_tool call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#delete_tool.",
+      "file": "tools/delete_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tool",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#delete_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeleteToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "DeleteTool",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.DeleteTool",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_ListToolVersions_sync",
+      "title": "Snippet for the list_tool_versions call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#list_tool_versions.",
+      "file": "tools/list_tool_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tool_versions",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#list_tool_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListToolVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListToolVersionsResponse",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "ListToolVersions",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.ListToolVersions",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_CreateToolVersion_sync",
+      "title": "Snippet for the create_tool_version call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#create_tool_version.",
+      "file": "tools/create_tool_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tool_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#create_tool_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreateToolVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ToolVersion",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "CreateToolVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.CreateToolVersion",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_GetToolVersion_sync",
+      "title": "Snippet for the get_tool_version call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#get_tool_version.",
+      "file": "tools/get_tool_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tool_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#get_tool_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetToolVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ToolVersion",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "GetToolVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.GetToolVersion",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_DeleteToolVersion_sync",
+      "title": "Snippet for the delete_tool_version call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#delete_tool_version.",
+      "file": "tools/delete_tool_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tool_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#delete_tool_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeleteToolVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "DeleteToolVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.DeleteToolVersion",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Tools_RestoreToolVersion_sync",
+      "title": "Snippet for the restore_tool_version call in the Tools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Tools::Client#restore_tool_version.",
+      "file": "tools/restore_tool_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_tool_version",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client#restore_tool_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::RestoreToolVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::RestoreToolVersionResponse",
+        "client": {
+          "short_name": "Tools::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Tools::Client"
+        },
+        "method": {
+          "short_name": "RestoreToolVersion",
+          "full_name": "google.cloud.dialogflow.cx.v3.Tools.RestoreToolVersion",
+          "service": {
+            "short_name": "Tools",
+            "full_name": "google.cloud.dialogflow.cx.v3.Tools"
           }
         }
       },

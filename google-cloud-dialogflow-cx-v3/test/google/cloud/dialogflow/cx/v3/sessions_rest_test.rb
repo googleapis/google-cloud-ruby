@@ -90,6 +90,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     query_params = {}
     query_input = {}
     output_audio_config = {}
+    response_view = :DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED
 
     detect_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -105,27 +106,27 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config }) do |_result, response|
+        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config do |_result, response|
+        client.detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config) do |_result, response|
+        client.detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config }, call_options) do |_result, response|
+        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config), call_options) do |_result, response|
+        client.detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -147,6 +148,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     query_params = {}
     query_input = {}
     output_audio_config = {}
+    response_view = :DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED
 
     server_streaming_detect_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -162,27 +164,27 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config }) do |_result, response|
+        client.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.server_streaming_detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config do |_result, response|
+        client.server_streaming_detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.server_streaming_detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config) do |_result, response|
+        client.server_streaming_detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config }, call_options) do |_result, response|
+        client.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.server_streaming_detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config), call_options) do |_result, response|
+        client.server_streaming_detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
