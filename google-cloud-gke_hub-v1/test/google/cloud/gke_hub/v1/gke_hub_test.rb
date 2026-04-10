@@ -134,6 +134,75 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_bound_memberships
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListBoundMembershipsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope_name = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_bound_memberships_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_bound_memberships, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest, request
+      assert_equal "hello world", request["scope_name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_bound_memberships_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_bound_memberships({ scope_name: scope_name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_bound_memberships scope_name: scope_name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_bound_memberships ::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest.new(scope_name: scope_name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_bound_memberships({ scope_name: scope_name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_bound_memberships(::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest.new(scope_name: scope_name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_bound_memberships_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_features
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GkeHub::V1::ListFeaturesResponse.new
@@ -147,6 +216,7 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
     page_token = "hello world"
     filter = "hello world"
     order_by = "hello world"
+    return_partial_success = true
 
     list_features_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_features, name
@@ -156,6 +226,7 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["order_by"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -166,35 +237,35 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_features({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      client.list_features({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_features parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      client.list_features parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_features ::Google::Cloud::GkeHub::V1::ListFeaturesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      client.list_features ::Google::Cloud::GkeHub::V1::ListFeaturesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_features({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      client.list_features({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_features(::Google::Cloud::GkeHub::V1::ListFeaturesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      client.list_features(::Google::Cloud::GkeHub::V1::ListFeaturesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -272,11 +343,13 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    return_partial_success = true
 
     get_feature_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_feature, name
       assert_kind_of ::Google::Cloud::GkeHub::V1::GetFeatureRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -287,31 +360,31 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_feature({ name: name }) do |response, operation|
+      client.get_feature({ name: name, return_partial_success: return_partial_success }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_feature name: name do |response, operation|
+      client.get_feature name: name, return_partial_success: return_partial_success do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_feature ::Google::Cloud::GkeHub::V1::GetFeatureRequest.new(name: name) do |response, operation|
+      client.get_feature ::Google::Cloud::GkeHub::V1::GetFeatureRequest.new(name: name, return_partial_success: return_partial_success) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_feature({ name: name }, grpc_options) do |response, operation|
+      client.get_feature({ name: name, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_feature(::Google::Cloud::GkeHub::V1::GetFeatureRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_feature(::Google::Cloud::GkeHub::V1::GetFeatureRequest.new(name: name, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -798,6 +871,2055 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, generate_connect_manifest_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_fleet
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    fleet = {}
+
+    create_fleet_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_fleet, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::CreateFleetRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::Fleet), request["fleet"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_fleet_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_fleet({ parent: parent, fleet: fleet }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_fleet parent: parent, fleet: fleet do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_fleet ::Google::Cloud::GkeHub::V1::CreateFleetRequest.new(parent: parent, fleet: fleet) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_fleet({ parent: parent, fleet: fleet }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_fleet(::Google::Cloud::GkeHub::V1::CreateFleetRequest.new(parent: parent, fleet: fleet), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_fleet_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_fleet
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::Fleet.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_fleet_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_fleet, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GetFleetRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_fleet_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_fleet({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_fleet name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_fleet ::Google::Cloud::GkeHub::V1::GetFleetRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_fleet({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_fleet(::Google::Cloud::GkeHub::V1::GetFleetRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_fleet_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_fleet
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    fleet = {}
+    update_mask = {}
+
+    update_fleet_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_fleet, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::UpdateFleetRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::Fleet), request["fleet"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_fleet_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_fleet({ fleet: fleet, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_fleet fleet: fleet, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_fleet ::Google::Cloud::GkeHub::V1::UpdateFleetRequest.new(fleet: fleet, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_fleet({ fleet: fleet, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_fleet(::Google::Cloud::GkeHub::V1::UpdateFleetRequest.new(fleet: fleet, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_fleet_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_fleet
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_fleet_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_fleet, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::DeleteFleetRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_fleet_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_fleet({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_fleet name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_fleet ::Google::Cloud::GkeHub::V1::DeleteFleetRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_fleet({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_fleet(::Google::Cloud::GkeHub::V1::DeleteFleetRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_fleet_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_fleets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListFleetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_token = "hello world"
+    page_size = 42
+
+    list_fleets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_fleets, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListFleetsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_fleets_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_fleets({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_fleets parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_fleets ::Google::Cloud::GkeHub::V1::ListFleetsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_fleets({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_fleets(::Google::Cloud::GkeHub::V1::ListFleetsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_fleets_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_scope_namespace
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::Namespace.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_scope_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_scope_namespace, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_scope_namespace_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_scope_namespace({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_scope_namespace name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_scope_namespace ::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_scope_namespace({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_scope_namespace(::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_scope_namespace_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_scope_namespace
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    scope_namespace_id = "hello world"
+    scope_namespace = {}
+
+    create_scope_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_scope_namespace, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["scope_namespace_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::Namespace), request["scope_namespace"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_scope_namespace_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_scope_namespace({ parent: parent, scope_namespace_id: scope_namespace_id, scope_namespace: scope_namespace }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_scope_namespace parent: parent, scope_namespace_id: scope_namespace_id, scope_namespace: scope_namespace do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_scope_namespace ::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest.new(parent: parent, scope_namespace_id: scope_namespace_id, scope_namespace: scope_namespace) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_scope_namespace({ parent: parent, scope_namespace_id: scope_namespace_id, scope_namespace: scope_namespace }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_scope_namespace(::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest.new(parent: parent, scope_namespace_id: scope_namespace_id, scope_namespace: scope_namespace), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_scope_namespace_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_scope_namespace
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope_namespace = {}
+    update_mask = {}
+
+    update_scope_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_scope_namespace, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::Namespace), request["scope_namespace"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_scope_namespace_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_scope_namespace({ scope_namespace: scope_namespace, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_scope_namespace scope_namespace: scope_namespace, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_scope_namespace ::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest.new(scope_namespace: scope_namespace, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_scope_namespace({ scope_namespace: scope_namespace, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_scope_namespace(::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest.new(scope_namespace: scope_namespace, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_scope_namespace_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_scope_namespace
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_scope_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_scope_namespace, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_scope_namespace_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_scope_namespace({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_scope_namespace name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_scope_namespace ::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_scope_namespace({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_scope_namespace(::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_scope_namespace_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_scope_namespaces
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListScopeNamespacesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_scope_namespaces_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_scope_namespaces, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_scope_namespaces_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_scope_namespaces({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_scope_namespaces parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_scope_namespaces ::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_scope_namespaces({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_scope_namespaces(::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_scope_namespaces_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_scope_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::RBACRoleBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_scope_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_scope_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_scope_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_scope_rbac_role_binding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_scope_rbac_role_binding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_scope_rbac_role_binding ::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_scope_rbac_role_binding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_scope_rbac_role_binding(::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_scope_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_scope_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rbacrolebinding_id = "hello world"
+    rbacrolebinding = {}
+
+    create_scope_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_scope_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["rbacrolebinding_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::RBACRoleBinding), request["rbacrolebinding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_scope_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_scope_rbac_role_binding({ parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_scope_rbac_role_binding parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_scope_rbac_role_binding ::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest.new(parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_scope_rbac_role_binding({ parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_scope_rbac_role_binding(::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest.new(parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_scope_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_scope_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    rbacrolebinding = {}
+    update_mask = {}
+
+    update_scope_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_scope_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::RBACRoleBinding), request["rbacrolebinding"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_scope_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_scope_rbac_role_binding({ rbacrolebinding: rbacrolebinding, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_scope_rbac_role_binding rbacrolebinding: rbacrolebinding, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_scope_rbac_role_binding ::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest.new(rbacrolebinding: rbacrolebinding, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_scope_rbac_role_binding({ rbacrolebinding: rbacrolebinding, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_scope_rbac_role_binding(::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest.new(rbacrolebinding: rbacrolebinding, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_scope_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_scope_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_scope_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_scope_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_scope_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_scope_rbac_role_binding({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_scope_rbac_role_binding name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_scope_rbac_role_binding ::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_scope_rbac_role_binding({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_scope_rbac_role_binding(::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_scope_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_scope_rbac_role_bindings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_scope_rbac_role_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_scope_rbac_role_bindings, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_scope_rbac_role_bindings_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_scope_rbac_role_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_scope_rbac_role_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_scope_rbac_role_bindings ::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_scope_rbac_role_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_scope_rbac_role_bindings(::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_scope_rbac_role_bindings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_scope
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::Scope.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_scope_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_scope, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GetScopeRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_scope_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_scope({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_scope name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_scope ::Google::Cloud::GkeHub::V1::GetScopeRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_scope({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_scope(::Google::Cloud::GkeHub::V1::GetScopeRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_scope_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_scope
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    scope_id = "hello world"
+    scope = {}
+
+    create_scope_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_scope, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::CreateScopeRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["scope_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::Scope), request["scope"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_scope_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_scope({ parent: parent, scope_id: scope_id, scope: scope }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_scope parent: parent, scope_id: scope_id, scope: scope do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_scope ::Google::Cloud::GkeHub::V1::CreateScopeRequest.new(parent: parent, scope_id: scope_id, scope: scope) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_scope({ parent: parent, scope_id: scope_id, scope: scope }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_scope(::Google::Cloud::GkeHub::V1::CreateScopeRequest.new(parent: parent, scope_id: scope_id, scope: scope), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_scope_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_scope
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = {}
+    update_mask = {}
+
+    update_scope_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_scope, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::UpdateScopeRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::Scope), request["scope"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_scope_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_scope({ scope: scope, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_scope scope: scope, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_scope ::Google::Cloud::GkeHub::V1::UpdateScopeRequest.new(scope: scope, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_scope({ scope: scope, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_scope(::Google::Cloud::GkeHub::V1::UpdateScopeRequest.new(scope: scope, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_scope_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_scope
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_scope_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_scope, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::DeleteScopeRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_scope_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_scope({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_scope name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_scope ::Google::Cloud::GkeHub::V1::DeleteScopeRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_scope({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_scope(::Google::Cloud::GkeHub::V1::DeleteScopeRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_scope_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_scopes
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListScopesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_scopes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_scopes, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListScopesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_scopes_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_scopes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_scopes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_scopes ::Google::Cloud::GkeHub::V1::ListScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_scopes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_scopes(::Google::Cloud::GkeHub::V1::ListScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_scopes_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_permitted_scopes
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListPermittedScopesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_permitted_scopes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_permitted_scopes, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_permitted_scopes_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_permitted_scopes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_permitted_scopes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_permitted_scopes ::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_permitted_scopes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_permitted_scopes(::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_permitted_scopes_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_membership_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::MembershipBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_membership_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_membership_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_membership_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_membership_binding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_membership_binding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_membership_binding ::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_membership_binding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_membership_binding(::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_membership_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_membership_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    membership_binding = {}
+    membership_binding_id = "hello world"
+
+    create_membership_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_membership_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::MembershipBinding), request["membership_binding"]
+      assert_equal "hello world", request["membership_binding_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_membership_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_membership_binding({ parent: parent, membership_binding: membership_binding, membership_binding_id: membership_binding_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_membership_binding parent: parent, membership_binding: membership_binding, membership_binding_id: membership_binding_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_membership_binding ::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest.new(parent: parent, membership_binding: membership_binding, membership_binding_id: membership_binding_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_membership_binding({ parent: parent, membership_binding: membership_binding, membership_binding_id: membership_binding_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_membership_binding(::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest.new(parent: parent, membership_binding: membership_binding, membership_binding_id: membership_binding_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_membership_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_membership_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    membership_binding = {}
+    update_mask = {}
+
+    update_membership_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_membership_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::MembershipBinding), request["membership_binding"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_membership_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_membership_binding({ membership_binding: membership_binding, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_membership_binding membership_binding: membership_binding, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_membership_binding ::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest.new(membership_binding: membership_binding, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_membership_binding({ membership_binding: membership_binding, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_membership_binding(::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest.new(membership_binding: membership_binding, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_membership_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_membership_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_membership_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_membership_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_membership_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_membership_binding({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_membership_binding name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_membership_binding ::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_membership_binding({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_membership_binding(::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_membership_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_membership_bindings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListMembershipBindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_membership_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_membership_bindings, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_membership_bindings_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_membership_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_membership_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_membership_bindings ::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_membership_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_membership_bindings(::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_membership_bindings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_membership_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::RBACRoleBinding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_membership_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_membership_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_membership_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_membership_rbac_role_binding({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_membership_rbac_role_binding name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_membership_rbac_role_binding ::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_membership_rbac_role_binding({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_membership_rbac_role_binding(::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_membership_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_membership_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rbacrolebinding_id = "hello world"
+    rbacrolebinding = {}
+
+    create_membership_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_membership_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["rbacrolebinding_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::RBACRoleBinding), request["rbacrolebinding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_membership_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_membership_rbac_role_binding({ parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_membership_rbac_role_binding parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_membership_rbac_role_binding ::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest.new(parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_membership_rbac_role_binding({ parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_membership_rbac_role_binding(::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest.new(parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_membership_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_membership_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    rbacrolebinding = {}
+    update_mask = {}
+
+    update_membership_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_membership_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::RBACRoleBinding), request["rbacrolebinding"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_membership_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_membership_rbac_role_binding({ rbacrolebinding: rbacrolebinding, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_membership_rbac_role_binding rbacrolebinding: rbacrolebinding, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_membership_rbac_role_binding ::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest.new(rbacrolebinding: rbacrolebinding, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_membership_rbac_role_binding({ rbacrolebinding: rbacrolebinding, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_membership_rbac_role_binding(::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest.new(rbacrolebinding: rbacrolebinding, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_membership_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_membership_rbac_role_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_membership_rbac_role_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_membership_rbac_role_binding, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_membership_rbac_role_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_membership_rbac_role_binding({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_membership_rbac_role_binding name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_membership_rbac_role_binding ::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_membership_rbac_role_binding({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_membership_rbac_role_binding(::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_membership_rbac_role_binding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_membership_rbac_role_bindings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_membership_rbac_role_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_membership_rbac_role_bindings, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_membership_rbac_role_bindings_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_membership_rbac_role_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_membership_rbac_role_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_membership_rbac_role_bindings ::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_membership_rbac_role_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_membership_rbac_role_bindings(::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_membership_rbac_role_bindings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_generate_membership_rbac_role_binding_yaml
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rbacrolebinding_id = "hello world"
+    rbacrolebinding = {}
+
+    generate_membership_rbac_role_binding_yaml_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_membership_rbac_role_binding_yaml, name
+      assert_kind_of ::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["rbacrolebinding_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GkeHub::V1::RBACRoleBinding), request["rbacrolebinding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_membership_rbac_role_binding_yaml_client_stub do
+      # Create client
+      client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_membership_rbac_role_binding_yaml({ parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_membership_rbac_role_binding_yaml parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_membership_rbac_role_binding_yaml ::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest.new(parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_membership_rbac_role_binding_yaml({ parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_membership_rbac_role_binding_yaml(::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest.new(parent: parent, rbacrolebinding_id: rbacrolebinding_id, rbacrolebinding: rbacrolebinding), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_membership_rbac_role_binding_yaml_client_stub.call_rpc_count
     end
   end
 
