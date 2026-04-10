@@ -66,6 +66,12 @@ module Google
         #     before this time otherwise the
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance SingleTenantHsmInstance} will
         #     become disabled.
+        # @!attribute [rw] key_portability_enabled
+        #   @return [::Boolean]
+        #     Optional. Immutable. Indicates whether key portability is enabled for the
+        #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance SingleTenantHsmInstance}.
+        #     This can only be set at creation time. Key portability features are
+        #     disabled by default and not yet available in GA.
         class SingleTenantHsmInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
