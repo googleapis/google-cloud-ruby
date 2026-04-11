@@ -1116,6 +1116,10 @@ module Google
 
               # Enables Search As You Type.
               ENABLED = 2
+
+              # Automatic switching between search-as-you-type and standard search
+              # modes, ideal for single-API implementations (e.g., debouncing).
+              AUTO = 3
             end
           end
 
