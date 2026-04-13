@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Google Cloud Security Operations API, popularly known as the Chronicle API, serves endpoints that enable security analysts to analyze and mitigate a security threat throughout its lifecycle. Note that google-cloud-chronicle-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-chronicle instead. See the readme for more details."
-  gem.summary       = "The Google Cloud Security Operations API, popularly known as the Chronicle API, serves endpoints that enable security analysts to analyze and mitigate a security threat throughout its lifecycle."
+  gem.description   = "The Google Cloud Security Operations API (Chronicle API) provides endpoints that help analysts investigate and mitigate security threats throughout their lifecycle. Note that google-cloud-chronicle-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-chronicle instead. See the readme for more details."
+  gem.summary       = "The Google Cloud Security Operations API (Chronicle API) provides endpoints that help analysts investigate and mitigate security threats throughout their lifecycle."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
