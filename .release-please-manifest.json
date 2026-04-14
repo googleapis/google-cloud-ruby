@@ -91,6 +91,8 @@
   "google-cloud-app_hub+FILLER": "0.0.0",
   "google-cloud-app_hub-v1": "1.6.0",
   "google-cloud-app_hub-v1+FILLER": "0.0.0",
+  "google-cloud-app_optimize-v1beta": "0.0.1",
+  "google-cloud-app_optimize-v1beta+FILLER": "0.0.0",
   "google-cloud-artifact_registry": "2.1.0",
   "google-cloud-artifact_registry+FILLER": "0.0.0",
   "google-cloud-artifact_registry-v1": "1.13.0",
