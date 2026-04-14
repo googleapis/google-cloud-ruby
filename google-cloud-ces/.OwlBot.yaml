@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/ces/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-ces/$1
