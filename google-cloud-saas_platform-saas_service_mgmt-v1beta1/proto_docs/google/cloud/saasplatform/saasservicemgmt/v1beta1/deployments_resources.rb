@@ -118,14 +118,14 @@ module Google
           #     Optional. Immutable. A reference to the consumer resource this SaaS Tenant
           #     is representing.
           #
-          #     The relationship with a consumer resource can be used by SaaS Runtime for
-          #     retrieving consumer-defined settings and policies such as maintenance
-          #     policies (using Unified Maintenance Policy API).
+          #     The relationship with a consumer resource can be used by App Lifecycle
+          #     Manager for retrieving consumer-defined settings and policies such as
+          #     maintenance policies (using Unified Maintenance Policy API).
           # @!attribute [rw] saas
           #   @return [::String]
           #     Required. Immutable. A reference to the Saas that defines the product
-          #     (managed service) that the producer wants to manage with SaaS Runtime. Part
-          #     of the SaaS Runtime common data model.
+          #     (managed service) that the producer wants to manage with App Lifecycle
+          #     Manager. Part of the App Lifecycle Manager common data model.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -214,8 +214,9 @@ module Google
           # @!attribute [rw] saas
           #   @return [::String]
           #     Required. Immutable. A reference to the Saas that defines the product
-          #     (managed service) that the producer wants to manage with SaaS Runtime. Part
-          #     of the SaaS Runtime common data model. Immutable once set.
+          #     (managed service) that the producer wants to manage with App Lifecycle
+          #     Manager. Part of the App Lifecycle Manager common data model. Immutable
+          #     once set.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -812,8 +813,8 @@ module Google
           #     Required. Name of the inputVariable on the dependency
           # @!attribute [rw] ignore_for_lookup
           #   @return [::Boolean]
-          #     Optional. Tells SaaS Runtime if this mapping should be used during lookup
-          #     or not
+          #     Optional. Tells App Lifecycle Manager if this mapping should be used during
+          #     lookup or not
           class ToMapping
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
