@@ -1839,17 +1839,25 @@ module Google
         #   @return [::String]
         #     A message digest produced with the SHA-256 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha384
         #   @return [::String]
         #     A message digest produced with the SHA-384 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha512
         #   @return [::String]
         #     A message digest produced with the SHA-512 algorithm.
         #
-        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`, `external_mu`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] external_mu
+        #   @return [::String]
+        #     A message digest produced with SHAKE-256, to be used with ML-DSA
+        #     external-μ algorithms only. See "message representative" note in
+        #     section 6.2, algorithm 7 of the FIPS-204 standard:
+        #     https://doi.org/10.6028/nist.fips.204
+        #
+        #     Note: The following fields are mutually exclusive: `external_mu`, `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Digest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
