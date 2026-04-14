@@ -858,7 +858,6 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
-        #
         #   # Set restriction mode to FullyRestricted
         #   new_config = { restriction_mode: "FullyRestricted" }
         #   bucket.new_google_managed_encryption_enforcement_config = new_config
