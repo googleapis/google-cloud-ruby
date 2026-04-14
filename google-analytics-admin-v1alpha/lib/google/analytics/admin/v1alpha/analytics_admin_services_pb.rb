@@ -443,8 +443,10 @@ module Google
             rpc :UpdateSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
             # Lookup for a single `SubpropertySyncConfig`.
             rpc :GetSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
-            # Returns the singleton data retention settings for this property.
+            # Returns the reporting identity settings for this property.
             rpc :GetReportingIdentitySettings, ::Google::Analytics::Admin::V1alpha::GetReportingIdentitySettingsRequest, ::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings
+            # Looks up settings related to user-provided data for a property.
+            rpc :GetUserProvidedDataSettings, ::Google::Analytics::Admin::V1alpha::GetUserProvidedDataSettingsRequest, ::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings
           end
 
           Stub = Service.rpc_stub_class
