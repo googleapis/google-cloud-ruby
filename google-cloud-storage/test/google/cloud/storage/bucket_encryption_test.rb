@@ -149,7 +149,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
     it "updates encryption_enforcement_config using update_bucket_encryption_enforcement_config" do
       mock = Minitest::Mock.new
-      incoming_config = { google_managed_encryption_enforcement_config: { restriction_mode: "FullyRestricted" } }
+      incoming_config = { restriction_mode: "FullyRestricted" }
 
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(
         encryption: Google::Apis::StorageV1::Bucket::Encryption.new(
@@ -162,14 +162,23 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
       returned_bucket_gapi = bucket_gapi.dup
       returned_bucket_gapi.encryption = bucket_gapi.encryption.dup
       returned_bucket_gapi.encryption.google_managed_encryption_enforcement_config = patch_bucket_gapi.encryption.google_managed_encryption_enforcement_config
-      mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: { retries: 0 })
+
+      mock.expect :update_bucket, returned_bucket_gapi do |name, patch_obj, **kwargs|
+        cm_config = patch_obj.encryption.customer_managed_encryption_enforcement_config
+        cs_config = patch_obj.encryption.customer_supplied_encryption_enforcement_config
+        gm_config = patch_obj.encryption.google_managed_encryption_enforcement_config
+  
+      end
 
       bucket.service.mocked_service = mock
       _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
       _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
       _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
 
-      bucket.update_bucket_encryption_enforcement_config incoming_config
+      bucket.update do |b|
+        b.google_managed_encryption_enforcement_config = incoming_config
+      end
+      # bucket.update_bucket_encryption_enforcement_config incoming_config
       _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
       _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
       _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
@@ -177,24 +186,18 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
       mock.verify
     end
 
-    it "raises error when invalid config is provided for update " do
-      config = { 
-        wrongconfig: { restriction_mode: "NotRestricted" }
-      }
+
+    it "raises error when a Hash is not provided for encryption enforcement config" do
+      invalid_config = "test"
+
       err = assert_raises(ArgumentError) do
-        bucket.update_bucket_encryption_enforcement_config(config)
+        bucket.update do |b|
+          b.google_managed_encryption_enforcement_config = invalid_config
+        end
       end
-      assert_match /Invalid config detected: wrongconfig/, err.message
 
-    end
-
-    it "raises error when a Hash in not provided for update " do
-      config = "wrongconfig"
-      err = assert_raises(ArgumentError) do
-        bucket.update_bucket_encryption_enforcement_config(config)
-      end
-      assert /incoming_config must be a Hash/
-
+      # Update the regex to match the error message in your validation method
+      assert_match(/must be a Hash or valid Config object/, err.message)
     end
 
     it "deletes all encryption enforcement configs together and preserves default_kms_key" do

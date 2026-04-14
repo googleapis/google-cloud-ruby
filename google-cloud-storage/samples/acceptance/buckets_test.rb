@@ -58,6 +58,7 @@ require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 require_relative "../storage_move_object"
+require 'pry'
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }

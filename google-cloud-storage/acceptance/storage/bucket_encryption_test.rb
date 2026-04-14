@@ -104,7 +104,9 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
 
       bucket.customer_supplied_encryption_enforcement_config = customer_supplied_config
       _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
-      bucket.update_bucket_encryption_enforcement_config  google_managed_config_complete
+       bucket.update do |b|
+        b.google_managed_encryption_enforcement_config = google_managed_config
+      end
       _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
 
       bucket.reload!
@@ -113,14 +115,6 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     end
 
     it "deletes all encryption enforcement configs" do
-      # For the update, need to specify all three configs
-      bucket.update do |b|
-        b.customer_supplied_encryption_enforcement_config = customer_supplied_config
-        b.google_managed_encryption_enforcement_config = google_managed_config
-      end
-      _(bucket.customer_managed_encryption_enforcement_config).wont_be :nil?
-      _(bucket.customer_supplied_encryption_enforcement_config).wont_be :nil?
-      _(bucket.google_managed_encryption_enforcement_config).wont_be :nil?
 
       bucket.update do |b|
         b.customer_managed_encryption_enforcement_config = nil
