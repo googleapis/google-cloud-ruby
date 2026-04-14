@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "SaaS Runtime lets you store, host, manage, and monitor software as a service (SaaS) applications on Google Cloud."
+  gem.description   = "App Lifecycle Manager Overview."
   gem.summary       = "Model, deploy, and operate your SaaS at scale."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
