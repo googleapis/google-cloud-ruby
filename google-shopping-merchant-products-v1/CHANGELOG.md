@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-04-14)
+
+#### Features
+
+* a new field `base64_encoded_name` is added to the `Product` message ([#33819](https://github.com/googleapis/google-cloud-ruby/issues/33819)) 
+
 ### 0.5.1 (2026-04-08)
 
 #### Documentation
