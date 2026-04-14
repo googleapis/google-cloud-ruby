@@ -435,6 +435,10 @@
       "component": "google-cloud-certificate_manager-v1",
       "version_file": "lib/google/cloud/certificate_manager/v1/version.rb"
     },
+    "google-cloud-ces": {
+      "component": "google-cloud-ces",
+      "version_file": "lib/google/cloud/ces/version.rb"
+    },
     "google-cloud-ces-v1": {
       "component": "google-cloud-ces-v1",
       "version_file": "lib/google/cloud/ces/v1/version.rb"
