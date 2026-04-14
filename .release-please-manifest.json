@@ -931,6 +931,8 @@
   "google-cloud-workflows-v1+FILLER": "0.0.0",
   "google-cloud-workflows-v1beta": "0.16.1",
   "google-cloud-workflows-v1beta+FILLER": "0.0.0",
+  "google-cloud-workload_manager": "0.0.1",
+  "google-cloud-workload_manager+FILLER": "0.0.0",
   "google-cloud-workload_manager-v1": "0.0.1",
   "google-cloud-workload_manager-v1+FILLER": "0.0.0",
   "google-cloud-workstations": "2.1.0",

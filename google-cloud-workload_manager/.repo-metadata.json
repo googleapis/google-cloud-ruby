@@ -1,0 +1,17 @@
+{
+    "api_id": "workloadmanager.googleapis.com",
+    "api_shortname": "workloadmanager",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-workload_manager/latest",
+    "distribution_name": "google-cloud-workload_manager",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "workloadmanager",
+    "name_pretty": "Workload Manager API",
+    "product_documentation": "https://docs.cloud.google.com/workload-manager/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Workload Manager is a service that provides tooling for enterprise workloads to automate the deployment and validation of your workloads against best practices and recommendations.",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/workload-manager/docs",
+    "library_type": "GAPIC_MANUAL"
+}

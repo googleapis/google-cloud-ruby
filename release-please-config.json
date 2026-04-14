@@ -1875,6 +1875,10 @@
       "component": "google-cloud-workflows-v1beta",
       "version_file": "lib/google/cloud/workflows/v1beta/version.rb"
     },
+    "google-cloud-workload_manager": {
+      "component": "google-cloud-workload_manager",
+      "version_file": "lib/google/cloud/workload_manager/version.rb"
+    },
     "google-cloud-workload_manager-v1": {
       "component": "google-cloud-workload_manager-v1",
       "version_file": "lib/google/cloud/workload_manager/v1/version.rb"
