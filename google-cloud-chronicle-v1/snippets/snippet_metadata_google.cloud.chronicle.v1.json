@@ -412,6 +412,606 @@
       ]
     },
     {
+      "region_tag": "chronicle_v1_generated_DataTableService_CreateDataTable_sync",
+      "title": "Snippet for the create_data_table call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#create_data_table.",
+      "file": "data_table_service/create_data_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_table",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#create_data_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::CreateDataTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTable",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataTable",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.CreateDataTable",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_ListDataTables_sync",
+      "title": "Snippet for the list_data_tables call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#list_data_tables.",
+      "file": "data_table_service/list_data_tables.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_tables",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#list_data_tables",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ListDataTablesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ListDataTablesResponse",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "ListDataTables",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.ListDataTables",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_GetDataTable_sync",
+      "title": "Snippet for the get_data_table call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#get_data_table.",
+      "file": "data_table_service/get_data_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_table",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#get_data_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetDataTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTable",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "GetDataTable",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.GetDataTable",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_UpdateDataTable_sync",
+      "title": "Snippet for the update_data_table call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#update_data_table.",
+      "file": "data_table_service/update_data_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_table",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#update_data_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateDataTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTable",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataTable",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.UpdateDataTable",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_DeleteDataTable_sync",
+      "title": "Snippet for the delete_data_table call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#delete_data_table.",
+      "file": "data_table_service/delete_data_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_table",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#delete_data_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::DeleteDataTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataTable",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.DeleteDataTable",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_CreateDataTableRow_sync",
+      "title": "Snippet for the create_data_table_row call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#create_data_table_row.",
+      "file": "data_table_service/create_data_table_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_table_row",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#create_data_table_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::CreateDataTableRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTableRow",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataTableRow",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.CreateDataTableRow",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_UpdateDataTableRow_sync",
+      "title": "Snippet for the update_data_table_row call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#update_data_table_row.",
+      "file": "data_table_service/update_data_table_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_table_row",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#update_data_table_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateDataTableRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTableRow",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataTableRow",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.UpdateDataTableRow",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_ListDataTableRows_sync",
+      "title": "Snippet for the list_data_table_rows call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#list_data_table_rows.",
+      "file": "data_table_service/list_data_table_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_table_rows",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#list_data_table_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ListDataTableRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ListDataTableRowsResponse",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "ListDataTableRows",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.ListDataTableRows",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_GetDataTableRow_sync",
+      "title": "Snippet for the get_data_table_row call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#get_data_table_row.",
+      "file": "data_table_service/get_data_table_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_table_row",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#get_data_table_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetDataTableRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTableRow",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "GetDataTableRow",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.GetDataTableRow",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_DeleteDataTableRow_sync",
+      "title": "Snippet for the delete_data_table_row call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#delete_data_table_row.",
+      "file": "data_table_service/delete_data_table_row.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_table_row",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#delete_data_table_row",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::DeleteDataTableRowRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataTableRow",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.DeleteDataTableRow",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_BulkCreateDataTableRows_sync",
+      "title": "Snippet for the bulk_create_data_table_rows call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_create_data_table_rows.",
+      "file": "data_table_service/bulk_create_data_table_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_create_data_table_rows",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_create_data_table_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::BulkCreateDataTableRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BulkCreateDataTableRowsResponse",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "BulkCreateDataTableRows",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.BulkCreateDataTableRows",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_BulkGetDataTableRows_sync",
+      "title": "Snippet for the bulk_get_data_table_rows call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_get_data_table_rows.",
+      "file": "data_table_service/bulk_get_data_table_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_get_data_table_rows",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_get_data_table_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::BulkGetDataTableRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BulkGetDataTableRowsResponse",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "BulkGetDataTableRows",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.BulkGetDataTableRows",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_BulkReplaceDataTableRows_sync",
+      "title": "Snippet for the bulk_replace_data_table_rows call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_replace_data_table_rows.",
+      "file": "data_table_service/bulk_replace_data_table_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_replace_data_table_rows",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_replace_data_table_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::BulkReplaceDataTableRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BulkReplaceDataTableRowsResponse",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "BulkReplaceDataTableRows",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.BulkReplaceDataTableRows",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_BulkUpdateDataTableRows_sync",
+      "title": "Snippet for the bulk_update_data_table_rows call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_update_data_table_rows.",
+      "file": "data_table_service/bulk_update_data_table_rows.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_update_data_table_rows",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#bulk_update_data_table_rows",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::BulkUpdateDataTableRowsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BulkUpdateDataTableRowsResponse",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "BulkUpdateDataTableRows",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.BulkUpdateDataTableRows",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DataTableService_GetDataTableOperationErrors_sync",
+      "title": "Snippet for the get_data_table_operation_errors call in the DataTableService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataTableService::Client#get_data_table_operation_errors.",
+      "file": "data_table_service/get_data_table_operation_errors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_table_operation_errors",
+        "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client#get_data_table_operation_errors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetDataTableOperationErrorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DataTableOperationErrors",
+        "client": {
+          "short_name": "DataTableService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DataTableService::Client"
+        },
+        "method": {
+          "short_name": "GetDataTableOperationErrors",
+          "full_name": "google.cloud.chronicle.v1.DataTableService.GetDataTableOperationErrors",
+          "service": {
+            "short_name": "DataTableService",
+            "full_name": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "chronicle_v1_generated_EntityService_GetWatchlist_sync",
       "title": "Snippet for the get_watchlist call in the EntityService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::EntityService::Client#get_watchlist.",
