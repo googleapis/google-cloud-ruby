@@ -1,0 +1,17 @@
+{
+    "api_id": "auditmanager.googleapis.com",
+    "api_shortname": "auditmanager",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-audit_manager-v1/latest",
+    "distribution_name": "google-cloud-audit_manager-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "auditmanager",
+    "name_pretty": "Audit Manager V1 API",
+    "product_documentation": "https://cloud.google.com/audit-manager/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-audit_manager-v1 is the official client library for the Audit Manager V1 API. Note that google-cloud-audit_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-audit_manager instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/audit-manager/docs",
+    "library_type": "GAPIC_AUTO"
+}
