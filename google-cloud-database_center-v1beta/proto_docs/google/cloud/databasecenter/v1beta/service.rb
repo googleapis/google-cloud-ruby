@@ -305,6 +305,9 @@ module Google
         # @!attribute [rw] maintenance_info
         #   @return [::Google::Cloud::DatabaseCenter::V1beta::MaintenanceInfo]
         #     Optional. The maintenance information of the resource.
+        # @!attribute [rw] affiliations
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::Affiliation>]
+        #     Optional. Affiliation details of the resource.
         class DatabaseResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -851,21 +854,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The enum value corresponds to 'type' suffix in the resource_type field.
-        module ResourceCategory
-          # Unspecified.
-          RESOURCE_CATEGORY_UNSPECIFIED = 0
-
-          # A resource that is an Instance.
-          INSTANCE = 1
-
-          # A resource that is a Cluster.
-          CLUSTER = 2
-
-          # A resource that is a Database.
-          DATABASE = 3
-        end
-
         # Represents the edition of a database resource.
         module Edition
           # Default, to make it consistent with instance edition enum.
@@ -921,6 +909,27 @@ module Google
 
           # Self-managed resource.
           MANAGEMENT_TYPE_SELF_MANAGED = 2
+        end
+
+        # The enum value corresponds to 'type' suffix in the resource_type field.
+        module ResourceCategory
+          # Unspecified.
+          RESOURCE_CATEGORY_UNSPECIFIED = 0
+
+          # A resource that is an Instance.
+          INSTANCE = 1
+
+          # A resource that is a Cluster.
+          CLUSTER = 2
+
+          # A resource that is a Database.
+          DATABASE = 3
+
+          # A resource that is a Dataset.
+          DATASET = 4
+
+          # A resource that is a Reservation.
+          RESERVATION = 5
         end
       end
     end
