@@ -793,6 +793,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     parent = "hello world"
     source_model = "hello world"
     encryption_spec = {}
+    custom_service_account = "hello world"
 
     copy_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :copy_model, name
@@ -802,6 +803,7 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["source_model"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::EncryptionSpec), request["encryption_spec"]
+      assert_equal "hello world", request["custom_service_account"]
       refute_nil options
     end
 
@@ -812,35 +814,35 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec }) do |response, operation|
+      client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec do |response, operation|
+      client.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec) do |response, operation|
+      client.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec }, grpc_options) do |response, operation|
+      client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec), grpc_options) do |response, operation|
+      client.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
