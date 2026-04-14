@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-app_optimize.gemspec",
+    "lib/google-cloud-app_optimize.rb",
+    "lib/google/cloud/app_optimize.rb",
+    "lib/google/cloud/app_optimize/version.rb",
+    "test/google/cloud/app_optimize/client_test.rb",
+    "test/google/cloud/app_optimize/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
