@@ -107,6 +107,8 @@
   "google-cloud-assured_workloads-v1+FILLER": "0.0.0",
   "google-cloud-assured_workloads-v1beta1": "0.25.0",
   "google-cloud-assured_workloads-v1beta1+FILLER": "0.0.0",
+  "google-cloud-audit_manager": "0.0.1",
+  "google-cloud-audit_manager+FILLER": "0.0.0",
   "google-cloud-audit_manager-v1": "0.0.1",
   "google-cloud-audit_manager-v1+FILLER": "0.0.0",
   "google-cloud-automl": "2.1.0",
