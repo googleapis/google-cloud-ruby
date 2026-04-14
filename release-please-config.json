@@ -427,6 +427,10 @@
       "component": "google-cloud-certificate_manager-v1",
       "version_file": "lib/google/cloud/certificate_manager/v1/version.rb"
     },
+    "google-cloud-ces-v1beta": {
+      "component": "google-cloud-ces-v1beta",
+      "version_file": "lib/google/cloud/ces/v1beta/version.rb"
+    },
     "google-cloud-channel": {
       "component": "google-cloud-channel",
       "version_file": "lib/google/cloud/channel/version.rb"
