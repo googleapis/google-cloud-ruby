@@ -90,7 +90,6 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     let(:google_managed_config_complete) do
       {google_managed_encryption_enforcement_config: { restriction_mode: "FullyRestricted" } }
     end
-
     it "knows its encryption enforcement config" do
       _(bucket.customer_managed_encryption_enforcement_config).wont_be :nil?
       _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
