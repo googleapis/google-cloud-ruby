@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.9.0 (2026-04-14)
+
+#### Features
+
+* adding DeploymentGroups, you can now manage deployment of multiple module root dependencies in a single DAG ([#33816](https://github.com/googleapis/google-cloud-ruby/issues/33816)) 
+
 ### 2.8.0 (2026-04-02)
 
 #### Features
