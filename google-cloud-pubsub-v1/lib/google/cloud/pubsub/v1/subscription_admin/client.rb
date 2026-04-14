@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14, 13]
                 }
 
-                default_config.rpcs.streaming_pull.timeout = 900.0
+                default_config.rpcs.streaming_pull.timeout = 1800.0
                 default_config.rpcs.streaming_pull.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 4, retry_codes: [4, 8, 10, 13, 14]
                 }
