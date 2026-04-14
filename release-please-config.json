@@ -227,6 +227,10 @@
       "component": "google-cloud-assured_workloads-v1beta1",
       "version_file": "lib/google/cloud/assured_workloads/v1beta1/version.rb"
     },
+    "google-cloud-audit_manager-v1": {
+      "component": "google-cloud-audit_manager-v1",
+      "version_file": "lib/google/cloud/audit_manager/v1/version.rb"
+    },
     "google-cloud-automl": {
       "component": "google-cloud-automl",
       "version_file": "lib/google/cloud/automl/version.rb"
