@@ -195,6 +195,10 @@
       "component": "google-cloud-app_hub-v1",
       "version_file": "lib/google/cloud/app_hub/v1/version.rb"
     },
+    "google-cloud-app_optimize": {
+      "component": "google-cloud-app_optimize",
+      "version_file": "lib/google/cloud/app_optimize/version.rb"
+    },
     "google-cloud-app_optimize-v1beta": {
       "component": "google-cloud-app_optimize-v1beta",
       "version_file": "lib/google/cloud/app_optimize/v1beta/version.rb"
