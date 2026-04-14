@@ -1159,6 +1159,10 @@
       "component": "google-cloud-network_connectivity-v1alpha1",
       "version_file": "lib/google/cloud/network_connectivity/v1alpha1/version.rb"
     },
+    "google-cloud-network_connectivity-v1beta": {
+      "component": "google-cloud-network_connectivity-v1beta",
+      "version_file": "lib/google/cloud/network_connectivity/v1beta/version.rb"
+    },
     "google-cloud-network_management": {
       "component": "google-cloud-network_management",
       "version_file": "lib/google/cloud/network_management/version.rb"

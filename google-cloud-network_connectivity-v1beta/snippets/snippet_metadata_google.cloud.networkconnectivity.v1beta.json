@@ -1,0 +1,2095 @@
+{
+  "client_library": {
+    "name": "google-cloud-network_connectivity-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.networkconnectivity.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_ListMulticloudDataTransferConfigs_sync",
+      "title": "Snippet for the list_multicloud_data_transfer_configs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#list_multicloud_data_transfer_configs.",
+      "file": "data_transfer_service/list_multicloud_data_transfer_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_multicloud_data_transfer_configs",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#list_multicloud_data_transfer_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferConfigsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListMulticloudDataTransferConfigs",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferConfigs",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_GetMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the get_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#get_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/get_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#get_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::MulticloudDataTransferConfig",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_CreateMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the create_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#create_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/create_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#create_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreateMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "CreateMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.CreateMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_UpdateMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the update_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#update_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/update_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#update_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "UpdateMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_DeleteMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the delete_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#delete_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/delete_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#delete_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeleteMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_ListDestinations_sync",
+      "title": "Snippet for the list_destinations call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#list_destinations.",
+      "file": "data_transfer_service/list_destinations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_destinations",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#list_destinations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListDestinationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListDestinationsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListDestinations",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListDestinations",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_GetDestination_sync",
+      "title": "Snippet for the get_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#get_destination.",
+      "file": "data_transfer_service/get_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#get_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::Destination",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetDestination",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_CreateDestination_sync",
+      "title": "Snippet for the create_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#create_destination.",
+      "file": "data_transfer_service/create_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#create_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreateDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "CreateDestination",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.CreateDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_UpdateDestination_sync",
+      "title": "Snippet for the update_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#update_destination.",
+      "file": "data_transfer_service/update_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#update_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDestination",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.UpdateDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_DeleteDestination_sync",
+      "title": "Snippet for the delete_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#delete_destination.",
+      "file": "data_transfer_service/delete_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#delete_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeleteDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDestination",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.DeleteDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_GetMulticloudDataTransferSupportedService_sync",
+      "title": "Snippet for the get_multicloud_data_transfer_supported_service call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#get_multicloud_data_transfer_supported_service.",
+      "file": "data_transfer_service/get_multicloud_data_transfer_supported_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_multicloud_data_transfer_supported_service",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#get_multicloud_data_transfer_supported_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferSupportedServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::MulticloudDataTransferSupportedService",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetMulticloudDataTransferSupportedService",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.GetMulticloudDataTransferSupportedService",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_DataTransferService_ListMulticloudDataTransferSupportedServices_sync",
+      "title": "Snippet for the list_multicloud_data_transfer_supported_services call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#list_multicloud_data_transfer_supported_services.",
+      "file": "data_transfer_service/list_multicloud_data_transfer_supported_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_multicloud_data_transfer_supported_services",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client#list_multicloud_data_transfer_supported_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferSupportedServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferSupportedServicesResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListMulticloudDataTransferSupportedServices",
+          "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService.ListMulticloudDataTransferSupportedServices",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListHubs_sync",
+      "title": "Snippet for the list_hubs call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_hubs.",
+      "file": "hub_service/list_hubs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hubs",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_hubs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListHubsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListHubsResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListHubs",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListHubs",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_GetHub_sync",
+      "title": "Snippet for the get_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_hub.",
+      "file": "hub_service/get_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::Hub",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetHub",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.GetHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_CreateHub_sync",
+      "title": "Snippet for the create_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#create_hub.",
+      "file": "hub_service/create_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#create_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreateHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "CreateHub",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.CreateHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_UpdateHub_sync",
+      "title": "Snippet for the update_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_hub.",
+      "file": "hub_service/update_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateHub",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.UpdateHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_DeleteHub_sync",
+      "title": "Snippet for the delete_hub call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#delete_hub.",
+      "file": "hub_service/delete_hub.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_hub",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#delete_hub",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeleteHubRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteHub",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.DeleteHub",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListHubSpokes_sync",
+      "title": "Snippet for the list_hub_spokes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_hub_spokes.",
+      "file": "hub_service/list_hub_spokes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hub_spokes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_hub_spokes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListHubSpokesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListHubSpokesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListHubSpokes",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListHubSpokes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_QueryHubStatus_sync",
+      "title": "Snippet for the query_hub_status call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#query_hub_status.",
+      "file": "hub_service/query_hub_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_hub_status",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#query_hub_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::QueryHubStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::QueryHubStatusResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "QueryHubStatus",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.QueryHubStatus",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListSpokes_sync",
+      "title": "Snippet for the list_spokes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_spokes.",
+      "file": "hub_service/list_spokes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_spokes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_spokes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListSpokesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListSpokesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListSpokes",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListSpokes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_GetSpoke_sync",
+      "title": "Snippet for the get_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_spoke.",
+      "file": "hub_service/get_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::Spoke",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.GetSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_CreateSpoke_sync",
+      "title": "Snippet for the create_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#create_spoke.",
+      "file": "hub_service/create_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#create_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreateSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "CreateSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.CreateSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_UpdateSpoke_sync",
+      "title": "Snippet for the update_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_spoke.",
+      "file": "hub_service/update_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.UpdateSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_RejectHubSpoke_sync",
+      "title": "Snippet for the reject_hub_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#reject_hub_spoke.",
+      "file": "hub_service/reject_hub_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reject_hub_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#reject_hub_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::RejectHubSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "RejectHubSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.RejectHubSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_AcceptHubSpoke_sync",
+      "title": "Snippet for the accept_hub_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#accept_hub_spoke.",
+      "file": "hub_service/accept_hub_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "accept_hub_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#accept_hub_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::AcceptHubSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "AcceptHubSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.AcceptHubSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_AcceptSpokeUpdate_sync",
+      "title": "Snippet for the accept_spoke_update call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#accept_spoke_update.",
+      "file": "hub_service/accept_spoke_update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "accept_spoke_update",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#accept_spoke_update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::AcceptSpokeUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "AcceptSpokeUpdate",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.AcceptSpokeUpdate",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_RejectSpokeUpdate_sync",
+      "title": "Snippet for the reject_spoke_update call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#reject_spoke_update.",
+      "file": "hub_service/reject_spoke_update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reject_spoke_update",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#reject_spoke_update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::RejectSpokeUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "RejectSpokeUpdate",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.RejectSpokeUpdate",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_DeleteSpoke_sync",
+      "title": "Snippet for the delete_spoke call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#delete_spoke.",
+      "file": "hub_service/delete_spoke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_spoke",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#delete_spoke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeleteSpokeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSpoke",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.DeleteSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_GetRouteTable_sync",
+      "title": "Snippet for the get_route_table call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_route_table.",
+      "file": "hub_service/get_route_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_route_table",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_route_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetRouteTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::RouteTable",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetRouteTable",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.GetRouteTable",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_GetRoute_sync",
+      "title": "Snippet for the get_route call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_route.",
+      "file": "hub_service/get_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::Route",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.GetRoute",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListRoutes_sync",
+      "title": "Snippet for the list_routes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_routes.",
+      "file": "hub_service/list_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_routes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListRoutesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListRoutes",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListRoutes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListRouteTables_sync",
+      "title": "Snippet for the list_route_tables call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_route_tables.",
+      "file": "hub_service/list_route_tables.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_route_tables",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_route_tables",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListRouteTablesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListRouteTablesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListRouteTables",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListRouteTables",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_GetGroup_sync",
+      "title": "Snippet for the get_group call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_group.",
+      "file": "hub_service/get_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_group",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::Group",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetGroup",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.GetGroup",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListGroups_sync",
+      "title": "Snippet for the list_groups call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_groups.",
+      "file": "hub_service/list_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_groups",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListGroupsResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListGroups",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListGroups",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_UpdateGroup_sync",
+      "title": "Snippet for the update_group call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_group.",
+      "file": "hub_service/update_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_group",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGroup",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.UpdateGroup",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_CreateGatewayAdvertisedRoute_sync",
+      "title": "Snippet for the create_gateway_advertised_route call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#create_gateway_advertised_route.",
+      "file": "hub_service/create_gateway_advertised_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_gateway_advertised_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#create_gateway_advertised_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreateGatewayAdvertisedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "CreateGatewayAdvertisedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.CreateGatewayAdvertisedRoute",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_GetGatewayAdvertisedRoute_sync",
+      "title": "Snippet for the get_gateway_advertised_route call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_gateway_advertised_route.",
+      "file": "hub_service/get_gateway_advertised_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_gateway_advertised_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#get_gateway_advertised_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetGatewayAdvertisedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::GatewayAdvertisedRoute",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "GetGatewayAdvertisedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.GetGatewayAdvertisedRoute",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_ListGatewayAdvertisedRoutes_sync",
+      "title": "Snippet for the list_gateway_advertised_routes call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_gateway_advertised_routes.",
+      "file": "hub_service/list_gateway_advertised_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_gateway_advertised_routes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#list_gateway_advertised_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListGatewayAdvertisedRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListGatewayAdvertisedRoutesResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "ListGatewayAdvertisedRoutes",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.ListGatewayAdvertisedRoutes",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_UpdateGatewayAdvertisedRoute_sync",
+      "title": "Snippet for the update_gateway_advertised_route call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_gateway_advertised_route.",
+      "file": "hub_service/update_gateway_advertised_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_gateway_advertised_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#update_gateway_advertised_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateGatewayAdvertisedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGatewayAdvertisedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.UpdateGatewayAdvertisedRoute",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_HubService_DeleteGatewayAdvertisedRoute_sync",
+      "title": "Snippet for the delete_gateway_advertised_route call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#delete_gateway_advertised_route.",
+      "file": "hub_service/delete_gateway_advertised_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_gateway_advertised_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client#delete_gateway_advertised_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeleteGatewayAdvertisedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::HubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteGatewayAdvertisedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.HubService.DeleteGatewayAdvertisedRoute",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_ListPolicyBasedRoutes_sync",
+      "title": "Snippet for the list_policy_based_routes call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#list_policy_based_routes.",
+      "file": "policy_based_routing_service/list_policy_based_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_policy_based_routes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#list_policy_based_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListPolicyBasedRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListPolicyBasedRoutesResponse",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "ListPolicyBasedRoutes",
+          "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.ListPolicyBasedRoutes",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_GetPolicyBasedRoute_sync",
+      "title": "Snippet for the get_policy_based_route call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#get_policy_based_route.",
+      "file": "policy_based_routing_service/get_policy_based_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy_based_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#get_policy_based_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetPolicyBasedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoute",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "GetPolicyBasedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.GetPolicyBasedRoute",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_CreatePolicyBasedRoute_sync",
+      "title": "Snippet for the create_policy_based_route call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#create_policy_based_route.",
+      "file": "policy_based_routing_service/create_policy_based_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_policy_based_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#create_policy_based_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreatePolicyBasedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "CreatePolicyBasedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.CreatePolicyBasedRoute",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_sync",
+      "title": "Snippet for the delete_policy_based_route call in the PolicyBasedRoutingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#delete_policy_based_route.",
+      "file": "policy_based_routing_service/delete_policy_based_route.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_policy_based_route",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client#delete_policy_based_route",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeletePolicyBasedRouteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBasedRoutingService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::PolicyBasedRoutingService::Client"
+        },
+        "method": {
+          "short_name": "DeletePolicyBasedRoute",
+          "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService.DeletePolicyBasedRoute",
+          "service": {
+            "short_name": "PolicyBasedRoutingService",
+            "full_name": "google.cloud.networkconnectivity.v1beta.PolicyBasedRoutingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_ListRemoteTransportProfiles_sync",
+      "title": "Snippet for the list_remote_transport_profiles call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#list_remote_transport_profiles.",
+      "file": "transport_manager/list_remote_transport_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_remote_transport_profiles",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#list_remote_transport_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesResponse",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "ListRemoteTransportProfiles",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.ListRemoteTransportProfiles",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_GetRemoteTransportProfile_sync",
+      "title": "Snippet for the get_remote_transport_profile call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#get_remote_transport_profile.",
+      "file": "transport_manager/get_remote_transport_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_remote_transport_profile",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#get_remote_transport_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetRemoteTransportProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::RemoteTransportProfile",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "GetRemoteTransportProfile",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.GetRemoteTransportProfile",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_ListTransports_sync",
+      "title": "Snippet for the list_transports call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#list_transports.",
+      "file": "transport_manager/list_transports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_transports",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#list_transports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsResponse",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "ListTransports",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.ListTransports",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_GetTransport_sync",
+      "title": "Snippet for the get_transport call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#get_transport.",
+      "file": "transport_manager/get_transport.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_transport",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#get_transport",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetTransportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::Transport",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "GetTransport",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.GetTransport",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_GetStatus_sync",
+      "title": "Snippet for the get_status call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#get_status.",
+      "file": "transport_manager/get_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_status",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#get_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1beta::GetStatusResponse",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "GetStatus",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.GetStatus",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_CreateTransport_sync",
+      "title": "Snippet for the create_transport call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#create_transport.",
+      "file": "transport_manager/create_transport.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_transport",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#create_transport",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::CreateTransportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "CreateTransport",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.CreateTransport",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_UpdateTransport_sync",
+      "title": "Snippet for the update_transport call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#update_transport.",
+      "file": "transport_manager/update_transport.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_transport",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#update_transport",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::UpdateTransportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateTransport",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.UpdateTransport",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1beta_generated_TransportManager_DeleteTransport_sync",
+      "title": "Snippet for the delete_transport call in the TransportManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#delete_transport.",
+      "file": "transport_manager/delete_transport.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_transport",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client#delete_transport",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1beta::DeleteTransportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TransportManager::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteTransport",
+          "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager.DeleteTransport",
+          "service": {
+            "short_name": "TransportManager",
+            "full_name": "google.cloud.networkconnectivity.v1beta.TransportManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
