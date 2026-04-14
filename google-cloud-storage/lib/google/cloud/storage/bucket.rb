@@ -1628,7 +1628,7 @@ module Google
         #   changed to a time in the future. If custom_time must be unset, you
         #   must either perform a rewrite operation, or upload the data again
         #   and create a new file.
-        # @param [Symbol, nil] checksum The type of checksum for the client to
+        # @param [Symbol, nil, Boolean] checksum The type of checksum for the client to
         #   automatically calculate and send with the create request to verify
         #   the integrity of the object. If provided, Cloud Storage will only
         #   create the file if the value calculated by the client matches the
@@ -1636,11 +1636,12 @@ module Google
         #
         #   Acceptable values are:
         #
+        #   * `true` [Boolean] - Calculate and provide a checksum using the CRC32c hash.
+        #   * `false` [Boolean] - Do not calculate or provide a checksum.
         #   * `md5` - Calculate and provide a checksum using the MD5 hash.
         #   * `crc32c` - Calculate and provide a checksum using the CRC32c hash.
         #   * `all` - Calculate and provide checksums for all available verifications.
-        #
-        #   Optional. The default is `nil`. Do not provide if also providing a
+        #   Optional. The default is `crc32c`. Do not provide if also providing a
         #   corresponding `crc32c` or `md5` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
         #   for more information.
@@ -1805,6 +1806,11 @@ module Google
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
           raise ArgumentError, "must provide path" if path.nil?
+          # If no checksum type or specific value is provided, the default will be set to crc32c. 
+          # If the checksum is set to false, it will be disabled.
+          if [checksum, crc32c, md5].all?(&:nil?) || checksum == true
+            checksum = :crc32c
+          end
           crc32c = crc32c_for file, checksum, crc32c
           md5 = md5_for file, checksum, md5
 
