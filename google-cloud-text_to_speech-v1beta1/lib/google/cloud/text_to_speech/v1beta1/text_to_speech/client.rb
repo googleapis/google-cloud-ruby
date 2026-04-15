@@ -300,7 +300,7 @@ module Google
             #   @param enable_time_pointing [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
             #     Whether and what timepoints are returned in the response.
             #   @param advanced_voice_options [::Google::Cloud::TextToSpeech::V1beta1::AdvancedVoiceOptions, ::Hash]
-            #     Advanced voice options.
+            #     Optional. Advanced voice options.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]
