@@ -1,5 +1,11 @@
 # Release History
 
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* Add `Engine` field to support LightningEngine in clusters and add support for stop ttl ([#33821](https://github.com/googleapis/google-cloud-ruby/issues/33821)) 
+
 ### 1.10.0 (2026-03-19)
 
 #### Features
