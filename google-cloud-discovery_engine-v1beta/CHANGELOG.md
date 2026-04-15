@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.26.0 (2026-04-15)
+
+#### Features
+
+* add AUTO condition to SearchAsYouTypeSpec in v1alpha and v1beta ([#33829](https://github.com/googleapis/google-cloud-ruby/issues/33829)) 
+
 ### 0.25.0 (2026-03-31)
 
 #### Features
