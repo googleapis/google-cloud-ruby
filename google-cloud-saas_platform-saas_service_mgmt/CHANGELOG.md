@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2026-04-15)
+
+#### Documentation
+
+* rebrand from "SaaS Runtime" to "App Lifecycle Manager" ([#33834](https://github.com/googleapis/google-cloud-ruby/issues/33834)) 
+
 ### 0.2.0 (2026-03-19)
 
 #### Features
