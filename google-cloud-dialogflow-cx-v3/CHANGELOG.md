@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* updated v3 dialogflow client libraries 
+* upgrade protobuf from v25.7 to v31.0 
+
 ### 1.10.1 (2025-10-27)
 
 #### Documentation
