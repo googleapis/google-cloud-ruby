@@ -1,5 +1,11 @@
 # Release History
 
+### 1.11.0 (2026-04-15)
+
+#### Features
+
+* add principal field to BigQuery Reservation Assignment ([#33832](https://github.com/googleapis/google-cloud-ruby/issues/33832)) 
+
 ### 1.10.0 (2026-03-19)
 
 #### Features
