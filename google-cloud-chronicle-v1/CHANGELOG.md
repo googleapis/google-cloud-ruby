@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2026-04-15)
+
+#### Features
+
+* Add DataTableService to Chronicle v1 Client Libraries ([#33831](https://github.com/googleapis/google-cloud-ruby/issues/33831)) 
+
 ### 0.4.0 (2026-03-19)
 
 #### Features
