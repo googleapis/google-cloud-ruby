@@ -55,7 +55,7 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Output only. The system-defined duration that an instance can remain
         #     unrefreshed until it is automatically disabled. This will have a value of
-        #     120 days.
+        #     730 days.
         # @!attribute [r] disable_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which the instance will be automatically disabled
