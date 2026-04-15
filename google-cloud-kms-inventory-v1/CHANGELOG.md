@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.20.0 (2026-04-15)
+
+#### Features
+
+* support external-μ in the Digest ([#33828](https://github.com/googleapis/google-cloud-ruby/issues/33828)) 
+
 ### 0.19.0 (2026-03-19)
 
 #### Features
