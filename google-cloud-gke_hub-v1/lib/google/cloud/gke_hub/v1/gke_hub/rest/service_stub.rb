@@ -114,6 +114,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the list_bound_memberships REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListBoundMembershipsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListBoundMembershipsResponse]
+              #   A result object deserialized from the server's reply
+              def list_bound_memberships request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_bound_memberships_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_bound_memberships",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListBoundMembershipsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the list_features REST call
               #
               # @param request_pb [::Google::Cloud::GkeHub::V1::ListFeaturesRequest]
@@ -514,6 +554,1286 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_fleet request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_fleet_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_fleet",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::Fleet]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::Fleet]
+              #   A result object deserialized from the server's reply
+              def get_fleet request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_fleet_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_fleet",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::Fleet.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_fleet request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_fleet_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_fleet",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_fleet request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_fleet_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_fleet",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_fleets REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListFleetsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListFleetsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListFleetsResponse]
+              #   A result object deserialized from the server's reply
+              def list_fleets request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_fleets_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_fleets",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListFleetsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::Namespace]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::Namespace]
+              #   A result object deserialized from the server's reply
+              def get_scope_namespace request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_scope_namespace_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_scope_namespace",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::Namespace.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the create_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_scope_namespace request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_scope_namespace_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_scope_namespace",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_scope_namespace request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_scope_namespace_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_scope_namespace",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_scope_namespace request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_scope_namespace_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_scope_namespace",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_scope_namespaces REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListScopeNamespacesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListScopeNamespacesResponse]
+              #   A result object deserialized from the server's reply
+              def list_scope_namespaces request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_scope_namespaces_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_scope_namespaces",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListScopeNamespacesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              #   A result object deserialized from the server's reply
+              def get_scope_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_scope_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_scope_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::RBACRoleBinding.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the create_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_scope_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_scope_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_scope_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_scope_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_scope_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_scope_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_scope_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_scope_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_scope_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_scope_rbac_role_bindings REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsResponse]
+              #   A result object deserialized from the server's reply
+              def list_scope_rbac_role_bindings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_scope_rbac_role_bindings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_scope_rbac_role_bindings",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::Scope]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::Scope]
+              #   A result object deserialized from the server's reply
+              def get_scope request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_scope_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_scope",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::Scope.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the create_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_scope request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_scope_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_scope",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_scope request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_scope_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_scope",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_scope request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_scope_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_scope",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_scopes REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListScopesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListScopesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListScopesResponse]
+              #   A result object deserialized from the server's reply
+              def list_scopes request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_scopes_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_scopes",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListScopesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_permitted_scopes REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListPermittedScopesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListPermittedScopesResponse]
+              #   A result object deserialized from the server's reply
+              def list_permitted_scopes request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_permitted_scopes_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_permitted_scopes",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListPermittedScopesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::MembershipBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::MembershipBinding]
+              #   A result object deserialized from the server's reply
+              def get_membership_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_membership_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_membership_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::MembershipBinding.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the create_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_membership_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_membership_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_membership_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_membership_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_membership_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_membership_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_membership_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_membership_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_membership_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_membership_bindings REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListMembershipBindingsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListMembershipBindingsResponse]
+              #   A result object deserialized from the server's reply
+              def list_membership_bindings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_membership_bindings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_membership_bindings",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListMembershipBindingsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::RBACRoleBinding]
+              #   A result object deserialized from the server's reply
+              def get_membership_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_membership_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_membership_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::RBACRoleBinding.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the create_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_membership_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_membership_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_membership_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_membership_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_membership_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_membership_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_membership_rbac_role_binding request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_membership_rbac_role_binding_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_membership_rbac_role_binding",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_membership_rbac_role_bindings REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsResponse]
+              #   A result object deserialized from the server's reply
+              def list_membership_rbac_role_bindings request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_membership_rbac_role_bindings_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_membership_rbac_role_bindings",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the generate_membership_rbac_role_binding_yaml REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse]
+              #   A result object deserialized from the server's reply
+              def generate_membership_rbac_role_binding_yaml request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_generate_membership_rbac_role_binding_yaml_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "generate_membership_rbac_role_binding_yaml",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the list_memberships REST call
@@ -529,6 +1849,27 @@ module Google
                                                           uri_template: "/v1/{parent}/memberships",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_bound_memberships REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListBoundMembershipsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_bound_memberships_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{scope_name}:listMemberships",
+                                                          matches: [
+                                                            ["scope_name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -743,6 +2084,698 @@ module Google
                                                           uri_template: "/v1/{name}:generateConnectManifest",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_fleet_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/fleets",
+                                                          body: "fleet",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_fleet_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/fleets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_fleet_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{fleet.name}",
+                                                          body: "fleet",
+                                                          matches: [
+                                                            ["fleet.name", %r{^projects/[^/]+/locations/[^/]+/fleets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_fleet REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteFleetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_fleet_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/fleets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_fleets REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListFleetsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_fleets_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/fleets",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/fleets",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_scope_namespace_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/namespaces/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_scope_namespace_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/namespaces",
+                                                          body: "scope_namespace",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_scope_namespace_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{scope_namespace.name}",
+                                                          body: "scope_namespace",
+                                                          matches: [
+                                                            ["scope_namespace.name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/namespaces/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_scope_namespace REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteScopeNamespaceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_scope_namespace_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/namespaces/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_scope_namespaces REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListScopeNamespacesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_scope_namespaces_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/namespaces",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_scope_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/rbacrolebindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_scope_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/rbacrolebindings",
+                                                          body: "rbacrolebinding",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_scope_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{rbacrolebinding.name}",
+                                                          body: "rbacrolebinding",
+                                                          matches: [
+                                                            ["rbacrolebinding.name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/rbacrolebindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_scope_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteScopeRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_scope_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/rbacrolebindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_scope_rbac_role_bindings REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListScopeRBACRoleBindingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_scope_rbac_role_bindings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/rbacrolebindings",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_scope_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_scope_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/scopes",
+                                                          body: "scope",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_scope_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{scope.name}",
+                                                          body: "scope",
+                                                          matches: [
+                                                            ["scope.name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_scope REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteScopeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_scope_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/scopes/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_scopes REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListScopesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_scopes_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/scopes",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_permitted_scopes REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListPermittedScopesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_permitted_scopes_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/scopes:listPermitted",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_membership_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/bindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_membership_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/bindings",
+                                                          body: "membership_binding",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_membership_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{membership_binding.name}",
+                                                          body: "membership_binding",
+                                                          matches: [
+                                                            ["membership_binding.name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/bindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_membership_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteMembershipBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_membership_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/bindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_membership_bindings REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListMembershipBindingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_membership_bindings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/bindings",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GetMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_membership_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/rbacrolebindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::CreateMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_membership_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/rbacrolebindings",
+                                                          body: "rbacrolebinding",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::UpdateMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_membership_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{rbacrolebinding.name}",
+                                                          body: "rbacrolebinding",
+                                                          matches: [
+                                                            ["rbacrolebinding.name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/rbacrolebindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_membership_rbac_role_binding REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::DeleteMembershipRBACRoleBindingRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_membership_rbac_role_binding_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/rbacrolebindings/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_membership_rbac_role_bindings REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::ListMembershipRBACRoleBindingsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_membership_rbac_role_bindings_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/rbacrolebindings",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the generate_membership_rbac_role_binding_yaml REST call
+              #
+              # @param request_pb [::Google::Cloud::GkeHub::V1::GenerateMembershipRBACRoleBindingYAMLRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_generate_membership_rbac_role_binding_yaml_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/rbacrolebindings:generateMembershipRBACRoleBindingYAML",
+                                                          body: "rbacrolebinding",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/memberships/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

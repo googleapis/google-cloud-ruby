@@ -44,6 +44,49 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Fleet resource string.
+            #
+            # @overload fleet_path(project:, location:, fleet:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/fleets/{fleet}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param fleet [String]
+            #
+            # @overload fleet_path(organization:, location:, fleet:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/fleets/{fleet}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param fleet [String]
+            #
+            # @return [::String]
+            def fleet_path **args
+              resources = {
+                "fleet:location:project" => (proc do |project:, location:, fleet:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/fleets/#{fleet}"
+                end),
+                "fleet:location:organization" => (proc do |organization:, location:, fleet:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/fleets/#{fleet}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -77,6 +120,114 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/memberships/#{membership}"
+            end
+
+            ##
+            # Create a fully-qualified MembershipBinding resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/memberships/{membership}/bindings/{membershipbinding}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param membership [String]
+            # @param membershipbinding [String]
+            #
+            # @return [::String]
+            def membership_binding_path project:, location:, membership:, membershipbinding:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "membership cannot contain /" if membership.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/memberships/#{membership}/bindings/#{membershipbinding}"
+            end
+
+            ##
+            # Create a fully-qualified Namespace resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/scopes/{scope}/namespaces/{namespace}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param scope [String]
+            # @param namespace [String]
+            #
+            # @return [::String]
+            def namespace_path project:, location:, scope:, namespace:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "scope cannot contain /" if scope.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/scopes/#{scope}/namespaces/#{namespace}"
+            end
+
+            ##
+            # Create a fully-qualified RBACRoleBinding resource string.
+            #
+            # @overload rbac_role_binding_path(project:, location:, scope:, rbacrolebinding:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/scopes/{scope}/rbacrolebindings/{rbacrolebinding}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param scope [String]
+            #   @param rbacrolebinding [String]
+            #
+            # @overload rbac_role_binding_path(project:, location:, membership:, rbacrolebinding:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param membership [String]
+            #   @param rbacrolebinding [String]
+            #
+            # @return [::String]
+            def rbac_role_binding_path **args
+              resources = {
+                "location:project:rbacrolebinding:scope" => (proc do |project:, location:, scope:, rbacrolebinding:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "scope cannot contain /" if scope.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/scopes/#{scope}/rbacrolebindings/#{rbacrolebinding}"
+                end),
+                "location:membership:project:rbacrolebinding" => (proc do |project:, location:, membership:, rbacrolebinding:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "membership cannot contain /" if membership.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/memberships/#{membership}/rbacrolebindings/#{rbacrolebinding}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Scope resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/scopes/{scope}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param scope [String]
+            #
+            # @return [::String]
+            def scope_path project:, location:, scope:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/scopes/#{scope}"
             end
 
             extend self
