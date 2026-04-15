@@ -1,0 +1,18 @@
+{
+    "api_id": "secretmanager.googleapis.com",
+    "api_shortname": "secretmanager",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-secret_manager-v1/latest",
+    "distribution_name": "google-cloud-secret_manager-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "secretmanager",
+    "name_pretty": "Secret Manager V1 API",
+    "product_documentation": "https://cloud.google.com/secret-manager",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud. Note that google-cloud-secret_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-secret_manager instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "SECRET_MANAGER",
+    "ruby-cloud-product-url": "https://cloud.google.com/secret-manager",
+    "library_type": "GAPIC_AUTO"
+}
