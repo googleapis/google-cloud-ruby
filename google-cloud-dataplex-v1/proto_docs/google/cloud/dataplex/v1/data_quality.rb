@@ -293,9 +293,41 @@ module Google
         #     assertion rule.
         #
         #     This field is only valid for SQL assertion rules.
+        # @!attribute [r] debug_queries_result_sets
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult::DebugQueryResultSet>]
+        #     Output only. Contains the results of all debug queries for this rule.
+        #     The number of result sets will correspond to the number of
+        #     {::Google::Cloud::Dataplex::V1::DataQualityRule#debug_queries debug_queries}.
         class DataQualityRuleResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Contains a single result from the debug query.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Specifies the name of the result. Available if provided with an explicit
+          #     alias using `[AS] alias`.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     Indicates the data type of the result. For more information, see
+          #     [BigQuery data
+          #     types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types).
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     Represents the value of the result as a string.
+          class DebugQueryResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Contains all results from a debug query.
+          # @!attribute [r] results
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult::DebugQueryResult>]
+          #     Output only. Contains all results. Up to 10 results can be returned.
+          class DebugQueryResultSet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # DataQualityDimensionResult provides a more detailed, per-dimension view of
@@ -399,7 +431,7 @@ module Google
         #     * UniquenessExpectation
         # @!attribute [rw] dimension
         #   @return [::String]
-        #     Required. The dimension a rule belongs to. Results are also aggregated at
+        #     Optional. The dimension a rule belongs to. Results are also aggregated at
         #     the dimension level. Custom dimension name is supported with all uppercase
         #     letters and maximum length of 30 characters.
         # @!attribute [rw] threshold
@@ -428,6 +460,11 @@ module Google
         #   @return [::Boolean]
         #     Optional. Whether the Rule is active or suspended.
         #     Default is false.
+        # @!attribute [rw] debug_queries
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRule::DebugQuery>]
+        #     Optional. Specifies the debug queries for this rule.
+        #     Currently, only one query is supported, but this may be expanded in the
+        #     future.
         class DataQualityRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -587,6 +624,39 @@ module Google
           #   @return [::String]
           #     Optional. The SQL statement.
           class SqlAssertion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies a SQL statement that is evaluated to return up to 10 scalar
+          # values that are used to debug rules. If the rule fails, the values can help
+          # diagnose the cause of the failure.
+          #
+          # The SQL statement must use [GoogleSQL
+          # syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax),
+          # and must not contain any semicolons.
+          #
+          # You can use the data reference parameter `${data()}` to reference the
+          # source table with all of its precondition filters applied. Examples of
+          # precondition filters include row filters, incremental data filters, and
+          # sampling. For more information, see [Data reference
+          # parameter](https://cloud.google.com/dataplex/docs/auto-data-quality-overview#data-reference-parameter).
+          #
+          # You can also name results with an explicit alias using `[AS] alias`. For
+          # more information, see [BigQuery explicit
+          # aliases](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#explicit_alias_syntax).
+          #
+          # Example: `SELECT MIN(col1) AS min_col1, MAX(col1) AS max_col1 FROM
+          # $\\{data()}`
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     Optional. Specifies the description of the debug query.
+          #
+          #     * The maximum length is 1,024 characters.
+          # @!attribute [rw] sql_statement
+          #   @return [::String]
+          #     Required. Specifies the SQL statement to be executed.
+          class DebugQuery
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
