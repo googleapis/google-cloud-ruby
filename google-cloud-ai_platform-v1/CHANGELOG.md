@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.41.0 (2026-04-15)
+
+#### Features
+
+* Model Registry CopyModel BYOSA ([#33833](https://github.com/googleapis/google-cloud-ruby/issues/33833)) 
+
 ### 1.40.0 (2026-04-03)
 
 #### Features
