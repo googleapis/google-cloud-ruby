@@ -89,6 +89,11 @@ module Google
         #   @return [::String]
         #     Optional. The billing account resource name that is used to pay for this
         #     entitlement.
+        # @!attribute [rw] price_reference_id
+        #   @return [::String]
+        #     Optional. Price reference ID for the offer. Only for offers that require
+        #     additional price information. Used to guarantee that the pricing is
+        #     consistent between quoting the offer and placing the order.
         class Entitlement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -188,9 +188,18 @@ module Google
         # @!attribute [rw] effective_price
         #   @return [::Google::Type::Money]
         #     Effective Price after applying the discounts.
+        # @!attribute [rw] price_period
+        #   @return [::Google::Cloud::Channel::V1::Period]
+        #     The time period with respect to which base and effective prices are
+        #     defined.
+        #     Example: 1 month, 6 months, 1 year, etc.
         # @!attribute [rw] external_price_uri
         #   @return [::String]
         #     Link to external price list, such as link to Google Voice rate card.
+        # @!attribute [rw] discount_components
+        #   @return [::Array<::Google::Cloud::Channel::V1::DiscountComponent>]
+        #     Breakdown of the discount into its components.
+        #     This will be empty if there is no discount present.
         class Price
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -249,6 +258,26 @@ module Google
         #   @return [::Google::Cloud::Channel::V1::PeriodType]
         #     Period Type.
         class Period
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a single component of the total discount applicable on a Price.
+        # @!attribute [rw] discount_percentage
+        #   @return [::Float]
+        #     Discount percentage, represented as decimal.
+        #     For example, a 20% discount will be represented as 0.2.
+        #
+        #     Note: The following fields are mutually exclusive: `discount_percentage`, `discount_absolute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] discount_absolute
+        #   @return [::Google::Type::Money]
+        #     Fixed value discount.
+        #
+        #     Note: The following fields are mutually exclusive: `discount_absolute`, `discount_percentage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] discount_type
+        #   @return [::Google::Cloud::Channel::V1::DiscountType]
+        #     Type of the discount.
+        class DiscountComponent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -346,6 +375,27 @@ module Google
 
           # Year.
           YEAR = 3
+        end
+
+        # Discount Type.
+        module DiscountType
+          # Not used.
+          DISCOUNT_TYPE_UNSPECIFIED = 0
+
+          # Regional discount.
+          REGIONAL_DISCOUNT = 1
+
+          # Promotional discount.
+          PROMOTIONAL_DISCOUNT = 2
+
+          # Sales-provided discount.
+          SALES_DISCOUNT = 3
+
+          # Reseller margin.
+          RESELLER_MARGIN = 4
+
+          # Deal code discount.
+          DEAL_CODE = 5
         end
       end
     end
