@@ -1084,6 +1084,63 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_find_group_chats
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::FindGroupChatsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    users = ["hello world"]
+    page_size = 42
+    page_token = "hello world"
+    space_view = :SPACE_VIEW_UNSPECIFIED
+
+    find_group_chats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_find_group_chats_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, find_group_chats_client_stub do
+        # Create client
+        client = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.find_group_chats({ users: users, page_size: page_size, page_token: page_token, space_view: space_view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.find_group_chats users: users, page_size: page_size, page_token: page_token, space_view: space_view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.find_group_chats ::Google::Apps::Chat::V1::FindGroupChatsRequest.new(users: users, page_size: page_size, page_token: page_token, space_view: space_view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.find_group_chats({ users: users, page_size: page_size, page_token: page_token, space_view: space_view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.find_group_chats(::Google::Apps::Chat::V1::FindGroupChatsRequest.new(users: users, page_size: page_size, page_token: page_token, space_view: space_view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, find_group_chats_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_membership
     # Create test objects.
     client_result = ::Google::Apps::Chat::V1::Membership.new

@@ -1195,6 +1195,75 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     end
   end
 
+  def test_find_group_chats
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::FindGroupChatsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    users = ["hello world"]
+    page_size = 42
+    page_token = "hello world"
+    space_view = :SPACE_VIEW_UNSPECIFIED
+
+    find_group_chats_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :find_group_chats, name
+      assert_kind_of ::Google::Apps::Chat::V1::FindGroupChatsRequest, request
+      assert_equal ["hello world"], request["users"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :SPACE_VIEW_UNSPECIFIED, request["space_view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, find_group_chats_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.find_group_chats({ users: users, page_size: page_size, page_token: page_token, space_view: space_view }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.find_group_chats users: users, page_size: page_size, page_token: page_token, space_view: space_view do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.find_group_chats ::Google::Apps::Chat::V1::FindGroupChatsRequest.new(users: users, page_size: page_size, page_token: page_token, space_view: space_view) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.find_group_chats({ users: users, page_size: page_size, page_token: page_token, space_view: space_view }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.find_group_chats(::Google::Apps::Chat::V1::FindGroupChatsRequest.new(users: users, page_size: page_size, page_token: page_token, space_view: space_view), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, find_group_chats_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_membership
     # Create GRPC objects.
     grpc_response = ::Google::Apps::Chat::V1::Membership.new
