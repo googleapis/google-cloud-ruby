@@ -245,21 +245,21 @@ class MockStorage < Minitest::Spec
   end
 
   def customer_managed_encryption
-     Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
       restriction_mode: "FullyRestricted"
-     )   
+    )
   end
 
   def customer_supplied_encryption
     Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
       restriction_mode: "NotRestricted"
-     )
+    )
   end
 
   def google_managed_encryption
     Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
       restriction_mode: "NotRestricted"
-     )
+    )
   end
 
   def encryption_gapi key_name: nil
