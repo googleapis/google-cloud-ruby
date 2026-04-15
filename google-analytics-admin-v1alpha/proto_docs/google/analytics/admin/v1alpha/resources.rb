@@ -22,9 +22,9 @@ module Google
     module Admin
       module V1alpha
         # A resource message representing a Google Analytics account.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this account.
+        #     Identifier. Resource name of this account.
         #     Format: accounts/\\{account}
         #     Example: "accounts/100"
         # @!attribute [r] create_time
@@ -54,9 +54,9 @@ module Google
         end
 
         # A resource message representing a Google Analytics property.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this property.
+        #     Identifier. Resource name of this property.
         #     Format: properties/\\{property_id}
         #     Example: "properties/1000"
         # @!attribute [rw] property_type
@@ -146,9 +146,9 @@ module Google
         #     IOS_APP_DATA_STREAM.
         #
         #     Note: The following fields are mutually exclusive: `ios_app_stream_data`, `web_stream_data`, `android_app_stream_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
+        #     Identifier. Resource name of this Data Stream.
         #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}
         #     Example: "properties/1000/dataStreams/2000"
         # @!attribute [rw] type
@@ -235,9 +235,9 @@ module Google
         end
 
         # A link between a Google Analytics property and a Firebase project.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Example format: properties/1234/firebaseLinks/5678
+        #     Identifier. Example format: properties/1234/firebaseLinks/5678
         # @!attribute [rw] project
         #   @return [::String]
         #     Immutable. Firebase project resource name. When creating a FirebaseLink,
@@ -257,9 +257,9 @@ module Google
 
         # Read-only resource with the tag for sending data from a website to a
         # DataStream. Only present for web DataStream resources.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name for this GlobalSiteTag resource.
+        #     Identifier. Resource name for this GlobalSiteTag resource.
         #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
         #     Example: "properties/123/dataStreams/456/globalSiteTag"
         # @!attribute [rw] snippet
@@ -272,9 +272,9 @@ module Google
         end
 
         # A link between a Google Analytics property and a Google Ads account.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Format:
+        #     Identifier. Format:
         #     properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
         #
         #     Note: googleAdsLinkId is not the Google Ads customer ID.
@@ -307,9 +307,9 @@ module Google
 
         # A resource message representing data sharing settings of a Google Analytics
         # account.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name.
+        #     Identifier. Resource name.
         #     Format: accounts/\\{account}/dataSharingSettings
         #     Example: "accounts/1000/dataSharingSettings"
         # @!attribute [rw] sharing_with_google_support_enabled
@@ -360,7 +360,7 @@ module Google
         # all its child Google Analytics properties.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name for this account summary.
+        #     Identifier. Resource name for this account summary.
         #     Format: accountSummaries/\\{account_id}
         #     Example: "accountSummaries/1000"
         # @!attribute [rw] account
@@ -404,10 +404,10 @@ module Google
         end
 
         # A secret value used for sending hits to Measurement Protocol.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this secret. This secret may be a child of
-        #     any type of stream. Format:
+        #     Identifier. Resource name of this secret. This secret may be a child of any
+        #     type of stream. Format:
         #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -423,9 +423,9 @@ module Google
         end
 
         # SKAdNetwork conversion value schema of an iOS stream.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of the schema. This will be child of ONLY an iOS
+        #     Identifier. Resource name of the schema. This will be child of ONLY an iOS
         #     stream, and there can be at most one such child under an iOS stream.
         #     Format:
         #     properties/\\{property}/dataStreams/\\{dataStream}/sKAdNetworkConversionValueSchema
@@ -607,150 +607,155 @@ module Google
           #   @return [::Google::Analytics::Admin::V1alpha::Account]
           #     A snapshot of an Account resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] property
           #   @return [::Google::Analytics::Admin::V1alpha::Property]
           #     A snapshot of a Property resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `property`, `account`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `property`, `account`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] firebase_link
           #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
           #     A snapshot of a FirebaseLink resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `firebase_link`, `account`, `property`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `firebase_link`, `account`, `property`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] google_ads_link
           #   @return [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
           #     A snapshot of a GoogleAdsLink resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `google_ads_link`, `account`, `property`, `firebase_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `google_ads_link`, `account`, `property`, `firebase_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] google_signals_settings
           #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
           #     A snapshot of a GoogleSignalsSettings resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `google_signals_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `google_signals_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] display_video_360_advertiser_link
           #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
           #     A snapshot of a DisplayVideo360AdvertiserLink resource in change
           #     history.
           #
-          #     Note: The following fields are mutually exclusive: `display_video_360_advertiser_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `display_video_360_advertiser_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] display_video_360_advertiser_link_proposal
           #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
           #     A snapshot of a DisplayVideo360AdvertiserLinkProposal resource in
           #     change history.
           #
-          #     Note: The following fields are mutually exclusive: `display_video_360_advertiser_link_proposal`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `display_video_360_advertiser_link_proposal`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] conversion_event
           #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
           #     A snapshot of a ConversionEvent resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `conversion_event`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `conversion_event`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] measurement_protocol_secret
           #   @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
           #     A snapshot of a MeasurementProtocolSecret resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `measurement_protocol_secret`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `measurement_protocol_secret`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] custom_dimension
           #   @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
           #     A snapshot of a CustomDimension resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `custom_dimension`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `custom_dimension`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] custom_metric
           #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
           #     A snapshot of a CustomMetric resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `custom_metric`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `custom_metric`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_retention_settings
           #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
           #     A snapshot of a data retention settings resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `data_retention_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `data_retention_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] search_ads_360_link
           #   @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
           #     A snapshot of a SearchAds360Link resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `search_ads_360_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `search_ads_360_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_stream
           #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
           #     A snapshot of a DataStream resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `data_stream`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `data_stream`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] attribution_settings
           #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
           #     A snapshot of AttributionSettings resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `attribution_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `attribution_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] expanded_data_set
           #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
           #     A snapshot of an ExpandedDataSet resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `expanded_data_set`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `expanded_data_set`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] channel_group
           #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
           #     A snapshot of a ChannelGroup resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `channel_group`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `channel_group`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bigquery_link
           #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
           #     A snapshot of a BigQuery link resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `bigquery_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `bigquery_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] enhanced_measurement_settings
           #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
           #     A snapshot of EnhancedMeasurementSettings resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `enhanced_measurement_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `enhanced_measurement_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_redaction_settings
           #   @return [::Google::Analytics::Admin::V1alpha::DataRedactionSettings]
           #     A snapshot of DataRedactionSettings resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `data_redaction_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `data_redaction_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] skadnetwork_conversion_value_schema
           #   @return [::Google::Analytics::Admin::V1alpha::SKAdNetworkConversionValueSchema]
           #     A snapshot of SKAdNetworkConversionValueSchema resource in change
           #     history.
           #
-          #     Note: The following fields are mutually exclusive: `skadnetwork_conversion_value_schema`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `skadnetwork_conversion_value_schema`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] adsense_link
           #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
           #     A snapshot of an AdSenseLink resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `adsense_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `adsense_link`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] audience
           #   @return [::Google::Analytics::Admin::V1alpha::Audience]
           #     A snapshot of an Audience resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `audience`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `audience`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] event_create_rule
           #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
           #     A snapshot of an EventCreateRule resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `event_create_rule`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `event_create_rule`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] key_event
           #   @return [::Google::Analytics::Admin::V1alpha::KeyEvent]
           #     A snapshot of a KeyEvent resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `key_event`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `key_event`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] calculated_metric
           #   @return [::Google::Analytics::Admin::V1alpha::CalculatedMetric]
           #     A snapshot of a CalculatedMetric resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `calculated_metric`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `calculated_metric`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] reporting_data_annotation
           #   @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
           #     A snapshot of a ReportingDataAnnotation resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `reporting_data_annotation`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `reporting_data_annotation`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `subproperty_sync_config`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] subproperty_sync_config
           #   @return [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
           #     A snapshot of a SubpropertySyncConfig resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `subproperty_sync_config`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `subproperty_sync_config`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `reporting_identity_settings`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] reporting_identity_settings
           #   @return [::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings]
           #     A snapshot of a ReportingIdentitySettings resource in change history.
           #
-          #     Note: The following fields are mutually exclusive: `reporting_identity_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `reporting_identity_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `user_provided_data_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] user_provided_data_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings]
+          #     A snapshot of a UserProvidedDataSettings resource in change history.
+          #
+          #     Note: The following fields are mutually exclusive: `user_provided_data_settings`, `account`, `property`, `firebase_link`, `google_ads_link`, `google_signals_settings`, `display_video_360_advertiser_link`, `display_video_360_advertiser_link_proposal`, `conversion_event`, `measurement_protocol_secret`, `custom_dimension`, `custom_metric`, `data_retention_settings`, `search_ads_360_link`, `data_stream`, `attribution_settings`, `expanded_data_set`, `channel_group`, `bigquery_link`, `enhanced_measurement_settings`, `data_redaction_settings`, `skadnetwork_conversion_value_schema`, `adsense_link`, `audience`, `event_create_rule`, `key_event`, `calculated_metric`, `reporting_data_annotation`, `subproperty_sync_config`, `reporting_identity_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -759,9 +764,9 @@ module Google
 
         # A link between a Google Analytics property and a Display & Video 360
         # advertiser.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name for this DisplayVideo360AdvertiserLink
+        #     Identifier. The resource name for this DisplayVideo360AdvertiserLink
         #     resource. Format:
         #     properties/\\{propertyId}/displayVideo360AdvertiserLinks/\\{linkId}
         #
@@ -800,9 +805,9 @@ module Google
         # A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
         # Google Analytics admins approve inbound proposals while Display & Video 360
         # admins approve outbound proposals.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name for this
+        #     Identifier. The resource name for this
         #     DisplayVideo360AdvertiserLinkProposal resource. Format:
         #     properties/\\{propertyId}/displayVideo360AdvertiserLinkProposals/\\{proposalId}
         #
@@ -844,9 +849,9 @@ module Google
         end
 
         # A link between a Google Analytics property and a Search Ads 360 entity.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name for this SearchAds360Link resource.
+        #     Identifier. The resource name for this SearchAds360Link resource.
         #     Format: properties/\\{propertyId}/searchAds360Links/\\{linkId}
         #
         #     Note: linkId is not the Search Ads 360 advertiser ID
@@ -900,9 +905,9 @@ module Google
         end
 
         # A conversion event in a Google Analytics property.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of this conversion event.
+        #     Identifier. Resource name of this conversion event.
         #     Format: properties/\\{property}/conversionEvents/\\{conversion_event}
         # @!attribute [rw] event_name
         #   @return [::String]
@@ -1052,9 +1057,9 @@ module Google
         end
 
         # A definition for a CustomDimension.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name for this CustomDimension resource.
+        #     Identifier. Resource name for this CustomDimension resource.
         #     Format: properties/\\{property}/customDimensions/\\{customDimension}
         # @!attribute [rw] parameter_name
         #   @return [::String]
@@ -1111,9 +1116,9 @@ module Google
         end
 
         # A definition for a custom metric.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name for this CustomMetric resource.
+        #     Identifier. Resource name for this CustomMetric resource.
         #     Format: properties/\\{property}/customMetrics/\\{customMetric}
         # @!attribute [rw] parameter_name
         #   @return [::String]
@@ -1213,9 +1218,9 @@ module Google
         end
 
         # A definition for a calculated metric.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name for this CalculatedMetric.
+        #     Identifier. Resource name for this CalculatedMetric.
         #     Format: 'properties/\\{property_id}/calculatedMetrics/\\{calculated_metric_id}'
         # @!attribute [rw] description
         #   @return [::String]
@@ -1307,9 +1312,9 @@ module Google
         end
 
         # Settings values for data retention. This is a singleton resource.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name for this DataRetentionSetting resource.
+        #     Identifier. Resource name for this DataRetentionSetting resource.
         #     Format: properties/\\{property}/dataRetentionSettings
         # @!attribute [rw] event_data_retention
         #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings::RetentionDuration]
@@ -1819,6 +1824,26 @@ module Google
           end
         end
 
+        # Configuration for user-provided data collection. This is a singleton resource
+        # for a Google Analytics property.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Resource name of this setting.
+        #     Format: properties/\\{property}/userProvidedDataSettings
+        #     Example: "properties/1000/userProvidedDataSettings"
+        # @!attribute [rw] user_provided_data_collection_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether this property accepts user-provided data sent to it.
+        # @!attribute [rw] automatically_detected_data_collection_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether this property allows a Google Tag to automatically
+        #     collect user-provided data from your website. This setting only takes
+        #     effect if `user_provided_data_collection_enabled` is also true.
+        class UserProvidedDataSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The category selected for this property, used for industry benchmarking.
         module IndustryCategory
           # Industry category unspecified
@@ -2037,6 +2062,9 @@ module Google
 
           # ReportingIdentitySettings resource
           REPORTING_IDENTITY_SETTINGS = 34
+
+          # UserProvidedDataSettings resource
+          USER_PROVIDED_DATA_SETTINGS = 35
         end
 
         # Status of the Google Signals settings.

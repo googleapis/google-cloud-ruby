@@ -250,7 +250,21 @@ module Google
               # Service calls
 
               ##
-              # Flags the specified instances to be removed from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified instances to be removed from the
+              # managed instance group. Abandoning an instance does not delete the
+              # instance, but it does remove the instance from any target pools that are
+              # applied by the managed instance group. This method reduces thetargetSize of the managed instance group by the
+              # number of instances that you abandon. This operation is marked asDONE when the action is scheduled even if the instances have
+              # not yet been removed from the group. You must separately verify the
+              # status of the abandoning action with thelistmanagedinstances
+              # method.
+              #
+              # If the group is part of a backend
+              # service that has enabled
+              # connection draining, it can take up to 60 seconds after the connection
+              # draining duration has elapsed before the VM instance is removed or deleted.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload abandon_instances(request, options = nil)
               #   Pass arguments to `abandon_instances` via a request object, either of type
@@ -274,9 +288,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -346,7 +373,10 @@ module Google
               end
 
               ##
-              # Retrieves the list of managed instance groups and groups them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
+              # Retrieves the list of managed instance groups and groups them by zone.
+              #
+              # To prevent failure, Google recommends that you set the
+              # `returnPartialSuccess` parameter to `true`.
               #
               # @overload aggregated_list(request, options = nil)
               #   Pass arguments to `aggregated_list` via a request object, either of type
@@ -364,21 +394,106 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param include_all_scopes [::Boolean]
-              #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+              #     Indicates whether every visible scope for each scope type (zone, region,
+              #     global) should be included in the response. For new resource types added
+              #     after this field, the flag has no effect as new resource types will always
+              #     include every visible scope for each scope type in response. For resource
+              #     types which predate this field, if this flag is omitted or false, only
+              #     scopes of the scope types where the resource type is expected to be found
+              #     will be included.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               #   @param service_project_number [::Integer]
-              #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+              #     The Shared VPC service project id or service project number for which
+              #     aggregated list request is invoked for subnetworks list-usable api.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::InstanceGroupManagersScopedList>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -440,7 +555,8 @@ module Google
               end
 
               ##
-              # Applies changes to selected instances on the managed instance group. This method can be used to apply new overrides and/or new versions.
+              # Applies changes to selected instances on the managed instance group.
+              # This method can be used to apply new overrides and/or new versions.
               #
               # @overload apply_updates_to_instances(request, options = nil)
               #   Pass arguments to `apply_updates_to_instances` via a request object, either of type
@@ -464,7 +580,8 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. Should conform to RFC1035.
+              #     The name of thezone
+              #     where the managed instance group is located. Should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -534,7 +651,10 @@ module Google
               end
 
               ##
-              # Creates instances with per-instance configurations in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+              # Creates instances with per-instance configurations in this managed instance
+              # group. Instances are created using the current instance template. Thecreate instances operation is marked DONE if thecreateInstances request is successful. The underlying actions
+              # take additional time. You must separately verify the status of thecreating or actions with the listmanagedinstances
+              # method.
               #
               # @overload create_instances(request, options = nil)
               #   Pass arguments to `create_instances` via a request object, either of type
@@ -552,15 +672,29 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param instance_group_manager [::String]
-              #     The name of the managed instance group. It should conform to RFC1035.
+              #     The name of the managed instance group.
+              #     It should conform to RFC1035.
               #   @param instance_group_managers_create_instances_request_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersCreateInstancesRequest, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
+              #     The name of thezone
+              #     where the managed instance group is located.
+              #     It should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -630,7 +764,10 @@ module Google
               end
 
               ##
-              # Deletes the specified managed instance group and all of the instances in that group. Note that the instance group must not belong to a backend service. Read Deleting an instance group for more information.
+              # Deletes the specified managed instance group and all of the instances
+              # in that group. Note that the instance group must not belong to a
+              # backend service. Read
+              # Deleting an instance group for more information.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
@@ -652,9 +789,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -724,7 +874,21 @@ module Google
               end
 
               ##
-              # Flags the specified instances in the managed instance group for immediate deletion. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified instances in the managed instance group for immediate
+              # deletion. The instances are also removed from any target
+              # pools of which they were a member. This method reduces thetargetSize of the managed instance group by the number of
+              # instances that you delete. This operation is marked as DONE
+              # when the action is scheduled even if the instances are still being deleted.
+              # You must separately verify the status of the deleting action
+              # with thelistmanagedinstances
+              # method.
+              #
+              # If the group is part of a backend
+              # service that has enabled
+              # connection draining, it can take up to 60 seconds after the connection
+              # draining duration has elapsed before the VM instance is removed or deleted.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload delete_instances(request, options = nil)
               #   Pass arguments to `delete_instances` via a request object, either of type
@@ -748,9 +912,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -820,7 +997,8 @@ module Google
               end
 
               ##
-              # Deletes selected per-instance configurations for the managed instance group.
+              # Deletes selected per-instance configurations for the managed instance
+              # group.
               #
               # @overload delete_per_instance_configs(request, options = nil)
               #   Pass arguments to `delete_per_instance_configs` via a request object, either of type
@@ -838,13 +1016,17 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param instance_group_manager [::String]
-              #     The name of the managed instance group. It should conform to RFC1035.
+              #     The name of the managed instance group.
+              #     It should conform to RFC1035.
               #   @param instance_group_managers_delete_per_instance_configs_req_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersDeletePerInstanceConfigsReq, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
+              #     The name of thezone
+              #     where the managed instance
+              #     group is located.
+              #     It should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -936,7 +1118,8 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstanceGroupManager]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -996,7 +1179,17 @@ module Google
               end
 
               ##
-              # Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method. A managed instance group can have up to 1000 VM instances per group. Please contact Cloud Support if you need an increase in this limit.
+              # Creates a managed instance group using the information that you specify
+              # in the request. After the group is created, instances in the group are
+              # created using the specified instance template.
+              # This operation is marked as DONE when the group is created
+              # even if the instances in the group have not yet been created. You
+              # must separately verify the status of the individual instances with thelistmanagedinstances
+              # method.
+              #
+              # A managed instance group can have up to 1000 VM instances per group. Please
+              # contact Cloud Support if you need an increase in
+              # this limit.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
@@ -1018,9 +1211,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where you want to create the managed instance group.
+              #     The name of the zone
+              #     where you want to create the managed instance group.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1090,7 +1296,8 @@ module Google
               end
 
               ##
-              # Retrieves a list of managed instance groups that are contained within the specified project and zone.
+              # Retrieves a list of managed instance groups that are contained within the
+              # specified project and zone.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
@@ -1108,19 +1315,98 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InstanceGroupManager>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1182,7 +1468,9 @@ module Google
               end
 
               ##
-              # Lists all errors thrown by actions on instances for a given managed instance group. The filter and orderBy query parameters are not supported.
+              # Lists all errors thrown by actions on instances for a given managed
+              # instance group. The filter and orderBy query
+              # parameters are not supported.
               #
               # @overload list_errors(request, options = nil)
               #   Pass arguments to `list_errors` via a request object, either of type
@@ -1200,21 +1488,104 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param instance_group_manager [::String]
-              #     The name of the managed instance group. It must be a string that meets the requirements in RFC1035, or an unsigned long integer: must match regexp pattern: (?:[a-z](?:[-a-z0-9]\\{0,61}[a-z0-9])?)|1-9\\{0,19}.
+              #     The name of the managed instance group.
+              #     It must be a string that meets the requirements in RFC1035, or an
+              #     unsigned long integer: must match regexp pattern:
+              #     (?:[a-z](?:[-a-z0-9]\\{0,61}[a-z0-9])?)|1-9\\{0,19}.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
+              #     The name of thezone where the managed
+              #     instance group is located.
+              #     It should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1276,7 +1647,15 @@ module Google
               end
 
               ##
-              # Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.
+              # Lists all of the instances in the managed instance group. Each instance
+              # in the list has a currentAction, which indicates the action
+              # that the managed instance group is performing on the instance. For example,
+              # if the group is still creating an instance, the currentAction
+              # is CREATING. If a previous action failed, the
+              # list displays the errors for that failed action. The orderBy
+              # query parameter is not supported. The `pageToken` query parameter is
+              # supported only if the group's `listManagedInstancesResults` field is set
+              # to `PAGINATED`.
               #
               # @overload list_managed_instances(request, options = nil)
               #   Pass arguments to `list_managed_instances` via a request object, either of type
@@ -1294,21 +1673,100 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param instance_group_manager [::String]
               #     The name of the managed instance group.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ManagedInstance>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1370,7 +1828,8 @@ module Google
               end
 
               ##
-              # Lists all of the per-instance configurations defined for the managed instance group. The orderBy query parameter is not supported.
+              # Lists all of the per-instance configurations defined for the managed
+              # instance group. The orderBy query parameter is not supported.
               #
               # @overload list_per_instance_configs(request, options = nil)
               #   Pass arguments to `list_per_instance_configs` via a request object, either of type
@@ -1388,21 +1847,101 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
               #   @param instance_group_manager [::String]
               #     The name of the managed instance group. It should conform to RFC1035.
               #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
               #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
+              #     The name of thezone
+              #     where the managed instance group is located.
+              #     It should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::PerInstanceConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1464,7 +2003,21 @@ module Google
               end
 
               ##
-              # Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules. If you update your group to specify a new template or instance configuration, it's possible that your intended specification for each VM in the group is different from the current state of that VM. To learn how to apply an updated configuration to the VMs in a MIG, see Updating instances in a MIG.
+              # Updates a managed instance group using the information that you specify
+              # in the request.
+              # This operation is marked as DONE when the group is patched
+              # even if the instances in the group are still in the process of being
+              # patched. You must separately verify the status of the individual instances
+              # with thelistManagedInstances
+              # method. This method supportsPATCH
+              # semantics and uses theJSON merge
+              # patch format and processing rules.
+              #
+              # If you update your group to specify a new template or instance
+              # configuration, it's possible that your intended specification for each VM
+              # in the group is different from the current state of that VM. To learn how
+              # to apply an updated configuration to the VMs in a MIG, seeUpdating instances in
+              # a MIG.
               #
               # @overload patch(request, options = nil)
               #   Pass arguments to `patch` via a request object, either of type
@@ -1488,9 +2041,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where you want to create the managed instance group.
+              #     The name of the zone where
+              #     you want to create the managed instance group.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1560,7 +2126,9 @@ module Google
               end
 
               ##
-              # Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+              # Inserts or patches per-instance configurations for the managed instance
+              # group. perInstanceConfig.name serves as a key used to
+              # distinguish whether to perform insert or patch.
               #
               # @overload patch_per_instance_configs(request, options = nil)
               #   Pass arguments to `patch_per_instance_configs` via a request object, either of type
@@ -1578,15 +2146,30 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param instance_group_manager [::String]
-              #     The name of the managed instance group. It should conform to RFC1035.
+              #     The name of the managed instance group.
+              #     It should conform to RFC1035.
               #   @param instance_group_managers_patch_per_instance_configs_req_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersPatchPerInstanceConfigsReq, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
+              #     The name of thezone
+              #     where the managed instance group is located.
+              #     It should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1656,7 +2239,19 @@ module Google
               end
 
               ##
-              # Flags the specified VM instances in the managed instance group to be immediately recreated. Each instance is recreated using the group's current configuration. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of each instance by checking its currentAction field; for more information, see Checking the status of managed instances. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified VM instances in the managed instance group to be
+              # immediately recreated. Each instance is recreated using the group's current
+              # configuration. This operation is marked as DONE when the flag
+              # is set even if the instances have not yet been recreated. You must
+              # separately verify the status of each instance by checking itscurrentAction field; for more information, see Checking
+              # the status of managed instances.
+              #
+              # If the group is part of a backend
+              # service that has enabled
+              # connection draining, it can take up to 60 seconds after the connection
+              # draining duration has elapsed before the VM instance is removed or deleted.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload recreate_instances(request, options = nil)
               #   Pass arguments to `recreate_instances` via a request object, either of type
@@ -1680,9 +2275,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1752,7 +2360,29 @@ module Google
               end
 
               ##
-              # Resizes the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method. When resizing down, the instance group arbitrarily chooses the order in which VMs are deleted. The group takes into account some VM attributes when making the selection including: + The status of the VM instance. + The health of the VM instance. + The instance template version the VM is based on. + For regional managed instance groups, the location of the VM instance. This list is subject to change. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
+              # Resizes the managed instance group. If you increase the size, the group
+              # creates new instances using the current instance template. If you decrease
+              # the size, the group deletes instances. The resize operation is markedDONE when the resize actions are scheduled even if the group
+              # has not yet added or deleted any instances. You must separately
+              # verify the status of the creating or deleting
+              # actions with thelistmanagedinstances
+              # method.
+              #
+              # When resizing down, the instance group arbitrarily chooses the order in
+              # which VMs are deleted. The group takes into account some VM attributes when
+              # making the selection including:
+              #
+              # + The status of the VM instance.
+              # + The health of the VM instance.
+              # + The instance template version the VM is based on.
+              # + For regional managed instance groups, the location of the VM instance.
+              #
+              # This list is subject to change.
+              #
+              # If the group is part of a backend
+              # service that has enabled
+              # connection draining, it can take up to 60 seconds after the connection
+              # draining duration has elapsed before the VM instance is removed or deleted.
               #
               # @overload resize(request, options = nil)
               #   Pass arguments to `resize` via a request object, either of type
@@ -1774,11 +2404,26 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param size [::Integer]
-              #     The number of running instances that the managed instance group should maintain at any given time. The group automatically adds or removes instances to maintain the number of instances specified by this parameter.
+              #     The number of running instances that the managed instance group should
+              #     maintain at any given time. The group automatically adds or removes
+              #     instances to maintain the number of instances specified by this parameter.
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1848,7 +2493,22 @@ module Google
               end
 
               ##
-              # Flags the specified instances in the managed instance group to be resumed. This method increases the targetSize and decreases the targetSuspendedSize of the managed instance group by the number of instances that you resume. The resumeInstances operation is marked DONE if the resumeInstances request is successful. The underlying actions take additional time. You must separately verify the status of the RESUMING action with the listmanagedinstances method. In this request, you can only specify instances that are suspended. For example, if an instance was previously suspended using the suspendInstances method, it can be resumed using the resumeInstances method. If a health check is attached to the managed instance group, the specified instances will be verified as healthy after they are resumed. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified instances in the managed instance group to be
+              # resumed. This method increases thetargetSize and decreases the targetSuspendedSize
+              # of the managed instance group by the number of instances that you resume.
+              # The resumeInstances operation is marked DONE if
+              # the resumeInstances request is successful. The underlying
+              # actions take additional time. You must separately verify the status of theRESUMING action with thelistmanagedinstances
+              # method.
+              #
+              # In this request, you can only specify instances that are suspended. For
+              # example, if an instance was previously suspended using the suspendInstances
+              # method, it can be resumed using the resumeInstances method.
+              #
+              # If a health check is attached to the managed instance group, the specified
+              # instances will be verified as healthy after they are resumed.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload resume_instances(request, options = nil)
               #   Pass arguments to `resume_instances` via a request object, either of type
@@ -1872,9 +2532,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1944,7 +2617,9 @@ module Google
               end
 
               ##
-              # Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
+              # Specifies the instance template to use when creating new instances in this
+              # group. The templates for existing instances in the group do not change
+              # unless you run recreateInstances, runapplyUpdatesToInstances, or set the group'supdatePolicy.type to PROACTIVE.
               #
               # @overload set_instance_template(request, options = nil)
               #   Pass arguments to `set_instance_template` via a request object, either of type
@@ -1968,9 +2643,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2040,7 +2728,12 @@ module Google
               end
 
               ##
-              # Modifies the target pools to which all instances in this managed instance group are assigned. The target pools automatically apply to all of the instances in the managed instance group. This operation is marked DONE when you make the request even if the instances have not yet been added to their target pools. The change might take some time to apply to all of the instances in the group depending on the size of the group.
+              # Modifies the target pools to which all instances in this managed instance
+              # group are assigned. The target pools automatically apply to all of the
+              # instances in the managed instance group. This operation is markedDONE when you make the request even if the instances have not
+              # yet been added to their target pools. The change might take some time to
+              # apply to all of the instances in the group depending on the size of the
+              # group.
               #
               # @overload set_target_pools(request, options = nil)
               #   Pass arguments to `set_target_pools` via a request object, either of type
@@ -2064,9 +2757,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2136,7 +2842,22 @@ module Google
               end
 
               ##
-              # Flags the specified instances in the managed instance group to be started. This method increases the targetSize and decreases the targetStoppedSize of the managed instance group by the number of instances that you start. The startInstances operation is marked DONE if the startInstances request is successful. The underlying actions take additional time. You must separately verify the status of the STARTING action with the listmanagedinstances method. In this request, you can only specify instances that are stopped. For example, if an instance was previously stopped using the stopInstances method, it can be started using the startInstances method. If a health check is attached to the managed instance group, the specified instances will be verified as healthy after they are started. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified instances in the managed instance group to be
+              # started. This method increases thetargetSize and decreases the targetStoppedSize
+              # of the managed instance group by the number of instances that you start.
+              # The startInstances operation is marked DONE if
+              # the startInstances request is successful. The underlying
+              # actions take additional time. You must separately verify the status of theSTARTING action with thelistmanagedinstances
+              # method.
+              #
+              # In this request, you can only specify instances that are stopped. For
+              # example, if an instance was previously stopped using the stopInstances
+              # method, it can be started using the startInstances method.
+              #
+              # If a health check is attached to the managed instance group, the specified
+              # instances will be verified as healthy after they are started.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload start_instances(request, options = nil)
               #   Pass arguments to `start_instances` via a request object, either of type
@@ -2160,9 +2881,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2232,7 +2966,31 @@ module Google
               end
 
               ##
-              # Flags the specified instances in the managed instance group to be immediately stopped. You can only specify instances that are running in this request. This method reduces the targetSize and increases the targetStoppedSize of the managed instance group by the number of instances that you stop. The stopInstances operation is marked DONE if the stopInstances request is successful. The underlying actions take additional time. You must separately verify the status of the STOPPING action with the listmanagedinstances method. If the standbyPolicy.initialDelaySec field is set, the group delays stopping the instances until initialDelaySec have passed from instance.creationTimestamp (that is, when the instance was created). This delay gives your application time to set itself up and initialize on the instance. If more than initialDelaySec seconds have passed since instance.creationTimestamp when this method is called, there will be zero delay. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is stopped. Stopped instances can be started using the startInstances method. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified instances in the managed instance group to be
+              # immediately stopped. You can only specify instances that are running in
+              # this request. This method reduces thetargetSize and increases the targetStoppedSize
+              # of the managed instance group by the number of instances that you stop.
+              # The stopInstances operation is marked DONE if
+              # the stopInstances request is successful. The underlying
+              # actions take additional time. You must separately verify the status of theSTOPPING action with thelistmanagedinstances
+              # method.
+              #
+              # If the standbyPolicy.initialDelaySec field is set, the group
+              # delays stopping the instances until initialDelaySec have
+              # passed from instance.creationTimestamp (that is, when the
+              # instance was created). This delay gives your application time to
+              # set itself up and initialize on the instance. If more thaninitialDelaySec seconds have passed sinceinstance.creationTimestamp when this method is called, there
+              # will be zero delay.
+              #
+              # If the group is part of a backend
+              # service that has enabled
+              # connection draining, it can take up to 60 seconds after the connection
+              # draining duration has elapsed before the VM instance is stopped.
+              #
+              # Stopped instances can be started using the startInstances
+              # method.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload stop_instances(request, options = nil)
               #   Pass arguments to `stop_instances` via a request object, either of type
@@ -2256,9 +3014,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2328,7 +3099,31 @@ module Google
               end
 
               ##
-              # Flags the specified instances in the managed instance group to be immediately suspended. You can only specify instances that are running in this request. This method reduces the targetSize and increases the targetSuspendedSize of the managed instance group by the number of instances that you suspend. The suspendInstances operation is marked DONE if the suspendInstances request is successful. The underlying actions take additional time. You must separately verify the status of the SUSPENDING action with the listmanagedinstances method. If the standbyPolicy.initialDelaySec field is set, the group delays suspension of the instances until initialDelaySec have passed from instance.creationTimestamp (that is, when the instance was created). This delay gives your application time to set itself up and initialize on the instance. If more than initialDelaySec seconds have passed since instance.creationTimestamp when this method is called, there will be zero delay. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is suspended. Suspended instances can be resumed using the resumeInstances method. You can specify a maximum of 1000 instances with this method per request.
+              # Flags the specified instances in the managed instance group to be
+              # immediately suspended. You can only specify instances that are running in
+              # this request. This method reduces thetargetSize and increases the targetSuspendedSize
+              # of the managed instance group by the number of instances that you suspend.
+              # The suspendInstances operation is marked DONE if
+              # the suspendInstances request is successful. The underlying
+              # actions take additional time. You must separately verify the status of theSUSPENDING action with thelistmanagedinstances
+              # method.
+              #
+              # If the standbyPolicy.initialDelaySec field is set, the group
+              # delays suspension of the instances until initialDelaySec have
+              # passed from instance.creationTimestamp (that is, when the
+              # instance was created). This delay gives your application time to
+              # set itself up and initialize on the instance. If more thaninitialDelaySec seconds have passed sinceinstance.creationTimestamp when this method is called, there
+              # will be zero delay.
+              #
+              # If the group is part of a backend
+              # service that has enabled
+              # connection draining, it can take up to 60 seconds after the connection
+              # draining duration has elapsed before the VM instance is suspended.
+              #
+              # Suspended instances can be resumed using the resumeInstances
+              # method.
+              #
+              # You can specify a maximum of 1000 instances with this method per request.
               #
               # @overload suspend_instances(request, options = nil)
               #   Pass arguments to `suspend_instances` via a request object, either of type
@@ -2352,9 +3147,22 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located.
+              #     The name of thezone where the managed
+              #     instance group is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2424,7 +3232,9 @@ module Google
               end
 
               ##
-              # Inserts or updates per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+              # Inserts or updates per-instance configurations for the managed instance
+              # group. perInstanceConfig.name serves as a key used to
+              # distinguish whether to perform insert or patch.
               #
               # @overload update_per_instance_configs(request, options = nil)
               #   Pass arguments to `update_per_instance_configs` via a request object, either of type
@@ -2442,15 +3252,30 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param instance_group_manager [::String]
-              #     The name of the managed instance group. It should conform to RFC1035.
+              #     The name of the managed instance group.
+              #     It should conform to RFC1035.
               #   @param instance_group_managers_update_per_instance_configs_req_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersUpdatePerInstanceConfigsReq, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
               #   @param zone [::String]
-              #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
+              #     The name of thezone
+              #     where the managed instance group is located.
+              #     It should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

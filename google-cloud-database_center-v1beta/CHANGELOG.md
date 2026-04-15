@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.6.0 (2026-04-15)
+
+#### Features
+
+* Add support for BigQuery datasets and reservations ([#33826](https://github.com/googleapis/google-cloud-ruby/issues/33826)) 
+
+### 0.5.0 (2026-03-31)
+
+#### Features
+
+* A new value `SUB_RESOURCE_TYPE_READ_POOL` is added to enum `SubResourceType` ([#33324](https://github.com/googleapis/google-cloud-ruby/issues/33324)) 
+
 ### 0.4.0 (2026-03-19)
 
 #### Features

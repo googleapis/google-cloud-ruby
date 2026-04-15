@@ -46,6 +46,7 @@ module Google
         # @!attribute [rw] source_volume
         #   @return [::String]
         #     Volume full name of this backup belongs to.
+        #     Either source_volume or ontap_source should be provided.
         #     Format:
         #     `projects/{projects_id}/locations/{location}/volumes/{volume_id}`
         # @!attribute [rw] source_snapshot

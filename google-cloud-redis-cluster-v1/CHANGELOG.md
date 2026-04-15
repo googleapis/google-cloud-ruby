@@ -1,5 +1,21 @@
 # Changelog
 
+### 1.5.1 (2026-04-03)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33480](https://github.com/googleapis/google-cloud-ruby/issues/33480)) 
+
+### 1.5.0 (2026-04-02)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33457](https://github.com/googleapis/google-cloud-ruby/issues/33457)) 
+* publish client batch config schema ([#33437](https://github.com/googleapis/google-cloud-ruby/issues/33437)) 
+#### Documentation
+
+* update API common type documentation ([#33449](https://github.com/googleapis/google-cloud-ruby/issues/33449)) 
+
 ### 1.4.0 (2026-03-19)
 
 #### Features

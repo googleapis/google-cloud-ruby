@@ -40,6 +40,11 @@
                 "get_cluster_certificate_authority"
               ]
             },
+            "GetSharedRegionalCertificateAuthority": {
+              "methods": [
+                "get_shared_regional_certificate_authority"
+              ]
+            },
             "RescheduleClusterMaintenance": {
               "methods": [
                 "reschedule_cluster_maintenance"

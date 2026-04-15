@@ -62,6 +62,27 @@ class Google::Cloud::Chronicle::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_data_table_service_grpc
+    skip unless Google::Cloud::Chronicle.data_table_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Chronicle.data_table_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::DataTableService::Client, client
+    end
+  end
+
+  def test_data_table_service_rest
+    skip unless Google::Cloud::Chronicle.data_table_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Chronicle.data_table_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::DataTableService::Rest::Client, client
+    end
+  end
+
   def test_entity_service_grpc
     skip unless Google::Cloud::Chronicle.entity_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do

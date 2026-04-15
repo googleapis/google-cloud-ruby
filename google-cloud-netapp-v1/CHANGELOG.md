@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.10.0 (2026-04-02)
+
+#### Features
+
+* Add ONTAP passthrough APIs ([#33444](https://github.com/googleapis/google-cloud-ruby/issues/33444)) 
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
 ### 2.9.0 (2026-03-19)
 
 #### Features

@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.10.0 (2026-03-31)
+
+#### Features
+
+* Adding new workload specific fields for AlloyDB ([#33325](https://github.com/googleapis/google-cloud-ruby/issues/33325)) 
+
 ### 1.9.0 (2026-03-19)
 
 #### Features

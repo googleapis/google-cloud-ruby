@@ -73,6 +73,10 @@ module Google
     #     operation. The default is no deadline.
     # @!attribute [rw] path_translation
     #   @return [::Google::Api::BackendRule::PathTranslation]
+    #     Path translation specifies how to combine the backend address with the
+    #     request path in order to produce the appropriate forwarding URL for the
+    #     request. See {::Google::Api::BackendRule::PathTranslation PathTranslation} for
+    #     more details.
     # @!attribute [rw] jwt_audience
     #   @return [::String]
     #     The JWT audience is used when generating a JWT ID token for the backend.
@@ -114,6 +118,13 @@ module Google
     # @!attribute [rw] overrides_by_request_protocol
     #   @return [::Google::Protobuf::Map{::String => ::Google::Api::BackendRule}]
     #     The map between request protocol and the backend address.
+    # @!attribute [rw] load_balancing_policy
+    #   @return [::String]
+    #     The load balancing policy used for connection to the application backend.
+    #
+    #     Defined as an arbitrary string to accomondate custom load balancing
+    #     policies supported by the underlying channel, but suggest most users use
+    #     one of the standard policies, such as the default, "RoundRobin".
     class BackendRule
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

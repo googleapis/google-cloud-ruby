@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14, 13]
                 }
 
-                default_config.rpcs.streaming_pull.timeout = 900.0
+                default_config.rpcs.streaming_pull.timeout = 1800.0
                 default_config.rpcs.streaming_pull.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 4, retry_codes: [4, 8, 10, 13, 14]
                 }
@@ -304,7 +304,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil, tags: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, bigtable_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil, tags: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -329,6 +329,9 @@ module Google
             #   @param cloud_storage_config [::Google::Cloud::PubSub::V1::CloudStorageConfig, ::Hash]
             #     Optional. If delivery to Google Cloud Storage is used with this
             #     subscription, this field is used to configure it.
+            #   @param bigtable_config [::Google::Cloud::PubSub::V1::BigtableConfig, ::Hash]
+            #     Optional. If delivery to Bigtable is used with this subscription, this
+            #     field is used to configure it.
             #   @param ack_deadline_seconds [::Integer]
             #     Optional. The approximate amount of time (on a best-effort basis) Pub/Sub
             #     waits for the subscriber to acknowledge receipt before resending the
@@ -429,6 +432,8 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+            #     using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -513,7 +518,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param subscription [::String]
-            #     Required. Identifier. The name of the subscription to get.
+            #     Required. The name of the subscription to get.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -689,8 +694,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. Identifier. The name of the project in which to list
-            #     subscriptions. Format is `projects/{project-id}`.
+            #     Required. The name of the project in which to list subscriptions.
+            #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of subscriptions to return.
             #   @param page_token [::String]
@@ -791,7 +796,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param subscription [::String]
-            #     Required. Identifier. The subscription to delete.
+            #     Required. The subscription to delete.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1359,7 +1364,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param snapshot [::String]
-            #     Required. Identifier. The name of the snapshot to get.
+            #     Required. The name of the snapshot to get.
             #     Format is `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1449,7 +1454,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. Identifier. The name of the project in which to list snapshots.
+            #     Required. The name of the project in which to list snapshots.
             #     Format is `projects/{project-id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of snapshots to return.
@@ -1562,10 +1567,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Identifier. User-provided name for this snapshot. If the name is
-            #     not provided in the request, the server will assign a random name for this
-            #     snapshot on the same project as the subscription. Note that for REST API
-            #     requests, you must specify a name.  See the [resource name
+            #     Required. User-provided name for this snapshot. If the name is not provided
+            #     in the request, the server will assign a random name for this snapshot on
+            #     the same project as the subscription. Note that for REST API requests, you
+            #     must specify a name.  See the [resource name
             #     rules](https://cloud.google.com/pubsub/docs/pubsub-basics#resource_names).
             #     Format is `projects/{project}/snapshots/{snap}`.
             #   @param subscription [::String]
@@ -1586,6 +1591,8 @@ module Google
             #     resource. For example:
             #       "123/environment": "production",
             #       "123/costCenter": "marketing"
+            #     See https://docs.cloud.google.com/pubsub/docs/tags for more information on
+            #     using tags with Pub/Sub resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]
@@ -1771,7 +1778,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param snapshot [::String]
-            #     Required. Identifier. The name of the snapshot to delete.
+            #     Required. The name of the snapshot to delete.
             #     Format is `projects/{project}/snapshots/{snap}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation

@@ -31,18 +31,33 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::UserData]
         #     User-provided data that identifies the user.
         #
-        #     Note: The following fields are mutually exclusive: `user_data`, `pair_data`, `mobile_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pair_data
         #   @return [::Google::Ads::DataManager::V1::PairData]
         #     [Publisher Advertiser Identity Reconciliation (PAIR)
         #     IDs](//support.google.com/admanager/answer/15067908).
         #
-        #     Note: The following fields are mutually exclusive: `pair_data`, `user_data`, `mobile_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     This feature is only available to data partners.
+        #
+        #     Note: The following fields are mutually exclusive: `pair_data`, `user_data`, `mobile_data`, `user_id_data`, `ppid_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mobile_data
         #   @return [::Google::Ads::DataManager::V1::MobileData]
         #     Data identifying the user's mobile devices.
         #
-        #     Note: The following fields are mutually exclusive: `mobile_data`, `user_data`, `pair_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mobile_data`, `user_data`, `pair_data`, `user_id_data`, `ppid_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] user_id_data
+        #   @return [::Google::Ads::DataManager::V1::UserIdData]
+        #     Data related to unique identifiers for a user, as defined by the
+        #     advertiser.
+        #
+        #     Note: The following fields are mutually exclusive: `user_id_data`, `user_data`, `pair_data`, `mobile_data`, `ppid_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ppid_data
+        #   @return [::Google::Ads::DataManager::V1::PpidData]
+        #     Data related to publisher provided identifiers.
+        #
+        #     This feature is only available to data partners.
+        #
+        #     Note: The following fields are mutually exclusive: `ppid_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] consent
         #   @return [::Google::Ads::DataManager::V1::Consent]
         #     Optional. The consent setting for the user.
@@ -53,6 +68,8 @@ module Google
 
         # [PAIR](//support.google.com/admanager/answer/15067908) IDs for the audience.
         # At least one PAIR ID is required.
+        #
+        # This feature is only available to data partners.
         # @!attribute [rw] pair_ids
         #   @return [::Array<::String>]
         #     Required. Cleanroom-provided PII data, hashed with SHA256, and encrypted
@@ -72,6 +89,28 @@ module Google
         #     `mobileIds` can be provided in a single
         #     {::Google::Ads::DataManager::V1::AudienceMember AudienceMember}.
         class MobileData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # User id data holding the user id.
+        # @!attribute [rw] user_id
+        #   @return [::String]
+        #     Required. A unique identifier for a user, as defined by the
+        #     advertiser.
+        class UserIdData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Publisher provided identifiers data holding the ppids. At least one ppid is
+        # required.
+        #
+        # This feature is only available to data partners.
+        # @!attribute [rw] ppids
+        #   @return [::Array<::String>]
+        #     Required. The list of publisher provided identifiers for a user.
+        class PpidData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

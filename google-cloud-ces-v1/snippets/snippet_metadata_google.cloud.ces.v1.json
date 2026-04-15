@@ -1,0 +1,2215 @@
+{
+  "client_library": {
+    "name": "google-cloud-ces-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.ces.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListApps_sync",
+      "title": "Snippet for the list_apps call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_apps.",
+      "file": "agent_service/list_apps.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_apps",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_apps",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListAppsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListAppsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListApps",
+          "full_name": "google.cloud.ces.v1.AgentService.ListApps",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetApp_sync",
+      "title": "Snippet for the get_app call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_app.",
+      "file": "agent_service/get_app.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_app",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_app",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetAppRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::App",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetApp",
+          "full_name": "google.cloud.ces.v1.AgentService.GetApp",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateApp_sync",
+      "title": "Snippet for the create_app call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_app.",
+      "file": "agent_service/create_app.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_app",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_app",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateAppRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateApp",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateApp",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateApp_sync",
+      "title": "Snippet for the update_app call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_app.",
+      "file": "agent_service/update_app.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_app",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_app",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateAppRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::App",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateApp",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateApp",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteApp_sync",
+      "title": "Snippet for the delete_app call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_app.",
+      "file": "agent_service/delete_app.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_app",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_app",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteAppRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteApp",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteApp",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ExportApp_sync",
+      "title": "Snippet for the export_app call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#export_app.",
+      "file": "agent_service/export_app.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_app",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#export_app",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ExportAppRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ExportApp",
+          "full_name": "google.cloud.ces.v1.AgentService.ExportApp",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ImportApp_sync",
+      "title": "Snippet for the import_app call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#import_app.",
+      "file": "agent_service/import_app.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_app",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#import_app",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ImportAppRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ImportApp",
+          "full_name": "google.cloud.ces.v1.AgentService.ImportApp",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListAgents_sync",
+      "title": "Snippet for the list_agents call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_agents.",
+      "file": "agent_service/list_agents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_agents",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_agents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListAgentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListAgentsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListAgents",
+          "full_name": "google.cloud.ces.v1.AgentService.ListAgents",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetAgent_sync",
+      "title": "Snippet for the get_agent call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_agent.",
+      "file": "agent_service/get_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_agent",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Agent",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetAgent",
+          "full_name": "google.cloud.ces.v1.AgentService.GetAgent",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateAgent_sync",
+      "title": "Snippet for the create_agent call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_agent.",
+      "file": "agent_service/create_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_agent",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Agent",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateAgent",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateAgent",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateAgent_sync",
+      "title": "Snippet for the update_agent call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_agent.",
+      "file": "agent_service/update_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_agent",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Agent",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAgent",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateAgent",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteAgent_sync",
+      "title": "Snippet for the delete_agent call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_agent.",
+      "file": "agent_service/delete_agent.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_agent",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_agent",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteAgentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAgent",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteAgent",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListExamples_sync",
+      "title": "Snippet for the list_examples call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_examples.",
+      "file": "agent_service/list_examples.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_examples",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_examples",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListExamplesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListExamplesResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListExamples",
+          "full_name": "google.cloud.ces.v1.AgentService.ListExamples",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetExample_sync",
+      "title": "Snippet for the get_example call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_example.",
+      "file": "agent_service/get_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_example",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Example",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetExample",
+          "full_name": "google.cloud.ces.v1.AgentService.GetExample",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateExample_sync",
+      "title": "Snippet for the create_example call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_example.",
+      "file": "agent_service/create_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_example",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Example",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateExample",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateExample",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateExample_sync",
+      "title": "Snippet for the update_example call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_example.",
+      "file": "agent_service/update_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_example",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Example",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateExample",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateExample",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteExample_sync",
+      "title": "Snippet for the delete_example call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_example.",
+      "file": "agent_service/delete_example.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_example",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_example",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteExampleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteExample",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteExample",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListTools_sync",
+      "title": "Snippet for the list_tools call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_tools.",
+      "file": "agent_service/list_tools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tools",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_tools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListToolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListToolsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListTools",
+          "full_name": "google.cloud.ces.v1.AgentService.ListTools",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetTool_sync",
+      "title": "Snippet for the get_tool call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_tool.",
+      "file": "agent_service/get_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tool",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Tool",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetTool",
+          "full_name": "google.cloud.ces.v1.AgentService.GetTool",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListConversations_sync",
+      "title": "Snippet for the list_conversations call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_conversations.",
+      "file": "agent_service/list_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversations",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListConversationsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListConversations",
+          "full_name": "google.cloud.ces.v1.AgentService.ListConversations",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetConversation_sync",
+      "title": "Snippet for the get_conversation call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_conversation.",
+      "file": "agent_service/get_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Conversation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetConversation",
+          "full_name": "google.cloud.ces.v1.AgentService.GetConversation",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteConversation_sync",
+      "title": "Snippet for the delete_conversation call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_conversation.",
+      "file": "agent_service/delete_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversation",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversation",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteConversation",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_BatchDeleteConversations_sync",
+      "title": "Snippet for the batch_delete_conversations call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#batch_delete_conversations.",
+      "file": "agent_service/batch_delete_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_conversations",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#batch_delete_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::BatchDeleteConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteConversations",
+          "full_name": "google.cloud.ces.v1.AgentService.BatchDeleteConversations",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateTool_sync",
+      "title": "Snippet for the create_tool call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_tool.",
+      "file": "agent_service/create_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tool",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Tool",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateTool",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateTool",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateTool_sync",
+      "title": "Snippet for the update_tool call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_tool.",
+      "file": "agent_service/update_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tool",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Tool",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateTool",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateTool",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteTool_sync",
+      "title": "Snippet for the delete_tool call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_tool.",
+      "file": "agent_service/delete_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tool",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTool",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteTool",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListGuardrails_sync",
+      "title": "Snippet for the list_guardrails call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_guardrails.",
+      "file": "agent_service/list_guardrails.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_guardrails",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_guardrails",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListGuardrailsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListGuardrailsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListGuardrails",
+          "full_name": "google.cloud.ces.v1.AgentService.ListGuardrails",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetGuardrail_sync",
+      "title": "Snippet for the get_guardrail call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_guardrail.",
+      "file": "agent_service/get_guardrail.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_guardrail",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_guardrail",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetGuardrailRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Guardrail",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetGuardrail",
+          "full_name": "google.cloud.ces.v1.AgentService.GetGuardrail",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateGuardrail_sync",
+      "title": "Snippet for the create_guardrail call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_guardrail.",
+      "file": "agent_service/create_guardrail.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_guardrail",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_guardrail",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateGuardrailRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Guardrail",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateGuardrail",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateGuardrail",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateGuardrail_sync",
+      "title": "Snippet for the update_guardrail call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_guardrail.",
+      "file": "agent_service/update_guardrail.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_guardrail",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_guardrail",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateGuardrailRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Guardrail",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGuardrail",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateGuardrail",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteGuardrail_sync",
+      "title": "Snippet for the delete_guardrail call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_guardrail.",
+      "file": "agent_service/delete_guardrail.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_guardrail",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_guardrail",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteGuardrailRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteGuardrail",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteGuardrail",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListDeployments_sync",
+      "title": "Snippet for the list_deployments call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_deployments.",
+      "file": "agent_service/list_deployments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deployments",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_deployments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListDeploymentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListDeploymentsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListDeployments",
+          "full_name": "google.cloud.ces.v1.AgentService.ListDeployments",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetDeployment_sync",
+      "title": "Snippet for the get_deployment call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_deployment.",
+      "file": "agent_service/get_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deployment",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Deployment",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetDeployment",
+          "full_name": "google.cloud.ces.v1.AgentService.GetDeployment",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateDeployment_sync",
+      "title": "Snippet for the create_deployment call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_deployment.",
+      "file": "agent_service/create_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deployment",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Deployment",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateDeployment",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateDeployment",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateDeployment_sync",
+      "title": "Snippet for the update_deployment call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_deployment.",
+      "file": "agent_service/update_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_deployment",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Deployment",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeployment",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateDeployment",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteDeployment_sync",
+      "title": "Snippet for the delete_deployment call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_deployment.",
+      "file": "agent_service/delete_deployment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_deployment",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_deployment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteDeploymentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeployment",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteDeployment",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListToolsets_sync",
+      "title": "Snippet for the list_toolsets call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_toolsets.",
+      "file": "agent_service/list_toolsets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_toolsets",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_toolsets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListToolsetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListToolsetsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListToolsets",
+          "full_name": "google.cloud.ces.v1.AgentService.ListToolsets",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetToolset_sync",
+      "title": "Snippet for the get_toolset call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_toolset.",
+      "file": "agent_service/get_toolset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_toolset",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_toolset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetToolsetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Toolset",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetToolset",
+          "full_name": "google.cloud.ces.v1.AgentService.GetToolset",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateToolset_sync",
+      "title": "Snippet for the create_toolset call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_toolset.",
+      "file": "agent_service/create_toolset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_toolset",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_toolset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateToolsetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Toolset",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateToolset",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateToolset",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_UpdateToolset_sync",
+      "title": "Snippet for the update_toolset call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#update_toolset.",
+      "file": "agent_service/update_toolset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_toolset",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#update_toolset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::UpdateToolsetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Toolset",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateToolset",
+          "full_name": "google.cloud.ces.v1.AgentService.UpdateToolset",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteToolset_sync",
+      "title": "Snippet for the delete_toolset call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_toolset.",
+      "file": "agent_service/delete_toolset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_toolset",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_toolset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteToolsetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteToolset",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteToolset",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListAppVersions_sync",
+      "title": "Snippet for the list_app_versions call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_app_versions.",
+      "file": "agent_service/list_app_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_app_versions",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_app_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListAppVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListAppVersionsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListAppVersions",
+          "full_name": "google.cloud.ces.v1.AgentService.ListAppVersions",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetAppVersion_sync",
+      "title": "Snippet for the get_app_version call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_app_version.",
+      "file": "agent_service/get_app_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_app_version",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_app_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetAppVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::AppVersion",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetAppVersion",
+          "full_name": "google.cloud.ces.v1.AgentService.GetAppVersion",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_CreateAppVersion_sync",
+      "title": "Snippet for the create_app_version call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#create_app_version.",
+      "file": "agent_service/create_app_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_app_version",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#create_app_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::CreateAppVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::AppVersion",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "CreateAppVersion",
+          "full_name": "google.cloud.ces.v1.AgentService.CreateAppVersion",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_DeleteAppVersion_sync",
+      "title": "Snippet for the delete_app_version call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#delete_app_version.",
+      "file": "agent_service/delete_app_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_app_version",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#delete_app_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::DeleteAppVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAppVersion",
+          "full_name": "google.cloud.ces.v1.AgentService.DeleteAppVersion",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_RestoreAppVersion_sync",
+      "title": "Snippet for the restore_app_version call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#restore_app_version.",
+      "file": "agent_service/restore_app_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_app_version",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#restore_app_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::RestoreAppVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "RestoreAppVersion",
+          "full_name": "google.cloud.ces.v1.AgentService.RestoreAppVersion",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_ListChangelogs_sync",
+      "title": "Snippet for the list_changelogs call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#list_changelogs.",
+      "file": "agent_service/list_changelogs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_changelogs",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#list_changelogs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ListChangelogsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ListChangelogsResponse",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "ListChangelogs",
+          "full_name": "google.cloud.ces.v1.AgentService.ListChangelogs",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_AgentService_GetChangelog_sync",
+      "title": "Snippet for the get_changelog call in the AgentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::AgentService::Client#get_changelog.",
+      "file": "agent_service/get_changelog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_changelog",
+        "full_name": "::Google::Cloud::Ces::V1::AgentService::Client#get_changelog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GetChangelogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::Changelog",
+        "client": {
+          "short_name": "AgentService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::AgentService::Client"
+        },
+        "method": {
+          "short_name": "GetChangelog",
+          "full_name": "google.cloud.ces.v1.AgentService.GetChangelog",
+          "service": {
+            "short_name": "AgentService",
+            "full_name": "google.cloud.ces.v1.AgentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_SessionService_RunSession_sync",
+      "title": "Snippet for the run_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::SessionService::Client#run_session.",
+      "file": "session_service/run_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_session",
+        "full_name": "::Google::Cloud::Ces::V1::SessionService::Client#run_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::RunSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::RunSessionResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "RunSession",
+          "full_name": "google.cloud.ces.v1.SessionService.RunSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.ces.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_SessionService_StreamRunSession_sync",
+      "title": "Snippet for the stream_run_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::SessionService::Client#stream_run_session.",
+      "file": "session_service/stream_run_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_run_session",
+        "full_name": "::Google::Cloud::Ces::V1::SessionService::Client#stream_run_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::RunSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::RunSessionResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "StreamRunSession",
+          "full_name": "google.cloud.ces.v1.SessionService.StreamRunSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.ces.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_SessionService_BidiRunSession_sync",
+      "title": "Snippet for the bidi_run_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::SessionService::Client#bidi_run_session.",
+      "file": "session_service/bidi_run_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bidi_run_session",
+        "full_name": "::Google::Cloud::Ces::V1::SessionService::Client#bidi_run_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::BidiSessionClientMessage",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::BidiSessionServerMessage",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "BidiRunSession",
+          "full_name": "google.cloud.ces.v1.SessionService.BidiRunSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.ces.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_ToolService_ExecuteTool_sync",
+      "title": "Snippet for the execute_tool call in the ToolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::ToolService::Client#execute_tool.",
+      "file": "tool_service/execute_tool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_tool",
+        "full_name": "::Google::Cloud::Ces::V1::ToolService::Client#execute_tool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::ExecuteToolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::ExecuteToolResponse",
+        "client": {
+          "short_name": "ToolService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::ToolService::Client"
+        },
+        "method": {
+          "short_name": "ExecuteTool",
+          "full_name": "google.cloud.ces.v1.ToolService.ExecuteTool",
+          "service": {
+            "short_name": "ToolService",
+            "full_name": "google.cloud.ces.v1.ToolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_ToolService_RetrieveToolSchema_sync",
+      "title": "Snippet for the retrieve_tool_schema call in the ToolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::ToolService::Client#retrieve_tool_schema.",
+      "file": "tool_service/retrieve_tool_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_tool_schema",
+        "full_name": "::Google::Cloud::Ces::V1::ToolService::Client#retrieve_tool_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::RetrieveToolSchemaResponse",
+        "client": {
+          "short_name": "ToolService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::ToolService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveToolSchema",
+          "full_name": "google.cloud.ces.v1.ToolService.RetrieveToolSchema",
+          "service": {
+            "short_name": "ToolService",
+            "full_name": "google.cloud.ces.v1.ToolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_ToolService_RetrieveTools_sync",
+      "title": "Snippet for the retrieve_tools call in the ToolService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::ToolService::Client#retrieve_tools.",
+      "file": "tool_service/retrieve_tools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_tools",
+        "full_name": "::Google::Cloud::Ces::V1::ToolService::Client#retrieve_tools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::RetrieveToolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::RetrieveToolsResponse",
+        "client": {
+          "short_name": "ToolService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::ToolService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveTools",
+          "full_name": "google.cloud.ces.v1.ToolService.RetrieveTools",
+          "service": {
+            "short_name": "ToolService",
+            "full_name": "google.cloud.ces.v1.ToolService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "ces_v1_generated_WidgetService_GenerateChatToken_sync",
+      "title": "Snippet for the generate_chat_token call in the WidgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Ces::V1::WidgetService::Client#generate_chat_token.",
+      "file": "widget_service/generate_chat_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_chat_token",
+        "full_name": "::Google::Cloud::Ces::V1::WidgetService::Client#generate_chat_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Ces::V1::GenerateChatTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Ces::V1::GenerateChatTokenResponse",
+        "client": {
+          "short_name": "WidgetService::Client",
+          "full_name": "::Google::Cloud::Ces::V1::WidgetService::Client"
+        },
+        "method": {
+          "short_name": "GenerateChatToken",
+          "full_name": "google.cloud.ces.v1.WidgetService.GenerateChatToken",
+          "service": {
+            "short_name": "WidgetService",
+            "full_name": "google.cloud.ces.v1.WidgetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

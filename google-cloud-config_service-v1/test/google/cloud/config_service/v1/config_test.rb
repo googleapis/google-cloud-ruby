@@ -1912,6 +1912,597 @@ class ::Google::Cloud::ConfigService::V1::Config::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_deployment_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfigService::V1::DeploymentGroup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_deployment_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_deployment_group, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_deployment_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_deployment_group({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_deployment_group name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_deployment_group ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_deployment_group({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_deployment_group(::Google::Cloud::ConfigService::V1::GetDeploymentGroupRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_deployment_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_deployment_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    deployment_group_id = "hello world"
+    deployment_group = {}
+    request_id = "hello world"
+
+    create_deployment_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_deployment_group, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["deployment_group_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfigService::V1::DeploymentGroup), request["deployment_group"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_deployment_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_deployment_group({ parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_deployment_group parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_deployment_group ::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest.new(parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_deployment_group({ parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_deployment_group(::Google::Cloud::ConfigService::V1::CreateDeploymentGroupRequest.new(parent: parent, deployment_group_id: deployment_group_id, deployment_group: deployment_group, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_deployment_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_deployment_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    deployment_group = {}
+    request_id = "hello world"
+
+    update_deployment_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_deployment_group, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfigService::V1::DeploymentGroup), request["deployment_group"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_deployment_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_deployment_group({ update_mask: update_mask, deployment_group: deployment_group, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_deployment_group update_mask: update_mask, deployment_group: deployment_group, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_deployment_group ::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest.new(update_mask: update_mask, deployment_group: deployment_group, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_deployment_group({ update_mask: update_mask, deployment_group: deployment_group, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_deployment_group(::Google::Cloud::ConfigService::V1::UpdateDeploymentGroupRequest.new(update_mask: update_mask, deployment_group: deployment_group, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_deployment_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_deployment_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    force = true
+    deployment_reference_policy = :DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED
+
+    delete_deployment_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_deployment_group, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["force"]
+      assert_equal :DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED, request["deployment_reference_policy"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_deployment_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_deployment_group({ name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_deployment_group name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_deployment_group ::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest.new(name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_deployment_group({ name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_deployment_group(::Google::Cloud::ConfigService::V1::DeleteDeploymentGroupRequest.new(name: name, request_id: request_id, force: force, deployment_reference_policy: deployment_reference_policy), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_deployment_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_deployment_groups
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_deployment_groups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_deployment_groups, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_deployment_groups_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_deployment_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_deployment_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_deployment_groups ::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_deployment_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_deployment_groups(::Google::Cloud::ConfigService::V1::ListDeploymentGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_deployment_groups_client_stub.call_rpc_count
+    end
+  end
+
+  def test_provision_deployment_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    deployment_specs = {}
+
+    provision_deployment_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :provision_deployment_group, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["deployment_specs"].to_h)
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, provision_deployment_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.provision_deployment_group({ name: name, deployment_specs: deployment_specs }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.provision_deployment_group name: name, deployment_specs: deployment_specs do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.provision_deployment_group ::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest.new(name: name, deployment_specs: deployment_specs) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.provision_deployment_group({ name: name, deployment_specs: deployment_specs }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.provision_deployment_group(::Google::Cloud::ConfigService::V1::ProvisionDeploymentGroupRequest.new(name: name, deployment_specs: deployment_specs), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, provision_deployment_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_deprovision_deployment_group
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+    delete_policy = :DELETE_POLICY_UNSPECIFIED
+
+    deprovision_deployment_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :deprovision_deployment_group, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
+      assert_equal :DELETE_POLICY_UNSPECIFIED, request["delete_policy"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, deprovision_deployment_group_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.deprovision_deployment_group({ name: name, force: force, delete_policy: delete_policy }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.deprovision_deployment_group name: name, force: force, delete_policy: delete_policy do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.deprovision_deployment_group ::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest.new(name: name, force: force, delete_policy: delete_policy) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.deprovision_deployment_group({ name: name, force: force, delete_policy: delete_policy }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.deprovision_deployment_group(::Google::Cloud::ConfigService::V1::DeprovisionDeploymentGroupRequest.new(name: name, force: force, delete_policy: delete_policy), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, deprovision_deployment_group_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_deployment_group_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfigService::V1::DeploymentGroupRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_deployment_group_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_deployment_group_revision, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_deployment_group_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_deployment_group_revision({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_deployment_group_revision name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_deployment_group_revision ::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_deployment_group_revision({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_deployment_group_revision(::Google::Cloud::ConfigService::V1::GetDeploymentGroupRevisionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_deployment_group_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_deployment_group_revisions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_deployment_group_revisions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_deployment_group_revisions, name
+      assert_kind_of ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_deployment_group_revisions_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_deployment_group_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_deployment_group_revisions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_deployment_group_revisions ::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_deployment_group_revisions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_deployment_group_revisions(::Google::Cloud::ConfigService::V1::ListDeploymentGroupRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_deployment_group_revisions_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

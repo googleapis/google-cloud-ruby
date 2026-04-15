@@ -41,6 +41,18 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientPathsTest < Minit
     end
   end
 
+  def test_account_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.account_path account: "value0"
+      assert_equal "accounts/value0", path
+    end
+  end
+
   def test_channel_partner_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

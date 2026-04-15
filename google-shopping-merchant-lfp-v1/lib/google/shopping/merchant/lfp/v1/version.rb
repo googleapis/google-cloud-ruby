@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Lfp
         module V1
-          VERSION = "0.2.1"
+          VERSION = "0.3.1"
         end
       end
     end

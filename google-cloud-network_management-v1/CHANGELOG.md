@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.10.1 (2026-04-15)
+
+#### Documentation
+
+* Update comment for the `region` field in `RouteInfo` ([#33822](https://github.com/googleapis/google-cloud-ruby/issues/33822)) 
+
+### 2.10.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+
 ### 2.9.0 (2026-03-19)
 
 #### Features

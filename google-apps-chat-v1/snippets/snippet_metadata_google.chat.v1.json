@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-apps-chat-v1",
-    "version": "0.20.0",
+    "version": "0.22.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1395,6 +1395,286 @@
         "method": {
           "short_name": "UpdateSpaceNotificationSetting",
           "full_name": "google.chat.v1.ChatService.UpdateSpaceNotificationSetting",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_CreateSection_sync",
+      "title": "Snippet for the create_section call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#create_section.",
+      "file": "chat_service/create_section.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_section",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#create_section",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::CreateSectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Section",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "CreateSection",
+          "full_name": "google.chat.v1.ChatService.CreateSection",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_DeleteSection_sync",
+      "title": "Snippet for the delete_section call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#delete_section.",
+      "file": "chat_service/delete_section.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_section",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#delete_section",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::DeleteSectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSection",
+          "full_name": "google.chat.v1.ChatService.DeleteSection",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_UpdateSection_sync",
+      "title": "Snippet for the update_section call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#update_section.",
+      "file": "chat_service/update_section.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_section",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#update_section",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::UpdateSectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Section",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSection",
+          "full_name": "google.chat.v1.ChatService.UpdateSection",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_ListSections_sync",
+      "title": "Snippet for the list_sections call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#list_sections.",
+      "file": "chat_service/list_sections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sections",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#list_sections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::ListSectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::ListSectionsResponse",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "ListSections",
+          "full_name": "google.chat.v1.ChatService.ListSections",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_PositionSection_sync",
+      "title": "Snippet for the position_section call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#position_section.",
+      "file": "chat_service/position_section.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "position_section",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#position_section",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::PositionSectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::PositionSectionResponse",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "PositionSection",
+          "full_name": "google.chat.v1.ChatService.PositionSection",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_ListSectionItems_sync",
+      "title": "Snippet for the list_section_items call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#list_section_items.",
+      "file": "chat_service/list_section_items.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_section_items",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#list_section_items",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::ListSectionItemsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::ListSectionItemsResponse",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "ListSectionItems",
+          "full_name": "google.chat.v1.ChatService.ListSectionItems",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_MoveSectionItem_sync",
+      "title": "Snippet for the move_section_item call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#move_section_item.",
+      "file": "chat_service/move_section_item.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "move_section_item",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#move_section_item",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::MoveSectionItemRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::MoveSectionItemResponse",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "MoveSectionItem",
+          "full_name": "google.chat.v1.ChatService.MoveSectionItem",
           "service": {
             "short_name": "ChatService",
             "full_name": "google.chat.v1.ChatService"

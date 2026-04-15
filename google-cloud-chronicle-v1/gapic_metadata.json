@@ -64,6 +64,90 @@
         }
       }
     },
+    "DataTableService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::DataTableService::Client",
+          "rpcs": {
+            "CreateDataTable": {
+              "methods": [
+                "create_data_table"
+              ]
+            },
+            "ListDataTables": {
+              "methods": [
+                "list_data_tables"
+              ]
+            },
+            "GetDataTable": {
+              "methods": [
+                "get_data_table"
+              ]
+            },
+            "UpdateDataTable": {
+              "methods": [
+                "update_data_table"
+              ]
+            },
+            "DeleteDataTable": {
+              "methods": [
+                "delete_data_table"
+              ]
+            },
+            "CreateDataTableRow": {
+              "methods": [
+                "create_data_table_row"
+              ]
+            },
+            "UpdateDataTableRow": {
+              "methods": [
+                "update_data_table_row"
+              ]
+            },
+            "ListDataTableRows": {
+              "methods": [
+                "list_data_table_rows"
+              ]
+            },
+            "GetDataTableRow": {
+              "methods": [
+                "get_data_table_row"
+              ]
+            },
+            "DeleteDataTableRow": {
+              "methods": [
+                "delete_data_table_row"
+              ]
+            },
+            "BulkCreateDataTableRows": {
+              "methods": [
+                "bulk_create_data_table_rows"
+              ]
+            },
+            "BulkGetDataTableRows": {
+              "methods": [
+                "bulk_get_data_table_rows"
+              ]
+            },
+            "BulkReplaceDataTableRows": {
+              "methods": [
+                "bulk_replace_data_table_rows"
+              ]
+            },
+            "BulkUpdateDataTableRows": {
+              "methods": [
+                "bulk_update_data_table_rows"
+              ]
+            },
+            "GetDataTableOperationErrors": {
+              "methods": [
+                "get_data_table_operation_errors"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityService": {
       "clients": {
         "grpc": {

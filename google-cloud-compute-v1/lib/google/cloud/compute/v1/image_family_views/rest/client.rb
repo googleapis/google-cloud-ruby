@@ -180,7 +180,8 @@ module Google
               # Service calls
 
               ##
-              # Returns the latest image that is part of an image family, is not deprecated and is rolled out in the specified zone.
+              # Returns the latest image that is part of an image family, is not
+              # deprecated and is rolled out in the specified zone.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type

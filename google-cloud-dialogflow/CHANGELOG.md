@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2026-03-31)
+
+#### Features
+
+* updated v2 dialogflow client libraries ([#33326](https://github.com/googleapis/google-cloud-ruby/issues/33326)) 
+
 ### 1.13.0 (2026-03-19)
 
 #### Features

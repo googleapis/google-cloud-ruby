@@ -1,5 +1,24 @@
 # Changelog
 
+### 1.41.0 (2026-04-15)
+
+#### Features
+
+* Model Registry CopyModel BYOSA ([#33833](https://github.com/googleapis/google-cloud-ruby/issues/33833)) 
+
+### 1.40.0 (2026-04-03)
+
+#### Features
+
+* add evaluation metrics and autorater configuration to the AI Platform v1 API ([#33660](https://github.com/googleapis/google-cloud-ruby/issues/33660)) 
+
+### 1.39.0 (2026-04-02)
+
+#### Features
+
+* Add container_spec to Reasoning Engine public protos ([#33456](https://github.com/googleapis/google-cloud-ruby/issues/33456)) 
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
 ### 1.38.0 (2026-03-19)
 
 #### Features

@@ -248,6 +248,41 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_section.timeout = 30.0
+                  default_config.rpcs.create_section.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.delete_section.timeout = 30.0
+                  default_config.rpcs.delete_section.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.update_section.timeout = 30.0
+                  default_config.rpcs.update_section.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_sections.timeout = 30.0
+                  default_config.rpcs.list_sections.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.position_section.timeout = 30.0
+                  default_config.rpcs.position_section.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_section_items.timeout = 30.0
+                  default_config.rpcs.list_section_items.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.move_section_item.timeout = 30.0
+                  default_config.rpcs.move_section_item.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -530,9 +565,8 @@ module Google
               # - [App
               # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
               # with [administrator
-              # approval](https://support.google.com/a?p=chat-app-auth) in
-              # [Developer Preview](https://developers.google.com/workspace/preview)
-              #  with the authorization scope:
+              # approval](https://support.google.com/a?p=chat-app-auth)
+              # with the authorization scope:
               #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`. When
               #     using this authentication scope, this method only returns public
               #     messages in a space. It doesn't include private messages.
@@ -1043,8 +1077,7 @@ module Google
               #     that invoke the Chat app.
               #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
               #     with [administrator
-              #     approval](https://support.google.com/a?p=chat-app-auth) (available in
-              #     [Developer Preview](https://developers.google.com/workspace/preview)).
+              #     approval](https://support.google.com/a?p=chat-app-auth).
               #     When using this authentication scope,
               #     this method returns details about a public message in a space.
               #
@@ -4419,12 +4452,13 @@ module Google
               # - [App
               # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
               # with [administrator
-              # approval](https://support.google.com/a?p=chat-app-auth) in
-              # [Developer Preview](https://developers.google.com/workspace/preview)
-              #  with one of the following authorization scopes:
+              # approval](https://support.google.com/a?p=chat-app-auth)
+              # with one of the following authorization scopes:
               #     - `https://www.googleapis.com/auth/chat.app.spaces`
+              #     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
               #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
               #     - `https://www.googleapis.com/auth/chat.app.memberships`
+              #     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
               #
               # - [User
               # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -4540,12 +4574,13 @@ module Google
               # - [App
               # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
               # with [administrator
-              # approval](https://support.google.com/a?p=chat-app-auth) in
-              # [Developer Preview](https://developers.google.com/workspace/preview)
-              #  with one of the following authorization scopes:
+              # approval](https://support.google.com/a?p=chat-app-auth)
+              # with one of the following authorization scopes:
               #     - `https://www.googleapis.com/auth/chat.app.spaces`
+              #     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
               #     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
               #     - `https://www.googleapis.com/auth/chat.app.memberships`
+              #     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
               #
               # - [User
               # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -4903,6 +4938,729 @@ module Google
               end
 
               ##
+              # Creates a section in Google Chat. Sections help users group conversations
+              # and customize the list of spaces displayed in Chat navigation panel. Only
+              # sections of type `CUSTOM_SECTION` can be created. For details, see [Create
+              # and organize sections in Google
+              # Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #
+              # @overload create_section(request, options = nil)
+              #   Pass arguments to `create_section` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::CreateSectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::CreateSectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_section(parent: nil, section: nil)
+              #   Pass arguments to `create_section` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource name where the section is created.
+              #
+              #     Format: `users/{user}`
+              #   @param section [::Google::Apps::Chat::V1::Section, ::Hash]
+              #     Required. The section to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::Section]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::Section]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::CreateSectionRequest.new
+              #
+              #   # Call the create_section method.
+              #   result = client.create_section request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::Section.
+              #   p result
+              #
+              def create_section request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::CreateSectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_section.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_section.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_section.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.create_section request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a section of type `CUSTOM_SECTION`.
+              #
+              # If the section contains items, such as spaces, the items are moved to
+              # Google Chat's default sections and are not deleted.
+              #
+              # For details, see [Create and organize sections in Google
+              # Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #
+              # @overload delete_section(request, options = nil)
+              #   Pass arguments to `delete_section` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::DeleteSectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::DeleteSectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_section(name: nil)
+              #   Pass arguments to `delete_section` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the section to delete.
+              #
+              #     Format: `users/{user}/sections/{section}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::DeleteSectionRequest.new
+              #
+              #   # Call the delete_section method.
+              #   result = client.delete_section request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_section request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::DeleteSectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_section.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_section.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_section.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.delete_section request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a section. Only sections of type `CUSTOM_SECTION` can be updated.
+              # For details, see [Create and organize sections in Google
+              # Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #
+              # @overload update_section(request, options = nil)
+              #   Pass arguments to `update_section` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::UpdateSectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::UpdateSectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_section(section: nil, update_mask: nil)
+              #   Pass arguments to `update_section` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param section [::Google::Apps::Chat::V1::Section, ::Hash]
+              #     Required. The section to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The mask to specify which fields to update.
+              #
+              #     Currently supported field paths:
+              #
+              #     - `display_name`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::Section]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::Section]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::UpdateSectionRequest.new
+              #
+              #   # Call the update_section method.
+              #   result = client.update_section request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::Section.
+              #   p result
+              #
+              def update_section request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::UpdateSectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_section.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_section.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_section.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.update_section request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists sections available to the Chat user. Sections help users group their
+              # conversations and customize the list of spaces displayed in Chat
+              # navigation panel. For details, see [Create and organize sections in Google
+              # Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #   - `https://www.googleapis.com/auth/chat.users.sections.readonly`
+              #
+              # @overload list_sections(request, options = nil)
+              #   Pass arguments to `list_sections` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::ListSectionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::ListSectionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_sections(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_sections` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which is the user resource name that owns this
+              #     collection of sections. Only supports listing sections for the calling
+              #     user. To refer to the calling user, set one of the following:
+              #
+              #     - The `me` alias. For example, `users/me`.
+              #
+              #     - Their Workspace email address. For example, `users/user@example.com`.
+              #
+              #     - Their user id. For example, `users/123456789`.
+              #
+              #     Format: `users/{user}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of sections to return. The service may return
+              #     fewer than this value.
+              #
+              #     If unspecified, at most 10 sections will be returned.
+              #
+              #     The maximum value is 100. If you use a value more than 100, it's
+              #     automatically changed to 100.
+              #
+              #     Negative values return an `INVALID_ARGUMENT` error.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous list sections call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Section>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Section>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::ListSectionsRequest.new
+              #
+              #   # Call the list_sections method.
+              #   result = client.list_sections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::Section.
+              #     p item
+              #   end
+              #
+              def list_sections request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ListSectionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_sections.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_sections.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_sections.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.list_sections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_sections, "sections", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Changes the sort order of a section. For details, see [Create and organize
+              # sections in Google Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #
+              # @overload position_section(request, options = nil)
+              #   Pass arguments to `position_section` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::PositionSectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::PositionSectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload position_section(name: nil, sort_order: nil, relative_position: nil)
+              #   Pass arguments to `position_section` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the section to position.
+              #
+              #     Format: `users/{user}/sections/{section}`
+              #   @param sort_order [::Integer]
+              #     Optional. The absolute position of the section in the list of sections.
+              #     The position must be greater than 0. If the position is greater than the
+              #     number of sections, the section will be appended to the end of the list.
+              #     This operation inserts the section at the given position and shifts the
+              #     original section at that position, and those below it, to the next
+              #     position.
+              #
+              #     Note: The following parameters are mutually exclusive: `sort_order`, `relative_position`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param relative_position [::Google::Apps::Chat::V1::PositionSectionRequest::Position]
+              #     Optional. The relative position of the section in the list of sections.
+              #
+              #     Note: The following parameters are mutually exclusive: `relative_position`, `sort_order`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::PositionSectionResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::PositionSectionResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::PositionSectionRequest.new
+              #
+              #   # Call the position_section method.
+              #   result = client.position_section request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::PositionSectionResponse.
+              #   p result
+              #
+              def position_section request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::PositionSectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.position_section.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.position_section.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.position_section.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.position_section request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists items in a section.
+              #
+              # Only spaces can be section items. For details, see [Create and organize
+              # sections in Google Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #   - `https://www.googleapis.com/auth/chat.users.sections.readonly`
+              #
+              # @overload list_section_items(request, options = nil)
+              #   Pass arguments to `list_section_items` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::ListSectionItemsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::ListSectionItemsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_section_items(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_section_items` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which is the section resource name that owns this
+              #     collection of section items. Only supports listing section items for the
+              #     calling user.
+              #
+              #     When you're filtering by space, use the wildcard `-` to search across all
+              #     sections. For example, `users/{user}/sections/-`.
+              #
+              #     Format: `users/{user}/sections/{section}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of section items to return. The service may
+              #     return fewer than this value.
+              #
+              #     If unspecified, at most 10 section items will be returned.
+              #
+              #     The maximum value is 100. If you use a value more than 100, it's
+              #     automatically changed to 100.
+              #
+              #     Negative values return an `INVALID_ARGUMENT` error.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous list section items call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              #   @param filter [::String]
+              #     Optional. A query filter.
+              #
+              #     Currently only supports filtering by space.
+              #
+              #     For example, `space = spaces/{space}`.
+              #
+              #     Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::SectionItem>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::SectionItem>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::ListSectionItemsRequest.new
+              #
+              #   # Call the list_section_items method.
+              #   result = client.list_section_items request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::SectionItem.
+              #     p item
+              #   end
+              #
+              def list_section_items request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ListSectionItemsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_section_items.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_section_items.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_section_items.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.list_section_items request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_section_items, "section_items", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Moves an item from one section to another. For example, if a section
+              # contains spaces, this method can be used to move a space to a different
+              # section. For details, see [Create and organize sections in Google
+              # Chat](https://support.google.com/chat/answer/16059854).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with the [authorization
+              # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.users.sections`
+              #
+              # @overload move_section_item(request, options = nil)
+              #   Pass arguments to `move_section_item` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::MoveSectionItemRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::MoveSectionItemRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload move_section_item(name: nil, target_section: nil)
+              #   Pass arguments to `move_section_item` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the section item to move.
+              #
+              #     Format: `users/{user}/sections/{section}/items/{item}`
+              #   @param target_section [::String]
+              #     Required. The resource name of the section to move the section item to.
+              #
+              #     Format: `users/{user}/sections/{section}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::MoveSectionItemResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::MoveSectionItemResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::MoveSectionItemRequest.new
+              #
+              #   # Call the move_section_item method.
+              #   result = client.move_section_item request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::MoveSectionItemResponse.
+              #   p result
+              #
+              def move_section_item request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::MoveSectionItemRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.move_section_item.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.move_section_item.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.move_section_item.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.move_section_item request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ChatService REST API.
               #
               # This class represents the configuration for ChatService REST,
@@ -5223,6 +5981,41 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_space_notification_setting
+                  ##
+                  # RPC-specific configuration for `create_section`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_section
+                  ##
+                  # RPC-specific configuration for `delete_section`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_section
+                  ##
+                  # RPC-specific configuration for `update_section`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_section
+                  ##
+                  # RPC-specific configuration for `list_sections`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_sections
+                  ##
+                  # RPC-specific configuration for `position_section`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :position_section
+                  ##
+                  # RPC-specific configuration for `list_section_items`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_section_items
+                  ##
+                  # RPC-specific configuration for `move_section_item`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :move_section_item
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -5296,6 +6089,20 @@ module Google
                     @get_space_notification_setting = ::Gapic::Config::Method.new get_space_notification_setting_config
                     update_space_notification_setting_config = parent_rpcs.update_space_notification_setting if parent_rpcs.respond_to? :update_space_notification_setting
                     @update_space_notification_setting = ::Gapic::Config::Method.new update_space_notification_setting_config
+                    create_section_config = parent_rpcs.create_section if parent_rpcs.respond_to? :create_section
+                    @create_section = ::Gapic::Config::Method.new create_section_config
+                    delete_section_config = parent_rpcs.delete_section if parent_rpcs.respond_to? :delete_section
+                    @delete_section = ::Gapic::Config::Method.new delete_section_config
+                    update_section_config = parent_rpcs.update_section if parent_rpcs.respond_to? :update_section
+                    @update_section = ::Gapic::Config::Method.new update_section_config
+                    list_sections_config = parent_rpcs.list_sections if parent_rpcs.respond_to? :list_sections
+                    @list_sections = ::Gapic::Config::Method.new list_sections_config
+                    position_section_config = parent_rpcs.position_section if parent_rpcs.respond_to? :position_section
+                    @position_section = ::Gapic::Config::Method.new position_section_config
+                    list_section_items_config = parent_rpcs.list_section_items if parent_rpcs.respond_to? :list_section_items
+                    @list_section_items = ::Gapic::Config::Method.new list_section_items_config
+                    move_section_item_config = parent_rpcs.move_section_item if parent_rpcs.respond_to? :move_section_item
+                    @move_section_item = ::Gapic::Config::Method.new move_section_item_config
 
                     yield self if block_given?
                   end

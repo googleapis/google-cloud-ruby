@@ -47,6 +47,18 @@ module Google
           #     Note: For calls to the v1beta version, the `product` section consists
           #     of: `channel~content_language~feed_label~offer_id`, for example:
           #     `accounts/123/products/online~en~US~sku123`.
+          # @!attribute [r] base64_encoded_name
+          #   @return [::String]
+          #     Output only. The **unpadded base64url encoded name** of the product.
+          #     Format:
+          #     `accounts/{account}/products/{product}` where the last
+          #     section `product` is the unpadded base64url encoding of the
+          #     `content_language~feed_label~offer_id` name.
+          #     Example: `accounts/123/products/ZW5-VVN-c2t1LzEyMw` for the decoded product
+          #     name `accounts/123/products/en~US~sku/123`. This field can be used directly
+          #     as input to the API methods that require the product name to be encoded if
+          #     it contains special characters, for example
+          #     [`GetProduct`](https://developers.google.com/merchant/api/reference/rest/products_v1/accounts.products/get).
           # @!attribute [r] legacy_local
           #   @return [::Boolean]
           #     Output only. Determines whether the product is **only** targeting
@@ -135,10 +147,10 @@ module Google
           #         MUST be used if any part of the product identifier (like `offer_id`)
           #         contains characters such as `/`, `%`, or `~`.
           #         *   Example: To represent the product ID `en~US~sku/123`, the
-          #             `{product}` segment must be the base64url encoding of this
-          #             string, which is `ZW5-VVMtc2t1LzEyMw`. The full resource name
+          #             `{product}` segment must be the unpadded base64url encoding of this
+          #             string, which is `ZW5-VVN-c2t1LzEyMw`. The full resource name
           #             for the product would be
-          #             `accounts/123/products/ZW5-VVMtc2t1LzEyMw`.
+          #             `accounts/123/products/ZW5-VVN-c2t1LzEyMw`.
           #
           #     2.  **Plain Format**: The `{product}` segment is the tilde-separated string
           #         `content_language~feed_label~offer_id`. This format is suitable only

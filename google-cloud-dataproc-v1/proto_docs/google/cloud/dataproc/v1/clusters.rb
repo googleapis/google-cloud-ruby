@@ -96,6 +96,9 @@ module Google
         # @!attribute [rw] cluster_tier
         #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::ClusterTier]
         #     Optional. The cluster tier.
+        # @!attribute [rw] engine
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::Engine]
+        #     Optional. The cluster engine.
         # @!attribute [rw] config_bucket
         #   @return [::String]
         #     Optional. A Cloud Storage bucket used to stage job
@@ -211,6 +214,18 @@ module Google
 
             # Premium Dataproc cluster.
             CLUSTER_TIER_PREMIUM = 2
+          end
+
+          # The cluster engine.
+          module Engine
+            # The engine is not specified. Works the same as ENGINE_DEFAULT.
+            ENGINE_UNSPECIFIED = 0
+
+            # The cluster is a default engine cluster.
+            DEFAULT = 1
+
+            # The cluster is a lightning engine cluster.
+            LIGHTNING = 2
           end
         end
 
@@ -1206,6 +1221,29 @@ module Google
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         #
         #     Note: The following fields are mutually exclusive: `auto_delete_ttl`, `auto_delete_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] idle_stop_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The duration to keep the cluster started while idling (when no
+        #     jobs are running). Passing this threshold will cause the cluster to be
+        #     stopped. Minimum value is 5 minutes; maximum value is 14 days (see JSON
+        #     representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        # @!attribute [rw] auto_stop_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The time when cluster will be auto-stopped (see JSON
+        #     representation of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #
+        #     Note: The following fields are mutually exclusive: `auto_stop_time`, `auto_stop_ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auto_stop_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The lifetime duration of the cluster. The cluster will be
+        #     auto-stopped at the end of this period, calculated from the time of
+        #     submission of the create or update cluster request. Minimum value is 10
+        #     minutes; maximum value is 14 days (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #
+        #     Note: The following fields are mutually exclusive: `auto_stop_ttl`, `auto_stop_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] idle_start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when cluster became idle (most recent job finished)

@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.4.2 (2026-04-15)
+
+#### Documentation
+
+* A comment for field `name` in message `.google.shopping.merchant.products.v1.LocalInventory` is changed ([#33825](https://github.com/googleapis/google-cloud-ruby/issues/33825)) 
+
+### 0.4.1 (2026-04-09)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33484](https://github.com/googleapis/google-cloud-ruby/issues/33484)) 
+
+### 0.4.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+
 ### 0.3.0 (2025-11-19)
 
 #### Features

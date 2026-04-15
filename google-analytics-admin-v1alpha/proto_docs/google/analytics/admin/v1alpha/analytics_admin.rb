@@ -164,13 +164,13 @@ module Google
         # Request message for ListAccounts RPC.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return. The service may return
+        #     Optional. The maximum number of resources to return. The service may return
         #     fewer than this value, even if there are additional pages.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListAccounts` call.
+        #     Optional. A page token, received from a previous `ListAccounts` call.
         #     Provide this to retrieve the subsequent page.
         #     When paginating, all other parameters provided to `ListAccounts` must
         #     match the call that provided the page token.
@@ -278,13 +278,13 @@ module Google
         #     ```
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return. The service may return
+        #     Optional. The maximum number of resources to return. The service may return
         #     fewer than this value, even if there are additional pages.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListProperties` call.
+        #     Optional. A page token, received from a previous `ListProperties` call.
         #     Provide this to retrieve the subsequent page.
         #     When paginating, all other parameters provided to `ListProperties` must
         #     match the call that provided the page token.
@@ -382,13 +382,13 @@ module Google
         #     Example: `properties/1234`
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return. The service may return
+        #     Optional. The maximum number of resources to return. The service may return
         #     fewer than this value, even if there are additional pages.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListFirebaseLinks` call.
+        #     Optional. A page token, received from a previous `ListFirebaseLinks` call.
         #     Provide this to retrieve the subsequent page.
         #     When paginating, all other parameters provided to `ListFirebaseLinks` must
         #     match the call that provided the page token.
@@ -467,12 +467,12 @@ module Google
         #     Required. Example format: properties/1234
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return.
+        #     Optional. The maximum number of resources to return.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200 (higher values will be coerced to the maximum).
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListGoogleAdsLinks` call.
+        #     Optional. A page token, received from a previous `ListGoogleAdsLinks` call.
         #     Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to `ListGoogleAdsLinks` must
@@ -510,16 +510,16 @@ module Google
         # Request message for ListAccountSummaries RPC.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of AccountSummary resources to return. The service may
-        #     return fewer than this value, even if there are additional pages.
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        #     Optional. The maximum number of AccountSummary resources to return. The
+        #     service may return fewer than this value, even if there are additional
+        #     pages. If unspecified, at most 50 resources will be returned. The maximum
+        #     value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListAccountSummaries` call.
-        #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListAccountSummaries`
-        #     must match the call that provided the page token.
+        #     Optional. A page token, received from a previous `ListAccountSummaries`
+        #     call. Provide this to retrieve the subsequent page. When paginating, all
+        #     other parameters provided to `ListAccountSummaries` must match the call
+        #     that provided the page token.
         class ListAccountSummariesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -687,15 +687,16 @@ module Google
         #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return.
+        #     Optional. The maximum number of resources to return.
         #     If unspecified, at most 10 resources will be returned.
         #     The maximum value is 10. Higher values will be coerced to the maximum.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListMeasurementProtocolSecrets`
-        #     call. Provide this to retrieve the subsequent page. When paginating, all
-        #     other parameters provided to `ListMeasurementProtocolSecrets` must match
-        #     the call that provided the page token.
+        #     Optional. A page token, received from a previous
+        #     `ListMeasurementProtocolSecrets` call. Provide this to retrieve the
+        #     subsequent page. When paginating, all other parameters provided to
+        #     `ListMeasurementProtocolSecrets` must match the call that provided the page
+        #     token.
         class ListMeasurementProtocolSecretsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -771,13 +772,13 @@ module Google
         #     Example: properties/1234/dataStreams/5678
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return. The service may return
+        #     Optional. The maximum number of resources to return. The service may return
         #     fewer than this value, even if there are additional pages.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous
+        #     Optional. A page token, received from a previous
         #     `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
         #     subsequent page. When paginating, all other parameters provided to
         #     `ListSKAdNetworkConversionValueSchema` must match the call that provided
@@ -888,15 +889,15 @@ module Google
         #     Example: 'properties/123'
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return.
+        #     Optional. The maximum number of resources to return.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListConversionEvents` call.
-        #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListConversionEvents`
-        #     must match the call that provided the page token.
+        #     Optional. A page token, received from a previous `ListConversionEvents`
+        #     call. Provide this to retrieve the subsequent page. When paginating, all
+        #     other parameters provided to `ListConversionEvents` must match the call
+        #     that provided the page token.
         class ListConversionEventsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -973,12 +974,12 @@ module Google
         #     Example: 'properties/123'
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return.
+        #     Optional. The maximum number of resources to return.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200; (higher values will be coerced to the maximum)
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListKeyEvents` call.
+        #     Optional. A page token, received from a previous `ListKeyEvents` call.
         #     Provide this to retrieve the subsequent page.
         #     When paginating, all other parameters provided to `ListKeyEvents`
         #     must match the call that provided the page token.
@@ -1292,13 +1293,13 @@ module Google
         #     Required. Example format: properties/1234
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of resources to return.
+        #     Optional. The maximum number of resources to return.
         #     If unspecified, at most 50 resources will be returned.
         #     The maximum value is 200 (higher values will be coerced to the maximum).
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token, received from a previous `ListCustomDimensions` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Optional. A page token, received from a previous `ListCustomDimensions`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to `ListCustomDimensions`
         #     must match the call that provided the page token.
@@ -2951,6 +2952,16 @@ module Google
         #     properties/\\{property}/reportingIdentitySettings
         #     Example: "properties/1000/reportingIdentitySettings"
         class GetReportingIdentitySettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetUserProvidedDataSettings RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the user provided data settings to retrieve.
+        #     Format: properties/\\{property}/userProvidedDataSettings
+        class GetUserProvidedDataSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

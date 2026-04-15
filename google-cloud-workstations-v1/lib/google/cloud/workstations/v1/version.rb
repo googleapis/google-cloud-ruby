@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Workstations
       module V1
-        VERSION = "1.3.1"
+        VERSION = "1.4.1"
       end
     end
   end

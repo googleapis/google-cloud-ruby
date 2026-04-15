@@ -1,5 +1,28 @@
 # Changelog
 
+### 0.6.0 (2026-04-14)
+
+#### Features
+
+* a new field `base64_encoded_name` is added to the `Product` message ([#33819](https://github.com/googleapis/google-cloud-ruby/issues/33819)) 
+
+### 0.5.1 (2026-04-08)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33485](https://github.com/googleapis/google-cloud-ruby/issues/33485)) 
+
+### 0.5.0 (2026-03-31)
+
+#### Features
+
+* Upgrade dependencies for Ruby v4.0 and drop Ruby v3.1 support
+* update products_common fields to include `handling_cutoff_timezone `, `shipping_handling_business_days`, `shipping_transit_business_days` 
+* upgrade protobuf from v25.7 to v31.0 ([#32822](https://github.com/googleapis/google-cloud-ruby/issues/32822)) 
+#### Documentation
+
+* comment for messages for products_common are changed 
+
 ### 0.4.1 (2025-11-19)
 
 #### Bug Fixes

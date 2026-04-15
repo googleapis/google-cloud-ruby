@@ -475,4 +475,16 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
       assert_equal "properties/value0/subpropertySyncConfigs/value1", path
     end
   end
+
+  def test_user_provided_data_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.user_provided_data_settings_path property: "value0"
+      assert_equal "properties/value0/userProvidedDataSettings", path
+    end
+  end
 end

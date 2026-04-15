@@ -1,13 +1,13 @@
-# Ruby Client for the SaaS Runtime V1BETA1 API
+# Ruby Client for the App Lifecycle Manager V1BETA1 API
 
 Model, deploy, and operate your SaaS at scale.
 
-SaaS Runtime lets you store, host, manage, and monitor software as a service (SaaS) applications on Google Cloud.
+App Lifecycle Manager Overview.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the SaaS Runtime V1BETA1 API. Most users should consider using
+specific version of the App Lifecycle Manager V1BETA1 API. Most users should consider using
 the main client gem,
 [google-cloud-saas_platform-saas_service_mgmt](https://rubygems.org/gems/google-cloud-saas_platform-saas_service_mgmt).
 See the section below titled *Which client should I use?* for more information.

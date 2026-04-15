@@ -1,5 +1,21 @@
 # Changelog
 
+### 1.14.0 (2026-04-03)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Add support for Flexible CA feature ([#33465](https://github.com/googleapis/google-cloud-ruby/issues/33465)) 
+
+### 1.13.0 (2026-04-02)
+
+#### Features
+
+* add origin to AttributeContext.Request ([#33461](https://github.com/googleapis/google-cloud-ruby/issues/33461)) 
+* publish client batch config schema ([#33436](https://github.com/googleapis/google-cloud-ruby/issues/33436)) 
+#### Documentation
+
+* update comments and formatting 
+
 ### 1.12.0 (2026-03-19)
 
 #### Features

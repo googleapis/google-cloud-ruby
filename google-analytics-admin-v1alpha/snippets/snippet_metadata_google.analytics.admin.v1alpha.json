@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-analytics-admin-v1alpha",
-    "version": "0.39.0",
+    "version": "0.41.0",
     "language": "RUBY",
     "apis": [
       {
@@ -6155,6 +6155,46 @@
         "method": {
           "short_name": "GetReportingIdentitySettings",
           "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingIdentitySettings",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetUserProvidedDataSettings_sync",
+      "title": "Snippet for the get_user_provided_data_settings call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_user_provided_data_settings.",
+      "file": "analytics_admin_service/get_user_provided_data_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_provided_data_settings",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_user_provided_data_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetUserProvidedDataSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetUserProvidedDataSettings",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetUserProvidedDataSettings",
           "service": {
             "short_name": "AnalyticsAdminService",
             "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"

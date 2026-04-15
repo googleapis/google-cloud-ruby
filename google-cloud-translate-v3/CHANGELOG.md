@@ -1,5 +1,22 @@
 # Release History
 
+### 1.9.0 (2026-04-09)
+
+#### Features
+
+* A new field `mime_type` is added to message `.google.cloud.translation.v3.AdaptiveMtTranslateRequest` ([#33808](https://github.com/googleapis/google-cloud-ruby/issues/33808)) 
+
+### 1.8.0 (2026-03-31)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32849](https://github.com/googleapis/google-cloud-ruby/issues/32849)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32851](https://github.com/googleapis/google-cloud-ruby/issues/32851)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32853](https://github.com/googleapis/google-cloud-ruby/issues/32853)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32854](https://github.com/googleapis/google-cloud-ruby/issues/32854)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32855](https://github.com/googleapis/google-cloud-ruby/issues/32855)) 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 ([#32866](https://github.com/googleapis/google-cloud-ruby/issues/32866)) 
+
 ### 1.7.1 (2025-10-27)
 
 #### Documentation

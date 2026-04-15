@@ -1,5 +1,17 @@
 # Release History
 
+### 0.41.0 (2026-04-15)
+
+#### Features
+
+* add UserProvidedDataSettings resource and GetUserProvidedDataSettings RPC to Google Analytics ([#33837](https://github.com/googleapis/google-cloud-ruby/issues/33837)) 
+
+### 0.40.0 (2026-04-02)
+
+#### Features
+
+* publish client batch config schema ([#33429](https://github.com/googleapis/google-cloud-ruby/issues/33429)) 
+
 ### 0.39.0 (2026-03-19)
 
 #### Features
