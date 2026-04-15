@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.0 (2026-04-15)
+
+#### Features
+
+* support external-μ in the Digest ([#33827](https://github.com/googleapis/google-cloud-ruby/issues/33827)) 
+
 ### 1.11.0 (2026-03-19)
 
 #### Features
