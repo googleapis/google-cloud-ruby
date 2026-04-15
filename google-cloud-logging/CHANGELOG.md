@@ -1,5 +1,11 @@
 # Release History
 
+### 2.7.0 (2026-04-15)
+
+#### Features
+
+* Update minimum Ruby to v3.2 and support v4.0 ([#33811](https://github.com/googleapis/google-cloud-ruby/issues/33811)) 
+
 ### 2.6.1 (2025-11-04)
 
 #### Documentation
