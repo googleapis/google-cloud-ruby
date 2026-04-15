@@ -8,7 +8,7 @@
     "name": "ces",
     "name_pretty": "Gemini Enterprise for Customer Experience API",
     "product_documentation": "https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-ces is the official client library for the Gemini Enterprise for Customer Experience API.",
