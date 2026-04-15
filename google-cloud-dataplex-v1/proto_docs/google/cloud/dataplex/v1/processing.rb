@@ -26,12 +26,18 @@ module Google
         #   @return [::Google::Cloud::Dataplex::V1::Trigger::OnDemand]
         #     The scan runs once via `RunDataScan` API.
         #
-        #     Note: The following fields are mutually exclusive: `on_demand`, `schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `on_demand`, `schedule`, `one_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schedule
         #   @return [::Google::Cloud::Dataplex::V1::Trigger::Schedule]
         #     The scan is scheduled to run periodically.
         #
-        #     Note: The following fields are mutually exclusive: `schedule`, `on_demand`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `schedule`, `on_demand`, `one_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] one_time
+        #   @return [::Google::Cloud::Dataplex::V1::Trigger::OneTime]
+        #     The scan runs once, and does not create an associated ScanJob child
+        #     resource.
+        #
+        #     Note: The following fields are mutually exclusive: `one_time`, `on_demand`, `schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Trigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -58,6 +64,19 @@ module Google
           #
           #     This field is required for Schedule scans.
           class Schedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The scan runs once using create API.
+          # @!attribute [rw] ttl_after_scan_completion
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. Time to live for OneTime scans.
+          #     default value is 24 hours, minimum value is 0 seconds, and maximum value
+          #     is 365 days. The time is calculated from the data scan job completion
+          #     time. If value is set as 0 seconds, the scan will be immediately deleted
+          #     upon job completion, regardless of whether the job succeeded or failed.
+          class OneTime
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
