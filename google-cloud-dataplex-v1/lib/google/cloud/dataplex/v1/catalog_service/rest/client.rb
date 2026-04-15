@@ -1990,11 +1990,6 @@ module Google
 
               ##
               # Lists Entries within an EntryGroup.
-              # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
-              # Metastore metadata that is stored in Dataplex Universal Catalog is
-              # changing. For more information, see [Changes to metadata stored in
-              # Dataplex Universal
-              # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
               #
               # @overload list_entries(request, options = nil)
               #   Pass arguments to `list_entries` via a request object, either of type
@@ -2114,11 +2109,6 @@ module Google
 
               ##
               # Gets an Entry.
-              # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
-              # Metastore metadata that is stored in Dataplex Universal Catalog is
-              # changing. For more information, see [Changes to metadata stored in
-              # Dataplex Universal
-              # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
               #
               # @overload get_entry(request, options = nil)
               #   Pass arguments to `get_entry` via a request object, either of type
@@ -2207,11 +2197,6 @@ module Google
 
               ##
               # Looks up an entry by name using the permission on the source system.
-              # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
-              # Metastore metadata that is stored in Dataplex Universal Catalog is
-              # changing. For more information, see [Changes to metadata stored in
-              # Dataplex Universal
-              # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
               #
               # @overload lookup_entry(request, options = nil)
               #   Pass arguments to `lookup_entry` via a request object, either of type
@@ -2868,6 +2853,94 @@ module Google
               end
 
               ##
+              # Updates an Entry Link.
+              #
+              # @overload update_entry_link(request, options = nil)
+              #   Pass arguments to `update_entry_link` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_entry_link(entry_link: nil, allow_missing: nil, aspect_keys: nil)
+              #   Pass arguments to `update_entry_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param entry_link [::Google::Cloud::Dataplex::V1::EntryLink, ::Hash]
+              #     Required. Entry Link resource.
+              #   @param allow_missing [::Boolean]
+              #     Optional. If set to true and the entry link doesn't exist, the service will
+              #     create it.
+              #   @param aspect_keys [::Array<::String>]
+              #     Optional. The map keys of the Aspects which the service should modify.
+              #     It should be the aspect type reference in the format
+              #     `{project_id_or_number}.{location_id}.{aspect_type_id}`.
+              #
+              #     If this field is left empty, the service treats it as specifying
+              #     exactly those Aspects present in the request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::EntryLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::EntryLink]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest.new
+              #
+              #   # Call the update_entry_link method.
+              #   result = client.update_entry_link request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::EntryLink.
+              #   p result
+              #
+              def update_entry_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_entry_link.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_entry_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_entry_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.update_entry_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes an Entry Link.
               #
               # @overload delete_entry_link(request, options = nil)
@@ -2940,6 +3013,198 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.delete_entry_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Looks up Entry Links referencing the specified Entry.
+              #
+              # @overload lookup_entry_links(request, options = nil)
+              #   Pass arguments to `lookup_entry_links` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload lookup_entry_links(name: nil, entry: nil, entry_mode: nil, entry_link_types: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `lookup_entry_links` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The project to which the request should be attributed to
+              #     Format: `projects/{project_id_or_number}/locations/{location_id}`.
+              #   @param entry [::String]
+              #     Required. The resource name of the referred Entry.
+              #     Format:
+              #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+              #     Entry Links which references this entry will be returned in the response.
+              #   @param entry_mode [::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest::EntryMode]
+              #     Mode of entry reference.
+              #   @param entry_link_types [::Array<::String>]
+              #     Entry link types to filter the response by. If empty, all entry link types
+              #     will be returned. At most 10 entry link types can be specified.
+              #   @param page_size [::Integer]
+              #     Maximum number of EntryLinks to return. The service may return fewer
+              #     than this value. If unspecified, at most 10 EntryLinks will be returned.
+              #     The maximum value is 10; values above 10 will be coerced to 10.
+              #   @param page_token [::String]
+              #     Page token received from a previous `LookupEntryLinks` call. Provide this
+              #     to retrieve the subsequent page. When paginating, all other parameters that
+              #     are provided to the `LookupEntryLinks` request must match the call that
+              #     provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::EntryLink>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::EntryLink>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::LookupEntryLinksRequest.new
+              #
+              #   # Call the lookup_entry_links method.
+              #   result = client.lookup_entry_links request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::EntryLink.
+              #     p item
+              #   end
+              #
+              def lookup_entry_links request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.lookup_entry_links.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.lookup_entry_links.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.lookup_entry_links.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.lookup_entry_links request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :lookup_entry_links, "entry_links", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Looks up LLM Context for the specified resources.
+              #
+              # @overload lookup_context(request, options = nil)
+              #   Pass arguments to `lookup_context` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::LookupContextRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::LookupContextRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload lookup_context(name: nil, resources: nil, options: nil)
+              #   Pass arguments to `lookup_context` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The project to which the request should be attributed in the
+              #     following form: `projects/{project}/locations/{location}`.
+              #   @param resources [::Array<::String>]
+              #     Required. The entry names to lookup context for. The request should have
+              #     max 10 of those.
+              #
+              #     ## Examples:
+              #
+              #     projects/\\{project}/locations/\\{location}/entryGroups/\\{entry_group}/entries/\\{entry}
+              #   @param options [::Hash{::String => ::String}]
+              #     Optional. Allows to configure the context.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::LookupContextResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::LookupContextResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::LookupContextRequest.new
+              #
+              #   # Call the lookup_context method.
+              #   result = client.lookup_context request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::LookupContextResponse.
+              #   p result
+              #
+              def lookup_context request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::LookupContextRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.lookup_context.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.lookup_context.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.lookup_context.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.lookup_context request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -3020,6 +3285,469 @@ module Google
 
                 @catalog_service_stub.get_entry_link request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a MetadataFeed.
+              #
+              # @overload create_metadata_feed(request, options = nil)
+              #   Pass arguments to `create_metadata_feed` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_metadata_feed(parent: nil, metadata_feed: nil, metadata_feed_id: nil, validate_only: nil)
+              #   Pass arguments to `create_metadata_feed` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the parent location, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}`
+              #   @param metadata_feed [::Google::Cloud::Dataplex::V1::MetadataFeed, ::Hash]
+              #     Required. The metadata job resource.
+              #   @param metadata_feed_id [::String]
+              #     Optional. The metadata job ID. If not provided, a unique ID is generated
+              #     with the prefix `metadata-job-`.
+              #   @param validate_only [::Boolean]
+              #     Optional. The service validates the request without performing any
+              #     mutations. The default is false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest.new
+              #
+              #   # Call the create_metadata_feed method.
+              #   result = client.create_metadata_feed request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_metadata_feed request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_metadata_feed.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_metadata_feed.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_metadata_feed.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.create_metadata_feed request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a MetadataFeed.
+              #
+              # @overload get_metadata_feed(request, options = nil)
+              #   Pass arguments to `get_metadata_feed` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_metadata_feed(name: nil)
+              #   Pass arguments to `get_metadata_feed` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the metadata feed, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::MetadataFeed]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::MetadataFeed]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetMetadataFeedRequest.new
+              #
+              #   # Call the get_metadata_feed method.
+              #   result = client.get_metadata_feed request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::MetadataFeed.
+              #   p result
+              #
+              def get_metadata_feed request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_metadata_feed.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_metadata_feed.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_metadata_feed.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.get_metadata_feed request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieve a list of MetadataFeeds.
+              #
+              # @overload list_metadata_feeds(request, options = nil)
+              #   Pass arguments to `list_metadata_feeds` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_metadata_feeds(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_metadata_feeds` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the parent location, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of metadata feeds to return. The service
+              #     might return fewer feeds than this value. If unspecified, at most 10 feeds
+              #     are returned. The maximum value is 1,000.
+              #   @param page_token [::String]
+              #     Optional. The page token received from a previous `ListMetadataFeeds` call.
+              #     Provide this token to retrieve the subsequent page of results. When
+              #     paginating, all other parameters that are provided to the
+              #     `ListMetadataFeeds` request must match the call that provided the
+              #     page token.
+              #   @param filter [::String]
+              #     Optional. Filter request. Filters are case-sensitive.
+              #     The service supports the following formats:
+              #
+              #     * `labels.key1 = "value1"`
+              #     * `labels:key1`
+              #     * `name = "value"`
+              #
+              #     You can combine filters with `AND`, `OR`, and `NOT` operators.
+              #   @param order_by [::String]
+              #     Optional. The field to sort the results by, either `name` or `create_time`.
+              #     If not specified, the ordering is undefined.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::MetadataFeed>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::MetadataFeed>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest.new
+              #
+              #   # Call the list_metadata_feeds method.
+              #   result = client.list_metadata_feeds request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::MetadataFeed.
+              #     p item
+              #   end
+              #
+              def list_metadata_feeds request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_metadata_feeds.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_metadata_feeds.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_metadata_feeds.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.list_metadata_feeds request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :list_metadata_feeds, "metadata_feeds", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a MetadataFeed.
+              #
+              # @overload delete_metadata_feed(request, options = nil)
+              #   Pass arguments to `delete_metadata_feed` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_metadata_feed(name: nil)
+              #   Pass arguments to `delete_metadata_feed` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the metadata feed, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest.new
+              #
+              #   # Call the delete_metadata_feed method.
+              #   result = client.delete_metadata_feed request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_metadata_feed request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_metadata_feed.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_metadata_feed.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_metadata_feed.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.delete_metadata_feed request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a MetadataFeed.
+              #
+              # @overload update_metadata_feed(request, options = nil)
+              #   Pass arguments to `update_metadata_feed` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_metadata_feed(metadata_feed: nil, update_mask: nil, validate_only: nil)
+              #   Pass arguments to `update_metadata_feed` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param metadata_feed [::Google::Cloud::Dataplex::V1::MetadataFeed, ::Hash]
+              #     Required. Update description.
+              #     Only fields specified in `update_mask` are updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Mask of fields to update.
+              #   @param validate_only [::Boolean]
+              #     Optional. Only validate the request, but do not perform mutations.
+              #     The default is false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest.new
+              #
+              #   # Call the update_metadata_feed method.
+              #   result = client.update_metadata_feed request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_metadata_feed request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_metadata_feed.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_metadata_feed.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_metadata_feed.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.update_metadata_feed request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3314,15 +4042,55 @@ module Google
                   #
                   attr_reader :create_entry_link
                   ##
+                  # RPC-specific configuration for `update_entry_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_entry_link
+                  ##
                   # RPC-specific configuration for `delete_entry_link`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_entry_link
                   ##
+                  # RPC-specific configuration for `lookup_entry_links`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :lookup_entry_links
+                  ##
+                  # RPC-specific configuration for `lookup_context`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :lookup_context
+                  ##
                   # RPC-specific configuration for `get_entry_link`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_entry_link
+                  ##
+                  # RPC-specific configuration for `create_metadata_feed`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_metadata_feed
+                  ##
+                  # RPC-specific configuration for `get_metadata_feed`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_metadata_feed
+                  ##
+                  # RPC-specific configuration for `list_metadata_feeds`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_metadata_feeds
+                  ##
+                  # RPC-specific configuration for `delete_metadata_feed`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_metadata_feed
+                  ##
+                  # RPC-specific configuration for `update_metadata_feed`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_metadata_feed
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3380,10 +4148,26 @@ module Google
                     @cancel_metadata_job = ::Gapic::Config::Method.new cancel_metadata_job_config
                     create_entry_link_config = parent_rpcs.create_entry_link if parent_rpcs.respond_to? :create_entry_link
                     @create_entry_link = ::Gapic::Config::Method.new create_entry_link_config
+                    update_entry_link_config = parent_rpcs.update_entry_link if parent_rpcs.respond_to? :update_entry_link
+                    @update_entry_link = ::Gapic::Config::Method.new update_entry_link_config
                     delete_entry_link_config = parent_rpcs.delete_entry_link if parent_rpcs.respond_to? :delete_entry_link
                     @delete_entry_link = ::Gapic::Config::Method.new delete_entry_link_config
+                    lookup_entry_links_config = parent_rpcs.lookup_entry_links if parent_rpcs.respond_to? :lookup_entry_links
+                    @lookup_entry_links = ::Gapic::Config::Method.new lookup_entry_links_config
+                    lookup_context_config = parent_rpcs.lookup_context if parent_rpcs.respond_to? :lookup_context
+                    @lookup_context = ::Gapic::Config::Method.new lookup_context_config
                     get_entry_link_config = parent_rpcs.get_entry_link if parent_rpcs.respond_to? :get_entry_link
                     @get_entry_link = ::Gapic::Config::Method.new get_entry_link_config
+                    create_metadata_feed_config = parent_rpcs.create_metadata_feed if parent_rpcs.respond_to? :create_metadata_feed
+                    @create_metadata_feed = ::Gapic::Config::Method.new create_metadata_feed_config
+                    get_metadata_feed_config = parent_rpcs.get_metadata_feed if parent_rpcs.respond_to? :get_metadata_feed
+                    @get_metadata_feed = ::Gapic::Config::Method.new get_metadata_feed_config
+                    list_metadata_feeds_config = parent_rpcs.list_metadata_feeds if parent_rpcs.respond_to? :list_metadata_feeds
+                    @list_metadata_feeds = ::Gapic::Config::Method.new list_metadata_feeds_config
+                    delete_metadata_feed_config = parent_rpcs.delete_metadata_feed if parent_rpcs.respond_to? :delete_metadata_feed
+                    @delete_metadata_feed = ::Gapic::Config::Method.new delete_metadata_feed_config
+                    update_metadata_feed_config = parent_rpcs.update_metadata_feed if parent_rpcs.respond_to? :update_metadata_feed
+                    @update_metadata_feed = ::Gapic::Config::Method.new update_metadata_feed_config
 
                     yield self if block_given?
                   end

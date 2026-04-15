@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,47 +21,64 @@ module Google
   module Cloud
     module Dataplex
       module V1
-        module ContentService
-          # Path helper methods for the ContentService API.
+        module DataProductService
+          # Path helper methods for the DataProductService API.
           module Paths
             ##
-            # Create a fully-qualified Content resource string.
+            # Create a fully-qualified DataAsset resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/lakes/{lake}/content/{content}`
+            # `projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}`
             #
             # @param project [String]
             # @param location [String]
-            # @param lake [String]
-            # @param content [String]
+            # @param data_product [String]
+            # @param data_asset [String]
             #
             # @return [::String]
-            def content_path project:, location:, lake:, content:
+            def data_asset_path project:, location:, data_product:, data_asset:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "lake cannot contain /" if lake.to_s.include? "/"
+              raise ::ArgumentError, "data_product cannot contain /" if data_product.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/lakes/#{lake}/content/#{content}"
+              "projects/#{project}/locations/#{location}/dataProducts/#{data_product}/dataAssets/#{data_asset}"
             end
 
             ##
-            # Create a fully-qualified Lake resource string.
+            # Create a fully-qualified DataProduct resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/lakes/{lake}`
+            # `projects/{project}/locations/{location}/dataProducts/{data_product}`
             #
             # @param project [String]
             # @param location [String]
-            # @param lake [String]
+            # @param data_product [String]
             #
             # @return [::String]
-            def lake_path project:, location:, lake:
+            def data_product_path project:, location:, data_product:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/lakes/#{lake}"
+              "projects/#{project}/locations/#{location}/dataProducts/#{data_product}"
+            end
+
+            ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
             end
 
             extend self

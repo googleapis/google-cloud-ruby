@@ -26,7 +26,10 @@ module Google
           # Credentials for the CatalogService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/dataplex.read-write",
+              "https://www.googleapis.com/auth/dataplex.readonly"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

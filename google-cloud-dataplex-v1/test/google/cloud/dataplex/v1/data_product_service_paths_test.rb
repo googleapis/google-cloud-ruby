@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/dataplex/v1/content_service"
+require "google/cloud/dataplex/v1/data_product_service"
 
-class ::Google::Cloud::Dataplex::V1::ContentService::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::Dataplex::V1::DataProductService::ClientPathsTest < Minitest::Test
   class DummyStub
     def endpoint
       "endpoint.example.com"
@@ -41,27 +41,39 @@ class ::Google::Cloud::Dataplex::V1::ContentService::ClientPathsTest < Minitest:
     end
   end
 
-  def test_content_path
+  def test_data_asset_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new do |config|
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.content_path project: "value0", location: "value1", lake: "value2", content: "value3"
-      assert_equal "projects/value0/locations/value1/lakes/value2/content/value3", path
+      path = client.data_asset_path project: "value0", location: "value1", data_product: "value2", data_asset: "value3"
+      assert_equal "projects/value0/locations/value1/dataProducts/value2/dataAssets/value3", path
     end
   end
 
-  def test_lake_path
+  def test_data_product_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new do |config|
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.lake_path project: "value0", location: "value1", lake: "value2"
-      assert_equal "projects/value0/locations/value1/lakes/value2", path
+      path = client.data_product_path project: "value0", location: "value1", data_product: "value2"
+      assert_equal "projects/value0/locations/value1/dataProducts/value2", path
+    end
+  end
+
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
     end
   end
 end
