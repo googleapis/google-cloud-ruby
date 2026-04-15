@@ -25,9 +25,23 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     ENV["GCLOUD_TEST_STORAGE_KMS_KEY_2"] ||
       "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2"
   }
+
+  let(:customer_managed_config) do
+    { restriction_mode: "NotRestricted" }
+  end
+
+  let(:customer_supplied_config) do
+    { restriction_mode: "FullyRestricted" }
+  end
+
+  let(:google_managed_config) do
+    { restriction_mode: "FullyRestricted" }
+  end
+
   let :bucket do
-    b = safe_gcs_execute { storage.create_bucket(bucket_name, location: bucket_location) }
+    b = safe_gcs_execute { storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location) }
     b.default_kms_key = kms_key
+    b.customer_managed_encryption_enforcement_config = customer_managed_config
     b
   end
 
@@ -69,6 +83,47 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
       _(bucket.default_kms_key).must_be :nil?
       bucket.reload!
       _(bucket.default_kms_key).must_be :nil?
+    end
+  end
+
+  describe "Encryption Enforcement Config" do
+    let(:google_managed_config_complete) do
+      {google_managed_encryption_enforcement_config: { restriction_mode: "FullyRestricted" } }
+    end
+    it "knows its encryption enforcement config" do
+      _(bucket.customer_managed_encryption_enforcement_config).wont_be :nil?
+      _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+      bucket.reload!
+      _(bucket.customer_managed_encryption_enforcement_config).wont_be :nil?
+      _(bucket.customer_managed_encryption_enforcement_config.restriction_mode).must_equal "NotRestricted"
+    end
+
+    it "updates encryption enforcement configs" do
+      _(bucket.customer_supplied_encryption_enforcement_config).must_be :nil?
+
+      bucket.customer_supplied_encryption_enforcement_config = customer_supplied_config
+      _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+      bucket.update do |b|
+        b.google_managed_encryption_enforcement_config = google_managed_config
+      end
+      _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+
+      bucket.reload!
+      _(bucket.customer_supplied_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+      _(bucket.google_managed_encryption_enforcement_config.restriction_mode).must_equal "FullyRestricted"
+    end
+
+    it "deletes all encryption enforcement configs" do
+      bucket.update do |b|
+        b.customer_managed_encryption_enforcement_config = nil
+        b.customer_supplied_encryption_enforcement_config = nil
+        b.google_managed_encryption_enforcement_config = nil
+      end
+      # Removed all encryption enforcement configs without removing default_kms_key
+      _(bucket.customer_managed_encryption_enforcement_config).must_be :nil?
+      _(bucket.customer_supplied_encryption_enforcement_config).must_be :nil?
+      _(bucket.google_managed_encryption_enforcement_config).must_be :nil?
+      _(bucket.default_kms_key).must_equal kms_key
     end
   end
 end

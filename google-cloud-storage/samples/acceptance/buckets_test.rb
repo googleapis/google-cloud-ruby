@@ -37,6 +37,7 @@ require_relative "../storage_enable_versioning"
 require_relative "../storage_get_bucket_class_and_location"
 require_relative "../storage_get_bucket_metadata"
 require_relative "../storage_get_default_event_based_hold"
+require_relative "../storage_get_bucket_encryption_enforcement_config"
 require_relative "../storage_get_public_access_prevention"
 require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
@@ -44,10 +45,12 @@ require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
 require_relative "../storage_list_buckets_with_partial_success"
 require_relative "../storage_lock_retention_policy"
+require_relative "../storage_update_bucket_encryption_enforcement_config"
 require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
 require_relative "../storage_set_bucket_default_kms_key"
+require_relative "../storage_set_bucket_encryption_enforcement_config"
 require_relative "../storage_set_object_retention_policy"
 require_relative "../storage_set_public_access_prevention_enforced"
 require_relative "../storage_set_public_access_prevention_inherited"
@@ -167,6 +170,44 @@ describe "Buckets Snippets" do
 
       delete_bucket_helper bucket_name
     end
+  end
+
+  describe "storage_bucket_encryption_enforcement_config" do
+    bucket_name = random_bucket_name
+
+    it "gets, sets and updates bucket encryption enforcement config" do
+      # creates bucket with encryption enforcement config
+      expected = "Created bucket #{bucket_name} with Encryption Enforcement Config.\n"
+
+      retry_resource_exhaustion do
+        assert_output expected do
+          set_bucket_encryption_enforcement_config bucket_name: bucket_name
+        end
+      end
+
+      # get encryption enforcement config
+      expected = "Encryption Enforcement Config for bucket #{bucket_name}:\n" \
+                 "Customer-managed encryption enforcement config restriction mode: NotRestricted\n" \
+                 "Customer-supplied encryption enforcement config restriction mode: FullyRestricted\n" \
+                 "Google-managed encryption enforcement config restriction mode: FullyRestricted\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          get_bucket_encryption_enforcement_config bucket_name: bucket_name
+        end
+      end
+
+      # update encryption enforcement config
+      expected = "Updated google_managed_config to NotRestricted for bucket #{bucket_name}.\n"
+
+      retry_resource_exhaustion do
+        assert_output expected do
+          update_bucket_encryption_enforcement_config bucket_name: bucket_name
+        end
+      end
+
+      refute_nil storage_client.bucket bucket_name
+    end
+    delete_bucket_helper bucket_name
   end
 
   describe "storage_create_bucket_with_object_retention" do

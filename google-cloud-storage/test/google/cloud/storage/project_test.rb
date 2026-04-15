@@ -389,7 +389,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   it "creates a bucket with block encryption" do
     mock = Minitest::Mock.new
     created_bucket = create_bucket_gapi bucket_name
-    created_bucket.encryption = encryption_gapi(kms_key)
+    created_bucket.encryption = encryption_gapi(key_name: kms_key)
     resp_bucket = bucket_with_location created_bucket
     mock.expect :insert_bucket, resp_bucket, [project, created_bucket], predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil, enable_object_retention: nil, options: {}
 
