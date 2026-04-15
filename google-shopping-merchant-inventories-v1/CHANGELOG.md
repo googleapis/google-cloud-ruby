@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.2 (2026-04-15)
+
+#### Documentation
+
+* A comment for field `name` in message `.google.shopping.merchant.products.v1.LocalInventory` is changed ([#33825](https://github.com/googleapis/google-cloud-ruby/issues/33825)) 
+
 ### 0.4.1 (2026-04-09)
 
 #### Documentation
