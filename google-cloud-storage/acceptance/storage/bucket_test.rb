@@ -385,4 +385,27 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(storage.bucket(hns_bucket_name)).must_be :nil?
   end
+
+  describe "storage move file" do
+    let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
+    let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
+    let :create_source_file do
+      file = StringIO.new "test"
+      bucket.create_file file, source_file
+    end
+    it "moves a file for bucket" do
+      create_source_file
+      bucket.move_file source_file, destination_file
+      refute_nil(bucket.file(destination_file))
+      assert_nil(bucket.file(source_file))
+    end
+
+    it "raises error if source and destination are having same filename" do
+      create_source_file
+      exception = assert_raises Google::Cloud::InvalidArgumentError do
+        bucket.move_file source_file, source_file
+      end
+      assert_equal "invalid: Source and destination object names must be different.", exception.message
+    end
+  end
 end
