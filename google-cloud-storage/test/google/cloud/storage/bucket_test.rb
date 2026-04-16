@@ -1408,6 +1408,112 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "restarts a resumable upload with upload_id" do
+    new_file_name = random_file_path
+    upload_id = "TEST_ID"
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+      mock = Minitest::Mock.new
+      expected_return_value = create_file_gapi(bucket.name, new_file_name)
+      mock.expect :restart_resumable_upload, expected_return_value,
+        [bucket.name, tmpfile, upload_id],
+        **resumable_upload_args(options: {})
+      bucket.service.mocked_service = mock
+      returned_value= bucket.restart_resumable_upload tmpfile, upload_id
+      assert_equal expected_return_value, returned_value
+      mock.verify
+    end
+  end
+
+  it "raises ArgumentError if anyone or both arguments are not provided to restart_resumable_upload" do
+    upload_id = "TEST_ID"
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+      error = _ { bucket.restart_resumable_upload  }.must_raise ArgumentError
+      assert_match "wrong number of arguments", error.message
+
+      error = _ { bucket.restart_resumable_upload upload_id }.must_raise ArgumentError
+      assert_match "wrong number of arguments", error.message
+
+      error = _ { bucket.restart_resumable_upload tmpfile }.must_raise ArgumentError
+      assert_match "wrong number of arguments", error.message
+    end
+  end
+
+  it "raises ArgumentError if upload_id as nil is provided to restart_resumable_upload" do
+    upload_id = nil
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+      error = _ { bucket.restart_resumable_upload tmpfile, upload_id }.must_raise ArgumentError
+      assert_match "Upload Id missing", error.message
+    end
+  end
+
+  it "returns false if restart_resumable_upload is provided wrong upload_id" do
+    new_file_name = random_file_path
+    upload_id = "wrong_TEST_ID"
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+      mock = Minitest::Mock.new
+      expected_return_value = false
+      mock.expect :restart_resumable_upload, expected_return_value,
+        [bucket.name, tmpfile, upload_id],
+        **resumable_upload_args(options: {})
+      bucket.service.mocked_service = mock
+      returned_value= bucket.restart_resumable_upload tmpfile, upload_id
+      assert_equal expected_return_value, returned_value
+      mock.verify
+    end
+  end
+
+
+  it "deletes a resumable upload with upload_id" do
+    upload_id = "TEST_ID"
+
+    mock = Minitest::Mock.new
+    expected_return_value = true
+    mock.expect :delete_resumable_upload, expected_return_value,
+      [bucket.name, upload_id],
+      **resumable_upload_args(options: {})
+    bucket.service.mocked_service = mock
+    returned_value = bucket.delete_resumable_upload upload_id
+    assert_equal expected_return_value, returned_value
+    mock.verify
+  end
+
+  it "returns false if delete_resumable_upload is provided wrong upload_id" do
+    upload_id = "wrong_TEST_ID"
+
+    mock = Minitest::Mock.new
+    expected_return_value = false
+    mock.expect :delete_resumable_upload, expected_return_value,
+      [bucket.name, upload_id],
+      **resumable_upload_args(options: {})
+    bucket.service.mocked_service = mock
+    returned_value = bucket.delete_resumable_upload upload_id
+    assert_equal expected_return_value, returned_value
+    mock.verify
+  end
+
+  it "raises ArgumentError if upload_id is not provided to delete_resumable_upload" do
+    error = _ { bucket.delete_resumable_upload  }.must_raise ArgumentError
+    assert_match "wrong number of arguments", error.message
+  end
+
+  it "raises ArgumentError if upload_id as nil is provided to delete_resumable_upload" do
+    upload_id = nil
+    error = _ { bucket.delete_resumable_upload upload_id }.must_raise ArgumentError
+    assert_match "Upload Id missing", error.message
+  end
+
   def create_file_gapi bucket=nil, name = nil
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
