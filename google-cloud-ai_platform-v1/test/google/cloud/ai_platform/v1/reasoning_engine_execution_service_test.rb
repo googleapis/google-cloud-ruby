@@ -202,6 +202,73 @@ class ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::ClientTe
     end
   end
 
+  def test_async_query_reasoning_engine
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    input_gcs_uri = "hello world"
+    output_gcs_uri = "hello world"
+
+    async_query_reasoning_engine_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :async_query_reasoning_engine, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::AsyncQueryReasoningEngineRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["input_gcs_uri"]
+      assert_equal "hello world", request["output_gcs_uri"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, async_query_reasoning_engine_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.async_query_reasoning_engine({ name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.async_query_reasoning_engine name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.async_query_reasoning_engine ::Google::Cloud::AIPlatform::V1::AsyncQueryReasoningEngineRequest.new(name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.async_query_reasoning_engine({ name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.async_query_reasoning_engine(::Google::Cloud::AIPlatform::V1::AsyncQueryReasoningEngineRequest.new(name: name, input_gcs_uri: input_gcs_uri, output_gcs_uri: output_gcs_uri), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, async_query_reasoning_engine_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -239,5 +306,19 @@ class ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::ClientTe
       assert_kind_of ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client, client
       assert_equal creds, client.configure.credentials
     end
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Operations, client.operations_client
   end
 end
