@@ -25,6 +25,7 @@ require "google/cloud/ai_platform/v1/bindings_override"
 
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/credentials"
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/paths"
+require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/rest/operations"
 require "google/cloud/ai_platform/v1/reasoning_engine_execution_service/rest/client"
 
 module Google

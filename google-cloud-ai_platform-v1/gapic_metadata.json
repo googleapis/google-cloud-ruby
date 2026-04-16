@@ -1519,6 +1519,11 @@
               "methods": [
                 "stream_query_reasoning_engine"
               ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "async_query_reasoning_engine"
+              ]
             }
           }
         }

@@ -67,6 +67,44 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#async_query_reasoning_engine ReasoningEngineExecutionService.AsyncQueryReasoningEngine}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ReasoningEngine resource to use.
+        #     Format:
+        #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+        # @!attribute [rw] input_gcs_uri
+        #   @return [::String]
+        #     Optional. Input Cloud Storage URI for the Async query.
+        # @!attribute [rw] output_gcs_uri
+        #   @return [::String]
+        #     Optional. Output Cloud Storage URI for the Async query.
+        class AsyncQueryReasoningEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Operation metadata message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#async_query_reasoning_engine ReasoningEngineExecutionService.AsyncQueryReasoningEngine}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class AsyncQueryReasoningEngineOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#async_query_reasoning_engine ReasoningEngineExecutionService.AsyncQueryReasoningEngine}.
+        # @!attribute [rw] output_gcs_uri
+        #   @return [::String]
+        #     Output Cloud Storage URI for the Async query.
+        class AsyncQueryReasoningEngineResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
