@@ -1101,7 +1101,6 @@ describe Google::Cloud::Storage::File, :storage do
           custom: context_custom_hash(custom_context_key: invalid_key, custom_context_value: custom_value)
         )
       }.must_raise Google::Cloud::InvalidArgumentError
-
       _(err.message).must_match(/Object context key must start with an alphanumeric character./)
 
       invalid_key = "my-custom-key"
