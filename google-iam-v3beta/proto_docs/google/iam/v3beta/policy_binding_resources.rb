@@ -53,8 +53,8 @@ module Google
       #     size limitations
       # @!attribute [rw] target
       #   @return [::Google::Iam::V3beta::PolicyBinding::Target]
-      #     Required. Immutable. Target is the full resource name of the resource to
-      #     which the policy will be bound. Immutable once set.
+      #     Required. Immutable. The full resource name of the resource to which the
+      #     policy will be bound. Immutable once set.
       # @!attribute [rw] policy_kind
       #   @return [::Google::Iam::V3beta::PolicyBinding::PolicyKind]
       #     Immutable. The kind of the policy to attach in this binding. This field
@@ -100,13 +100,14 @@ module Google
       #     - `principal.type != <principal type string>`
       #     - `principal.type in [<list of principal types>]`
       #
-      #     Supported principal types are Workspace, Workforce Pool, Workload Pool and
-      #     Service Account. Allowed string must be one of:
+      #     Supported principal types are workspace, workforce pool, workload pool,
+      #     service account, and Agent Identity. Allowed string must be one of:
       #
-      #     - iam.googleapis.com/WorkspaceIdentity
-      #     - iam.googleapis.com/WorkforcePoolIdentity
-      #     - iam.googleapis.com/WorkloadPoolIdentity
-      #     - iam.googleapis.com/ServiceAccount
+      #     - `iam.googleapis.com/WorkspaceIdentity`
+      #     - `iam.googleapis.com/WorkforcePoolIdentity`
+      #     - `iam.googleapis.com/WorkloadPoolIdentity`
+      #     - `iam.googleapis.com/ServiceAccount`
+      #     - `iam.googleapis.com/AgentPoolIdentity` (available in Preview)
       # @!attribute [r] create_time
       #   @return [::Google::Protobuf::Timestamp]
       #     Output only. The time when the policy binding was created.
@@ -117,32 +118,50 @@ module Google
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
 
-        # Target is the full resource name of the resource to which the policy will
+        # The full resource name of the resource to which the policy will
         # be bound. Immutable once set.
         # @!attribute [rw] principal_set
         #   @return [::String]
-        #     Immutable. Full Resource Name used for principal access boundary policy
-        #     bindings. The principal set must be directly parented by the policy
-        #     binding's parent or same as the parent if the target is a
-        #     project/folder/organization.
+        #     Immutable. The full resource name that's used for principal access
+        #     boundary policy bindings. The principal set must be directly parented
+        #     by the policy binding's parent or same as the parent if the target is a
+        #     project, folder, or organization.
         #
         #     Examples:
-        #     * For binding's parented by an organization:
-        #       * Organization:
-        #       `//cloudresourcemanager.googleapis.com/organizations/ORGANIZATION_ID`
-        #       * Workforce Identity:
-        #       `//iam.googleapis.com/locations/global/workforcePools/WORKFORCE_POOL_ID`
-        #       * Workspace Identity:
-        #       `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
-        #     * For binding's parented by a folder:
-        #       * Folder:
-        #       `//cloudresourcemanager.googleapis.com/folders/FOLDER_ID`
-        #     * For binding's parented by a project:
-        #       * Project:
+        #
+        #     * For bindings parented by an organization:
+        #         * Organization:
+        #         `//cloudresourcemanager.googleapis.com/organizations/ORGANIZATION_ID`
+        #         * Workforce Identity:
+        #         `//iam.googleapis.com/locations/global/workforcePools/WORKFORCE_POOL_ID`
+        #         * Workspace Identity:
+        #         `//iam.googleapis.com/locations/global/workspace/WORKSPACE_ID`
+        #     * For bindings parented by a folder:
+        #         * Folder:
+        #           `//cloudresourcemanager.googleapis.com/folders/FOLDER_ID`
+        #     * For bindings parented by a project:
+        #         * Project:
+        #             * `//cloudresourcemanager.googleapis.com/projects/PROJECT_NUMBER`
+        #             * `//cloudresourcemanager.googleapis.com/projects/PROJECT_ID`
+        #         * Workload Identity Pool:
+        #         `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/LOCATION/workloadIdentityPools/WORKLOAD_POOL_ID`
+        #
+        #     Note: The following fields are mutually exclusive: `principal_set`, `resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Immutable. The full resource name that's used for access policy
+        #     bindings.
+        #
+        #     Examples:
+        #
+        #     * Organization:
+        #     `//cloudresourcemanager.googleapis.com/organizations/ORGANIZATION_ID`
+        #     * Folder: `//cloudresourcemanager.googleapis.com/folders/FOLDER_ID`
+        #     * Project:
         #         * `//cloudresourcemanager.googleapis.com/projects/PROJECT_NUMBER`
         #         * `//cloudresourcemanager.googleapis.com/projects/PROJECT_ID`
-        #       * Workload Identity Pool:
-        #       `//iam.googleapis.com/projects/PROJECT_NUMBER/locations/LOCATION/workloadIdentityPools/WORKLOAD_POOL_ID`
+        #
+        #     Note: The following fields are mutually exclusive: `resource`, `principal_set`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Target
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,13 +176,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Different policy kinds supported in this binding.
+        # The different policy kinds supported in this binding.
         module PolicyKind
           # Unspecified policy kind; Not a valid state
           POLICY_KIND_UNSPECIFIED = 0
 
           # Principal access boundary policy kind
           PRINCIPAL_ACCESS_BOUNDARY = 1
+
+          # Access policy kind.
+          ACCESS = 2
         end
       end
     end

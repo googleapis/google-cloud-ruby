@@ -20,7 +20,7 @@ require "gapic/common"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/iam/v3beta/version"
+require "google/cloud/iam/v3beta/version"
 
 require "google/iam/v3beta/principal_access_boundary_policies/credentials"
 require "google/iam/v3beta/principal_access_boundary_policies/paths"

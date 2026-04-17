@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,24 +22,23 @@ require "gapic/config/method"
 
 require "google/cloud/iam/v3beta/version"
 
-require "google/iam/v3beta/principal_access_boundary_policies/credentials"
-require "google/iam/v3beta/principal_access_boundary_policies/paths"
-require "google/iam/v3beta/principal_access_boundary_policies/rest/operations"
-require "google/iam/v3beta/principal_access_boundary_policies/rest/client"
+require "google/iam/v3beta/access_policies/credentials"
+require "google/iam/v3beta/access_policies/paths"
+require "google/iam/v3beta/access_policies/rest/operations"
+require "google/iam/v3beta/access_policies/rest/client"
 
 module Google
   module Iam
     module V3beta
       ##
-      # Manages Identity and Access Management (IAM) principal access boundary
-      # policies.
+      # Manages Identity and Access Management (IAM) access policies.
       #
       # To load this service and instantiate a REST client:
       #
-      #     require "google/iam/v3beta/principal_access_boundary_policies/rest"
-      #     client = ::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Rest::Client.new
+      #     require "google/iam/v3beta/access_policies/rest"
+      #     client = ::Google::Iam::V3beta::AccessPolicies::Rest::Client.new
       #
-      module PrincipalAccessBoundaryPolicies
+      module AccessPolicies
         # Client for the REST transport
         module Rest
         end
@@ -49,4 +48,4 @@ module Google
 end
 
 helper_path = ::File.join __dir__, "rest", "helpers.rb"
-require "google/iam/v3beta/principal_access_boundary_policies/rest/helpers" if ::File.file? helper_path
+require "google/iam/v3beta/access_policies/rest/helpers" if ::File.file? helper_path
