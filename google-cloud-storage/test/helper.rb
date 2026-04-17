@@ -165,15 +165,18 @@ class MockStorage < Minitest::Spec
     }.delete_if { |_, v| v.nil? } if !retention_params.nil? && !retention_params.empty?
   end
 
-  def random_file_hash bucket=random_bucket_name,
-                       name=random_file_path,
-                       generation="1234567890",
-                       kms_key_name="path/to/encryption_key_name",
+  def random_file_hash bucket = random_bucket_name,
+                       name = random_file_path,
+                       generation = "1234567890",
+                       kms_key_name = "path/to/encryption_key_name",
                        custom_time: nil,
                        retention_params: nil,
                        override_unlocked_retention: nil,
                        soft_delete_time: nil,
-                       hard_delete_time: nil
+                       hard_delete_time: nil,
+                       custom_context_key: nil,
+                       custom_context_value: nil
+
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -204,8 +207,21 @@ class MockStorage < Minitest::Spec
       "retention" => file_retention_hash(retention_params),
       "overrideUnlockedRetention" => override_unlocked_retention,
       "softDeleteTime" => soft_delete_time,
-      "hardDeleteTime" => hard_delete_time }
+      "hardDeleteTime" => hard_delete_time, 
+      "contexts" => context_custom_hash(custom_context_key: custom_context_key, custom_context_value: custom_context_value)
+    }
   end
+
+  def context_custom_hash custom_context_key:, custom_context_value:
+    if custom_context_key
+      custom_hash = {
+        custom: { custom_context_key => { "value" => custom_context_value, "createTime" => Time.now } }
+      }
+    else
+      nil
+    end
+  end
+
 
   def random_bucket_name
     (0...50).map { ("a".."z").to_a[rand(26)] }.join
@@ -421,6 +437,7 @@ class MockStorage < Minitest::Spec
                         match_glob: nil,
                         include_folders_as_prefixes: nil,
                         soft_deleted: nil,
+                        filter: nil,
                         options: {}
     {
       delimiter: delimiter,
@@ -432,6 +449,7 @@ class MockStorage < Minitest::Spec
       match_glob: match_glob,
       include_folders_as_prefixes: include_folders_as_prefixes,
       soft_deleted: soft_deleted,
+      filter: filter,
       options: options
     }
   end
