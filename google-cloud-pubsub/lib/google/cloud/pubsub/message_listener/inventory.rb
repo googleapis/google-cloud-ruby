@@ -109,6 +109,21 @@ module Google
             end
           end
 
+          def wait_until_empty timeout = nil
+            synchronize do
+              if timeout
+                target_time = Time.now + timeout
+                while !@inventory.empty?
+                  remaining = target_time - Time.now
+                  break if remaining <= 0
+                  @wait_cond.wait remaining
+                end
+              else
+                @wait_cond.wait_while { !@inventory.empty? }
+              end
+            end
+          end
+
           def start
             @background_thread ||= Thread.new { background_run }
 
