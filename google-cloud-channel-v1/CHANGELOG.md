@@ -1,5 +1,22 @@
 # Release History
 
+### 2.5.0 (2026-04-19)
+
+#### Features
+
+* add custom prompt config in the request and return prompt in the response 
+* update min_speaker_count and max_speaker_count to be optional 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* Changed field behavior for an existing field `entitlement_granularity` in message `.google.cloud.channel.v1.RepricingConfig` 
+#### Documentation
+
+* Clarify that min_speaker_count and max_speaker_count in SpeakerDiarizationConfig are not currently used 
+* Update guidance on how to enable speaker diarization; to enable, set the diarization_config field to an empty SpeakerDiarizationConfig message 
+* update SelectiveGapicGeneration usage doc ([#32231](https://github.com/googleapis/google-cloud-ruby/issues/32231)) 
+
 ### 2.4.1 (2025-10-27)
 
 #### Documentation
