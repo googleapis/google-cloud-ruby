@@ -110,7 +110,7 @@ module Google
           # @!attribute [rw] gtins
           #   @return [::Array<::String>]
           #     Global Trade Item Numbers
-          #     ([GTIN](https://support.google.com/merchants/answer/188494#gtin)) of the
+          #     ([GTIN](https://support.google.com/merchants/answer/6324461)) of the
           #     item.
           #     You can provide up to 10 GTINs.
           # @!attribute [rw] item_group_id
@@ -123,7 +123,7 @@ module Google
           # @!attribute [rw] mpn
           #   @return [::String]
           #     Manufacturer Part Number
-          #     ([MPN](https://support.google.com/merchants/answer/188494#mpn)) of the
+          #     ([MPN](https://support.google.com/merchants/answer/6324482)) of the
           #     item.
           # @!attribute [rw] pattern
           #   @return [::String]
@@ -433,6 +433,12 @@ module Google
           # @!attribute [rw] sustainability_incentives
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductSustainabilityIncentive>]
           #     The list of sustainability incentive programs.
+          # @!attribute [rw] video_links
+          #   @return [::Array<::String>]
+          #     Optional. A list of video URLs for the item. Use this attribute to provide
+          #     more visuals for your product beyond your image attributes. See the [Help
+          #     Center article](https://support.google.com/merchants/answer/15216925) for
+          #     more information.
           class ProductAttributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -847,6 +853,9 @@ module Google
           # @!attribute [rw] credit_type
           #   @return [::Google::Shopping::Merchant::Products::V1::CreditType]
           #     Type of installment payments.
+          # @!attribute [rw] annual_percentage_rate
+          #   @return [::Float]
+          #     Optional. Annual percentage rate for `credit_type` finance
           class ProductInstallment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
