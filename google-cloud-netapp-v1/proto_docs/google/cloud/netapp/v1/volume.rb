@@ -236,7 +236,9 @@ module Google
         # @!attribute [rw] large_capacity
         #   @return [::Boolean]
         #     Optional. Flag indicating if the volume will be a large capacity volume or
-        #     a regular volume.
+        #     a regular volume. This field is used for legacy FILE pools. For Unified
+        #     pools, use the `large_capacity_config` field instead. This field and
+        #     `large_capacity_config` are mutually exclusive.
         # @!attribute [rw] multiple_endpoints
         #   @return [::Boolean]
         #     Optional. Flag indicating if the volume will have an IP address per node
@@ -272,6 +274,13 @@ module Google
         #   @return [::Array<::Google::Cloud::NetApp::V1::BlockDevice>]
         #     Optional. Block devices for the volume.
         #     Currently, only one block device is permitted per Volume.
+        # @!attribute [rw] large_capacity_config
+        #   @return [::Google::Cloud::NetApp::V1::LargeCapacityConfig]
+        #     Optional. Large capacity config for the volume.
+        #     Enables and configures large capacity for volumes in Unified pools with
+        #     File protocols. Not applicable for Block protocols in Unified pools.
+        #     This field and the legacy `large_capacity` boolean field
+        #     are mutually exclusive.
         # @!attribute [r] clone_details
         #   @return [::Google::Cloud::NetApp::V1::Volume::CloneDetails]
         #     Output only. If this volume is a clone, this field contains details about
@@ -343,6 +352,18 @@ module Google
             # Volume State is Read Only
             READ_ONLY = 9
           end
+        end
+
+        # Configuration for a Large Capacity Volume. A Large Capacity Volume
+        # supports sizes ranging from 4.8 TiB to 20 PiB, it is composed of multiple
+        # internal constituents, and must be created in a large capacity pool.
+        # @!attribute [rw] constituent_count
+        #   @return [::Integer]
+        #     Optional. The number of internal constituents (e.g., FlexVols) for this
+        #     large volume. The minimum number of constituents is 2.
+        class LargeCapacityConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Defines the export policy for the volume.

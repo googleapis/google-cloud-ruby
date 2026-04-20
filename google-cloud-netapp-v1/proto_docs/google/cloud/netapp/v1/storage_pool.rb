@@ -245,6 +245,10 @@ module Google
         #     the user can perform the ONTAP operations on the storage pool using the
         #     GCNV ONTAP Mode APIs. If not specified during creation, it defaults to
         #     `DEFAULT`.
+        # @!attribute [rw] scale_type
+        #   @return [::Google::Cloud::NetApp::V1::ScaleType]
+        #     Optional. The scale type of the storage pool. Defaults to
+        #     `SCALE_TYPE_DEFAULT` if not specified.
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
