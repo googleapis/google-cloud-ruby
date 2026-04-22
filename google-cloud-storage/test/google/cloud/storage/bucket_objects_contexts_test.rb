@@ -34,7 +34,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                   [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, match_glob: nil, include_folders_as_prefixes: nil, soft_deleted: nil, filter: expected_filter, options: {}
 
       bucket.service.mocked_service = mock
-
       files = bucket.files filter: expected_filter
 
       mock.verify
