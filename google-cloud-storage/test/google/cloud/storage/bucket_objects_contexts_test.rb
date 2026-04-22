@@ -30,7 +30,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       num_files = 2
       expected_filter = "contexts.\"#{custom_context_key1}\"=\"#{custom_context_value1}\""
       mock = Minitest::Mock.new
-      mock.expect :list_objects, list_files_gapi(num_files, custom_context_key1, custom_context_value1),
+      mock.expect :list_objects, list_files_gapi(count: num_files, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1),
                   [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, match_glob: nil, include_folders_as_prefixes: nil, soft_deleted: nil, filter: expected_filter, options: {}
 
       bucket.service.mocked_service = mock
@@ -48,7 +48,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       num_files = 1
       expected_filter = "-contexts.\"#{custom_context_key1}\"=\"#{custom_context_value1}\""
       mock = Minitest::Mock.new
-      mock.expect :list_objects, list_files_gapi(num_files, custom_context_key1, custom_context_value1),
+
+      mock.expect :list_objects, list_files_gapi(count: num_files, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1),
                   [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, match_glob: nil, include_folders_as_prefixes: nil, soft_deleted: nil, filter: expected_filter, options: {}
 
       bucket.service.mocked_service = mock
@@ -63,13 +64,13 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   describe "setting and deleting contexts" do
     let(:file_name) { "my-file" }
-    let(:file_gapi) { create_file_gapi bucket.name, file_name }
+    let(:file_gapi) { create_file_gapi bucket: bucket.name, name: file_name }
     let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
 
     it "sets contexts for a file" do
       expected_contexts = context_custom_hash custom_context_key: custom_context_key1,
                                               custom_context_value: custom_context_value1
-    
+
       mock = Minitest::Mock.new
 
       mock.expect :patch_object, file_gapi do |bucket_name, file_name, patch_obj, **args|
@@ -85,7 +86,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
 
     it "deletes contexts for a file" do
-      file_gapi = create_file_gapi_with_contexts bucket.name, file_name, custom_context_key: custom_context_key1,custom_context_value: custom_context_value1
+      file_gapi = create_file_gapi_with_contexts bucket: bucket.name, name: file_name,
+                                                 custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       file = Google::Cloud::Storage::File.from_gapi file_gapi, storage.service
       mock = Minitest::Mock.new
 
@@ -103,13 +105,19 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   end
 
 
-  def create_file_gapi bucket = nil, name = nil
+  def create_file_gapi bucket: nil, name: nil
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
 
-    def create_file_gapi_with_contexts bucket = nil, name = nil, custom_context_key = nil, custom_context_value = nil
-    Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name, custom_context_key: custom_context_key,
-                                                               custom_context_value: custom_context_value).to_json
+  def create_file_gapi_with_contexts bucket: nil, name: nil, custom_context_key: nil, custom_context_value: nil
+    Google::Apis::StorageV1::Object.from_json(
+      random_file_hash(
+        bucket,
+        name,
+        custom_context_key: custom_context_key,
+        custom_context_value: custom_context_value
+      ).to_json
+    )
   end
 
   def empty_file_gapi cache_control: nil, content_disposition: nil,
@@ -126,13 +134,22 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     Google::Apis::StorageV1::Object.new(**params)
   end
 
-  def find_file_gapi bucket = nil, name = nil
+  def find_file_gapi bucket: nil, name: nil
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
 
-  def list_files_gapi count = 2, custom_context_key = nil, custom_context_value = nil, token = nil, prefixes = nil
-    files = count.times.map { Google::Apis::StorageV1::Object.from_json random_file_hash(custom_context_key = custom_context_key, custom_context_value = custom_context_value).to_json }
-    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token,
-                                         prefixes: prefixes
+  def list_files_gapi count: 2, custom_context_key: nil, custom_context_value: nil, token: nil, prefixes: nil
+    files = count.times.map do
+      Google::Apis::StorageV1::Object.from_json(
+        random_file_hash(custom_context_key: custom_context_key, custom_context_value: custom_context_value).to_json
+      )
+    end
+
+    Google::Apis::StorageV1::Objects.new(
+      kind: "storage#objects",
+      items: files,
+      next_page_token: token,
+      prefixes: prefixes
+    )
   end
 end
