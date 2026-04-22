@@ -244,8 +244,30 @@ class MockStorage < Minitest::Spec
     OpenStruct.new(header: headers)
   end
 
-  def encryption_gapi key_name
-    Google::Apis::StorageV1::Bucket::Encryption.new default_kms_key_name: key_name
+  def customer_managed_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "FullyRestricted"
+    )
+  end
+
+  def customer_supplied_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::CustomerSuppliedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
+  end
+
+  def google_managed_encryption
+    Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
+      restriction_mode: "NotRestricted"
+    )
+  end
+
+  def encryption_gapi key_name: nil
+    params = {
+      default_kms_key_name: key_name
+    }.compact
+
+    Google::Apis::StorageV1::Bucket::Encryption.new(**params)
   end
 
   def lifecycle_gapi *rules
