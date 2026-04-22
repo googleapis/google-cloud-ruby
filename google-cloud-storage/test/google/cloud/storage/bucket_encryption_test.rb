@@ -150,7 +150,6 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
     it "updates encryption_enforcement_config using update_bucket_encryption_enforcement_config" do
       mock = Minitest::Mock.new
       incoming_config = { restriction_mode: "FullyRestricted" }
-
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(
         encryption: Google::Apis::StorageV1::Bucket::Encryption.new(
           google_managed_encryption_enforcement_config: Google::Apis::StorageV1::Bucket::Encryption::GoogleManagedEncryptionEnforcementConfig.new(
