@@ -27,7 +27,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The name of the framework deployment, in the format
-        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
         #     The only supported location is `global`.
         # @!attribute [rw] target_resource_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceConfig]
@@ -103,7 +105,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The name for the cloud control deployment, in the format
-        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`.
         #     The only supported location is `global`.
         # @!attribute [rw] target_resource_config
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::TargetResourceConfig]
@@ -241,7 +245,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the framework deployment in the format
-        #     `organizations/{organization}/locations/{location}`.
+        #     `organizations/{organization}/locations/{location}`
+        #     or
+        #     `projects/{project}/locations/{location}`.
         #     Only the global location is supported.
         # @!attribute [rw] framework_deployment_id
         #   @return [::String]
@@ -261,7 +267,9 @@ module Google
         #   @return [::String]
         #     Required. The name of the framework deployment that you want to delete,
         #     in the format
-        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
         #     The only supported location is `global`.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -282,7 +290,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the framework deployment, in the format
-        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
         #     The only supported location is `global`.
         class GetFrameworkDeploymentRequest
           include ::Google::Protobuf::MessageExts
@@ -293,7 +303,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the framework deployment, in the format
-        #     `organizations/{organization}/locations/{location}`.
+        #     `organizations/{organization}/locations/{location}`
+        #     or
+        #     `projects/{project}/locations/{location}`.
         #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -339,7 +351,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name for the cloud control deployment, in the format
-        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`.
         #     The only supported location is `global`.
         class GetCloudControlDeploymentRequest
           include ::Google::Protobuf::MessageExts
@@ -350,8 +364,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource for the cloud control deployment, in the
-        #     format `organizations/{organization}/locations/{location}`. The only
-        #     supported location is `global`.
+        #     format `organizations/{organization}/locations/{location}` or
+        #     `projects/{project}/locations/{location}`.
+        #     The only supported location is `global`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The requested page size. The server might return fewer items than
@@ -396,7 +411,9 @@ module Google
         # @!attribute [r] cloud_control_deployment
         #   @return [::String]
         #     Output only. The name of the CloudControlDeployment. The format is
-        #     `organizations/{org}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`.
         #     The only supported location is `global`.
         class CloudControlDeploymentReference
           include ::Google::Protobuf::MessageExts
@@ -407,7 +424,9 @@ module Google
         # @!attribute [r] framework_deployment
         #   @return [::String]
         #     Output only. The name of the framework deployment, in the format
-        #     `organizations/{org}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+        #     `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
         #     The only supported location is `global`.
         # @!attribute [rw] framework_reference
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::FrameworkReference]
@@ -417,7 +436,7 @@ module Google
         #     ```
         #     {
         #       framework:
-        #       "organizations/\\{org}/locations/\\{location}/frameworks/\\{framework}",
+        #       "organizations/\\{organization}/locations/\\{location}/frameworks/\\{framework}",
         #       major_revision_id: 1
         #     }
         #     ```
@@ -445,6 +464,9 @@ module Google
 
           # Deployment is being deleted.
           DEPLOYMENT_STATE_DELETING = 3
+
+          # Deployment is being updated.
+          DEPLOYMENT_STATE_UPDATING = 8
 
           # Deployment has failed. All the changes made by the deployment were
           # successfully rolled back. You can retry or delete a deployment that's

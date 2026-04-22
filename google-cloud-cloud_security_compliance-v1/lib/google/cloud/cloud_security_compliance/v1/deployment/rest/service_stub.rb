@@ -332,6 +332,14 @@ module Google
                                                             ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/frameworkDeployments",
+                                                          body: "framework_deployment",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -351,6 +359,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^organizations/[^/]+/locations/[^/]+/frameworkDeployments/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/frameworkDeployments/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -374,6 +389,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/locations/[^/]+/frameworkDeployments/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/frameworkDeployments/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -393,6 +415,13 @@ module Google
                                                           uri_template: "/v1/{parent}/frameworkDeployments",
                                                           matches: [
                                                             ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/frameworkDeployments",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -416,6 +445,13 @@ module Google
                                                             ["name", %r{^organizations/[^/]+/locations/[^/]+/cloudControlDeployments/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/cloudControlDeployments/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -435,6 +471,13 @@ module Google
                                                           uri_template: "/v1/{parent}/cloudControlDeployments",
                                                           matches: [
                                                             ["parent", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/cloudControlDeployments",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

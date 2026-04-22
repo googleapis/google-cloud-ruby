@@ -50,6 +50,9 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::ClientPathsTest < Mi
 
       path = client.cloud_control_path organization: "value0", location: "value1", cloud_control: "value2"
       assert_equal "organizations/value0/locations/value1/cloudControls/value2", path
+
+      path = client.cloud_control_path project: "value0", location: "value1", cloud_control: "value2"
+      assert_equal "projects/value0/locations/value1/cloudControls/value2", path
     end
   end
 
@@ -62,6 +65,21 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Config::ClientPathsTest < Mi
 
       path = client.framework_path organization: "value0", location: "value1", framework: "value2"
       assert_equal "organizations/value0/locations/value1/frameworks/value2", path
+
+      path = client.framework_path project: "value0", location: "value1", framework: "value2"
+      assert_equal "projects/value0/locations/value1/frameworks/value2", path
+    end
+  end
+
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::CloudSecurityCompliance::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
     end
   end
 
