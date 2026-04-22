@@ -860,7 +860,7 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   # Set restriction mode to FullyRestricted
         #   restricted_config = { restriction_mode: "FullyRestricted" }
-        #   bucket.new_google_managed_encryption_enforcement_config = restricted_config
+        #   bucket.google_managed_encryption_enforcement_config = restricted_config
         #
         # @example Setting via Request Object (Google API Client)
         #   require "google/apis/storage_v1"
