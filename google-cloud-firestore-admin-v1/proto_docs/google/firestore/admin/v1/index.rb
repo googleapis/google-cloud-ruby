@@ -78,6 +78,11 @@ module Google
           #   @return [::Boolean]
           #     Optional. Whether it is an unique index. Unique index ensures all values
           #     for the indexed field(s) are unique across documents.
+          # @!attribute [rw] search_index_options
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Index::SearchIndexOptions]
+          #     Optional. Options for search indexes that are at the index definition
+          #     level. This field is only currently supported for indexes with
+          #     MONGODB_COMPATIBLE_API ApiScope.
           class Index
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -95,18 +100,25 @@ module Google
             #     Indicates that this field supports ordering by the specified order or
             #     comparing using =, !=, <, <=, >, >=.
             #
-            #     Note: The following fields are mutually exclusive: `order`, `array_config`, `vector_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `order`, `array_config`, `vector_config`, `search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] array_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::ArrayConfig]
             #     Indicates that this field supports operations on `array_value`s.
             #
-            #     Note: The following fields are mutually exclusive: `array_config`, `order`, `vector_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `array_config`, `order`, `vector_config`, `search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] vector_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::VectorConfig]
             #     Indicates that this field supports nearest neighbor and distance
             #     operations on vector.
             #
-            #     Note: The following fields are mutually exclusive: `vector_config`, `order`, `array_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `vector_config`, `order`, `array_config`, `search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] search_config
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::SearchConfig]
+            #     Indicates that this field supports search operations. This field
+            #     is only currently supported for indexes with MONGODB_COMPATIBLE_API
+            #     ApiScope.
+            #
+            #     Note: The following fields are mutually exclusive: `search_config`, `order`, `array_config`, `vector_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class IndexField
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -133,6 +145,74 @@ module Google
                 end
               end
 
+              # The configuration for how to index a field for search.
+              # @!attribute [rw] text_spec
+              #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::SearchConfig::SearchTextSpec]
+              #     Optional. The specification for building a text search index for a
+              #     field.
+              # @!attribute [rw] geo_spec
+              #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::SearchConfig::SearchGeoSpec]
+              #     Optional. The specification for building a geo search index for a
+              #     field.
+              class SearchConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Specification of how the field should be indexed for search text
+                # indexes.
+                # @!attribute [rw] index_type
+                #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::SearchConfig::TextIndexType]
+                #     Required. How to index the text field value.
+                # @!attribute [rw] match_type
+                #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::SearchConfig::TextMatchType]
+                #     Required. How to match the text field value.
+                class SearchTextIndexSpec
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # The specification for how to build a text search index for a field.
+                # @!attribute [rw] index_specs
+                #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::Index::IndexField::SearchConfig::SearchTextIndexSpec>]
+                #     Required. Specifications for how the field should be indexed.
+                #     Repeated so that the field can be indexed in multiple ways.
+                class SearchTextSpec
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # The specification for how to build a geo search index for a field.
+                # @!attribute [rw] geo_json_indexing_disabled
+                #   @return [::Boolean]
+                #     Optional. Disables geoJSON indexing for the field. By default,
+                #     geoJSON points are indexed.
+                class SearchGeoSpec
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # Ways to index the text field value.
+                module TextIndexType
+                  # The index type is unspecified. Not a valid option.
+                  TEXT_INDEX_TYPE_UNSPECIFIED = 0
+
+                  # Field values are tokenized. This is the only way currently supported
+                  # for MONGODB_COMPATIBLE_API.
+                  TOKENIZED = 1
+                end
+
+                # Types of text matches that are supported for the
+                # field.
+                module TextMatchType
+                  # The match type is unspecified. Not a valid option.
+                  TEXT_MATCH_TYPE_UNSPECIFIED = 0
+
+                  # Match on any indexed field. This is the only way currently supported
+                  # for MONGODB_COMPATIBLE_API.
+                  MATCH_GLOBALLY = 1
+                end
+              end
+
               # The supported orderings.
               module Order
                 # The ordering is unspecified. Not a valid option.
@@ -153,6 +233,28 @@ module Google
                 # The index supports array containment queries.
                 CONTAINS = 1
               end
+            end
+
+            # Options for search indexes at the definition level.
+            # @!attribute [rw] text_language
+            #   @return [::String]
+            #     Optional. The language to use for text search indexes. Used as the
+            #     default language if not overridden at the document level by specifying
+            #     the `text_language_override_field`. The language is specified as a BCP 47
+            #     language code.
+            #     For indexes with MONGODB_COMPATIBLE_API ApiScope: If unspecified, the
+            #     default language is English.
+            #     For indexes with `ANY_API` ApiScope: If unspecified, the default behavior
+            #     is autodetect.
+            # @!attribute [rw] text_language_override_field_path
+            #   @return [::String]
+            #     Optional. The field in the document that specifies which language to use
+            #     for that specific document. For indexes with MONGODB_COMPATIBLE_API
+            #     ApiScope: if unspecified, the language is taken from the "language" field
+            #     if it exists or from `text_language` if it does not.
+            class SearchIndexOptions
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Query Scope defines the scope at which a query is run. This is specified on
