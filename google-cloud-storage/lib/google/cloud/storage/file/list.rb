@@ -167,7 +167,7 @@ module Google
                              delimiter = nil, max = nil, versions = nil,
                              user_project: nil, match_glob: nil,
                              include_folders_as_prefixes: nil,
-                             soft_deleted: nil
+                             soft_deleted: nil, filter: nil
             files = new(Array(gapi_list.items).map do |gapi_object|
               File.from_gapi gapi_object, service, user_project: user_project
             end)
@@ -183,6 +183,7 @@ module Google
             files.instance_variable_set :@match_glob, match_glob
             files.instance_variable_set :@include_folders_as_prefixes, include_folders_as_prefixes
             files.instance_variable_set :@soft_deleted, soft_deleted
+            files.instance_variable_set :@filter, filter
             files
           end
 
