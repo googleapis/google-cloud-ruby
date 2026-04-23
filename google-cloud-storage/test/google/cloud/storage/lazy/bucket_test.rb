@@ -281,7 +281,6 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
   it "creates a file with crc32c if checksum is true" do
     new_file_name = random_file_path
-
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world!"
       tmpfile.rewind
