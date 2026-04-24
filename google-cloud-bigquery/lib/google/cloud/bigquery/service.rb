@@ -248,11 +248,11 @@ access_policy_version: access_policy_version, update_mode: update_mode
         ##
         # Retrieves data from the table.
         def list_tabledata dataset_id, table_id, max: nil, token: nil, start: nil,
-                           format_options_use_int64_timestamp: nil
+                           format_options_use_int64_timestamp: nil, project_id: nil
           # The list operation is considered idempotent
           execute backoff: true do
             json_txt = service.list_table_data \
-              @project, dataset_id, table_id,
+              project_id || @project, dataset_id, table_id,
               max_results: max,
               page_token:  token,
               start_index: start,
