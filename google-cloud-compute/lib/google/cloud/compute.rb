@@ -1874,6 +1874,69 @@ module Google
       end
 
       ##
+      # Create a new client object for InstantSnapshotGroups.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::InstantSnapshotGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InstantSnapshotGroups-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the InstantSnapshotGroups service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the InstantSnapshotGroups service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.instant_snapshot_groups_available?}.
+      #
+      # ## About InstantSnapshotGroups
+      #
+      # The InstantSnapshotGroups API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.instant_snapshot_groups version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InstantSnapshotGroups)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the InstantSnapshotGroups service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.instant_snapshot_groups}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the InstantSnapshotGroups service,
+      # or if the versioned client gem needs an update to support the InstantSnapshotGroups service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.instant_snapshot_groups_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :InstantSnapshotGroups
+        service_module = service_module.const_get :InstantSnapshotGroups
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for InstantSnapshots.
       #
       # By default, this returns an instance of
@@ -3575,6 +3638,69 @@ module Google
       end
 
       ##
+      # Create a new client object for RegionBackendBuckets.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionBackendBuckets::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionBackendBuckets-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RegionBackendBuckets service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the RegionBackendBuckets service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.region_backend_buckets_available?}.
+      #
+      # ## About RegionBackendBuckets
+      #
+      # The RegionBackendBuckets API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.region_backend_buckets version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionBackendBuckets)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RegionBackendBuckets service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.region_backend_buckets}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RegionBackendBuckets service,
+      # or if the versioned client gem needs an update to support the RegionBackendBuckets service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.region_backend_buckets_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :RegionBackendBuckets
+        service_module = service_module.const_get :RegionBackendBuckets
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for RegionBackendServices.
       #
       # By default, this returns an instance of
@@ -4142,6 +4268,69 @@ module Google
       end
 
       ##
+      # Create a new client object for RegionInstanceGroupManagerResizeRequests.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionInstanceGroupManagerResizeRequests-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RegionInstanceGroupManagerResizeRequests service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the RegionInstanceGroupManagerResizeRequests service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.region_instance_group_manager_resize_requests_available?}.
+      #
+      # ## About RegionInstanceGroupManagerResizeRequests
+      #
+      # The RegionInstanceGroupManagerResizeRequests API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.region_instance_group_manager_resize_requests version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionInstanceGroupManagerResizeRequests)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RegionInstanceGroupManagerResizeRequests service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.region_instance_group_manager_resize_requests}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RegionInstanceGroupManagerResizeRequests service,
+      # or if the versioned client gem needs an update to support the RegionInstanceGroupManagerResizeRequests service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.region_instance_group_manager_resize_requests_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :RegionInstanceGroupManagerResizeRequests
+        service_module = service_module.const_get :RegionInstanceGroupManagerResizeRequests
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for RegionInstanceGroupManagers.
       #
       # By default, this returns an instance of
@@ -4386,6 +4575,69 @@ module Google
         service_module = Google::Cloud::Compute.const_get package_name
         return false unless service_module.const_defined? :RegionInstances
         service_module = service_module.const_get :RegionInstances
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for RegionInstantSnapshotGroups.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionInstantSnapshotGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionInstantSnapshotGroups-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RegionInstantSnapshotGroups service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the RegionInstantSnapshotGroups service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.region_instant_snapshot_groups_available?}.
+      #
+      # ## About RegionInstantSnapshotGroups
+      #
+      # The RegionInstantSnapshotGroups API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.region_instant_snapshot_groups version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionInstantSnapshotGroups)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RegionInstantSnapshotGroups service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.region_instant_snapshot_groups}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RegionInstantSnapshotGroups service,
+      # or if the versioned client gem needs an update to support the RegionInstantSnapshotGroups service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.region_instant_snapshot_groups_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :RegionInstantSnapshotGroups
+        service_module = service_module.const_get :RegionInstantSnapshotGroups
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -4764,6 +5016,132 @@ module Google
         service_module = Google::Cloud::Compute.const_get package_name
         return false unless service_module.const_defined? :RegionSecurityPolicies
         service_module = service_module.const_get :RegionSecurityPolicies
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for RegionSnapshotSettings.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionSnapshotSettings-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RegionSnapshotSettings service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the RegionSnapshotSettings service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.region_snapshot_settings_available?}.
+      #
+      # ## About RegionSnapshotSettings
+      #
+      # The RegionSnapshotSettings API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.region_snapshot_settings version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionSnapshotSettings)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RegionSnapshotSettings service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.region_snapshot_settings}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RegionSnapshotSettings service,
+      # or if the versioned client gem needs an update to support the RegionSnapshotSettings service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.region_snapshot_settings_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :RegionSnapshotSettings
+        service_module = service_module.const_get :RegionSnapshotSettings
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for RegionSnapshots.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionSnapshots::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionSnapshots-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RegionSnapshots service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the RegionSnapshots service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.region_snapshots_available?}.
+      #
+      # ## About RegionSnapshots
+      #
+      # The RegionSnapshots API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.region_snapshots version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionSnapshots)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RegionSnapshots service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.region_snapshots}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RegionSnapshots service,
+      # or if the versioned client gem needs an update to support the RegionSnapshots service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.region_snapshots_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :RegionSnapshots
+        service_module = service_module.const_get :RegionSnapshots
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -7095,6 +7473,69 @@ module Google
         service_module = Google::Cloud::Compute.const_get package_name
         return false unless service_module.const_defined? :ZoneOperations
         service_module = service_module.const_get :ZoneOperations
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ZoneVmExtensionPolicies.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::ZoneVmExtensionPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ZoneVmExtensionPolicies-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ZoneVmExtensionPolicies service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ZoneVmExtensionPolicies service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.zone_vm_extension_policies_available?}.
+      #
+      # ## About ZoneVmExtensionPolicies
+      #
+      # The ZoneVmExtensionPolicies API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.zone_vm_extension_policies version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ZoneVmExtensionPolicies)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ZoneVmExtensionPolicies service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.zone_vm_extension_policies}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ZoneVmExtensionPolicies service,
+      # or if the versioned client gem needs an update to support the ZoneVmExtensionPolicies service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.zone_vm_extension_policies_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :ZoneVmExtensionPolicies
+        service_module = service_module.const_get :ZoneVmExtensionPolicies
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
