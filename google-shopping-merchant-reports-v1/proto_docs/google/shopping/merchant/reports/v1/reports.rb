@@ -34,11 +34,11 @@ module Google
           #     For details on how to construct your query, see the [Query Language
           #     guide](/merchant/api/guides/reports/query-language). For the full list of
           #     available tables and fields, see the [Available
-          #     fields](/merchant/api/reference/rest/reports_v1/accounts.reports).
+          #     fields][google.shopping.merchant.reports.v1.ReportRow].
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-          #     1000. Values above 5000 are coerced to 5000.
+          #     1000. Values above 100,000 are coerced to 100,000.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     Optional. Token of the page to retrieve. If not specified, the first page
@@ -137,6 +137,13 @@ module Google
           #
           #     If the customer country cannot be determined, a special 'ZZ' code is
           #     returned.
+          # @!attribute [rw] store_type
+          #   @return [::Google::Shopping::Merchant::Reports::V1::StoreType::StoreTypeEnum]
+          #     Store type to which metrics apply. Can be `ONLINE_STORE` or
+          #     `LOCAL_STORES`. Segment.
+          #
+          #     For `LOCAL_STORES` store type, further segmentation by a specific store
+          #     is not available.
           # @!attribute [rw] offer_id
           #   @return [::String]
           #     Merchant-provided id of the product. Segment.
@@ -249,12 +256,13 @@ module Google
 
           # Fields available for query in `product_view` table.
           #
-          # Products in the current inventory. Products in this table are the same as in
-          # Products sub-API but not all product attributes from Products sub-API are
-          # available for query in this table. In contrast to Products sub-API, this
-          # table allows to filter the returned list of products by product attributes.
-          # To retrieve a single product by `id` or list all products, Products sub-API
-          # should be used.
+          # Products in the current inventory. Products in this table are the
+          # same as a [Product resource in Products
+          # sub-API](https://developers.google.com/merchant/api/reference/rest/products_v1/accounts.products)
+          # but not all product attributes from Products sub-API are available for query
+          # in this table. In contrast to Products sub-API, this table allows to filter
+          # the returned list of products by product attributes. To retrieve a single
+          # product by `id` or list all products, Products sub-API should be used.
           #
           # Values are only set for fields requested explicitly in the request's search
           # query.
@@ -358,7 +366,32 @@ module Google
           #     Expiration date for the product, specified on insertion.
           # @!attribute [rw] aggregated_reporting_context_status
           #   @return [::Google::Shopping::Merchant::Reports::V1::ProductView::AggregatedReportingContextStatus]
-          #     Aggregated status.
+          #     Aggregated status across all reporting contexts.
+          #
+          #     Reporting contexts included in the computation of the aggregated status can
+          #     be restricted using a filter on the `reporting_context` field.
+          # @!attribute [rw] status_per_reporting_context
+          #   @return [::Array<::Google::Shopping::Merchant::Reports::V1::ProductView::StatusPerReportingContext>]
+          #     Detailed product status per reporting context.
+          #
+          #     Reporting contexts included in this list can be restricted using a filter
+          #     on the `reporting_context` field.
+          #
+          #     Equivalent to
+          #     [`ProductStatus.destination_statuses`][google.shopping.merchant.products.v1.ProductStatus]
+          #     in Products API.
+          #
+          #     **This field cannot be used for sorting or filtering the results.**
+          # @!attribute [rw] reporting_context
+          #   @return [::Google::Shopping::Type::ReportingContext::ReportingContextEnum]
+          #     Reporting context to restrict the query to.
+          #
+          #     Restricts the reporting contexts returned in `status_per_reporting_context`
+          #     and `item_issues`, and used to compute
+          #     `aggregated_reporting_context_status`.
+          #
+          #     **This field can only be used in the `WHERE` clause and cannot be selected
+          #     in the `SELECT` clause.**
           # @!attribute [rw] item_issues
           #   @return [::Array<::Google::Shopping::Merchant::Reports::V1::ProductView::ItemIssue>]
           #     List of item issues for the product.
@@ -374,9 +407,8 @@ module Google
           #     the merchant.
           # @!attribute [rw] click_potential_rank
           #   @return [::Integer]
-          #     Rank of the product based on its click potential. A product with
-          #     `click_potential_rank` 1 has the highest click potential among the
-          #     merchant's products that fulfill the search query conditions.
+          #     Normalized click potential of the product. Values range from 1 to 1000,
+          #     where 1 is the highest click potential and 1000 is the theoretical lowest.
           class ProductView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -412,9 +444,16 @@ module Google
               # @!attribute [rw] severity_per_reporting_context
               #   @return [::Array<::Google::Shopping::Merchant::Reports::V1::ProductView::ItemIssue::ItemIssueSeverity::IssueSeverityPerReportingContext>]
               #     Issue severity per reporting context.
+              #
+              #     Reporting contexts included in this list can be restricted using a
+              #     filter on the `reporting_context` field.
               # @!attribute [rw] aggregated_severity
               #   @return [::Google::Shopping::Merchant::Reports::V1::ProductView::ItemIssue::ItemIssueSeverity::AggregatedIssueSeverity]
               #     Aggregated severity of the issue for all reporting contexts it affects.
+              #
+              #     Reporting contexts included in the computation of the aggregated
+              #     severity can be restricted using a filter on the `reporting_context`
+              #     field.
               #
               #     **This field can be used for filtering the results.**
               class ItemIssueSeverity
@@ -469,7 +508,38 @@ module Google
               end
             end
 
+            # Status of the product for a specific reporting context.
+            #
+            # Equivalent to
+            # [`DestinationStatus`][google.shopping.merchant.products.v1.ProductStatus.DestinationStatus]
+            # in Products API.
+            # @!attribute [rw] reporting_context
+            #   @return [::Google::Shopping::Type::ReportingContext::ReportingContextEnum]
+            #     Reporting context the status applies to.
+            # @!attribute [rw] approved_countries
+            #   @return [::Array<::String>]
+            #     List of approved countries in the reporting context, represented in
+            #     [ISO 3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format, for
+            #     example, `US`.
+            # @!attribute [rw] disapproved_countries
+            #   @return [::Array<::String>]
+            #     List of disapproved countries in the reporting context, represented in
+            #     [ISO 3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format, for
+            #     example, `US`.
+            # @!attribute [rw] pending_countries
+            #   @return [::Array<::String>]
+            #     List of pending countries in the reporting context, represented in
+            #     [ISO 3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format, for
+            #     example, `US`.
+            class StatusPerReportingContext
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Status of the product aggregated for all reporting contexts.
+            #
+            # Reporting contexts included in the computation of the aggregated status can
+            # be restricted using a filter on the `reporting_context` field.
             #
             # Here's an example of how the aggregated status is computed:
             #
@@ -484,16 +554,18 @@ module Google
               # Not specified.
               AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED = 0
 
-              # Product is not eligible or is disapproved for all reporting contexts.
+              # Product is not eligible or is disapproved for all reporting contexts and
+              # countries.
               NOT_ELIGIBLE_OR_DISAPPROVED = 1
 
-              # Product's status is pending in all reporting contexts.
+              # Product's status is pending in all reporting contexts and countries.
               PENDING = 2
 
-              # Product is eligible for some (but not all) reporting contexts.
+              # Product is eligible for some (but not all) reporting contexts and
+              # countries.
               ELIGIBLE_LIMITED = 3
 
-              # Product is eligible for all reporting contexts.
+              # Product is eligible for all reporting contexts and countries.
               ELIGIBLE = 4
             end
 
@@ -1189,6 +1261,24 @@ module Google
 
               # Ads-based marketing.
               ADS = 2
+            end
+          end
+
+          # Store where the product is sold (online versus local stores).
+          class StoreType
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Store types.
+            module StoreTypeEnum
+              # Not specified.
+              STORE_TYPE_ENUM_UNSPECIFIED = 0
+
+              # Online store.
+              ONLINE_STORE = 1
+
+              # Local (physical) stores.
+              LOCAL_STORES = 2
             end
           end
 
