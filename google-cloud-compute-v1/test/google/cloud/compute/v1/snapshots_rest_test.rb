@@ -528,6 +528,63 @@ class ::Google::Cloud::Compute::V1::Snapshots::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_update_kms_key
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    request_id = "hello world"
+    snapshot = "hello world"
+    snapshot_update_kms_key_request_resource = {}
+
+    update_kms_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Snapshots::Rest::ServiceStub.stub :transcode_update_kms_key_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_kms_key_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_kms_key({ project: project, request_id: request_id, snapshot: snapshot, snapshot_update_kms_key_request_resource: snapshot_update_kms_key_request_resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_kms_key project: project, request_id: request_id, snapshot: snapshot, snapshot_update_kms_key_request_resource: snapshot_update_kms_key_request_resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_kms_key ::Google::Cloud::Compute::V1::UpdateKmsKeySnapshotRequest.new(project: project, request_id: request_id, snapshot: snapshot, snapshot_update_kms_key_request_resource: snapshot_update_kms_key_request_resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_kms_key({ project: project, request_id: request_id, snapshot: snapshot, snapshot_update_kms_key_request_resource: snapshot_update_kms_key_request_resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_kms_key(::Google::Cloud::Compute::V1::UpdateKmsKeySnapshotRequest.new(project: project, request_id: request_id, snapshot: snapshot, snapshot_update_kms_key_request_resource: snapshot_update_kms_key_request_resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_kms_key_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

@@ -1975,6 +1975,121 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for BackendBuckets.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region,
+        #     global) should be included in the response. For new resource types added
+        #     after this field, the flag has no effect as new resource types will always
+        #     include every visible scope for each scope type in response. For resource
+        #     types which predate this field, if this flag is omitted or false, only
+        #     scopes of the scope types where the resource type is expected to be found
+        #     will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        # @!attribute [rw] service_project_number
+        #   @return [::Integer]
+        #     The Shared VPC service project id or service project number for which
+        #     aggregated list request is invoked for subnetworks list-usable api.
+        class AggregatedListBackendBucketsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for BackendServices.AggregatedList. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -9437,6 +9552,20 @@ module Google
         #     balancing mode.
         #
         #     Not available if the backend's balancingMode isRATE.
+        # @!attribute [rw] max_in_flight_requests
+        #   @return [::Integer]
+        #     Defines a maximum number of in-flight requests for the whole NEG or
+        #     instance group. Not available if backend's balancingMode isRATE or CONNECTION.
+        # @!attribute [rw] max_in_flight_requests_per_endpoint
+        #   @return [::Integer]
+        #     Defines a maximum number of in-flight requests for a single endpoint.
+        #     Not available if backend's balancingMode is RATE
+        #     or CONNECTION.
+        # @!attribute [rw] max_in_flight_requests_per_instance
+        #   @return [::Integer]
+        #     Defines a maximum number of in-flight requests for a single VM.
+        #     Not available if backend's balancingMode is RATE
+        #     or CONNECTION.
         # @!attribute [rw] max_rate
         #   @return [::Integer]
         #     Defines a maximum number of HTTP requests per second (RPS). For
@@ -9483,6 +9612,9 @@ module Google
         #        assigned based on the load balancing algorithm you use. This is the
         #        default
         #     Check the Preference enum for the list of possible values.
+        # @!attribute [rw] traffic_duration
+        #   @return [::String]
+        #     Check the TrafficDuration enum for the list of possible values.
         class Backend
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -9509,6 +9641,9 @@ module Google
 
             # Based on custom defined and reported metrics.
             CUSTOM_METRICS = 331_575_765
+
+            # Balance based on the number of in-flight requests.
+            IN_FLIGHT = 190_040_266
 
             # Balance based on requests per second (RPS).
             RATE = 2_508_000
@@ -9539,6 +9674,21 @@ module Google
 
             # Traffic will be sent to this backend first.
             PREFERRED = 418_847_841
+          end
+
+          module TrafficDuration
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TRAFFIC_DURATION = 0
+
+            # Most of the requests are expected to take more than multiple seconds to
+            # finish.
+            LONG = 2_342_524
+
+            # Most requests are expected to finish with a sub-second latency.
+            SHORT = 78_875_740
+
+            # Traffic duration is unspecified.
+            TRAFFIC_DURATION_UNSPECIFIED = 265_201_166
           end
         end
 
@@ -9613,6 +9763,12 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::BackendBucketParams]
         #     Input only. [Input Only] Additional params passed with the request, but not persisted
         #     as part of resource payload.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Output only. [Output Only] URL of the region where the regional backend bucket
+        #     resides. This field is not applicable to global backend buckets.
+        #     You must specify this field as part of the HTTP request URL. It is
+        #     not settable as a field in the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -9648,8 +9804,48 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
 
+            # Signifies that this will be used for regional external Application Load
+            # Balancers.
+            EXTERNAL_MANAGED = 512_006_923
+
             # Signifies that this will be used for internal Application Load Balancers.
             INTERNAL_MANAGED = 37_350_397
+          end
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::BackendBucketsScopedList}]
+        #     A list of BackendBucketsScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. Type of resource.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class BackendBucketAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::BackendBucketsScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -9897,6 +10093,34 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendBucket>]
+        #     A list of BackendBucket resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of resource. Alwayscompute#usableBackendBucketList for lists of usable backend
+        #     buckets.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class BackendBucketListUsable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Additional Backend Bucket parameters.
         # @!attribute [rw] resource_manager_tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -9931,6 +10155,18 @@ module Google
         #     Output only. [Output Only] Server-defined URL for UrlMaps referencing that
         #     BackendBucket.
         class BackendBucketUsedBy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] backend_buckets
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendBucket>]
+        #     A list of BackendBuckets contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Informational warning which replaces the list of
+        #     backend services when the list is empty.
+        class BackendBucketsScopedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -10025,7 +10261,7 @@ module Google
         #
         #     This field is applicable to either:
         #
-        #        - A regional backend service with the service_protocol set to HTTP,
+        #        - A regional backend service with the service protocol set to HTTP,
         #        HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
         #        INTERNAL_MANAGED.
         #        - A global backend service with the
@@ -10255,7 +10491,7 @@ module Google
         #        metrics to use for computing the weights are specified via thecustomMetrics field.
         #
         #        This field is applicable to either:
-        #           - A regional backend service with the service_protocol set to HTTP,
+        #           - A regional backend service with the service protocol set to HTTP,
         #           HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
         #           INTERNAL_MANAGED.
         #           - A global backend service with the
@@ -10361,7 +10597,7 @@ module Google
         #        - A global backend service with the loadBalancingScheme set to
         #        INTERNAL_SELF_MANAGED or EXTERNAL_MANAGED.
         #        - A regional backend
-        #        service with the serviceProtocol set to HTTP, HTTPS, HTTP2 or H2C, and
+        #        service with the service protocol set to HTTP, HTTPS, HTTP2 or H2C, and
         #        loadBalancingScheme set to INTERNAL_MANAGED or EXTERNAL_MANAGED. Not
         #        supported for Serverless NEGs.
         #
@@ -10645,7 +10881,7 @@ module Google
           #    metrics to use for computing the weights are specified via thecustomMetrics field.
           #
           #    This field is applicable to either:
-          #       - A regional backend service with the service_protocol set to HTTP,
+          #       - A regional backend service with the service protocol set to HTTP,
           #       HTTPS, HTTP2 or H2C, and load_balancing_scheme set to
           #       INTERNAL_MANAGED.
           #       - A global backend service with the
@@ -12432,6 +12668,13 @@ module Google
         # A transient resource used in compute.disks.bulkInsert and
         # compute.regionDisks.bulkInsert. It is only used to process
         # requests and is not persisted.
+        # @!attribute [rw] instant_snapshot_group_parameters
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshotGroupParameters]
+        #     The parameters for the instant snapshot group.
+        # @!attribute [rw] snapshot_group_parameters
+        #   @return [::Google::Cloud::Compute::V1::SnapshotGroupParameters]
+        #     The parameters for the snapshot group. The usage of snapshot group feature
+        #     is restricted.
         # @!attribute [rw] source_consistency_group_policy
         #   @return [::String]
         #     The URL of the DiskConsistencyGroupPolicy for the group of disks to clone.
@@ -12944,6 +13187,42 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceGroupManagerResizeRequests.Cancel. See the method description for details.
+        # @!attribute [rw] instance_group_manager
+        #   @return [::String]
+        #     The name of the managed instance group.
+        #     Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region
+        #     scoping this request. Name should conform to RFC1035.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resize_request
+        #   @return [::String]
+        #     The name of the resize request to cancel.
+        #     Name should conform to RFC1035 or be a resource ID.
+        class CancelRegionInstanceGroupManagerResizeRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Settings controlling the volume of requests, connections and retries to this
         # backend service.
         # @!attribute [rw] max_connections
@@ -13145,6 +13424,10 @@ module Google
         #     character must be a lowercase letter, and all following characters must
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::CommitmentParams]
+        #     Input only. Additional params passed with the request, but not persisted
+        #     as part of resource payload.
         # @!attribute [rw] plan
         #   @return [::String]
         #     The minimum time duration that you commit to purchasing resources.
@@ -13445,6 +13728,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Additional commitment params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Input only. Resource manager tags to be bound to the commitment. Tag keys and
+        #     values have the same definition as resource
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/{tag_value_id}` or in
+        #     namespaced format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
+        #     PATCH) when empty.
+        class CommitmentParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # [Output Only] Contains output only fields.
         # @!attribute [rw] custom_term_eligibility_end_timestamp
         #   @return [::String]
@@ -13574,6 +13881,35 @@ module Google
           end
         end
 
+        # Response message for RegionCompositeHealthChecks.GetHealth
+        # @!attribute [rw] health_sources
+        #   @return [::Array<::Google::Cloud::Compute::V1::CompositeHealthChecksGetHealthResponseHealthSourceHealth>]
+        #     Health sources and their corresponding health states.
+        # @!attribute [rw] health_state
+        #   @return [::String]
+        #     Health state of the CompositeHealthCheck.
+        #     Check the HealthState enum for the list of possible values.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of resource. Alwayscompute#compositeHealthCheckHealth for the health of
+        #     composite health checks.
+        class CompositeHealthCheckHealth
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Health state of the CompositeHealthCheck.
+          module HealthState
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATE = 0
+
+            HEALTHY = 439_801_213
+
+            UNHEALTHY = 462_118_084
+
+            UNKNOWN = 433_141_802
+          end
+        end
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -13599,6 +13935,30 @@ module Google
         class CompositeHealthCheckList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] health_state
+        #   @return [::String]
+        #     Health state of the associated HealthSource resource.
+        #     Check the HealthState enum for the list of possible values.
+        # @!attribute [rw] source
+        #   @return [::String]
+        #     Fully qualified URL of the associated HealthSource resource.
+        class CompositeHealthChecksGetHealthResponseHealthSourceHealth
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Health state of the associated HealthSource resource.
+          module HealthState
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATE = 0
+
+            HEALTHY = 439_801_213
+
+            UNHEALTHY = 462_118_084
+
+            UNKNOWN = 433_141_802
+          end
         end
 
         # @!attribute [rw] composite_health_checks
@@ -14980,6 +15340,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshotGroups.Delete. See the method description for details.
+        # @!attribute [rw] instant_snapshot_group
+        #   @return [::String]
+        #     Name of the InstantSnapshot resource to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class DeleteInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InstantSnapshots.Delete. See the method description for details.
         # @!attribute [rw] instant_snapshot
         #   @return [::String]
@@ -15632,6 +16022,37 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.Delete. See the method description for details.
+        # @!attribute [rw] backend_bucket
+        #   @return [::String]
+        #     Name of the BackendBucket resource to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        #     end_interface: MixerMutationRequestBuilder
+        class DeleteRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.Delete. See the method description for details.
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -15873,6 +16294,42 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceGroupManagerResizeRequests.Delete. See the method description for details.
+        # @!attribute [rw] instance_group_manager
+        #   @return [::String]
+        #     The name of the managed instance group.
+        #     Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region
+        #     scoping this request. Name should conform to RFC1035.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resize_request
+        #   @return [::String]
+        #     The name of the resize request to delete.
+        #     Name should conform to RFC1035 or be a resource ID.
+        class DeleteRegionInstanceGroupManagerResizeRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstanceTemplates.Delete. See the method description for details.
         # @!attribute [rw] instance_template
         #   @return [::String]
@@ -15899,6 +16356,36 @@ module Google
         #     a valid UUID with the exception that zero UUID is not supported
         #     (00000000-0000-0000-0000-000000000000).
         class DeleteRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshotGroups.Delete. See the method description for details.
+        # @!attribute [rw] instant_snapshot_group
+        #   @return [::String]
+        #     Name of the InstantSnapshotGroup resource to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        class DeleteRegionInstantSnapshotGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16073,6 +16560,36 @@ module Google
         #   @return [::String]
         #     Name of the security policy to delete.
         class DeleteRegionSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.Delete. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] snapshot
+        #   @return [::String]
+        #     Name of the snapshot resource to delete.
+        class DeleteRegionSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -17018,6 +17535,36 @@ module Google
 
         # A response message for ZoneOperations.Delete. See the method description for details.
         class DeleteZoneOperationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ZoneVmExtensionPolicies.Delete. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] vm_extension_policy
+        #   @return [::String]
+        #     Name of the zone VM extension policy to delete.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class DeleteZoneVmExtensionPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -18215,6 +18762,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Optional. The new KMS key to replace the current one on the disk. If empty, the disk
+        #     will be re-encrypted using the primary version of the disk's current KMS
+        #     key.
+        #
+        #     The KMS key can be provided in the following formats:
+        #
+        #
+        #          - projects/project_id/locations/location/keyRings/key_ring/cryptoKeys/key
+        #
+        #
+        #     Where project is the project ID or
+        #     project number.
+        class DiskUpdateKmsKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Full or relative path to the resource policy to be added to this disk. You
@@ -18444,7 +19010,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Output only. [Output Only] Encountered errors.
+        # Output only. Encountered errors.
         # @!attribute [rw] errors
         #   @return [::Array<::Google::Cloud::Compute::V1::Errors>]
         #     [Output Only] The array of errors encountered while processing this
@@ -20425,6 +20991,9 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::FutureReservationCommitmentInfo]
         #     If not present, then FR will not deliver a new commitment or update an
         #     existing commitment.
+        # @!attribute [rw] confidential_compute_type
+        #   @return [::String]
+        #     Check the ConfidentialComputeType enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     Output only. [Output Only] The creation timestamp for this future reservation inRFC3339
@@ -20463,6 +21032,10 @@ module Google
         #     delivery. The name prefix must comply with RFC1035.
         #     Maximum allowed length for name prefix is 20. Automatically created
         #     reservations name format will be -date-####.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::FutureReservationParams]
+        #     Input only. Additional params passed with the request, but not persisted
+        #     as part of resource payload.
         # @!attribute [rw] planning_status
         #   @return [::String]
         #     Planning state before being submitted for evaluation
@@ -20513,6 +21086,17 @@ module Google
         class FutureReservation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module ConfidentialComputeType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE = 0
+
+            # Intel Trust Domain Extensions.
+            CONFIDENTIAL_COMPUTE_TYPE_TDX = 301_241_954
+
+            CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED = 42_227_601
+          end
 
           # Type of the deployment requested as part of future reservation.
           module DeploymentType
@@ -20621,6 +21205,30 @@ module Google
 
             # No changes to associated parents Committed Used Discount(s) terms.
             PREVIOUSCOMMITMENTTERM_UNSPECIFIED = 98_482_448
+          end
+        end
+
+        # Additional future reservation params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Input only. Resource manager tags to be bound to the future reservation. Tag keys and
+        #     values have the same definition as resource
+        #     manager tags. Keys and values can be either in numeric format,
+        #     such as `tagKeys/{tag_key_id}` and `tagValues/{tag_value_id}` or in
+        #     namespaced format such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`. The field is ignored (both PUT &
+        #     PATCH) when empty.
+        class FutureReservationParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -21895,6 +22503,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionCompositeHealthChecks.GetHealth. See the method description for details.
+        # @!attribute [rw] composite_health_check
+        #   @return [::String]
+        #     Name of the CompositeHealthCheck resource to get health for.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetHealthRegionCompositeHealthCheckRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionHealthSources.GetHealth. See the method description for details.
+        # @!attribute [rw] health_source
+        #   @return [::String]
+        #     Name of the HealthSource resource to get health for.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetHealthRegionHealthSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for TargetPools.GetHealth. See the method description for details.
         # @!attribute [rw] instance_reference_resource
         #   @return [::Google::Cloud::Compute::V1::InstanceReference]
@@ -22017,6 +22655,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class GetIamPolicyInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstantSnapshotGroups.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class GetIamPolicyInstantSnapshotGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22168,6 +22824,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.GetIamPolicy. See the method description for details.
         # @!attribute [rw] options_requested_policy_version
         #   @return [::Integer]
@@ -22204,6 +22878,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstantSnapshotGroups.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyRegionInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstantSnapshots.GetIamPolicy. See the method description for details.
         # @!attribute [rw] options_requested_policy_version
         #   @return [::Integer]
@@ -22236,6 +22928,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class GetIamPolicyRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyRegionSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22502,6 +23212,21 @@ module Google
         #   @return [::String]
         #     Project ID for this request.
         class GetInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstantSnapshotGroups.Get. See the method description for details.
+        # @!attribute [rw] instant_snapshot_group
+        #   @return [::String]
+        #     Name of the InstantSnapshotGroup resource to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class GetInstantSnapshotGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -23047,6 +23772,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.Get. See the method description for details.
+        # @!attribute [rw] backend_bucket
+        #   @return [::String]
+        #     Name of the BackendBucket resource to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.Get. See the method description for details.
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -23198,6 +23938,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceGroupManagerResizeRequests.Get. See the method description for details.
+        # @!attribute [rw] instance_group_manager
+        #   @return [::String]
+        #     The name of the managed instance group.
+        #     Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region
+        #     scoping this request. Name should conform to RFC1035.
+        # @!attribute [rw] resize_request
+        #   @return [::String]
+        #     The name of the resize request.
+        #     Name should conform to RFC1035 or be a resource ID.
+        class GetRegionInstanceGroupManagerResizeRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstanceGroups.Get. See the method description for details.
         # @!attribute [rw] instance_group
         #   @return [::String]
@@ -23224,6 +23985,21 @@ module Google
         #   @return [::String]
         #     The name of the region for this request.
         class GetRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshotGroups.Get. See the method description for details.
+        # @!attribute [rw] instant_snapshot_group
+        #   @return [::String]
+        #     Name of the InstantSnapshotGroup resource to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        class GetRegionInstantSnapshotGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -23328,6 +24104,33 @@ module Google
         #   @return [::String]
         #     Name of the security policy to get.
         class GetRegionSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] snapshot
+        #   @return [::String]
+        #     Name of the Snapshot resource to return.
+        class GetRegionSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshotSettings.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        class GetRegionSnapshotSettingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -24342,6 +25145,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for ZoneVmExtensionPolicies.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] vm_extension_policy
+        #   @return [::String]
+        #     Name of the VM extension policy resource to return.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class GetZoneVmExtensionPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional destination address description if intended to be different
@@ -24563,6 +25381,7 @@ module Google
         #        - TDX_CAPABLE
         #        - IDPF
         #        - SNP_SVSM_CAPABLE
+        #        - CCA_CAPABLE
         #
         #
         #     For more information, see
@@ -24587,6 +25406,7 @@ module Google
           #    - TDX_CAPABLE
           #    - IDPF
           #    - SNP_SVSM_CAPABLE
+          #    - CCA_CAPABLE
           #
           #
           # For more information, see
@@ -25709,6 +26529,34 @@ module Google
           end
         end
 
+        # Response message for RegionHealthSources.GetHealth
+        # @!attribute [rw] health_state
+        #   @return [::String]
+        #     Health state of the HealthSource.
+        #     Check the HealthState enum for the list of possible values.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of resource. Alwayscompute#healthSourceHealth for the health of health sources.
+        # @!attribute [rw] sources
+        #   @return [::Array<::Google::Cloud::Compute::V1::HealthSourcesGetHealthResponseSourceInfo>]
+        #     Health state details of the sources.
+        class HealthSourceHealth
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Health state of the HealthSource.
+          module HealthState
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATE = 0
+
+            HEALTHY = 439_801_213
+
+            UNHEALTHY = 462_118_084
+
+            UNKNOWN = 433_141_802
+          end
+        end
+
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -25732,6 +26580,41 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class HealthSourceList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] backends
+        #   @return [::Array<::Google::Cloud::Compute::V1::HealthSourcesGetHealthResponseSourceInfoBackendInfo>]
+        #     Represents an instance group or network endpoint group behind the source
+        #     backend service. Only used if the sourceType of the regionHealthSource
+        #     is BACKEND_SERVICE.
+        # @!attribute [rw] forwarding_rule
+        #   @return [::String]
+        #     Fully qualified URL of the forwarding rule associated with the source
+        #     resource if it is a L4ILB backend service.
+        # @!attribute [rw] source
+        #   @return [::String]
+        #     Fully qualified URL of the associated source resource. This is always a
+        #     backend service URL.
+        class HealthSourcesGetHealthResponseSourceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] endpoint_count
+        #   @return [::Integer]
+        #     Total number of endpoints when determining the health of the
+        #     regionHealthSource.
+        # @!attribute [rw] group
+        #   @return [::String]
+        #     Fully qualified URL of an instance group or network endpoint group
+        #     behind the source backend service.
+        # @!attribute [rw] healthy_endpoint_count
+        #   @return [::Integer]
+        #     Number of endpoints considered healthy when determining health of the
+        #     regionHealthSource.
+        class HealthSourcesGetHealthResponseSourceInfoBackendInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27678,6 +28561,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshotGroups.Insert. See the method description for details.
+        # @!attribute [rw] instant_snapshot_group_resource
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshotGroup]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] source_consistency_group
+        #   @return [::String]
+        #     begin_interface: MixerMutationRequestBuilder
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class InsertInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InstantSnapshots.Insert. See the method description for details.
         # @!attribute [rw] instant_snapshot_resource
         #   @return [::Google::Cloud::Compute::V1::InstantSnapshot]
@@ -28240,6 +29156,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.Insert. See the method description for details.
+        # @!attribute [rw] backend_bucket_resource
+        #   @return [::Google::Cloud::Compute::V1::BackendBucket]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        class InsertRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.Insert. See the method description for details.
         # @!attribute [rw] backend_service_resource
         #   @return [::Google::Cloud::Compute::V1::BackendService]
@@ -28513,6 +29459,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceGroupManagerResizeRequests.Insert. See the method description for details.
+        # @!attribute [rw] instance_group_manager
+        #   @return [::String]
+        #     Name of the managed instance group to which the resize request is scoped.
+        #     Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] instance_group_manager_resize_request_resource
+        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region
+        #     scoping this request. Name should conform to RFC1035.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        class InsertRegionInstanceGroupManagerResizeRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstanceTemplates.Insert. See the method description for details.
         # @!attribute [rw] instance_template_resource
         #   @return [::Google::Cloud::Compute::V1::InstanceTemplate]
@@ -28539,6 +29520,39 @@ module Google
         #     a valid UUID with the exception that zero UUID is not supported
         #     (00000000-0000-0000-0000-000000000000).
         class InsertRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshotGroups.Insert. See the method description for details.
+        # @!attribute [rw] instant_snapshot_group_resource
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshotGroup]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] source_consistency_group
+        #   @return [::String]
+        #     begin_interface: MixerMutationRequestBuilder
+        class InsertRegionInstantSnapshotGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -28694,6 +29708,36 @@ module Google
         #   @return [::Boolean]
         #     If true, the request will not be committed.
         class InsertRegionSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.Insert. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] snapshot_resource
+        #   @return [::Google::Cloud::Compute::V1::Snapshot]
+        #     The body resource for this request
+        class InsertRegionSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -29530,6 +30574,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for ZoneVmExtensionPolicies.Insert. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] vm_extension_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::VmExtensionPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class InsertZoneVmExtensionPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents an Instance resource.
         #
         # An instance is a virtual machine that is hosted on Google Cloud Platform.
@@ -30170,11 +31244,11 @@ module Google
         #     [a-z](([-a-z0-9]\\{0,57})|([-a-z0-9]\\{0,51}-#\\{1,10}(\\[[0-9]\\{1,10}\\])?))
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     Output only. [Output Only] The creation timestamp for this managed instance group inRFC3339
+        #     Output only. The creation timestamp for this managed instance group inRFC3339
         #     text format.
         # @!attribute [rw] current_actions
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerActionsSummary]
-        #     Output only. [Output Only] The list of instance actions and the number of instances
+        #     Output only. The list of instance actions and the number of instances
         #     in this managed instance group that are scheduled for each of those
         #     actions.
         # @!attribute [rw] description
@@ -30195,7 +31269,7 @@ module Google
         #     retrieve an InstanceGroupManager.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     Output only. [Output Only] A unique identifier for this resource type. The server
+        #     Output only. A unique identifier for this resource type. The server
         #     generates this identifier.
         # @!attribute [rw] instance_flexibility_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerInstanceFlexibilityPolicy]
@@ -30205,7 +31279,7 @@ module Google
         #     template configuration.
         # @!attribute [rw] instance_group
         #   @return [::String]
-        #     Output only. [Output Only] The URL of the Instance Group resource.
+        #     Output only. The URL of the Instance Group resource.
         # @!attribute [rw] instance_lifecycle_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerInstanceLifecyclePolicy]
         #     The repair policy for this managed instance group.
@@ -30217,7 +31291,7 @@ module Google
         #     group do not change unless you run recreateInstances, runapplyUpdatesToInstances, or set the group'supdatePolicy.type to PROACTIVE.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupManager for managed instance groups.
+        #     Output only. The resource type, which is alwayscompute#instanceGroupManager for managed instance groups.
         # @!attribute [rw] list_managed_instances_results
         #   @return [::String]
         #     Pagination behavior of the listManagedInstances API method for
@@ -30240,13 +31314,13 @@ module Google
         #     Resource policies for this managed instance group.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
-        #     Output only. [Output Only] Reserved for future use.
+        #     Output only. Reserved for future use.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     Output only. [Output Only] Reserved for future use.
+        #     Output only. Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     Output only. [Output Only] The URL for this managed instance group. The server defines
+        #     Output only. The URL for this managed instance group. The server defines
         #     this URL.
         # @!attribute [rw] standby_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStandbyPolicy]
@@ -30256,7 +31330,7 @@ module Google
         #     Stateful configuration for this Instanced Group Manager
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatus]
-        #     Output only. [Output Only] The status of this managed instance group.
+        #     Output only. The status of this managed instance group.
         # @!attribute [rw] target_pools
         #   @return [::Array<::String>]
         #     The URLs for all TargetPool resources to which instances in theinstanceGroup field are added. The target pools automatically
@@ -30307,7 +31381,7 @@ module Google
         #     updates.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     Output only. [Output Only] The URL of azone
+        #     Output only. The URL of azone
         #     where the managed instance group is located (for zonal resources).
         class InstanceGroupManager
           include ::Google::Protobuf::MessageExts
@@ -30333,12 +31407,12 @@ module Google
 
         # @!attribute [rw] abandoning
         #   @return [::Integer]
-        #     Output only. [Output Only] The total number of instances in the managed instance group
+        #     Output only. The total number of instances in the managed instance group
         #     that are scheduled to be abandoned. Abandoning an instance removes it
         #     from the managed instance group without deleting it.
         # @!attribute [rw] creating
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be created or are currently being created. If the group
         #     fails to create any of these instances, it tries again until it creates
         #     the instance successfully.
@@ -30347,54 +31421,54 @@ module Google
         #     instead, the creatingWithoutRetries field will be populated.
         # @!attribute [rw] creating_without_retries
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances that the managed instance group
+        #     Output only. The number of instances that the managed instance group
         #     will attempt to create. The group attempts to create each instance
         #     only once. If the group fails to create any of these instances, it
         #     decreases the group's targetSize value accordingly.
         # @!attribute [rw] deleting
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be deleted or are currently being deleted.
         # @!attribute [rw] none
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are running and have no scheduled actions.
         # @!attribute [rw] recreating
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be recreated or are currently being being recreated.
         #     Recreating an instance deletes the existing root persistent disk
         #     and creates a new disk from the image that is defined in the
         #     instance template.
         # @!attribute [rw] refreshing
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are being reconfigured with properties that do not require a restart
         #     or a recreate action. For example, setting or removing target
         #     pools for the instance.
         # @!attribute [rw] restarting
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be restarted or are currently being restarted.
         # @!attribute [rw] resuming
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be resumed or are currently being resumed.
         # @!attribute [rw] starting
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be started or are currently being started.
         # @!attribute [rw] stopping
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be stopped or are currently being stopped.
         # @!attribute [rw] suspending
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are scheduled to be suspended or are currently being suspended.
         # @!attribute [rw] verifying
         #   @return [::Integer]
-        #     Output only. [Output Only] The number of instances in the managed instance group that
+        #     Output only. The number of instances in the managed instance group that
         #     are being verified. See the managedInstances[].currentAction
         #     property in the listManagedInstances method documentation.
         class InstanceGroupManagerActionsSummary
@@ -30653,23 +31727,27 @@ module Google
         # InstanceGroupManager.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
-        #     Output only. [Output Only] The creation timestamp for this resize request inRFC3339
+        #     Output only. The creation timestamp for this resize request inRFC3339
         #     text format.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource.
         # @!attribute [rw] id
         #   @return [::Integer]
-        #     Output only. [Output Only] A unique identifier for this resource type. The server
-        #     generates this identifier.
+        #     Output only. A unique identifier for this resource type. The server generates this
+        #     identifier.
         # @!attribute [rw] kind
         #   @return [::String]
-        #     Output only. [Output Only] The resource type, which is alwayscompute#instanceGroupManagerResizeRequest for
-        #     resize requests.
+        #     Output only. The resource type, which is alwayscompute#instanceGroupManagerResizeRequest for resize requests.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this resize request. The name must be 1-63 characters
         #     long, and comply withRFC1035.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Output only. The URL of a region
+        #     where the resize request is located. Populated only for regional resize
+        #     requests.
         # @!attribute [rw] requested_run_duration
         #   @return [::Google::Cloud::Compute::V1::Duration]
         #     Requested run duration for instances that will be created by this request.
@@ -30681,28 +31759,27 @@ module Google
         #     together with 'instances'.
         # @!attribute [rw] self_link
         #   @return [::String]
-        #     Output only. [Output Only] The URL for this resize request. The server defines
-        #     this URL.
+        #     Output only. The URL for this resize request. The server defines this URL.
         # @!attribute [rw] self_link_with_id
         #   @return [::String]
-        #     Output only. [Output Only] Server-defined URL for this resource with the resource id.
+        #     Output only. Server-defined URL for this resource with the resource id.
         # @!attribute [rw] state
         #   @return [::String]
-        #     Output only. [Output only] Current state of the request.
+        #     Output only. Current state of the request.
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequestStatus]
-        #     Output only. [Output only] Status of the request.
+        #     Output only. Status of the request.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     Output only. [Output Only] The URL of azone
+        #     Output only. The URL of a zone
         #     where the resize request is located. Populated only for zonal resize
         #     requests.
         class InstanceGroupManagerResizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Output only. [Output only] Current state of the request.
+          # Output only. Current state of the request.
           module State
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
@@ -30732,21 +31809,20 @@ module Google
 
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::Error]
-        #     Output only. [Output only] Fatal errors encountered during the queueing or
-        #     provisioning phases of the ResizeRequest that caused the transition to
-        #     the FAILED state. Contrary to the last_attempt errors, this field is
-        #     final and errors are never removed from here, as the ResizeRequest is not
-        #     going to retry.
+        #     Output only. Fatal errors encountered during the queueing or provisioning phases of
+        #     the ResizeRequest that caused the transition to the FAILED state.
+        #     Contrary to the last_attempt errors, this field is final and errors are
+        #     never removed from here, as the ResizeRequest is not going to retry.
         # @!attribute [rw] last_attempt
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequestStatusLastAttempt]
-        #     Output only. [Output only] Information about the last attempt to fulfill the request.
-        #     The value is temporary since the ResizeRequest can retry, as long as it's
-        #     still active and the last attempt value can either be cleared or replaced
-        #     with a different error. Since ResizeRequest retries infrequently, the
-        #     value may be stale and no longer show an active problem. The value is
-        #     cleared when ResizeRequest transitions to the final state (becomes
-        #     inactive). If the final state is FAILED the error describing it will be
-        #     storred in the "error" field only.
+        #     Output only. Information about the last attempt to fulfill the request. The value is
+        #     temporary since the ResizeRequest can retry, as long as it's still active
+        #     and the last attempt value can either be cleared or replaced with a
+        #     different error. Since ResizeRequest retries infrequently, the value may
+        #     be stale and no longer show an active problem. The value is cleared when
+        #     ResizeRequest transitions to the final state (becomes inactive). If the
+        #     final state is FAILED the error describing it will be stored in the
+        #     "error" field only.
         class InstanceGroupManagerResizeRequestStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -30839,21 +31915,26 @@ module Google
 
         # @!attribute [rw] all_instances_config
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusAllInstancesConfig]
-        #     Output only. [Output only] Status of all-instances configuration on the group.
+        #     Output only. Status of all-instances configuration on the group.
         # @!attribute [rw] applied_accelerator_topologies
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManagerStatusAcceleratorTopology>]
-        #     Output only. [Output Only] The accelerator topology applied to this MIG.
+        #     Output only. The accelerator topology applied to this MIG.
         #     Currently only one accelerator topology is supported.
         # @!attribute [rw] autoscaler
         #   @return [::String]
-        #     Output only. [Output Only] The URL of theAutoscaler
+        #     Output only. The URL of theAutoscaler
         #     that targets this instance group manager.
         # @!attribute [rw] bulk_instance_operation
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusBulkInstanceOperation]
-        #     Output only. [Output Only] The status of bulk instance operation.
+        #     Output only. The status of bulk instance operation.
+        # @!attribute [rw] current_instance_statuses
+        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusInstanceStatusSummary]
+        #     Output only. The list of instance statuses and the number of instances
+        #     in this managed instance group that have the status. Currently only shown
+        #     for TPU MIGs
         # @!attribute [rw] is_stable
         #   @return [::Boolean]
-        #     Output only. [Output Only] A bit indicating whether the managed instance group is in a
+        #     Output only. A bit indicating whether the managed instance group is in a
         #     stable state. A stable state means that: none of the instances in the
         #     managed instance group is currently undergoing any type of change (for
         #     example, creation, restart, or deletion); no future changes are scheduled
@@ -30861,10 +31942,10 @@ module Google
         #     group itself is not being modified.
         # @!attribute [rw] stateful
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusStateful]
-        #     Output only. [Output Only] Stateful status of the given Instance Group Manager.
+        #     Output only. Stateful status of the given Instance Group Manager.
         # @!attribute [rw] version_target
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusVersionTarget]
-        #     Output only. [Output Only] A status of consistency of Instances' versions with their
+        #     Output only. A status of consistency of Instances' versions with their
         #     target version specified by version field on Instance Group
         #     Manager.
         class InstanceGroupManagerStatus
@@ -30874,21 +31955,21 @@ module Google
 
         # @!attribute [rw] accelerator_topology
         #   @return [::String]
-        #     Output only. [Output Only] Topology in the format of: "16x16", "4x4x4", etc.
+        #     Output only. Topology in the format of: "16x16", "4x4x4", etc.
         #     The value is the same as configured in the WorkloadPolicy.
         # @!attribute [rw] state
         #   @return [::String]
-        #     Output only. [Output Only] The state of the accelerator topology.
+        #     Output only. The state of the accelerator topology.
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] state_details
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusAcceleratorTopologyAcceleratorTopologyStateDetails]
-        #     Output only. [Output Only] The result of the latest accelerator topology state
+        #     Output only. The result of the latest accelerator topology state
         #     check.
         class InstanceGroupManagerStatusAcceleratorTopology
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Output only. [Output Only] The state of the accelerator topology.
+          # Output only. The state of the accelerator topology.
           module State
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
@@ -30916,10 +31997,10 @@ module Google
 
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::Error]
-        #     Output only. [Output Only] Encountered errors.
+        #     Output only. Encountered errors.
         # @!attribute [rw] timestamp
         #   @return [::String]
-        #     Output only. [Output Only] Timestamp is shown only if there is an error. The field
+        #     Output only. Timestamp is shown only if there is an error. The field
         #     has // RFC3339 //
         #     text format.
         class InstanceGroupManagerStatusAcceleratorTopologyAcceleratorTopologyStateDetails
@@ -30929,11 +32010,11 @@ module Google
 
         # @!attribute [rw] current_revision
         #   @return [::String]
-        #     Output only. [Output Only] Current all-instances configuration revision.
+        #     Output only. Current all-instances configuration revision.
         #     This value is in RFC3339 text format.
         # @!attribute [rw] effective
         #   @return [::Boolean]
-        #     Output only. [Output Only] A bit indicating whether this configuration has
+        #     Output only. A bit indicating whether this configuration has
         #     been applied to all managed instances in the group.
         class InstanceGroupManagerStatusAllInstancesConfig
           include ::Google::Protobuf::MessageExts
@@ -30944,10 +32025,10 @@ module Google
         # targetSizePolicy.mode is set to BULK.
         # @!attribute [rw] in_progress
         #   @return [::Boolean]
-        #     Output only. [Output Only] Informs whether bulk instance operation is in progress.
+        #     Output only. Informs whether bulk instance operation is in progress.
         # @!attribute [rw] last_progress_check
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck]
-        #     Output only. [Output Only] Information from the last progress check of bulk instance
+        #     Output only. Information from the last progress check of bulk instance
         #     operation.
         class InstanceGroupManagerStatusBulkInstanceOperation
           include ::Google::Protobuf::MessageExts
@@ -30956,19 +32037,86 @@ module Google
 
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::Error]
-        #     Output only. [Output Only] Errors encountered during bulk instance operation.
+        #     Output only. Errors encountered during bulk instance operation.
         # @!attribute [rw] timestamp
         #   @return [::String]
-        #     Output only. [Output Only] Timestamp of the last progress check of bulk instance
+        #     Output only. Timestamp of the last progress check of bulk instance
         #     operation. Timestamp is in RFC3339 text format.
         class InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The list of instance statuses and the number of instances in this managed
+        # instance group that have the status. For more information about how to
+        # interpret each status check the instance lifecycle documentation.
+        # Currently only shown for TPU MIGs.
+        # @!attribute [rw] deprovisioning
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have DEPROVISIONING status.
+        # @!attribute [rw] non_existent
+        #   @return [::Integer]
+        #     Output only. The number of instances that have not been created yet or
+        #     have been deleted. Includes only instances that would be shown in the
+        #     listManagedInstances method and not all instances that have been
+        #     deleted in the lifetime of the MIG.
+        #     Does not include FlexStart instances that are waiting for the resources
+        #     availability, they are considered as 'pending'.
+        # @!attribute [rw] pending
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have PENDING status, that is FlexStart instances that are waiting
+        #     for resources. Instances that do not exist because of the other reasons
+        #     are counted as 'non_existent'.
+        # @!attribute [rw] pending_stop
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have PENDING_STOP status.
+        # @!attribute [rw] provisioning
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have PROVISIONING status.
+        # @!attribute [rw] repairing
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have REPAIRING status.
+        # @!attribute [rw] running
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have RUNNING status.
+        # @!attribute [rw] staging
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have STAGING status.
+        # @!attribute [rw] stopped
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have STOPPED status.
+        # @!attribute [rw] stopping
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have STOPPING status.
+        # @!attribute [rw] suspended
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have SUSPENDED status.
+        # @!attribute [rw] suspending
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have SUSPENDING status.
+        # @!attribute [rw] terminated
+        #   @return [::Integer]
+        #     Output only. The number of instances in the managed instance group
+        #     that have TERMINATED status.
+        class InstanceGroupManagerStatusInstanceStatusSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] has_stateful_config
         #   @return [::Boolean]
-        #     Output only. [Output Only] A bit indicating whether the managed instance group
+        #     Output only. A bit indicating whether the managed instance group
         #     has stateful configuration, that is, if you have configured any items
         #     in a stateful policy or in per-instance configs.
         #     The group might report that it has no stateful configuration even when
@@ -30976,7 +32124,7 @@ module Google
         #     if you have deleted all PICs but not yet applied those deletions.
         # @!attribute [rw] per_instance_configs
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusStatefulPerInstanceConfigs]
-        #     Output only. [Output Only] Status of per-instance configurations on the instances.
+        #     Output only. Status of per-instance configurations on the instances.
         class InstanceGroupManagerStatusStateful
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -30994,7 +32142,7 @@ module Google
 
         # @!attribute [rw] is_reached
         #   @return [::Boolean]
-        #     Output only. [Output Only] A bit indicating whether version target has been reached
+        #     Output only. A bit indicating whether version target has been reached
         #     in this managed instance group, i.e. all instances are in their target
         #     version. Instances' target version are specified byversion field on Instance Group Manager.
         class InstanceGroupManagerStatusVersionTarget
@@ -32707,6 +33855,17 @@ module Google
         #     Output only. [Output Only] The ID value of the disk used to create this InstantSnapshot.
         #     This value may be used to determine whether the InstantSnapshot
         #     was taken from the current or a previous instance of a given disk name.
+        # @!attribute [rw] source_instant_snapshot_group
+        #   @return [::String]
+        #     Output only. [Output Only] URL of the source instant snapshot this instant snapshot is
+        #     part of. Note that the source instant snapshot group must be in the same
+        #     zone/region as the instant snapshot to be created. This can be a full or
+        #     valid partial URL.
+        # @!attribute [rw] source_instant_snapshot_group_id
+        #   @return [::String]
+        #     Output only. [Output Only] The ID value of the source instant snapshot group this
+        #     InstantSnapshot is part of. This value may be used to determine whether the
+        #     InstantSnapshot was created as part of an InstantSnapshotGroup creation.
         # @!attribute [rw] status
         #   @return [::String]
         #     Output only. [Output Only] The status of the instantSnapshot. This can beCREATING, DELETING, FAILED, orREADY.
@@ -32806,6 +33965,117 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Represents an InstantSnapshotGroup resource.
+        #
+        # An instant snapshot group is a set of instant snapshots that represents a
+        # point in time state of a consistency group.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     Output only. [Output Only] Creation timestamp inRFC3339
+        #     text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. An optional description of this resource. Provide this property when you
+        #     create the resource.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
+        #     defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#instantSnapshotGroup for InstantSnapshotGroup
+        #     resources.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Name of the resource; provided by the client when the resource is created.
+        #     The name must be 1-63 characters long, and comply withRFC1035.
+        #     Specifically, the name must be 1-63 characters long and match the regular
+        #     expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first
+        #     character must be a lowercase letter, and all following characters must be
+        #     a dash, lowercase letter, or digit, except the last character, which cannot
+        #     be a dash.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Output only. [Output Only] URL of the region where the instant snapshot group resides.
+        #     You must specify this field as part of the HTTP request URL. It is
+        #     not settable as a field in the request body.
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshotGroupResourceStatus]
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource's resource id.
+        # @!attribute [rw] source_consistency_group
+        #   @return [::String]
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     Output only. [Output Only]
+        #     Check the Status enum for the list of possible values.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Output only. [Output Only] URL of the zone where the instant snapshot group resides.
+        #     You must specify this field as part of the HTTP request URL. It is
+        #     not settable as a field in the request body.
+        class InstantSnapshotGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Output only. [Output Only]
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            CREATING = 455_564_985
+
+            DELETING = 528_602_024
+
+            FAILED = 455_706_685
+
+            INVALID = 530_283_991
+
+            READY = 77_848_963
+
+            UNKNOWN = 433_141_802
+          end
+        end
+
+        # @!attribute [rw] source_instant_snapshot_group
+        #   @return [::String]
+        #     The source instant snapshot group used to create disks. You can provide
+        #     this as a partial or full URL to the resource. For example, the following
+        #     are valid values:
+        #
+        #
+        #          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/instantSnapshotGroups/instantSnapshotGroup
+        #          - projects/project/zones/zone/instantSnapshotGroups/instantSnapshotGroup
+        #          - zones/zone/instantSnapshotGroups/instantSnapshotGroup
+        class InstantSnapshotGroupParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] consistency_membership_resolution_time
+        #   @return [::String]
+        #     Output only. [Output Only]
+        # @!attribute [rw] source_info
+        #   @return [::Google::Cloud::Compute::V1::InstantSnapshotGroupSourceInfo]
+        #     Output only. [Output Only]
+        class InstantSnapshotGroupResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] consistency_group
+        #   @return [::String]
+        # @!attribute [rw] consistency_group_id
+        #   @return [::String]
+        class InstantSnapshotGroupSourceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains a list of InstantSnapshot resources.
@@ -40266,6 +41536,145 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Contains a list of InstantSnapshotGroup resources.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstantSnapshotGroup>]
+        #     A list of InstantSnapshotGroup resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. Type of resource.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     Output only. [Output Only] Unreachable resources.
+        #     end_interface: MixerListResponseWithEtagBuilder
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class ListInstantSnapshotGroups
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstantSnapshotGroups.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class ListInstantSnapshotGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InstantSnapshots.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -44061,6 +45470,111 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListRegionBackendBucketsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -45006,6 +46520,115 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceGroupManagerResizeRequests.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] instance_group_manager
+        #   @return [::String]
+        #     The name of the managed instance group. The name should conform to RFC1035.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region
+        #     scoping this request. Name should conform to RFC1035.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListRegionInstanceGroupManagerResizeRequestsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstanceGroupManagers.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -45317,6 +46940,111 @@ module Google
         #     single zone scope either returns all resources in the zone or no resources,
         #     with an error code.
         class ListRegionInstanceTemplatesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstantSnapshotGroups.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListRegionInstantSnapshotGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -45948,6 +47676,111 @@ module Google
         #     single zone scope either returns all resources in the zone or no resources,
         #     with an error code.
         class ListRegionSecurityPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListRegionSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -49420,6 +51253,108 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for BackendBuckets.ListUsable. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListUsableBackendBucketsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for BackendServices.ListUsable. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -49518,6 +51453,112 @@ module Google
         #     single zone scope either returns all resources in the zone or no resources,
         #     with an error code.
         class ListUsableBackendServicesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionBackendBuckets.ListUsable. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        #     It must be a string that meets the requirements in RFC1035.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        class ListUsableRegionBackendBucketsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -50255,6 +52296,111 @@ module Google
         #   @return [::String]
         #     Name of the zone for request.
         class ListZoneOperationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ZoneVmExtensionPolicies.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most
+        #     Compute resources support two types of filter expressions:
+        #     expressions that support regular expressions and expressions that follow
+        #     API improvement proposal AIP-160.
+        #     These two types of filter expressions cannot be mixed in one request.
+        #
+        #     If you want to use AIP-160, your expression must specify the field name, an
+        #     operator, and the value that you want to use for filtering. The value
+        #     must be a string, a number, or a boolean. The operator
+        #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can
+        #     exclude instances named `example-instance` by specifying
+        #     `name != example-instance`.
+        #
+        #     The `:*` comparison can be used to test whether a key has been defined.
+        #     For example, to find all objects with `owner` label use:
+        #     ```
+        #     labels.owner:*
+        #     ```
+        #
+        #     You can also filter nested fields. For example, you could specify
+        #     `scheduling.automaticRestart = false` to include instances only
+        #     if they are not scheduled for automatic restarts. You can use filtering
+        #     on nested fields to filter based onresource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within
+        #     parentheses. For example:
+        #     ```
+        #     (scheduling.automaticRestart = true)
+        #     (cpuPlatform = "Intel Skylake")
+        #     ```
+        #     By default, each expression is an `AND` expression. However, you
+        #     can include `AND` and `OR` expressions explicitly.
+        #     For example:
+        #     ```
+        #     (cpuPlatform = "Intel Skylake") OR
+        #     (cpuPlatform = "Intel Broadwell") AND
+        #     (scheduling.automaticRestart = true)
+        #     ```
+        #
+        #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+        #     (not equal) operator against a single un-parenthesized expression with or
+        #     without quotes or against multiple parenthesized expressions. Examples:
+        #
+        #     `fieldname eq unquoted literal`
+        #     `fieldname eq 'single quoted literal'`
+        #     `fieldname eq "double quoted literal"`
+        #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+        #
+        #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+        #     The literal value must match the entire field.
+        #
+        #     For example, to filter for instances that do not end with name "instance",
+        #     you would use `name ne .*instance`.
+        #
+        #     You cannot combine constraints on multiple fields using regular
+        #     expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned.
+        #     If the number of available results is larger than `maxResults`,
+        #     Compute Engine returns a `nextPageToken` that can be used to get
+        #     the next page of results in subsequent list requests. Acceptable values are
+        #     `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results
+        #     are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation
+        #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+        #     results based on the `creationTimestamp` field in
+        #     reverse chronological order (newest result first). Use this to sort
+        #     resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or
+        #     `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the
+        #     `nextPageToken` returned by a previous list request to get
+        #     the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case
+        #     of failure. The default value is false.
+        #
+        #     For example, when partial success behavior is enabled, aggregatedList for a
+        #     single zone scope either returns all resources in the zone or no resources,
+        #     with an error code.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class ListZoneVmExtensionPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -51767,6 +53913,10 @@ module Google
         # @!attribute [rw] secondary_ip_cidr_ranges
         #   @return [::Array<::String>]
         #     Alias IP ranges from the same subnetwork.
+        # @!attribute [rw] service_class_id
+        #   @return [::String]
+        #     The service class id of the producer service to which the IP was
+        #     assigned.
         # @!attribute [rw] status
         #   @return [::String]
         #     The status of a connected endpoint to this network attachment.
@@ -52627,6 +54777,12 @@ module Google
         #     The networking queue count that's specified by users for the network
         #     interface. Both Rx and Tx queues will be set to this number. It'll be empty
         #     if not specified by the users.
+        # @!attribute [rw] service_class_id
+        #   @return [::String]
+        #     Optional. Producer Service's Service class Id for the region of this network
+        #     interface. Can only be used with network_attachment. It is not possible to
+        #     use on its own however, network_attachment can be used without
+        #     service_class_id.
         # @!attribute [rw] stack_type
         #   @return [::String]
         #     The stack type for this network interface. To assign only IPv4 addresses,
@@ -56622,6 +58778,40 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.Patch. See the method description for details.
+        # @!attribute [rw] backend_bucket
+        #   @return [::String]
+        #     Name of the BackendBucket resource to patch.
+        # @!attribute [rw] backend_bucket_resource
+        #   @return [::Google::Cloud::Compute::V1::BackendBucket]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        #     end_interface: MixerMutationRequestBuilder
+        class PatchRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.Patch. See the method description for details.
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -56922,6 +59112,39 @@ module Google
         #   @return [::String]
         #     Indicates fields to be cleared as part of this request.
         class PatchRegionSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshotSettings.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] snapshot_settings_resource
+        #   @return [::Google::Cloud::Compute::V1::SnapshotSettings]
+        #     The body resource for this request
+        # @!attribute [rw] update_mask
+        #   @return [::String]
+        #     update_mask indicates fields to be updated as part of this request.
+        class PatchRegionSnapshotSettingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -59976,12 +62199,14 @@ module Google
         #     by the client when the disk image is created.
         # @!attribute [rw] source
         #   @return [::String]
-        #     The full Google Cloud Storage URL where the raw disk image archive is
-        #     stored.
-        #     The following are valid formats for the URL:
+        #     The full Google Cloud Storage URL or Artifact Registry path where the raw
+        #     disk image archive is stored.
+        #     The following are valid formats:
         #
         #        - https://storage.googleapis.com/bucket_name/image_archive_name
         #        - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name
+        #        - projects/project/locations/location/repositories/repo/packages/package/versions/version_id
+        #        - projects/project/locations/location/repositories/repo/packages/package/versions/version_id@dirsum_sha256:hex_value
         #
         #
         #
@@ -60232,6 +62457,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Optional. The new KMS key to replace the current one on the disk. If empty, the disk
+        #     will be re-encrypted using the primary version of the disk's current KMS
+        #     key.
+        #
+        #     The KMS key can be provided in the following formats:
+        #
+        #
+        #          - projects/project_id/locations/location/keyRings/key_ring/cryptoKeys/key
+        #
+        #
+        #     Where project is the project ID or
+        #     project number.
+        class RegionDiskUpdateKmsKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be added to this disk.
@@ -60359,6 +62603,40 @@ module Google
         #     The list of per-instance configurations to insert or patch on this managed
         #     instance group.
         class RegionInstanceGroupManagerPatchInstanceConfigReq
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManagerResizeRequest>]
+        #     A list of Resize Request resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#regionInstanceGroupManagerResizeRequestList for
+        #     a list of Resize Requests.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Output only. [Output Only] This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     Output only. [Output Only] Unreachable resources.
+        #     end_interface: MixerListResponseWithEtagBuilder
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Output only. [Output Only] Informational warning message.
+        class RegionInstanceGroupManagerResizeRequestsListResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -60853,6 +63131,21 @@ module Google
         #     the policy is limited to a few 10s of KB. An empty policy is in general a
         #     valid policy but certain services (like Projects) might reject them.
         class RegionSetPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Optional. The new KMS key to replace the current one on the snapshot. If empty, the
+        #     snapshot will be re-encrypted using the primary version of the snapshot's
+        #     current KMS key.
+        #
+        #     The KMS key can be provided in the following formats:
+        #
+        #
+        #          - projects/project_id/locations/region/keyRings/region/cryptoKeys/key
+        class RegionSnapshotUpdateKmsKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -61540,6 +63833,9 @@ module Google
         #   @return [::String]
         #     Output only. [Output Only] Full or partial URL to a parent commitment. This field
         #     displays for reservations that are tied to a commitment.
+        # @!attribute [rw] confidential_compute_type
+        #   @return [::String]
+        #     Check the ConfidentialComputeType enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     Output only. [Output Only] Creation timestamp inRFC3339
@@ -61664,6 +63960,16 @@ module Google
           class ResourcePoliciesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          module ConfidentialComputeType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CONFIDENTIAL_COMPUTE_TYPE = 0
+
+            # Intel Trust Domain Extensions.
+            CONFIDENTIAL_COMPUTE_TYPE_TDX = 301_241_954
+
+            CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED = 42_227_601
           end
 
           # Specifies the deployment strategy for this reservation.
@@ -68175,6 +70481,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshotGroups.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        # @!attribute [rw] zone_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::ZoneSetPolicyRequest]
+        #     The body resource for this request
+        class SetIamPolicyInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InstantSnapshots.SetIamPolicy. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -68322,6 +70646,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.SetIamPolicy. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -68358,6 +70700,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstantSnapshotGroups.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyRegionInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstantSnapshots.SetIamPolicy. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -68390,6 +70750,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetIamPolicyRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyRegionSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -68991,6 +71369,39 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetLabelsRegionSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.SetLabels. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The region for this request.
+        # @!attribute [rw] region_set_labels_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetLabelsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetLabelsRegionSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -70562,6 +72973,10 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::SnapshotParams]
         #     Input only. [Input Only] Additional params passed with the request, but not persisted
         #     as part of resource payload.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Output only. [Output Only] URL of the region where the snapshot resides. Only applicable
+        #     for regional snapshots.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
@@ -70587,6 +73002,14 @@ module Google
         #     If you do not provide an encryption key when creating the snapshot, then
         #     the snapshot will be encrypted using an automatically generated key and you
         #     do not need to provide a key to use the snapshot later.
+        # @!attribute [rw] snapshot_group_id
+        #   @return [::String]
+        #     Output only. [Output Only] The unique ID of the snapshot group that this snapshot
+        #     belongs to. The usage of snapshot group feature is restricted.
+        # @!attribute [rw] snapshot_group_name
+        #   @return [::String]
+        #     Output only. [Output only] The snapshot group that this snapshot belongs to. The usage
+        #     of snapshot group feature is restricted.
         # @!attribute [rw] snapshot_type
         #   @return [::String]
         #     Indicates the type of the snapshot.
@@ -70734,6 +73157,30 @@ module Google
           end
         end
 
+        # @!attribute [rw] replica_zones
+        #   @return [::Array<::String>]
+        #     URLs of the zones where disks should be replicated to. Only applicable
+        #     for regional resources.
+        # @!attribute [rw] source_snapshot_group
+        #   @return [::String]
+        #     The source snapshot group used to create disks. You can provide this as a
+        #     partial or full URL to the resource. For example, the following are valid
+        #     values:
+        #
+        #
+        #          - https://www.googleapis.com/compute/v1/projects/project/global/snapshotGroups/snapshotGroup
+        #        - projects/project/global/snapshotGroups/snapshotGroup
+        #          - global/snapshotGroups/snapshotGroup
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     URL of the disk type resource describing which disk type to use to create
+        #     disks. Provide this when creating the disk. For example:projects/project/zones/zone/diskTypes/pd-ssd. See Persistent disk
+        #     types.
+        class SnapshotGroupParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Contains a list of Snapshot resources.
         # @!attribute [rw] id
         #   @return [::String]
@@ -70786,11 +73233,61 @@ module Google
           end
         end
 
+        # @!attribute [rw] access_location
+        #   @return [::Google::Cloud::Compute::V1::SnapshotSettingsAccessLocation]
+        #     (Regional snapshots use only)Policy of which location is allowed to access
+        #     snapshot.
         # @!attribute [rw] storage_location
         #   @return [::Google::Cloud::Compute::V1::SnapshotSettingsStorageLocationSettings]
         #     Policy of which storage location is going to be resolved, and additional
         #     data that particularizes how the policy is going to be carried out.
         class SnapshotSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] locations
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::SnapshotSettingsAccessLocationAccessLocationPreference}]
+        #     List of regions that can restore a regional
+        #      snapshot from the current region
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     Policy of which location is allowed to access snapshot.
+        #     Check the Policy enum for the list of possible values.
+        class SnapshotSettingsAccessLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::SnapshotSettingsAccessLocationAccessLocationPreference]
+          class LocationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Policy of which location is allowed to access snapshot.
+          module Policy
+            # A value indicating that the enum field is not set.
+            UNDEFINED_POLICY = 0
+
+            # Any regions will be able to access the source location.
+            ALL_REGIONS = 273_143_585
+
+            POLICY_UNSPECIFIED = 197_974_922
+
+            # Only allowlisted regions will be able to restore region scoped
+            # snapshots
+            SPECIFIC_REGIONS = 454_128_082
+          end
+        end
+
+        # A structure for specifying an allowed target region.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Accessible region name
+        class SnapshotSettingsAccessLocationAccessLocationPreference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -70845,6 +73342,21 @@ module Google
         #     Name of the location. It should be one of the Cloud Storage buckets.
         #     Only one location can be specified.
         class SnapshotSettingsStorageLocationSettingsStorageLocationPreference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Optional. The new KMS key to replace the current one on the snapshot. If empty, the
+        #     snapshot will be re-encrypted using the primary version of the snapshot's
+        #     current KMS key.
+        #
+        #     The KMS key can be provided in the following formats:
+        #
+        #
+        #          - projects/project_id/locations/region/keyRings/key_ring/cryptoKeys/key
+        class SnapshotUpdateKmsKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -75540,6 +78052,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InstantSnapshotGroups.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class TestIamPermissionsInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InstantSnapshots.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -75756,6 +78286,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionBackendBuckets.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionBackendBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionBackendServices.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -75900,6 +78448,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstantSnapshotGroups.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionInstantSnapshotGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstantSnapshots.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -75950,6 +78516,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsRegionNotificationEndpointRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -76748,6 +79332,135 @@ module Google
           end
         end
 
+        # A request message for Disks.UpdateKmsKey. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     Name of the Disk resource, should conform to RFC1035.
+        # @!attribute [rw] disk_update_kms_key_request_resource
+        #   @return [::Google::Cloud::Compute::V1::DiskUpdateKmsKeyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class UpdateKmsKeyDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionDisks.UpdateKmsKey. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     Name of the Disk resource, should conform to RFC1035.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_disk_update_kms_key_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionDiskUpdateKmsKeyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        class UpdateKmsKeyRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSnapshots.UpdateKmsKey. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] region_snapshot_update_kms_key_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSnapshotUpdateKmsKeyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] snapshot
+        #   @return [::String]
+        #     Name of the snapshot resource to update. Should conform to RFC1035.
+        class UpdateKmsKeyRegionSnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Snapshots.UpdateKmsKey. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] snapshot
+        #   @return [::String]
+        #     Name of the snapshot resource to update. Should conform to RFC1035.
+        # @!attribute [rw] snapshot_update_kms_key_request_resource
+        #   @return [::Google::Cloud::Compute::V1::SnapshotUpdateKmsKeyRequest]
+        #     The body resource for this request
+        class UpdateKmsKeySnapshotRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Licenses.Update. See the method description for details.
         # @!attribute [rw] license
         #   @return [::String]
@@ -77367,6 +80080,39 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::UrlMap]
         #     The body resource for this request
         class UpdateUrlMapRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ZoneVmExtensionPolicies.Update. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server will know to ignore the
+        #     request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same
+        #     request ID, the server can check if original operation with the same
+        #     request ID was received, and if so, will ignore the second request. This
+        #     prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be
+        #     a valid UUID with the exception that zero UUID is not supported
+        #     (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] vm_extension_policy
+        #   @return [::String]
+        #     Name of the zone VM extension policy to update.
+        # @!attribute [rw] vm_extension_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::VmExtensionPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Name of the zone for this request.
+        class UpdateZoneVmExtensionPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -78169,6 +80915,189 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class VmEndpointNatMappingsList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a VM extension policy.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     Output only. [Output Only] Creation timestamp inRFC3339
+        #     text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource.
+        # @!attribute [rw] extension_policies
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::VmExtensionPolicyExtensionPolicy}]
+        #     Required. A map of extension names (for example, "ops-agent") to their corresponding
+        #     policy configurations.
+        # @!attribute [rw] global_resource_link
+        #   @return [::String]
+        #     Optional. Output only. [Output Only] Link to the global policy that manages this zone policy, if
+        #     applicable.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     Output only. [Output Only] The unique identifier for the resource. This identifier is
+        #     defined by the server.
+        # @!attribute [rw] instance_selectors
+        #   @return [::Array<::Google::Cloud::Compute::V1::VmExtensionPolicyInstanceSelector>]
+        #     Optional. Selectors to target VMs for this policy. VMs are selected if they match
+        #     *any* of the provided selectors (logical OR). If this list is empty, the
+        #     policy applies to all VMs.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. [Output Only] Type of the resource. Alwayscompute#vmExtensionPolicy.
+        # @!attribute [rw] managed_by_global
+        #   @return [::Boolean]
+        #     Optional. Output only. [Output Only] Indicates if this policy is managed by a global policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource. Provided by the client when the resource is created.
+        #     The name must be 1-63 characters long, and comply withRFC1035.
+        #     Specifically, the name must be 1-63 characters long and match the regular
+        #     expression `[a-z]([-a-z0-9]*[a-z0-9])?`
+        #     which means the first character must be a lowercase letter, and all
+        #     following characters must be a dash, lowercase letter, or digit, except
+        #     the last character, which cannot be a dash.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     Optional. Priority of this policy. Used to resolve conflicts when multiple policies
+        #     apply to the same extension.
+        #     The policy priority is an integer from 0 to 65535, inclusive. Lower
+        #     integers indicate higher priorities. If you do not specify a priority when
+        #     creating a rule, it is assigned a priority of 1000. If priorities are
+        #     equal, the policy with the most recent creation timestamp takes precedence.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined fully-qualified URL for this resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource's resource id.
+        # @!attribute [rw] state
+        #   @return [::String]
+        #     Optional. Output only. [Output Only] Current state of the policy: ACTIVE or DELETING.
+        #     Check the State enum for the list of possible values.
+        # @!attribute [rw] update_timestamp
+        #   @return [::String]
+        #     Output only. [Output Only] Update timestamp inRFC3339
+        #     text format.
+        class VmExtensionPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::VmExtensionPolicyExtensionPolicy]
+          class ExtensionPoliciesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Optional. Output only. [Output Only] Current state of the policy: ACTIVE or DELETING.
+          module State
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATE = 0
+
+            # The policy is active and applied to matching VMs.
+            # Newly created VMs that match the policy will also receive the
+            # extension policy.
+            ACTIVE = 314_733_318
+
+            # The policy is in the process of being deleted. After the extension is
+            # removed from all matching VMs, the policy will be deleted.
+            DELETING = 528_602_024
+
+            # Default value. Do not use.
+            STATE_UNSPECIFIED = 470_755_401
+          end
+        end
+
+        # Configuration for a specific VM extension.
+        # @!attribute [rw] pinned_version
+        #   @return [::String]
+        #     Optional. The specific version of the extension to install. If not set, the latest
+        #     version is used.
+        # @!attribute [rw] string_config
+        #   @return [::String]
+        #     Optional. String-based configuration data for the extension.
+        class VmExtensionPolicyExtensionPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines how to select VMs to apply a zone VM extension policy.
+        # @!attribute [rw] label_selector
+        #   @return [::Google::Cloud::Compute::V1::VmExtensionPolicyLabelSelector]
+        #     Optional. LabelSelector selects VMs based on their labels.
+        class VmExtensionPolicyInstanceSelector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A LabelSelector is applied to a VM only if it matches all the specified
+        # labels.
+        # @!attribute [rw] inclusion_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A map of key-value pairs representing VM labels.
+        #     VMs must have all of the labels specified in this map to be selected
+        #     (logical AND).
+        #
+        #     e.g. If the `inclusion_labels` are \\{("key1", "value1"), ("key2",
+        #     "value2")}, the VM labels must contain both ("key1", "value1") and
+        #     ("key2", "value2") to be selected. If the VM labels are ("key1",
+        #     "value1") and ("something", "else"), it will not be selected.
+        #
+        #     If the map is empty, it's considered a match.
+        class VmExtensionPolicyLabelSelector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class InclusionLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Output only. [Output Only] Fingerprint of this resource. A hash of the contents stored
+        #     in this object. This field is used in optimistic locking. This field will
+        #     be ignored when inserting a VmExtensionPolicy. An up-to-date
+        #     fingerprint must be provided in order to update the VmExtensionPolicy.
+        #
+        #     To see the latest value of the fingerprint, make a get() request to
+        #     retrieve a VmExtensionPolicy.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Output only. [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::VmExtensionPolicy>]
+        #     Output only. [Output Only] A list of VM extension policy resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Output only. Type of resource.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Output only. [Output Only] This token allows you to get the next page of results for
+        #     list requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for
+        #     the query parameter pageToken in the next list request.
+        #     Subsequent list requests will have their own nextPageToken to
+        #     continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     Output only. [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     Output only. [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Output only. [Output Only] Informational warning message.
+        class VmExtensionPolicyList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
