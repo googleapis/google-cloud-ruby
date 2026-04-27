@@ -48,6 +48,12 @@ module Google
         #     in response to requests that included a `RoutingHint` field, but may also
         #     be obtained by explicit location-fetching RPCs which may be added in the
         #     future.
+        # @!attribute [rw] isolation_level
+        #   @return [::Google::Cloud::Spanner::V1::TransactionOptions::IsolationLevel]
+        #     The isolation level used for the read-write transaction.
+        # @!attribute [rw] read_lock_mode
+        #   @return [::Google::Cloud::Spanner::V1::TransactionOptions::ReadWrite::ReadLockMode]
+        #     The read lock mode used for the read-write transaction.
         class CommitResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
