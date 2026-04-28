@@ -93,6 +93,16 @@ module Google
                   initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14]
                 }
 
+                default_config.rpcs.list_bucket_operations.timeout = 60.0
+                default_config.rpcs.list_bucket_operations.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_bucket_operation.timeout = 60.0
+                default_config.rpcs.get_bucket_operation.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
