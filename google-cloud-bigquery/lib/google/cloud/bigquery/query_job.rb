@@ -757,6 +757,7 @@ module Google
 
           data_hash = service.list_tabledata destination_table_dataset_id,
                                              destination_table_table_id,
+                                             project_id: destination_table_project_id,
                                              token: token,
                                              max: max,
                                              start: start,
@@ -1826,6 +1827,10 @@ module Google
 
         def destination_table_table_id
           @gapi.configuration.query.destination_table.table_id
+        end
+
+        def destination_table_project_id
+          @gapi.configuration.query.destination_table.project_id
         end
 
         def destination_table_gapi
