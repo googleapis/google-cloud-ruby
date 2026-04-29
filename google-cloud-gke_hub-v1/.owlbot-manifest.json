@@ -31,6 +31,7 @@
     "lib/google/cloud/gkehub/v1/fleet_pb.rb",
     "lib/google/cloud/gkehub/v1/membership_pb.rb",
     "lib/google/cloud/gkehub/v1/multiclusteringress/multiclusteringress_pb.rb",
+    "lib/google/cloud/gkehub/v1/rbacrolebindingactuation/rbacrolebindingactuation_pb.rb",
     "lib/google/cloud/gkehub/v1/service_pb.rb",
     "lib/google/cloud/gkehub/v1/service_services_pb.rb",
     "proto_docs/README.md",
