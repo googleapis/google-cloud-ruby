@@ -29,11 +29,11 @@ require "google/cloud/memorystore/v1"
 # client as shown in https://cloud.google.com/ruby/docs/reference.
 #
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#delete_backup.
+# Google::Cloud::Memorystore::V1::Memorystore::Client#delete_backup.
 #
 def delete_backup
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+  client = Google::Cloud::Memorystore::V1::Memorystore::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Memorystore::V1::DeleteBackupRequest.new
