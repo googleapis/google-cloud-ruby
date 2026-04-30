@@ -41,6 +41,48 @@ class Google::Cloud::Chronicle::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_dashboard_query_service_grpc
+    skip unless Google::Cloud::Chronicle.dashboard_query_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Chronicle.dashboard_query_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::DashboardQueryService::Client, client
+    end
+  end
+
+  def test_dashboard_query_service_rest
+    skip unless Google::Cloud::Chronicle.dashboard_query_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Chronicle.dashboard_query_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::DashboardQueryService::Rest::Client, client
+    end
+  end
+
+  def test_dashboard_chart_service_grpc
+    skip unless Google::Cloud::Chronicle.dashboard_chart_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Chronicle.dashboard_chart_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::DashboardChartService::Client, client
+    end
+  end
+
+  def test_dashboard_chart_service_rest
+    skip unless Google::Cloud::Chronicle.dashboard_chart_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Chronicle.dashboard_chart_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::DashboardChartService::Rest::Client, client
+    end
+  end
+
   def test_data_access_control_service_grpc
     skip unless Google::Cloud::Chronicle.data_access_control_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -101,6 +143,48 @@ class Google::Cloud::Chronicle::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Chronicle::V1::EntityService::Rest::Client, client
+    end
+  end
+
+  def test_native_dashboard_service_grpc
+    skip unless Google::Cloud::Chronicle.native_dashboard_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Chronicle.native_dashboard_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::NativeDashboardService::Client, client
+    end
+  end
+
+  def test_native_dashboard_service_rest
+    skip unless Google::Cloud::Chronicle.native_dashboard_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Chronicle.native_dashboard_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::NativeDashboardService::Rest::Client, client
+    end
+  end
+
+  def test_featured_content_native_dashboard_service_grpc
+    skip unless Google::Cloud::Chronicle.featured_content_native_dashboard_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Chronicle.featured_content_native_dashboard_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client, client
+    end
+  end
+
+  def test_featured_content_native_dashboard_service_rest
+    skip unless Google::Cloud::Chronicle.featured_content_native_dashboard_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Chronicle.featured_content_native_dashboard_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Rest::Client, client
     end
   end
 

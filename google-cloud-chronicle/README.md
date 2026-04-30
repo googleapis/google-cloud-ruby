@@ -37,9 +37,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/chronicle"
 
-client = Google::Cloud::Chronicle.data_access_control_service
-request = ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new # (request fields as keyword arguments...)
-response = client.create_data_access_label request
+client = Google::Cloud::Chronicle.dashboard_query_service
+request = ::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new # (request fields as keyword arguments...)
+response = client.get_dashboard_query request
 ```
 
 ## Debug Logging
