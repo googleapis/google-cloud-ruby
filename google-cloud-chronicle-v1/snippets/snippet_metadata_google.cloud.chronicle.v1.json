@@ -12,6 +12,126 @@
   },
   "snippets": [
     {
+      "region_tag": "chronicle_v1_generated_BigQueryExportService_GetBigQueryExport_sync",
+      "title": "Snippet for the get_big_query_export call in the BigQueryExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::BigQueryExportService::Client#get_big_query_export.",
+      "file": "big_query_export_service/get_big_query_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_big_query_export",
+        "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client#get_big_query_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BigQueryExport",
+        "client": {
+          "short_name": "BigQueryExportService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client"
+        },
+        "method": {
+          "short_name": "GetBigQueryExport",
+          "full_name": "google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExport",
+          "service": {
+            "short_name": "BigQueryExportService",
+            "full_name": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_BigQueryExportService_UpdateBigQueryExport_sync",
+      "title": "Snippet for the update_big_query_export call in the BigQueryExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::BigQueryExportService::Client#update_big_query_export.",
+      "file": "big_query_export_service/update_big_query_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_big_query_export",
+        "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client#update_big_query_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BigQueryExport",
+        "client": {
+          "short_name": "BigQueryExportService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBigQueryExport",
+          "full_name": "google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExport",
+          "service": {
+            "short_name": "BigQueryExportService",
+            "full_name": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_BigQueryExportService_ProvisionBigQueryExport_sync",
+      "title": "Snippet for the provision_big_query_export call in the BigQueryExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::BigQueryExportService::Client#provision_big_query_export.",
+      "file": "big_query_export_service/provision_big_query_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "provision_big_query_export",
+        "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client#provision_big_query_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BigQueryExport",
+        "client": {
+          "short_name": "BigQueryExportService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client"
+        },
+        "method": {
+          "short_name": "ProvisionBigQueryExport",
+          "full_name": "google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExport",
+          "service": {
+            "short_name": "BigQueryExportService",
+            "full_name": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "chronicle_v1_generated_DashboardQueryService_GetDashboardQuery_sync",
       "title": "Snippet for the get_dashboard_query call in the DashboardQueryService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DashboardQueryService::Client#get_dashboard_query.",

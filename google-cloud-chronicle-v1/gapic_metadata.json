@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.chronicle.v1",
   "libraryPackage": "::Google::Cloud::Chronicle::V1",
   "services": {
+    "BigQueryExportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client",
+          "rpcs": {
+            "GetBigQueryExport": {
+              "methods": [
+                "get_big_query_export"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "update_big_query_export"
+              ]
+            },
+            "ProvisionBigQueryExport": {
+              "methods": [
+                "provision_big_query_export"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DashboardQueryService": {
       "clients": {
         "grpc": {
