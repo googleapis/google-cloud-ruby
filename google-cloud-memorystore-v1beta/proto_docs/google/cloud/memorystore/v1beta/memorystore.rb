@@ -745,7 +745,7 @@ module Google
         end
 
         # Request for
-        # {::Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
+        # {::Google::Cloud::Memorystore::V1beta::Memorystore::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Regional certificate authority resource name using the form:

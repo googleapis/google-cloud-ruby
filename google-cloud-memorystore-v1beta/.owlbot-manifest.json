@@ -17,7 +17,9 @@
     "lib/google/cloud/memorystore/v1beta.rb",
     "lib/google/cloud/memorystore/v1beta/bindings_override.rb",
     "lib/google/cloud/memorystore/v1beta/memorystore.rb",
+    "lib/google/cloud/memorystore/v1beta/memorystore/client.rb",
     "lib/google/cloud/memorystore/v1beta/memorystore/credentials.rb",
+    "lib/google/cloud/memorystore/v1beta/memorystore/operations.rb",
     "lib/google/cloud/memorystore/v1beta/memorystore/paths.rb",
     "lib/google/cloud/memorystore/v1beta/memorystore/rest.rb",
     "lib/google/cloud/memorystore/v1beta/memorystore/rest/client.rb",
@@ -50,7 +52,10 @@
     "snippets/memorystore/list_instances.rb",
     "snippets/memorystore/update_instance.rb",
     "snippets/snippet_metadata_google.cloud.memorystore.v1beta.json",
+    "test/google/cloud/memorystore/v1beta/memorystore_operations_test.rb",
+    "test/google/cloud/memorystore/v1beta/memorystore_paths_test.rb",
     "test/google/cloud/memorystore/v1beta/memorystore_rest_test.rb",
+    "test/google/cloud/memorystore/v1beta/memorystore_test.rb",
     "test/helper.rb"
   ],
   "static": [

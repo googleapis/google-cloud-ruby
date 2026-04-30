@@ -29,11 +29,11 @@ require "google/cloud/memorystore/v1beta"
 # client as shown in https://cloud.google.com/ruby/docs/reference.
 #
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client#get_instance.
+# Google::Cloud::Memorystore::V1beta::Memorystore::Client#get_instance.
 #
 def get_instance
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+  client = Google::Cloud::Memorystore::V1beta::Memorystore::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Memorystore::V1beta::GetInstanceRequest.new
