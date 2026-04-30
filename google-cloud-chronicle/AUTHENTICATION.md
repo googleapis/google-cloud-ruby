@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/chronicle"
 
-client = Google::Cloud::Chronicle.dashboard_query_service do |config|
+client = Google::Cloud::Chronicle.big_query_export_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::Chronicle.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::Chronicle.dashboard_query_service
+client = Google::Cloud::Chronicle.big_query_export_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/chronicle"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::Chronicle.dashboard_query_service
+client = Google::Cloud::Chronicle.big_query_export_service
 ```
 
 ### Local ADC file
