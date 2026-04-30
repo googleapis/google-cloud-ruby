@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/chronicle/v1"
 
-client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new
-request = ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new # (request fields as keyword arguments...)
-response = client.create_data_access_label request
+client = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Client.new
+request = ::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new # (request fields as keyword arguments...)
+response = client.get_dashboard_query request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/chronicle/v1"
 require "logger"
 
-client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Client.new do |config|
+client = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

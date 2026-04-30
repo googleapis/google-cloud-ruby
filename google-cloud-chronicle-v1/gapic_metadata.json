@@ -5,6 +5,44 @@
   "protoPackage": "google.cloud.chronicle.v1",
   "libraryPackage": "::Google::Cloud::Chronicle::V1",
   "services": {
+    "DashboardQueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::DashboardQueryService::Client",
+          "rpcs": {
+            "GetDashboardQuery": {
+              "methods": [
+                "get_dashboard_query"
+              ]
+            },
+            "ExecuteDashboardQuery": {
+              "methods": [
+                "execute_dashboard_query"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DashboardChartService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::DashboardChartService::Client",
+          "rpcs": {
+            "GetDashboardChart": {
+              "methods": [
+                "get_dashboard_chart"
+              ]
+            },
+            "BatchGetDashboardCharts": {
+              "methods": [
+                "batch_get_dashboard_charts"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataAccessControlService": {
       "clients": {
         "grpc": {
@@ -176,6 +214,99 @@
             "DeleteWatchlist": {
               "methods": [
                 "delete_watchlist"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NativeDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client",
+          "rpcs": {
+            "CreateNativeDashboard": {
+              "methods": [
+                "create_native_dashboard"
+              ]
+            },
+            "GetNativeDashboard": {
+              "methods": [
+                "get_native_dashboard"
+              ]
+            },
+            "ListNativeDashboards": {
+              "methods": [
+                "list_native_dashboards"
+              ]
+            },
+            "UpdateNativeDashboard": {
+              "methods": [
+                "update_native_dashboard"
+              ]
+            },
+            "DuplicateNativeDashboard": {
+              "methods": [
+                "duplicate_native_dashboard"
+              ]
+            },
+            "DeleteNativeDashboard": {
+              "methods": [
+                "delete_native_dashboard"
+              ]
+            },
+            "AddChart": {
+              "methods": [
+                "add_chart"
+              ]
+            },
+            "RemoveChart": {
+              "methods": [
+                "remove_chart"
+              ]
+            },
+            "EditChart": {
+              "methods": [
+                "edit_chart"
+              ]
+            },
+            "DuplicateChart": {
+              "methods": [
+                "duplicate_chart"
+              ]
+            },
+            "ExportNativeDashboards": {
+              "methods": [
+                "export_native_dashboards"
+              ]
+            },
+            "ImportNativeDashboards": {
+              "methods": [
+                "import_native_dashboards"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeaturedContentNativeDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client",
+          "rpcs": {
+            "GetFeaturedContentNativeDashboard": {
+              "methods": [
+                "get_featured_content_native_dashboard"
+              ]
+            },
+            "ListFeaturedContentNativeDashboards": {
+              "methods": [
+                "list_featured_content_native_dashboards"
+              ]
+            },
+            "InstallFeaturedContentNativeDashboard": {
+              "methods": [
+                "install_featured_content_native_dashboard"
               ]
             }
           }
