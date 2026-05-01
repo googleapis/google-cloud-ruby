@@ -33,11 +33,10 @@ def subscribe_avro_records_with_revisions subscription_id:
     # Prevent concurrent threads from racing to fetch and parse the same schema.
     avro_schema = cache_mutex.synchronize { schema_cache[revision_id] }
 
-
     if avro_schema.nil?
       begin
         require "avro"
-        # The resource name format is projects/{project}/schemas/{schema}@{revision}
+        # The resource name format is projects/{project}/schemas/{schema}@{revision}.
         schema_resource = pubsub.schemas.get_schema name: "#{schema_name}@#{revision_id}"
         
         avro_schema = Avro::Schema.parse schema_resource.definition
@@ -64,7 +63,7 @@ def subscribe_avro_records_with_revisions subscription_id:
         message_data = JSON.parse received_message.data
         puts "Received a JSON-encoded message:\n#{message_data}"
       else
-        puts "Unknown message type; rejecting message."
+        puts "Unknown message encoding: #{encoding}. Rejecting message."
         received_message.reject!
         next
       end
@@ -78,9 +77,8 @@ def subscribe_avro_records_with_revisions subscription_id:
 
   listener.start
 
-
   # Let the main thread sleep for 60 seconds so the thread for listening
-  # messages does not quit
+  # messages does not quit.
   sleep 60
   listener.stop.wait!
   # [END pubsub_subscribe_avro_records_with_revisions]

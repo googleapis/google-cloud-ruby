@@ -220,7 +220,7 @@ describe "schemas" do
     end
 
     it "supports pubsub_subscribe_avro_records_with_revisions" do
-      # Commit Rev B first (Rev A is already created in before block)
+      # Commit Rev B first (Rev A is already created in before block).
       schema_b = nil
       out, _err = capture_io do
         schema_b = commit_avro_schema schema_id: schema_id, avsc_file: avsc_revision_file
@@ -229,7 +229,7 @@ describe "schemas" do
       rev_a_id = @schema.revision_id
       rev_b_id = schema_b.revision_id
 
-      # Create topic with schema range allowing both revisions
+      # Create topic with schema range allowing both revisions.
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
                                                                       encoding: :BINARY,
                                                                       first_revision_id: rev_a_id,
@@ -241,14 +241,14 @@ describe "schemas" do
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
 
-      # Publish message 1 (Old format - valid for both)
+      # Publish message 1 (Old format - valid for both).
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
       publisher = pubsub.publisher @topic.name
       publisher.publish buffer
 
-      # Publish message 2 (New format - valid only for Rev B)
+      # Publish message 2 (New format - valid only for Rev B).
       avsc_definition_plus = File.read avsc_revision_file
       avro_schema_plus = Avro::Schema.parse avsc_definition_plus
       record_plus = { "name" => "California", "post_abbr" => "CA", "population" => 39000000 }
@@ -258,7 +258,7 @@ describe "schemas" do
       writer_plus.write record_plus, Avro::IO::BinaryEncoder.new(buffer_plus)
       publisher.publish buffer_plus
 
-      # Verify we can subscribe and decode both
+      # Verify we can subscribe and decode both.
       expect_with_retry "pubsub_subscribe_avro_records_with_revisions" do
         assert_output /Received a binary-encoded message:.*Alaska.*Received a binary-encoded message:.*California/m do
           subscribe_avro_records_with_revisions subscription_id: @subscription.name
