@@ -1,5 +1,27 @@
 # Release History
 
+### 1.15.0 (2026-05-01)
+
+#### Features
+
+* Add AIInference MessageTransform type 
+* Add BigtableConfig type 
+* add custom prompt config in the request and return prompt in the response 
+* update min_speaker_count and max_speaker_count to be optional 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* increase streaming pull timeout ([#32300](https://github.com/googleapis/google-cloud-ruby/issues/32300)) 
+#### Documentation
+
+* A comment for field `analytics_hub_subscription_info` in message `.google.pubsub.v1.Subscription` is updated 
+* A comment for field `subscription` in message `.google.pubsub.v1.CreateSnapshotRequest` is updated 
+* A comment for field `topic` in message `.google.pubsub.v1.Subscription` is updated 
+* add tags documentation links to Pub/Sub resource tags fields 
+* Clarify that min_speaker_count and max_speaker_count in SpeakerDiarizationConfig are not currently used 
+* Update guidance on how to enable speaker diarization; to enable, set the diarization_config field to an empty SpeakerDiarizationConfig message 
+
 ### 1.14.2 (2025-12-17)
 
 #### Documentation
