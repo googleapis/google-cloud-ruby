@@ -12,6 +12,286 @@
   },
   "snippets": [
     {
+      "region_tag": "chronicle_v1_generated_BigQueryExportService_GetBigQueryExport_sync",
+      "title": "Snippet for the get_big_query_export call in the BigQueryExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::BigQueryExportService::Client#get_big_query_export.",
+      "file": "big_query_export_service/get_big_query_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_big_query_export",
+        "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client#get_big_query_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BigQueryExport",
+        "client": {
+          "short_name": "BigQueryExportService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client"
+        },
+        "method": {
+          "short_name": "GetBigQueryExport",
+          "full_name": "google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExport",
+          "service": {
+            "short_name": "BigQueryExportService",
+            "full_name": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_BigQueryExportService_UpdateBigQueryExport_sync",
+      "title": "Snippet for the update_big_query_export call in the BigQueryExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::BigQueryExportService::Client#update_big_query_export.",
+      "file": "big_query_export_service/update_big_query_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_big_query_export",
+        "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client#update_big_query_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BigQueryExport",
+        "client": {
+          "short_name": "BigQueryExportService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBigQueryExport",
+          "full_name": "google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExport",
+          "service": {
+            "short_name": "BigQueryExportService",
+            "full_name": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_BigQueryExportService_ProvisionBigQueryExport_sync",
+      "title": "Snippet for the provision_big_query_export call in the BigQueryExportService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::BigQueryExportService::Client#provision_big_query_export.",
+      "file": "big_query_export_service/provision_big_query_export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "provision_big_query_export",
+        "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client#provision_big_query_export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BigQueryExport",
+        "client": {
+          "short_name": "BigQueryExportService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::BigQueryExportService::Client"
+        },
+        "method": {
+          "short_name": "ProvisionBigQueryExport",
+          "full_name": "google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExport",
+          "service": {
+            "short_name": "BigQueryExportService",
+            "full_name": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DashboardQueryService_GetDashboardQuery_sync",
+      "title": "Snippet for the get_dashboard_query call in the DashboardQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DashboardQueryService::Client#get_dashboard_query.",
+      "file": "dashboard_query_service/get_dashboard_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dashboard_query",
+        "full_name": "::Google::Cloud::Chronicle::V1::DashboardQueryService::Client#get_dashboard_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DashboardQuery",
+        "client": {
+          "short_name": "DashboardQueryService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DashboardQueryService::Client"
+        },
+        "method": {
+          "short_name": "GetDashboardQuery",
+          "full_name": "google.cloud.chronicle.v1.DashboardQueryService.GetDashboardQuery",
+          "service": {
+            "short_name": "DashboardQueryService",
+            "full_name": "google.cloud.chronicle.v1.DashboardQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DashboardQueryService_ExecuteDashboardQuery_sync",
+      "title": "Snippet for the execute_dashboard_query call in the DashboardQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DashboardQueryService::Client#execute_dashboard_query.",
+      "file": "dashboard_query_service/execute_dashboard_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_dashboard_query",
+        "full_name": "::Google::Cloud::Chronicle::V1::DashboardQueryService::Client#execute_dashboard_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryResponse",
+        "client": {
+          "short_name": "DashboardQueryService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DashboardQueryService::Client"
+        },
+        "method": {
+          "short_name": "ExecuteDashboardQuery",
+          "full_name": "google.cloud.chronicle.v1.DashboardQueryService.ExecuteDashboardQuery",
+          "service": {
+            "short_name": "DashboardQueryService",
+            "full_name": "google.cloud.chronicle.v1.DashboardQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DashboardChartService_GetDashboardChart_sync",
+      "title": "Snippet for the get_dashboard_chart call in the DashboardChartService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DashboardChartService::Client#get_dashboard_chart.",
+      "file": "dashboard_chart_service/get_dashboard_chart.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dashboard_chart",
+        "full_name": "::Google::Cloud::Chronicle::V1::DashboardChartService::Client#get_dashboard_chart",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetDashboardChartRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DashboardChart",
+        "client": {
+          "short_name": "DashboardChartService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DashboardChartService::Client"
+        },
+        "method": {
+          "short_name": "GetDashboardChart",
+          "full_name": "google.cloud.chronicle.v1.DashboardChartService.GetDashboardChart",
+          "service": {
+            "short_name": "DashboardChartService",
+            "full_name": "google.cloud.chronicle.v1.DashboardChartService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_DashboardChartService_BatchGetDashboardCharts_sync",
+      "title": "Snippet for the batch_get_dashboard_charts call in the DashboardChartService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DashboardChartService::Client#batch_get_dashboard_charts.",
+      "file": "dashboard_chart_service/batch_get_dashboard_charts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_get_dashboard_charts",
+        "full_name": "::Google::Cloud::Chronicle::V1::DashboardChartService::Client#batch_get_dashboard_charts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsResponse",
+        "client": {
+          "short_name": "DashboardChartService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::DashboardChartService::Client"
+        },
+        "method": {
+          "short_name": "BatchGetDashboardCharts",
+          "full_name": "google.cloud.chronicle.v1.DashboardChartService.BatchGetDashboardCharts",
+          "service": {
+            "short_name": "DashboardChartService",
+            "full_name": "google.cloud.chronicle.v1.DashboardChartService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "chronicle_v1_generated_DataAccessControlService_CreateDataAccessLabel_sync",
       "title": "Snippet for the create_data_access_label call in the DataAccessControlService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::DataAccessControlService::Client#create_data_access_label.",
@@ -1198,6 +1478,606 @@
           "service": {
             "short_name": "EntityService",
             "full_name": "google.cloud.chronicle.v1.EntityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_CreateNativeDashboard_sync",
+      "title": "Snippet for the create_native_dashboard call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#create_native_dashboard.",
+      "file": "native_dashboard_service/create_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#create_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::CreateNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::NativeDashboard",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "CreateNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.CreateNativeDashboard",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_GetNativeDashboard_sync",
+      "title": "Snippet for the get_native_dashboard call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#get_native_dashboard.",
+      "file": "native_dashboard_service/get_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#get_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::NativeDashboard",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "GetNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.GetNativeDashboard",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_ListNativeDashboards_sync",
+      "title": "Snippet for the list_native_dashboards call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#list_native_dashboards.",
+      "file": "native_dashboard_service/list_native_dashboards.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_native_dashboards",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#list_native_dashboards",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ListNativeDashboardsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ListNativeDashboardsResponse",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "ListNativeDashboards",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.ListNativeDashboards",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_UpdateNativeDashboard_sync",
+      "title": "Snippet for the update_native_dashboard call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#update_native_dashboard.",
+      "file": "native_dashboard_service/update_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#update_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::UpdateNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::NativeDashboard",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "UpdateNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.UpdateNativeDashboard",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_DuplicateNativeDashboard_sync",
+      "title": "Snippet for the duplicate_native_dashboard call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#duplicate_native_dashboard.",
+      "file": "native_dashboard_service/duplicate_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "duplicate_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#duplicate_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::DuplicateNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::NativeDashboard",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "DuplicateNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.DuplicateNativeDashboard",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_DeleteNativeDashboard_sync",
+      "title": "Snippet for the delete_native_dashboard call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#delete_native_dashboard.",
+      "file": "native_dashboard_service/delete_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#delete_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::DeleteNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "DeleteNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.DeleteNativeDashboard",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_AddChart_sync",
+      "title": "Snippet for the add_chart call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#add_chart.",
+      "file": "native_dashboard_service/add_chart.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_chart",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#add_chart",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::AddChartRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::AddChartResponse",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "AddChart",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.AddChart",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_RemoveChart_sync",
+      "title": "Snippet for the remove_chart call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#remove_chart.",
+      "file": "native_dashboard_service/remove_chart.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_chart",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#remove_chart",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::RemoveChartRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::NativeDashboard",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "RemoveChart",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.RemoveChart",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_EditChart_sync",
+      "title": "Snippet for the edit_chart call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#edit_chart.",
+      "file": "native_dashboard_service/edit_chart.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "edit_chart",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#edit_chart",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::EditChartRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::EditChartResponse",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "EditChart",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.EditChart",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_DuplicateChart_sync",
+      "title": "Snippet for the duplicate_chart call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#duplicate_chart.",
+      "file": "native_dashboard_service/duplicate_chart.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "duplicate_chart",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#duplicate_chart",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::DuplicateChartRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::DuplicateChartResponse",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "DuplicateChart",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.DuplicateChart",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_ExportNativeDashboards_sync",
+      "title": "Snippet for the export_native_dashboards call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#export_native_dashboards.",
+      "file": "native_dashboard_service/export_native_dashboards.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_native_dashboards",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#export_native_dashboards",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ExportNativeDashboardsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ExportNativeDashboardsResponse",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "ExportNativeDashboards",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.ExportNativeDashboards",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_NativeDashboardService_ImportNativeDashboards_sync",
+      "title": "Snippet for the import_native_dashboards call in the NativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::NativeDashboardService::Client#import_native_dashboards.",
+      "file": "native_dashboard_service/import_native_dashboards.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_native_dashboards",
+        "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client#import_native_dashboards",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ImportNativeDashboardsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ImportNativeDashboardsResponse",
+        "client": {
+          "short_name": "NativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::NativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "ImportNativeDashboards",
+          "full_name": "google.cloud.chronicle.v1.NativeDashboardService.ImportNativeDashboards",
+          "service": {
+            "short_name": "NativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FeaturedContentNativeDashboardService_GetFeaturedContentNativeDashboard_sync",
+      "title": "Snippet for the get_featured_content_native_dashboard call in the FeaturedContentNativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client#get_featured_content_native_dashboard.",
+      "file": "featured_content_native_dashboard_service/get_featured_content_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_featured_content_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client#get_featured_content_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::GetFeaturedContentNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboard",
+        "client": {
+          "short_name": "FeaturedContentNativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "GetFeaturedContentNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.GetFeaturedContentNativeDashboard",
+          "service": {
+            "short_name": "FeaturedContentNativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FeaturedContentNativeDashboardService_ListFeaturedContentNativeDashboards_sync",
+      "title": "Snippet for the list_featured_content_native_dashboards call in the FeaturedContentNativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client#list_featured_content_native_dashboards.",
+      "file": "featured_content_native_dashboard_service/list_featured_content_native_dashboards.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_featured_content_native_dashboards",
+        "full_name": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client#list_featured_content_native_dashboards",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::ListFeaturedContentNativeDashboardsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::ListFeaturedContentNativeDashboardsResponse",
+        "client": {
+          "short_name": "FeaturedContentNativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "ListFeaturedContentNativeDashboards",
+          "full_name": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.ListFeaturedContentNativeDashboards",
+          "service": {
+            "short_name": "FeaturedContentNativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chronicle_v1_generated_FeaturedContentNativeDashboardService_InstallFeaturedContentNativeDashboard_sync",
+      "title": "Snippet for the install_featured_content_native_dashboard call in the FeaturedContentNativeDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client#install_featured_content_native_dashboard.",
+      "file": "featured_content_native_dashboard_service/install_featured_content_native_dashboard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "install_featured_content_native_dashboard",
+        "full_name": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client#install_featured_content_native_dashboard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Chronicle::V1::InstallFeaturedContentNativeDashboardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Chronicle::V1::InstallFeaturedContentNativeDashboardResponse",
+        "client": {
+          "short_name": "FeaturedContentNativeDashboardService::Client",
+          "full_name": "::Google::Cloud::Chronicle::V1::FeaturedContentNativeDashboardService::Client"
+        },
+        "method": {
+          "short_name": "InstallFeaturedContentNativeDashboard",
+          "full_name": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.InstallFeaturedContentNativeDashboard",
+          "service": {
+            "short_name": "FeaturedContentNativeDashboardService",
+            "full_name": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService"
           }
         }
       },
