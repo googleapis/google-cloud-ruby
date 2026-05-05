@@ -1,5 +1,11 @@
 # Release History
 
+### 1.63.1 (2026-05-05)
+
+#### Bug Fixes
+
+* use destination table's project_id for queries ([#33886](https://github.com/googleapis/google-cloud-ruby/issues/33886)) ([df84fa9](https://github.com/googleapis/google-cloud-ruby/commit/df84fa9883aa9e159bcafbf8033780f33bf19fc5)), closes [#33810](https://github.com/googleapis/google-cloud-ruby/issues/33810)
+
 ### 1.63.0 (2026-04-15)
 
 #### Features
