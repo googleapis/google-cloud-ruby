@@ -148,22 +148,27 @@ module Google
         #   @return [::Google::Cloud::Dataproc::V1::PySparkBatch]
         #     Optional. PySpark batch config.
         #
-        #     Note: The following fields are mutually exclusive: `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkBatch]
         #     Optional. Spark batch config.
         #
-        #     Note: The following fields are mutually exclusive: `spark_batch`, `pyspark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spark_batch`, `pyspark_batch`, `spark_r_batch`, `spark_sql_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_r_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkRBatch]
         #     Optional. SparkR batch config.
         #
-        #     Note: The following fields are mutually exclusive: `spark_r_batch`, `pyspark_batch`, `spark_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spark_r_batch`, `pyspark_batch`, `spark_batch`, `spark_sql_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_sql_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkSqlBatch]
         #     Optional. SparkSql batch config.
         #
-        #     Note: The following fields are mutually exclusive: `spark_sql_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spark_sql_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`, `pyspark_notebook_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pyspark_notebook_batch
+        #   @return [::Google::Cloud::Dataproc::V1::PySparkNotebookBatch]
+        #     Optional. PySpark notebook batch config.
+        #
+        #     Note: The following fields are mutually exclusive: `pyspark_notebook_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] runtime_info
         #   @return [::Google::Cloud::Dataproc::V1::RuntimeInfo]
         #     Output only. Runtime information about batch execution.
@@ -374,6 +379,42 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class QueryVariablesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A configuration for running a PySpark Notebook batch workload.
+        # @!attribute [rw] notebook_file_uri
+        #   @return [::String]
+        #     Required. The HCFS URI of the notebook file to execute.
+        # @!attribute [rw] params
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The parameters to pass to the notebook.
+        # @!attribute [rw] python_file_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of Python files to pass to the PySpark framework.
+        # @!attribute [rw] jar_file_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
+        # @!attribute [rw] file_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of files to be placed in the working directory of
+        #     each executor
+        # @!attribute [rw] archive_uris
+        #   @return [::Array<::String>]
+        #     Optional. HCFS URIs of archives to be extracted into the working directory
+        #     of each executor. Supported file types:
+        #     `.jar`, `.tar`, `.tar.gz`, `.tgz`, and `.zip`.
+        class PySparkNotebookBatch
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ParamsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
