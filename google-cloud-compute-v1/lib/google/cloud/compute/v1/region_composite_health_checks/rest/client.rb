@@ -83,6 +83,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.get_health.timeout = 600.0
+                  default_config.rpcs.get_health.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.insert.timeout = 600.0
 
                   default_config.rpcs.list.timeout = 600.0
@@ -577,6 +582,89 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @region_composite_health_checks_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the most recent health check results for this
+              # regional CompositeHealthCheck.
+              #
+              # @overload get_health(request, options = nil)
+              #   Pass arguments to `get_health` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_health(composite_health_check: nil, project: nil, region: nil)
+              #   Pass arguments to `get_health` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param composite_health_check [::String]
+              #     Name of the CompositeHealthCheck resource to get health for.
+              #   @param project [::String]
+              #     Name of the project scoping this request.
+              #   @param region [::String]
+              #     Name of the region scoping this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::CompositeHealthCheckHealth]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::CompositeHealthCheckHealth]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new
+              #
+              #   # Call the get_health method.
+              #   result = client.get_health request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::CompositeHealthCheckHealth.
+              #   p result
+              #
+              def get_health request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_health.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_health.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_health.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_composite_health_checks_stub.get_health request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1218,6 +1306,11 @@ module Google
                   #
                   attr_reader :get
                   ##
+                  # RPC-specific configuration for `get_health`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_health
+                  ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1246,6 +1339,8 @@ module Google
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
+                    get_health_config = parent_rpcs.get_health if parent_rpcs.respond_to? :get_health
+                    @get_health = ::Gapic::Config::Method.new get_health_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list

@@ -252,6 +252,62 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     end
   end
 
+  def test_get_health
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::CompositeHealthCheckHealth.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    composite_health_check = "hello world"
+    project = "hello world"
+    region = "hello world"
+
+    get_health_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_get_health_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_health_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_health({ composite_health_check: composite_health_check, project: project, region: region }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_health composite_health_check: composite_health_check, project: project, region: region do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_health ::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_health({ composite_health_check: composite_health_check, project: project, region: region }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_health(::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_health_client_stub.call_count
+      end
+    end
+  end
+
   def test_insert
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new

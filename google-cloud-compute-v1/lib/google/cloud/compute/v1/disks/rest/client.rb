@@ -121,6 +121,8 @@ module Google
 
                   default_config.rpcs.update.timeout = 600.0
 
+                  default_config.rpcs.update_kms_key.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -2353,6 +2355,115 @@ module Google
               end
 
               ##
+              # Rotates the customer-managed
+              # encryption key to the latest version for the specified persistent disk.
+              #
+              # @overload update_kms_key(request, options = nil)
+              #   Pass arguments to `update_kms_key` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::UpdateKmsKeyDiskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::UpdateKmsKeyDiskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_kms_key(disk: nil, disk_update_kms_key_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `update_kms_key` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param disk [::String]
+              #     Name of the Disk resource, should conform to RFC1035.
+              #   @param disk_update_kms_key_request_resource [::Google::Cloud::Compute::V1::DiskUpdateKmsKeyRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Disks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::UpdateKmsKeyDiskRequest.new
+              #
+              #   # Call the update_kms_key method.
+              #   result = client.update_kms_key request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def update_kms_key request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::UpdateKmsKeyDiskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_kms_key.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_kms_key.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_kms_key.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @disks_stub.update_kms_key request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Disks REST API.
               #
               # This class represents the configuration for Disks REST,
@@ -2593,6 +2704,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update
+                  ##
+                  # RPC-specific configuration for `update_kms_key`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_kms_key
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2634,6 +2750,8 @@ module Google
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                     update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
                     @update = ::Gapic::Config::Method.new update_config
+                    update_kms_key_config = parent_rpcs.update_kms_key if parent_rpcs.respond_to? :update_kms_key
+                    @update_kms_key = ::Gapic::Config::Method.new update_kms_key_config
 
                     yield self if block_given?
                   end
