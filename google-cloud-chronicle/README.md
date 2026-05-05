@@ -37,9 +37,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/chronicle"
 
-client = Google::Cloud::Chronicle.data_access_control_service
-request = ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new # (request fields as keyword arguments...)
-response = client.create_data_access_label request
+client = Google::Cloud::Chronicle.big_query_export_service
+request = ::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new # (request fields as keyword arguments...)
+response = client.get_big_query_export request
 ```
 
 ## Debug Logging
