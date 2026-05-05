@@ -1197,6 +1197,24 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # The request for
+        # {::Google::Cloud::Spanner::V1::Spanner::Client#fetch_cache_update FetchCacheUpdate}.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. The database for which to retrieve the cache update.
+        # @!attribute [rw] max_recipe_count
+        #   @return [::Integer]
+        #     Optional. The maximum number of key recipes to return in the response.
+        #     If not set, a default limit of 100 will be used.
+        # @!attribute [rw] max_range_count
+        #   @return [::Integer]
+        #     Optional. The maximum number of ranges to return in the response.
+        #     If not set, a default limit of 10000 will be used.
+        class FetchCacheUpdateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
