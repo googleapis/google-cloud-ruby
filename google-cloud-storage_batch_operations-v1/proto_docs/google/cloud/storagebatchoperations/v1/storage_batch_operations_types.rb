@@ -513,11 +513,26 @@ module Google
         #     Output only. Number of objects completed.
         # @!attribute [r] failed_object_count
         #   @return [::Integer]
-        #     Output only. Number of objects failed.
+        #     Output only. The number of objects that failed due to user errors or
+        #     service errors.
         # @!attribute [r] total_bytes_found
         #   @return [::Integer]
         #     Output only. Number of bytes found from source. This field is only
         #     populated for jobs with a prefix list object configuration.
+        # @!attribute [r] object_custom_contexts_created
+        #   @return [::Integer]
+        #     Output only. Number of object custom contexts created. This field is only
+        #     populated for jobs with the UpdateObjectCustomContext transformation.
+        # @!attribute [r] object_custom_contexts_deleted
+        #   @return [::Integer]
+        #     Output only. Number of object custom contexts deleted. This field is only
+        #     populated for jobs with the UpdateObjectCustomContext transformation.
+        # @!attribute [r] object_custom_contexts_updated
+        #   @return [::Integer]
+        #     Output only. Number of object custom contexts updated. This counter tracks
+        #     custom contexts where the key already existed, but the payload was
+        #     modified. This field is only populated for jobs with the
+        #     UpdateObjectCustomContext transformation.
         class Counters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
