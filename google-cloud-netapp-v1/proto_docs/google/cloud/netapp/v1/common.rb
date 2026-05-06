@@ -112,6 +112,20 @@ module Google
           UNIFIED = 2
         end
 
+        # Defines the scale-type of a UNIFIED Storage Pool.
+        module ScaleType
+          # Unspecified scale type.
+          SCALE_TYPE_UNSPECIFIED = 0
+
+          # Represents standard capacity and performance scale-type.
+          # Suitable for general purpose workloads.
+          SCALE_TYPE_DEFAULT = 1
+
+          # Represents higher capacity and performance scale-type.
+          # Suitable for more demanding workloads.
+          SCALE_TYPE_SCALEOUT = 2
+        end
+
         # Schedule for Hybrid Replication.
         # New enum values may be added in future to support different frequency of
         # replication.
