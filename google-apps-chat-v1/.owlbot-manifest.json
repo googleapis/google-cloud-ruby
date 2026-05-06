@@ -99,6 +99,7 @@
     "snippets/chat_service/delete_section.rb",
     "snippets/chat_service/delete_space.rb",
     "snippets/chat_service/find_direct_message.rb",
+    "snippets/chat_service/find_group_chats.rb",
     "snippets/chat_service/get_attachment.rb",
     "snippets/chat_service/get_custom_emoji.rb",
     "snippets/chat_service/get_membership.rb",

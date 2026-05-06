@@ -553,6 +553,27 @@ module Google
             #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
             #     - `https://www.googleapis.com/auth/chat.spaces`
             rpc :FindDirectMessage, ::Google::Apps::Chat::V1::FindDirectMessageRequest, ::Google::Apps::Chat::V1::Space
+            # Returns all spaces with `spaceType == GROUP_CHAT`, whose
+            # human memberships contain exactly the calling user, and the users specified
+            # in `FindGroupChatsRequest.users`. Only members that have joined the
+            # conversation are supported. For an example, see [Find group
+            # chats](https://developers.google.com/workspace/chat/find-group-chats).
+            #
+            # If the calling user blocks, or is blocked by, some users, and no spaces
+            # with the entire specified set of users are found, this method returns
+            # spaces that don't include the blocked or blocking users.
+            #
+            # The specified set of users must contain only human (non-app) memberships.
+            # A request that contains non-human users doesn't return any spaces.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.memberships.readonly`
+            #   - `https://www.googleapis.com/auth/chat.memberships`
+            rpc :FindGroupChats, ::Google::Apps::Chat::V1::FindGroupChatsRequest, ::Google::Apps::Chat::V1::FindGroupChatsResponse
             # Creates a membership for the calling Chat app, a user, or a Google Group.
             # Creating memberships for other Chat apps isn't supported.
             # When creating a membership, if the specified member has their auto-accept
