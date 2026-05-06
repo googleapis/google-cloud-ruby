@@ -1,5 +1,25 @@
 # Changelog
 
+### 2.5.0 (2026-05-06)
+
+#### Features
+
+* Add GKE Hub teams scope and RBAC GAPIC 
+* Add irb as explicit dependency for Ruby 4.0 compatibility 
+* publish client batch config schema 
+* publish new error reasons 
+* Update minimum Ruby to v3.2 and required dependencies for Ruby v4.0 
+* upgrade protobuf from v25.7 to v31.0 
+#### Bug Fixes
+
+* add rbacrolebindingactuation dependency ([#32414](https://github.com/googleapis/google-cloud-ruby/issues/32414)) 
+#### Documentation
+
+* fix documentation formatting 
+* update license year 
+* update SelectiveGapicGeneration usage doc 
+* update various comments 
+
 ### 2.4.1 (2025-10-27)
 
 #### Documentation
