@@ -61,6 +61,11 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::EnterpriseWebSearch]
         #     Optional. Tool to support searching public web data, powered by Vertex AI
         #     Search and Sec4 compliance.
+        # @!attribute [rw] parallel_ai_search
+        #   @return [::Google::Cloud::AIPlatform::V1::Tool::ParallelAiSearch]
+        #     Optional. If specified, Vertex AI will use Parallel.ai to search for
+        #     information to answer user queries. The search results will be grounded on
+        #     Parallel.ai and presented to the model for response generation
         # @!attribute [rw] code_execution
         #   @return [::Google::Cloud::AIPlatform::V1::Tool::CodeExecution]
         #     Optional. CodeExecution tool type.
@@ -89,6 +94,39 @@ module Google
           #     Optional. Sites with confidence level chosen & above this value will be
           #     blocked from the search results.
           class GoogleSearch
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ParallelAiSearch tool type.
+          # A tool that uses the Parallel.ai search engine for grounding.
+          # @!attribute [rw] api_key
+          #   @return [::String]
+          #     Optional. The API key for ParallelAiSearch.
+          #     If an API key is not provided, the system will attempt to verify access
+          #     by checking for an active Parallel.ai subscription through the Google
+          #     Cloud Marketplace.
+          #     See https://docs.parallel.ai/search/search-quickstart for more details.
+          # @!attribute [rw] custom_configs
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. Custom configs for ParallelAiSearch.
+          #     This field can be used to pass any parameter from the Parallel.ai
+          #     Search API.
+          #     See the Parallel.ai documentation for the full list of available
+          #     parameters and their usage:
+          #     https://docs.parallel.ai/api-reference/search-beta/search
+          #     Currently only `source_policy`, `excerpts`, `max_results`, `mode`,
+          #     `fetch_policy` can be set via this field. For example:
+          #     {
+          #       "source_policy": {
+          #         "include_domains": ["google.com", "wikipedia.org"],
+          #         "exclude_domains": ["example.com"]
+          #       },
+          #       "fetch_policy": {
+          #         "max_age_seconds": 3600
+          #       }
+          #     }
+          class ParallelAiSearch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

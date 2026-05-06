@@ -37,6 +37,8 @@ module Google
             rpc :QueryReasoningEngine, ::Google::Cloud::AIPlatform::V1::QueryReasoningEngineRequest, ::Google::Cloud::AIPlatform::V1::QueryReasoningEngineResponse
             # Streams queries using a reasoning engine.
             rpc :StreamQueryReasoningEngine, ::Google::Cloud::AIPlatform::V1::StreamQueryReasoningEngineRequest, stream(::Google::Api::HttpBody)
+            # Async query using a reasoning engine.
+            rpc :AsyncQueryReasoningEngine, ::Google::Cloud::AIPlatform::V1::AsyncQueryReasoningEngineRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
