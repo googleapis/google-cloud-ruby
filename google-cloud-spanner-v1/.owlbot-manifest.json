@@ -63,6 +63,7 @@
     "snippets/spanner/execute_batch_dml.rb",
     "snippets/spanner/execute_sql.rb",
     "snippets/spanner/execute_streaming_sql.rb",
+    "snippets/spanner/fetch_cache_update.rb",
     "snippets/spanner/get_session.rb",
     "snippets/spanner/list_sessions.rb",
     "snippets/spanner/partition_query.rb",
