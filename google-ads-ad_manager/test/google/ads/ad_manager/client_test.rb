@@ -280,6 +280,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_label_service_rest
+    skip unless Google::Ads::AdManager.label_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.label_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::LabelService::Rest::Client, client
+    end
+  end
+
   def test_line_item_service_rest
     skip unless Google::Ads::AdManager.line_item_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -287,6 +297,26 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::LineItemService::Rest::Client, client
+    end
+  end
+
+  def test_linked_device_service_rest
+    skip unless Google::Ads::AdManager.linked_device_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.linked_device_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::LinkedDeviceService::Rest::Client, client
+    end
+  end
+
+  def test_mcm_earnings_service_rest
+    skip unless Google::Ads::AdManager.mcm_earnings_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.mcm_earnings_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::McmEarningsService::Rest::Client, client
     end
   end
 
@@ -407,6 +437,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::ReportService::Rest::Client, client
+    end
+  end
+
+  def test_rich_media_ads_company_service_rest
+    skip unless Google::Ads::AdManager.rich_media_ads_company_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.rich_media_ads_company_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::RichMediaAdsCompanyService::Rest::Client, client
     end
   end
 
