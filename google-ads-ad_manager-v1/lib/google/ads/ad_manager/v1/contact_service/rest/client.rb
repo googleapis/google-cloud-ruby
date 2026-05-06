@@ -289,8 +289,23 @@ module Google
               #     the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>address</code></li>
+              #       <li><code>cellPhone</code></li>
+              #       <li><code>comment</code></li>
+              #       <li><code>company</code></li>
+              #       <li><code>displayName</code></li>
+              #       <li><code>email</code></li>
+              #       <li><code>fax</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>status</code></li>
+              #       <li><code>title</code></li>
+              #       <li><code>workPhone</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -549,7 +564,7 @@ module Google
               #
               #     The `Contact`'s `name` is used to identify the `Contact` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::Contact]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

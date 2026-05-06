@@ -128,6 +128,15 @@ module Google
             # must be
             # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
             IN_TARGET_IMPRESSIONS = 7
+
+            # The number of completed views reported by creatives associated with the
+            # line item. A completed view is defined as having watched the entirety of
+            # the in-stream video ad and is only supported for standard reservation
+            # video line items. The
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.line_item_type}
+            # must be
+            # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
+            COMPLETED_VIEWS = 8
           end
         end
       end

@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the `Placement`.
         #     Format: `networks/{network_code}/placements/{placement_id}`
         # @!attribute [r] placement_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `Placement` ID.
+        #     Output only. Deprecated: `Placement` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the placement. This attribute has a maximum

@@ -289,8 +289,15 @@ module Google
               #     must match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>displayName</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>status</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -356,6 +363,171 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @cms_metadata_key_service_stub, :list_cms_metadata_keys, "cms_metadata_keys", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to activate a list of `CmsMetadataKey` objects.
+              #
+              # @overload batch_activate_cms_metadata_keys(request, options = nil)
+              #   Pass arguments to `batch_activate_cms_metadata_keys` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_cms_metadata_keys(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_cms_metadata_keys` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `CmsMetadataKeys` will be activated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `CmsMetadataKey`s to activate.
+              #     Format: `networks/{network_code}/cmsMetadataKeys/{cms_metadata_key_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest.new
+              #
+              #   # Call the batch_activate_cms_metadata_keys method.
+              #   result = client.batch_activate_cms_metadata_keys request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysResponse.
+              #   p result
+              #
+              def batch_activate_cms_metadata_keys request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_cms_metadata_keys.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_cms_metadata_keys.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_cms_metadata_keys.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cms_metadata_key_service_stub.batch_activate_cms_metadata_keys request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to deactivate a list of `CmsMetadataKey` objects.
+              #
+              # @overload batch_deactivate_cms_metadata_keys(request, options = nil)
+              #   Pass arguments to `batch_deactivate_cms_metadata_keys` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_cms_metadata_keys(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_cms_metadata_keys` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `CmsMetadataKeys` will be
+              #     deactivated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `CmsMetadataKey`s to deactivate.
+              #     Format: `networks/{network_code}/cmsMetadataKeys/{cms_metadata_key_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest.new
+              #
+              #   # Call the batch_deactivate_cms_metadata_keys method.
+              #   result = client.batch_deactivate_cms_metadata_keys request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysResponse.
+              #   p result
+              #
+              def batch_deactivate_cms_metadata_keys request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_cms_metadata_keys.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_cms_metadata_keys.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_cms_metadata_keys.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cms_metadata_key_service_stub.batch_deactivate_cms_metadata_keys request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -517,6 +689,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_cms_metadata_keys
+                  ##
+                  # RPC-specific configuration for `batch_activate_cms_metadata_keys`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_cms_metadata_keys
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_cms_metadata_keys`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_cms_metadata_keys
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -524,6 +706,10 @@ module Google
                     @get_cms_metadata_key = ::Gapic::Config::Method.new get_cms_metadata_key_config
                     list_cms_metadata_keys_config = parent_rpcs.list_cms_metadata_keys if parent_rpcs.respond_to? :list_cms_metadata_keys
                     @list_cms_metadata_keys = ::Gapic::Config::Method.new list_cms_metadata_keys_config
+                    batch_activate_cms_metadata_keys_config = parent_rpcs.batch_activate_cms_metadata_keys if parent_rpcs.respond_to? :batch_activate_cms_metadata_keys
+                    @batch_activate_cms_metadata_keys = ::Gapic::Config::Method.new batch_activate_cms_metadata_keys_config
+                    batch_deactivate_cms_metadata_keys_config = parent_rpcs.batch_deactivate_cms_metadata_keys if parent_rpcs.respond_to? :batch_deactivate_cms_metadata_keys
+                    @batch_deactivate_cms_metadata_keys = ::Gapic::Config::Method.new batch_deactivate_cms_metadata_keys_config
 
                     yield self if block_given?
                   end

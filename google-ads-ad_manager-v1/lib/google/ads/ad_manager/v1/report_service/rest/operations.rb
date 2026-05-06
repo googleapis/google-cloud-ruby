@@ -909,9 +909,8 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v1/{name}:cancel",
-                                                          body: "*",
                                                           matches: [
-                                                            ["name", %r{^operations(?:/.*)?$}, true]
+                                                            ["name", %r{^networks/[^/]+/operations/reports/runs/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

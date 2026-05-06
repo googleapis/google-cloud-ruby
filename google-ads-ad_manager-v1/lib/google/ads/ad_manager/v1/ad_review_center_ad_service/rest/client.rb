@@ -203,11 +203,22 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_ad_review_center_ads(parent: nil, page_size: nil, page_token: nil, status: nil, ad_review_center_ad_id: nil, date_time_range: nil, search_text: nil, buyer_account_id: nil)
+              # @overload search_ad_review_center_ads(status: nil, manual_review_status: nil, parent: nil, page_size: nil, page_token: nil, ad_review_center_ad_id: nil, date_time_range: nil, search_text: nil, buyer_account_id: nil)
               #   Pass arguments to `search_ad_review_center_ads` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param status [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
+              #     Optional. Only return ads with the given status.
+              #
+              #     Note: The following parameters are mutually exclusive: `status`, `manual_review_status`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param manual_review_status [::Google::Ads::AdManager::V1::ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus]
+              #     Optional. Only return ads with the given manual review status. Only
+              #     available for networks with Manual Creative Review enabled. For more
+              #     information, see
+              #     https://support.google.com/admanager/answer/2586531#manual-creative-review.
+              #
+              #     Note: The following parameters are mutually exclusive: `manual_review_status`, `status`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. The parent, which owns this collection of AdReviewCenterAds.
               #     Format: networks/\\{network_code}/webProperties/\\{web_property_code}
@@ -231,15 +242,14 @@ module Google
               #   @param page_token [::String]
               #     Optional. The page token to fetch the next page of AdReviewCenterAds. This
               #     is the value returned from a previous Search request, or empty.
-              #   @param status [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
-              #     Optional. Only return ads with the given status.
               #   @param ad_review_center_ad_id [::Array<::String>]
               #     Optional. Only return ads with the given AdReviewCenterAd IDs. If provided,
               #     no other filter can be set (other than page size and page token).
               #   @param date_time_range [::Google::Type::Interval, ::Hash]
               #     Optional. If provided, only return ads that served within the given date
               #     range (inclusive). The  date range must be within the last 30 days. If not
-              #     provided, the date range will be the last 30 days.
+              #     provided, the date range will be the last 30 days. This filter does not
+              #     apply to the PENDING manual review status.
               #   @param search_text [::Array<::String>]
               #     Optional. If provided, restrict the search to AdReviewCenterAds associated
               #     with the text (including any text on the ad or in the destination URL). If
@@ -249,7 +259,7 @@ module Google
               #   @param buyer_account_id [::Array<::Integer>]
               #     Optional. If provided, restrict the search to creatives belonging to one of
               #     the given Adx buyer account IDs. Only applicable to RTB creatives. Adx
-              #     buyer account IDs can be found via the ProgrammaticBuyerService.
+              #     buyer account IDs can be found using the `ProgrammaticBuyerService`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Ads::AdManager::V1::AdReviewCenterAd>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

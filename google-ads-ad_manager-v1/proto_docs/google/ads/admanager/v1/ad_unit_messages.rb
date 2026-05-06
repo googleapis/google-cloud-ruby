@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the AdUnit.
         #     Format: `networks/{network_code}/adUnits/{ad_unit_id}`
         # @!attribute [r] ad_unit_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. AdUnit ID.
+        #     Output only. Deprecated: AdUnit ID.
         # @!attribute [rw] parent_ad_unit
         #   @return [::String]
         #     Required. Immutable. The AdUnit's parent. Every ad unit has a parent except

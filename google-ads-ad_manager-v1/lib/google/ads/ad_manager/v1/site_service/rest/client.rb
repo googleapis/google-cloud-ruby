@@ -289,8 +289,17 @@ module Google
               #     the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>approvalStatus</code></li>
+              #       <li><code>approvalStatusUpdateTime</code></li>
+              #       <li><code>childNetworkCode</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>url</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -549,7 +558,7 @@ module Google
               #
               #     The `Site`'s `name` is used to identify the `Site` to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::Site]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

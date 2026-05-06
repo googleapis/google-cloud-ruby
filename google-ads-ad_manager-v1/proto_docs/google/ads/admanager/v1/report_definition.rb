@@ -54,12 +54,25 @@ module Google
         #   @return [::Google::Ads::AdManager::V1::ReportDefinition::DateRange]
         #     Optional. The comparison date range of this report. If unspecified, the
         #     report won't have any comparison metrics.
+        # @!attribute [rw] cms_metadata_dimension_key_ids
+        #   @return [::Array<::Integer>]
+        #     Optional. CMS Metadata Dimension keys that represent
+        #     CMS_METADATA_DIMENSION_* dimensions. The index of this repeated field
+        #     corresponds to the index on each dimension. For example,
+        #     cms_metadata_dimension_key_ids[0] describes
+        #     CMS_METADATA_DIMENSION_0_VALUE_ID and CMS_METADATA_DIMENSION_0_VALUE.
         # @!attribute [rw] custom_dimension_key_ids
         #   @return [::Array<::Integer>]
         #     Optional. Custom Dimension keys that represent CUSTOM_DIMENSION_*
         #     dimensions. The index of this repeated field corresponds to the index on
         #     each dimension. For example, custom_dimension_key_ids[0] describes
         #     CUSTOM_DIMENSION_0_VALUE_ID and CUSTOM_DIMENSION_0_VALUE.
+        # @!attribute [rw] ekv_dimension_key_ids
+        #   @return [::Array<::Integer>]
+        #     Optional. Enhanced Key-values Dimension keys that represent EKV_DIMENSION_*
+        #     dimensions. The index of this repeated field corresponds to the index on
+        #     each dimension.  For example, ekv_dimension_key_ids[0] describes
+        #     EKV_DIMENSION_0_VALUE_ID and EKV_DIMENSION_0_VALUE.
         # @!attribute [rw] line_item_custom_field_ids
         #   @return [::Array<::Integer>]
         #     Optional. Custom field IDs that represent LINE_ITEM_CUSTOM_FIELD_*
@@ -96,6 +109,20 @@ module Google
         # @!attribute [rw] sorts
         #   @return [::Array<::Google::Ads::AdManager::V1::ReportDefinition::Sort>]
         #     Optional. Default sorts to apply to this report.
+        # @!attribute [rw] expanded_compatibility
+        #   @return [::Boolean]
+        #     Optional. Whether to use expanded compatibility for this report.
+        #
+        #     If true, this setting enables certain combinations of dimensions and
+        #     metrics for this report that would otherwise be incompatible. Enabling this
+        #     will collapse reservation data into a single row even if the report's
+        #     dimensions would normally result in multiple rows for reservation data.
+        #     This impacts dimensions related to line items, orders, creatives, and
+        #     advertisers.
+        #
+        #     This is equivalent to the "Access more dimension and metric combinations"
+        #     setting in the Interactive Reports UI. For more details, see:
+        #     https://support.google.com/admanager/answer/16865393#combinations
         class ReportDefinition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -158,9 +185,13 @@ module Google
               # the future.
               THIS_WEEK = 3
 
-              # From the beginning of the calendar week (Monday to Sunday) in which the
+              # From the beginning of the calendar week in which the
               # up to and including the day the report is run.
               THIS_WEEK_TO_DATE = 29
+
+              # From the beginning of the calendar week in which the
+              # report is run, up to and including the day before the report is run.
+              THIS_WEEK_TO_YESTERDAY = 40
 
               # The full month in which this report is run. Could include dates in
               # the future.
@@ -170,6 +201,10 @@ module Google
               # up to and including the day the report is run.
               THIS_MONTH_TO_DATE = 26
 
+              # From the beginning of the calendar month in which the report is run,
+              # up to and including the day before the report is run.
+              THIS_MONTH_TO_YESTERDAY = 41
+
               # The full quarter in which this report is run. Could include dates
               # in the future.
               THIS_QUARTER = 5
@@ -178,6 +213,10 @@ module Google
               # up to and including the day the report is run.
               THIS_QUARTER_TO_DATE = 27
 
+              # From the beginning of the calendar quarter in which the report is run,
+              # up to and including the day before the report is run.
+              THIS_QUARTER_TO_YESTERDAY = 42
+
               # The full year in which this report is run. Could include dates in
               # the future.
               THIS_YEAR = 6
@@ -185,6 +224,10 @@ module Google
               # From the beginning of the calendar year in which the report is run, to
               # up to and including the day the report is run.
               THIS_YEAR_TO_DATE = 28
+
+              # From the beginning of the calendar year in which the report is run, to
+              # up to and including the day before the report is run.
+              THIS_YEAR_TO_YESTERDAY = 43
 
               # The entire previous calendar week, Monday to Sunday (inclusive),
               # preceding the calendar week the report is run.
@@ -493,6 +536,9 @@ module Google
             # Historical.
             HISTORICAL = 1
 
+            # Future sell through.
+            FUTURE_SELL_THROUGH = 4
+
             # Reach.
             REACH = 5
 
@@ -507,6 +553,21 @@ module Google
 
             # Ad speed.
             AD_SPEED = 13
+
+            # Real time video.
+            REAL_TIME_VIDEO = 15
+
+            # Youtube consolidated.
+            YOUTUBE_CONSOLIDATED = 16
+
+            # Ads traffic navigator report.
+            ADS_TRAFFIC_NAVIGATOR = 21
+
+            # Off property campaigns report.
+            OFF_PROPERTY_CAMPAIGNS = 22
+
+            # On platform multicall report.
+            ON_PLATFORM_MULTICALL = 24
           end
 
           # Reporting dimensions.
@@ -544,8 +605,8 @@ module Google
             # Corresponds to "Advertiser credit status value" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `ENUM`
             ADVERTISER_CREDIT_STATUS = 475
@@ -556,8 +617,8 @@ module Google
             #
             # Corresponds to "Advertiser credit status" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `STRING`
             ADVERTISER_CREDIT_STATUS_NAME = 476
@@ -590,8 +651,8 @@ module Google
             #
             # Corresponds to "Advertiser ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `IDENTIFIER`
             ADVERTISER_ID = 131
@@ -626,8 +687,8 @@ module Google
             #
             # Corresponds to "Advertiser" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `STRING`
             ADVERTISER_NAME = 132
@@ -673,8 +734,8 @@ module Google
             # Corresponds to "Advertiser type value" in the Ad Manager UI (when showing
             # API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `ENUM`
             ADVERTISER_TYPE = 473
@@ -685,8 +746,8 @@ module Google
             #
             # Corresponds to "Advertiser type" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `STRING`
             ADVERTISER_TYPE_NAME = 474
@@ -783,7 +844,7 @@ module Google
             #
             # Corresponds to "Ad request sizes" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
             #
             # Data format: `STRING_LIST`
             AD_REQUEST_SIZES = 541
@@ -850,8 +911,8 @@ module Google
             #
             # Corresponds to "Ad unit code" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
-            # `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`, `REACH`
             #
             # Data format: `STRING`
             AD_UNIT_CODE = 64
@@ -863,7 +924,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 1" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_1 = 65
@@ -875,7 +937,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 10" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_10 = 74
@@ -887,7 +950,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 11" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_11 = 75
@@ -899,7 +963,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 12" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_12 = 76
@@ -911,7 +976,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 13" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_13 = 77
@@ -923,7 +989,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 14" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_14 = 78
@@ -935,7 +1002,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 15" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_15 = 79
@@ -947,7 +1015,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 16" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_16 = 80
@@ -959,7 +1028,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 2" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_2 = 66
@@ -971,7 +1041,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 3" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_3 = 67
@@ -983,7 +1054,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 4" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_4 = 68
@@ -995,7 +1067,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 5" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_5 = 69
@@ -1007,7 +1080,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 6" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_6 = 70
@@ -1019,7 +1093,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 7" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_7 = 71
@@ -1031,7 +1106,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 8" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_8 = 72
@@ -1043,7 +1119,8 @@ module Google
             #
             # Corresponds to "Ad unit code level 9" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_CODE_LEVEL_9 = 73
@@ -1054,8 +1131,9 @@ module Google
             #
             # Corresponds to "Ad unit ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
-            # `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`, `REACH`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID = 25
@@ -1067,8 +1145,9 @@ module Google
             #
             # Corresponds to "Ad unit ID (all levels)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
-            # `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`, `REACH`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `IDENTIFIER_LIST`
             AD_UNIT_ID_ALL_LEVEL = 27
@@ -1079,7 +1158,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 1" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_1 = 30
@@ -1090,7 +1170,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 10" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_10 = 48
@@ -1101,7 +1182,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 11" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_11 = 50
@@ -1112,7 +1194,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 12" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_12 = 52
@@ -1124,7 +1207,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 13" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_13 = 54
@@ -1136,7 +1220,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 14" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_14 = 56
@@ -1147,7 +1232,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 15" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_15 = 58
@@ -1158,7 +1244,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 16" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_16 = 60
@@ -1169,7 +1256,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 2" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_2 = 32
@@ -1180,7 +1268,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 3" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_3 = 34
@@ -1191,7 +1280,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 4" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_4 = 36
@@ -1202,7 +1292,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 5" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_5 = 38
@@ -1213,7 +1304,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 6" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_6 = 40
@@ -1224,7 +1316,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 7" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_7 = 42
@@ -1235,7 +1328,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 8" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_8 = 44
@@ -1246,7 +1340,8 @@ module Google
             #
             # Corresponds to "Ad unit ID level 9" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_LEVEL_9 = 46
@@ -1257,7 +1352,9 @@ module Google
             #
             # Corresponds to "Ad unit ID (top level)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `IDENTIFIER`
             AD_UNIT_ID_TOP_LEVEL = 142
@@ -1268,8 +1365,9 @@ module Google
             #
             # Corresponds to "Ad unit" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
-            # `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`, `REACH`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             AD_UNIT_NAME = 26
@@ -1281,8 +1379,9 @@ module Google
             #
             # Corresponds to "Ad unit (all levels)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
-            # `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`, `REACH`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING_LIST`
             AD_UNIT_NAME_ALL_LEVEL = 29
@@ -1293,7 +1392,8 @@ module Google
             #
             # Corresponds to "Ad unit level 1" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_1 = 31
@@ -1304,7 +1404,8 @@ module Google
             #
             # Corresponds to "Ad unit level 10" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_10 = 49
@@ -1316,7 +1417,8 @@ module Google
             #
             # Corresponds to "Ad unit level 11" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_11 = 51
@@ -1327,7 +1429,8 @@ module Google
             #
             # Corresponds to "Ad unit level 12" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_12 = 53
@@ -1339,7 +1442,8 @@ module Google
             #
             # Corresponds to "Ad unit level 13" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_13 = 55
@@ -1351,7 +1455,8 @@ module Google
             #
             # Corresponds to "Ad unit level 14" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_14 = 57
@@ -1363,7 +1468,8 @@ module Google
             #
             # Corresponds to "Ad unit level 15" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_15 = 59
@@ -1375,7 +1481,8 @@ module Google
             #
             # Corresponds to "Ad unit level 16" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_16 = 61
@@ -1386,7 +1493,8 @@ module Google
             #
             # Corresponds to "Ad unit level 2" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_2 = 33
@@ -1397,7 +1505,8 @@ module Google
             #
             # Corresponds to "Ad unit level 3" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_3 = 35
@@ -1408,7 +1517,8 @@ module Google
             #
             # Corresponds to "Ad unit level 4" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_4 = 37
@@ -1419,7 +1529,8 @@ module Google
             #
             # Corresponds to "Ad unit level 5" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_5 = 39
@@ -1430,7 +1541,8 @@ module Google
             #
             # Corresponds to "Ad unit level 6" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_6 = 41
@@ -1441,7 +1553,8 @@ module Google
             #
             # Corresponds to "Ad unit level 7" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_7 = 43
@@ -1452,7 +1565,8 @@ module Google
             #
             # Corresponds to "Ad unit level 8" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_8 = 45
@@ -1463,7 +1577,8 @@ module Google
             #
             # Corresponds to "Ad unit level 9" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_LEVEL_9 = 47
@@ -1474,7 +1589,9 @@ module Google
             #
             # Corresponds to "Ad unit (top level)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             AD_UNIT_NAME_TOP_LEVEL = 143
@@ -1510,9 +1627,13 @@ module Google
             # Corresponds to "Ad unit status value" in the Ad Manager UI (when showing
             # API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::AdUnitStatusEnum::AdUnitStatus AdUnitStatus}
             AD_UNIT_STATUS = 206
 
             # The name of the status of the ad unit
@@ -1521,7 +1642,8 @@ module Google
             #
             # Corresponds to "Ad unit status" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             AD_UNIT_STATUS_NAME = 207
@@ -1746,7 +1868,8 @@ module Google
             #
             # Corresponds to "Audience segment ID (targeted)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             AUDIENCE_SEGMENT_ID_TARGETED = 584
@@ -1758,7 +1881,8 @@ module Google
             #
             # Corresponds to "Audience segment (targeted)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             AUDIENCE_SEGMENT_TARGETED = 585
@@ -1770,7 +1894,8 @@ module Google
             # Corresponds to "Audience segment (targeted) AdID size" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_AD_ID_USER_SIZE = 605
@@ -1782,7 +1907,8 @@ module Google
             # Corresponds to "Audience segment (targeted) Amazon Fire size" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_AMAZON_FIRE_USER_SIZE = 606
@@ -1794,7 +1920,8 @@ module Google
             # Corresponds to "Audience segment (targeted) Android TV size" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_ANDROID_TV_USER_SIZE = 607
@@ -1806,7 +1933,8 @@ module Google
             # Corresponds to "Audience segment (targeted) Apple TV size" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_APPLE_TV_USER_SIZE = 608
@@ -1818,7 +1946,8 @@ module Google
             # Corresponds to "Audience segment (targeted) IDFA size" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_IDFA_USER_SIZE = 609
@@ -1830,7 +1959,8 @@ module Google
             # Corresponds to "Audience segment (targeted) mobile web size" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_MOBILE_WEB_USER_SIZE = 610
@@ -1842,7 +1972,8 @@ module Google
             # Corresponds to "Audience segment (targeted) PlayStation size" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_PLAYSTATION_USER_SIZE = 611
@@ -1854,7 +1985,8 @@ module Google
             # Corresponds to "Audience segment (targeted) PPID size" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_PPID_USER_SIZE = 612
@@ -1866,7 +1998,8 @@ module Google
             # Corresponds to "Audience segment (targeted) Roku size" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_ROKU_USER_SIZE = 615
@@ -1878,7 +2011,8 @@ module Google
             # Corresponds to "Audience segment (targeted) Samsung TV size" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_SAMSUNG_TV_USER_SIZE = 616
@@ -1889,7 +2023,8 @@ module Google
             #
             # Corresponds to "Audience segment (targeted) size" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_SIZE = 618
@@ -1901,7 +2036,8 @@ module Google
             # Corresponds to "Audience segment (targeted) status value" in the Ad
             # Manager UI (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `ENUM`
             AUDIENCE_SEGMENT_TARGETED_STATUS = 628
@@ -1912,7 +2048,8 @@ module Google
             #
             # Corresponds to "Audience segment (targeted) status" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             AUDIENCE_SEGMENT_TARGETED_STATUS_NAME = 617
@@ -1924,7 +2061,8 @@ module Google
             # Corresponds to "Audience segment (targeted) Xbox size" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `INTEGER`
             AUDIENCE_SEGMENT_TARGETED_XBOX_USER_SIZE = 619
@@ -1959,7 +2097,7 @@ module Google
             # Corresponds to "Bidder encrypted ID" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `REVENUE_VERIFICATION`
+            # `REVENUE_VERIFICATION`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             BIDDER_ENCRYPTED_ID = 493
@@ -1971,7 +2109,7 @@ module Google
             # Corresponds to "Bidder" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `REVENUE_VERIFICATION`
+            # `REVENUE_VERIFICATION`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             BIDDER_NAME = 494
@@ -2042,7 +2180,8 @@ module Google
             # Corresponds to "Browser category value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`, `REACH`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `ENUM`
             BROWSER_CATEGORY = 119
@@ -2053,7 +2192,8 @@ module Google
             #
             # Corresponds to "Browser category" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`, `REACH`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             BROWSER_CATEGORY_NAME = 120
@@ -2064,7 +2204,8 @@ module Google
             #
             # Corresponds to "Browser ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `IDENTIFIER`
             BROWSER_ID = 235
@@ -2075,7 +2216,8 @@ module Google
             #
             # Corresponds to "Browser" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             BROWSER_NAME = 236
@@ -2102,25 +2244,13 @@ module Google
             # Data format: `STRING`
             BUYER_NETWORK_NAME = 449
 
-            # The callout status category in the Ads traffic navigator report.
-            #
-            #
-            #
-            # Corresponds to "Callout status category value" in the Ad Manager UI (when
-            # showing API fields).
-            #
-            # Compatible with the following report types:
-            #
-            # Data format: `ENUM`
-            CALLOUT_STATUS_CATEGORY = 588
-
             # The callout status category name in the Ads traffic navigator report.
             #
             #
             #
             # Corresponds to "Callout status category" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             CALLOUT_STATUS_CATEGORY_NAME = 589
@@ -2265,7 +2395,8 @@ module Google
             #
             # Corresponds to "Content bundle ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `IDENTIFIER`
             CONTENT_BUNDLE_ID = 460
@@ -2276,7 +2407,8 @@ module Google
             #
             # Corresponds to "Content bundle" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             CONTENT_BUNDLE_NAME = 461
@@ -2287,7 +2419,8 @@ module Google
             #
             # Corresponds to "CMS metadata key ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `IDENTIFIER`
             CONTENT_CMS_METADATA_KV_NAMESPACE_ID = 462
@@ -2298,7 +2431,8 @@ module Google
             #
             # Corresponds to "CMS metadata key" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             CONTENT_CMS_METADATA_KV_NAMESPACE_NAME = 463
@@ -2309,7 +2443,8 @@ module Google
             #
             # Corresponds to "Content source name" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             CONTENT_CMS_NAME = 643
@@ -2321,7 +2456,8 @@ module Google
             # Corresponds to "ID of the video in the content source" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             CONTENT_CMS_VIDEO_ID = 644
@@ -2332,7 +2468,8 @@ module Google
             #
             # Corresponds to "Content ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `IDENTIFIER`
             CONTENT_ID = 246
@@ -2366,7 +2503,8 @@ module Google
             #
             # Corresponds to "Content" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             CONTENT_NAME = 247
@@ -2400,8 +2538,9 @@ module Google
             #
             # Corresponds to "Country code" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`, `AD_SPEED`,
+            # `YOUTUBE_CONSOLIDATED`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             COUNTRY_CODE = 466
@@ -2412,8 +2551,10 @@ module Google
             #
             # Corresponds to "Country ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`, `AD_SPEED`,
+            # `YOUTUBE_CONSOLIDATED`, `OFF_PROPERTY_CAMPAIGNS`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `IDENTIFIER`
             COUNTRY_ID = 11
@@ -2424,8 +2565,10 @@ module Google
             #
             # Corresponds to "Country" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`, `AD_SPEED`,
+            # `YOUTUBE_CONSOLIDATED`, `OFF_PROPERTY_CAMPAIGNS`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             COUNTRY_NAME = 12
@@ -2470,7 +2613,8 @@ module Google
             #
             # Corresponds to "Creative ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REAL_TIME_VIDEO`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             CREATIVE_ID = 138
@@ -2481,10 +2625,36 @@ module Google
             #
             # Corresponds to "Creative" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REAL_TIME_VIDEO`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             CREATIVE_NAME = 139
+
+            # ENUM describing whether the creative is part of a creative set or a
+            #  normal creative.
+            #
+            #
+            #
+            # Corresponds to "Creative or creative set value" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            CREATIVE_OR_CREATIVE_SET = 682
+
+            # Localized string name of whether the creative is part of a creative set
+            #  or a normal creative.
+            #
+            #
+            #
+            # Corresponds to "Creative or creative set" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            CREATIVE_OR_CREATIVE_SET_NAME = 683
 
             # Creative Policies filtering.
             #
@@ -2556,6 +2726,66 @@ module Google
             #
             # Data format: `STRING`
             CREATIVE_SET_ROLE_TYPE_NAME = 687
+
+            # Whether the creative has an SSL compliance override, and how the override
+            #  has been set.
+            #
+            #
+            #
+            # Corresponds to "Creative SSL compliance override value" in the Ad Manager
+            # UI (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            CREATIVE_SSL_COMPLIANCE_OVERRIDE = 784
+
+            # Localized name of the creative SSL compliance override.
+            #
+            #
+            #
+            # Corresponds to "Creative SSL compliance override" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            CREATIVE_SSL_COMPLIANCE_OVERRIDE_NAME = 786
+
+            # The result of an Ad Manager scan of the creative.
+            #
+            #
+            #
+            # Corresponds to "Creative SSL scan result value" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            CREATIVE_SSL_SCAN_RESULT = 785
+
+            # Localized name of the creative SSL scan result.
+            #
+            #
+            #
+            # Corresponds to "Creative SSL scan result" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            CREATIVE_SSL_SCAN_RESULT_NAME = 787
+
+            # The size of the ad unit that the creative is intended to occupy, such as
+            #  "468 x 60".
+            #
+            #
+            #
+            # Corresponds to "Creative target ad unit size" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `REAL_TIME_VIDEO`, `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `STRING`
+            CREATIVE_TARGET_AD_UNIT_SIZE = 770
 
             # Creative technology ENUM
             #
@@ -2746,8 +2976,11 @@ module Google
             #
             # Corresponds to "Date" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`, `REVENUE_VERIFICATION`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`,
+            # `REVENUE_VERIFICATION`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `YOUTUBE_CONSOLIDATED`, `OFF_PROPERTY_CAMPAIGNS`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `DATE`
             DATE = 3
@@ -2759,8 +2992,9 @@ module Google
             #
             # Corresponds to "Day of week" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`,
+            # `YOUTUBE_CONSOLIDATED`, `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             DAY_OF_WEEK = 4
@@ -2793,10 +3027,22 @@ module Google
             #
             # Corresponds to "Deal ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             DEAL_ID = 436
+
+            # List of deal IDs found in a callout.
+            #
+            #
+            #
+            # Corresponds to "Deal ID (all)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `STRING_LIST`
+            DEAL_ID_ALL = 781
 
             # Deal name
             #
@@ -2804,7 +3050,8 @@ module Google
             #
             # Corresponds to "Deal" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             DEAL_NAME = 437
@@ -2865,10 +3112,21 @@ module Google
             # Corresponds to "Demand source value" in the Ad Manager UI (when showing
             # API fields).
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `ENUM`
             DEMAND_SOURCE = 592
+
+            # List of demand sources found in a callout.
+            #
+            #
+            #
+            # Corresponds to "Demand source (all)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `STRING_LIST`
+            DEMAND_SOURCE_ALL = 782
 
             # Demand source name.
             #
@@ -2876,7 +3134,7 @@ module Google
             #
             # Corresponds to "Demand source" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             DEMAND_SOURCE_NAME = 593
@@ -2924,7 +3182,8 @@ module Google
             # API fields).
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `ENUM`
             DEVICE_CATEGORY = 15
@@ -2937,7 +3196,8 @@ module Google
             # Corresponds to "Device category" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             DEVICE_CATEGORY_NAME = 16
@@ -3237,7 +3497,7 @@ module Google
             # Corresponds to "Yield partner ID (header bidding trafficking)" in the Ad
             # Manager UI (when showing API fields).
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `IDENTIFIER`
             HBT_YIELD_PARTNER_ID = 659
@@ -3249,7 +3509,7 @@ module Google
             # Corresponds to "Yield partner (header bidding trafficking)" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             HBT_YIELD_PARTNER_NAME = 660
@@ -3283,7 +3543,9 @@ module Google
             #
             # Corresponds to "Hour" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`, `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`,
+            # `ON_PLATFORM_MULTICALL`
             #
             # Data format: `INTEGER`
             HOUR = 100
@@ -3480,7 +3742,8 @@ module Google
             # Corresponds to "Inventory type (expanded) value" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `ENUM`
             INVENTORY_TYPE = 19
@@ -3492,7 +3755,8 @@ module Google
             #
             # Corresponds to "Inventory type (expanded)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             INVENTORY_TYPE_NAME = 20
@@ -3569,7 +3833,7 @@ module Google
             #
             # Corresponds to "Key-values" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
             #
             # Data format: `STRING_LIST`
             KEY_VALUES_SET = 713
@@ -3596,6 +3860,17 @@ module Google
             # Data format: `BOOLEAN`
             LINE_ITEM_ARCHIVED = 188
 
+            # The average number of viewers for the line item.
+            #
+            #
+            #
+            # Corresponds to "Nielsen average number of viewers" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `DOUBLE`
+            LINE_ITEM_AVERAGE_NUMBER_OF_VIEWERS = 694
+
             # Line item companion delivery option ENUM value.
             #
             #
@@ -3606,6 +3881,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [LineItemCompanionDeliveryType][google.ads.admanager.v1.LineItemCompanionDeliveryTypeEnum.LineItemCompanionDeliveryType]
             LINE_ITEM_COMPANION_DELIVERY_OPTION = 204
 
             # Localized line item companion delivery option name.
@@ -3627,10 +3905,13 @@ module Google
             # Corresponds to "Line item computed status value" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [LineItemComputedStatus][google.ads.admanager.v1.LineItemComputedStatusEnum.LineItemComputedStatus]
             LINE_ITEM_COMPUTED_STATUS = 250
 
             # The localized name of the computed status of the LineItem.
@@ -3639,8 +3920,8 @@ module Google
             #
             # Corresponds to "Line item computed status" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             LINE_ITEM_COMPUTED_STATUS_NAME = 251
@@ -3662,8 +3943,8 @@ module Google
             #
             # Corresponds to "Line item rate" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `MONEY`
             LINE_ITEM_COST_PER_UNIT = 85
@@ -3675,10 +3956,13 @@ module Google
             # Corresponds to "Line item cost type value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [LineItemCostType][google.ads.admanager.v1.LineItemCostTypeEnum.LineItemCostType]
             LINE_ITEM_COST_TYPE = 212
 
             # Localized line item cost type name.
@@ -3687,8 +3971,8 @@ module Google
             #
             # Corresponds to "Line item cost type" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             LINE_ITEM_COST_TYPE_NAME = 213
@@ -3714,6 +3998,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [CreativeRotationType][google.ads.admanager.v1.CreativeRotationTypeEnum.CreativeRotationType]
             LINE_ITEM_CREATIVE_ROTATION_TYPE = 189
 
             # The localized name of the creative rotation type of the LineItem.
@@ -3744,8 +4031,8 @@ module Google
             #
             # Corresponds to "Line item currency code" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             LINE_ITEM_CURRENCY_CODE = 180
@@ -3756,7 +4043,8 @@ module Google
             #
             # Corresponds to "Line item delivery indicator" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`, `REACH`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `PERCENT`
             LINE_ITEM_DELIVERY_INDICATOR = 87
@@ -3768,10 +4056,13 @@ module Google
             # Corresponds to "Line item delivery rate type value" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [LineItemDeliveryRateType][google.ads.admanager.v1.LineItemDeliveryRateTypeEnum.LineItemDeliveryRateType]
             LINE_ITEM_DELIVERY_RATE_TYPE = 191
 
             # The localized name of the delivery rate type of the LineItem.
@@ -3780,8 +4071,8 @@ module Google
             #
             # Corresponds to "Line item delivery rate type" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             LINE_ITEM_DELIVERY_RATE_TYPE_NAME = 192
@@ -3815,8 +4106,8 @@ module Google
             #
             # Corresponds to "Line item end date" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `DATE`
             LINE_ITEM_END_DATE = 81
@@ -3827,8 +4118,8 @@ module Google
             #
             # Corresponds to "Line item end time" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `TIMESTAMP`
             LINE_ITEM_END_DATE_TIME = 83
@@ -3843,6 +4134,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::EnvironmentTypeEnum::EnvironmentType EnvironmentType}
             LINE_ITEM_ENVIRONMENT_TYPE = 201
 
             # The localized name of the environment a LineItem is targeting.
@@ -3895,8 +4189,9 @@ module Google
             #
             # Corresponds to "Line item ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `IDENTIFIER`
             LINE_ITEM_ID = 1
@@ -3940,8 +4235,8 @@ module Google
             #
             # Corresponds to "Line item lifetime clicks" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             LINE_ITEM_LIFETIME_CLICKS = 95
@@ -3953,8 +4248,8 @@ module Google
             #
             # Corresponds to "Line item lifetime impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             LINE_ITEM_LIFETIME_IMPRESSIONS = 94
@@ -3967,8 +4262,8 @@ module Google
             # Corresponds to "Line item lifetime viewable impressions" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             LINE_ITEM_LIFETIME_VIEWABLE_IMPRESSIONS = 96
@@ -3992,8 +4287,9 @@ module Google
             #
             # Corresponds to "Line item" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             LINE_ITEM_NAME = 2
@@ -4027,8 +4323,8 @@ module Google
             #
             # Corresponds to "Line item PO number" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             LINE_ITEM_PO_NUMBER = 669
@@ -4043,6 +4339,8 @@ module Google
             # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `ENUM`
+            #
+            # Values: {::Google::Ads::AdManager::V1::GoalTypeEnum::GoalType GoalType}
             LINE_ITEM_PRIMARY_GOAL_TYPE = 210
 
             # Localized goal type name of the primary goal of the line item.
@@ -4068,8 +4366,8 @@ module Google
             # Corresponds to "Line item primary goal units (absolute)" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             LINE_ITEM_PRIMARY_GOAL_UNITS_ABSOLUTE = 93
@@ -4085,8 +4383,8 @@ module Google
             # Corresponds to "Line item primary goal units (percentage)" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `WHOLE_PERCENT`
             LINE_ITEM_PRIMARY_GOAL_UNITS_PERCENTAGE = 396
@@ -4101,6 +4399,8 @@ module Google
             # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `ENUM`
+            #
+            # Values: {::Google::Ads::AdManager::V1::UnitTypeEnum::UnitType UnitType}
             LINE_ITEM_PRIMARY_GOAL_UNIT_TYPE = 208
 
             # Localized unit type name of the primary goal of the line item.
@@ -4122,8 +4422,8 @@ module Google
             #
             # Corresponds to "Line item priority" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             LINE_ITEM_PRIORITY = 24
@@ -4139,6 +4439,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`, `REACH`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [LineItemReservationStatus][google.ads.admanager.v1.LineItemReservationStatusEnum.LineItemReservationStatus]
             LINE_ITEM_RESERVATION_STATUS = 304
 
             # Localized string describing the state of inventory reservation for the
@@ -4192,8 +4495,8 @@ module Google
             #
             # Corresponds to "Line item start date" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `DATE`
             LINE_ITEM_START_DATE = 82
@@ -4204,8 +4507,8 @@ module Google
             #
             # Corresponds to "Line item start time" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `TIMESTAMP`
             LINE_ITEM_START_DATE_TIME = 84
@@ -4228,10 +4531,13 @@ module Google
             # Corresponds to "Line item type value" in the Ad Manager UI (when showing
             # API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType LineItemType}
             LINE_ITEM_TYPE = 193
 
             # Localized line item type name.
@@ -4240,8 +4546,8 @@ module Google
             #
             # Corresponds to "Line item type" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             LINE_ITEM_TYPE_NAME = 194
@@ -4254,7 +4560,8 @@ module Google
             # Corresponds to "Line item is unlimited end time" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `REAL_TIME_VIDEO`
             #
             # Data format: `BOOLEAN`
             LINE_ITEM_UNLIMITED_END = 187
@@ -4336,7 +4643,7 @@ module Google
             # Corresponds to "Yield partner ID (mediation)" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `IDENTIFIER`
             MEDIATION_YIELD_PARTNER_ID = 661
@@ -4347,7 +4654,7 @@ module Google
             #
             # Corresponds to "Yield partner (mediation)" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             MEDIATION_YIELD_PARTNER_NAME = 662
@@ -4405,7 +4712,7 @@ module Google
             # Corresponds to "App ID" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`
+            # `PRIVACY_AND_MESSAGING`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             MOBILE_APP_ID = 123
@@ -4417,7 +4724,7 @@ module Google
             # Corresponds to "App" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`
+            # `PRIVACY_AND_MESSAGING`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             MOBILE_APP_NAME = 127
@@ -4482,7 +4789,7 @@ module Google
             # API fields).
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `ENUM`
             MOBILE_INVENTORY_TYPE = 99
@@ -4496,7 +4803,7 @@ module Google
             # Corresponds to "Inventory type" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`
+            # `PRIVACY_AND_MESSAGING`, `AD_SPEED`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             MOBILE_INVENTORY_TYPE_NAME = 21
@@ -4565,8 +4872,10 @@ module Google
             #
             # Corresponds to "Month and year" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`, `REVENUE_VERIFICATION`, `PARTNER_FINANCE`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`,
+            # `REVENUE_VERIFICATION`, `PARTNER_FINANCE`, `YOUTUBE_CONSOLIDATED`,
+            # `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             MONTH_YEAR = 6
@@ -4615,17 +4924,97 @@ module Google
             # Data format: `STRING`
             NATIVE_STYLE_NAME = 252
 
-            # No fill reason category in the Ads traffic navigator report.
+            # Nielsen demographics (gender and age group).
             #
             #
             #
-            # Corresponds to "No fill reason category value" in the Ad Manager UI (when
-            # showing API fields).
+            # Corresponds to "Nielsen Digital Ad Ratings demographics value" in the Ad
+            # Manager UI (when showing API fields).
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REACH`
             #
             # Data format: `ENUM`
-            NO_FILL_REASON_CATEGORY = 586
+            NIELSEN_DEMOGRAPHICS = 695
+
+            # Name of the Nielsen demographics (gender and age group).
+            #
+            #
+            #
+            # Corresponds to "Nielsen Digital Ad Ratings demographics" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `STRING`
+            NIELSEN_DEMOGRAPHICS_NAME = 768
+
+            # Nielsen device.
+            #
+            #
+            #
+            # Corresponds to "Nielsen Digital Ad Ratings device value" in the Ad
+            # Manager UI (when showing API fields).
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `ENUM`
+            NIELSEN_DEVICE = 696
+
+            # Name of the Nielsen device.
+            #
+            #
+            #
+            # Corresponds to "Nielsen Digital Ad Ratings device" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `STRING`
+            NIELSEN_DEVICE_NAME = 697
+
+            # Nielsen in target
+            #
+            #
+            #
+            # Corresponds to "Nielsen in-target" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `BOOLEAN`
+            NIELSEN_IN_TARGET = 769
+
+            # Data restatement date of Nielsen Digital Ad Ratings data.
+            #
+            #
+            #
+            # Corresponds to "Nielsen Digital Ad Ratings restatement date" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `DATE`
+            NIELSEN_RESTATEMENT_DATE = 698
+
+            # Campaign date segment of Nielsen Digital Ad Ratings reporting.
+            #
+            #
+            #
+            # Corresponds to "Nielsen Digital Ad Ratings segment" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `DATE_RANGE`
+            NIELSEN_SEGMENT = 699
+
+            # Site URL of Nielsen Digital Ad Ratings data.
+            #
+            #
+            #
+            # Corresponds to "Nielsen Site URL" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `STRING`
+            NIELSEN_SITE_URL = 700
 
             # No fill reason category name in the Ads traffic navigator report.
             #
@@ -4633,7 +5022,7 @@ module Google
             #
             # Corresponds to "No fill reason category" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             NO_FILL_REASON_CATEGORY_NAME = 587
@@ -4760,6 +5149,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # [OrderDeliveryStatus][google.ads.admanager.v1.OrderDeliveryStatusEnum.OrderDeliveryStatus]
             ORDER_DELIVERY_STATUS = 231
 
             # Order delivery status localized name.
@@ -4779,8 +5171,8 @@ module Google
             #
             # Corresponds to "Order end date" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `DATE`
             ORDER_END_DATE = 154
@@ -4791,8 +5183,8 @@ module Google
             #
             # Corresponds to "Order end time" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `TIMESTAMP`
             ORDER_END_DATE_TIME = 155
@@ -4814,8 +5206,8 @@ module Google
             #
             # Corresponds to "Order ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `IDENTIFIER`
             ORDER_ID = 7
@@ -4848,8 +5240,8 @@ module Google
             #
             # Corresponds to "Order lifetime clicks" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `INTEGER`
             ORDER_LIFETIME_CLICKS = 158
@@ -4860,8 +5252,8 @@ module Google
             #
             # Corresponds to "Order lifetime impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `INTEGER`
             ORDER_LIFETIME_IMPRESSIONS = 159
@@ -4872,8 +5264,8 @@ module Google
             #
             # Corresponds to "Order" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`, `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             ORDER_NAME = 8
@@ -4884,8 +5276,8 @@ module Google
             #
             # Corresponds to "Order PO number" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `STRING`
             ORDER_PO_NUMBER = 160
@@ -4907,7 +5299,8 @@ module Google
             #
             # Corresponds to "Order salesperson" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`
             #
             # Data format: `STRING`
             ORDER_SALESPERSON = 161
@@ -4918,7 +5311,8 @@ module Google
             #
             # Corresponds to "Order salesperson ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`
             #
             # Data format: `IDENTIFIER`
             ORDER_SALESPERSON_ID = 629
@@ -4973,8 +5367,8 @@ module Google
             #
             # Corresponds to "Order start date" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `DATE`
             ORDER_START_DATE = 168
@@ -4985,8 +5379,8 @@ module Google
             #
             # Corresponds to "Order start time" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `TIMESTAMP`
             ORDER_START_DATE_TIME = 169
@@ -5021,7 +5415,8 @@ module Google
             # Corresponds to "Order is unlimited end time" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `AD_SPEED`
             #
             # Data format: `BOOLEAN`
             ORDER_UNLIMITED_END = 203
@@ -5115,7 +5510,8 @@ module Google
             #
             # Corresponds to "Placement ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `IDENTIFIER`
             PLACEMENT_ID = 113
@@ -5126,7 +5522,8 @@ module Google
             #
             # Corresponds to "Placement ID (all)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `IDENTIFIER_LIST`
             PLACEMENT_ID_ALL = 144
@@ -5137,7 +5534,8 @@ module Google
             #
             # Corresponds to "Placement" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             PLACEMENT_NAME = 114
@@ -5148,7 +5546,8 @@ module Google
             #
             # Corresponds to "Placement (all)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING_LIST`
             PLACEMENT_NAME_ALL = 145
@@ -5160,9 +5559,13 @@ module Google
             # Corresponds to "Placement status value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::PlacementStatusEnum::PlacementStatus PlacementStatus}
             PLACEMENT_STATUS = 362
 
             # Localized placement status name.
@@ -5171,7 +5574,8 @@ module Google
             #
             # Corresponds to "Placement status" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `STRING`
             PLACEMENT_STATUS_NAME = 364
@@ -5183,7 +5587,8 @@ module Google
             #
             # Corresponds to "Placement status (all)" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `STRING_LIST`
             PLACEMENT_STATUS_NAME_ALL = 365
@@ -5280,6 +5685,28 @@ module Google
             # Data format: `STRING`
             PRESENTED_SECURE_SIGNAL_NAME = 496
 
+            # Pricing rule ID dimension
+            #
+            #
+            #
+            # Corresponds to "Pricing rule ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            PRICING_RULE_ID = 393
+
+            # Pricing rule name dimension
+            #
+            #
+            #
+            # Corresponds to "Pricing rule" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            PRICING_RULE_NAME = 394
+
             # The ID type selected for personalization.
             #
             #
@@ -5302,18 +5729,6 @@ module Google
             #
             # Data format: `STRING`
             PRIMARY_PERSONALIZATION_ID_TYPE_NAME = 409
-
-            # Deprecated. Dimension has been renamed to `DEAL_BUYER_ID`.
-            # The server will normalize any requests using this value to
-            # `DEAL_BUYER_ID`.
-            # This value will be removed on or after October 10, 2025.
-            PROGRAMMATIC_BUYER_ID = 240
-
-            # Deprecated. Dimension has been renamed to `DEAL_BUYER_NAME`.
-            # The server will normalize any requests using this value to
-            # `DEAL_BUYER_NAME`.
-            # This value will be removed on or after October 10, 2025.
-            PROGRAMMATIC_BUYER_NAME = 241
 
             # Programmatic channel.
             #  The type of transaction that occurred in Ad Exchange.
@@ -5572,25 +5987,13 @@ module Google
             # Data format: `STRING`
             REGION_NAME = 458
 
-            # The rejection class category in the Ads traffic navigator report.
-            #
-            #
-            #
-            # Corresponds to "Rejection class category value" in the Ad Manager UI
-            # (when showing API fields).
-            #
-            # Compatible with the following report types:
-            #
-            # Data format: `ENUM`
-            REJECTION_CLASS_CATEGORY = 590
-
             # The rejection class category name in the Ads traffic navigator report.
             #
             #
             #
             # Corresponds to "Rejection class category" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `STRING`
             REJECTION_CLASS_CATEGORY_NAME = 591
@@ -5602,7 +6005,8 @@ module Google
             #
             # Corresponds to "Rendered creative size" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`,
+            # `OFF_PROPERTY_CAMPAIGNS`
             #
             # Data format: `STRING`
             RENDERED_CREATIVE_SIZE = 343
@@ -5746,6 +6150,18 @@ module Google
             # Data format: `STRING`
             TARGETING_TYPE_NAME = 386
 
+            # Targets customer matching list. Whether the query is siloed customer
+            #  match attributed.
+            #
+            #
+            #
+            # Corresponds to "Targets customer matching list" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `BOOLEAN`
+            TARGETS_CUSTOMER_MATCHING_LIST = 789
+
             # Whether a third-party cookie or device ID was present on a given ad
             #  request.
             #
@@ -5801,7 +6217,7 @@ module Google
             # Corresponds to "Domain" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`,
-            # `PRIVACY_AND_MESSAGING`
+            # `OFF_PROPERTY_CAMPAIGNS`, `PRIVACY_AND_MESSAGING`
             #
             # Data format: `STRING`
             TOP_PRIVATE_DOMAIN = 444
@@ -5828,28 +6244,6 @@ module Google
             #
             # Data format: `STRING`
             TRAFFIC_SOURCE_NAME = 389
-
-            # Unified pricing rule ID dimension
-            #
-            #
-            #
-            # Corresponds to "Unified pricing rule ID" in the Ad Manager UI.
-            #
-            # Compatible with the following report types: `HISTORICAL`
-            #
-            # Data format: `IDENTIFIER`
-            UNIFIED_PRICING_RULE_ID = 393
-
-            # Unified pricing rule name dimension
-            #
-            #
-            #
-            # Corresponds to "Unified pricing rule" in the Ad Manager UI.
-            #
-            # Compatible with the following report types: `HISTORICAL`
-            #
-            # Data format: `STRING`
-            UNIFIED_PRICING_RULE_NAME = 394
 
             # A URL defined under a publisher's inventory.
             #
@@ -6065,7 +6459,8 @@ module Google
             # Corresponds to "Ad request source value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
             VIDEO_AD_REQUEST_SOURCE = 438
@@ -6076,7 +6471,8 @@ module Google
             #
             # Corresponds to "Ad request source" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             VIDEO_AD_REQUEST_SOURCE_NAME = 439
@@ -6155,7 +6551,8 @@ module Google
             #
             # Corresponds to "Live stream ad break ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             VIDEO_LIVE_STREAM_EVENT_AD_BREAK_ID = 548
@@ -6166,7 +6563,8 @@ module Google
             #
             # Corresponds to "Live stream ad break" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             VIDEO_LIVE_STREAM_EVENT_AD_BREAK_NAME = 549
@@ -6189,7 +6587,8 @@ module Google
             #
             # Corresponds to "Live stream ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_LIVE_STREAM_EVENT_ID = 551
@@ -6200,7 +6599,8 @@ module Google
             #
             # Corresponds to "Live stream" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             VIDEO_LIVE_STREAM_EVENT_NAME = 552
@@ -6232,8 +6632,8 @@ module Google
             #
             #
             #
-            # Corresponds to "Video placement value (new)" in the Ad Manager UI (when
-            # showing API fields).
+            # Corresponds to "Video placement value" in the Ad Manager UI (when showing
+            # API fields).
             #
             # Compatible with the following report types: `HISTORICAL`
             #
@@ -6244,7 +6644,7 @@ module Google
             #
             #
             #
-            # Corresponds to "Video placement (new)" in the Ad Manager UI.
+            # Corresponds to "Video placement" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`
             #
@@ -6269,7 +6669,8 @@ module Google
             #
             # Corresponds to "Position of pod" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             VIDEO_POSITION_OF_POD = 539
@@ -6281,7 +6682,8 @@ module Google
             # Corresponds to "Video SDK version value" in the Ad Manager UI (when
             # showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
             VIDEO_SDK_VERSION = 440
@@ -6292,7 +6694,8 @@ module Google
             #
             # Corresponds to "Video SDK version" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             VIDEO_SDK_VERSION_NAME = 441
@@ -6337,8 +6740,9 @@ module Google
             #
             # Corresponds to "Week" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `PRIVACY_AND_MESSAGING`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`, `REACH`, `PRIVACY_AND_MESSAGING`,
+            # `YOUTUBE_CONSOLIDATED`, `OFF_PROPERTY_CAMPAIGNS`, `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             WEEK = 5
@@ -6396,7 +6800,7 @@ module Google
             # Corresponds to "Ad duration value" in the Ad Manager UI (when showing API
             # fields).
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `ENUM`
             YOUTUBE_AD_DURATION_BUCKET = 430
@@ -6407,7 +6811,7 @@ module Google
             #
             # Corresponds to "Ad duration" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             YOUTUBE_AD_DURATION_BUCKET_NAME = 431
@@ -6419,7 +6823,7 @@ module Google
             # Corresponds to "YouTube ad type ID" in the Ad Manager UI (when showing
             # API fields).
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `ENUM`
             YOUTUBE_AD_TYPE = 399
@@ -6430,7 +6834,7 @@ module Google
             #
             # Corresponds to "YouTube ad type" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `STRING`
             YOUTUBE_AD_TYPE_NAME = 400
@@ -6585,6 +6989,186 @@ module Google
             # type `STRING` or `DROPDOWN`.
             LINE_ITEM_CUSTOM_FIELD_14_VALUE = 11_014
 
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 0 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 0 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_0_VALUE_DOUBLE = 11_015
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 1 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 1 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_1_VALUE_DOUBLE = 11_016
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 2 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 2 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_2_VALUE_DOUBLE = 11_017
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 3 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 3 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_3_VALUE_DOUBLE = 11_018
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 4 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 4 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_4_VALUE_DOUBLE = 11_019
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 5 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 5 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_5_VALUE_DOUBLE = 11_020
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 6 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 6 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_6_VALUE_DOUBLE = 11_021
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 7 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 7 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_7_VALUE_DOUBLE = 11_022
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 8 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 8 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_8_VALUE_DOUBLE = 11_023
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 9 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 9 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_9_VALUE_DOUBLE = 11_024
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 10 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 10 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_10_VALUE_DOUBLE = 11_025
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 11 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 11 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_11_VALUE_DOUBLE = 11_026
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 12 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 12 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_12_VALUE_DOUBLE = 11_027
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 13 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 13 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_13_VALUE_DOUBLE = 11_028
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 14 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 14 is of
+            # type DOUBLE.
+            LINE_ITEM_CUSTOM_FIELD_14_VALUE_DOUBLE = 11_029
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 0 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 0 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_0_VALUE_BOOL = 11_030
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 1 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 1 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_1_VALUE_BOOL = 11_031
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 2 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 2 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_2_VALUE_BOOL = 11_032
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 3 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 3 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_3_VALUE_BOOL = 11_033
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 4 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 4 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_4_VALUE_BOOL = 11_034
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 5 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 5 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_5_VALUE_BOOL = 11_035
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 6 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 6 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_6_VALUE_BOOL = 11_036
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 7 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 7 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_7_VALUE_BOOL = 11_037
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 8 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 8 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_8_VALUE_BOOL = 11_038
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 9 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 9 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_9_VALUE_BOOL = 11_039
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 10 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 10 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_10_VALUE_BOOL = 11_040
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 11 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 11 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_11_VALUE_BOOL = 11_041
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 12 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 12 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_12_VALUE_BOOL = 11_042
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 13 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 13 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_13_VALUE_BOOL = 11_043
+
+            # Custom field value for Line Item with custom field ID equal to the ID
+            # in index 14 of `ReportDefinition.line_item_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 14 is of
+            # type BOOLEAN.
+            LINE_ITEM_CUSTOM_FIELD_14_VALUE_BOOL = 11_044
+
             # Custom field option ID for Order with custom field ID equal to the ID
             # in index 0 of `ReportDefinition.order_custom_field_ids`.
             ORDER_CUSTOM_FIELD_0_OPTION_ID = 12_000
@@ -6734,6 +7318,186 @@ module Google
             # value as a string. Can only be used if the custom field at index 14 is of
             # type STRING.
             ORDER_CUSTOM_FIELD_14_VALUE = 13_014
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 0 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 0 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_0_VALUE_DOUBLE = 13_015
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 1 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 1 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_1_VALUE_DOUBLE = 13_016
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 2 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 2 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_2_VALUE_DOUBLE = 13_017
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 3 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 3 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_3_VALUE_DOUBLE = 13_018
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 4 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 4 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_4_VALUE_DOUBLE = 13_019
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 5 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 5 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_5_VALUE_DOUBLE = 13_020
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 6 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 6 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_6_VALUE_DOUBLE = 13_021
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 7 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 7 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_7_VALUE_DOUBLE = 13_022
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 8 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 8 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_8_VALUE_DOUBLE = 13_023
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 9 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 9 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_9_VALUE_DOUBLE = 13_024
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 10 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 10 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_10_VALUE_DOUBLE = 13_025
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 11 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 11 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_11_VALUE_DOUBLE = 13_026
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 12 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 12 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_12_VALUE_DOUBLE = 13_027
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 13 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 13 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_13_VALUE_DOUBLE = 13_028
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 14 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 14 is of
+            # type DOUBLE.
+            ORDER_CUSTOM_FIELD_14_VALUE_DOUBLE = 13_029
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 0 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 0 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_0_VALUE_BOOL = 13_030
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 1 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 1 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_1_VALUE_BOOL = 13_031
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 2 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 2 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_2_VALUE_BOOL = 13_032
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 3 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 3 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_3_VALUE_BOOL = 13_033
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 4 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 4 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_4_VALUE_BOOL = 13_034
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 5 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 5 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_5_VALUE_BOOL = 13_035
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 6 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 6 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_6_VALUE_BOOL = 13_036
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 7 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 7 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_7_VALUE_BOOL = 13_037
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 8 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 8 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_8_VALUE_BOOL = 13_038
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 9 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 9 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_9_VALUE_BOOL = 13_039
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 10 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 10 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_10_VALUE_BOOL = 13_040
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 11 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 11 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_11_VALUE_BOOL = 13_041
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 12 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 12 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_12_VALUE_BOOL = 13_042
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 13 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 13 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_13_VALUE_BOOL = 13_043
+
+            # Custom field value for Order with custom field ID equal to the ID
+            # in index 14 of `ReportDefinition.order_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 14 is of
+            # type BOOLEAN.
+            ORDER_CUSTOM_FIELD_14_VALUE_BOOL = 13_044
 
             # Custom field option ID for Creative with custom field ID equal to the ID
             # in index 0 of `ReportDefinition.creative_custom_field_ids`.
@@ -6885,457 +7649,285 @@ module Google
             # type STRING.
             CREATIVE_CUSTOM_FIELD_14_VALUE = 15_014
 
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 0 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_0_OPTION_ID = 16_000
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 1 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_1_OPTION_ID = 16_001
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 2 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_2_OPTION_ID = 16_002
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 3 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_3_OPTION_ID = 16_003
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 4 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_4_OPTION_ID = 16_004
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 5 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_5_OPTION_ID = 16_005
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 6 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_6_OPTION_ID = 16_006
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 7 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_7_OPTION_ID = 16_007
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 8 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_8_OPTION_ID = 16_008
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 9 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_9_OPTION_ID = 16_009
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 10 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_10_OPTION_ID = 16_010
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 11 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_11_OPTION_ID = 16_011
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 12 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_12_OPTION_ID = 16_012
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 13 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_13_OPTION_ID = 16_013
-
-            # Custom field option ID for Backfill line item with custom field ID equal
-            # to the ID in index 14 of `ReportDefinition.line_item_custom_field_ids`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_14_OPTION_ID = 16_014
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 0 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 0 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_0_VALUE = 17_000
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 1 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 1 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_1_VALUE = 17_001
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 2 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 2 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_2_VALUE = 17_002
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 3 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 3 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_3_VALUE = 17_003
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 4 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 4 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_4_VALUE = 17_004
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 5 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 5 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_5_VALUE = 17_005
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 6 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 6 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_6_VALUE = 17_006
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 7 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 7 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_7_VALUE = 17_007
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 8 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 8 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_8_VALUE = 17_008
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 9 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 9 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_9_VALUE = 17_009
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 10 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 10 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_10_VALUE = 17_010
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 11 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 11 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_11_VALUE = 17_011
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 12 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 12 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_12_VALUE = 17_012
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 13 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 13 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_13_VALUE = 17_013
-
-            # Custom field value for Backfill line item with custom field ID equal to
-            # the ID in index 14 of `ReportDefinition.line_item_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 14 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_LINE_ITEM_CUSTOM_FIELD_14_VALUE = 17_014
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 0 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_0_OPTION_ID = 18_000
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 1 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_1_OPTION_ID = 18_001
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 2 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_2_OPTION_ID = 18_002
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 3 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_3_OPTION_ID = 18_003
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 4 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_4_OPTION_ID = 18_004
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 5 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_5_OPTION_ID = 18_005
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 6 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_6_OPTION_ID = 18_006
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 7 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_7_OPTION_ID = 18_007
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 8 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_8_OPTION_ID = 18_008
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 9 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_9_OPTION_ID = 18_009
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 10 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_10_OPTION_ID = 18_010
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 11 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_11_OPTION_ID = 18_011
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 12 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_12_OPTION_ID = 18_012
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 13 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_13_OPTION_ID = 18_013
-
-            # Custom field option ID for Backfill order with custom field ID equal to
-            # the ID in index 14 of `ReportDefinition.order_custom_field_ids`.
-            BACKFILL_ORDER_CUSTOM_FIELD_14_OPTION_ID = 18_014
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID
-            # in index 0 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 0 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_0_VALUE = 19_000
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 1 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 1 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_1_VALUE = 19_001
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 2 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 2 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_2_VALUE = 19_002
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 3 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 3 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_3_VALUE = 19_003
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 4 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 4 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_4_VALUE = 19_004
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 5 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 5 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_5_VALUE = 19_005
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 6 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 6 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_6_VALUE = 19_006
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 7 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 7 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_7_VALUE = 19_007
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 8 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 8 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_8_VALUE = 19_008
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 9 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 9 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_9_VALUE = 19_009
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 10 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 10 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_10_VALUE = 19_010
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 11 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 11 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_11_VALUE = 19_011
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 12 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 12 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_12_VALUE = 19_012
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 13 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 13 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_13_VALUE = 19_013
-
-            # Custom field value for Backfill order with custom field ID equal to the
-            # ID in index 14 of `ReportDefinition.order_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 14 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_ORDER_CUSTOM_FIELD_14_VALUE = 19_014
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 0 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_0_OPTION_ID = 20_000
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 1 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_1_OPTION_ID = 20_001
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 2 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_2_OPTION_ID = 20_002
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 3 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_3_OPTION_ID = 20_003
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 4 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_4_OPTION_ID = 20_004
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 5 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_5_OPTION_ID = 20_005
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 6 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_6_OPTION_ID = 20_006
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 7 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_7_OPTION_ID = 20_007
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 8 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_8_OPTION_ID = 20_008
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 9 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_9_OPTION_ID = 20_009
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 10 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_10_OPTION_ID = 20_010
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 11 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_11_OPTION_ID = 20_011
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 12 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_12_OPTION_ID = 20_012
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 13 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_13_OPTION_ID = 20_013
-
-            # Custom field option ID for Backfill creative with custom field ID equal
-            # to the ID in index 14 of `ReportDefinition.creative_custom_field_ids`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_14_OPTION_ID = 20_014
-
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID
+            # Custom field value for Creative with custom field ID equal to the ID
             # in index 0 of `ReportDefinition.creative_custom_field_ids`. Treats the
-            # value as a string. Can only be used if the custom field at index 0 is of
-            # type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_0_VALUE = 21_000
+            # value as double. Can only be used if the custom field at index 0 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_0_VALUE_DOUBLE = 15_015
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 1 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 1 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_1_VALUE = 21_001
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 1 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 1 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_1_VALUE_DOUBLE = 15_016
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 2 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 2 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_2_VALUE = 21_002
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 2 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 2 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_2_VALUE_DOUBLE = 15_017
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 3 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 3 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_3_VALUE = 21_003
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 3 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 3 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_3_VALUE_DOUBLE = 15_018
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 4 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 4 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_4_VALUE = 21_004
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 4 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 4 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_4_VALUE_DOUBLE = 15_019
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 5 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 5 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_5_VALUE = 21_005
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 5 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 5 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_5_VALUE_DOUBLE = 15_020
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 6 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 6 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_6_VALUE = 21_006
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 6 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 6 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_6_VALUE_DOUBLE = 15_021
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 7 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 7 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_7_VALUE = 21_007
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 7 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 7 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_7_VALUE_DOUBLE = 15_022
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 8 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 8 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_8_VALUE = 21_008
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 8 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 8 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_8_VALUE_DOUBLE = 15_023
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 9 of `ReportDefinition.creative_custom_field_ids`. Treats
-            # the value as a string. Can only be used if the custom field at index 9 is
-            # of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_9_VALUE = 21_009
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 9 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 9 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_9_VALUE_DOUBLE = 15_024
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 10 of `ReportDefinition.creative_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 10 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_10_VALUE = 21_010
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 10 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 10 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_10_VALUE_DOUBLE = 15_025
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 11 of `ReportDefinition.creative_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 11 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_11_VALUE = 21_011
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 11 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 11 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_11_VALUE_DOUBLE = 15_026
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 12 of `ReportDefinition.creative_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 12 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_12_VALUE = 21_012
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 12 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 12 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_12_VALUE_DOUBLE = 15_027
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 13 of `ReportDefinition.creative_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 13 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_13_VALUE = 21_013
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 13 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 13 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_13_VALUE_DOUBLE = 15_028
 
-            # Custom field value for Backfill creative with custom field ID equal to
-            # the ID in index 14 of `ReportDefinition.creative_custom_field_ids`.
-            # Treats the value as a string. Can only be used if the custom field at
-            # index 14 is of type `STRING` or `DROPDOWN`.
-            BACKFILL_CREATIVE_CUSTOM_FIELD_14_VALUE = 21_014
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 14 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as double. Can only be used if the custom field at index 14 is of
+            # type DOUBLE.
+            CREATIVE_CUSTOM_FIELD_14_VALUE_DOUBLE = 15_029
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 0 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 0 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_0_VALUE_BOOL = 15_030
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 1 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 1 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_1_VALUE_BOOL = 15_031
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 2 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 2 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_2_VALUE_BOOL = 15_032
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 3 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 3 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_3_VALUE_BOOL = 15_033
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 4 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 4 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_4_VALUE_BOOL = 15_034
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 5 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 5 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_5_VALUE_BOOL = 15_035
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 6 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 6 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_6_VALUE_BOOL = 15_036
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 7 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 7 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_7_VALUE_BOOL = 15_037
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 8 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 8 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_8_VALUE_BOOL = 15_038
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 9 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 9 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_9_VALUE_BOOL = 15_039
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 10 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 10 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_10_VALUE_BOOL = 15_040
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 11 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 11 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_11_VALUE_BOOL = 15_041
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 12 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 12 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_12_VALUE_BOOL = 15_042
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 13 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 13 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_13_VALUE_BOOL = 15_043
+
+            # Custom field value for Creative with custom field ID equal to the ID
+            # in index 14 of `ReportDefinition.creative_custom_field_ids`. Treats the
+            # value as boolean. Can only be used if the custom field at index 14 is of
+            # type BOOLEAN.
+            CREATIVE_CUSTOM_FIELD_14_VALUE_BOOL = 15_044
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 0 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_0_VALUE_ID = 102_000
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 1 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_1_VALUE_ID = 102_001
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 2 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_2_VALUE_ID = 102_002
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 3 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_3_VALUE_ID = 102_003
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 4 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_4_VALUE_ID = 102_004
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 5 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_5_VALUE_ID = 102_005
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 6 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_6_VALUE_ID = 102_006
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 7 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_7_VALUE_ID = 102_007
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 8 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_8_VALUE_ID = 102_008
+
+            # CMS Metadata Dimension Value ID for CMS Metadata Dimension with key equal
+            # to the key in index 9 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_9_VALUE_ID = 102_009
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 9 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_0_VALUE = 103_000
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 1 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_1_VALUE = 103_001
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 2 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_2_VALUE = 103_002
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 3 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_3_VALUE = 103_003
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 4 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_4_VALUE = 103_004
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 5 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_5_VALUE = 103_005
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 6 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_6_VALUE = 103_006
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 7 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_7_VALUE = 103_007
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 8 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_8_VALUE = 103_008
+
+            # CMS Metadata Dimension Value Name for CMS Metadata Dimension with key
+            # equal to the key in index 9 of
+            # `ReportDefinition.cms_metadata_dimension_key_ids`.
+            CMS_METADATA_DIMENSION_9_VALUE = 103_009
 
             # Custom Dimension Value ID for Custom Dimension with key equal to the key
             # in index 0 of `ReportDefinition.custom_dimension_key_ids`.
@@ -7416,6 +8008,86 @@ module Google
             # Custom Dimension Value name for Custom Dimension with key equal to the
             # ID in index 9 of `ReportDefinition.custom_dimension_key_ids`.
             CUSTOM_DIMENSION_9_VALUE = 101_009
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 0 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_0_VALUE_ID = 105_000
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 1 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_1_VALUE_ID = 105_001
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 2 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_2_VALUE_ID = 105_002
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 3 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_3_VALUE_ID = 105_003
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 4 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_4_VALUE_ID = 105_004
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 5 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_5_VALUE_ID = 105_005
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 6 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_6_VALUE_ID = 105_006
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 9 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_7_VALUE_ID = 105_007
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 8 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_8_VALUE_ID = 105_008
+
+            # Enhanced Key-values Dimension Value ID for EKV Dimension with key equal
+            # to the key in index 9 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_9_VALUE_ID = 105_009
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 0 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_0_VALUE = 106_000
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 1 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_1_VALUE = 106_001
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 2 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_2_VALUE = 106_002
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 3 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_3_VALUE = 106_003
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 4 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_4_VALUE = 106_004
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 5 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_5_VALUE = 106_005
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 6 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_6_VALUE = 106_006
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 7 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_7_VALUE = 106_007
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 8 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_8_VALUE = 106_008
+
+            # Enhanced Key-values Dimension Value name for EKV Dimension with key equal
+            # to the ID in index 9 of `ReportDefinition.ekv_dimension_key_ids`.
+            EKV_DIMENSION_9_VALUE = 106_009
           end
 
           # Reporting metrics.
@@ -8619,6 +9291,17 @@ module Google
             # Data format: `PERCENT`
             AD_SERVER_ACTIVE_VIEW_NON_VIEWABLE_IMPRESSIONS_DISTRIBUTION = 334
 
+            # Revenue generated from Ad Server Active View impressions.
+            #
+            #
+            #
+            # Corresponds to "Ad server Active View revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            AD_SERVER_ACTIVE_VIEW_REVENUE = 704
+
             # The fraction of non-eligible impressions among eligible impressions from
             #  Ad Server in Active View reporting."
             #
@@ -9086,7 +9769,7 @@ module Google
             #
             # Corresponds to "Ads failed to render" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_ADS_FAILED_TO_RENDER = 430
@@ -9098,7 +9781,7 @@ module Google
             #
             # Corresponds to "Eligible line items" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_ELIGIBLE_LINE_ITEMS = 342
@@ -9111,7 +9794,7 @@ module Google
             # Corresponds to "Ad requests with eligible line items" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_ELIGIBLE_LINE_ITEMS_AD_REQUESTS = 343
@@ -9124,7 +9807,7 @@ module Google
             # Corresponds to "Ad requests allowing header bidding trafficking" in the
             # Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_ALLOWED_AD_REQUESTS = 344
@@ -9137,7 +9820,7 @@ module Google
             # Corresponds to "Competing header bidding trafficking bids" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_BIDS_IN_AUCTION = 345
@@ -9150,7 +9833,7 @@ module Google
             # Corresponds to "Ad requests with competing header bidding trafficking
             # bids" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_BIDS_IN_AUCTION_AD_REQUESTS = 346
@@ -9162,7 +9845,7 @@ module Google
             #
             # Corresponds to "Header bidding trafficking bids" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_CANDIDATE_BIDS = 347
@@ -9175,7 +9858,7 @@ module Google
             # Corresponds to "Invalid ad requests allowing header bidding trafficking"
             # in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_INVALID_AD_REQUESTS = 348
@@ -9188,7 +9871,7 @@ module Google
             # Corresponds to "Ad requests with no header bidding trafficking bids" in
             # the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_NO_BIDS_AD_REQUESTS = 472
@@ -9201,7 +9884,7 @@ module Google
             # Corresponds to "Rejected header bidding trafficking bids" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_REJECTED_BIDS = 349
@@ -9214,7 +9897,7 @@ module Google
             # Corresponds to "Valid header bidding trafficking ad requests" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_VALID_AD_REQUESTS = 350
@@ -9227,7 +9910,7 @@ module Google
             # Corresponds to "Ad requests with header bidding trafficking bids" in the
             # Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_HBT_WITH_BIDS_AD_REQUESTS = 473
@@ -9238,7 +9921,7 @@ module Google
             #
             # Corresponds to "Invalid ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_INVALID_AD_REQUESTS = 351
@@ -9251,7 +9934,7 @@ module Google
             # Corresponds to "Line items with no creative retrieved" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_LINE_ITEMS_CREATIVE_NOT_RETRIEVED = 476
@@ -9263,7 +9946,7 @@ module Google
             #
             # Corresponds to "Competing line items" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_LINE_ITEMS_IN_AUCTION = 352
@@ -9275,7 +9958,7 @@ module Google
             #
             # Corresponds to "Non-competing line items" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_LINE_ITEMS_NOT_COMPETING = 515
@@ -9287,7 +9970,7 @@ module Google
             #
             # Corresponds to "Line items not selected to compete" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_LINE_ITEMS_NOT_SELECTED = 353
@@ -9300,7 +9983,7 @@ module Google
             # Corresponds to "Ad requests with competing line items" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_LINE_ITEM_IN_AUCTION_AD_REQUESTS = 354
@@ -9313,7 +9996,7 @@ module Google
             # Corresponds to "Ad requests with targeted line items" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_LINE_ITEM_TARGETED_AD_REQUESTS = 355
@@ -9325,7 +10008,7 @@ module Google
             #
             # Corresponds to "Ad requests allowing mediation" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_ALLOWED_AD_REQUESTS = 356
@@ -9338,7 +10021,7 @@ module Google
             # Corresponds to "Invalid ad requests allowing mediation" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_INVALID_AD_REQUESTS = 357
@@ -9350,7 +10033,7 @@ module Google
             #
             # Corresponds to "Loaded ads from chains" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_LOADED_ADS_FROM_CHAINS = 358
@@ -9363,7 +10046,7 @@ module Google
             # Corresponds to "Ad requests with no targeted mediation partners" in the
             # Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_NO_PARTNER_AD_REQUESTS = 474
@@ -9375,7 +10058,7 @@ module Google
             #
             # Corresponds to "Competing mediation partners" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_PARTNERS_IN_AUCTION = 359
@@ -9388,7 +10071,7 @@ module Google
             # Corresponds to "Ad requests with competing mediation partners" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_PARTNERS_IN_AUCTION_AD_REQUESTS = 360
@@ -9400,7 +10083,7 @@ module Google
             #
             # Corresponds to "Rejected partners" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_REJECTED_PARTNERS = 361
@@ -9412,22 +10095,21 @@ module Google
             #
             # Corresponds to "Targeted mediation partners" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_TARGETED_PARTNERS = 362
 
-            # Number of partners on served mediation chains in the Ads traffic
-            #  navigator report.
+            # Number of ads in mediation chains in the Ads traffic navigator report.
             #
             #
             #
-            # Corresponds to "Total yield partners" in the Ad Manager UI.
+            # Corresponds to "Total ads in chains" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
-            ATN_MEDIATION_TOTAL_YIELD_PARTNERS = 442
+            ATN_MEDIATION_TOTAL_ADS_IN_CHAINS = 703
 
             # Number of ads from mediation chains that Ad Manager won't serve in the
             #  Ads traffic navigator report.
@@ -9436,7 +10118,7 @@ module Google
             #
             # Corresponds to "Unloaded ads from chains" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_UNLOADED_ADS_FROM_CHAINS = 363
@@ -9448,7 +10130,7 @@ module Google
             #
             # Corresponds to "Unused bids or partners" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_UNUSED_BIDS_OR_PARTNERS = 364
@@ -9460,7 +10142,7 @@ module Google
             #
             # Corresponds to "Valid mediation ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_VALID_AD_REQUESTS = 365
@@ -9473,7 +10155,7 @@ module Google
             # Corresponds to "Ad requests with targeted mediation partners" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_MEDIATION_WITH_PARTNERS_AD_REQUESTS = 475
@@ -9485,7 +10167,7 @@ module Google
             #
             # Corresponds to "Ad requests with bids" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_AD_REQUESTS_WITH_BIDS = 366
@@ -9497,7 +10179,7 @@ module Google
             #
             # Corresponds to "Ad requests with bid requests sent" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_AD_REQUESTS_WITH_BID_REQUESTS_SENT = 367
@@ -9509,7 +10191,7 @@ module Google
             #
             # Corresponds to "Ad requests allowing programmatic" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_ALLOWED_AD_REQUESTS = 368
@@ -9521,7 +10203,7 @@ module Google
             #
             # Corresponds to "Competing programmatic bids" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_BIDS_IN_AUCTION = 369
@@ -9534,7 +10216,7 @@ module Google
             # Corresponds to "Ad requests with competing programmatic bids" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_BID_IN_AUCTION_AD_REQUESTS = 370
@@ -9546,7 +10228,7 @@ module Google
             #
             # Corresponds to "Bid requests sent" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_BID_REQUESTS_SENT = 371
@@ -9558,7 +10240,7 @@ module Google
             #
             # Corresponds to "Bid requests with response" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_BID_REQUESTS_WITH_RESPONSE = 372
@@ -9570,7 +10252,7 @@ module Google
             #
             # Corresponds to "Bid request candidates" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_BID_REQUEST_CANDIDATES = 373
@@ -9582,7 +10264,7 @@ module Google
             #
             # Corresponds to "Bid request errors" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_BID_REQUEST_ERRORS = 374
@@ -9595,7 +10277,7 @@ module Google
             # Corresponds to "Invalid ad requests allowing programmatic" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_INELIGIBLE_AD_REQUESTS = 375
@@ -9607,7 +10289,7 @@ module Google
             #
             # Corresponds to "Rejected bids" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_REJECTED_BIDS = 376
@@ -9619,7 +10301,7 @@ module Google
             #
             # Corresponds to "Skipped bid requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_SKIPPED_BID_REQUESTS = 377
@@ -9631,7 +10313,7 @@ module Google
             #
             # Corresponds to "Total programmatic bids" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_TOTAL_BIDS = 378
@@ -9644,7 +10326,7 @@ module Google
             # Corresponds to "Valid ad requests allowing programmatic" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_PROGRAMMATIC_VALID_AD_REQUESTS = 379
@@ -9656,7 +10338,7 @@ module Google
             #
             # Corresponds to "Rejected line items" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_REJECTED_LINE_ITEMS = 380
@@ -9668,7 +10350,7 @@ module Google
             #
             # Corresponds to "Served mediation chains" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_SERVED_MEDIATION_CHAINS = 381
@@ -9679,7 +10361,7 @@ module Google
             #
             # Corresponds to "Served single ads" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_SERVED_SINGLE_ADS = 382
@@ -9691,7 +10373,7 @@ module Google
             #
             # Corresponds to "Targeted line items" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_TARGETED_LINE_ITEMS = 383
@@ -9704,21 +10386,10 @@ module Google
             # Corresponds to "Total ad requests (Ads traffic navigator)" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_TOTAL_AD_REQUESTS = 384
-
-            # Number of competing ads in auction in the Ads traffic navigator report.
-            #
-            #
-            #
-            # Corresponds to "Total competing ads" in the Ad Manager UI.
-            #
-            # Compatible with the following report types:
-            #
-            # Data format: `INTEGER`
-            ATN_TOTAL_COMPETING_ADS_IN_AUCTION = 385
 
             # Total number of ads loaded in the Ads traffic navigator report.
             #
@@ -9726,7 +10397,7 @@ module Google
             #
             # Corresponds to "Total loaded ads" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_TOTAL_LOADED_ADS = 387
@@ -9737,7 +10408,7 @@ module Google
             #
             # Corresponds to "Valid ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_VALID_AD_REQUESTS = 389
@@ -9749,7 +10420,7 @@ module Google
             #
             # Corresponds to "Yield group mediation passbacks" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             ATN_YIELD_GROUP_MEDIATION_PASSBACKS = 390
@@ -9896,7 +10567,8 @@ module Google
             #
             # Corresponds to "Total clicks" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `AD_SPEED`
             #
             # Data format: `INTEGER`
             CLICKS = 2
@@ -9908,7 +10580,8 @@ module Google
             #
             # Corresponds to "Total code served count" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `INTEGER`
             CODE_SERVED_COUNT = 44
@@ -9919,7 +10592,7 @@ module Google
             #
             # Corresponds to "CPC revenue" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `MONEY`
             CPC_REVENUE = 440
@@ -9930,7 +10603,7 @@ module Google
             #
             # Corresponds to "CPM revenue" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `MONEY`
             CPM_REVENUE = 441
@@ -10403,7 +11076,7 @@ module Google
             # Corresponds to "Google-sold auction impressions (co-viewed)" in the Ad
             # Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             GOOGLE_SOLD_AUCTION_COVIEWED_IMPRESSIONS = 129
@@ -10414,7 +11087,7 @@ module Google
             #
             # Corresponds to "Google-sold auction impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             GOOGLE_SOLD_AUCTION_IMPRESSIONS = 128
@@ -10426,7 +11099,7 @@ module Google
             # Corresponds to "Google-sold impressions (co-viewed)" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             GOOGLE_SOLD_COVIEWED_IMPRESSIONS = 131
@@ -10437,7 +11110,7 @@ module Google
             #
             # Corresponds to "Google-sold impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             GOOGLE_SOLD_IMPRESSIONS = 130
@@ -10449,7 +11122,7 @@ module Google
             # Corresponds to "Google-sold reservation impressions (co-viewed)" in the
             # Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             GOOGLE_SOLD_RESERVATION_COVIEWED_IMPRESSIONS = 127
@@ -10461,7 +11134,7 @@ module Google
             # Corresponds to "Google-sold reservation impressions" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             GOOGLE_SOLD_RESERVATION_IMPRESSIONS = 126
@@ -10473,7 +11146,8 @@ module Google
             #
             # Corresponds to "Total impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`, `AD_SPEED`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`, `AD_SPEED`
             #
             # Data format: `INTEGER`
             IMPRESSIONS = 1
@@ -10571,6 +11245,303 @@ module Google
             #
             # Data format: `INTEGER`
             MUTE_ELIGIBLE_IMPRESSIONS = 409
+
+            # Nielsen: The relative unique audience in the demographic compared with
+            #  its share of the overall population.
+            #
+            #
+            #
+            # Corresponds to "Audience index" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_AUDIENCE_INDEX = 568
+
+            # Nielsen: The average number of times that a person within the target
+            #  audience sees an advertisement.
+            #
+            #
+            #
+            # Corresponds to "Average frequency" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `DOUBLE`
+            NIELSEN_AVERAGE_FREQUENCY = 569
+
+            # Nielsen: The average number of viewers.
+            #
+            #
+            #
+            # Corresponds to "Average number of viewers" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `DOUBLE`
+            NIELSEN_AVERAGE_NUMBER_OF_VIEWERS = 570
+
+            # Nielsen: The unit of audience volume, based on the percentage of the
+            #  reached target audience population multiplied by the average frequency.
+            #
+            #
+            #
+            # Corresponds to "Gross rating points" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_GROSS_RATING_POINTS = 571
+
+            # Nielsen: The total number of impressions tracked for Nielsen Digital Ad
+            #  Ratings measurement.
+            #
+            #
+            #
+            # Corresponds to "Impressions" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `INTEGER`
+            NIELSEN_IMPRESSIONS = 572
+
+            # Nielsen: The relative impressions per person in the demographic compared
+            #  with the impressions per person for the overall population.
+            #
+            #
+            #
+            # Corresponds to "Impressions index" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_IMPRESSIONS_INDEX = 573
+
+            # Nielsen: The adjusted in-target impression share used for pacing and
+            #  billing.
+            #
+            #
+            #
+            # Corresponds to "Processed Nielsen in-target rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_IN_TARGET_RATIO = 576
+
+            # Nielsen: The unique audience reached as a percentage of the population
+            #  base.
+            #
+            #
+            #
+            # Corresponds to "% audience reach" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_PERCENT_AUDIENCE_REACH = 578
+
+            # Nielsen: The share of the unique audience in the demographic.
+            #
+            #
+            #
+            # Corresponds to "% audience share" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_PERCENT_AUDIENCE_SHARE = 579
+
+            # Nielsen: The share of impressions that reached the target demographic.
+            #
+            #
+            #
+            # Corresponds to "% impression share" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_PERCENT_IMPRESSIONS_SHARE = 580
+
+            # Nielsen: The share of the total population represented by the population
+            #  base.
+            #
+            #
+            #
+            # Corresponds to "% population share" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `PERCENT`
+            NIELSEN_PERCENT_POPULATION_SHARE = 581
+
+            # Nielsen: The population in the demographic.
+            #
+            #
+            #
+            # Corresponds to "Population base" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `INTEGER`
+            NIELSEN_POPULATION_BASE = 582
+
+            # Nielsen: The total number of different people within the selected
+            #  demographic who were reached.
+            #
+            #
+            #
+            # Corresponds to "Unique audience" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `REACH`
+            #
+            # Data format: `INTEGER`
+            NIELSEN_UNIQUE_AUDIENCE = 583
+
+            # The total number of cross publisher impressions that were sampled and
+            #  measured by active view.
+            #
+            #
+            #
+            # Corresponds to "Off-property Active View measurable impressions" in the
+            # Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_ACTIVE_VIEW_MEASURABLE_IMPRESSIONS = 395
+
+            # The total number of cross publisher impressions viewed on the user's
+            #  screen.
+            #
+            #
+            #
+            # Corresponds to "Off-property Active View viewable impressions" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS = 396
+
+            # The percentage of total cross publisher impressions viewed on the user's
+            #  screen (out of the total impressions measurable by active view).
+            #
+            #
+            #
+            # Corresponds to "Off-property Active View % viewable impressions" in the
+            # Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `PERCENT`
+            OFF_PROPERTY_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS_RATE = 397
+
+            # The total number of cross publisher clicks.
+            #
+            #
+            #
+            # Corresponds to "Off-property clicks" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_CLICKS = 398
+
+            # The ratio of cross publisher impressions that resulted in users clicking
+            #  on an ad. Cross publisher CTR is calculated as:
+            #  (Cross publisher clicks / Cross publisher impressions).
+            #
+            #
+            #
+            # Corresponds to "Off-property CTR" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `PERCENT`
+            OFF_PROPERTY_CTR = 399
+
+            # The total number of cross publisher impressions.
+            #
+            #
+            #
+            # Corresponds to "Off-property impressions" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_IMPRESSIONS = 400
+
+            # The total cross publisher revenue from line item and works with the
+            #  currency code from the same line item.
+            #
+            #
+            #
+            # Corresponds to "Off-property revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `MONEY`
+            OFF_PROPERTY_REVENUE = 401
+
+            # The total cross publisher spend and works with the billing currency code
+            #  of the this network.
+            #
+            #
+            #
+            # Corresponds to "Off-property spend" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `MONEY`
+            OFF_PROPERTY_SPEND = 402
+
+            # The average effective cost-per-thousand-impressions earned from the ads
+            #  delivered from cross publisher traffic.
+            #
+            #
+            #
+            # Corresponds to "Off-property spend eCPM" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `MONEY`
+            OFF_PROPERTY_SPEND_ECPM = 403
+
+            # Average effective cost-per-thousand-impressions earned from the mediation
+            #  on-platform multiple call, excluding CPD value.
+            #
+            #
+            #
+            # Corresponds to "On-platform multiple call eCPM" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `ON_PLATFORM_MULTICALL`
+            #
+            # Data format: `MONEY`
+            ON_PLATFORM_MULTIPLE_CALL_ECPM = 678
+
+            # Total impressions delivered by the mediation on-platform multiple call.
+            #
+            #
+            #
+            # Corresponds to "On-platform multiple call impressions" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `ON_PLATFORM_MULTICALL`
+            #
+            # Data format: `INTEGER`
+            ON_PLATFORM_MULTIPLE_CALL_IMPRESSIONS = 676
+
+            # Total revenue from the mediation on-platform multiple call.
+            #
+            #
+            #
+            # Corresponds to "On-platform multiple call revenue" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `ON_PLATFORM_MULTICALL`
+            #
+            # Data format: `MONEY`
+            ON_PLATFORM_MULTIPLE_CALL_REVENUE = 677
 
             # The total number of opportunities from impressions and errors.
             #
@@ -10771,7 +11742,7 @@ module Google
             #
             # Corresponds to "Filled pod requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SALES_FILLED_POD_REQUESTS = 135
@@ -10783,7 +11754,7 @@ module Google
             #
             # Corresponds to "Fill rate" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `PERCENT`
             PARTNER_SALES_FILL_RATE = 136
@@ -10795,7 +11766,7 @@ module Google
             #
             # Corresponds to "Partner match rate" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `PERCENT`
             PARTNER_SALES_PARTNER_MATCH_RATE = 137
@@ -10806,7 +11777,7 @@ module Google
             #
             # Corresponds to "Total partner sales ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SALES_QUERIES = 132
@@ -10819,7 +11790,7 @@ module Google
             #
             # Corresponds to "Partner unfilled impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SALES_UNFILLED_IMPRESSIONS = 133
@@ -10832,7 +11803,7 @@ module Google
             #
             # Corresponds to "Partner unmatched ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SALES_UNMATCHED_QUERIES = 134
@@ -10843,7 +11814,7 @@ module Google
             #
             # Corresponds to "Partner-sold code served count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SOLD_CODE_SERVED = 125
@@ -10855,7 +11826,7 @@ module Google
             # Corresponds to "Partner-sold impressions (co-viewed)" in the Ad Manager
             # UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SOLD_COVIEWED_IMPRESSIONS = 124
@@ -10866,7 +11837,7 @@ module Google
             #
             # Corresponds to "Partner-sold impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `YOUTUBE_CONSOLIDATED`
             #
             # Data format: `INTEGER`
             PARTNER_SOLD_IMPRESSIONS = 123
@@ -11037,7 +12008,8 @@ module Google
             #
             # Corresponds to "Total CPM and CPC revenue" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `ADS_TRAFFIC_NAVIGATOR`
             #
             # Data format: `MONEY`
             REVENUE_WITHOUT_CPD = 4
@@ -11358,7 +12330,7 @@ module Google
             #
             # Corresponds to "Available impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
             #
             # Data format: `INTEGER`
             SELL_THROUGH_AVAILABLE_IMPRESSIONS = 477
@@ -11369,7 +12341,7 @@ module Google
             #
             # Corresponds to "Forecasted impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
             #
             # Data format: `INTEGER`
             SELL_THROUGH_FORECASTED_IMPRESSIONS = 478
@@ -11380,7 +12352,7 @@ module Google
             #
             # Corresponds to "Reserved impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
             #
             # Data format: `INTEGER`
             SELL_THROUGH_RESERVED_IMPRESSIONS = 479
@@ -11391,7 +12363,7 @@ module Google
             #
             # Corresponds to "Sell-through rate" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
             #
             # Data format: `PERCENT`
             SELL_THROUGH_SELL_THROUGH_RATE = 480
@@ -12434,7 +13406,7 @@ module Google
             #
             # Corresponds to "Total creative serves" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_CREATIVE_SERVES = 139
@@ -12445,7 +13417,7 @@ module Google
             #
             # Corresponds to "VAST error 100 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_100_COUNT = 143
@@ -12456,7 +13428,7 @@ module Google
             #
             # Corresponds to "VAST error 101 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_101_COUNT = 144
@@ -12467,7 +13439,7 @@ module Google
             #
             # Corresponds to "VAST error 102 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_102_COUNT = 145
@@ -12478,7 +13450,7 @@ module Google
             #
             # Corresponds to "VAST error 200 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_200_COUNT = 146
@@ -12489,7 +13461,7 @@ module Google
             #
             # Corresponds to "VAST error 201 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_201_COUNT = 147
@@ -12500,7 +13472,7 @@ module Google
             #
             # Corresponds to "VAST error 202 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_202_COUNT = 148
@@ -12511,7 +13483,7 @@ module Google
             #
             # Corresponds to "VAST error 203 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_203_COUNT = 149
@@ -12522,7 +13494,7 @@ module Google
             #
             # Corresponds to "VAST error 300 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_300_COUNT = 150
@@ -12533,7 +13505,7 @@ module Google
             #
             # Corresponds to "VAST error 301 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_301_COUNT = 151
@@ -12544,7 +13516,7 @@ module Google
             #
             # Corresponds to "VAST error 302 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_302_COUNT = 152
@@ -12555,7 +13527,7 @@ module Google
             #
             # Corresponds to "VAST error 303 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_303_COUNT = 153
@@ -12566,7 +13538,7 @@ module Google
             #
             # Corresponds to "VAST error 400 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_400_COUNT = 154
@@ -12577,7 +13549,7 @@ module Google
             #
             # Corresponds to "VAST error 401 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_401_COUNT = 155
@@ -12588,7 +13560,7 @@ module Google
             #
             # Corresponds to "VAST error 402 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_402_COUNT = 156
@@ -12599,7 +13571,7 @@ module Google
             #
             # Corresponds to "VAST error 403 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_403_COUNT = 157
@@ -12610,7 +13582,7 @@ module Google
             #
             # Corresponds to "VAST error 405 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_405_COUNT = 158
@@ -12621,7 +13593,7 @@ module Google
             #
             # Corresponds to "VAST error 406 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_406_COUNT = 159
@@ -12632,7 +13604,7 @@ module Google
             #
             # Corresponds to "VAST error 407 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_407_COUNT = 160
@@ -12643,7 +13615,7 @@ module Google
             #
             # Corresponds to "VAST error 408 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_408_COUNT = 161
@@ -12654,7 +13626,7 @@ module Google
             #
             # Corresponds to "VAST error 409 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_409_COUNT = 162
@@ -12665,7 +13637,7 @@ module Google
             #
             # Corresponds to "VAST error 410 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_410_COUNT = 163
@@ -12676,7 +13648,7 @@ module Google
             #
             # Corresponds to "VAST error 500 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_500_COUNT = 164
@@ -12687,7 +13659,7 @@ module Google
             #
             # Corresponds to "VAST error 501 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_501_COUNT = 165
@@ -12698,7 +13670,7 @@ module Google
             #
             # Corresponds to "VAST error 502 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_502_COUNT = 166
@@ -12709,7 +13681,7 @@ module Google
             #
             # Corresponds to "VAST error 503 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_503_COUNT = 167
@@ -12720,7 +13692,7 @@ module Google
             #
             # Corresponds to "VAST error 600 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_600_COUNT = 168
@@ -12731,7 +13703,7 @@ module Google
             #
             # Corresponds to "VAST error 601 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_601_COUNT = 169
@@ -12742,7 +13714,7 @@ module Google
             #
             # Corresponds to "VAST error 602 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_602_COUNT = 170
@@ -12753,7 +13725,7 @@ module Google
             #
             # Corresponds to "VAST error 603 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_603_COUNT = 171
@@ -12764,7 +13736,7 @@ module Google
             #
             # Corresponds to "VAST error 604 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_604_COUNT = 172
@@ -12775,7 +13747,7 @@ module Google
             #
             # Corresponds to "VAST error 900 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_900_COUNT = 173
@@ -12786,7 +13758,7 @@ module Google
             #
             # Corresponds to "VAST error 901 count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_ERROR_901_COUNT = 174
@@ -12797,7 +13769,7 @@ module Google
             #
             # Corresponds to "Total impressions" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_IMPRESSIONS = 138
@@ -12808,7 +13780,7 @@ module Google
             #
             # Corresponds to "Total responses served" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_MATCHED_QUERIES = 140
@@ -12819,7 +13791,7 @@ module Google
             #
             # Corresponds to "Total error count" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_TOTAL_ERROR_COUNT = 175
@@ -12830,7 +13802,7 @@ module Google
             #
             # Corresponds to "Total ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_TOTAL_QUERIES = 142
@@ -12841,7 +13813,7 @@ module Google
             #
             # Corresponds to "Total unmatched ad requests" in the Ad Manager UI.
             #
-            # Compatible with the following report types:
+            # Compatible with the following report types: `REAL_TIME_VIDEO`
             #
             # Data format: `INTEGER`
             VIDEO_REAL_TIME_UNMATCHED_QUERIES = 141
@@ -12882,6 +13854,18 @@ module Google
             # Data format: `INTEGER`
             VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK = 281
 
+            # The number of video ad opportunities reached by a user (rounded down, or
+            #  capped based on your max ads setting, whichever is less).
+            #
+            #
+            #
+            # Corresponds to "Capped opportunities (subpod)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_SUBPOD = 282
+
             # The total number of seconds available to be filled.
             #
             #
@@ -12892,6 +13876,17 @@ module Google
             #
             # Data format: `INTEGER`
             VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK = 283
+
+            # The total number of seconds available to be filled.
+            #
+            #
+            #
+            # Corresponds to "Total duration (subpod)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_SUBPOD = 284
 
             # The total number of seconds filled.
             #
@@ -12904,6 +13899,17 @@ module Google
             # Data format: `INTEGER`
             VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK = 285
 
+            # The total number of seconds filled.
+            #
+            #
+            #
+            # Corresponds to "Matched duration (subpod)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_SUBPOD = 286
+
             # The total matched opportunities in video true opportunities reporting.
             #
             #
@@ -12915,6 +13921,17 @@ module Google
             # Data format: `INTEGER`
             VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK = 287
 
+            # The total matched opportunities in video true opportunities reporting.
+            #
+            #
+            #
+            # Corresponds to "Matched opportunities (subpod)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_SUBPOD = 288
+
             # The number of video ad opportunities reached by a user (rounded down).
             #
             #
@@ -12925,6 +13942,17 @@ module Google
             #
             # Data format: `INTEGER`
             VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK = 289
+
+            # The number of video ad opportunities reached by a user (rounded down).
+            #
+            #
+            #
+            # Corresponds to "Viewed opportunities (subpod)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_SUBPOD = 290
 
             # The number of TrueView ad impressions viewed.
             #

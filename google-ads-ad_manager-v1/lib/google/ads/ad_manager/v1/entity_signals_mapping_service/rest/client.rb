@@ -471,7 +471,7 @@ module Google
               #     Format:
               #     `networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}`
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The list of fields to update.
+              #     Optional. The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::EntitySignalsMapping]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

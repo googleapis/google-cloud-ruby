@@ -27,8 +27,9 @@ module Google
         #     Identifier. The resource name of the `Role`.
         #     Format: `networks/{network_code}/roles/{role_id}`
         # @!attribute [r] role_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Output only. `Role` ID.
+        #     Output only. Deprecated: `Role` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the `Role`.

@@ -26,6 +26,20 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `Label`.
         #     Format: `networks/{network_code}/labels/{label_id}`
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Display name of the Label. This attribute has a maximum length of
+        #     127 characters.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. A description of the label. This attribute has a maximum length
+        #     of 255 characters.
+        # @!attribute [r] active
+        #   @return [::Boolean]
+        #     Output only. Specifies whether or not the label is active.
+        # @!attribute [rw] types
+        #   @return [::Array<::Google::Ads::AdManager::V1::LabelTypeEnum::LabelType>]
+        #     Required. Unordered list. The types of the Label.
         class Label
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -37,6 +37,10 @@ module Google
             rpc :GetCmsMetadataKey, ::Google::Ads::AdManager::V1::GetCmsMetadataKeyRequest, ::Google::Ads::AdManager::V1::CmsMetadataKey
             # API to retrieve a list of `CmsMetadataKey` objects.
             rpc :ListCmsMetadataKeys, ::Google::Ads::AdManager::V1::ListCmsMetadataKeysRequest, ::Google::Ads::AdManager::V1::ListCmsMetadataKeysResponse
+            # API to activate a list of `CmsMetadataKey` objects.
+            rpc :BatchActivateCmsMetadataKeys, ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest, ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysResponse
+            # API to deactivate a list of `CmsMetadataKey` objects.
+            rpc :BatchDeactivateCmsMetadataKeys, ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest, ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysResponse
           end
 
           Stub = Service.rpc_stub_class

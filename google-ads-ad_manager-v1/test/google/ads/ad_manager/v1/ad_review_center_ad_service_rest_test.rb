@@ -86,10 +86,10 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
     call_options = {}
 
     # Create request parameters for a unary method.
+    status = :AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
-    status = :AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED
     ad_review_center_ad_id = ["hello world"]
     date_time_range = {}
     search_text = ["hello world"]
@@ -109,27 +109,27 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.search_ad_review_center_ads({ parent: parent, page_size: page_size, page_token: page_token, status: status, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }) do |_result, response|
+        client.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_ad_review_center_ads parent: parent, page_size: page_size, page_token: page_token, status: status, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id do |_result, response|
+        client.search_ad_review_center_ads status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_ad_review_center_ads ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, status: status, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id) do |_result, response|
+        client.search_ad_review_center_ads ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_ad_review_center_ads({ parent: parent, page_size: page_size, page_token: page_token, status: status, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }, call_options) do |_result, response|
+        client.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_ad_review_center_ads(::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, status: status, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id), call_options) do |_result, response|
+        client.search_ad_review_center_ads(::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
