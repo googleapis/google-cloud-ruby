@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.0 (2026-05-06)
+
+#### Features
+
+* Support search indexing ([#33884](https://github.com/googleapis/google-cloud-ruby/issues/33884)) 
+
 ### 1.12.1 (2026-04-03)
 
 #### Documentation
