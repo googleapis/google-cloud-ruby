@@ -1,5 +1,12 @@
 # Release History
 
+### 1.18.0 (2026-05-06)
+
+#### Features
+
+* `isolation_level` and `read_lock_mode` are added to message `.google.spanner.v1.CommitResponse` ([#33894](https://github.com/googleapis/google-cloud-ruby/issues/33894)) 
+* add cache updates API ([#33902](https://github.com/googleapis/google-cloud-ruby/issues/33902)) 
+
 ### 1.17.1 (2026-04-03)
 
 #### Documentation
