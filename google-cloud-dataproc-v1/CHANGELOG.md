@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.0 (2026-05-06)
+
+#### Features
+
+* add PySparkNotebookBatch message ([#33903](https://github.com/googleapis/google-cloud-ruby/issues/33903)) 
+
 ### 1.11.0 (2026-04-15)
 
 #### Features
