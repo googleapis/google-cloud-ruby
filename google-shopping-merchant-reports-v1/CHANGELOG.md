@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2026-05-06)
+
+#### Features
+
+* add `store_type` to `product_performance_view` ([#33893](https://github.com/googleapis/google-cloud-ruby/issues/33893)) 
+
 ### 0.3.1 (2026-04-08)
 
 #### Documentation
