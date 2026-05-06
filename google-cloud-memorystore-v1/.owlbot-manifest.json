@@ -17,7 +17,9 @@
     "lib/google/cloud/memorystore/v1.rb",
     "lib/google/cloud/memorystore/v1/bindings_override.rb",
     "lib/google/cloud/memorystore/v1/memorystore.rb",
+    "lib/google/cloud/memorystore/v1/memorystore/client.rb",
     "lib/google/cloud/memorystore/v1/memorystore/credentials.rb",
+    "lib/google/cloud/memorystore/v1/memorystore/operations.rb",
     "lib/google/cloud/memorystore/v1/memorystore/paths.rb",
     "lib/google/cloud/memorystore/v1/memorystore/rest.rb",
     "lib/google/cloud/memorystore/v1/memorystore/rest/client.rb",
@@ -60,7 +62,10 @@
     "snippets/memorystore/reschedule_maintenance.rb",
     "snippets/memorystore/update_instance.rb",
     "snippets/snippet_metadata_google.cloud.memorystore.v1.json",
+    "test/google/cloud/memorystore/v1/memorystore_operations_test.rb",
+    "test/google/cloud/memorystore/v1/memorystore_paths_test.rb",
     "test/google/cloud/memorystore/v1/memorystore_rest_test.rb",
+    "test/google/cloud/memorystore/v1/memorystore_test.rb",
     "test/helper.rb"
   ],
   "static": [

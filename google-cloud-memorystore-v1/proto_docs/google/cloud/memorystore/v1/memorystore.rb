@@ -349,6 +349,24 @@ module Google
 
             # Standard small.
             STANDARD_SMALL = 4
+
+            # Custom micro.
+            CUSTOM_MICRO = 5
+
+            # Custom mini.
+            CUSTOM_MINI = 6
+
+            # High cpu medium.
+            HIGHCPU_MEDIUM = 7
+
+            # Standard large.
+            STANDARD_LARGE = 8
+
+            # High memory 2x large.
+            HIGHMEM_2XLARGE = 9
+
+            # Custom pico.
+            CUSTOM_PICO = 10
           end
 
           # The mode config, which is used to enable/disable cluster mode.
@@ -1347,7 +1365,7 @@ module Google
         end
 
         # Request for
-        # {::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
+        # {::Google::Cloud::Memorystore::V1::Memorystore::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Regional certificate authority resource name using the form:
