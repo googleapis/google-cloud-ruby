@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2026-05-06)
+
+#### Features
+
+* Adding Client Libraries for BigQueryExportService ([#33899](https://github.com/googleapis/google-cloud-ruby/issues/33899)) 
+* Support NativeDashboardService, DashboardChartService, DashboardQueryService, FeaturedContentNativeDashboardService, FeaturedContentMetadata for v1 
+
 ### 0.5.0 (2026-04-15)
 
 #### Features
