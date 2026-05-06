@@ -28,10 +28,10 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `LineItem`.
         #     Format: `networks/{network_code}/lineItems/{line_item_id}`
-        # @!attribute [r] order
+        # @!attribute [rw] order
         #   @return [::String]
-        #     Output only. The ID of the Order to which the LineItem belongs. This
-        #     attribute is required. Format: `networks/{network_code}/orders/{order}`
+        #     Required. Immutable. The ID of the Order to which the LineItem belongs.
+        #     Format: `networks/{network_code}/orders/{order}`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The name of the line item. This attribute is required and has a

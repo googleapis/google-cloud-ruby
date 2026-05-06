@@ -37,6 +37,18 @@ module Google
             rpc :GetApplication, ::Google::Ads::AdManager::V1::GetApplicationRequest, ::Google::Ads::AdManager::V1::Application
             # API to retrieve a list of `Application` objects.
             rpc :ListApplications, ::Google::Ads::AdManager::V1::ListApplicationsRequest, ::Google::Ads::AdManager::V1::ListApplicationsResponse
+            # API to create a `Application` object.
+            rpc :CreateApplication, ::Google::Ads::AdManager::V1::CreateApplicationRequest, ::Google::Ads::AdManager::V1::Application
+            # API to batch create `Application` objects.
+            rpc :BatchCreateApplications, ::Google::Ads::AdManager::V1::BatchCreateApplicationsRequest, ::Google::Ads::AdManager::V1::BatchCreateApplicationsResponse
+            # API to update a `Application` object.
+            rpc :UpdateApplication, ::Google::Ads::AdManager::V1::UpdateApplicationRequest, ::Google::Ads::AdManager::V1::Application
+            # API to batch update `Application` objects.
+            rpc :BatchUpdateApplications, ::Google::Ads::AdManager::V1::BatchUpdateApplicationsRequest, ::Google::Ads::AdManager::V1::BatchUpdateApplicationsResponse
+            # / API to batch archive `Application` objects.
+            rpc :BatchArchiveApplications, ::Google::Ads::AdManager::V1::BatchArchiveApplicationsRequest, ::Google::Ads::AdManager::V1::BatchArchiveApplicationsResponse
+            # / API to batch unarchive `Application` objects.
+            rpc :BatchUnarchiveApplications, ::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsRequest, ::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsResponse
           end
 
           Stub = Service.rpc_stub_class

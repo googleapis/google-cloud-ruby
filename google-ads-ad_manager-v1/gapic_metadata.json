@@ -136,6 +136,36 @@
               "methods": [
                 "list_applications"
               ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "create_application"
+              ]
+            },
+            "BatchCreateApplications": {
+              "methods": [
+                "batch_create_applications"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "update_application"
+              ]
+            },
+            "BatchUpdateApplications": {
+              "methods": [
+                "batch_update_applications"
+              ]
+            },
+            "BatchArchiveApplications": {
+              "methods": [
+                "batch_archive_applications"
+              ]
+            },
+            "BatchUnarchiveApplications": {
+              "methods": [
+                "batch_unarchive_applications"
+              ]
             }
           }
         }
@@ -231,6 +261,16 @@
               "methods": [
                 "list_cms_metadata_keys"
               ]
+            },
+            "BatchActivateCmsMetadataKeys": {
+              "methods": [
+                "batch_activate_cms_metadata_keys"
+              ]
+            },
+            "BatchDeactivateCmsMetadataKeys": {
+              "methods": [
+                "batch_deactivate_cms_metadata_keys"
+              ]
             }
           }
         }
@@ -249,6 +289,16 @@
             "ListCmsMetadataValues": {
               "methods": [
                 "list_cms_metadata_values"
+              ]
+            },
+            "BatchActivateCmsMetadataValues": {
+              "methods": [
+                "batch_activate_cms_metadata_values"
+              ]
+            },
+            "BatchDeactivateCmsMetadataValues": {
+              "methods": [
+                "batch_deactivate_cms_metadata_values"
               ]
             }
           }
@@ -621,6 +671,55 @@
         }
       }
     },
+    "LabelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::LabelService::Client",
+          "rpcs": {
+            "GetLabel": {
+              "methods": [
+                "get_label"
+              ]
+            },
+            "ListLabels": {
+              "methods": [
+                "list_labels"
+              ]
+            },
+            "CreateLabel": {
+              "methods": [
+                "create_label"
+              ]
+            },
+            "BatchCreateLabels": {
+              "methods": [
+                "batch_create_labels"
+              ]
+            },
+            "UpdateLabel": {
+              "methods": [
+                "update_label"
+              ]
+            },
+            "BatchUpdateLabels": {
+              "methods": [
+                "batch_update_labels"
+              ]
+            },
+            "BatchActivateLabels": {
+              "methods": [
+                "batch_activate_labels"
+              ]
+            },
+            "BatchDeactivateLabels": {
+              "methods": [
+                "batch_deactivate_labels"
+              ]
+            }
+          }
+        }
+      }
+    },
     "LineItemService": {
       "clients": {
         "grpc": {
@@ -634,6 +733,39 @@
             "ListLineItems": {
               "methods": [
                 "list_line_items"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LinkedDeviceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::LinkedDeviceService::Client",
+          "rpcs": {
+            "GetLinkedDevice": {
+              "methods": [
+                "get_linked_device"
+              ]
+            },
+            "ListLinkedDevices": {
+              "methods": [
+                "list_linked_devices"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "McmEarningsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::McmEarningsService::Client",
+          "rpcs": {
+            "FetchMcmEarnings": {
+              "methods": [
+                "fetch_mcm_earnings"
               ]
             }
           }
@@ -937,6 +1069,25 @@
             "FetchReportResultRows": {
               "methods": [
                 "fetch_report_result_rows"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RichMediaAdsCompanyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::RichMediaAdsCompanyService::Client",
+          "rpcs": {
+            "GetRichMediaAdsCompany": {
+              "methods": [
+                "get_rich_media_ads_company"
+              ]
+            },
+            "ListRichMediaAdsCompanies": {
+              "methods": [
+                "list_rich_media_ads_companies"
               ]
             }
           }

@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n7google/ads/admanager/v1/private_marketplace_enums.proto\x12\x17google.ads.admanager.v1\"\xc0\x01\n PrivateMarketplaceDealStatusEnum\"\x9b\x01\n\x1cPrivateMarketplaceDealStatus\x12/\n+PRIVATE_MARKETPLACE_DEAL_STATUS_UNSPECIFIED\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\x0c\n\x08\x43\x41NCELED\x10\x03\x12\x11\n\rSELLER_PAUSED\x10\x04\x12\x10\n\x0c\x42UYER_PAUSED\x10\x05\x42\xd0\x01\n\x1b\x63om.google.ads.admanager.v1B\x1cPrivateMarketplaceEnumsProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n7google/ads/admanager/v1/private_marketplace_enums.proto\x12\x17google.ads.admanager.v1\"\xcf\x01\n PrivateMarketplaceDealStatusEnum\"\xaa\x01\n\x1cPrivateMarketplaceDealStatus\x12/\n+PRIVATE_MARKETPLACE_DEAL_STATUS_UNSPECIFIED\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\x0c\n\x08\x43\x41NCELED\x10\x03\x12\x11\n\rSELLER_PAUSED\x10\x04\x12\x10\n\x0c\x42UYER_PAUSED\x10\x05\x12\r\n\tCOMPLETED\x10\x06\x42\xd0\x01\n\x1b\x63om.google.ads.admanager.v1B\x1cPrivateMarketplaceEnumsProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

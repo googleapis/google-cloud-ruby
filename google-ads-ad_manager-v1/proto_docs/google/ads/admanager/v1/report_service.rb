@@ -146,7 +146,7 @@ module Google
         #     Required. The `Report` to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to update.
+        #     Optional. The list of fields to update.
         class UpdateReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

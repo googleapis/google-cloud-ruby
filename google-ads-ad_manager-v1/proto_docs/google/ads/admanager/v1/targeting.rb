@@ -103,8 +103,8 @@ module Google
 
         # Bandwidth Targeting.
         #
-        # Reach users accessing the internet via various means of connection, such as
-        # cable, DSL, or dial-up. Can be useful to target campaigns using
+        # Reach users accessing the internet through various means of connection, such
+        # as cable, DSL, or dial-up. Can be useful to target campaigns using
         # low-resolution creatives or text ads for users with low bandwidth.
         # @!attribute [rw] targeted_bandwidth_groups
         #   @return [::Array<::String>]
@@ -273,7 +273,7 @@ module Google
         #
         #     Excluded AUs take precedence over targeted AUs. In fact an AU can be
         #     excluded only if one of its ancestors is targeted. Subsequently child
-        #     AUs of an excluded AU can not be targeted (except via a placement).
+        #     AUs of an excluded AU can not be targeted (except through a Placement).
         # @!attribute [rw] targeted_placements
         #   @return [::Array<::String>]
         #     Optional. The resource names of the placements that should be

@@ -66,12 +66,14 @@ module Google
             # the user has configured the UI to show them.
             DRAFT = 1
 
-            # Reports with saved visibility will appear in the Ad Manager UI by
-            # default. Alias for VISIBLE and will be replaced in the future.
-            SAVED = 2
-
             # Reports with this visibility will appear in the Ad Manager UI.
             VISIBLE = 2
+
+            # Deprecated: Use `VISIBLE`.
+            # Reports with saved visibility will appear in the Ad Manager UI by
+            # default. This is an alias for `VISIBLE` and will be removed in the
+            # future.
+            SAVED = 2
           end
         end
 

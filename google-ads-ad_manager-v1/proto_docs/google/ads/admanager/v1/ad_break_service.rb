@@ -127,7 +127,7 @@ module Google
         #     The `AdBreak`'s `name` is used to identify the `AdBreak` to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to update.
+        #     Optional. The list of fields to update.
         class UpdateAdBreakRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

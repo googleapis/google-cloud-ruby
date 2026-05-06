@@ -289,8 +289,21 @@ module Google
               #     match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
-              #     See syntax details at
-              #     https://developers.google.com/ad-manager/api/beta/filters
+              #      See syntax details at
+              #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     <b>Filterable fields:</b>
+              #     <ul style="list-style-type:none">
+              #       <li><code>appStoreId</code></li>
+              #       <li><code>appStores</code></li>
+              #       <li><code>applicationCode</code></li>
+              #       <li><code>approvalStatus</code></li>
+              #       <li><code>archived</code></li>
+              #       <li><code>displayName</code></li>
+              #       <li><code>name</code></li>
+              #       <li><code>platform</code></li>
+              #       <li><code>webviewClaimingStatus</code></li>
+              #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -356,6 +369,497 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @application_service_stub, :list_applications, "applications", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to create a `Application` object.
+              #
+              # @overload create_application(request, options = nil)
+              #   Pass arguments to `create_application` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateApplicationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateApplicationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_application(parent: nil, application: nil)
+              #   Pass arguments to `create_application` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this `Application` will be created.
+              #     Format: `networks/{network_code}`
+              #   @param application [::Google::Ads::AdManager::V1::Application, ::Hash]
+              #     Required. The `Application` to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Application]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Application]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ApplicationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateApplicationRequest.new
+              #
+              #   # Call the create_application method.
+              #   result = client.create_application request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Application.
+              #   p result
+              #
+              def create_application request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateApplicationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_application.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_application.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_application.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @application_service_stub.create_application request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch create `Application` objects.
+              #
+              # @overload batch_create_applications(request, options = nil)
+              #   Pass arguments to `batch_create_applications` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateApplicationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateApplicationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_applications(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_applications` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Applications` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateApplicationRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateApplicationRequest, ::Hash>]
+              #     Required. The `Application` objects to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateApplicationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateApplicationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ApplicationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateApplicationsRequest.new
+              #
+              #   # Call the batch_create_applications method.
+              #   result = client.batch_create_applications request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateApplicationsResponse.
+              #   p result
+              #
+              def batch_create_applications request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateApplicationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_applications.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_applications.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_applications.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @application_service_stub.batch_create_applications request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to update a `Application` object.
+              #
+              # @overload update_application(request, options = nil)
+              #   Pass arguments to `update_application` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateApplicationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateApplicationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_application(application: nil, update_mask: nil)
+              #   Pass arguments to `update_application` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param application [::Google::Ads::AdManager::V1::Application, ::Hash]
+              #     Required. The `Application` to update.
+              #
+              #     The `Application`'s `name` is used to identify the `Application` to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Application]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Application]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ApplicationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateApplicationRequest.new
+              #
+              #   # Call the update_application method.
+              #   result = client.update_application request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Application.
+              #   p result
+              #
+              def update_application request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateApplicationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_application.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_application.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_application.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @application_service_stub.update_application request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # API to batch update `Application` objects.
+              #
+              # @overload batch_update_applications(request, options = nil)
+              #   Pass arguments to `batch_update_applications` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateApplicationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateApplicationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_applications(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_applications` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Applications` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateApplicationRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateApplicationRequest, ::Hash>]
+              #     Required. The `Application` objects to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateApplicationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateApplicationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ApplicationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateApplicationsRequest.new
+              #
+              #   # Call the batch_update_applications method.
+              #   result = client.batch_update_applications request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateApplicationsResponse.
+              #   p result
+              #
+              def batch_update_applications request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateApplicationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_applications.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_applications.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_applications.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @application_service_stub.batch_update_applications request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # / API to batch archive `Application` objects.
+              #
+              # @overload batch_archive_applications(request, options = nil)
+              #   Pass arguments to `batch_archive_applications` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchArchiveApplicationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchArchiveApplicationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_archive_applications(parent: nil, names: nil)
+              #   Pass arguments to `batch_archive_applications` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource shared by all `Applications` to archive.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The `Application` objects to archive.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchArchiveApplicationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchArchiveApplicationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ApplicationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchArchiveApplicationsRequest.new
+              #
+              #   # Call the batch_archive_applications method.
+              #   result = client.batch_archive_applications request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchArchiveApplicationsResponse.
+              #   p result
+              #
+              def batch_archive_applications request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchArchiveApplicationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_archive_applications.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_archive_applications.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_archive_applications.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @application_service_stub.batch_archive_applications request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # / API to batch unarchive `Application` objects.
+              #
+              # @overload batch_unarchive_applications(request, options = nil)
+              #   Pass arguments to `batch_unarchive_applications` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_unarchive_applications(parent: nil, names: nil)
+              #   Pass arguments to `batch_unarchive_applications` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource shared by all `Applications` to Unarchive.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The `Application` objects to unarchive.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ApplicationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUnarchiveApplicationsRequest.new
+              #
+              #   # Call the batch_unarchive_applications method.
+              #   result = client.batch_unarchive_applications request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUnarchiveApplicationsResponse.
+              #   p result
+              #
+              def batch_unarchive_applications request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUnarchiveApplicationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_unarchive_applications.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_unarchive_applications.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_unarchive_applications.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @application_service_stub.batch_unarchive_applications request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -517,6 +1021,36 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_applications
+                  ##
+                  # RPC-specific configuration for `create_application`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_application
+                  ##
+                  # RPC-specific configuration for `batch_create_applications`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_applications
+                  ##
+                  # RPC-specific configuration for `update_application`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_application
+                  ##
+                  # RPC-specific configuration for `batch_update_applications`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_applications
+                  ##
+                  # RPC-specific configuration for `batch_archive_applications`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_archive_applications
+                  ##
+                  # RPC-specific configuration for `batch_unarchive_applications`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_unarchive_applications
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -524,6 +1058,18 @@ module Google
                     @get_application = ::Gapic::Config::Method.new get_application_config
                     list_applications_config = parent_rpcs.list_applications if parent_rpcs.respond_to? :list_applications
                     @list_applications = ::Gapic::Config::Method.new list_applications_config
+                    create_application_config = parent_rpcs.create_application if parent_rpcs.respond_to? :create_application
+                    @create_application = ::Gapic::Config::Method.new create_application_config
+                    batch_create_applications_config = parent_rpcs.batch_create_applications if parent_rpcs.respond_to? :batch_create_applications
+                    @batch_create_applications = ::Gapic::Config::Method.new batch_create_applications_config
+                    update_application_config = parent_rpcs.update_application if parent_rpcs.respond_to? :update_application
+                    @update_application = ::Gapic::Config::Method.new update_application_config
+                    batch_update_applications_config = parent_rpcs.batch_update_applications if parent_rpcs.respond_to? :batch_update_applications
+                    @batch_update_applications = ::Gapic::Config::Method.new batch_update_applications_config
+                    batch_archive_applications_config = parent_rpcs.batch_archive_applications if parent_rpcs.respond_to? :batch_archive_applications
+                    @batch_archive_applications = ::Gapic::Config::Method.new batch_archive_applications_config
+                    batch_unarchive_applications_config = parent_rpcs.batch_unarchive_applications if parent_rpcs.respond_to? :batch_unarchive_applications
+                    @batch_unarchive_applications = ::Gapic::Config::Method.new batch_unarchive_applications_config
 
                     yield self if block_given?
                   end

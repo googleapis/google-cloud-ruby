@@ -42,6 +42,34 @@ module Google
             UNREVIEWED = 3
           end
         end
+
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus ManualAdReviewCenterAdStatus}
+        class ManualAdReviewCenterAdStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the manual review status of a AdReviewCenterAd.
+          module ManualAdReviewCenterAdStatus
+            # Not specified value.
+            MANUAL_AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED = 0
+
+            # This ad has been explicitly allowed to serve.
+            ALLOWED = 1
+
+            # This ad has been explicitly blocked from serving.
+            BLOCKED = 2
+
+            # This ad is implicitly blocked and has been reviewed.
+            ARCHIVED = 3
+
+            # This ad is implicitly blocked and has not been reviewed.
+            PENDING = 4
+
+            # This ad is allowed to serve by default and has not been reviewed.
+            SERVING = 5
+          end
+        end
       end
     end
   end

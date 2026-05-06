@@ -38,6 +38,13 @@ module Google
         # @!attribute [rw] status
         #   @return [::Google::Ads::AdManager::V1::AdReviewCenterAdStatusEnum::AdReviewCenterAdStatus]
         #     The status of the AdReviewCenterAd.
+        # @!attribute [r] manual_review_statuses
+        #   @return [::Array<::Google::Ads::AdManager::V1::ManualAdReviewCenterAdStatusEnum::ManualAdReviewCenterAdStatus>]
+        #     Output only. The manual review status of the AdReviewCenterAd (for web
+        #     properties in MCR mode). For MCR mode, a single ad could have multiple
+        #     statuses (for example, pending and serving at the same time, if the ad is
+        #     affected by a protection in certain inventory only). This field is not set
+        #     for the standard mode.
         # @!attribute [r] preview_url
         #   @return [::String]
         #     Output only. The preview URL that can be embedded or accessed directly
