@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2026-05-06)
+
+#### Features
+
+* add object custom contexts counters ([#33895](https://github.com/googleapis/google-cloud-ruby/issues/33895)) 
+
 ### 0.8.1 (2026-04-03)
 
 #### Documentation
