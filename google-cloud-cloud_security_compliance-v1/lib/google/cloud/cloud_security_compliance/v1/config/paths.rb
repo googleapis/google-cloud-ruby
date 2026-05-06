@@ -27,39 +27,104 @@ module Google
             ##
             # Create a fully-qualified CloudControl resource string.
             #
-            # The resource will be in the following format:
+            # @overload cloud_control_path(organization:, location:, cloud_control:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+            #   `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
             #
-            # @param organization [String]
-            # @param location [String]
-            # @param cloud_control [String]
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param cloud_control [String]
+            #
+            # @overload cloud_control_path(project:, location:, cloud_control:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/cloudControls/{cloud_control}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param cloud_control [String]
             #
             # @return [::String]
-            def cloud_control_path organization:, location:, cloud_control:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def cloud_control_path **args
+              resources = {
+                "cloud_control:location:organization" => (proc do |organization:, location:, cloud_control:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "organizations/#{organization}/locations/#{location}/cloudControls/#{cloud_control}"
+                  "organizations/#{organization}/locations/#{location}/cloudControls/#{cloud_control}"
+                end),
+                "cloud_control:location:project" => (proc do |project:, location:, cloud_control:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/cloudControls/#{cloud_control}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
             # Create a fully-qualified Framework resource string.
             #
-            # The resource will be in the following format:
+            # @overload framework_path(organization:, location:, framework:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/locations/{location}/frameworks/{framework}`
+            #   `organizations/{organization}/locations/{location}/frameworks/{framework}`
             #
-            # @param organization [String]
-            # @param location [String]
-            # @param framework [String]
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param framework [String]
+            #
+            # @overload framework_path(project:, location:, framework:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/frameworks/{framework}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param framework [String]
             #
             # @return [::String]
-            def framework_path organization:, location:, framework:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def framework_path **args
+              resources = {
+                "framework:location:organization" => (proc do |organization:, location:, framework:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "organizations/#{organization}/locations/#{location}/frameworks/#{framework}"
+                  "organizations/#{organization}/locations/#{location}/frameworks/#{framework}"
+                end),
+                "framework:location:project" => (proc do |project:, location:, framework:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/frameworks/#{framework}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
             end
 
             ##

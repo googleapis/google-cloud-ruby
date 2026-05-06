@@ -26,8 +26,12 @@ module Google
         # FedRAMP or NIST.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Identifier. The name of the framework, in the format
-        #     `organizations/{organization}/locations/{location}/frameworks/{framework_id}`.
+        #     Required. Identifier. The name of the framework, in one of the following
+        #     formats:
+        #     `organizations/{organization}/locations/{location}/frameworks/{framework}`
+        #     or
+        #     `projects/{project}/locations/{location}/frameworks/{framework}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [r] major_revision_id
         #   @return [::Integer]
@@ -80,8 +84,11 @@ module Google
         # The details of a cloud control.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the cloud control, in the format
-        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud-control}`.
+        #     Required. The name of the cloud control, in one of the following formats:
+        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+        #     or
+        #     `projects/{project}/locations/{location}/cloudControls/{cloud_control}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [rw] major_revision_id
         #   @return [::Integer]
@@ -97,8 +104,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The reference of a framework, in the format
-        # `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+        # The reference of a framework, in one of the following formats:
+        # - `organizations/{organization}/locations/{location}/frameworks/{framework}`
+        # - `projects/{project}/locations/{location}/frameworks/{framework}`.
+        #
         # The only supported location is `global`.
         # @!attribute [rw] framework
         #   @return [::String]
@@ -131,8 +140,12 @@ module Google
         # use to define your organization's security or compliance intent.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Identifier. The name of the cloud control, in the format
-        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control_id}`.
+        #     Required. Identifier. The name of the cloud control, in either of the
+        #     formats:
+        #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+        #     or
+        #     `projects/{project}/locations/{location}/cloudControls/{cloud_control}`.
+        #
         #     The only supported location is `global`.
         # @!attribute [r] major_revision_id
         #   @return [::Integer]
@@ -324,27 +337,27 @@ module Google
         # The possible parameter value types.
         # @!attribute [rw] string_value
         #   @return [::String]
-        #     A string value.
+        #     Optional. A string value.
         #
         #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `string_list_value`, `number_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
-        #     A boolean value.
+        #     Optional. A boolean value.
         #
         #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `string_list_value`, `number_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_list_value
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::StringList]
-        #     A repeated string.
+        #     Optional. A repeated string.
         #
         #     Note: The following fields are mutually exclusive: `string_list_value`, `string_value`, `bool_value`, `number_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] number_value
         #   @return [::Float]
-        #     A double value.
+        #     Optional. A double value.
         #
         #     Note: The following fields are mutually exclusive: `number_value`, `string_value`, `bool_value`, `string_list_value`, `oneof_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oneof_value
         #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Parameter]
-        #     Sub-parameter values.
+        #     Optional. Sub-parameter values.
         #
         #     Note: The following fields are mutually exclusive: `oneof_value`, `string_value`, `bool_value`, `string_list_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ParamValue
@@ -447,6 +460,122 @@ module Google
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The regulatory control.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The name of a regulatory control, in one of the following
+        #     formats:
+        #     - `organizations/{organization}/locations/{location}/controls/{control}`
+        #     - `projects/{project}/locations/{location}/controls/{control}`.
+        #
+        #     The only supported location is `global`.
+        # @!attribute [r] display_name
+        #   @return [::String]
+        #     Output only. The friendly name for the regulatory control.
+        # @!attribute [r] description
+        #   @return [::String]
+        #     Output only. The description of the regulatory control.
+        # @!attribute [r] family
+        #   @return [::Google::Cloud::CloudSecurityCompliance::V1::Control::Family]
+        #     Output only. The regulatory group that the control belongs to.
+        # @!attribute [r] control_family
+        #   @return [::Google::Cloud::CloudSecurityCompliance::V1::ControlFamily]
+        #     Output only. The regulatory family that the control belongs to.
+        # @!attribute [r] responsibility_type
+        #   @return [::Google::Cloud::CloudSecurityCompliance::V1::RegulatoryControlResponsibilityType]
+        #     Output only. The entity that's responsible for the control, whether Google,
+        #     you as the customer, or both.
+        # @!attribute [r] google_responsibility_description
+        #   @return [::String]
+        #     Output only. A description of Google's responsibility for the regulatory
+        #     control.
+        # @!attribute [r] google_responsibility_implementation
+        #   @return [::String]
+        #     Output only. A description of Google's responsibility for implementing the
+        #     regulatory control.
+        # @!attribute [r] customer_responsibility_description
+        #   @return [::String]
+        #     Output only. A description of your responsibility for the regulatory
+        #     control.
+        # @!attribute [r] customer_responsibility_implementation
+        #   @return [::String]
+        #     Output only. A description of the your responsibility for implementing the
+        #     regulatory control.
+        # @!attribute [r] shared_responsibility_description
+        #   @return [::String]
+        #     Output only. A description of the responsibility that's shared between
+        #     Google and you in implementing this control.
+        # @!attribute [r] additional_content_uri
+        #   @return [::String]
+        #     Output only. A link to the documentation that's related to this control.
+        # @!attribute [r] related_frameworks
+        #   @return [::Array<::String>]
+        #     Output only. The frameworks that include this control.
+        class Control
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The regulatory control family.
+          module Family
+            # Default value. This value is unused.
+            FAMILY_UNSPECIFIED = 0
+
+            # Access control
+            AC = 1
+
+            # Awareness and araining
+            AT = 2
+
+            # Audit and accountability
+            AU = 3
+
+            # Certification, accreditation, and security assessments
+            CA = 4
+
+            # Configuration management
+            CM = 5
+
+            # Contingency planning
+            CP = 6
+
+            # Identification and authentication
+            IA = 7
+
+            # Incident response
+            IR = 8
+
+            # Maintenance
+            MA = 9
+
+            # Media protection
+            MP = 10
+
+            # Physical and environmental protection
+            PE = 11
+
+            # Security planning
+            PL = 12
+
+            # Personnel aecurity
+            PS = 13
+
+            # Risk assessment
+            RA = 14
+
+            # System services and acquisition
+            SA = 15
+
+            # System and communications protection
+            SC = 16
+
+            # System and information integrity
+            SI = 17
+
+            # Supply chain risk management
+            SR = 18
+          end
         end
 
         # The regulatory family of the control.
@@ -561,6 +690,18 @@ module Google
 
           # The business continuity and disaster recovery (BCDR) category.
           CC_CATEGORY_BCDR = 15
+
+          # The admin access category.
+          CC_CATEGORY_ADMIN_ACCESS = 16
+
+          # DRZ (Data Residency).
+          CC_CATEGORY_DATA_RESIDENCY = 17
+
+          # RUR (Resource Usage Restriction).
+          CC_CATEGORY_RESOURCE_USAGE_RESTRICTION = 18
+
+          # SERVICE SPECIFIC
+          CC_CATEGORY_SERVICE_SPECIFIC = 19
         end
 
         # The cloud provider that's associated with the cloud control.

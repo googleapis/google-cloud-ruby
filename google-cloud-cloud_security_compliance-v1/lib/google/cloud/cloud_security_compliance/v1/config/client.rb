@@ -254,8 +254,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, in the format
-            #     `organizations/{organization}/locations/{location}`.
+            #     Required. The parent resource name, in one of the following formats:
+            #     - `organizations/{organization}/locations/{location}`
+            #     - `projects/{project}/locations/{location}`.
+            #
             #     The only supported location is `global`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of frameworks to return. The default value is
@@ -360,8 +362,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the framework to retrieve, in the format
-            #     `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
+            #     Required. The name of the framework to retrieve, in one of the following
+            #     formats:
+            #     `organizations/{organization}/locations/{location}/frameworks/{framework}`
+            #     or
+            #     `projects/{project}/locations/{location}/frameworks/{framework}`.
+            #
             #     The only supported location is `global`.
             #   @param major_revision_id [::Integer]
             #     Optional. The framework major version to retrieve. If not specified, the
@@ -452,8 +458,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, in the format
-            #     `organizations/{organization}/locations/{location}`.
+            #     Required. The parent resource name, in one of the following formats:
+            #     - `organizations/{organization}/locations/{location}`
+            #     - `projects/{project}/locations/{location}`.
+            #
             #     The only supported location is `global`.
             #   @param framework_id [::String]
             #     Required. The identifier (ID) of the framework. The ID is not the full name
@@ -654,8 +662,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the resource, in the format
-            #     `organizations/{organization}/locations/{location}/frameworks/{framework}`.
+            #     Required. The name of the resource, in one of the following formats:
+            #     `organizations/{organization}/locations/{location}/frameworks/{framework}`
+            #     or
+            #     `projects/{project}/locations/{location}/frameworks/{framework}`.
+            #
             #     The only supported location is `global`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -744,8 +755,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, in the format
-            #     `organizations/{organization}/locations/{location}`.
+            #     Required. The parent resource name, in one of the following formats:
+            #     - `organizations/{organization}/locations/{location}`
+            #     - `projects/{project}/locations/{location}`.
+            #
             #     The only supported location is `global`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of cloud controls to return. The default value
@@ -857,8 +870,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the cloud control to retrieve, in the format
-            #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
+            #     Required. The name of the cloud control to retrieve, in one of the
+            #     following formats:
+            #     `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+            #     or
+            #     `projects/{project}/locations/{location}/cloudControls/{cloud_control}`.
+            #
             #     The only supported location is `global`.
             #   @param major_revision_id [::Integer]
             #     Optional. The major version of the cloud control to retrieve. If not
@@ -950,8 +967,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, in the format
-            #     `organizations/{organization}/locations/{location}`.
+            #     Required. The parent resource name, in one of the following formats:
+            #     - `organizations/{organization}/locations/{location}`.
+            #     - `projects/{project}/locations/{location}`.
+            #
             #     The only supported location is `global`.
             #   @param cloud_control_id [::String]
             #     Required. The identifier for the cloud control, which is the last segment
@@ -1161,8 +1180,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the cloud control to delete, in the format
-            #     `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`.
+            #     Required. The name of the cloud control to delete, in one of the following
+            #     formats:
+            #     `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`
+            #     or
+            #     `projects/{project}/locations/{location}/CloudControls/{CloudControl}`.
+            #
             #     The only supported location is `global`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
