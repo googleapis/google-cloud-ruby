@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ require "gapic/operation"
 module Google
   module Iam
     module V3beta
-      module PrincipalAccessBoundaryPolicies
+      module AccessPolicies
         module Rest
           # Service that implements Longrunning Operations API.
           class Operations
@@ -35,7 +35,7 @@ module Google
             attr_reader :operations_stub
 
             ##
-            # Configuration for the PrincipalAccessBoundaryPolicies Operations API.
+            # Configuration for the AccessPolicies Operations API.
             #
             # @yield [config] Configure the Operations client.
             # @yieldparam config [Operations::Configuration]
@@ -49,7 +49,7 @@ module Google
             end
 
             ##
-            # Configure the PrincipalAccessBoundaryPolicies Operations instance.
+            # Configure the AccessPolicies Operations instance.
             #
             # The configuration is set to the derived mode, meaning that values can be changed,
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes

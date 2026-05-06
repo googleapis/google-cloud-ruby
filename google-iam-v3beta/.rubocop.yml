@@ -3,7 +3,7 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-iam-v3beta.gemspec"
+    - "google-cloud-iam-v3beta.gemspec"
     - "lib/**/*_pb.rb"
     - "proto_docs/**/*"
     - "test/**/*"
@@ -30,4 +30,4 @@ Naming/AccessorMethodName:
     - "snippets/**/*.rb"
 Naming/FileName:
   Exclude:
-    - "lib/google-iam-v3beta.rb"
+    - "lib/google-cloud-iam-v3beta.rb"

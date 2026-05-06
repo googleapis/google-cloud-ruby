@@ -129,8 +129,7 @@ module Google
       #     Optional. The maximum number of policy bindings to return. The service may
       #     return fewer than this value.
       #
-      #     If unspecified, at most 50 policy bindings will be returned.
-      #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+      #     The default value is 50. The maximum value is 1000.
       # @!attribute [rw] page_token
       #   @return [::String]
       #     Optional. A page token, received from a previous `ListPolicyBindings` call.
@@ -141,7 +140,8 @@ module Google
       # @!attribute [rw] filter
       #   @return [::String]
       #     Optional. An expression for filtering the results of the request. Filter
-      #     rules are case insensitive. Some eligible fields for filtering are:
+      #     rules are case insensitive. Some eligible fields for filtering are the
+      #     following:
       #
       #     + `target`
       #     + `policy`
@@ -187,8 +187,7 @@ module Google
       #     Optional. The maximum number of policy bindings to return. The service may
       #     return fewer than this value.
       #
-      #     If unspecified, at most 50 policy bindings will be returned.
-      #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+      #     The default value is 50. The maximum value is 1000.
       # @!attribute [rw] page_token
       #   @return [::String]
       #     Optional. A page token, received from a previous
@@ -210,6 +209,18 @@ module Google
       #     * `projects/{project_number}/locations/{location}`
       #     * `folders/{folder_id}/locations/{location}`
       #     * `organizations/{organization_id}/locations/{location}`
+      # @!attribute [rw] filter
+      #   @return [::String]
+      #     Optional. Filtering currently only supports the kind of policies to return,
+      #     and must be in the format "policy_kind=\\{policy_kind}".
+      #
+      #     If String is empty, bindings bound to all kinds of policies would be
+      #     returned.
+      #
+      #     The only supported values are the following:
+      #
+      #     * "policy_kind=PRINCIPAL_ACCESS_BOUNDARY",
+      #     * "policy_kind=ACCESS"
       class SearchTargetPolicyBindingsRequest
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

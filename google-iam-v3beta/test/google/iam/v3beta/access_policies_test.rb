@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/iam/v3beta/policy_bindings_service_pb"
-require "google/iam/v3beta/policy_bindings"
+require "google/iam/v3beta/access_policies_service_pb"
+require "google/iam/v3beta/access_policies"
 
-class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
+class ::Google::Iam::V3beta::AccessPolicies::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -63,7 +63,7 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     end
   end
 
-  def test_create_policy_binding
+  def test_create_access_policy
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
@@ -72,69 +72,69 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     parent = "hello world"
-    policy_binding_id = "hello world"
-    policy_binding = {}
+    access_policy_id = "hello world"
+    access_policy = {}
     validate_only = true
 
-    create_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :create_policy_binding, name
-      assert_kind_of ::Google::Iam::V3beta::CreatePolicyBindingRequest, request
+    create_access_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_access_policy, name
+      assert_kind_of ::Google::Iam::V3beta::CreateAccessPolicyRequest, request
       assert_equal "hello world", request["parent"]
-      assert_equal "hello world", request["policy_binding_id"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V3beta::PolicyBinding), request["policy_binding"]
+      assert_equal "hello world", request["access_policy_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V3beta::AccessPolicy), request["access_policy"]
       assert_equal true, request["validate_only"]
       refute_nil options
     end
 
-    Gapic::ServiceStub.stub :new, create_policy_binding_client_stub do
+    Gapic::ServiceStub.stub :new, create_access_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_policy_binding({ parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only }) do |response, operation|
+      client.create_access_policy({ parent: parent, access_policy_id: access_policy_id, access_policy: access_policy, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_policy_binding parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only do |response, operation|
+      client.create_access_policy parent: parent, access_policy_id: access_policy_id, access_policy: access_policy, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_policy_binding ::Google::Iam::V3beta::CreatePolicyBindingRequest.new(parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only) do |response, operation|
+      client.create_access_policy ::Google::Iam::V3beta::CreateAccessPolicyRequest.new(parent: parent, access_policy_id: access_policy_id, access_policy: access_policy, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_policy_binding({ parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only }, grpc_options) do |response, operation|
+      client.create_access_policy({ parent: parent, access_policy_id: access_policy_id, access_policy: access_policy, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_policy_binding(::Google::Iam::V3beta::CreatePolicyBindingRequest.new(parent: parent, policy_binding_id: policy_binding_id, policy_binding: policy_binding, validate_only: validate_only), grpc_options) do |response, operation|
+      client.create_access_policy(::Google::Iam::V3beta::CreateAccessPolicyRequest.new(parent: parent, access_policy_id: access_policy_id, access_policy: access_policy, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 5, create_policy_binding_client_stub.call_rpc_count
+      assert_equal 5, create_access_policy_client_stub.call_rpc_count
     end
   end
 
-  def test_get_policy_binding
+  def test_get_access_policy
     # Create GRPC objects.
-    grpc_response = ::Google::Iam::V3beta::PolicyBinding.new
+    grpc_response = ::Google::Iam::V3beta::AccessPolicy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -142,55 +142,55 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_policy_binding, name
-      assert_kind_of ::Google::Iam::V3beta::GetPolicyBindingRequest, request
+    get_access_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_access_policy, name
+      assert_kind_of ::Google::Iam::V3beta::GetAccessPolicyRequest, request
       assert_equal "hello world", request["name"]
       refute_nil options
     end
 
-    Gapic::ServiceStub.stub :new, get_policy_binding_client_stub do
+    Gapic::ServiceStub.stub :new, get_access_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_policy_binding({ name: name }) do |response, operation|
+      client.get_access_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_policy_binding name: name do |response, operation|
+      client.get_access_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_policy_binding ::Google::Iam::V3beta::GetPolicyBindingRequest.new(name: name) do |response, operation|
+      client.get_access_policy ::Google::Iam::V3beta::GetAccessPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_policy_binding({ name: name }, grpc_options) do |response, operation|
+      client.get_access_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_policy_binding(::Google::Iam::V3beta::GetPolicyBindingRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_access_policy(::Google::Iam::V3beta::GetAccessPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 5, get_policy_binding_client_stub.call_rpc_count
+      assert_equal 5, get_access_policy_client_stub.call_rpc_count
     end
   end
 
-  def test_update_policy_binding
+  def test_update_access_policy
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
@@ -198,66 +198,64 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
-    policy_binding = {}
+    access_policy = {}
     validate_only = true
-    update_mask = {}
 
-    update_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_policy_binding, name
-      assert_kind_of ::Google::Iam::V3beta::UpdatePolicyBindingRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V3beta::PolicyBinding), request["policy_binding"]
+    update_access_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_access_policy, name
+      assert_kind_of ::Google::Iam::V3beta::UpdateAccessPolicyRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V3beta::AccessPolicy), request["access_policy"]
       assert_equal true, request["validate_only"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
-    Gapic::ServiceStub.stub :new, update_policy_binding_client_stub do
+    Gapic::ServiceStub.stub :new, update_access_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_policy_binding({ policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
+      client.update_access_policy({ access_policy: access_policy, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_policy_binding policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask do |response, operation|
+      client.update_access_policy access_policy: access_policy, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_policy_binding ::Google::Iam::V3beta::UpdatePolicyBindingRequest.new(policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask) do |response, operation|
+      client.update_access_policy ::Google::Iam::V3beta::UpdateAccessPolicyRequest.new(access_policy: access_policy, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_policy_binding({ policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
+      client.update_access_policy({ access_policy: access_policy, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_policy_binding(::Google::Iam::V3beta::UpdatePolicyBindingRequest.new(policy_binding: policy_binding, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
+      client.update_access_policy(::Google::Iam::V3beta::UpdateAccessPolicyRequest.new(access_policy: access_policy, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 5, update_policy_binding_client_stub.call_rpc_count
+      assert_equal 5, update_access_policy_client_stub.call_rpc_count
     end
   end
 
-  def test_delete_policy_binding
+  def test_delete_access_policy
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
@@ -268,65 +266,67 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     name = "hello world"
     etag = "hello world"
     validate_only = true
+    force = true
 
-    delete_policy_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :delete_policy_binding, name
-      assert_kind_of ::Google::Iam::V3beta::DeletePolicyBindingRequest, request
+    delete_access_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_access_policy, name
+      assert_kind_of ::Google::Iam::V3beta::DeleteAccessPolicyRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["etag"]
       assert_equal true, request["validate_only"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
-    Gapic::ServiceStub.stub :new, delete_policy_binding_client_stub do
+    Gapic::ServiceStub.stub :new, delete_access_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_policy_binding({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
+      client.delete_access_policy({ name: name, etag: etag, validate_only: validate_only, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_policy_binding name: name, etag: etag, validate_only: validate_only do |response, operation|
+      client.delete_access_policy name: name, etag: etag, validate_only: validate_only, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_policy_binding ::Google::Iam::V3beta::DeletePolicyBindingRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
+      client.delete_access_policy ::Google::Iam::V3beta::DeleteAccessPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_policy_binding({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
+      client.delete_access_policy({ name: name, etag: etag, validate_only: validate_only, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_policy_binding(::Google::Iam::V3beta::DeletePolicyBindingRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
+      client.delete_access_policy(::Google::Iam::V3beta::DeleteAccessPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 5, delete_policy_binding_client_stub.call_rpc_count
+      assert_equal 5, delete_access_policy_client_stub.call_rpc_count
     end
   end
 
-  def test_list_policy_bindings
+  def test_list_access_policies
     # Create GRPC objects.
-    grpc_response = ::Google::Iam::V3beta::ListPolicyBindingsResponse.new
+    grpc_response = ::Google::Iam::V3beta::ListAccessPoliciesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -335,132 +335,126 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
-    filter = "hello world"
 
-    list_policy_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :list_policy_bindings, name
-      assert_kind_of ::Google::Iam::V3beta::ListPolicyBindingsRequest, request
+    list_access_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_access_policies, name
+      assert_kind_of ::Google::Iam::V3beta::ListAccessPoliciesRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
-      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
-    Gapic::ServiceStub.stub :new, list_policy_bindings_client_stub do
+    Gapic::ServiceStub.stub :new, list_access_policies_client_stub do
       # Create client
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_access_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_policy_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_access_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_policy_bindings ::Google::Iam::V3beta::ListPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_access_policies ::Google::Iam::V3beta::ListAccessPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_policy_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_access_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_policy_bindings(::Google::Iam::V3beta::ListPolicyBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_access_policies(::Google::Iam::V3beta::ListAccessPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 5, list_policy_bindings_client_stub.call_rpc_count
+      assert_equal 5, list_access_policies_client_stub.call_rpc_count
     end
   end
 
-  def test_search_target_policy_bindings
+  def test_search_access_policy_bindings
     # Create GRPC objects.
-    grpc_response = ::Google::Iam::V3beta::SearchTargetPolicyBindingsResponse.new
+    grpc_response = ::Google::Iam::V3beta::SearchAccessPolicyBindingsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
 
     # Create request parameters for a unary method.
-    target = "hello world"
+    name = "hello world"
     page_size = 42
     page_token = "hello world"
-    parent = "hello world"
-    filter = "hello world"
 
-    search_target_policy_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :search_target_policy_bindings, name
-      assert_kind_of ::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest, request
-      assert_equal "hello world", request["target"]
+    search_access_policy_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_access_policy_bindings, name
+      assert_kind_of ::Google::Iam::V3beta::SearchAccessPolicyBindingsRequest, request
+      assert_equal "hello world", request["name"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
-      assert_equal "hello world", request["parent"]
-      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
-    Gapic::ServiceStub.stub :new, search_target_policy_bindings_client_stub do
+    Gapic::ServiceStub.stub :new, search_access_policy_bindings_client_stub do
       # Create client
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter }) do |response, operation|
+      client.search_access_policy_bindings({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter do |response, operation|
+      client.search_access_policy_bindings name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_target_policy_bindings ::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter) do |response, operation|
+      client.search_access_policy_bindings ::Google::Iam::V3beta::SearchAccessPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter }, grpc_options) do |response, operation|
+      client.search_access_policy_bindings({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_target_policy_bindings(::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter), grpc_options) do |response, operation|
+      client.search_access_policy_bindings(::Google::Iam::V3beta::SearchAccessPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 5, search_target_policy_bindings_client_stub.call_rpc_count
+      assert_equal 5, search_access_policy_bindings_client_stub.call_rpc_count
     end
   end
 
@@ -470,7 +464,7 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     client = block_config = config = nil
     dummy_stub = ClientStub.new nil, nil
     Gapic::ServiceStub.stub :new, dummy_stub do
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -480,7 +474,7 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Iam::V3beta::PolicyBindings::Client::Configuration, config
+    assert_kind_of ::Google::Iam::V3beta::AccessPolicies::Client::Configuration, config
   end
 
   def test_credentials
@@ -495,10 +489,10 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
 
     dummy_stub = ClientStub.new nil, nil
     Gapic::ServiceStub.stub :new, dummy_stub do
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = creds
       end
-      assert_kind_of ::Google::Iam::V3beta::PolicyBindings::Client, client
+      assert_kind_of ::Google::Iam::V3beta::AccessPolicies::Client, client
       assert_equal creds, client.configure.credentials
     end
   end
@@ -509,11 +503,11 @@ class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test
     client = nil
     dummy_stub = ClientStub.new nil, nil
     Gapic::ServiceStub.stub :new, dummy_stub do
-      client = ::Google::Iam::V3beta::PolicyBindings::Client.new do |config|
+      client = ::Google::Iam::V3beta::AccessPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of ::Google::Iam::V3beta::PolicyBindings::Operations, client.operations_client
+    assert_kind_of ::Google::Iam::V3beta::AccessPolicies::Operations, client.operations_client
   end
 end

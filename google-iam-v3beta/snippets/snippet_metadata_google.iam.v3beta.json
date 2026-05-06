@@ -1,6 +1,6 @@
 {
   "client_library": {
-    "name": "google-iam-v3beta",
+    "name": "google-cloud-iam-v3beta",
     "version": "0.4.1",
     "language": "RUBY",
     "apis": [
@@ -11,6 +11,246 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "iam_v3beta_generated_AccessPolicies_CreateAccessPolicy_sync",
+      "title": "Snippet for the create_access_policy call in the AccessPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::AccessPolicies::Client#create_access_policy.",
+      "file": "access_policies/create_access_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_access_policy",
+        "full_name": "::Google::Iam::V3beta::AccessPolicies::Client#create_access_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::CreateAccessPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AccessPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::AccessPolicies::Client"
+        },
+        "method": {
+          "short_name": "CreateAccessPolicy",
+          "full_name": "google.iam.v3beta.AccessPolicies.CreateAccessPolicy",
+          "service": {
+            "short_name": "AccessPolicies",
+            "full_name": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_AccessPolicies_GetAccessPolicy_sync",
+      "title": "Snippet for the get_access_policy call in the AccessPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::AccessPolicies::Client#get_access_policy.",
+      "file": "access_policies/get_access_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_access_policy",
+        "full_name": "::Google::Iam::V3beta::AccessPolicies::Client#get_access_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::GetAccessPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::AccessPolicy",
+        "client": {
+          "short_name": "AccessPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::AccessPolicies::Client"
+        },
+        "method": {
+          "short_name": "GetAccessPolicy",
+          "full_name": "google.iam.v3beta.AccessPolicies.GetAccessPolicy",
+          "service": {
+            "short_name": "AccessPolicies",
+            "full_name": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_AccessPolicies_UpdateAccessPolicy_sync",
+      "title": "Snippet for the update_access_policy call in the AccessPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::AccessPolicies::Client#update_access_policy.",
+      "file": "access_policies/update_access_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_access_policy",
+        "full_name": "::Google::Iam::V3beta::AccessPolicies::Client#update_access_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::UpdateAccessPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AccessPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::AccessPolicies::Client"
+        },
+        "method": {
+          "short_name": "UpdateAccessPolicy",
+          "full_name": "google.iam.v3beta.AccessPolicies.UpdateAccessPolicy",
+          "service": {
+            "short_name": "AccessPolicies",
+            "full_name": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_AccessPolicies_DeleteAccessPolicy_sync",
+      "title": "Snippet for the delete_access_policy call in the AccessPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::AccessPolicies::Client#delete_access_policy.",
+      "file": "access_policies/delete_access_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_access_policy",
+        "full_name": "::Google::Iam::V3beta::AccessPolicies::Client#delete_access_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::DeleteAccessPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AccessPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::AccessPolicies::Client"
+        },
+        "method": {
+          "short_name": "DeleteAccessPolicy",
+          "full_name": "google.iam.v3beta.AccessPolicies.DeleteAccessPolicy",
+          "service": {
+            "short_name": "AccessPolicies",
+            "full_name": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_AccessPolicies_ListAccessPolicies_sync",
+      "title": "Snippet for the list_access_policies call in the AccessPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::AccessPolicies::Client#list_access_policies.",
+      "file": "access_policies/list_access_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_access_policies",
+        "full_name": "::Google::Iam::V3beta::AccessPolicies::Client#list_access_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::ListAccessPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::ListAccessPoliciesResponse",
+        "client": {
+          "short_name": "AccessPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::AccessPolicies::Client"
+        },
+        "method": {
+          "short_name": "ListAccessPolicies",
+          "full_name": "google.iam.v3beta.AccessPolicies.ListAccessPolicies",
+          "service": {
+            "short_name": "AccessPolicies",
+            "full_name": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_AccessPolicies_SearchAccessPolicyBindings_sync",
+      "title": "Snippet for the search_access_policy_bindings call in the AccessPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::AccessPolicies::Client#search_access_policy_bindings.",
+      "file": "access_policies/search_access_policy_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_access_policy_bindings",
+        "full_name": "::Google::Iam::V3beta::AccessPolicies::Client#search_access_policy_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::SearchAccessPolicyBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::SearchAccessPolicyBindingsResponse",
+        "client": {
+          "short_name": "AccessPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::AccessPolicies::Client"
+        },
+        "method": {
+          "short_name": "SearchAccessPolicyBindings",
+          "full_name": "google.iam.v3beta.AccessPolicies.SearchAccessPolicyBindings",
+          "service": {
+            "short_name": "AccessPolicies",
+            "full_name": "google.iam.v3beta.AccessPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "iam_v3beta_generated_PolicyBindings_CreatePolicyBinding_sync",
       "title": "Snippet for the create_policy_binding call in the PolicyBindings service",

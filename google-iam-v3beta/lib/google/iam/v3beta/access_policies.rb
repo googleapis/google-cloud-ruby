@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,34 +22,33 @@ require "gapic/config/method"
 
 require "google/cloud/iam/v3beta/version"
 
-require "google/iam/v3beta/policy_bindings/credentials"
-require "google/iam/v3beta/policy_bindings/paths"
-require "google/iam/v3beta/policy_bindings/operations"
-require "google/iam/v3beta/policy_bindings/client"
-require "google/iam/v3beta/policy_bindings/rest"
+require "google/iam/v3beta/access_policies/credentials"
+require "google/iam/v3beta/access_policies/paths"
+require "google/iam/v3beta/access_policies/operations"
+require "google/iam/v3beta/access_policies/client"
+require "google/iam/v3beta/access_policies/rest"
 
 module Google
   module Iam
     module V3beta
       ##
-      # An interface for managing Identity and Access Management (IAM) policy
-      # bindings.
+      # Manages Identity and Access Management (IAM) access policies.
       #
       # @example Load this service and instantiate a gRPC client
       #
-      #     require "google/iam/v3beta/policy_bindings"
-      #     client = ::Google::Iam::V3beta::PolicyBindings::Client.new
+      #     require "google/iam/v3beta/access_policies"
+      #     client = ::Google::Iam::V3beta::AccessPolicies::Client.new
       #
       # @example Load this service and instantiate a REST client
       #
-      #     require "google/iam/v3beta/policy_bindings/rest"
-      #     client = ::Google::Iam::V3beta::PolicyBindings::Rest::Client.new
+      #     require "google/iam/v3beta/access_policies/rest"
+      #     client = ::Google::Iam::V3beta::AccessPolicies::Rest::Client.new
       #
-      module PolicyBindings
+      module AccessPolicies
       end
     end
   end
 end
 
-helper_path = ::File.join __dir__, "policy_bindings", "helpers.rb"
-require "google/iam/v3beta/policy_bindings/helpers" if ::File.file? helper_path
+helper_path = ::File.join __dir__, "access_policies", "helpers.rb"
+require "google/iam/v3beta/access_policies/helpers" if ::File.file? helper_path
