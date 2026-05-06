@@ -1322,6 +1322,15 @@ module Google
 
             # Redis standard small node_type.
             REDIS_STANDARD_SMALL = 4
+
+            # Redis highcpu medium node_type.
+            REDIS_HIGHCPU_MEDIUM = 7
+
+            # Redis standard large node_type.
+            REDIS_STANDARD_LARGE = 8
+
+            # Redis highmem 2xlarge node_type.
+            REDIS_HIGHMEM_2XLARGE = 9
           end
 
           # Available mode of in-transit encryption.
