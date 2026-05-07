@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.1 (2026-05-07)
+
+#### Documentation
+
+* Update the comment for duration value `unrefreshed_duration_until_disable` to accurately reflect the system-defined duration ([#33875](https://github.com/googleapis/google-cloud-ruby/issues/33875)) 
+
 ### 1.12.0 (2026-04-15)
 
 #### Features
