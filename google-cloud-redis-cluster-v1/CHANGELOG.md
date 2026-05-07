@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.6.0 (2026-05-07)
+
+#### Features
+
+* [Memorystore for Redis Cluster] Updating new node types added ([#33888](https://github.com/googleapis/google-cloud-ruby/issues/33888)) 
+
 ### 1.5.1 (2026-04-03)
 
 #### Documentation
