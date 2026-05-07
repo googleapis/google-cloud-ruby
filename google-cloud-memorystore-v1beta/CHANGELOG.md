@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.12.0 (2026-05-07)
+
+#### Features
+
+* [Memorystore for Valkey] Updating new node types added 
+* support grpc transport in memorystore v1beta ([#33889](https://github.com/googleapis/google-cloud-ruby/issues/33889)) 
+
 ### 0.11.0 (2026-04-03)
 
 #### Features
