@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-05-07)
+
+#### Features
+
+* a new optional field `video_links` is added to the `.google.shopping.merchant.products.v1.ProductAttributes` message ([#33880](https://github.com/googleapis/google-cloud-ruby/issues/33880)) 
+
 ### 0.6.0 (2026-04-14)
 
 #### Features
