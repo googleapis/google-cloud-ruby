@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2026-05-07)
+
+#### Documentation
+
+* Updated docs for the APIs ([#33882](https://github.com/googleapis/google-cloud-ruby/issues/33882)) 
+
 ### 0.4.0 (2026-04-02)
 
 #### Features
