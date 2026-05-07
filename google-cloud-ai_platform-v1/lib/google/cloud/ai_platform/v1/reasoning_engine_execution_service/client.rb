@@ -519,6 +519,98 @@ module Google
             end
 
             ##
+            # Cancels an AsyncQueryReasoningEngine operation.
+            #
+            # @overload cancel_async_query_reasoning_engine(request, options = nil)
+            #   Pass arguments to `cancel_async_query_reasoning_engine` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload cancel_async_query_reasoning_engine(name: nil, operation_name: nil)
+            #   Pass arguments to `cancel_async_query_reasoning_engine` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the ReasoningEngine resource to use.
+            #     Format:
+            #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+            #   @param operation_name [::String]
+            #     Required. The name of the longrunning operation returned from
+            #     AsyncQueryReasoningEngine.
+            #     Format:
+            #     `projects/{project}/locations/{location}/operations/{operation}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest.new
+            #
+            #   # Call the cancel_async_query_reasoning_engine method.
+            #   result = client.cancel_async_query_reasoning_engine request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineResponse.
+            #   p result
+            #
+            def cancel_async_query_reasoning_engine request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.cancel_async_query_reasoning_engine.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.cancel_async_query_reasoning_engine.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.cancel_async_query_reasoning_engine.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @reasoning_engine_execution_service_stub.call_rpc :cancel_async_query_reasoning_engine, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ReasoningEngineExecutionService API.
             #
             # This class represents the configuration for ReasoningEngineExecutionService,
@@ -716,6 +808,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :async_query_reasoning_engine
+                ##
+                # RPC-specific configuration for `cancel_async_query_reasoning_engine`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :cancel_async_query_reasoning_engine
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -725,6 +822,8 @@ module Google
                   @stream_query_reasoning_engine = ::Gapic::Config::Method.new stream_query_reasoning_engine_config
                   async_query_reasoning_engine_config = parent_rpcs.async_query_reasoning_engine if parent_rpcs.respond_to? :async_query_reasoning_engine
                   @async_query_reasoning_engine = ::Gapic::Config::Method.new async_query_reasoning_engine_config
+                  cancel_async_query_reasoning_engine_config = parent_rpcs.cancel_async_query_reasoning_engine if parent_rpcs.respond_to? :cancel_async_query_reasoning_engine
+                  @cancel_async_query_reasoning_engine = ::Gapic::Config::Method.new cancel_async_query_reasoning_engine_config
 
                   yield self if block_given?
                 end

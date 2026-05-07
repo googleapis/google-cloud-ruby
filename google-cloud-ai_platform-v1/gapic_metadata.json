@@ -1524,6 +1524,11 @@
               "methods": [
                 "async_query_reasoning_engine"
               ]
+            },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancel_async_query_reasoning_engine"
+              ]
             }
           }
         }
