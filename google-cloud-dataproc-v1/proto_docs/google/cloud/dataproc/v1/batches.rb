@@ -38,10 +38,9 @@ module Google
         #   @return [::String]
         #     Optional. A unique ID used to identify the request. If the service
         #     receives two
-        #     [CreateBatchRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateBatchRequest)s
-        #     with the same request_id, the second request is ignored and the
-        #     Operation that corresponds to the first Batch created and stored
-        #     in the backend is returned.
+        #     `CreateBatchRequests` with the same `request_id`, the second request is
+        #     ignored and the operation that corresponds to the first Batch created and
+        #     stored in the backend is returned.
         #
         #     Recommendation: Set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -84,10 +83,13 @@ module Google
         #     A filter is a logical expression constraining the values of various fields
         #     in each batch resource. Filters are case sensitive, and may contain
         #     multiple clauses combined with logical operators (AND/OR).
-        #     Supported fields are `batch_id`, `batch_uuid`, `state`, and `create_time`.
+        #     Supported fields are `batch_id`, `batch_uuid`, `state`, `create_time`, and
+        #     `labels`.
         #
         #     e.g. `state = RUNNING and create_time < "2023-01-01T00:00:00Z"`
-        #     filters for batches in state RUNNING that were created before 2023-01-01
+        #     filters for batches in state RUNNING that were created before 2023-01-01.
+        #     `state = RUNNING and labels.environment=production` filters for batches in
+        #     state in a RUNNING state that have a production environment label.
         #
         #     See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
         #     description of the filter syntax and a list of supported comparisons.
@@ -105,9 +107,9 @@ module Google
         end
 
         # A list of batch workloads.
-        # @!attribute [rw] batches
+        # @!attribute [r] batches
         #   @return [::Array<::Google::Cloud::Dataproc::V1::Batch>]
-        #     The batches from the specified collection.
+        #     Output only. The batches from the specified collection.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.

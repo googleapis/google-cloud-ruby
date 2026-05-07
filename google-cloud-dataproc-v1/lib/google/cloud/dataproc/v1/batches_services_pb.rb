@@ -39,8 +39,10 @@ module Google
             rpc :GetBatch, ::Google::Cloud::Dataproc::V1::GetBatchRequest, ::Google::Cloud::Dataproc::V1::Batch
             # Lists batch workloads.
             rpc :ListBatches, ::Google::Cloud::Dataproc::V1::ListBatchesRequest, ::Google::Cloud::Dataproc::V1::ListBatchesResponse
-            # Deletes the batch workload resource. If the batch is not in terminal state,
-            # the delete fails and the response returns `FAILED_PRECONDITION`.
+            # Deletes the batch workload resource. If the batch is not in a
+            # `CANCELLED`, `SUCCEEDED` or `FAILED`
+            # [`State`][google.cloud.dataproc.v1.Batch.State], the delete operation fails
+            # and the response returns `FAILED_PRECONDITION`.
             rpc :DeleteBatch, ::Google::Cloud::Dataproc::V1::DeleteBatchRequest, ::Google::Protobuf::Empty
           end
 

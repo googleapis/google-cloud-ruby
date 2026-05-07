@@ -41,8 +41,8 @@ module Google
         #     Optional. Autotuning configuration of the workload.
         # @!attribute [rw] cohort
         #   @return [::String]
-        #     Optional. Cohort identifier. Identifies families of the workloads having
-        #     the same shape, e.g. daily ETL jobs.
+        #     Optional. Cohort identifier. Identifies families of the workloads that have
+        #     the same shape, for example, daily ETL jobs.
         class RuntimeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -133,9 +133,26 @@ module Google
         #     the workload execution. The config specifies the type of identity
         #     (service account or user) that will be used by workloads to access
         #     resources on the project(s).
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Associates Resource Manager tags with the workload nodes.
+        #     There is a max limit of 30 tags.
+        #     Keys and values can be either in numeric format, such as
+        #     `tagKeys/{tag_key_id}` and `tagValues/{tag_value_id}`, or in namespaced
+        #     format, such as `{org_id|project_id}/{tag_key_short_name}` and
+        #     `{tag_value_short_name}`.
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Spark History Server configuration for the workload.
@@ -223,12 +240,15 @@ module Google
         #     (https://cloud.google.com/dataproc-serverless/pricing)).
         # @!attribute [rw] milli_accelerator_seconds
         #   @return [::Integer]
-        #     Optional. Accelerator usage in (`milliAccelerator` x `seconds`) (see
-        #     [Dataproc Serverless pricing]
+        #     Optional. [DEPRECATED] Accelerator usage in (`milliAccelerator` x
+        #     `seconds`) (see [Dataproc Serverless pricing]
         #     (https://cloud.google.com/dataproc-serverless/pricing)).
         # @!attribute [rw] accelerator_type
         #   @return [::String]
-        #     Optional. Accelerator type being used, if any
+        #     Optional. [DEPRECATED] Accelerator type being used, if any
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The timestamp of the usage metrics.
         class UsageMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -472,7 +492,7 @@ module Google
           #     (https://cloud.google.com/kubernetes-engine/docs/how-to/using-cmek)
           #     used to encrypt the boot disk attached to each node in the node pool.
           #     Specify the key using the following format:
-          #     <code>projects/<var>KEY_PROJECT_ID</var>/locations/<var>LOCATION</var>/keyRings/<var>RING_NAME</var>/cryptoKeys/<var>KEY_NAME</var></code>.
+          #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
           # @!attribute [rw] spot
           #   @return [::Boolean]
           #     Optional. Whether the nodes are created as [Spot VM instances]
@@ -595,7 +615,8 @@ module Google
         # Configuration for PyPi repository
         # @!attribute [rw] pypi_repository
         #   @return [::String]
-        #     Optional. PyPi repository address
+        #     Optional. The PyPi repository address. **Note: This field is not available
+        #     for batch workloads.**
         class PyPiRepositoryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -640,9 +661,6 @@ module Google
           # The Jupyter Notebook.
           JUPYTER = 1
 
-          # The Jupyter Kernel Gateway.
-          JUPYTER_KERNEL_GATEWAY = 22
-
           # The Pig component.
           PIG = 21
 
@@ -663,6 +681,9 @@ module Google
 
           # The Zookeeper service.
           ZOOKEEPER = 8
+
+          # The Jupyter Kernel Gateway.
+          JUPYTER_KERNEL_GATEWAY = 22
         end
 
         # Actions in response to failure of a resource associated with a cluster.
