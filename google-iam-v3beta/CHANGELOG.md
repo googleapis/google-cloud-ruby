@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2026-05-07)
+
+#### Features
+
+* new iam v3beta client for AccessPolicies ([#33878](https://github.com/googleapis/google-cloud-ruby/issues/33878)) 
+
 ### 0.4.1 (2026-04-03)
 
 #### Documentation
