@@ -105,6 +105,31 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#cancel_async_query_reasoning_engine ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the ReasoningEngine resource to use.
+        #     Format:
+        #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+        # @!attribute [rw] operation_name
+        #   @return [::String]
+        #     Required. The name of the longrunning operation returned from
+        #     AsyncQueryReasoningEngine.
+        #     Format:
+        #     `projects/{project}/locations/{location}/operations/{operation}`
+        class CancelAsyncQueryReasoningEngineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#cancel_async_query_reasoning_engine ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine}.
+        class CancelAsyncQueryReasoningEngineResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

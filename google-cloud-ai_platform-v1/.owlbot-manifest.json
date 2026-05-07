@@ -903,6 +903,7 @@
     "snippets/prediction_service/streaming_predict.rb",
     "snippets/prediction_service/streaming_raw_predict.rb",
     "snippets/reasoning_engine_execution_service/async_query_reasoning_engine.rb",
+    "snippets/reasoning_engine_execution_service/cancel_async_query_reasoning_engine.rb",
     "snippets/reasoning_engine_execution_service/query_reasoning_engine.rb",
     "snippets/reasoning_engine_execution_service/stream_query_reasoning_engine.rb",
     "snippets/reasoning_engine_service/create_reasoning_engine.rb",

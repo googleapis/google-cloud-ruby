@@ -10332,6 +10332,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineExecutionService_CancelAsyncQueryReasoningEngine_sync",
+      "title": "Snippet for the cancel_async_query_reasoning_engine call in the ReasoningEngineExecutionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#cancel_async_query_reasoning_engine.",
+      "file": "reasoning_engine_execution_service/cancel_async_query_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_async_query_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#cancel_async_query_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::CancelAsyncQueryReasoningEngineResponse",
+        "client": {
+          "short_name": "ReasoningEngineExecutionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client"
+        },
+        "method": {
+          "short_name": "CancelAsyncQueryReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineExecutionService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_ReasoningEngineService_CreateReasoningEngine_sync",
       "title": "Snippet for the create_reasoning_engine call in the ReasoningEngineService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#create_reasoning_engine.",
