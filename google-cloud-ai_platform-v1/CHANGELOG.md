@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.42.0 (2026-05-07)
+
+#### Features
+
+* Making grounding with parallel.ai available on SDK ([#33877](https://github.com/googleapis/google-cloud-ruby/issues/33877)) 
+
 ### 1.41.0 (2026-04-15)
 
 #### Features
