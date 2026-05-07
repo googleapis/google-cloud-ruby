@@ -26,7 +26,9 @@ module Google
           # Credentials for the SessionTemplateController API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/dataproc",
+              "https://www.googleapis.com/auth/dataproc.read-only"
             ]
             self.env_vars = [
               "DATAPROC_CREDENTIALS",
