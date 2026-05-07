@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.11.0 (2026-05-07)
+
+#### Features
+
+* add ScaleType for Storage Pools and LargeCapacityConfig for Volumes ([#33881](https://github.com/googleapis/google-cloud-ruby/issues/33881)) 
+#### Documentation
+
+* A comment for field `large_capacity` in message `.google.cloud.netapp.v1.Volume` is changed 
+
 ### 2.10.0 (2026-04-02)
 
 #### Features
