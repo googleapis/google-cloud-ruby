@@ -94,6 +94,11 @@
               "methods": [
                 "batch_search_link_processes"
               ]
+            },
+            "SearchLineageStreaming": {
+              "methods": [
+                "search_lineage_streaming"
+              ]
             }
           }
         }

@@ -227,9 +227,9 @@ module Google
                 #     Required. OpenLineage message following OpenLineage format:
                 #     https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
                 #   @param request_id [::String]
-                #     A unique identifier for this request. Restricted to 36 ASCII characters.
-                #     A random UUID is recommended. This request is idempotent only if a
-                #     `request_id` is provided.
+                #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+                #     characters. A random UUID is recommended. This request is idempotent only
+                #     if a `request_id` is provided.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::ProcessOpenLineageRunEventResponse]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -312,9 +312,9 @@ module Google
                 #   @param process [::Google::Cloud::DataCatalog::Lineage::V1::Process, ::Hash]
                 #     Required. The process to create.
                 #   @param request_id [::String]
-                #     A unique identifier for this request. Restricted to 36 ASCII characters.
-                #     A random UUID is recommended. This request is idempotent only if a
-                #     `request_id` is provided.
+                #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+                #     characters. A random UUID is recommended. This request is idempotent only
+                #     if a `request_id` is provided.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::Process]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -386,7 +386,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload update_process(process: nil, update_mask: nil, allow_missing: nil)
+                # @overload update_process(process: nil, update_mask: nil, allow_missing: nil, request_id: nil)
                 #   Pass arguments to `update_process` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -396,10 +396,15 @@ module Google
                 #
                 #     The process's `name` field is used to identify the process to update.
                 #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-                #     The list of fields to update. Currently not used. The whole message is
-                #     updated.
+                #     Optional. The list of fields to update. Currently not used. The whole
+                #     message is updated.
                 #   @param allow_missing [::Boolean]
-                #     If set to true and the process is not found, the request inserts it.
+                #     Optional. If set to true and the process is not found, the request inserts
+                #     it.
+                #   @param request_id [::String]
+                #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+                #     characters. A random UUID is recommended. This request is idempotent only
+                #     if a `request_id` is provided.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::Process]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -559,13 +564,13 @@ module Google
                 #     Required. The name of the project and its location that owns this
                 #     collection of processes.
                 #   @param page_size [::Integer]
-                #     The maximum number of processes to return. The service may return
+                #     Optional. The maximum number of processes to return. The service may return
                 #     fewer than this value. If unspecified, at most 50 processes are
                 #     returned. The maximum value is 100; values greater than 100 are cut to
                 #     100.
                 #   @param page_token [::String]
-                #     The page token received from a previous `ListProcesses` call. Specify
-                #     it to get the next page.
+                #     Optional. The page token received from a previous `ListProcesses` call.
+                #     Specify it to get the next page.
                 #
                 #     When paginating, all other parameters specified in this call must
                 #     match the parameters of the call that provided the page token.
@@ -654,7 +659,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the process to delete.
                 #   @param allow_missing [::Boolean]
-                #     If set to true and the process is not found, the request
+                #     Optional. If set to true and the process is not found, the request
                 #     succeeds but the server doesn't perform any actions.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
@@ -746,9 +751,9 @@ module Google
                 #   @param run [::Google::Cloud::DataCatalog::Lineage::V1::Run, ::Hash]
                 #     Required. The run to create.
                 #   @param request_id [::String]
-                #     A unique identifier for this request. Restricted to 36 ASCII characters.
-                #     A random UUID is recommended. This request is idempotent only if a
-                #     `request_id` is provided.
+                #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+                #     characters. A random UUID is recommended. This request is idempotent only
+                #     if a `request_id` is provided.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::Run]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -833,10 +838,10 @@ module Google
                 #     Format:
                 #     `projects/{project}/locations/{location}/processes/{process}/runs/{run}`.
                 #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-                #     The list of fields to update. Currently not used. The whole message is
-                #     updated.
+                #     Optional. The list of fields to update. Currently not used. The whole
+                #     message is updated.
                 #   @param allow_missing [::Boolean]
-                #     If set to true and the run is not found, the request creates it.
+                #     Optional. If set to true and the run is not found, the request creates it.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::Run]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -995,12 +1000,12 @@ module Google
                 #   @param parent [::String]
                 #     Required. The name of process that owns this collection of runs.
                 #   @param page_size [::Integer]
-                #     The maximum number of runs to return. The service may return
+                #     Optional. The maximum number of runs to return. The service may return
                 #     fewer than this value. If unspecified, at most 50 runs are
                 #     returned. The maximum value is 100; values greater than 100 are cut to
                 #     100.
                 #   @param page_token [::String]
-                #     The page token received from a previous `ListRuns` call. Specify
+                #     Optional. The page token received from a previous `ListRuns` call. Specify
                 #     it to get the next page.
                 #
                 #     When paginating, all other parameters specified in this call must
@@ -1090,7 +1095,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the run to delete.
                 #   @param allow_missing [::Boolean]
-                #     If set to true and the run is not found, the request
+                #     Optional. If set to true and the run is not found, the request
                 #     succeeds but the server doesn't perform any actions.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
@@ -1182,9 +1187,9 @@ module Google
                 #   @param lineage_event [::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent, ::Hash]
                 #     Required. The lineage event to create.
                 #   @param request_id [::String]
-                #     A unique identifier for this request. Restricted to 36 ASCII characters.
-                #     A random UUID is recommended. This request is idempotent only if a
-                #     `request_id` is provided.
+                #     Optional. A unique identifier for this request. Restricted to 36 ASCII
+                #     characters. A random UUID is recommended. This request is idempotent only
+                #     if a `request_id` is provided.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::DataCatalog::Lineage::V1::LineageEvent]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1344,14 +1349,14 @@ module Google
                 #     Required. The name of the run that owns the collection of lineage events to
                 #     get.
                 #   @param page_size [::Integer]
-                #     The maximum number of lineage events to return.
+                #     Optional. The maximum number of lineage events to return.
                 #
                 #     The service may return fewer events than this value.
                 #     If unspecified, at most 50 events are returned. The maximum value is 100;
                 #     values greater than 100 are cut to 100.
                 #   @param page_token [::String]
-                #     The page token received from a previous `ListLineageEvents` call. Specify
-                #     it to get the next page.
+                #     Optional. The page token received from a previous `ListLineageEvents` call.
+                #     Specify it to get the next page.
                 #
                 #     When paginating, all other parameters specified in this call must
                 #     match the parameters of the call that provided the page token.
@@ -1440,7 +1445,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the lineage event to delete.
                 #   @param allow_missing [::Boolean]
-                #     If set to true and the lineage event is not found, the request
+                #     Optional. If set to true and the lineage event is not found, the request
                 #     succeeds but the server doesn't perform any actions.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
@@ -1521,7 +1526,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload search_links(parent: nil, source: nil, target: nil, page_size: nil, page_token: nil)
+                # @overload search_links(parent: nil, source: nil, target: nil, sources: nil, targets: nil, page_size: nil, page_token: nil)
                 #   Pass arguments to `search_links` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1532,12 +1537,32 @@ module Google
                 #     Optional. Send asset information in the **source** field to retrieve all
                 #     links that lead from the specified asset to downstream assets.
                 #
-                #     Note: The following parameters are mutually exclusive: `source`, `target`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+                #     Note: The following parameters are mutually exclusive: `source`, `target`, `sources`, `targets`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 #   @param target [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference, ::Hash]
                 #     Optional. Send asset information in the **target** field to retrieve all
                 #     links that lead from upstream assets to the specified asset.
                 #
-                #     Note: The following parameters are mutually exclusive: `target`, `source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+                #     Note: The following parameters are mutually exclusive: `target`, `source`, `sources`, `targets`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+                #   @param sources [::Google::Cloud::DataCatalog::Lineage::V1::MultipleEntityReference, ::Hash]
+                #     Optional. Send a list of asset information in the **sources** field to
+                #     retrieve all links that lead from the specified assets to downstream
+                #     assets. This field is similar to the `source`
+                #     {::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest#source source}
+                #     field but allows providing multiple entities.
+                #     All entities within the `MultipleEntityReference` must have the same
+                #     `fully_qualified_name`.
+                #
+                #     Note: The following parameters are mutually exclusive: `sources`, `source`, `target`, `targets`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+                #   @param targets [::Google::Cloud::DataCatalog::Lineage::V1::MultipleEntityReference, ::Hash]
+                #     Optional. Send a list of asset information in the **targets** field to
+                #     retrieve all links that lead from upstream assets to the specified
+                #     assets. This field is similar to the `target`
+                #     {::Google::Cloud::DataCatalog::Lineage::V1::SearchLinksRequest#target target}
+                #     field but allows providing multiple entities.
+                #     All entities within the `MultipleEntityReference` must have the same
+                #     `fully_qualified_name`.
+                #
+                #     Note: The following parameters are mutually exclusive: `targets`, `source`, `target`, `sources`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 #   @param page_size [::Integer]
                 #     Optional. The maximum number of links to return in a single page of the
                 #     response. A page may contain fewer links than this value. If unspecified,
@@ -1657,11 +1682,11 @@ module Google
                 #
                 #     Format: `projects/{project}/locations/{location}/links/{link}`.
                 #   @param page_size [::Integer]
-                #     The maximum number of processes to return in a single page of the response.
-                #     A page may contain fewer results than this value.
+                #     Optional. The maximum number of processes to return in a single page of the
+                #     response. A page may contain fewer results than this value.
                 #   @param page_token [::String]
-                #     The page token received from a previous `BatchSearchLinkProcesses` call.
-                #     Use it to get the next page.
+                #     Optional. The page token received from a previous
+                #     `BatchSearchLinkProcesses` call. Use it to get the next page.
                 #
                 #     When requesting subsequent pages of a response, remember that
                 #     all parameters must match the values you provided
@@ -1726,6 +1751,123 @@ module Google
                     yield result, operation if block_given?
                     throw :response, result
                   end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Retrieves a streaming response of lineage links connected to the requested
+                # assets by performing a breadth-first search in the given direction. Links
+                # represent the data flow between **source** (upstream) and **target**
+                # (downstream) assets in transformation pipelines. Links are stored in the
+                # same project as the Lineage Events that create them. This method retrieves
+                # links from all valid locations provided in the request. This method
+                # supports Column-Level Lineage (CLL) along with wildcard support to retrieve
+                # all CLL for an Entity FQN.
+                #
+                # Following permissions are required to retrieve links:
+                # * `datalineage.events.get` permission for the project where the link is
+                # stored for entity-level lineage.
+                # * `datalineage.events.getFields` permission for the project where the link
+                # is stored for column-level lineage.
+                #
+                # This method also returns processes that created the links if explicitly
+                # requested by setting
+                # [max_process_per_link](google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.limits.max_process_per_link)
+                # is non-zero and full process details are requested via
+                # `links.processes.process` in the
+                # [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
+                #
+                # Permission required to retrieve processes:
+                # * `datalineage.processes.get` permission for the project where the process
+                # is stored.
+                #
+                # @overload search_lineage_streaming(request, options = nil)
+                #   Pass arguments to `search_lineage_streaming` via a request object, either of type
+                #   {::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload search_lineage_streaming(parent: nil, locations: nil, root_criteria: nil, direction: nil, filters: nil, limits: nil)
+                #   Pass arguments to `search_lineage_streaming` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The project and location to initiate the search from.
+                #   @param locations [::Array<::String>]
+                #     Required. The locations to search in.
+                #   @param root_criteria [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::RootCriteria, ::Hash]
+                #     Required. Criteria for the root of the search.
+                #   @param direction [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchDirection]
+                #     Required. Direction of the search.
+                #   @param filters [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchFilters, ::Hash]
+                #     Optional. Filters for the search.
+                #   @param limits [::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest::SearchLimits, ::Hash]
+                #     Optional. Limits for the search.
+                # @return [::Enumerable<::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse>]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/data_catalog/lineage/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new
+                #
+                #   # Call the search_lineage_streaming method to start streaming.
+                #   output = client.search_lineage_streaming request
+                #
+                #   # The returned object is a streamed enumerable yielding elements of type
+                #   # ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse
+                #   output.each do |current_response|
+                #     p current_response
+                #   end
+                #
+                def search_lineage_streaming request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.search_lineage_streaming.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::DataCatalog::Lineage::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.search_lineage_streaming.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.search_lineage_streaming.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  ::Gapic::Rest::ServerStream.new(
+                    ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse,
+                    ::Gapic::Rest::ThreadedEnumerator.new do |in_q, out_q|
+                      @lineage_stub.search_lineage_streaming request, options do |chunk|
+                        in_q.deq
+                        out_q.enq chunk
+                      end
+                    end
+                  )
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
                 end
@@ -1961,6 +2103,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :batch_search_link_processes
+                    ##
+                    # RPC-specific configuration for `search_lineage_streaming`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :search_lineage_streaming
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -1998,6 +2145,8 @@ module Google
                       @search_links = ::Gapic::Config::Method.new search_links_config
                       batch_search_link_processes_config = parent_rpcs.batch_search_link_processes if parent_rpcs.respond_to? :batch_search_link_processes
                       @batch_search_link_processes = ::Gapic::Config::Method.new batch_search_link_processes_config
+                      search_lineage_streaming_config = parent_rpcs.search_lineage_streaming if parent_rpcs.respond_to? :search_lineage_streaming
+                      @search_lineage_streaming = ::Gapic::Config::Method.new search_lineage_streaming_config
 
                       yield self if block_given?
                     end

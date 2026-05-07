@@ -690,6 +690,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "datalineage_v1_generated_Lineage_SearchLineageStreaming_sync",
+      "title": "Snippet for the search_lineage_streaming call in the Lineage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_lineage_streaming.",
+      "file": "lineage/search_lineage_streaming.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_lineage_streaming",
+        "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client#search_lineage_streaming",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse",
+        "client": {
+          "short_name": "Lineage::Client",
+          "full_name": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client"
+        },
+        "method": {
+          "short_name": "SearchLineageStreaming",
+          "full_name": "google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming",
+          "service": {
+            "short_name": "Lineage",
+            "full_name": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
