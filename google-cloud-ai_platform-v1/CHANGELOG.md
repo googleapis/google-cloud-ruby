@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.43.0 (2026-05-08)
+
+#### Features
+
+* Release ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine v1 API ([#33916](https://github.com/googleapis/google-cloud-ruby/issues/33916)) 
+
 ### 1.42.0 (2026-05-07)
 
 #### Features
