@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.0 (2026-05-08)
+
+#### Features
+
+* add support for Cloud Resource Manager tags for Dataproc Serverless workloads ([#33915](https://github.com/googleapis/google-cloud-ruby/issues/33915)) 
+
 ### 1.12.0 (2026-05-06)
 
 #### Features
