@@ -98,6 +98,32 @@ module Google
               # have the `datalineage.events.get` permission. The project provided in the
               # URL is used for Billing and Quota.
               rpc :BatchSearchLinkProcesses, ::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesRequest, ::Google::Cloud::DataCatalog::Lineage::V1::BatchSearchLinkProcessesResponse
+              # Retrieves a streaming response of lineage links connected to the requested
+              # assets by performing a breadth-first search in the given direction. Links
+              # represent the data flow between **source** (upstream) and **target**
+              # (downstream) assets in transformation pipelines. Links are stored in the
+              # same project as the Lineage Events that create them. This method retrieves
+              # links from all valid locations provided in the request. This method
+              # supports Column-Level Lineage (CLL) along with wildcard support to retrieve
+              # all CLL for an Entity FQN.
+              #
+              # Following permissions are required to retrieve links:
+              # * `datalineage.events.get` permission for the project where the link is
+              # stored for entity-level lineage.
+              # * `datalineage.events.getFields` permission for the project where the link
+              # is stored for column-level lineage.
+              #
+              # This method also returns processes that created the links if explicitly
+              # requested by setting
+              # [max_process_per_link](google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.limits.max_process_per_link)
+              # is non-zero and full process details are requested via
+              # `links.processes.process` in the
+              # [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
+              #
+              # Permission required to retrieve processes:
+              # * `datalineage.processes.get` permission for the project where the process
+              # is stored.
+              rpc :SearchLineageStreaming, ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest, stream(::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse)
             end
 
             Stub = Service.rpc_stub_class

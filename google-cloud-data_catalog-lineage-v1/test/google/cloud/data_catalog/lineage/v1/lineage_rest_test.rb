@@ -201,6 +201,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     process = {}
     update_mask = {}
     allow_missing = true
+    request_id = "hello world"
 
     update_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -216,27 +217,27 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing }) do |_result, response|
+        client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_process process: process, update_mask: update_mask, allow_missing: allow_missing do |_result, response|
+        client.update_process process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_process ::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing) do |_result, response|
+        client.update_process ::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing }, call_options) do |_result, response|
+        client.update_process({ process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_process(::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing), call_options) do |_result, response|
+        client.update_process(::Google::Cloud::DataCatalog::Lineage::V1::UpdateProcessRequest.new(process: process, update_mask: update_mask, allow_missing: allow_missing, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1019,6 +1020,65 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
 
         # Verify method calls
         assert_equal 5, batch_search_link_processes_client_stub.call_count
+      end
+    end
+  end
+
+  def test_search_lineage_streaming
+    # Create test objects.
+    client_result = ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    locations = ["hello world"]
+    root_criteria = {}
+    direction = :SEARCH_DIRECTION_UNSPECIFIED
+    filters = {}
+    limits = {}
+
+    search_lineage_streaming_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ServiceStub.stub :transcode_search_lineage_streaming_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, search_lineage_streaming_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use named arguments
+        client.search_lineage_streaming parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object
+        client.search_lineage_streaming ::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use hash object with options
+        client.search_lineage_streaming({ parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object with options
+        client.search_lineage_streaming(::Google::Cloud::DataCatalog::Lineage::V1::SearchLineageStreamingRequest.new(parent: parent, locations: locations, root_criteria: root_criteria, direction: direction, filters: filters, limits: limits), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Verify method calls
+        assert_equal 5, search_lineage_streaming_client_stub.call_count
       end
     end
   end
