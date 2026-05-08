@@ -1,6 +1,6 @@
 # Authentication
 
-The recommended way to authenticate to the google-cloud-iam-v3beta library is to use
+The recommended way to authenticate to the google-iam-v3beta library is to use
 [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials).
 To review all of your authentication options, see [Credentials lookup](#credential-lookup).
 
@@ -26,7 +26,7 @@ For more information about setting up authentication for a local development env
 
 ## Credential Lookup
 
-The google-cloud-iam-v3beta library provides several mechanisms to configure your system.
+The google-iam-v3beta library provides several mechanisms to configure your system.
 Generally, using Application Default Credentials to facilitate automatic 
 credentials discovery is the easist method. But if you need to explicitly specify
 credentials, there are several methods available to you.
@@ -89,7 +89,7 @@ Note: Service account keys are a security risk if not managed correctly. You sho
 [choose a more secure alternative to service account keys](https://cloud.google.com/docs/authentication#auth-decision-tree)
 whenever possible.
 
-The environment variables that google-cloud-iam-v3beta
+The environment variables that google-iam-v3beta
 checks for credentials are:
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents

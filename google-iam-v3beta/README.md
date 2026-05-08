@@ -9,13 +9,13 @@ https://github.com/googleapis/google-cloud-ruby
 This gem is a _versioned_ client. It provides basic client classes for a
 specific version of the Identity and Access Management (IAM) V3BETA API. Most users should consider using
 the main client gem,
-[google-cloud-iam](https://rubygems.org/gems/google-cloud-iam).
+[google-iam](https://rubygems.org/gems/google-iam).
 See the section below titled *Which client should I use?* for more information.
 
 ## Installation
 
 ```
-$ gem install google-cloud-iam-v3beta
+$ gem install google-iam-v3beta
 ```
 
 ## Before You Begin
@@ -37,7 +37,7 @@ request = ::Google::Iam::V3beta::CreateAccessPolicyRequest.new # (request fields
 response = client.create_access_policy request
 ```
 
-View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-iam-v3beta/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-iam-v3beta/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/iam/docs/overview)
@@ -98,9 +98,9 @@ support schedule.
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
-client library with a name such as `google-cloud-iam`,
+client library with a name such as `google-iam`,
 and lower-level _versioned_ client libraries with names such as
-`google-cloud-iam-v3beta`.
+`google-iam-v3beta`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -125,7 +125,7 @@ service version.
 
 We recommend that most users install the main client gem for a service. You can
 identify this gem as the one _without_ a version in its name, e.g.
-`google-cloud-iam`.
+`google-iam`.
 The main client is recommended because it will embody the best practices for
 accessing the service, and may also provide more convenient interfaces or
 tighter integration into frameworks and third-party libraries. In addition, the
@@ -138,7 +138,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-iam-v3beta`.
+is part of the name, e.g. `google-iam-v3beta`.
 
 ### What about the google-apis-<name> clients?
 

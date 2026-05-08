@@ -12,9 +12,8 @@
     "README.md",
     "Rakefile",
     "gapic_metadata.json",
-    "google-cloud-iam-v3beta.gemspec",
-    "lib/google-cloud-iam-v3beta.rb",
-    "lib/google/cloud/iam/v3beta/version.rb",
+    "google-iam-v3beta.gemspec",
+    "lib/google-iam-v3beta.rb",
     "lib/google/iam/v3beta.rb",
     "lib/google/iam/v3beta/access_policies.rb",
     "lib/google/iam/v3beta/access_policies/client.rb",
@@ -54,6 +53,7 @@
     "lib/google/iam/v3beta/principal_access_boundary_policies_service_services_pb.rb",
     "lib/google/iam/v3beta/principal_access_boundary_policy_resources_pb.rb",
     "lib/google/iam/v3beta/rest.rb",
+    "lib/google/iam/v3beta/version.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/client.rb",
     "proto_docs/google/api/field_behavior.rb",
@@ -110,7 +110,6 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml",
-    "lib/google/iam/v3beta/version.rb"
+    ".OwlBot.yaml"
   ]
 }

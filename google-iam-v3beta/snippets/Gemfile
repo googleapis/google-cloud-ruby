@@ -19,9 +19,9 @@
 source "https://rubygems.org"
 
 if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-  gem "google-cloud-iam-v3beta", path: "../"
+  gem "google-iam-v3beta", path: "../"
 else
-  gem "google-cloud-iam-v3beta"
+  gem "google-iam-v3beta"
 end
 
 group :test do

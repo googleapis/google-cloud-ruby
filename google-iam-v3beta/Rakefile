@@ -37,7 +37,7 @@ Rake::TestTask.new :smoke_test do |t|
 end
 
 # Acceptance tests
-desc "Run the google-cloud-iam-v3beta acceptance tests."
+desc "Run the google-iam-v3beta acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
@@ -73,7 +73,7 @@ namespace :acceptance do
     if File.directory? "acceptance"
       Rake::Task[:smoke_test].invoke
     else
-      puts "The google-cloud-iam-v3beta gem has no acceptance tests."
+      puts "The google-iam-v3beta gem has no acceptance tests."
     end
   end
 
@@ -97,7 +97,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-cloud-iam-v3beta gem has no samples to test."
+      puts "The google-iam-v3beta gem has no samples to test."
     end
   end
 
@@ -111,7 +111,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-cloud-iam-v3beta gem has no samples to test."
+      puts "The google-iam-v3beta gem has no samples to test."
     end
   end
 end
@@ -124,17 +124,17 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-iam-v3beta gem does not have doctest tests."
+  puts "The google-iam-v3beta gem does not have doctest tests."
 end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING google-cloud-iam-v3beta"
-  header "google-cloud-iam-v3beta rubocop", "*"
+  header "BUILDING google-iam-v3beta"
+  header "google-iam-v3beta rubocop", "*"
   Rake::Task[:rubocop].invoke
-  header "google-cloud-iam-v3beta yard", "*"
+  header "google-iam-v3beta yard", "*"
   Rake::Task[:yard].invoke
-  header "google-cloud-iam-v3beta test", "*"
+  header "google-iam-v3beta test", "*"
   Rake::Task[:test].invoke
 end
 
@@ -142,13 +142,13 @@ namespace :ci do
   desc "Run the CI build, with smoke tests."
   task :smoke_test do
     Rake::Task[:ci].invoke
-    header "google-cloud-iam-v3beta smoke_test", "*"
+    header "google-iam-v3beta smoke_test", "*"
     Rake::Task[:smoke_test].invoke
   end
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task[:ci].invoke
-    header "google-cloud-iam-v3beta acceptance", "*"
+    header "google-iam-v3beta acceptance", "*"
     Rake::Task[:acceptance].invoke
   end
   task :a do

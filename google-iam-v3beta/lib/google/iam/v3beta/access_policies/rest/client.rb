@@ -311,7 +311,7 @@ module Google
               # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Iam::V3beta::VERSION,
+                gapic_version: ::Google::Iam::V3beta::VERSION,
                 transports_version_send: [:rest]
 
               call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
@@ -397,7 +397,7 @@ module Google
               # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Iam::V3beta::VERSION,
+                gapic_version: ::Google::Iam::V3beta::VERSION,
                 transports_version_send: [:rest]
 
               call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
@@ -488,7 +488,7 @@ module Google
               # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Iam::V3beta::VERSION,
+                gapic_version: ::Google::Iam::V3beta::VERSION,
                 transports_version_send: [:rest]
 
               call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
@@ -590,7 +590,7 @@ module Google
               # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Iam::V3beta::VERSION,
+                gapic_version: ::Google::Iam::V3beta::VERSION,
                 transports_version_send: [:rest]
 
               call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
@@ -695,7 +695,7 @@ module Google
               # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Iam::V3beta::VERSION,
+                gapic_version: ::Google::Iam::V3beta::VERSION,
                 transports_version_send: [:rest]
 
               call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
@@ -799,7 +799,7 @@ module Google
               # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
               call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Iam::V3beta::VERSION,
+                gapic_version: ::Google::Iam::V3beta::VERSION,
                 transports_version_send: [:rest]
 
               call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?

@@ -317,7 +317,7 @@ module Google
             # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
             metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
               lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Cloud::Iam::V3beta::VERSION
+              gapic_version: ::Google::Iam::V3beta::VERSION
             metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
@@ -407,7 +407,7 @@ module Google
             # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
             metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
               lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Cloud::Iam::V3beta::VERSION
+              gapic_version: ::Google::Iam::V3beta::VERSION
             metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
@@ -507,7 +507,7 @@ module Google
             # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
             metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
               lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Cloud::Iam::V3beta::VERSION
+              gapic_version: ::Google::Iam::V3beta::VERSION
             metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
@@ -613,7 +613,7 @@ module Google
             # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
             metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
               lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Cloud::Iam::V3beta::VERSION
+              gapic_version: ::Google::Iam::V3beta::VERSION
             metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
@@ -723,7 +723,7 @@ module Google
             # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
             metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
               lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Cloud::Iam::V3beta::VERSION
+              gapic_version: ::Google::Iam::V3beta::VERSION
             metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
@@ -831,7 +831,7 @@ module Google
             # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
             metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
               lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Cloud::Iam::V3beta::VERSION
+              gapic_version: ::Google::Iam::V3beta::VERSION
             metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 

@@ -19,7 +19,7 @@
 require "google/iam/v3beta/access_policies"
 require "google/iam/v3beta/policy_bindings"
 require "google/iam/v3beta/principal_access_boundary_policies"
-require "google/cloud/iam/v3beta/version"
+require "google/iam/v3beta/version"
 
 module Google
   module Iam
