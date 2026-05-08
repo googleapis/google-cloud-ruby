@@ -77,6 +77,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     request_id = "hello world"
     message_reply_option = :MESSAGE_REPLY_OPTION_UNSPECIFIED
     message_id = "hello world"
+    create_message_notification_options = {}
 
     create_message_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_message, name
@@ -87,6 +88,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       assert_equal "hello world", request["request_id"]
       assert_equal :MESSAGE_REPLY_OPTION_UNSPECIFIED, request["message_reply_option"]
       assert_equal "hello world", request["message_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Chat::V1::CreateMessageNotificationOptions), request["create_message_notification_options"]
       refute_nil options
     end
 
@@ -97,31 +99,31 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id }) do |response, operation|
+      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_message parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id do |response, operation|
+      client.create_message parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_message ::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id) do |response, operation|
+      client.create_message ::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id }, grpc_options) do |response, operation|
+      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_message(::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id), grpc_options) do |response, operation|
+      client.create_message(::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

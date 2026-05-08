@@ -448,7 +448,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_message(parent: nil, message: nil, thread_key: nil, request_id: nil, message_reply_option: nil, message_id: nil)
+              # @overload create_message(parent: nil, message: nil, thread_key: nil, request_id: nil, message_reply_option: nil, message_id: nil, create_message_notification_options: nil)
               #   Pass arguments to `create_message` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -496,6 +496,10 @@ module Google
               #
               #     For details, see [Name a
               #     message](https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+              #   @param create_message_notification_options [::Google::Apps::Chat::V1::CreateMessageNotificationOptions, ::Hash]
+              #     Optional. Controls the notification behavior when the message is posted.
+              #     To learn more, see [Force notifications or send silent
+              #     messages](https://developer.google.com/workspace/chat/create-messages#force-notify-silent).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Message]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

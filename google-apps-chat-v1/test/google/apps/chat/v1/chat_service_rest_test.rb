@@ -92,6 +92,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     request_id = "hello world"
     message_reply_option = :MESSAGE_REPLY_OPTION_UNSPECIFIED
     message_id = "hello world"
+    create_message_notification_options = {}
 
     create_message_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -107,27 +108,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id }) do |_result, response|
+        client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_message parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id do |_result, response|
+        client.create_message parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_message ::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id) do |_result, response|
+        client.create_message ::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id }, call_options) do |_result, response|
+        client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_message(::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id), call_options) do |_result, response|
+        client.create_message(::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
