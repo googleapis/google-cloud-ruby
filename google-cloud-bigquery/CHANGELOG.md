@@ -1,5 +1,11 @@
 # Release History
 
+### 1.64.0 (2026-05-11)
+
+#### Features
+
+* Support bigdecimal 4.x ([#33930](https://github.com/googleapis/google-cloud-ruby/issues/33930)) 
+
 ### 1.63.1 (2026-05-05)
 
 #### Bug Fixes
