@@ -1,0 +1,17 @@
+{
+    "api_id": "devicestreaming.googleapis.com",
+    "api_shortname": "devicestreaming",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-device_streaming-v1/latest",
+    "distribution_name": "google-cloud-device_streaming-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "devicestreaming",
+    "name_pretty": "Device Streaming V1 API",
+    "product_documentation": "https://cloud.google.com/device-streaming/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Cloud API for device streaming usage. Note that google-cloud-device_streaming-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-device_streaming instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/device-streaming/docs",
+    "library_type": "GAPIC_AUTO"
+}
