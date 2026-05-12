@@ -1,0 +1,18 @@
+{
+    "api_id": "cloudkms.googleapis.com",
+    "api_shortname": "cloudkms",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest",
+    "distribution_name": "google-cloud-kms-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudkms",
+    "name_pretty": "Cloud Key Management Service (KMS) V1 API",
+    "product_documentation": "https://cloud.google.com/kms",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications. Note that google-cloud-kms-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-kms instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "KMS",
+    "ruby-cloud-product-url": "https://cloud.google.com/kms",
+    "library_type": "GAPIC_AUTO"
+}
