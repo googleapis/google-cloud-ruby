@@ -1,5 +1,13 @@
 # Release History
 
+### 1.60.0 (2026-05-11)
+
+#### Features
+
+* add support for object context ([#32902](https://github.com/googleapis/google-cloud-ruby/issues/32902)) 
+* setting default checksum ([#33331](https://github.com/googleapis/google-cloud-ruby/issues/33331)) 
+* Support bucket encryption config ([#33452](https://github.com/googleapis/google-cloud-ruby/issues/33452)) 
+
 ### 1.59.0 (2026-03-19)
 
 #### Features
