@@ -18,6 +18,7 @@
 
 require "google/cloud/run/v2/builds/rest"
 require "google/cloud/run/v2/executions/rest"
+require "google/cloud/run/v2/instances/rest"
 require "google/cloud/run/v2/jobs/rest"
 require "google/cloud/run/v2/revisions/rest"
 require "google/cloud/run/v2/services/rest"
