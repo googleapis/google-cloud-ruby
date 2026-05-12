@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-05-12)
+
+#### Features
+
+* new iam v3beta client for AccessPolicies 
+
 ### 0.5.0 (2026-05-07)
 
 #### Features
