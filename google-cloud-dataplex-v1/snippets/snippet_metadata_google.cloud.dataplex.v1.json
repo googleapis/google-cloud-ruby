@@ -1092,246 +1092,6 @@
       ]
     },
     {
-      "region_tag": "dataplex_v1_generated_DataplexService_CreateEnvironment_sync",
-      "title": "Snippet for the create_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#create_environment.",
-      "file": "dataplex_service/create_environment.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_environment",
-        "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client#create_environment",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "DataplexService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client"
-        },
-        "method": {
-          "short_name": "CreateEnvironment",
-          "full_name": "google.cloud.dataplex.v1.DataplexService.CreateEnvironment",
-          "service": {
-            "short_name": "DataplexService",
-            "full_name": "google.cloud.dataplex.v1.DataplexService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 53,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_DataplexService_UpdateEnvironment_sync",
-      "title": "Snippet for the update_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#update_environment.",
-      "file": "dataplex_service/update_environment.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "update_environment",
-        "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client#update_environment",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "DataplexService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client"
-        },
-        "method": {
-          "short_name": "UpdateEnvironment",
-          "full_name": "google.cloud.dataplex.v1.DataplexService.UpdateEnvironment",
-          "service": {
-            "short_name": "DataplexService",
-            "full_name": "google.cloud.dataplex.v1.DataplexService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 53,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_DataplexService_DeleteEnvironment_sync",
-      "title": "Snippet for the delete_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#delete_environment.",
-      "file": "dataplex_service/delete_environment.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_environment",
-        "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client#delete_environment",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Longrunning::Operation",
-        "client": {
-          "short_name": "DataplexService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client"
-        },
-        "method": {
-          "short_name": "DeleteEnvironment",
-          "full_name": "google.cloud.dataplex.v1.DataplexService.DeleteEnvironment",
-          "service": {
-            "short_name": "DataplexService",
-            "full_name": "google.cloud.dataplex.v1.DataplexService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 53,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_DataplexService_ListEnvironments_sync",
-      "title": "Snippet for the list_environments call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_environments.",
-      "file": "dataplex_service/list_environments.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_environments",
-        "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client#list_environments",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dataplex::V1::ListEnvironmentsResponse",
-        "client": {
-          "short_name": "DataplexService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client"
-        },
-        "method": {
-          "short_name": "ListEnvironments",
-          "full_name": "google.cloud.dataplex.v1.DataplexService.ListEnvironments",
-          "service": {
-            "short_name": "DataplexService",
-            "full_name": "google.cloud.dataplex.v1.DataplexService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_DataplexService_GetEnvironment_sync",
-      "title": "Snippet for the get_environment call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#get_environment.",
-      "file": "dataplex_service/get_environment.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_environment",
-        "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client#get_environment",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::GetEnvironmentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dataplex::V1::Environment",
-        "client": {
-          "short_name": "DataplexService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client"
-        },
-        "method": {
-          "short_name": "GetEnvironment",
-          "full_name": "google.cloud.dataplex.v1.DataplexService.GetEnvironment",
-          "service": {
-            "short_name": "DataplexService",
-            "full_name": "google.cloud.dataplex.v1.DataplexService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_DataplexService_ListSessions_sync",
-      "title": "Snippet for the list_sessions call in the DataplexService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataplexService::Client#list_sessions.",
-      "file": "dataplex_service/list_sessions.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_sessions",
-        "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client#list_sessions",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::ListSessionsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dataplex::V1::ListSessionsResponse",
-        "client": {
-          "short_name": "DataplexService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::DataplexService::Client"
-        },
-        "method": {
-          "short_name": "ListSessions",
-          "full_name": "google.cloud.dataplex.v1.DataplexService.ListSessions",
-          "service": {
-            "short_name": "DataplexService",
-            "full_name": "google.cloud.dataplex.v1.DataplexService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "dataplex_v1_generated_BusinessGlossaryService_CreateGlossary_sync",
       "title": "Snippet for the create_glossary call in the BusinessGlossaryService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::BusinessGlossaryService::Client#create_glossary.",
@@ -3012,6 +2772,46 @@
       ]
     },
     {
+      "region_tag": "dataplex_v1_generated_CatalogService_UpdateEntryLink_sync",
+      "title": "Snippet for the update_entry_link call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#update_entry_link.",
+      "file": "catalog_service/update_entry_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_entry_link",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#update_entry_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::EntryLink",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "UpdateEntryLink",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.UpdateEntryLink",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataplex_v1_generated_CatalogService_DeleteEntryLink_sync",
       "title": "Snippet for the delete_entry_link call in the CatalogService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#delete_entry_link.",
@@ -3035,6 +2835,86 @@
         "method": {
           "short_name": "DeleteEntryLink",
           "full_name": "google.cloud.dataplex.v1.CatalogService.DeleteEntryLink",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_LookupEntryLinks_sync",
+      "title": "Snippet for the lookup_entry_links call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#lookup_entry_links.",
+      "file": "catalog_service/lookup_entry_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_entry_links",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#lookup_entry_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::LookupEntryLinksResponse",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "LookupEntryLinks",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.LookupEntryLinks",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_LookupContext_sync",
+      "title": "Snippet for the lookup_context call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#lookup_context.",
+      "file": "catalog_service/lookup_context.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_context",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#lookup_context",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::LookupContextRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::LookupContextResponse",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "LookupContext",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.LookupContext",
           "service": {
             "short_name": "CatalogService",
             "full_name": "google.cloud.dataplex.v1.CatalogService"
@@ -3087,6 +2967,206 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_CreateMetadataFeed_sync",
+      "title": "Snippet for the create_metadata_feed call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#create_metadata_feed.",
+      "file": "catalog_service/create_metadata_feed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_metadata_feed",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#create_metadata_feed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "CreateMetadataFeed",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.CreateMetadataFeed",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_GetMetadataFeed_sync",
+      "title": "Snippet for the get_metadata_feed call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#get_metadata_feed.",
+      "file": "catalog_service/get_metadata_feed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_metadata_feed",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#get_metadata_feed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::MetadataFeed",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "GetMetadataFeed",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.GetMetadataFeed",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_ListMetadataFeeds_sync",
+      "title": "Snippet for the list_metadata_feeds call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#list_metadata_feeds.",
+      "file": "catalog_service/list_metadata_feeds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_metadata_feeds",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#list_metadata_feeds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::ListMetadataFeedsResponse",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "ListMetadataFeeds",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.ListMetadataFeeds",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_DeleteMetadataFeed_sync",
+      "title": "Snippet for the delete_metadata_feed call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#delete_metadata_feed.",
+      "file": "catalog_service/delete_metadata_feed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_metadata_feed",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#delete_metadata_feed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMetadataFeed",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.DeleteMetadataFeed",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_UpdateMetadataFeed_sync",
+      "title": "Snippet for the update_metadata_feed call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#update_metadata_feed.",
+      "file": "catalog_service/update_metadata_feed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_metadata_feed",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#update_metadata_feed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "UpdateMetadataFeed",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.UpdateMetadataFeed",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -3292,32 +3372,112 @@
       ]
     },
     {
-      "region_tag": "dataplex_v1_generated_ContentService_CreateContent_sync",
-      "title": "Snippet for the create_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#create_content.",
-      "file": "content_service/create_content.rb",
+      "region_tag": "dataplex_v1_generated_DataProductService_CreateDataProduct_sync",
+      "title": "Snippet for the create_data_product call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#create_data_product.",
+      "file": "data_product_service/create_data_product.rb",
       "language": "RUBY",
       "client_method": {
-        "short_name": "create_content",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#create_content",
+        "short_name": "create_data_product",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#create_data_product",
         "async": false,
         "parameters": [
           {
-            "type": "::Google::Cloud::Dataplex::V1::CreateContentRequest",
+            "type": "::Google::Cloud::Dataplex::V1::CreateDataProductRequest",
             "name": "request"
           }
         ],
-        "result_type": "::Google::Cloud::Dataplex::V1::Content",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
         },
         "method": {
-          "short_name": "CreateContent",
-          "full_name": "google.cloud.dataplex.v1.ContentService.CreateContent",
+          "short_name": "CreateDataProduct",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.CreateDataProduct",
           "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_DeleteDataProduct_sync",
+      "title": "Snippet for the delete_data_product call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#delete_data_product.",
+      "file": "data_product_service/delete_data_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_product",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#delete_data_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::DeleteDataProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataProduct",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.DeleteDataProduct",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_GetDataProduct_sync",
+      "title": "Snippet for the get_data_product call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#get_data_product.",
+      "file": "data_product_service/get_data_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_product",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#get_data_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::GetDataProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::DataProduct",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "GetDataProduct",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.GetDataProduct",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
           }
         }
       },
@@ -3332,32 +3492,232 @@
       ]
     },
     {
-      "region_tag": "dataplex_v1_generated_ContentService_UpdateContent_sync",
-      "title": "Snippet for the update_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#update_content.",
-      "file": "content_service/update_content.rb",
+      "region_tag": "dataplex_v1_generated_DataProductService_ListDataProducts_sync",
+      "title": "Snippet for the list_data_products call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#list_data_products.",
+      "file": "data_product_service/list_data_products.rb",
       "language": "RUBY",
       "client_method": {
-        "short_name": "update_content",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#update_content",
+        "short_name": "list_data_products",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#list_data_products",
         "async": false,
         "parameters": [
           {
-            "type": "::Google::Cloud::Dataplex::V1::UpdateContentRequest",
+            "type": "::Google::Cloud::Dataplex::V1::ListDataProductsRequest",
             "name": "request"
           }
         ],
-        "result_type": "::Google::Cloud::Dataplex::V1::Content",
+        "result_type": "::Google::Cloud::Dataplex::V1::ListDataProductsResponse",
         "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
         },
         "method": {
-          "short_name": "UpdateContent",
-          "full_name": "google.cloud.dataplex.v1.ContentService.UpdateContent",
+          "short_name": "ListDataProducts",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.ListDataProducts",
           "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_UpdateDataProduct_sync",
+      "title": "Snippet for the update_data_product call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#update_data_product.",
+      "file": "data_product_service/update_data_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_product",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#update_data_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::UpdateDataProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataProduct",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.UpdateDataProduct",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_CreateDataAsset_sync",
+      "title": "Snippet for the create_data_asset call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#create_data_asset.",
+      "file": "data_product_service/create_data_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_asset",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#create_data_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::CreateDataAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataAsset",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.CreateDataAsset",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_UpdateDataAsset_sync",
+      "title": "Snippet for the update_data_asset call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#update_data_asset.",
+      "file": "data_product_service/update_data_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_asset",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#update_data_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::UpdateDataAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataAsset",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.UpdateDataAsset",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_DeleteDataAsset_sync",
+      "title": "Snippet for the delete_data_asset call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#delete_data_asset.",
+      "file": "data_product_service/delete_data_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_asset",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#delete_data_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::DeleteDataAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataAsset",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.DeleteDataAsset",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_DataProductService_GetDataAsset_sync",
+      "title": "Snippet for the get_data_asset call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#get_data_asset.",
+      "file": "data_product_service/get_data_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_asset",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#get_data_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::GetDataAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::DataAsset",
+        "client": {
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
+        },
+        "method": {
+          "short_name": "GetDataAsset",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.GetDataAsset",
+          "service": {
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
           }
         }
       },
@@ -3372,232 +3732,32 @@
       ]
     },
     {
-      "region_tag": "dataplex_v1_generated_ContentService_DeleteContent_sync",
-      "title": "Snippet for the delete_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#delete_content.",
-      "file": "content_service/delete_content.rb",
+      "region_tag": "dataplex_v1_generated_DataProductService_ListDataAssets_sync",
+      "title": "Snippet for the list_data_assets call in the DataProductService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::DataProductService::Client#list_data_assets.",
+      "file": "data_product_service/list_data_assets.rb",
       "language": "RUBY",
       "client_method": {
-        "short_name": "delete_content",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#delete_content",
+        "short_name": "list_data_assets",
+        "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client#list_data_assets",
         "async": false,
         "parameters": [
           {
-            "type": "::Google::Cloud::Dataplex::V1::DeleteContentRequest",
+            "type": "::Google::Cloud::Dataplex::V1::ListDataAssetsRequest",
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataplex::V1::ListDataAssetsResponse",
         "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
+          "short_name": "DataProductService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::DataProductService::Client"
         },
         "method": {
-          "short_name": "DeleteContent",
-          "full_name": "google.cloud.dataplex.v1.ContentService.DeleteContent",
+          "short_name": "ListDataAssets",
+          "full_name": "google.cloud.dataplex.v1.DataProductService.ListDataAssets",
           "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_ContentService_GetContent_sync",
-      "title": "Snippet for the get_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#get_content.",
-      "file": "content_service/get_content.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_content",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#get_content",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::GetContentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dataplex::V1::Content",
-        "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
-        },
-        "method": {
-          "short_name": "GetContent",
-          "full_name": "google.cloud.dataplex.v1.ContentService.GetContent",
-          "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_ContentService_GetIamPolicy_sync",
-      "title": "Snippet for the get_iam_policy call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#get_iam_policy.",
-      "file": "content_service/get_iam_policy.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_iam_policy",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#get_iam_policy",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Iam::V1::GetIamPolicyRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Iam::V1::Policy",
-        "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
-        },
-        "method": {
-          "short_name": "GetIamPolicy",
-          "full_name": "google.cloud.dataplex.v1.ContentService.GetIamPolicy",
-          "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_ContentService_SetIamPolicy_sync",
-      "title": "Snippet for the set_iam_policy call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#set_iam_policy.",
-      "file": "content_service/set_iam_policy.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "set_iam_policy",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#set_iam_policy",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Iam::V1::SetIamPolicyRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Iam::V1::Policy",
-        "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
-        },
-        "method": {
-          "short_name": "SetIamPolicy",
-          "full_name": "google.cloud.dataplex.v1.ContentService.SetIamPolicy",
-          "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_ContentService_TestIamPermissions_sync",
-      "title": "Snippet for the test_iam_permissions call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#test_iam_permissions.",
-      "file": "content_service/test_iam_permissions.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "test_iam_permissions",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#test_iam_permissions",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
-        "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
-        },
-        "method": {
-          "short_name": "TestIamPermissions",
-          "full_name": "google.cloud.dataplex.v1.ContentService.TestIamPermissions",
-          "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 46,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dataplex_v1_generated_ContentService_ListContent_sync",
-      "title": "Snippet for the list_content call in the ContentService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#list_content.",
-      "file": "content_service/list_content.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_content",
-        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#list_content",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dataplex::V1::ListContentRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dataplex::V1::ListContentResponse",
-        "client": {
-          "short_name": "ContentService::Client",
-          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
-        },
-        "method": {
-          "short_name": "ListContent",
-          "full_name": "google.cloud.dataplex.v1.ContentService.ListContent",
-          "service": {
-            "short_name": "ContentService",
-            "full_name": "google.cloud.dataplex.v1.ContentService"
+            "short_name": "DataProductService",
+            "full_name": "google.cloud.dataplex.v1.DataProductService"
           }
         }
       },

@@ -751,6 +751,9 @@ module Google
 
             # Data scan triggers as per schedule.
             SCHEDULE = 2
+
+            # Data scan is run one time on creation.
+            ONE_TIME = 3
           end
 
           # The scope of job for the data scan.
