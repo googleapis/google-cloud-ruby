@@ -20,7 +20,7 @@ require "gapic/rest"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/cloud/iam/v3beta/version"
+require "google/iam/v3beta/version"
 
 require "google/iam/v3beta/access_policies/credentials"
 require "google/iam/v3beta/access_policies/paths"

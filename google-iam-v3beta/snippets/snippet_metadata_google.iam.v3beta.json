@@ -1,7 +1,7 @@
 {
   "client_library": {
-    "name": "google-cloud-iam-v3beta",
-    "version": "0.4.1",
+    "name": "google-iam-v3beta",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
