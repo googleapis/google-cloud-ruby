@@ -25,9 +25,6 @@ module Google
         module ContentService
           # Credentials for the ContentService API.
           class Credentials < ::Google::Auth::Credentials
-            self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
-            ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",
               "GOOGLE_CLOUD_KEYFILE",
