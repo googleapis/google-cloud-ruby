@@ -699,7 +699,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil, boot_disk: nil, node_drain_config: nil, consolidation_delay: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil, boot_disk: nil, node_drain_config: nil, consolidation_delay: nil, taint_config: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -840,6 +840,8 @@ module Google
             #     Consolidation delay defines duration after which the Cluster Autoscaler can
             #     scale down underutilized nodes. If not set, nodes are scaled down by
             #     default behavior, i.e. according to the chosen autoscaling profile.
+            #   @param taint_config [::Google::Cloud::Container::V1beta1::TaintConfig, ::Hash]
+            #     The taint configuration for the node pool.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
@@ -4013,7 +4015,7 @@ module Google
             end
 
             ##
-            # Fetch upgrade information of a specific nodepool.
+            # Fetch upgrade information of a specific node pool.
             #
             # @overload fetch_node_pool_upgrade_info(request, options = nil)
             #   Pass arguments to `fetch_node_pool_upgrade_info` via a request object, either of type
@@ -4031,7 +4033,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name (project, location, cluster, nodepool) of the nodepool
+            #     Required. The name (project, location, cluster, node pool) of the node pool
             #     to get. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*` or
             #     `projects/*/zones/*/clusters/*/nodePools/*`.
