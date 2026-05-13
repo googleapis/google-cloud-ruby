@@ -17,16 +17,19 @@ require "trace_helper"
 describe Google::Cloud::Trace, :trace do
   describe "API client" do
     it "writes a trace and reads it back" do
-      skip "This test is failing, probably due to a backed up indexer. Skip for now."
       orig_trace = simple_trace
       tracer.patch_traces orig_trace
       trace = wait_until do
-        tracer.get_trace orig_trace.trace_id
+        # Rescue NotFoundError to allow wait_until to retry until the trace becomes available.
+        begin
+          tracer.get_trace orig_trace.trace_id
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
       end
       _(trace).must_equal orig_trace
     end
 
-    focus
     it "writes traces and lists them" do
       start_time = Time.now.utc - 2
       trace1 = simple_trace
@@ -39,7 +42,7 @@ describe Google::Cloud::Trace, :trace do
       all_results = wait_until do
         res = tracer.list_traces start_time, end_time,
                                  view: :COMPLETE,
-                                 filter: simple_span_name,
+                                 filter: "+span:#{simple_span_name}",
                                  order_by: "start",
                                  page_size: 4
         res.size == 3 ? res : nil
@@ -49,7 +52,7 @@ describe Google::Cloud::Trace, :trace do
       page1 = wait_until do
         res = tracer.list_traces start_time, end_time,
                                  view: :COMPLETE,
-                                 filter: simple_span_name,
+                                 filter: "+span:#{simple_span_name}",
                                  order_by: "start",
                                  page_size: 2
         res.to_a == [trace1, trace2] ? res : nil

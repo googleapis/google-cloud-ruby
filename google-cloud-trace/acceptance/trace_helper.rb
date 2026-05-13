@@ -43,7 +43,7 @@ module Acceptance
     extend Minitest::Spec::DSL
 
     let(:simple_span_name) { "/path/to/#{@test_id}" }
-    let(:simple_span_labels) { { "foo" => "bar" } }
+    let(:simple_span_labels) { { "foo" => "bar", "gcp.project_id" => @tracer.project } }
 
     def simple_trace
       tc = Stackdriver::Core::TraceContext.new.with is_new: false, span_id: 123
