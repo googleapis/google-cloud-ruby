@@ -24,14 +24,17 @@ module Google
     # date is relative to the Gregorian Calendar. This can represent one of the
     # following:
     #
-    # * A full date, with non-zero year, month, and day values
-    # * A month and day value, with a zero year, such as an anniversary
-    # * A year on its own, with zero month and day values
-    # * A year and month value, with a zero day, such as a credit card expiration
-    # date
+    # * A full date, with non-zero year, month, and day values.
+    # * A month and day, with a zero year (for example, an anniversary).
+    # * A year on its own, with a zero month and a zero day.
+    # * A year and month, with a zero day (for example, a credit card expiration
+    #   date).
     #
-    # Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
-    # `google.protobuf.Timestamp`.
+    # Related types:
+    #
+    # * {::Google::Type::TimeOfDay google.type.TimeOfDay}
+    # * [google.type.DateTime][google.type.DateTime]
+    # * {::Google::Protobuf::Timestamp google.protobuf.Timestamp}
     # @!attribute [rw] year
     #   @return [::Integer]
     #     Year of the date. Must be from 1 to 9999, or 0 to specify a date without
