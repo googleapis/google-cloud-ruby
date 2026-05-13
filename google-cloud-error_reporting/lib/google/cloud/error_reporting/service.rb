@@ -48,6 +48,7 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::ErrorReporting::VERSION
+              config.quota_project = Google::Cloud.configure.error_reporting.quota_project || project
             end
         end
         attr_accessor :mocked_error_reporting

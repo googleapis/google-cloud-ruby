@@ -118,3 +118,25 @@ describe Google::Cloud do
     end
   end
 end
+
+describe Google::Cloud::ErrorReporting do
+  describe ".new" do
+    # Stubs Client.new and yields a dummy config to capture assignments without creating a real client.
+    def stub_client_new *args
+      @yielded_config = OpenStruct.new
+      yield @yielded_config
+      "fake-gapic-client"
+    end
+
+    it "sets quota_project on the low-level client" do
+      er = Google::Cloud::ErrorReporting.new project_id: "test-project-id"
+      service = er.service
+      
+      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.stub :new, method(:stub_client_new) do
+        service.error_reporting
+      end
+      
+      _(@yielded_config.quota_project).must_equal "test-project-id"
+    end
+  end
+end
