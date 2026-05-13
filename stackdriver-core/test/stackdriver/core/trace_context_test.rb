@@ -19,7 +19,7 @@ require "stackdriver/core/trace_context"
 describe Stackdriver::Core::TraceContext do
   it "generates a new context with a randomly generated trace ID" do
     tc = Stackdriver::Core::TraceContext.new
-    _(tc.trace_id).must_match /\w{32}/
+    _(tc.trace_id).must_match(/\w{32}/)
     _(tc.span_id).must_be_nil
     _(tc.sampled?).must_be_nil
     _(tc.new?).must_equal true
@@ -202,7 +202,7 @@ describe Stackdriver::Core::TraceContext do
     it "initializes a default context when no header is found" do
       env = {}
       tc = Stackdriver::Core::TraceContext.parse_rack_env(env)
-      _(tc.trace_id).must_match /\w{32}/
+      _(tc.trace_id).must_match(/\w{32}/)
       _(tc.span_id).must_be_nil
       _(tc.sampled?).must_be_nil
       _(tc.new?).must_equal true
