@@ -25,7 +25,7 @@ local_dependencies.each do |name|
   gem name, path: "../#{name}"
 end
 
-gem "activerecord", ">= 5.0", "< 7.1.4"
+gem "activerecord", ">= 5.0", "< 8.1.4"
 gem "autotest-suffix", "~> 1.1"
 gem "benchmark", "~> 0.5.0"
 gem "cgi", "~> 0.5.0"
@@ -38,7 +38,7 @@ gem "minitest-focus", "~> 1.4"
 gem "minitest-mock", "~> 5.27"
 gem "minitest-rg", "~> 5.3"
 gem "ostruct", "~> 0.5.5"
-gem "railties", ">= 5.0", "< 7.1.4"
+gem "railties", ">= 5.0", "< 8.1.4"
 gem "rake"
 gem "redcarpet", "~> 3.6"
 gem "simplecov", "~> 0.22"
