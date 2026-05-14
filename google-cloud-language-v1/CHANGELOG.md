@@ -1,5 +1,14 @@
 # Release History
 
+### 1.6.0 (2026-05-14)
+
+#### Features
+
+* publish client batch config schema 
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33435](https://github.com/googleapis/google-cloud-ruby/issues/33435)) 
+
 ### 1.5.0 (2026-03-19)
 
 #### Features
