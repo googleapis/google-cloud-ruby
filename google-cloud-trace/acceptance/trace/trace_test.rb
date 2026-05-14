@@ -17,13 +17,17 @@ require "trace_helper"
 describe Google::Cloud::Trace, :trace do
   describe "API client" do
     it "writes a trace and reads it back" do
-      skip "This test is failing, probably due to a backed up indexer. Skip for now."
       orig_trace = simple_trace
       tracer.patch_traces orig_trace
       trace = wait_until do
-        tracer.get_trace orig_trace.trace_id
+        # Rescue NotFoundError to allow wait_until to retry until the trace becomes available.
+        begin
+          tracer.get_trace orig_trace.trace_id
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
       end
-      trace.must_equal orig_trace
+      _(trace).must_equal orig_trace
     end
 
     it "writes traces and lists them" do
@@ -38,26 +42,26 @@ describe Google::Cloud::Trace, :trace do
       all_results = wait_until do
         res = tracer.list_traces start_time, end_time,
                                  view: :COMPLETE,
-                                 filter: simple_span_name,
+                                 filter: "+span:#{simple_span_name}",
                                  order_by: "start",
                                  page_size: 4
         res.size == 3 ? res : nil
       end
-      all_results.to_a.must_equal [trace1, trace2, trace3]
-      all_results.results_pending?.must_equal false
+      _(all_results.to_a).must_equal [trace1, trace2, trace3]
+      _(all_results.results_pending?).must_equal false
       page1 = wait_until do
         res = tracer.list_traces start_time, end_time,
                                  view: :COMPLETE,
-                                 filter: simple_span_name,
+                                 filter: "+span:#{simple_span_name}",
                                  order_by: "start",
                                  page_size: 2
         res.to_a == [trace1, trace2] ? res : nil
       end
-      page1.to_a.must_equal [trace1, trace2]
-      page1.results_pending?.must_equal true
+      _(page1.to_a).must_equal [trace1, trace2]
+      _(page1.results_pending?).must_equal true
       page2 = page1.next_page
-      page2.to_a.must_equal [trace3]
-      page2.results_pending?.must_equal false
+      _(page2.to_a).must_equal [trace3]
+      _(page2.results_pending?).must_equal false
     end
   end
 end
