@@ -240,6 +240,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_global_vm_extension_policies_rest
+    skip unless Google::Cloud::Compute.global_vm_extension_policies_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.global_vm_extension_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::GlobalVmExtensionPolicies::Rest::Client, client
+    end
+  end
+
   def test_health_checks_rest
     skip unless Google::Cloud::Compute.health_checks_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -977,6 +987,26 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ResourcePolicies::Rest::Client, client
+    end
+  end
+
+  def test_rollout_plans_rest
+    skip unless Google::Cloud::Compute.rollout_plans_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.rollout_plans do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RolloutPlans::Rest::Client, client
+    end
+  end
+
+  def test_rollouts_rest
+    skip unless Google::Cloud::Compute.rollouts_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.rollouts do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::Rollouts::Rest::Client, client
     end
   end
 
