@@ -123,7 +123,7 @@ module Google
         #   error_reporting.report error_event
         #
         def report *args, &block
-          service.report *args, &block
+          service.report(*args, &block)
         end
 
         ##
