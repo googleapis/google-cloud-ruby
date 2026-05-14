@@ -138,7 +138,7 @@ module Google
             rpc :ListLocations, ::Google::Cloud::Container::V1beta1::ListLocationsRequest, ::Google::Cloud::Container::V1beta1::ListLocationsResponse
             # Fetch upgrade information of a specific cluster.
             rpc :FetchClusterUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchClusterUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::ClusterUpgradeInfo
-            # Fetch upgrade information of a specific nodepool.
+            # Fetch upgrade information of a specific node pool.
             rpc :FetchNodePoolUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchNodePoolUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::NodePoolUpgradeInfo
             # CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
             # performing the step two upgrade for a specific cluster.
