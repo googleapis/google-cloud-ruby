@@ -14,6 +14,11 @@
               "methods": [
                 "list_attachments"
               ]
+            },
+            "GetAttachment": {
+              "methods": [
+                "get_attachment"
+              ]
             }
           }
         }
@@ -81,6 +86,11 @@
             "CreateComment": {
               "methods": [
                 "create_comment"
+              ]
+            },
+            "GetComment": {
+              "methods": [
+                "get_comment"
               ]
             }
           }
