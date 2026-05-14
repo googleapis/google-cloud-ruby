@@ -26,7 +26,9 @@ module Google
           # Credentials for the ClusterManager API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/container",
+              "https://www.googleapis.com/auth/container.read-only"
             ]
             self.env_vars = [
               "CONTAINER_CREDENTIALS",
