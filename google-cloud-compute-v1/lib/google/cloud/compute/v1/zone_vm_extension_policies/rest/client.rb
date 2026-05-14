@@ -206,7 +206,7 @@ module Google
               # Service calls
 
               ##
-              # Deletes a specified zone VM extension policy.
+              # Deletes a specified zone VM extension policy within a project.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
@@ -312,7 +312,7 @@ module Google
               end
 
               ##
-              # Retrieves details of a specific zone VM extension policy.
+              # Retrieves details of a specific zone VM extension policy within a project.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -670,7 +670,7 @@ module Google
               end
 
               ##
-              # Modifies an existing zone VM extension policy.
+              # Modifies an existing zone VM extension policy within a project.
               #
               # @overload update(request, options = nil)
               #   Pass arguments to `update` via a request object, either of type

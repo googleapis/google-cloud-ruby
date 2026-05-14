@@ -26,7 +26,6 @@ module Google
           # Credentials for the LicenseCodes API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/compute.readonly",
               "https://www.googleapis.com/auth/compute",
               "https://www.googleapis.com/auth/cloud-platform"
             ]
