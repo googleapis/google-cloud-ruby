@@ -515,7 +515,7 @@
   "google-cloud-location+FILLER": "0.0.0",
   "google-cloud-location_finder": "0.2.0",
   "google-cloud-location_finder+FILLER": "0.0.0",
-  "google-cloud-location_finder-v1": "0.2.0",
+  "google-cloud-location_finder-v1": "0.3.0",
   "google-cloud-location_finder-v1+FILLER": "0.0.0",
   "google-cloud-logging": "2.7.0",
   "google-cloud-logging+FILLER": "0.0.0",
