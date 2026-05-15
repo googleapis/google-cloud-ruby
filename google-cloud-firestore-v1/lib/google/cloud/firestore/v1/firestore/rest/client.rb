@@ -100,7 +100,7 @@ module Google
 
                   default_config.rpcs.batch_get_documents.timeout = 300.0
                   default_config.rpcs.batch_get_documents.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.begin_transaction.timeout = 60.0
@@ -120,22 +120,22 @@ module Google
 
                   default_config.rpcs.run_query.timeout = 300.0
                   default_config.rpcs.run_query.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.execute_pipeline.timeout = 300.0
                   default_config.rpcs.execute_pipeline.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.run_aggregation_query.timeout = 300.0
                   default_config.rpcs.run_aggregation_query.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.partition_query.timeout = 300.0
                   default_config.rpcs.partition_query.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.list_collection_ids.timeout = 60.0
