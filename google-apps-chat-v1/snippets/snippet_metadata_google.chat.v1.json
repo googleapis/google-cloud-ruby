@@ -732,6 +732,46 @@
       ]
     },
     {
+      "region_tag": "chat_v1_generated_ChatService_FindGroupChats_sync",
+      "title": "Snippet for the find_group_chats call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#find_group_chats.",
+      "file": "chat_service/find_group_chats.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "find_group_chats",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#find_group_chats",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::FindGroupChatsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::FindGroupChatsResponse",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "FindGroupChats",
+          "full_name": "google.chat.v1.ChatService.FindGroupChats",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "chat_v1_generated_ChatService_CreateMembership_sync",
       "title": "Snippet for the create_membership call in the ChatService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#create_membership.",

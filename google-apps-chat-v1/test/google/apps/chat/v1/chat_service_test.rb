@@ -77,6 +77,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     request_id = "hello world"
     message_reply_option = :MESSAGE_REPLY_OPTION_UNSPECIFIED
     message_id = "hello world"
+    create_message_notification_options = {}
 
     create_message_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_message, name
@@ -87,6 +88,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       assert_equal "hello world", request["request_id"]
       assert_equal :MESSAGE_REPLY_OPTION_UNSPECIFIED, request["message_reply_option"]
       assert_equal "hello world", request["message_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Chat::V1::CreateMessageNotificationOptions), request["create_message_notification_options"]
       refute_nil options
     end
 
@@ -97,31 +99,31 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id }) do |response, operation|
+      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_message parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id do |response, operation|
+      client.create_message parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_message ::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id) do |response, operation|
+      client.create_message ::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id }, grpc_options) do |response, operation|
+      client.create_message({ parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_message(::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id), grpc_options) do |response, operation|
+      client.create_message(::Google::Apps::Chat::V1::CreateMessageRequest.new(parent: parent, message: message, thread_key: thread_key, request_id: request_id, message_reply_option: message_reply_option, message_id: message_id, create_message_notification_options: create_message_notification_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1192,6 +1194,75 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, find_direct_message_client_stub.call_rpc_count
+    end
+  end
+
+  def test_find_group_chats
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::FindGroupChatsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    users = ["hello world"]
+    page_size = 42
+    page_token = "hello world"
+    space_view = :SPACE_VIEW_UNSPECIFIED
+
+    find_group_chats_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :find_group_chats, name
+      assert_kind_of ::Google::Apps::Chat::V1::FindGroupChatsRequest, request
+      assert_equal ["hello world"], request["users"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :SPACE_VIEW_UNSPECIFIED, request["space_view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, find_group_chats_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.find_group_chats({ users: users, page_size: page_size, page_token: page_token, space_view: space_view }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.find_group_chats users: users, page_size: page_size, page_token: page_token, space_view: space_view do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.find_group_chats ::Google::Apps::Chat::V1::FindGroupChatsRequest.new(users: users, page_size: page_size, page_token: page_token, space_view: space_view) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.find_group_chats({ users: users, page_size: page_size, page_token: page_token, space_view: space_view }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.find_group_chats(::Google::Apps::Chat::V1::FindGroupChatsRequest.new(users: users, page_size: page_size, page_token: page_token, space_view: space_view), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, find_group_chats_client_stub.call_rpc_count
     end
   end
 

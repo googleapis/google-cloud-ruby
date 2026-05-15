@@ -161,6 +161,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.find_group_chats.timeout = 30.0
+                default_config.rpcs.find_group_chats.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.create_membership.timeout = 30.0
                 default_config.rpcs.create_membership.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -450,7 +455,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_message(parent: nil, message: nil, thread_key: nil, request_id: nil, message_reply_option: nil, message_id: nil)
+            # @overload create_message(parent: nil, message: nil, thread_key: nil, request_id: nil, message_reply_option: nil, message_id: nil, create_message_notification_options: nil)
             #   Pass arguments to `create_message` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -498,6 +503,10 @@ module Google
             #
             #     For details, see [Name a
             #     message](https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+            #   @param create_message_notification_options [::Google::Apps::Chat::V1::CreateMessageNotificationOptions, ::Hash]
+            #     Optional. Controls the notification behavior when the message is posted.
+            #     To learn more, see [Force notifications or send silent
+            #     messages](https://developer.google.com/workspace/chat/create-messages#force-notify-silent).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Apps::Chat::V1::Message]
@@ -3006,6 +3015,147 @@ module Google
 
               @chat_service_stub.call_rpc :find_direct_message, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns all spaces with `spaceType == GROUP_CHAT`, whose
+            # human memberships contain exactly the calling user, and the users specified
+            # in `FindGroupChatsRequest.users`. Only members that have joined the
+            # conversation are supported. For an example, see [Find group
+            # chats](https://developers.google.com/workspace/chat/find-group-chats).
+            #
+            # If the calling user blocks, or is blocked by, some users, and no spaces
+            # with the entire specified set of users are found, this method returns
+            # spaces that don't include the blocked or blocking users.
+            #
+            # The specified set of users must contain only human (non-app) memberships.
+            # A request that contains non-human users doesn't return any spaces.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.memberships.readonly`
+            #   - `https://www.googleapis.com/auth/chat.memberships`
+            #
+            # @overload find_group_chats(request, options = nil)
+            #   Pass arguments to `find_group_chats` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::FindGroupChatsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::FindGroupChatsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload find_group_chats(users: nil, page_size: nil, page_token: nil, space_view: nil)
+            #   Pass arguments to `find_group_chats` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param users [::Array<::String>]
+            #     Optional. Resource names of all human users in group chat with the calling
+            #     user. Chat apps can't be included in the request.
+            #
+            #     The maximum number of users that can be specified in a single request is
+            #     `49`.
+            #
+            #     Format: `users/{user}`, where `{user}` is either the `id` for the
+            #     [person](https://developers.google.com/people/api/rest/v1/people) from the
+            #     People API, or the `id` for the
+            #     [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users)
+            #     in the Directory API. For example, to find all group chats with the calling
+            #     user and two other users, with People API profile IDs `123456789` and
+            #     `987654321`, you can use `users/123456789` and `users/987654321`.
+            #     You can also use the email as an alias for `{user}`. For example,
+            #     `users/example@gmail.com` where `example@gmail.com` is the email of the
+            #     Google Chat user.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of spaces to return. The service might return
+            #     fewer than this value.
+            #
+            #     If unspecified, at most 10 spaces are returned.
+            #
+            #     The maximum value is 30. If you use a value more than 30, it's
+            #     automatically changed to 30.
+            #
+            #     Negative values return an `INVALID_ARGUMENT` error.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous call to find group chats.
+            #     Provide this parameter to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided should match the call that
+            #     provided the token. Passing different values may lead to unexpected
+            #     results.
+            #   @param space_view [::Google::Apps::Chat::V1::SpaceView]
+            #     Requested space view type. If unset, defaults to
+            #     `SPACE_VIEW_RESOURCE_NAME_ONLY`. Requests that specify
+            #     `SPACE_VIEW_EXPANDED` must include scopes that allow reading space data,
+            #     for example,
+            #     https://www.googleapis.com/auth/chat.spaces or
+            #     https://www.googleapis.com/auth/chat.spaces.readonly.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::Space>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::Space>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::FindGroupChatsRequest.new
+            #
+            #   # Call the find_group_chats method.
+            #   result = client.find_group_chats request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Apps::Chat::V1::Space.
+            #     p item
+            #   end
+            #
+            def find_group_chats request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::FindGroupChatsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.find_group_chats.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.find_group_chats.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.find_group_chats.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :find_group_chats, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @chat_service_stub, :find_group_chats, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6179,6 +6329,11 @@ module Google
                 #
                 attr_reader :find_direct_message
                 ##
+                # RPC-specific configuration for `find_group_chats`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :find_group_chats
+                ##
                 # RPC-specific configuration for `create_membership`
                 # @return [::Gapic::Config::Method]
                 #
@@ -6337,6 +6492,8 @@ module Google
                   @complete_import_space = ::Gapic::Config::Method.new complete_import_space_config
                   find_direct_message_config = parent_rpcs.find_direct_message if parent_rpcs.respond_to? :find_direct_message
                   @find_direct_message = ::Gapic::Config::Method.new find_direct_message_config
+                  find_group_chats_config = parent_rpcs.find_group_chats if parent_rpcs.respond_to? :find_group_chats
+                  @find_group_chats = ::Gapic::Config::Method.new find_group_chats_config
                   create_membership_config = parent_rpcs.create_membership if parent_rpcs.respond_to? :create_membership
                   @create_membership = ::Gapic::Config::Method.new create_membership_config
                   update_membership_config = parent_rpcs.update_membership if parent_rpcs.respond_to? :update_membership
