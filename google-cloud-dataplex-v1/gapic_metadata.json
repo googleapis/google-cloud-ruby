@@ -144,36 +144,6 @@
               "methods": [
                 "cancel_job"
               ]
-            },
-            "CreateEnvironment": {
-              "methods": [
-                "create_environment"
-              ]
-            },
-            "UpdateEnvironment": {
-              "methods": [
-                "update_environment"
-              ]
-            },
-            "DeleteEnvironment": {
-              "methods": [
-                "delete_environment"
-              ]
-            },
-            "ListEnvironments": {
-              "methods": [
-                "list_environments"
-              ]
-            },
-            "GetEnvironment": {
-              "methods": [
-                "get_environment"
-              ]
-            },
-            "ListSessions": {
-              "methods": [
-                "list_sessions"
-              ]
             }
           }
         }
@@ -403,14 +373,54 @@
                 "create_entry_link"
               ]
             },
+            "UpdateEntryLink": {
+              "methods": [
+                "update_entry_link"
+              ]
+            },
             "DeleteEntryLink": {
               "methods": [
                 "delete_entry_link"
               ]
             },
+            "LookupEntryLinks": {
+              "methods": [
+                "lookup_entry_links"
+              ]
+            },
+            "LookupContext": {
+              "methods": [
+                "lookup_context"
+              ]
+            },
             "GetEntryLink": {
               "methods": [
                 "get_entry_link"
+              ]
+            },
+            "CreateMetadataFeed": {
+              "methods": [
+                "create_metadata_feed"
+              ]
+            },
+            "GetMetadataFeed": {
+              "methods": [
+                "get_metadata_feed"
+              ]
+            },
+            "ListMetadataFeeds": {
+              "methods": [
+                "list_metadata_feeds"
+              ]
+            },
+            "DeleteMetadataFeed": {
+              "methods": [
+                "delete_metadata_feed"
+              ]
+            },
+            "UpdateMetadataFeed": {
+              "methods": [
+                "update_metadata_feed"
               ]
             }
           }
@@ -455,45 +465,63 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataplex::V1::ContentService::Client",
+          "rpcs": {}
+        }
+      }
+    },
+    "DataProductService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::DataProductService::Client",
           "rpcs": {
-            "CreateContent": {
+            "CreateDataProduct": {
               "methods": [
-                "create_content"
+                "create_data_product"
               ]
             },
-            "UpdateContent": {
+            "DeleteDataProduct": {
               "methods": [
-                "update_content"
+                "delete_data_product"
               ]
             },
-            "DeleteContent": {
+            "GetDataProduct": {
               "methods": [
-                "delete_content"
+                "get_data_product"
               ]
             },
-            "GetContent": {
+            "ListDataProducts": {
               "methods": [
-                "get_content"
+                "list_data_products"
               ]
             },
-            "GetIamPolicy": {
+            "UpdateDataProduct": {
               "methods": [
-                "get_iam_policy"
+                "update_data_product"
               ]
             },
-            "SetIamPolicy": {
+            "CreateDataAsset": {
               "methods": [
-                "set_iam_policy"
+                "create_data_asset"
               ]
             },
-            "TestIamPermissions": {
+            "UpdateDataAsset": {
               "methods": [
-                "test_iam_permissions"
+                "update_data_asset"
               ]
             },
-            "ListContent": {
+            "DeleteDataAsset": {
               "methods": [
-                "list_content"
+                "delete_data_asset"
+              ]
+            },
+            "GetDataAsset": {
+              "methods": [
+                "get_data_asset"
+              ]
+            },
+            "ListDataAssets": {
+              "methods": [
+                "list_data_assets"
               ]
             }
           }
