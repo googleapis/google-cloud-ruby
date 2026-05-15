@@ -1545,6 +1545,333 @@ module Google
             end
 
             ##
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            #
+            # @overload get_client_configuration(request, options = nil)
+            #   Pass arguments to `get_client_configuration` via a request object, either of type
+            #   {::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_client_configuration(instance_name: nil, app_profile_id: nil)
+            #   Pass arguments to `get_client_configuration` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param instance_name [::String]
+            #     Required. The unique name of the instance for which the client will target
+            #     with Data API requests.
+            #
+            #     Values are of the form `projects/<project>/instances/<instance>`
+            #   @param app_profile_id [::String]
+            #     Optional. The name of the AppProfile which will be used by the client when
+            #     sending requests in the Data API.
+            #
+            #     If not specified, the `default` application profile will be used.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Bigtable::V2::ClientConfiguration]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Bigtable::V2::ClientConfiguration]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new
+            #
+            #   # Call the get_client_configuration method.
+            #   result = client.get_client_configuration request
+            #
+            #   # The returned object is of type Google::Cloud::Bigtable::V2::ClientConfiguration.
+            #   p result
+            #
+            def get_client_configuration request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_client_configuration.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.get_client_configuration.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_client_configuration.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :get_client_configuration, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Bigtable::V2::SessionRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Bigtable::V2::SessionRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::SessionResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Bigtable::V2::SessionResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the open_table method to start streaming.
+            #   output = client.open_table input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Bigtable::V2::SessionRequest.new
+            #   input << Google::Cloud::Bigtable::V2::SessionRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::SessionResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def open_table request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Bigtable::V2::SessionRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.open_table.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.open_table.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.open_table.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :open_table, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Bigtable::V2::SessionRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Bigtable::V2::SessionRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::SessionResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Bigtable::V2::SessionResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the open_authorized_view method to start streaming.
+            #   output = client.open_authorized_view input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Bigtable::V2::SessionRequest.new
+            #   input << Google::Cloud::Bigtable::V2::SessionRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::SessionResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def open_authorized_view request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Bigtable::V2::SessionRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.open_authorized_view.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.open_authorized_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.open_authorized_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :open_authorized_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # This RPC is only intended to be used by the official Cloud Bigtable client
+            # libraries to implement the Bigtable Session based protocol. It is subject
+            # to change without notice.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Bigtable::V2::SessionRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Bigtable::V2::SessionRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::SessionResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Bigtable::V2::SessionResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the open_materialized_view method to start streaming.
+            #   output = client.open_materialized_view input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Bigtable::V2::SessionRequest.new
+            #   input << Google::Cloud::Bigtable::V2::SessionRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::SessionResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def open_materialized_view request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Bigtable::V2::SessionRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.open_materialized_view.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.open_materialized_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.open_materialized_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :open_materialized_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Bigtable API.
             #
             # This class represents the configuration for Bigtable,
@@ -1782,6 +2109,26 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :execute_query
+                ##
+                # RPC-specific configuration for `get_client_configuration`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_client_configuration
+                ##
+                # RPC-specific configuration for `open_table`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :open_table
+                ##
+                # RPC-specific configuration for `open_authorized_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :open_authorized_view
+                ##
+                # RPC-specific configuration for `open_materialized_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :open_materialized_view
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1807,6 +2154,14 @@ module Google
                   @prepare_query = ::Gapic::Config::Method.new prepare_query_config
                   execute_query_config = parent_rpcs.execute_query if parent_rpcs.respond_to? :execute_query
                   @execute_query = ::Gapic::Config::Method.new execute_query_config
+                  get_client_configuration_config = parent_rpcs.get_client_configuration if parent_rpcs.respond_to? :get_client_configuration
+                  @get_client_configuration = ::Gapic::Config::Method.new get_client_configuration_config
+                  open_table_config = parent_rpcs.open_table if parent_rpcs.respond_to? :open_table
+                  @open_table = ::Gapic::Config::Method.new open_table_config
+                  open_authorized_view_config = parent_rpcs.open_authorized_view if parent_rpcs.respond_to? :open_authorized_view
+                  @open_authorized_view = ::Gapic::Config::Method.new open_authorized_view_config
+                  open_materialized_view_config = parent_rpcs.open_materialized_view if parent_rpcs.respond_to? :open_materialized_view
+                  @open_materialized_view = ::Gapic::Config::Method.new open_materialized_view_config
 
                   yield self if block_given?
                 end
