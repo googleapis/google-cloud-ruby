@@ -72,6 +72,9 @@ module Google
         attr_reader :callback_threads
         attr_reader :push_threads
 
+        attr_reader :shutdown_behavior
+        attr_reader :shutdown_timeout
+
         ##
         # @private Implementation attributes.
         attr_reader :stream_pool, :thread_pool, :buffer, :service
@@ -83,7 +86,7 @@ module Google
         ##
         # @private Create an empty {MessageListener} object.
         def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
-                       threads: {}, service: nil
+                       threads: {}, shutdown_behavior: :wait_for_processing, shutdown_timeout: nil, service: nil
           super() # to init MonitorMixin
 
           @callback = callback
@@ -95,6 +98,8 @@ module Google
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
           @push_threads = Integer(threads[:push] || 4)
+          @shutdown_behavior = shutdown_behavior || :wait_for_processing
+          @shutdown_timeout = shutdown_timeout
           @exactly_once_delivery_enabled = nil
 
           @service = service
@@ -140,11 +145,18 @@ module Google
         #
         # @return [MessageListener] returns self so calls can be chained.
         #
-        def stop
+        def stop shutdown_behavior: nil, shutdown_timeout: nil
+          shutdown_behavior ||= @shutdown_behavior
+          shutdown_timeout ||= @shutdown_timeout
+
+          unless [:wait_for_processing, :nack_immediately].include? shutdown_behavior
+            raise ArgumentError, "Invalid shutdown_behavior: #{shutdown_behavior}"
+          end
+
           synchronize do
             @started = false
             @stopped = true
-            @stream_pool.map(&:stop)
+            @stream_pool.each { |s| s.stop shutdown_behavior: shutdown_behavior, shutdown_timeout: shutdown_timeout }
             wait_stop_buffer_thread!
             self
           end
@@ -182,8 +194,10 @@ module Google
         #
         # @return [MessageListener] returns self so calls can be chained.
         #
-        def stop! timeout = nil
-          stop
+        def stop! timeout = nil, shutdown_behavior: nil, shutdown_timeout: nil
+          shutdown_behavior ||= @shutdown_behavior
+          shutdown_timeout ||= timeout || @shutdown_timeout
+          stop shutdown_behavior: shutdown_behavior, shutdown_timeout: shutdown_timeout
           wait! timeout
         end
 
