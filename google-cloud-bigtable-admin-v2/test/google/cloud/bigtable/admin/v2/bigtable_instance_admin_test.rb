@@ -262,6 +262,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
     display_name = "hello world"
     state = :STATE_NOT_KNOWN
     type = :TYPE_UNSPECIFIED
+    edition = :EDITION_UNSPECIFIED
     labels = {}
     create_time = {}
     satisfies_pzs = true
@@ -275,6 +276,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       assert_equal "hello world", request["display_name"]
       assert_equal :STATE_NOT_KNOWN, request["state"]
       assert_equal :TYPE_UNSPECIFIED, request["type"]
+      assert_equal :EDITION_UNSPECIFIED, request["edition"]
       assert_equal({}, request["labels"].to_h)
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["create_time"]
       assert_equal true, request["satisfies_pzs"]
@@ -292,31 +294,31 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use hash object
-      client.update_instance({ name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }) do |response, operation|
+      client.update_instance({ name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags do |response, operation|
+      client.update_instance name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags) do |response, operation|
+      client.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }, grpc_options) do |response, operation|
+      client.update_instance({ name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags), grpc_options) do |response, operation|
+      client.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, edition: edition, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi, tags: tags), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
