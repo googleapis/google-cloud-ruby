@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,24 +23,25 @@ require "gapic/config/method"
 require "google/cloud/dataplex/v1/version"
 require "google/cloud/dataplex/v1/bindings_override"
 
-require "google/cloud/dataplex/v1/content_service/credentials"
-require "google/cloud/dataplex/v1/content_service/paths"
-require "google/cloud/dataplex/v1/content_service/rest/client"
+require "google/cloud/dataplex/v1/data_product_service/credentials"
+require "google/cloud/dataplex/v1/data_product_service/paths"
+require "google/cloud/dataplex/v1/data_product_service/rest/operations"
+require "google/cloud/dataplex/v1/data_product_service/rest/client"
 
 module Google
   module Cloud
     module Dataplex
       module V1
         ##
-        # ContentService manages Notebook and SQL Scripts for Dataplex Universal
-        # Catalog.
+        # `DataProductService` provides APIs for managing data products and
+        # the underlying data assets.
         #
         # To load this service and instantiate a REST client:
         #
-        #     require "google/cloud/dataplex/v1/content_service/rest"
-        #     client = ::Google::Cloud::Dataplex::V1::ContentService::Rest::Client.new
+        #     require "google/cloud/dataplex/v1/data_product_service/rest"
+        #     client = ::Google::Cloud::Dataplex::V1::DataProductService::Rest::Client.new
         #
-        module ContentService
+        module DataProductService
           # Client for the REST transport
           module Rest
           end
@@ -51,4 +52,4 @@ module Google
 end
 
 helper_path = ::File.join __dir__, "rest", "helpers.rb"
-require "google/cloud/dataplex/v1/content_service/rest/helpers" if ::File.file? helper_path
+require "google/cloud/dataplex/v1/data_product_service/rest/helpers" if ::File.file? helper_path

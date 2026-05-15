@@ -74,25 +74,10 @@ module Google
             # Deletes an Entry.
             rpc :DeleteEntry, ::Google::Cloud::Dataplex::V1::DeleteEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Lists Entries within an EntryGroup.
-            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
-            # Metastore metadata that is stored in Dataplex Universal Catalog is
-            # changing. For more information, see [Changes to metadata stored in
-            # Dataplex Universal
-            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             rpc :ListEntries, ::Google::Cloud::Dataplex::V1::ListEntriesRequest, ::Google::Cloud::Dataplex::V1::ListEntriesResponse
             # Gets an Entry.
-            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
-            # Metastore metadata that is stored in Dataplex Universal Catalog is
-            # changing. For more information, see [Changes to metadata stored in
-            # Dataplex Universal
-            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             rpc :GetEntry, ::Google::Cloud::Dataplex::V1::GetEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Looks up an entry by name using the permission on the source system.
-            # Caution: The Vertex AI, Bigtable, Spanner, Pub/Sub, Dataform, and Dataproc
-            # Metastore metadata that is stored in Dataplex Universal Catalog is
-            # changing. For more information, see [Changes to metadata stored in
-            # Dataplex Universal
-            # Catalog](https://cloud.google.com/dataplex/docs/metadata-changes).
             rpc :LookupEntry, ::Google::Cloud::Dataplex::V1::LookupEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Searches for Entries matching the given query and scope.
             rpc :SearchEntries, ::Google::Cloud::Dataplex::V1::SearchEntriesRequest, ::Google::Cloud::Dataplex::V1::SearchEntriesResponse
@@ -112,10 +97,26 @@ module Google
             rpc :CancelMetadataJob, ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest, ::Google::Protobuf::Empty
             # Creates an Entry Link.
             rpc :CreateEntryLink, ::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
+            # Updates an Entry Link.
+            rpc :UpdateEntryLink, ::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
             # Deletes an Entry Link.
             rpc :DeleteEntryLink, ::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
+            # Looks up Entry Links referencing the specified Entry.
+            rpc :LookupEntryLinks, ::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest, ::Google::Cloud::Dataplex::V1::LookupEntryLinksResponse
+            # Looks up LLM Context for the specified resources.
+            rpc :LookupContext, ::Google::Cloud::Dataplex::V1::LookupContextRequest, ::Google::Cloud::Dataplex::V1::LookupContextResponse
             # Gets an Entry Link.
             rpc :GetEntryLink, ::Google::Cloud::Dataplex::V1::GetEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
+            # Creates a MetadataFeed.
+            rpc :CreateMetadataFeed, ::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest, ::Google::Longrunning::Operation
+            # Gets a MetadataFeed.
+            rpc :GetMetadataFeed, ::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest, ::Google::Cloud::Dataplex::V1::MetadataFeed
+            # Retrieve a list of MetadataFeeds.
+            rpc :ListMetadataFeeds, ::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest, ::Google::Cloud::Dataplex::V1::ListMetadataFeedsResponse
+            # Deletes a MetadataFeed.
+            rpc :DeleteMetadataFeed, ::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest, ::Google::Longrunning::Operation
+            # Updates a MetadataFeed.
+            rpc :UpdateMetadataFeed, ::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

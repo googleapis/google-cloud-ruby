@@ -1597,6 +1597,62 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     end
   end
 
+  def test_update_entry_link
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    entry_link = {}
+    allow_missing = true
+    aspect_keys = ["hello world"]
+
+    update_entry_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_entry_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_entry_link_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_entry_link({ entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_entry_link entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_entry_link ::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest.new(entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_entry_link({ entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_entry_link(::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest.new(entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_entry_link_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_entry_link
     # Create test objects.
     client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
@@ -1651,6 +1707,121 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     end
   end
 
+  def test_lookup_entry_links
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::LookupEntryLinksResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    entry = "hello world"
+    entry_mode = :ENTRY_MODE_UNSPECIFIED
+    entry_link_types = ["hello world"]
+    page_size = 42
+    page_token = "hello world"
+
+    lookup_entry_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_lookup_entry_links_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, lookup_entry_links_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.lookup_entry_links({ name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.lookup_entry_links name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.lookup_entry_links ::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest.new(name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.lookup_entry_links({ name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.lookup_entry_links(::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest.new(name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, lookup_entry_links_client_stub.call_count
+      end
+    end
+  end
+
+  def test_lookup_context
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::LookupContextResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    resources = ["hello world"]
+    options = {}
+
+    lookup_context_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_lookup_context_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, lookup_context_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.lookup_context({ name: name, resources: resources, options: options }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.lookup_context name: name, resources: resources, options: options do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.lookup_context ::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, options: options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.lookup_context({ name: name, resources: resources, options: options }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.lookup_context(::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, options: options), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, lookup_context_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_entry_link
     # Create test objects.
     client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
@@ -1701,6 +1872,285 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
 
         # Verify method calls
         assert_equal 5, get_entry_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    metadata_feed = {}
+    metadata_feed_id = "hello world"
+    validate_only = true
+
+    create_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_metadata_feed_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_metadata_feed({ parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_metadata_feed parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_metadata_feed ::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest.new(parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_metadata_feed({ parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_metadata_feed(::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest.new(parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_metadata_feed_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::MetadataFeed.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_metadata_feed_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_metadata_feed({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_metadata_feed name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_metadata_feed ::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_metadata_feed({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_metadata_feed(::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_metadata_feed_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_metadata_feeds
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::ListMetadataFeedsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_metadata_feeds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_metadata_feeds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_metadata_feeds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_metadata_feeds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_metadata_feeds parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_metadata_feeds ::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_metadata_feeds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_metadata_feeds(::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_metadata_feeds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_metadata_feed_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_metadata_feed({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_metadata_feed name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_metadata_feed ::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_metadata_feed({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_metadata_feed(::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_metadata_feed_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    metadata_feed = {}
+    update_mask = {}
+    validate_only = true
+
+    update_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_metadata_feed_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_metadata_feed({ metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_metadata_feed metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_metadata_feed ::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest.new(metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_metadata_feed({ metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_metadata_feed(::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest.new(metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_metadata_feed_client_stub.call_count
       end
     end
   end
