@@ -18,6 +18,7 @@
 
 require "google/cloud/run/v2/builds"
 require "google/cloud/run/v2/executions"
+require "google/cloud/run/v2/instances"
 require "google/cloud/run/v2/jobs"
 require "google/cloud/run/v2/revisions"
 require "google/cloud/run/v2/services"
