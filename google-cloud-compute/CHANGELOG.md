@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.18.0 (2026-05-17)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20260422 ([#1193](https://github.com/googleapis/google-cloud-ruby/issues/1193)) ([#33963](https://github.com/googleapis/google-cloud-ruby/issues/33963)) 
+
 ### 1.17.0 (2026-05-06)
 
 #### Features
