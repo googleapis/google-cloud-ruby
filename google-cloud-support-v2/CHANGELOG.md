@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.0 (2026-05-17)
+
+#### Features
+
+* v2 version for `GetComment` and `GetAttachment` ([#33946](https://github.com/googleapis/google-cloud-ruby/issues/33946)) 
+
 ### 1.7.1 (2026-04-03)
 
 #### Documentation
