@@ -1,5 +1,11 @@
 # Release History
 
+### 0.55.0 (2026-05-17)
+
+#### Features
+
+* add confidential instance type and hyperdisk support to GKE API ([#33940](https://github.com/googleapis/google-cloud-ruby/issues/33940)) 
+
 ### 0.54.0 (2026-04-02)
 
 #### Features
