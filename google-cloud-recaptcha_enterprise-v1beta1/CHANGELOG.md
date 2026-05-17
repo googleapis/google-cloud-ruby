@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.1 (2026-05-17)
+
+#### Documentation
+
+* update SelectiveGapicGeneration usage doc ([#33480](https://github.com/googleapis/google-cloud-ruby/issues/33480)) 
+
 ### 0.20.0 (2026-03-19)
 
 #### Features
