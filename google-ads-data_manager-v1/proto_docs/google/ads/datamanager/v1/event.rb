@@ -30,8 +30,8 @@ module Google
         #     in the request.
         # @!attribute [rw] transaction_id
         #   @return [::String]
-        #     Optional. The unique identifier for this event. Required for conversions
-        #     using multiple data sources.
+        #     Optional. The unique identifier for this event. Required for events sent as
+        #     an additional data source for tag conversions.
         # @!attribute [rw] event_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Required. The time the event occurred.
@@ -97,6 +97,19 @@ module Google
         #     parameters](https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference/events)
         #     to be included within the event that were not already specified using other
         #     structured fields.
+        # @!attribute [rw] third_party_user_data
+        #   @return [::Google::Ads::DataManager::V1::UserData]
+        #     Optional. The same type of data provided in user_data, but explicitly
+        #     flagged as being provided as owned by a third-party and not first-party
+        #     advertiser data.
+        # @!attribute [rw] event_location
+        #   @return [::Google::Ads::DataManager::V1::EventLocation]
+        #     Optional. Information gathered about the location of the user when this
+        #     event occurred.
+        # @!attribute [rw] app_instance_id
+        #   @return [::String]
+        #     Optional. A unique identifier for the user instance of an app client for
+        #     this GA4 app stream.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -122,6 +135,10 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::DeviceInfo]
         #     Optional. Information gathered about the device being used (if any) at the
         #     time of landing onto the advertiser’s site after interacting with the ad.
+        # @!attribute [rw] mobile_device_id
+        #   @return [::String]
+        #     Optional. The mobile identifier for advertisers. This would be IDFA on iOS,
+        #     AdID on Android, or other platforms’ identifiers for advertisers.
         class AdIdentifiers
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -159,6 +176,31 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The location where the event occurred.
+        # @!attribute [rw] store_id
+        #   @return [::String]
+        #     Optional. Required for Store Sales. The identifier to represent a physical
+        #     store where the event happened.
+        # @!attribute [rw] city
+        #   @return [::String]
+        #     Optional. The name of the city where the event occurred.
+        # @!attribute [rw] subdivision_code
+        #   @return [::String]
+        #     Optional. The ISO 3166-2 subdivision code where the event occurred.
+        # @!attribute [rw] region_code
+        #   @return [::String]
+        #     Optional. The 2-letter CLDR region code of the user's address.
+        # @!attribute [rw] subcontinent_code
+        #   @return [::String]
+        #     Optional. The subcontinent code in UN M49 format where the event occurred.
+        # @!attribute [rw] continent_code
+        #   @return [::String]
+        #     Optional. The continent code in UN M49 format where the event occurred.
+        class EventLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The source of the event.
         module EventSource
           # Unspecified EventSource. Should never be used.
@@ -175,6 +217,9 @@ module Google
 
           # The event was generated from a phone call.
           PHONE = 4
+
+          # The event was generated from a message.
+          MESSAGE = 6
 
           # The event was generated from other sources.
           OTHER = 5

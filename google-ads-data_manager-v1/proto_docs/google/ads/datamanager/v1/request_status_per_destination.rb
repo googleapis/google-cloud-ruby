@@ -31,11 +31,23 @@ module Google
         # @!attribute [rw] error_info
         #   @return [::Google::Ads::DataManager::V1::ErrorInfo]
         #     An error info error containing the error reason and error counts related to
-        #     the upload.
+        #     the upload. Only populated if the
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination#request_status `request_status`}
+        #     is
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::FAILED `FAILED`}
+        #     or
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::PARTIAL_SUCCESS `PARTIAL_SUCCESS`}.
+        #     This field isn't populated while the request has
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination#request_status `request_status`}
+        #     of
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::PROCESSING `PROCESSING`}.
         # @!attribute [rw] warning_info
         #   @return [::Google::Ads::DataManager::V1::WarningInfo]
         #     A warning info containing the warning reason and warning counts related to
-        #     the upload.
+        #     the upload. This field isn't populated while the request has
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination#request_status `request_status`}
+        #     of
+        #     {::Google::Ads::DataManager::V1::RequestStatusPerDestination::RequestStatus::PROCESSING `PROCESSING`}.
         # @!attribute [rw] audience_members_ingestion_status
         #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestAudienceMembersStatus]
         #     The status of the ingest audience members request.
@@ -301,16 +313,28 @@ module Google
             # The request status is unknown.
             REQUEST_STATUS_UNKNOWN = 0
 
-            # The request succeeded.
+            # Processing succeeded for all records without any errors. However, there
+            # may be warnings in the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#warning_info `warning_info`}
+            # field.
             SUCCESS = 1
 
             # The request is processing.
             PROCESSING = 2
 
-            # The request failed.
+            # Processing failed for all records. Check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#error_info `error_info`}
+            # field for error details, and check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#warning_info `warning_info`}
+            # field for warning details.
             FAILED = 3
 
-            # The request partially succeeded.
+            # Processing completed successfully without errors for some records, but
+            # failed with errors for other records. Check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#error_info `error_info`}
+            # field for error details, and check the
+            # {::Google::Ads::DataManager::V1::RequestStatusPerDestination#warning_info `warning_info`}
+            # field for warning details.
             PARTIAL_SUCCESS = 4
           end
         end
