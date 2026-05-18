@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Compute
       module V1
-        VERSION = "3.6.0"
+        VERSION = "3.7.0"
       end
     end
   end
