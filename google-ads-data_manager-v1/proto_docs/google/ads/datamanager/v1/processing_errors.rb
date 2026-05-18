@@ -158,6 +158,9 @@ module Google
           # The user attempted to ingest events with an ad identifier that isn't
           # from the operating account's ads.
           PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER = 26
+
+          # One-per-click conversion actions cannot be used with BRAIDs.
+          PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID = 28
         end
 
         # The processing warning reason.
@@ -185,7 +188,7 @@ module Google
           # exist.
           PROCESSING_WARNING_REASON_INVALID_KEK = 6
 
-          # Failed to decrypt th
+          # Failed to decrypt the
           # {::Google::Ads::DataManager::V1::UserIdentifier UserIdentifier} data using the
           # DEK.
           PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 7

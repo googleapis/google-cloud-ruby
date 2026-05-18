@@ -26,7 +26,8 @@ module Google
           # Credentials for the PartnerLinkService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/datamanager"
+              "https://www.googleapis.com/auth/datamanager",
+              "https://www.googleapis.com/auth/datamanager.partnerlink"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

@@ -145,6 +145,12 @@ module Google
         #     Output only. Estimated number of members in this user list in the
         #     google.com domain. These are the members available for targeting in Search
         #     campaigns.
+        # @!attribute [r] youtube_members_count
+        #   @return [::Integer]
+        #     Output only. Estimated number of members in this user list on YouTube.
+        # @!attribute [r] gmail_members_count
+        #   @return [::Integer]
+        #     Output only. Estimated number of members in this user list on Gmail.
         class SizeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

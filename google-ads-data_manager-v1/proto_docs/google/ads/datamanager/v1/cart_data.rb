@@ -39,6 +39,13 @@ module Google
         # @!attribute [rw] items
         #   @return [::Array<::Google::Ads::DataManager::V1::Item>]
         #     Optional. The list of items associated with the event.
+        # @!attribute [rw] coupon_codes
+        #   @return [::Array<::String>]
+        #     Optional. The list of coupon codes that were applied to the cart.
+        #     Cart-level and item-level coupon codes are independent.
+        #
+        #     If the event is for a Google Analytics destination, only provide a single
+        #     coupon code. Google Analytics ignores additional coupon codes.
         class CartData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -64,7 +71,52 @@ module Google
         #     item](https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference/events)
         #     to be included within the event that were not already specified using other
         #     structured fields.
+        # @!attribute [rw] merchant_id
+        #   @return [::String]
+        #     Optional. The Merchant Center ID associated with the item. For Store Sales
+        #     events this will override the value set at the cart level.  This field is
+        #     ignored for other events.
+        # @!attribute [rw] merchant_feed_label
+        #   @return [::String]
+        #     Optional. The feed label of the Merchant Center feed. If countries are
+        #     still being used, the 2-letter country code in ISO-3166-1 alpha-2 can be
+        #     used instead. For Store Sales events this will override the value set at
+        #     the cart level. This field is ignored for other events.
+        # @!attribute [rw] merchant_feed_language_code
+        #   @return [::String]
+        #     Optional. The language code in ISO 639-1 associated with the Merchant
+        #     Center feed where your items are uploaded.
+        # @!attribute [rw] conversion_value
+        #   @return [::Float]
+        #     Optional. The conversion value associated with this item within the event,
+        #     for cases where the conversion value is different for each item.
+        # @!attribute [rw] custom_variables
+        #   @return [::Array<::Google::Ads::DataManager::V1::ItemCustomVariable>]
+        #     Optional. Additional key/value pair information to send to the conversion
+        #     containers (conversion action or Floodlight activity), when tracking
+        #     per-item
+        #      conversions.
         class Item
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Item-level custom variable for ads conversions.
+        # @!attribute [rw] variable
+        #   @return [::String]
+        #     Optional. The name of the custom variable to set. If the variable is not
+        #     found for the given destination, it will be ignored.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Optional. The value to store for the custom variable.
+        # @!attribute [rw] destination_references
+        #   @return [::Array<::String>]
+        #     Optional. Reference string used to determine which of the
+        #     {::Google::Ads::DataManager::V1::Event#destination_references Event.destination_references}
+        #     the custom variable should be sent to. If empty, the
+        #     {::Google::Ads::DataManager::V1::Event#destination_references Event.destination_references}
+        #     will be used.
+        class ItemCustomVariable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
