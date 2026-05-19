@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2026-05-19)
+
+#### Features
+
+* add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics ([#33971](https://github.com/googleapis/google-cloud-ruby/issues/33971)) 
+
 ### 0.3.0 (2026-05-06)
 
 ### ⚠ BREAKING CHANGES
