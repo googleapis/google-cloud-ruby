@@ -732,6 +732,143 @@ module Google
             end
 
             ##
+            # AggregateQueryStats provides database resource query execution statistics.
+            #
+            # @overload aggregate_query_stats(request, options = nil)
+            #   Pass arguments to `aggregate_query_stats` via a request object, either of type
+            #   {::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload aggregate_query_stats(parent: nil, order_by: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `aggregate_query_stats` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent can be a project, a folder, or an organization. The search
+            #     is limited to the resources within the `parent`.
+            #
+            #     The allowed values are:
+            #
+            #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+            #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+            #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+            #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+            #   @param order_by [::String]
+            #     Optional. The expression to order the results by.
+            #     Example: `order_by="execution_count"`
+            #     Example: `order_by="execution_count desc"`
+            #     Supported order by fields are `execution_count`, `rows_processed`,
+            #     `total_cpu_time`, `avg_cpu_time`.
+            #   @param filter [::String]
+            #     Optional. The expression to filter resources.
+            #
+            #     Supported fields are: `full_resource_name`, `resource_type`, `container`,
+            #       `product.type`, `product.engine`, `product.version`, `location`,
+            #       `labels`, `issues`, fields of availability_info,
+            #       data_protection_info,'resource_name', etc.
+            #
+            #     The expression is a list of zero or more restrictions combined via logical
+            #     operators `AND` and `OR`. When `AND` and `OR` are both used in the
+            #     expression, parentheses must be appropriately used to group the
+            #     combinations.
+            #
+            #     Example: `location="us-east1"`
+            #     Example: `container="projects/123" OR container="projects/456"`
+            #     Example: `(container="projects/123" OR
+            #               container="projects/456") AND location="us-east1"`
+            #     Additional specific fields for query stats are: `metric_window`,
+            #     `query_hash`, `normalized_query`.
+            #     Example: `metric_window="LAST_ONE_DAY"`
+            #     (Possible values  for `metric_window` are: `LAST_ONE_DAY`,
+            #     `LAST_ONE_WEEK`, `LAST_TWO_WEEKS`)
+            #     Example: `query_hash="12345678"`
+            #     Example: `normalized_query="SELECT * FROM table"`
+            #   @param page_size [::Integer]
+            #     Optional. If unspecified, at most 100 query stats will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous
+            #     `AggregateQueryStatsRequest` call. Provide this to retrieve the subsequent
+            #     page. All parameters except page_token should match the parameters in the
+            #     call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DatabaseCenter::V1beta::QueryStatsInfo>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::DatabaseCenter::V1beta::QueryStatsInfo>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/database_center/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new
+            #
+            #   # Call the aggregate_query_stats method.
+            #   result = client.aggregate_query_stats request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DatabaseCenter::V1beta::QueryStatsInfo.
+            #     p item
+            #   end
+            #
+            def aggregate_query_stats request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.aggregate_query_stats.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DatabaseCenter::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.aggregate_query_stats.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.aggregate_query_stats.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @database_center_stub.call_rpc :aggregate_query_stats, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @database_center_stub, :aggregate_query_stats, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # QueryIssues provides a list of issues and recommendations
             # that a user has access to and that are within the requested scope.
             #
@@ -1057,6 +1194,11 @@ module Google
                 #
                 attr_reader :aggregate_issue_stats
                 ##
+                # RPC-specific configuration for `aggregate_query_stats`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :aggregate_query_stats
+                ##
                 # RPC-specific configuration for `query_issues`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1072,6 +1214,8 @@ module Google
                   @query_database_resource_groups = ::Gapic::Config::Method.new query_database_resource_groups_config
                   aggregate_issue_stats_config = parent_rpcs.aggregate_issue_stats if parent_rpcs.respond_to? :aggregate_issue_stats
                   @aggregate_issue_stats = ::Gapic::Config::Method.new aggregate_issue_stats_config
+                  aggregate_query_stats_config = parent_rpcs.aggregate_query_stats if parent_rpcs.respond_to? :aggregate_query_stats
+                  @aggregate_query_stats = ::Gapic::Config::Method.new aggregate_query_stats_config
                   query_issues_config = parent_rpcs.query_issues if parent_rpcs.respond_to? :query_issues
                   @query_issues = ::Gapic::Config::Method.new query_issues_config
 

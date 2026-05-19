@@ -357,6 +357,85 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AggregateQueryStatsRequest represents the input to the AggregateQueryStats
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent can be a project, a folder, or an organization. The search
+        #     is limited to the resources within the `parent`.
+        #
+        #     The allowed values are:
+        #
+        #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+        #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+        #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+        #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The expression to order the results by.
+        #     Example: `order_by="execution_count"`
+        #     Example: `order_by="execution_count desc"`
+        #     Supported order by fields are `execution_count`, `rows_processed`,
+        #     `total_cpu_time`, `avg_cpu_time`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The expression to filter resources.
+        #
+        #     Supported fields are: `full_resource_name`, `resource_type`, `container`,
+        #       `product.type`, `product.engine`, `product.version`, `location`,
+        #       `labels`, `issues`, fields of availability_info,
+        #       data_protection_info,'resource_name', etc.
+        #
+        #     The expression is a list of zero or more restrictions combined via logical
+        #     operators `AND` and `OR`. When `AND` and `OR` are both used in the
+        #     expression, parentheses must be appropriately used to group the
+        #     combinations.
+        #
+        #     Example: `location="us-east1"`
+        #     Example: `container="projects/123" OR container="projects/456"`
+        #     Example: `(container="projects/123" OR
+        #               container="projects/456") AND location="us-east1"`
+        #     Additional specific fields for query stats are: `metric_window`,
+        #     `query_hash`, `normalized_query`.
+        #     Example: `metric_window="LAST_ONE_DAY"`
+        #     (Possible values  for `metric_window` are: `LAST_ONE_DAY`,
+        #     `LAST_ONE_WEEK`, `LAST_TWO_WEEKS`)
+        #     Example: `query_hash="12345678"`
+        #     Example: `normalized_query="SELECT * FROM table"`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. If unspecified, at most 100 query stats will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `AggregateQueryStatsRequest` call. Provide this to retrieve the subsequent
+        #     page. All parameters except page_token should match the parameters in the
+        #     call that provided the page token.
+        class AggregateQueryStatsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message containing relevant query stats
+        # for database resources.
+        # @!attribute [rw] query_stats
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::QueryStatsInfo>]
+        #     List of query stats where each group contains stats for resources having a
+        #     particular combination of relevant query stats.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. List of unreachable regions from where data could not be
+        #     retrieved.
+        class AggregateQueryStatsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The response message containing one of more group of relevant health issues
         # for database resources.
         # @!attribute [rw] issue_group_stats
@@ -532,6 +611,105 @@ module Google
         class AggregateFleetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryStatsInfo contains the aggregated and detailed query stats for a
+        # particular combination of relevant query stats for queries having same
+        # normalized query.
+        # @!attribute [rw] aggregated_query_stats
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::QueryStats]
+        #     Aggregated query stats for the resources for same normalized query.
+        # @!attribute [rw] query_stats
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::QueryStats>]
+        #     List of query stats for the resources in the group.
+        #     This stats is stats at resource level for the resources having same
+        #     normalized query.
+        class QueryStatsInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ResourceId contains the identifier for a database resource,
+        # including the full resource name, resource type, and product.
+        # @!attribute [rw] full_resource_name
+        #   @return [::String]
+        #     The full resource name of the resource.
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     The type of the resource.
+        #     sqladmin.googleapis.com/Instance
+        #     alloydb.googleapis.com/Cluster
+        #     alloydb.googleapis.com/Instance
+        # @!attribute [rw] product
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::Product]
+        #     The product of the resource, including the type, engine, and version.
+        class ResourceId
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryStats contains the stats for a particular combination of query_hash,
+        # query_string and resource_type.
+        # @!attribute [rw] query_hash
+        #   @return [::String]
+        #     The query hash of the query.
+        # @!attribute [rw] normalized_query
+        #   @return [::String]
+        #     The query string is normalized query without any PII data.
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     The type of the resource.
+        #     sqladmin.googleapis.com/Instance
+        #     alloydb.googleapis.com/Cluster
+        #     alloydb.googleapis.com/Instance
+        # @!attribute [rw] resource_ids
+        #   @return [::Array<::Google::Cloud::DatabaseCenter::V1beta::ResourceId>]
+        #     The resource ids for which the query stats are collected.
+        # @!attribute [rw] query_metrics
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::QueryMetrics]
+        #     Metrics related to the query performance.
+        # @!attribute [rw] inefficient_query_info
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::InefficientQueryInfo]
+        #     Information about inefficient query.
+        class QueryStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryMetrics contains the metrics related to the query execution.
+        # @!attribute [rw] execution_count
+        #   @return [::Integer]
+        #     The number of times the query was executed.
+        # @!attribute [rw] avg_cpu_time
+        #   @return [::Google::Protobuf::Duration]
+        #     The average execution period of the query across all runs.
+        # @!attribute [rw] total_cpu_time
+        #   @return [::Google::Protobuf::Duration]
+        #     The total CPU time consumed by the query across all runs.
+        # @!attribute [rw] rows_processed
+        #   @return [::Integer]
+        #     The average number of rows processed by the query across all runs.
+        # @!attribute [rw] metrics_window
+        #   @return [::Google::Cloud::DatabaseCenter::V1beta::QueryMetrics::MetricsWindow]
+        #     The window over which the metrics are aggregated.
+        class QueryMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum to represent the window over which the metrics are aggregated.
+          module MetricsWindow
+            # Unspecified. Default value.
+            METRICS_WINDOW_UNSPECIFIED = 0
+
+            # Metrics are aggregated over the last 1 day.
+            LAST_ONE_DAY = 1
+
+            # Metrics are aggregated over the last 7 days.
+            LAST_ONE_WEEK = 2
+
+            # Metrics are aggregated over the last 14 days.
+            LAST_TWO_WEEKS = 3
+          end
         end
 
         # The response message to aggregate a fleet by some group by

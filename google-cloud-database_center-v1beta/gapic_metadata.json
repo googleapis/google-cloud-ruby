@@ -30,6 +30,11 @@
                 "aggregate_issue_stats"
               ]
             },
+            "AggregateQueryStats": {
+              "methods": [
+                "aggregate_query_stats"
+              ]
+            },
             "QueryIssues": {
               "methods": [
                 "query_issues"
