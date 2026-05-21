@@ -44,9 +44,57 @@ module Google
           #     lineage_from_sql_scripts, etc. If not specified, a default set of
           #     targets will be generated. Some additional target types may be slower to
           #     generate. See the documentation for the set of available target types.
+          # @!attribute [rw] suggestion_config
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::SuggestionConfig]
+          #     The configuration for the suggestion if requested as a target type.
           class TranslationDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The configuration for the suggestion if requested as a target type.
+          # @!attribute [rw] skip_suggestion_steps
+          #   @return [::Array<::Google::Cloud::Bigquery::Migration::V2::SuggestionStep>]
+          #     The list of suggestion steps to skip.
+          class SuggestionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Suggestion step to skip.
+          # @!attribute [rw] suggestion_type
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::SuggestionStep::SuggestionType]
+          #     The type of suggestion.
+          # @!attribute [rw] rewrite_target
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::SuggestionStep::RewriteTarget]
+          #     The rewrite target.
+          class SuggestionStep
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Suggestion type.
+            module SuggestionType
+              # Suggestion type unspecified.
+              SUGGESTION_TYPE_UNSPECIFIED = 0
+
+              # Query customization.
+              QUERY_CUSTOMIZATION = 1
+
+              # Translation explanation.
+              TRANSLATION_EXPLANATION = 2
+            end
+
+            # The target to apply the suggestion to.
+            module RewriteTarget
+              # Rewrite target unspecified.
+              REWRITE_TARGET_UNSPECIFIED = 0
+
+              # Source SQL.
+              SOURCE_SQL = 1
+
+              # Target SQL.
+              TARGET_SQL = 2
+            end
           end
 
           # Represents one mapping from a source SQL to a target SQL.
@@ -66,12 +114,17 @@ module Google
           #   @return [::String]
           #     The base URI for all files to be read in as sources for translation.
           #
-          #     Note: The following fields are mutually exclusive: `base_uri`, `literal`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `base_uri`, `literal`, `gcs_file_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] literal
           #   @return [::Google::Cloud::Bigquery::Migration::V2::Literal]
           #     Source literal.
           #
-          #     Note: The following fields are mutually exclusive: `literal`, `base_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `literal`, `base_uri`, `gcs_file_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] gcs_file_path
+          #   @return [::String]
+          #     The path to a single source file in Cloud Storage.
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_file_path`, `base_uri`, `literal`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] encoding
           #   @return [::String]
           #     Optional. The optional field to specify the encoding of the sql bytes.
