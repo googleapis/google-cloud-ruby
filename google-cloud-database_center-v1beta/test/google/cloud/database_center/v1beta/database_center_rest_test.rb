@@ -311,6 +311,64 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     end
   end
 
+  def test_aggregate_query_stats
+    # Create test objects.
+    client_result = ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    aggregate_query_stats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_aggregate_query_stats_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, aggregate_query_stats_client_stub do
+        # Create client
+        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.aggregate_query_stats parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.aggregate_query_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.aggregate_query_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, aggregate_query_stats_client_stub.call_count
+      end
+    end
+  end
+
   def test_query_issues
     # Create test objects.
     client_result = ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesResponse.new

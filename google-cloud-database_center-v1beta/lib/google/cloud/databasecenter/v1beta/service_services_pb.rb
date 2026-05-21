@@ -43,6 +43,8 @@ module Google
             rpc :QueryDatabaseResourceGroups, ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest, ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsResponse
             # AggregateIssueStats provides database resource issues statistics.
             rpc :AggregateIssueStats, ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest, ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsResponse
+            # AggregateQueryStats provides database resource query execution statistics.
+            rpc :AggregateQueryStats, ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest, ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsResponse
             # QueryIssues provides a list of issues and recommendations
             # that a user has access to and that are within the requested scope.
             rpc :QueryIssues, ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest, ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesResponse
