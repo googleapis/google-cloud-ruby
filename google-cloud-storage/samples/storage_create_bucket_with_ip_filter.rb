@@ -20,16 +20,33 @@ def create_bucket_with_ip_filter bucket_name:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
+  binding.pry
 
-  ip_filter = Google::Apis::StorageV1::Bucket::IpFilter.new(
-    mode: "Enabled",
-    public_network_source: Google::Apis::StorageV1::Bucket::IpFilter::PublicNetworkSource.new(
+  # ip_filter = Google::Apis::StorageV1::Bucket::IpFilter.new(
+  #   mode: "Enabled",
+  #   public_network_source: Google::Apis::StorageV1::Bucket::IpFilter::PublicNetworkSource.new(
+  #   allowed_ip_cidr_ranges: [
+  #     "0.0.0.0/0", "::/0"
+  #   ],
+  #   vpc_network_sources: [
+  #     {}
+  #       network: "projects/storage-sdk-vendor/global/networks/default",
+  #       allowed_ip_cidr_ranges: [
+  #         "10.0.0.0/8"
+  #       ]
+  #     }
+  #   ]
+  # ),
+  #  allow_all_service_agent_access: true
+  # )
+  ip_filter = {
+  mode: "Disabled",
+  public_network_source: {
     allowed_ip_cidr_ranges: [
       "0.0.0.0/0", "::/0"
     ]
-  ),
-   allow_all_service_agent_access: false
-  )
+  }
+}
 
   bucket = storage.create_bucket bucket_name do |b|
     b.ip_filter = ip_filter
@@ -68,14 +85,11 @@ def update_bucket_with_ip_filter bucket_name:
   storage = Google::Cloud::Storage.new
 
   ip_filter = Google::Apis::StorageV1::Bucket::IpFilter.new(
-    mode: "Enabled",
     public_network_source: Google::Apis::StorageV1::Bucket::IpFilter::PublicNetworkSource.new(
     allowed_ip_cidr_ranges: [
-      "0.0.0.0/0", "::/0"
+      "0.0.0.3/0", "::/0"
     ]
-  ),
-   allow_all_service_agent_access: false
-  )
+  ))
   
 # require "google/cloud/resource_manager"
 

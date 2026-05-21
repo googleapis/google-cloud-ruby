@@ -178,18 +178,20 @@ describe "Buckets Snippets" do
     end
 
     after :all do
-    binding.pry
-      # delete_bucket_helper @bucket_name
+      # removes_bucket_ip_filter bucket_name: @bucket_name
+          binding.pry
+
+      delete_bucket_helper @bucket_name
     end
 
-    # it "creates IP filter enabled bucket" do
-    #   expected = "Created bucket #{@bucket_name} with IP filter enabled.\n"
-    #   retry_resource_exhaustion do
-    #     assert_output expected do
-    #       create_bucket_with_ip_filter bucket_name: @bucket_name
-    #     end
-    #   end
-    # end
+    it "creates IP filter enabled bucket" do
+      expected = "Created bucket #{@bucket_name} with IP filter enabled.\n"
+      retry_resource_exhaustion do
+        assert_output expected do
+          create_bucket_with_ip_filter bucket_name: @bucket_name
+        end
+      end
+    end
 
     # it "removes IP filter of an existing bucket" do
     #   expected = "Updated IP filter for bucket #{@bucket_name}.\n"
