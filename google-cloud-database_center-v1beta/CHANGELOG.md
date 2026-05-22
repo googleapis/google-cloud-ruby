@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-05-22)
+
+#### Features
+
+* add a AggregateQueryStats  API ([#33973](https://github.com/googleapis/google-cloud-ruby/issues/33973)) 
+
 ### 0.6.0 (2026-04-15)
 
 #### Features
