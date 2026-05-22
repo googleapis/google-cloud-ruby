@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.21.0 (2026-05-22)
+
+#### Features
+
+* add support for assessment tasks in BigQuery Migration API ([#33975](https://github.com/googleapis/google-cloud-ruby/issues/33975)) 
+
 ### 0.20.0 (2026-04-03)
 
 #### Features
