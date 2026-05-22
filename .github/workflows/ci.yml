@@ -43,7 +43,8 @@ jobs:
             task: "--test"
           - os: ubuntu-latest
             ruby: "4.0"
-            task: "--rubocop-toplevel --rubocop --build --yard --linkinator"
+            # (b/515549177): Disabled linkinator globally due to broken external doc links.
+            task: "--rubocop-toplevel --rubocop --build --yard"
           - os: macos-latest
             ruby: "4.0"
             task: "--test"
