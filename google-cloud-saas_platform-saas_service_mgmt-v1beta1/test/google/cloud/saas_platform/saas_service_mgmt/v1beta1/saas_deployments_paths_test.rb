@@ -41,6 +41,45 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
     end
   end
 
+  def test_application_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.application_path project: "value0", location: "value1", application: "value2"
+      assert_equal "projects/value0/locations/value1/applications/value2", path
+    end
+  end
+
+  def test_application_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.application_template_path project: "value0", location: "value1", space: "value2", application_template: "value3"
+      assert_equal "projects/value0/locations/value1/spaces/value2/applicationTemplates/value3", path
+
+      path = client.application_template_path project: "value0", location: "value1", workspace: "value2", application_template: "value3"
+      assert_equal "projects/value0/locations/value1/workspaces/value2/applicationTemplates/value3", path
+    end
+  end
+
+  def test_application_template_revision_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.application_template_revision_path project: "value0", location: "value1", space: "value2", application_template: "value3", revision: "value4"
+      assert_equal "projects/value0/locations/value1/spaces/value2/applicationTemplates/value3/revisions/value4", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
