@@ -95,6 +95,9 @@ module Google
         #        }
         #      }
         #      ```
+        # @!attribute [rw] access_approval_config
+        #   @return [::Google::Cloud::Dataplex::V1::DataProduct::AccessApprovalConfig]
+        #     Optional. Configuration for access approval for the data product.
         class DataProduct
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -105,6 +108,10 @@ module Google
           #   @return [::String]
           #     Optional. Email of the Google Group, as per
           #     https://cloud.google.com/iam/docs/principals-overview#google-group.
+          # @!attribute [rw] service_account
+          #   @return [::String]
+          #     Optional. Specifies the email of the producer service account, as per
+          #     https://cloud.google.com/iam/docs/principals-overview#service-account.
           class Principal
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -128,6 +135,17 @@ module Google
           #   @return [::Google::Cloud::Dataplex::V1::DataProduct::Principal]
           #     Required. The principal entity associated with this access group.
           class AccessGroup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for access approval for the data product.
+          # @!attribute [rw] approver_emails
+          #   @return [::Array<::String>]
+          #     Optional. Specifies the email addresses of users who are potential
+          #     approvers and are notified when an access request is made for the data
+          #     product. The maximum number of emails allowed is 10.
+          class AccessApprovalConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -384,6 +402,35 @@ module Google
         #     Optional. Validates the request without actually updating the data product.
         #     Default: false.
         class UpdateDataProductRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for requesting access to a Data Product.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the data product.
+        #     Format:
+        #     projects/\\{project_number}/locations/\\{location_id}/dataProducts/\\{data_product_id}
+        # @!attribute [rw] change_request
+        #   @return [::Google::Cloud::Dataplex::V1::ChangeRequest]
+        #     Required. The change request for the data product access request.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Validates the request without actually creating the access change
+        #     request. Defaults to false.
+        class RequestDataProductAccessRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for requesting access to a Data Product.
+        # @!attribute [rw] change_request_name
+        #   @return [::String]
+        #     The resource name of the created ChangeRequest.
+        #     Format:
+        #     projects/\\{project_number}/locations/\\{location_id}/changeRequests/\\{change_request_id}
+        class RequestDataProductAccessResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

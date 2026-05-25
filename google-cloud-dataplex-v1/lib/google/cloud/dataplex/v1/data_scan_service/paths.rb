@@ -124,6 +124,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Entry resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param entry_group [String]
+            # @param entry [String]
+            #
+            # @return [::String]
+            def entry_path project:, location:, entry_group:, entry:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entries/#{entry}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

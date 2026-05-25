@@ -343,6 +343,11 @@
                 "lookup_entry"
               ]
             },
+            "ModifyEntry": {
+              "methods": [
+                "modify_entry"
+              ]
+            },
             "SearchEntries": {
               "methods": [
                 "search_entries"
@@ -497,6 +502,11 @@
             "UpdateDataProduct": {
               "methods": [
                 "update_data_product"
+              ]
+            },
+            "RequestDataProductAccess": {
+              "methods": [
+                "request_data_product_access"
               ]
             },
             "CreateDataAsset": {
@@ -655,6 +665,11 @@
             "ListDataScanJobs": {
               "methods": [
                 "list_data_scan_jobs"
+              ]
+            },
+            "CancelDataScanJob": {
+              "methods": [
+                "cancel_data_scan_job"
               ]
             },
             "GenerateDataQualityRules": {

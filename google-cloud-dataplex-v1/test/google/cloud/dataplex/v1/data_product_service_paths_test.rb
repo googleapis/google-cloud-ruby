@@ -41,6 +41,18 @@ class ::Google::Cloud::Dataplex::V1::DataProductService::ClientPathsTest < Minit
     end
   end
 
+  def test_change_request_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.change_request_path project: "value0", location: "value1", change_request: "value2"
+      assert_equal "projects/value0/locations/value1/changeRequests/value2", path
+    end
+  end
+
   def test_data_asset_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -62,6 +74,78 @@ class ::Google::Cloud::Dataplex::V1::DataProductService::ClientPathsTest < Minit
 
       path = client.data_product_path project: "value0", location: "value1", data_product: "value2"
       assert_equal "projects/value0/locations/value1/dataProducts/value2", path
+    end
+  end
+
+  def test_entry_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.entry_path project: "value0", location: "value1", entry_group: "value2", entry: "value3"
+      assert_equal "projects/value0/locations/value1/entryGroups/value2/entries/value3", path
+    end
+  end
+
+  def test_entry_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.entry_group_path project: "value0", location: "value1", entry_group: "value2"
+      assert_equal "projects/value0/locations/value1/entryGroups/value2", path
+    end
+  end
+
+  def test_entry_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.entry_link_path project: "value0", location: "value1", entry_group: "value2", entry_link: "value3"
+      assert_equal "projects/value0/locations/value1/entryGroups/value2/entryLinks/value3", path
+    end
+  end
+
+  def test_glossary_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.glossary_path project: "value0", location: "value1", glossary: "value2"
+      assert_equal "projects/value0/locations/value1/glossaries/value2", path
+    end
+  end
+
+  def test_glossary_category_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.glossary_category_path project: "value0", location: "value1", glossary: "value2", glossary_category: "value3"
+      assert_equal "projects/value0/locations/value1/glossaries/value2/categories/value3", path
+    end
+  end
+
+  def test_glossary_term_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.glossary_term_path project: "value0", location: "value1", glossary: "value2", glossary_term: "value3"
+      assert_equal "projects/value0/locations/value1/glossaries/value2/terms/value3", path
     end
   end
 

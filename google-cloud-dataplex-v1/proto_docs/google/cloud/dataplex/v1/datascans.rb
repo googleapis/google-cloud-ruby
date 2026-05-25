@@ -33,7 +33,8 @@ module Google
         #     Required. DataScan resource.
         # @!attribute [rw] data_scan_id
         #   @return [::String]
-        #     Required. DataScan identifier.
+        #     Optional. DataScan identifier. If not provided, a unique ID will be
+        #     generated with the prefix "data-scan-".
         #
         #     * Must contain only lowercase letters, numbers and hyphens.
         #     * Must start with a letter.
@@ -263,6 +264,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for the `CancelDataScanJob` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the DataScanJob:
+        #     `projects/{project_id_or_number}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
+        #     where `project_id_or_number` refers to a *project_id* or *project_number*
+        #     and `location_id` refers to a Google Cloud region.
+        class CancelDataScanJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for the `CancelDataScanJob` method.
+        class CancelDataScanJobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request details for generating data quality rule recommendations.
         # @!attribute [rw] name
         #   @return [::String]
@@ -303,10 +322,11 @@ module Google
         # * Data discovery: scans data in Cloud Storage buckets to extract and then
         #   catalog metadata. For more information, see [Discover and catalog Cloud
         #   Storage data](https://cloud.google.com/bigquery/docs/automatic-discovery).
-        # * Data documentation: analyzes the table details and generates insights
-        # including descriptions and sample SQL queries for the table. For more
-        # information, see [Generate data insights in
-        # BigQuery](https://cloud.google.com/bigquery/docs/data-insights).
+        # * Data documentation: analyzes the table or dataset metadata and generates
+        #   insights. For tables, insights include descriptions and sample SQL
+        #   queries. For datasets, insights include descriptions, schema relationships
+        #   and sample SQL queries. For more information, see [Generate data insights
+        #   in BigQuery](https://cloud.google.com/bigquery/docs/data-insights).
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Identifier. The relative resource name of the scan, of the
@@ -393,6 +413,10 @@ module Google
         #     Output only. The result of a data documentation scan.
         #
         #     Note: The following fields are mutually exclusive: `data_documentation_result`, `data_quality_result`, `data_profile_result`, `data_discovery_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] execution_identity
+        #   @return [::Google::Cloud::Dataplex::V1::ExecutionIdentity]
+        #     Optional. Immutable. The identity to run the datascan.
+        #     If not specified, defaults to the Dataplex Service Agent.
         class DataScan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -440,6 +464,53 @@ module Google
           end
         end
 
+        # The identity to run the datascan.
+        # @!attribute [rw] dataplex_service_agent
+        #   @return [::Google::Cloud::Dataplex::V1::ExecutionIdentity::DataplexServiceAgent]
+        #     Optional. The Dataplex service agent associated with the user's project.
+        #
+        #     Note: The following fields are mutually exclusive: `dataplex_service_agent`, `user_credential`, `service_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] user_credential
+        #   @return [::Google::Cloud::Dataplex::V1::ExecutionIdentity::UserCredential]
+        #     Optional. The credential of the calling user. Supports only ONE_TIME
+        #     trigger type.
+        #
+        #     Note: The following fields are mutually exclusive: `user_credential`, `dataplex_service_agent`, `service_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] service_account
+        #   @return [::Google::Cloud::Dataplex::V1::ExecutionIdentity::ServiceAccount]
+        #     Optional. The provided service account.
+        #
+        #     Note: The following fields are mutually exclusive: `service_account`, `dataplex_service_agent`, `user_credential`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ExecutionIdentity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Dataplex service agent associated with the user's project.
+          class DataplexServiceAgent
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The credential of the calling user.
+          class UserCredential
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The service account
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     Required. Service account email. The datascan will execute with this
+          #     service account's credentials. The user calling this API must have
+          #     permissions to act as this service account. Dataplex service agent must
+          #     be granted iam.serviceAccounts.getAccessToken permission on this service
+          #     account, for example, through the iam.serviceAccountTokenCreator role .
+          class ServiceAccount
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # A DataScanJob represents an instance of DataScan execution.
         # @!attribute [r] name
         #   @return [::String]
@@ -454,6 +525,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the DataScanJob was created.
+        # @!attribute [r] partial_failure_message
+        #   @return [::String]
+        #     Output only. A message indicating partial failure details.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the DataScanJob was started.
@@ -535,6 +609,9 @@ module Google
 
             # The DataScanJob has been created but not started to run yet.
             PENDING = 7
+
+            # The DataScanJob succeeded with errors.
+            SUCCEEDED_WITH_ERRORS = 8
           end
         end
 

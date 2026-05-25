@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the DataProductService API.
           module Paths
             ##
+            # Create a fully-qualified ChangeRequest resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/changeRequests/{change_request}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param change_request [String]
+            #
+            # @return [::String]
+            def change_request_path project:, location:, change_request:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/changeRequests/#{change_request}"
+            end
+
+            ##
             # Create a fully-qualified DataAsset resource string.
             #
             # The resource will be in the following format:
@@ -62,6 +81,128 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/dataProducts/#{data_product}"
+            end
+
+            ##
+            # Create a fully-qualified Entry resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param entry_group [String]
+            # @param entry [String]
+            #
+            # @return [::String]
+            def entry_path project:, location:, entry_group:, entry:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entries/#{entry}"
+            end
+
+            ##
+            # Create a fully-qualified EntryGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/entryGroups/{entry_group}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param entry_group [String]
+            #
+            # @return [::String]
+            def entry_group_path project:, location:, entry_group:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}"
+            end
+
+            ##
+            # Create a fully-qualified EntryLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param entry_group [String]
+            # @param entry_link [String]
+            #
+            # @return [::String]
+            def entry_link_path project:, location:, entry_group:, entry_link:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entryLinks/#{entry_link}"
+            end
+
+            ##
+            # Create a fully-qualified Glossary resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/glossaries/{glossary}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param glossary [String]
+            #
+            # @return [::String]
+            def glossary_path project:, location:, glossary:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/glossaries/#{glossary}"
+            end
+
+            ##
+            # Create a fully-qualified GlossaryCategory resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param glossary [String]
+            # @param glossary_category [String]
+            #
+            # @return [::String]
+            def glossary_category_path project:, location:, glossary:, glossary_category:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "glossary cannot contain /" if glossary.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/glossaries/#{glossary}/categories/#{glossary_category}"
+            end
+
+            ##
+            # Create a fully-qualified GlossaryTerm resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param glossary [String]
+            # @param glossary_term [String]
+            #
+            # @return [::String]
+            def glossary_term_path project:, location:, glossary:, glossary_term:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "glossary cannot contain /" if glossary.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/glossaries/#{glossary}/terms/#{glossary_term}"
             end
 
             ##

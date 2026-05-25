@@ -717,6 +717,93 @@ module Google
               end
 
               ##
+              # Requests access to a data product. This will trigger an access approval
+              # workflow, and the requester will need to wait for the approval to be
+              # granted before they will be able to access the data product assets.
+              #
+              # @overload request_data_product_access(request, options = nil)
+              #   Pass arguments to `request_data_product_access` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload request_data_product_access(parent: nil, change_request: nil, validate_only: nil)
+              #   Pass arguments to `request_data_product_access` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the data product.
+              #     Format:
+              #     projects/\\{project_number}/locations/\\{location_id}/dataProducts/\\{data_product_id}
+              #   @param change_request [::Google::Cloud::Dataplex::V1::ChangeRequest, ::Hash]
+              #     Required. The change request for the data product access request.
+              #   @param validate_only [::Boolean]
+              #     Optional. Validates the request without actually creating the access change
+              #     request. Defaults to false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::RequestDataProductAccessResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::RequestDataProductAccessResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::DataProductService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest.new
+              #
+              #   # Call the request_data_product_access method.
+              #   result = client.request_data_product_access request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::RequestDataProductAccessResponse.
+              #   p result
+              #
+              def request_data_product_access request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.request_data_product_access.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.request_data_product_access.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.request_data_product_access.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @data_product_service_stub.request_data_product_access request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates a data asset.
               #
               # @overload create_data_asset(request, options = nil)
@@ -1376,6 +1463,11 @@ module Google
                   #
                   attr_reader :update_data_product
                   ##
+                  # RPC-specific configuration for `request_data_product_access`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :request_data_product_access
+                  ##
                   # RPC-specific configuration for `create_data_asset`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1413,6 +1505,8 @@ module Google
                     @list_data_products = ::Gapic::Config::Method.new list_data_products_config
                     update_data_product_config = parent_rpcs.update_data_product if parent_rpcs.respond_to? :update_data_product
                     @update_data_product = ::Gapic::Config::Method.new update_data_product_config
+                    request_data_product_access_config = parent_rpcs.request_data_product_access if parent_rpcs.respond_to? :request_data_product_access
+                    @request_data_product_access = ::Gapic::Config::Method.new request_data_product_access_config
                     create_data_asset_config = parent_rpcs.create_data_asset if parent_rpcs.respond_to? :create_data_asset
                     @create_data_asset = ::Gapic::Config::Method.new create_data_asset_config
                     update_data_asset_config = parent_rpcs.update_data_asset if parent_rpcs.respond_to? :update_data_asset

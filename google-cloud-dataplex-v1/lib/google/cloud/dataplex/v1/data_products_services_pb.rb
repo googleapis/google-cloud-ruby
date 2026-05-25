@@ -45,6 +45,10 @@ module Google
             rpc :ListDataProducts, ::Google::Cloud::Dataplex::V1::ListDataProductsRequest, ::Google::Cloud::Dataplex::V1::ListDataProductsResponse
             # Updates a data product.
             rpc :UpdateDataProduct, ::Google::Cloud::Dataplex::V1::UpdateDataProductRequest, ::Google::Longrunning::Operation
+            # Requests access to a data product. This will trigger an access approval
+            # workflow, and the requester will need to wait for the approval to be
+            # granted before they will be able to access the data product assets.
+            rpc :RequestDataProductAccess, ::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest, ::Google::Cloud::Dataplex::V1::RequestDataProductAccessResponse
             # Creates a data asset.
             rpc :CreateDataAsset, ::Google::Cloud::Dataplex::V1::CreateDataAssetRequest, ::Google::Longrunning::Operation
             # Updates a data asset.

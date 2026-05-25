@@ -1438,6 +1438,72 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
     end
   end
 
+  def test_modify_entry
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataplex::V1::Entry.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    entry = {}
+    update_mask = {}
+    delete_missing_aspects = true
+    aspect_keys = ["hello world"]
+
+    modify_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :modify_entry, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::ModifyEntryRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataplex::V1::Entry), request["entry"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["delete_missing_aspects"]
+      assert_equal ["hello world"], request["aspect_keys"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, modify_entry_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::CatalogService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.modify_entry({ name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.modify_entry name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.modify_entry ::Google::Cloud::Dataplex::V1::ModifyEntryRequest.new(name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.modify_entry({ name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.modify_entry(::Google::Cloud::Dataplex::V1::ModifyEntryRequest.new(name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, modify_entry_client_stub.call_rpc_count
+    end
+  end
+
   def test_search_entries
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataplex::V1::SearchEntriesResponse.new
@@ -2034,6 +2100,7 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     resources = ["hello world"]
+    context = "hello world"
     options = {}
 
     lookup_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -2041,6 +2108,7 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Dataplex::V1::LookupContextRequest, request
       assert_equal "hello world", request["name"]
       assert_equal ["hello world"], request["resources"]
+      assert_equal "hello world", request["context"]
       assert_equal({}, request["options"].to_h)
       refute_nil options
     end
@@ -2052,31 +2120,31 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.lookup_context({ name: name, resources: resources, options: options }) do |response, operation|
+      client.lookup_context({ name: name, resources: resources, context: context, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.lookup_context name: name, resources: resources, options: options do |response, operation|
+      client.lookup_context name: name, resources: resources, context: context, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.lookup_context ::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, options: options) do |response, operation|
+      client.lookup_context ::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, context: context, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.lookup_context({ name: name, resources: resources, options: options }, grpc_options) do |response, operation|
+      client.lookup_context({ name: name, resources: resources, context: context, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.lookup_context(::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, options: options), grpc_options) do |response, operation|
+      client.lookup_context(::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, context: context, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

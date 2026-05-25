@@ -395,6 +395,68 @@ class ::Google::Cloud::Dataplex::V1::DataProductService::ClientTest < Minitest::
     end
   end
 
+  def test_request_data_product_access
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataplex::V1::RequestDataProductAccessResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    change_request = {}
+    validate_only = true
+
+    request_data_product_access_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :request_data_product_access, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataplex::V1::ChangeRequest), request["change_request"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, request_data_product_access_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::DataProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.request_data_product_access({ parent: parent, change_request: change_request, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.request_data_product_access parent: parent, change_request: change_request, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.request_data_product_access ::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest.new(parent: parent, change_request: change_request, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.request_data_product_access({ parent: parent, change_request: change_request, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.request_data_product_access(::Google::Cloud::Dataplex::V1::RequestDataProductAccessRequest.new(parent: parent, change_request: change_request, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, request_data_product_access_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_data_asset
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

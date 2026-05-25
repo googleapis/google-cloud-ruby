@@ -155,6 +155,25 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 8]
                   }
 
+                  default_config.rpcs.create_entry_link.timeout = 60.0
+
+                  default_config.rpcs.update_entry_link.timeout = 60.0
+                  default_config.rpcs.update_entry_link.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 8]
+                  }
+
+                  default_config.rpcs.delete_entry_link.timeout = 60.0
+
+                  default_config.rpcs.lookup_entry_links.timeout = 20.0
+                  default_config.rpcs.lookup_entry_links.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 8]
+                  }
+
+                  default_config.rpcs.get_entry_link.timeout = 20.0
+                  default_config.rpcs.get_entry_link.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 8]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -2131,6 +2150,9 @@ module Google
               #   @param view [::Google::Cloud::Dataplex::V1::EntryView]
               #     Optional. View to control which parts of an entry the service should
               #     return.
+              #     **Please check the limitations on returned aspects in the Entry view
+              #     documentation. Amount of returned aspects depends on the selected Entry
+              #     View.**
               #   @param aspect_types [::Array<::String>]
               #     Optional. Limits the aspects returned to the provided aspect types.
               #     It only works for CUSTOM view.
@@ -2219,6 +2241,9 @@ module Google
               #   @param view [::Google::Cloud::Dataplex::V1::EntryView]
               #     Optional. View to control which parts of an entry the service should
               #     return.
+              #     **Please check the limitations on returned aspects in the Entry view
+              #     documentation. Amount of returned aspects depends on the selected Entry
+              #     View.**
               #   @param aspect_types [::Array<::String>]
               #     Optional. Limits the aspects returned to the provided aspect types.
               #     It only works for CUSTOM view.
@@ -2280,6 +2305,115 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.lookup_entry request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Modifies an entry using the permission on the source system.
+              #
+              # @overload modify_entry(request, options = nil)
+              #   Pass arguments to `modify_entry` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::ModifyEntryRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::ModifyEntryRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload modify_entry(name: nil, entry: nil, update_mask: nil, delete_missing_aspects: nil, aspect_keys: nil)
+              #   Pass arguments to `modify_entry` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The project to which the request should be attributed in the
+              #     following form: `projects/{project}/locations/{location}`.
+              #   @param entry [::Google::Cloud::Dataplex::V1::Entry, ::Hash]
+              #     Required. The entry to modify.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Mask of fields to update. To update Aspects, the update_mask must
+              #     contain the value "aspects".
+              #
+              #     If the update_mask is empty, the service will update all modifiable fields
+              #     present in the request.
+              #   @param delete_missing_aspects [::Boolean]
+              #     Optional. If set to true, any aspects not specified in the request will be
+              #     deleted. The default is false.
+              #   @param aspect_keys [::Array<::String>]
+              #     Optional. The aspect keys which the service should modify. It supports
+              #     the following syntaxes:
+              #
+              #     * `<aspect_type_reference>` - matches an aspect of the given type and empty
+              #     path.
+              #     * `<aspect_type_reference>@path` - matches an aspect of the given type and
+              #     specified path. For example, to attach an aspect to a field that is
+              #     specified by the `schema` aspect, the path should have the format
+              #     `Schema.<field_name>`.
+              #     * `<aspect_type_reference>@*` - matches aspects of the given type for all
+              #     paths.
+              #     * `*@path` - matches aspects of all types on the given path.
+              #
+              #     The service will not remove existing aspects matching the syntax unless
+              #     `delete_missing_aspects` is set to true.
+              #
+              #     If this field is left empty, the service treats it as specifying
+              #     exactly those Aspects present in the request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::Entry]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::Entry]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ModifyEntryRequest.new
+              #
+              #   # Call the modify_entry method.
+              #   result = client.modify_entry request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::Entry.
+              #   p result
+              #
+              def modify_entry request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::ModifyEntryRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.modify_entry.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.modify_entry.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.modify_entry.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.modify_entry request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -3136,7 +3270,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload lookup_context(name: nil, resources: nil, options: nil)
+              # @overload lookup_context(name: nil, resources: nil, context: nil, options: nil)
               #   Pass arguments to `lookup_context` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3145,14 +3279,25 @@ module Google
               #     Required. The project to which the request should be attributed in the
               #     following form: `projects/{project}/locations/{location}`.
               #   @param resources [::Array<::String>]
-              #     Required. The entry names to lookup context for. The request should have
-              #     max 10 of those.
+              #     Required. The entry names to look up the context for. The maximum number of
+              #     resources for a request is limited to 10.
               #
               #     ## Examples:
               #
-              #     projects/\\{project}/locations/\\{location}/entryGroups/\\{entry_group}/entries/\\{entry}
+              #     `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+              #   @param context [::String]
+              #     Optional. The text representing contextual information for which metadata
+              #     context is being requested.
               #   @param options [::Hash{::String => ::String}]
               #     Optional. Allows to configure the context.
+              #
+              #     Supported options:
+              #
+              #     - `format` - The format of the context (one of `yaml`,
+              #     `xml`, `json`, default is `yaml`).
+              #     - `context_budget` - If provided, the output will be intelligently
+              #     truncated on a best-effort basis to contain approximately the desired
+              #     amount of characters. There is no guarantee to achieve the specific amount.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::LookupContextResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4012,6 +4157,11 @@ module Google
                   #
                   attr_reader :lookup_entry
                   ##
+                  # RPC-specific configuration for `modify_entry`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :modify_entry
+                  ##
                   # RPC-specific configuration for `search_entries`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4136,6 +4286,8 @@ module Google
                     @get_entry = ::Gapic::Config::Method.new get_entry_config
                     lookup_entry_config = parent_rpcs.lookup_entry if parent_rpcs.respond_to? :lookup_entry
                     @lookup_entry = ::Gapic::Config::Method.new lookup_entry_config
+                    modify_entry_config = parent_rpcs.modify_entry if parent_rpcs.respond_to? :modify_entry
+                    @modify_entry = ::Gapic::Config::Method.new modify_entry_config
                     search_entries_config = parent_rpcs.search_entries if parent_rpcs.respond_to? :search_entries
                     @search_entries = ::Gapic::Config::Method.new search_entries_config
                     create_metadata_job_config = parent_rpcs.create_metadata_job if parent_rpcs.respond_to? :create_metadata_job

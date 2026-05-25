@@ -359,7 +359,7 @@ module Google
           end
         end
 
-        # An aspect is a single piece of metadata describing an entry.
+        # Represents a single piece of metadata describing an entry or entry link.
         # @!attribute [r] aspect_type
         #   @return [::String]
         #     Output only. The resource name of the type used to create this Aspect.
@@ -1025,6 +1025,9 @@ module Google
         #   @return [::Google::Cloud::Dataplex::V1::EntryView]
         #     Optional. View to control which parts of an entry the service should
         #     return.
+        #     **Please check the limitations on returned aspects in the Entry view
+        #     documentation. Amount of returned aspects depends on the selected Entry
+        #     View.**
         # @!attribute [rw] aspect_types
         #   @return [::Array<::String>]
         #     Optional. Limits the aspects returned to the provided aspect types.
@@ -1047,6 +1050,9 @@ module Google
         #   @return [::Google::Cloud::Dataplex::V1::EntryView]
         #     Optional. View to control which parts of an entry the service should
         #     return.
+        #     **Please check the limitations on returned aspects in the Entry view
+        #     documentation. Amount of returned aspects depends on the selected Entry
+        #     View.**
         # @!attribute [rw] aspect_types
         #   @return [::Array<::String>]
         #     Optional. Limits the aspects returned to the provided aspect types.
@@ -1071,15 +1077,27 @@ module Google
         #     following form: `projects/{project}/locations/{location}`.
         # @!attribute [rw] resources
         #   @return [::Array<::String>]
-        #     Required. The entry names to lookup context for. The request should have
-        #     max 10 of those.
+        #     Required. The entry names to look up the context for. The maximum number of
+        #     resources for a request is limited to 10.
         #
         #     ## Examples:
         #
-        #     projects/\\{project}/locations/\\{location}/entryGroups/\\{entry_group}/entries/\\{entry}
+        #     `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+        # @!attribute [rw] context
+        #   @return [::String]
+        #     Optional. The text representing contextual information for which metadata
+        #     context is being requested.
         # @!attribute [rw] options
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Allows to configure the context.
+        #
+        #     Supported options:
+        #
+        #     - `format` - The format of the context (one of `yaml`,
+        #     `xml`, `json`, default is `yaml`).
+        #     - `context_budget` - If provided, the output will be intelligently
+        #     truncated on a best-effort basis to contain approximately the desired
+        #     amount of characters. There is no guarantee to achieve the specific amount.
         class LookupContextRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1094,10 +1112,55 @@ module Google
           end
         end
 
+        # Modify Entry request using permissions in the source system.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The project to which the request should be attributed in the
+        #     following form: `projects/{project}/locations/{location}`.
+        # @!attribute [rw] entry
+        #   @return [::Google::Cloud::Dataplex::V1::Entry]
+        #     Required. The entry to modify.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Mask of fields to update. To update Aspects, the update_mask must
+        #     contain the value "aspects".
+        #
+        #     If the update_mask is empty, the service will update all modifiable fields
+        #     present in the request.
+        # @!attribute [rw] delete_missing_aspects
+        #   @return [::Boolean]
+        #     Optional. If set to true, any aspects not specified in the request will be
+        #     deleted. The default is false.
+        # @!attribute [rw] aspect_keys
+        #   @return [::Array<::String>]
+        #     Optional. The aspect keys which the service should modify. It supports
+        #     the following syntaxes:
+        #
+        #     * `<aspect_type_reference>` - matches an aspect of the given type and empty
+        #     path.
+        #     * `<aspect_type_reference>@path` - matches an aspect of the given type and
+        #     specified path. For example, to attach an aspect to a field that is
+        #     specified by the `schema` aspect, the path should have the format
+        #     `Schema.<field_name>`.
+        #     * `<aspect_type_reference>@*` - matches aspects of the given type for all
+        #     paths.
+        #     * `*@path` - matches aspects of all types on the given path.
+        #
+        #     The service will not remove existing aspects matching the syntax unless
+        #     `delete_missing_aspects` is set to true.
+        #
+        #     If this field is left empty, the service treats it as specifying
+        #     exactly those Aspects present in the request.
+        class ModifyEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Lookup Context response.
         # @!attribute [rw] context
         #   @return [::String]
-        #     LLM generated context for the resources.
+        #     Pre-formatted block of text containing the context for the requested
+        #     resources.
         class LookupContextResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -79,6 +79,8 @@ module Google
             rpc :GetEntry, ::Google::Cloud::Dataplex::V1::GetEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Looks up an entry by name using the permission on the source system.
             rpc :LookupEntry, ::Google::Cloud::Dataplex::V1::LookupEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
+            # Modifies an entry using the permission on the source system.
+            rpc :ModifyEntry, ::Google::Cloud::Dataplex::V1::ModifyEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Searches for Entries matching the given query and scope.
             rpc :SearchEntries, ::Google::Cloud::Dataplex::V1::SearchEntriesRequest, ::Google::Cloud::Dataplex::V1::SearchEntriesResponse
             # Creates a metadata job. For example, use a metadata job to import metadata

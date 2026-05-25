@@ -857,6 +857,10 @@ module Google
             # See
             # {::Google::Cloud::Dataplex::V1::DataQualityRule::SqlAssertion DataQualityRule.SqlAssertion}.
             SQL_ASSERTION = 9
+
+            # See
+            # {::Google::Cloud::Dataplex::V1::DataQualityRule::TemplateReference DataQualityRule.TemplateReference}.
+            TEMPLATE_REFERENCE = 10
           end
 
           # The evaluation type of the data quality rule.
