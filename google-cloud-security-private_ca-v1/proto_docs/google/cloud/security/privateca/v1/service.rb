@@ -109,9 +109,18 @@ module Google
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#list_certificates CertificateAuthorityService.ListCertificates}.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The resource name of the location associated with the
+          #     Required. The resource name of the parent associated with the
           #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates}, in the
-          #     format `projects/*/locations/*/caPools/*`.
+          #     format `projects/*/locations/*/caPools/*`. The parent resource name can be
+          #     in one of two forms:
+          #
+          #     1.  **Specific CA Pool:** To list certificates within a single CA Pool:
+          #         `projects/*/locations/*/caPools/*`
+          #
+          #     2.  **All CA Pools in a Location:** To list certificates across *all* CA
+          #         Pools in a given project and location, use the wildcard character (`-`)
+          #         in place of the CA Pool ID.
+          #         Example: `projects/*/locations/*/caPools/-`
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Optional. Limit on the number of
