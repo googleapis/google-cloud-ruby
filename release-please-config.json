@@ -903,6 +903,10 @@
       "component": "google-cloud-gemini_data_analytics",
       "version_file": "lib/google/cloud/gemini_data_analytics/version.rb"
     },
+    "google-cloud-gemini_data_analytics-v1": {
+      "component": "google-cloud-gemini_data_analytics-v1",
+      "version_file": "lib/google/cloud/gemini_data_analytics/v1/version.rb"
+    },
     "google-cloud-gemini_data_analytics-v1beta": {
       "component": "google-cloud-gemini_data_analytics-v1beta",
       "version_file": "lib/google/cloud/gemini_data_analytics/v1beta/version.rb"
