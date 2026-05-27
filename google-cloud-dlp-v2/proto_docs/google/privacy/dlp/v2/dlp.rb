@@ -475,19 +475,26 @@ module Google
         #   @return [::String]
         #     String data to inspect or redact.
         #
-        #     Note: The following fields are mutually exclusive: `value`, `table`, `byte_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `value`, `table`, `byte_item`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::Dlp::V2::Table]
         #     Structured content for inspection. See
         #     https://cloud.google.com/sensitive-data-protection/docs/inspecting-text#inspecting_a_table
         #     to learn more.
         #
-        #     Note: The following fields are mutually exclusive: `table`, `value`, `byte_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `table`, `value`, `byte_item`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] byte_item
         #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     Content data to inspect or redact. Replaces `type` and `data`.
         #
-        #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] conversation
+        #   @return [::Google::Cloud::Dlp::V2::Conversation]
+        #     Represents a conversation (either complete or a slice).
+        #     It is assumed that all included messages are contiguous and ordered in
+        #     chronological order.
+        #
+        #     Note: The following fields are mutually exclusive: `conversation`, `value`, `table`, `byte_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] content_metadata
         #   @return [::Google::Cloud::Dlp::V2::ContentMetadata]
         #     User provided metadata for the content.
@@ -503,6 +510,54 @@ module Google
         class ContentMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Complete conversation or slice of a conversation.
+        # It is assumed that all included messages are contiguous and ordered in
+        # chronological order.
+        # @!attribute [rw] messages
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ConversationMessage>]
+        #     Messages exchanged within this conversation.
+        #     The maximum number of messages allowed is 50k.
+        #     The order of the messages is assumed to be chronological and will be used
+        #     to index findings in the response.
+        class Conversation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Single message in a conversation.
+        # @!attribute [rw] content
+        #   @return [::String]
+        #     The contents of this message.
+        # @!attribute [rw] message_type
+        #   @return [::Google::Cloud::Dlp::V2::ConversationMessage::MessageType]
+        #     The type of message.
+        # @!attribute [rw] participant_id
+        #   @return [::String]
+        #     Optional. The identifier of the participant,
+        #     for example, 'test-user' or 'gemini'.
+        #     The participant ID can contain lowercase letters, numbers, and hyphens;
+        #     that is, it must match the regular expression:
+        #     `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+        #     The maximum length is 63 characters.
+        class ConversationMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of message.
+          # New values may be added in the future.
+          module MessageType
+            # Unused.
+            MESSAGE_TYPE_UNSPECIFIED = 0
+
+            # Message contains content to be inspected.
+            CONTENT = 1
+
+            # Message contains context only and will not have findings reported from
+            # it during inspection or redacted from it during de-identification.
+            CONTEXT = 2
+          end
         end
 
         # Structured content to inspect. Up to 50,000 `Value`s per request allowed. See
@@ -676,22 +731,27 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::RecordLocation]
         #     Location within a row or record of a database table.
         #
-        #     Note: The following fields are mutually exclusive: `record_location`, `image_location`, `document_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `record_location`, `image_location`, `document_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_location
         #   @return [::Google::Cloud::Dlp::V2::ImageLocation]
         #     Location within an image's pixels.
         #
-        #     Note: The following fields are mutually exclusive: `image_location`, `record_location`, `document_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `image_location`, `record_location`, `document_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_location
         #   @return [::Google::Cloud::Dlp::V2::DocumentLocation]
         #     Location data for document files.
         #
-        #     Note: The following fields are mutually exclusive: `document_location`, `record_location`, `image_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `document_location`, `record_location`, `image_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata_location
         #   @return [::Google::Cloud::Dlp::V2::MetadataLocation]
         #     Location within the metadata for inspected content.
         #
-        #     Note: The following fields are mutually exclusive: `metadata_location`, `record_location`, `image_location`, `document_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `metadata_location`, `record_location`, `image_location`, `document_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] conversation_location
+        #   @return [::Google::Cloud::Dlp::V2::ConversationLocation]
+        #     Location within a conversation.
+        #
+        #     Note: The following fields are mutually exclusive: `conversation_location`, `record_location`, `image_location`, `document_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Finding container modification timestamp, if applicable. For Cloud Storage,
@@ -705,6 +765,31 @@ module Google
         class ContentLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Location within a conversation.
+        # @!attribute [rw] message_index
+        #   @return [::Integer]
+        #     Matches an index of a message in the conversation provided in the
+        #     request.
+        #
+        #     Note: The following fields are mutually exclusive: `message_index`, `all_messages`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] all_messages
+        #   @return [::Google::Cloud::Dlp::V2::ConversationLocation::AllMessages]
+        #     If set, indicates that the finding applies to all messages in the
+        #     conversation.
+        #
+        #     Note: The following fields are mutually exclusive: `all_messages`, `message_index`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ConversationLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # If set, indicates that the finding applies to all messages in the
+          # conversation.
+          class AllMessages
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Metadata Location
@@ -4651,7 +4736,7 @@ module Google
           #        visible to queries by the time your topic receives the Pub/Sub
           #        notification.
           #      * The best practice is to use the same table for an entire organization
-          #        so that you can take advantage of the [provided Looker
+          #        so that you can take advantage of the [provided Data Studio
           #        reports](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#use_a_premade_report).
           #        If you use VPC Service Controls to define security perimeters, then
           #        you must use a separate table for each boundary.
@@ -8591,21 +8676,20 @@ module Google
           # Unused.
           STATE_TYPE_UNSPECIFIED = 0
 
-          # This will be set when a finding could not be transformed (i.e. outside user
+          # This is set when a finding cannot be transformed (i.e. outside user
           # set bucket range).
           INVALID_TRANSFORM = 1
 
-          # This will be set when a BigQuery transformation was successful but could
-          # not be stored back in BigQuery because the transformed row exceeds
-          # BigQuery's max row size.
+          # This is set when a transformation is successful but cannot be stored in
+          # BigQuery because the transformed row exceeds BigQuery's max row size.
           BIGQUERY_MAX_ROW_SIZE_EXCEEDED = 2
 
-          # This will be set when there is a finding in the custom metadata of a file,
+          # This is set when there is a finding in the custom metadata of a file,
           # but at the write time of the transformed file, this key / value pair is
           # unretrievable.
           METADATA_UNRETRIEVABLE = 3
 
-          # This will be set when the transformation and storing of it is successful.
+          # This is set when the transformation and its storage are successful.
           SUCCESS = 4
         end
 
