@@ -114,6 +114,17 @@ module Google
               # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
               # for a managed folder.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+              # Gets the `IntelligenceFinding` for a project.
+              rpc :GetIntelligenceFinding, ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceFinding
+              # Lists the `IntelligenceFinding` resources for the specified project.
+              rpc :ListIntelligenceFindings, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse
+              # Summarize the intelligence findings for the specified scope(org, folder or
+              # project).
+              rpc :SummarizeIntelligenceFindings, ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest, ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse
+              # Gets the `IntelligenceFindingRevision` resource.
+              rpc :GetIntelligenceFindingRevision, ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision
+              # Lists all the revisions of an `IntelligenceFinding` resource.
+              rpc :ListIntelligenceFindingRevisions, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse
             end
 
             Stub = Service.rpc_stub_class

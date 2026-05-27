@@ -1019,6 +1019,644 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The `IntelligenceFinding` resource that represents a security, performance,
+          # or cost-related finding about a project or bucket.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of `IntelligenceFinding`.
+          #     Format:
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+          # @!attribute [r] description
+          #   @return [::String]
+          #     Output only. A short description about the finding.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingType]
+          #     Output only. Type of this finding.
+          # @!attribute [r] category
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingCategory]
+          #     Output only. Category of this finding.
+          # @!attribute [r] severity
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingSeverity]
+          #     Output only. Severity of the finding.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time at which the finding was created.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time at which the finding was last updated.
+          # @!attribute [r] target_resource
+          #   @return [::String]
+          #     Output only. The fully qualified resource name of the resource that this
+          #     `IntelligenceFinding` applies to. eg:
+          #     - `storage.googleapis.com/projects/_/buckets/b1`
+          #     - `cloudresourecemanager.googleapis.com/projects/p1`
+          # @!attribute [r] associated_resources
+          #   @return [::Array<::String>]
+          #     Output only. Contains GCP resource names that are
+          #     relevant to this `IntelligenceFinding`. The `target_resource` is also added
+          #     as part of `associated_resources`. eg:
+          #     - `storage.googleapis.com/projects/_/buckets/b1`
+          #     - `cloudresourecemanager.googleapis.com/projects/p1`
+          # @!attribute [r] observation_period
+          #   @return [::Google::Type::Interval]
+          #     Output only. The time interval during which the underlying data was used to
+          #     generate this `IntelligenceFinding`.
+          # @!attribute [r] coldline_and_archival_storage_operations_spike
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike]
+          #     Output only. `IntelligenceFinding` about a spike in Class A/B operations
+          #     on Coldline or Archive Cloud Storage objects.
+          #
+          #     Note: The following fields are mutually exclusive: `coldline_and_archival_storage_operations_spike`, `throttled_requests_spike`, `cross_region_egress_spike`, `storage_growth_above_trend`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] throttled_requests_spike
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike]
+          #     Output only. `IntelligenceFinding` about a spike in throttled requests
+          #     (429 errors) within a project.
+          #
+          #     Note: The following fields are mutually exclusive: `throttled_requests_spike`, `coldline_and_archival_storage_operations_spike`, `cross_region_egress_spike`, `storage_growth_above_trend`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] cross_region_egress_spike
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike]
+          #     Output only. `IntelligenceFinding` about a spike in cross-region egress.
+          #
+          #     Note: The following fields are mutually exclusive: `cross_region_egress_spike`, `coldline_and_archival_storage_operations_spike`, `throttled_requests_spike`, `storage_growth_above_trend`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] storage_growth_above_trend
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::StorageGrowthAboveTrend]
+          #     Output only. `IntelligenceFinding` about growth in storage above the
+          #     expected trend.
+          #
+          #     Note: The following fields are mutually exclusive: `storage_growth_above_trend`, `coldline_and_archival_storage_operations_spike`, `throttled_requests_spike`, `cross_region_egress_spike`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class IntelligenceFinding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents a finding about a spike in Class A/B operations on Coldline
+            # or Archive Cloud Storage objects.
+            # This corresponds to the `COLD_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE`
+            # finding type.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in operations across the project.
+            # @!attribute [r] total_operations_count
+            #   @return [::Integer]
+            #     Output only. The total count of operations across the project.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike::BucketContribution>]
+            #     Output only. A list of the top buckets driving the increase in
+            #     operations.
+            class ColdlineAndArchivalStorageOperationsSpike
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the operation spike details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in operations for the bucket.
+              # @!attribute [r] total_operations_count
+              #   @return [::Integer]
+              #     Output only. The total count of operations for the bucket.
+              # @!attribute [r] contribution
+              #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike::BucketContribution::Contribution]
+              #     Output only. The details about the contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `contribution`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `error`, `contribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Represents the contribution of the bucket towards the
+                # `IntelligenceFinding`.
+                # @!attribute [r] top_prefixes
+                #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ColdlineAndArchivalStorageOperationsSpike::BucketContribution::Contribution::PrefixContribution>]
+                #     Output only. A list of the top object prefixes driving the increase
+                #     in operations.
+                class Contribution
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Represents the operation spike details for an object prefix.
+                  # @!attribute [r] prefix
+                  #   @return [::String]
+                  #     Output only. The object prefix.
+                  #     Format: `a/b/c`, 'a/b/d', etc.
+                  # @!attribute [r] percentage_increase
+                  #   @return [::Float]
+                  #     Output only. The percentage increase in operations for the object
+                  #     prefix.
+                  # @!attribute [r] total_operations_count
+                  #   @return [::Integer]
+                  #     Output only. The total count of operations for the object prefix.
+                  class PrefixContribution
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+                  end
+                end
+              end
+            end
+
+            # Represents a finding about a spike in cross-region egress from Cloud
+            # Storage.
+            # This corresponds to the `CROSS_REGION_EGRESS_SPIKE` finding type.
+            # @!attribute [r] total_egress_bytes
+            #   @return [::Integer]
+            #     Output only. The total cross-region egress volume in bytes across the
+            #     project.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in cross-region egress across the
+            #     project.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike::BucketContribution>]
+            #     Output only. A list of top buckets driving the increase in cross-region
+            #     egress.
+            class CrossRegionEgressSpike
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the cross-region egress spike details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] total_egress_bytes
+              #   @return [::Integer]
+              #     Output only. The total cross-region egress volume in bytes for the
+              #     bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in cross-region egress for the
+              #     bucket.
+              # @!attribute [r] contribution
+              #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike::BucketContribution::Contribution]
+              #     Output only. The details about the contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `contribution`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `error`, `contribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Represents the contribution of the bucket towards the
+                # `IntelligenceFinding`.
+                # @!attribute [r] top_prefixes
+                #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::CrossRegionEgressSpike::BucketContribution::Contribution::PrefixContribution>]
+                #     Output only. A list of the top object prefixes driving the increase
+                #     in cross-region egress.
+                class Contribution
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Represents the cross-region egress spike details for an object
+                  # prefix.
+                  # @!attribute [r] prefix
+                  #   @return [::String]
+                  #     Output only. The object prefix.
+                  #     Format: `a/b/c`, 'a/b/d', etc.
+                  # @!attribute [r] total_egress_bytes
+                  #   @return [::Integer]
+                  #     Output only. The total cross-region egress volume in bytes from the
+                  #     object prefix.
+                  # @!attribute [r] percentage_increase
+                  #   @return [::Float]
+                  #     Output only. The percentage increase in cross-region egress for the
+                  #     object prefix.
+                  class PrefixContribution
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+                  end
+                end
+              end
+            end
+
+            # Represents a finding about a spike in throttled requests (429 errors)
+            # within a project.
+            # This corresponds to the `THROTTLED_REQUEST_SPIKE` finding type.
+            # @!attribute [r] throttled_requests
+            #   @return [::Integer]
+            #     Output only. The count of throttled requests across the project.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in throttled requests across the
+            #     project.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike::BucketContribution>]
+            #     Output only. A list of top buckets driving the increase in throttled
+            #     requests.
+            class ThrottledRequestSpike
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the throttled requests details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] throttled_requests
+              #   @return [::Integer]
+              #     Output only. The count of throttled requests for the bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in throttled requests for the
+              #     bucket.
+              # @!attribute [r] contribution
+              #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike::BucketContribution::Contribution]
+              #     Output only. The details about the contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `contribution`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              #
+              #     Note: The following fields are mutually exclusive: `error`, `contribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Represents the contribution of the bucket towards the
+                # `IntelligenceFinding`.
+                # @!attribute [r] top_prefixes
+                #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::ThrottledRequestSpike::BucketContribution::Contribution::PrefixContribution>]
+                #     Output only. A list of top object prefixes driving the increase in
+                #     throttled requests.
+                class Contribution
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Represents throttled requests details for an object prefix.
+                  # @!attribute [r] prefix
+                  #   @return [::String]
+                  #     Output only. The object prefix.
+                  #     Format: `a/b/c`, 'a/b/d', etc.
+                  # @!attribute [r] throttled_requests
+                  #   @return [::Integer]
+                  #     Output only. The count of throttled requests for the object prefix.
+                  # @!attribute [r] percentage_increase
+                  #   @return [::Float]
+                  #     Output only. The percentage increase in throttled requests for the
+                  #     object prefix.
+                  class PrefixContribution
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+                  end
+                end
+              end
+            end
+
+            # Represents a finding about a storage growth above the expected trend.
+            # This corresponds to the `STORAGE_GROWTH_ABOVE_TREND` finding type.
+            # @!attribute [r] total_storage_growth_bytes
+            #   @return [::Integer]
+            #     Output only. The total storage growth in bytes.
+            # @!attribute [r] percentage_increase
+            #   @return [::Float]
+            #     Output only. The percentage increase in storage growth.
+            # @!attribute [r] top_buckets
+            #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding::StorageGrowthAboveTrend::BucketContribution>]
+            #     Output only. A list of top buckets driving the increase in storage
+            #     growth.
+            class StorageGrowthAboveTrend
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the storage growth details for a bucket.
+              # @!attribute [r] bucket
+              #   @return [::String]
+              #     Output only. The name of the bucket.
+              # @!attribute [r] total_storage_growth_bytes
+              #   @return [::Integer]
+              #     Output only. The total storage growth in bytes for the bucket.
+              # @!attribute [r] percentage_increase
+              #   @return [::Float]
+              #     Output only. The percentage increase in storage growth for the bucket.
+              # @!attribute [r] error
+              #   @return [::Google::Rpc::Status]
+              #     Output only. The error related to accessing the details about the
+              #     contribution of the bucket.
+              class BucketContribution
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # An `IntelligenceFindingRevision` represents a specific revision of an
+          # `IntelligenceFinding` resource.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of `IntelligenceFindingRevision`.
+          #     Format:
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+          # @!attribute [r] snapshot
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+          #     Output only. The snapshot of the `IntelligenceFinding` at the time the
+          #     revision was created. This field contains the full finding details as they
+          #     existed for the revision.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp when the revision was created.
+          class IntelligenceFindingRevision
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceFinding` resource associated with a
+          # project.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceFinding` resource.
+          #
+          #     Format:
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+          class GetIntelligenceFindingRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to list `IntelligenceFinding` resources associated with
+          # a project.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent of the `IntelligenceFinding` resource.
+          #
+          #     Format: `projects/{project}/locations/{location}`
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter expression to be applied.
+          #     Supports filtering by `type` and `associated_resources`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of `IntelligenceFinding` resources to return.
+          #
+          #     The maximum value is `100`; values above `100` will be coerced to `100`.
+          #     The default value is `100`.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous `ListIntelligenceFindings`
+          #     call. Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `ListIntelligenceFindings` must match the call that provided the page
+          #     token.
+          class ListIntelligenceFindingsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message to list the `IntelligenceFinding` resources associated with
+          # a project.
+          # @!attribute [rw] intelligence_findings
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFinding>]
+          #     The `IntelligenceFinding` resources from the specified project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token to retrieve the next page of results.
+          #     Pass this value in the `page_token` field in the subsequent call.
+          class ListIntelligenceFindingsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to summarize the intelligence findings for the specified
+          # scope(org, folder or project).
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The scope to summarize the findings for.
+          #     Format:
+          #     - `organizations/{organization}/locations/{location}`
+          #     - `folders/{folder}/locations/{location}`
+          #     - `projects/{project}/locations/{location}`
+          # @!attribute [rw] resource_scope
+          #   @return [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest::ResourceScope]
+          #     Optional. Determines the granularity of the findings
+          #     when the `parent` is an organization or folder.
+          #
+          #     - `PARENT` (or not set): A single summary is
+          #       returned for each insight type, aggregated across the entire `parent`
+          #       scope.
+          #     - `PROJECT`: A separate summary is returned for each
+          #       insight type for every project within the `parent` scope.
+          #
+          #     The only supported values are `PARENT` and `PROJECT`.
+          #     If no value is specified, the API behaviour defaults to the `PARENT`.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. The filter expression, following AIP-160.
+          #     Supports filtering by FindingType.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of findings to return.
+          #
+          #     The maximum value is `100`; values above `100` will be coerced to `100`.
+          #     The default value is `100`.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous
+          #     `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+          #     subsequent page.
+          #
+          #     When paginating, all other parameters provided to
+          #     `SummarizeIntelligenceFindings` must match the call that provided the page
+          #     token.
+          class SummarizeIntelligenceFindingsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The list of resource scopes.
+            module ResourceScope
+              # The default behavior. Falls back to PARENT behaviour
+              RESOURCE_SCOPE_UNSPECIFIED = 0
+
+              # Summaries are aggregated at the level of the `parent` resource.
+              PARENT = 1
+
+              # Summaries are broken down by each project within the `parent` scope.
+              PROJECT = 2
+            end
+          end
+
+          # Response message to summarize the intelligence findings for a specified
+          # scope(org, folder or project).
+          # @!attribute [rw] finding_summaries
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::FindingSummary>]
+          #     The list of `FindingSummary` summaries.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token to retrieve the next page of results.
+          #     Pass this value in the `page_token` field in the subsequent call to
+          #     `SummarizeIntelligenceFindings` to retrieve the next page of results.
+          class SummarizeIntelligenceFindingsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceFindingRevision` resource associated
+          # with a project.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceFindingRevision` resource.
+          #     ## Format:
+          #
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+          class GetIntelligenceFindingRevisionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to list `IntelligenceFindingRevision` resources associated
+          # with a project.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent of the `IntelligenceFindingRevision` resource.
+          #     ## Format:
+          #
+          #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of `IntelligenceFindingRevision` resources to
+          #     return.
+          #
+          #     The maximum value is `100`; values above `100` will be coerced to `100`.
+          #     The default value is `100`.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous
+          #     `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+          #     subsequent page.
+          class ListIntelligenceFindingRevisionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message to list `IntelligenceFindingRevision` resources associated
+          # with a project.
+          # @!attribute [rw] intelligence_finding_revisions
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision>]
+          #     The `IntelligenceFindingRevision` resources from the specified project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token that can be sent as `page_token` to retrieve the next page.
+          class ListIntelligenceFindingRevisionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A summary of findings generated for an organization, a folder, or a project.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingType]
+          #     Output only. The type of the finding.
+          # @!attribute [r] category
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingCategory]
+          #     Output only. The category of finding.
+          # @!attribute [r] target_resource
+          #   @return [::String]
+          #     Output only. The fully qualified Cloud resource name for which this
+          #     summary was generated.
+          #     eg: `//cloudresourcemanager.googleapis.com/projects/p1`
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The creation time of the earliest finding that this summary is
+          #     based on.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time of the most recent update among all the findings that
+          #     this summary is based on.
+          # @!attribute [r] severity
+          #   @return [::Google::Cloud::Storage::Control::V2::FindingSeverity]
+          #     Severity of the finding.
+          # @!attribute [r] summary_details
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::FindingSummary::SummaryDetails>]
+          #     Output only. List of `SummaryDetails`.
+          class FindingSummary
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Details about the `FindingSummary` resource.
+            # @!attribute [rw] count
+            #   @return [::Integer]
+            #     The count of impacted resources.
+            #
+            #     Note: The following fields are mutually exclusive: `count`, `percentage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] percentage
+            #   @return [::Float]
+            #     The percentage of impacted resources.
+            #
+            #     Note: The following fields are mutually exclusive: `percentage`, `count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] resource_type
+            #   @return [::Google::Cloud::Storage::Control::V2::FindingSummary::SummaryDetails::ResourceType]
+            #     Output only. The type of Cloud resource this summary detail applies to.
+            # @!attribute [r] description
+            #   @return [::String]
+            #     Output only. A short description about the FindingSummary
+            class SummaryDetails
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The list of resource types.
+              module ResourceType
+                # Resource type is unspecified.
+                RESOURCE_TYPE_UNSPECIFIED = 0
+
+                # Resource type is project.
+                PROJECT = 1
+
+                # Resource type is bucket.
+                BUCKET = 2
+              end
+            end
+          end
+
+          # List the finding types.
+          module FindingType
+            # Finding type is unspecified.
+            FINDING_TYPE_UNSPECIFIED = 0
+
+            # Finding is about a spike in Class A/B operations on Coldline or Archive
+            # Cloud Storage objects.
+            FINDING_TYPE_COLDLINE_AND_ARCHIVAL_STORAGE_OPERATIONS_SPIKE = 1
+
+            # Finding is about a spike in throttled requests (429 errors) within a
+            # project.
+            FINDING_TYPE_THROTTLED_REQUEST_SPIKE = 2
+
+            # Finding is about a spike in cross region egress in Cloud Storage.
+            FINDING_TYPE_CROSS_REGION_EGRESS_SPIKE = 3
+
+            # Finding is about growth in storage above the expected trend.
+            FINDING_TYPE_STORAGE_GROWTH_ABOVE_TREND = 4
+          end
+
+          # List of categories a finding falls under.
+          module FindingCategory
+            # Category is unspecified.
+            FINDING_CATEGORY_UNSPECIFIED = 0
+
+            # Category is 'Data Management'.
+            FINDING_CATEGORY_DATA_MANAGEMENT = 1
+
+            # Category is 'Performance'.
+            FINDING_CATEGORY_PERFORMANCE = 2
+          end
+
+          # Severity of the `IntelligenceFinding` resource.
+          module FindingSeverity
+            # Severity is unspecified.
+            FINDING_SEVERITY_UNSPECIFIED = 0
+
+            # Severity is critical.
+            FINDING_SEVERITY_CRITICAL = 1
+          end
         end
       end
     end

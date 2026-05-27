@@ -178,6 +178,31 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
                   }
 
+                  default_config.rpcs.get_intelligence_finding.timeout = 60.0
+                  default_config.rpcs.get_intelligence_finding.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.list_intelligence_findings.timeout = 60.0
+                  default_config.rpcs.list_intelligence_findings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.summarize_intelligence_findings.timeout = 60.0
+                  default_config.rpcs.summarize_intelligence_findings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.get_intelligence_finding_revision.timeout = 60.0
+                  default_config.rpcs.get_intelligence_finding_revision.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.list_intelligence_finding_revisions.timeout = 60.0
+                  default_config.rpcs.list_intelligence_finding_revisions.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -2991,6 +3016,518 @@ module Google
               end
 
               ##
+              # Gets the `IntelligenceFinding` for a project.
+              #
+              # @overload get_intelligence_finding(request, options = nil)
+              #   Pass arguments to `get_intelligence_finding` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_intelligence_finding(name: nil)
+              #   Pass arguments to `get_intelligence_finding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `IntelligenceFinding` resource.
+              #
+              #     Format:
+              #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceFinding]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new
+              #
+              #   # Call the get_intelligence_finding method.
+              #   result = client.get_intelligence_finding request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceFinding.
+              #   p result
+              #
+              def get_intelligence_finding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_intelligence_finding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_intelligence_finding.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_intelligence_finding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_intelligence_finding, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists the `IntelligenceFinding` resources for the specified project.
+              #
+              # @overload list_intelligence_findings(request, options = nil)
+              #   Pass arguments to `list_intelligence_findings` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_intelligence_findings(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_intelligence_findings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent of the `IntelligenceFinding` resource.
+              #
+              #     Format: `projects/{project}/locations/{location}`
+              #   @param filter [::String]
+              #     Optional. The filter expression to be applied.
+              #     Supports filtering by `type` and `associated_resources`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of `IntelligenceFinding` resources to return.
+              #
+              #     The maximum value is `100`; values above `100` will be coerced to `100`.
+              #     The default value is `100`.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListIntelligenceFindings`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `ListIntelligenceFindings` must match the call that provided the page
+              #     token.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFinding>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new
+              #
+              #   # Call the list_intelligence_findings method.
+              #   result = client.list_intelligence_findings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Storage::Control::V2::IntelligenceFinding.
+              #     p item
+              #   end
+              #
+              def list_intelligence_findings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_intelligence_findings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_intelligence_findings.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_intelligence_findings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :list_intelligence_findings, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @storage_control_stub, :list_intelligence_findings, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Summarize the intelligence findings for the specified scope(org, folder or
+              # project).
+              #
+              # @overload summarize_intelligence_findings(request, options = nil)
+              #   Pass arguments to `summarize_intelligence_findings` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload summarize_intelligence_findings(parent: nil, resource_scope: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `summarize_intelligence_findings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The scope to summarize the findings for.
+              #     Format:
+              #     - `organizations/{organization}/locations/{location}`
+              #     - `folders/{folder}/locations/{location}`
+              #     - `projects/{project}/locations/{location}`
+              #   @param resource_scope [::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest::ResourceScope]
+              #     Optional. Determines the granularity of the findings
+              #     when the `parent` is an organization or folder.
+              #
+              #     - `PARENT` (or not set): A single summary is
+              #       returned for each insight type, aggregated across the entire `parent`
+              #       scope.
+              #     - `PROJECT`: A separate summary is returned for each
+              #       insight type for every project within the `parent` scope.
+              #
+              #     The only supported values are `PARENT` and `PROJECT`.
+              #     If no value is specified, the API behaviour defaults to the `PARENT`.
+              #   @param filter [::String]
+              #     Optional. The filter expression, following AIP-160.
+              #     Supports filtering by FindingType.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of findings to return.
+              #
+              #     The maximum value is `100`; values above `100` will be coerced to `100`.
+              #     The default value is `100`.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `SummarizeIntelligenceFindings` call. Provide this to retrieve the
+              #     subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     `SummarizeIntelligenceFindings` must match the call that provided the page
+              #     token.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::FindingSummary>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::FindingSummary>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new
+              #
+              #   # Call the summarize_intelligence_findings method.
+              #   result = client.summarize_intelligence_findings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Storage::Control::V2::FindingSummary.
+              #     p item
+              #   end
+              #
+              def summarize_intelligence_findings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.summarize_intelligence_findings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.summarize_intelligence_findings.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.summarize_intelligence_findings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :summarize_intelligence_findings, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @storage_control_stub, :summarize_intelligence_findings, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the `IntelligenceFindingRevision` resource.
+              #
+              # @overload get_intelligence_finding_revision(request, options = nil)
+              #   Pass arguments to `get_intelligence_finding_revision` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_intelligence_finding_revision(name: nil)
+              #   Pass arguments to `get_intelligence_finding_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `IntelligenceFindingRevision` resource.
+              #     ## Format:
+              #
+              #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new
+              #
+              #   # Call the get_intelligence_finding_revision method.
+              #   result = client.get_intelligence_finding_revision request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.
+              #   p result
+              #
+              def get_intelligence_finding_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_intelligence_finding_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_intelligence_finding_revision.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_intelligence_finding_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_intelligence_finding_revision, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all the revisions of an `IntelligenceFinding` resource.
+              #
+              # @overload list_intelligence_finding_revisions(request, options = nil)
+              #   Pass arguments to `list_intelligence_finding_revisions` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_intelligence_finding_revisions(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_intelligence_finding_revisions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent of the `IntelligenceFindingRevision` resource.
+              #     ## Format:
+              #
+              #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of `IntelligenceFindingRevision` resources to
+              #     return.
+              #
+              #     The maximum value is `100`; values above `100` will be coerced to `100`.
+              #     The default value is `100`.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListIntelligenceFindingRevisions` call. Provide this to retrieve the
+              #     subsequent page.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new
+              #
+              #   # Call the list_intelligence_finding_revisions method.
+              #   result = client.list_intelligence_finding_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.
+              #     p item
+              #   end
+              #
+              def list_intelligence_finding_revisions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_intelligence_finding_revisions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_intelligence_finding_revisions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_intelligence_finding_revisions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :list_intelligence_finding_revisions, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @storage_control_stub, :list_intelligence_finding_revisions, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the StorageControl API.
               #
               # This class represents the configuration for StorageControl,
@@ -3308,6 +3845,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `get_intelligence_finding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_intelligence_finding
+                  ##
+                  # RPC-specific configuration for `list_intelligence_findings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_intelligence_findings
+                  ##
+                  # RPC-specific configuration for `summarize_intelligence_findings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :summarize_intelligence_findings
+                  ##
+                  # RPC-specific configuration for `get_intelligence_finding_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_intelligence_finding_revision
+                  ##
+                  # RPC-specific configuration for `list_intelligence_finding_revisions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_intelligence_finding_revisions
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3365,6 +3927,16 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    get_intelligence_finding_config = parent_rpcs.get_intelligence_finding if parent_rpcs.respond_to? :get_intelligence_finding
+                    @get_intelligence_finding = ::Gapic::Config::Method.new get_intelligence_finding_config
+                    list_intelligence_findings_config = parent_rpcs.list_intelligence_findings if parent_rpcs.respond_to? :list_intelligence_findings
+                    @list_intelligence_findings = ::Gapic::Config::Method.new list_intelligence_findings_config
+                    summarize_intelligence_findings_config = parent_rpcs.summarize_intelligence_findings if parent_rpcs.respond_to? :summarize_intelligence_findings
+                    @summarize_intelligence_findings = ::Gapic::Config::Method.new summarize_intelligence_findings_config
+                    get_intelligence_finding_revision_config = parent_rpcs.get_intelligence_finding_revision if parent_rpcs.respond_to? :get_intelligence_finding_revision
+                    @get_intelligence_finding_revision = ::Gapic::Config::Method.new get_intelligence_finding_revision_config
+                    list_intelligence_finding_revisions_config = parent_rpcs.list_intelligence_finding_revisions if parent_rpcs.respond_to? :list_intelligence_finding_revisions
+                    @list_intelligence_finding_revisions = ::Gapic::Config::Method.new list_intelligence_finding_revisions_config
 
                     yield self if block_given?
                   end

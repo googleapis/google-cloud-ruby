@@ -1090,6 +1090,206 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_GetIntelligenceFinding_sync",
+      "title": "Snippet for the get_intelligence_finding call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#get_intelligence_finding.",
+      "file": "storage_control/get_intelligence_finding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_intelligence_finding",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#get_intelligence_finding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::IntelligenceFinding",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "GetIntelligenceFinding",
+          "full_name": "google.storage.control.v2.StorageControl.GetIntelligenceFinding",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_ListIntelligenceFindings_sync",
+      "title": "Snippet for the list_intelligence_findings call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#list_intelligence_findings.",
+      "file": "storage_control/list_intelligence_findings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_intelligence_findings",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#list_intelligence_findings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "ListIntelligenceFindings",
+          "full_name": "google.storage.control.v2.StorageControl.ListIntelligenceFindings",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_SummarizeIntelligenceFindings_sync",
+      "title": "Snippet for the summarize_intelligence_findings call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#summarize_intelligence_findings.",
+      "file": "storage_control/summarize_intelligence_findings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "summarize_intelligence_findings",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#summarize_intelligence_findings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "SummarizeIntelligenceFindings",
+          "full_name": "google.storage.control.v2.StorageControl.SummarizeIntelligenceFindings",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_GetIntelligenceFindingRevision_sync",
+      "title": "Snippet for the get_intelligence_finding_revision call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#get_intelligence_finding_revision.",
+      "file": "storage_control/get_intelligence_finding_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_intelligence_finding_revision",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#get_intelligence_finding_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "GetIntelligenceFindingRevision",
+          "full_name": "google.storage.control.v2.StorageControl.GetIntelligenceFindingRevision",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_ListIntelligenceFindingRevisions_sync",
+      "title": "Snippet for the list_intelligence_finding_revisions call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#list_intelligence_finding_revisions.",
+      "file": "storage_control/list_intelligence_finding_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_intelligence_finding_revisions",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#list_intelligence_finding_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "ListIntelligenceFindingRevisions",
+          "full_name": "google.storage.control.v2.StorageControl.ListIntelligenceFindingRevisions",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
