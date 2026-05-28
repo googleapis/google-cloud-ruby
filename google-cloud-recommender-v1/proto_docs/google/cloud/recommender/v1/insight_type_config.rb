@@ -24,7 +24,7 @@ module Google
         # Configuration for an InsightType.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of insight type config.
+        #     Identifier. Name of insight type config.
         #     Eg,
         #     projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config
         # @!attribute [rw] insight_type_generation_config

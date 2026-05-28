@@ -25,7 +25,7 @@ module Google
         # recommendation for an underutilized VM, IAM role recommendations, etc
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of recommendation.
+        #     Identifier. Name of recommendation.
         # @!attribute [rw] description
         #   @return [::String]
         #     Free-form human readable summary in English. The maximum length is 500
@@ -76,6 +76,9 @@ module Google
         #     A non-empty ID indicates that the recommendation belongs to a mutually
         #     exclusive group. This means that only one recommendation within the group
         #     is suggested to be applied.
+        # @!attribute [rw] target_resources
+        #   @return [::Array<::String>]
+        #     Fully qualified resource names that this recommendation is targeting.
         class Recommendation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -351,6 +354,9 @@ module Google
         #     Use with CategoryType.RELIABILITY
         #
         #     Note: The following fields are mutually exclusive: `reliability_projection`, `cost_projection`, `security_projection`, `sustainability_projection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     The service that this impact is associated with.
         class Impact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

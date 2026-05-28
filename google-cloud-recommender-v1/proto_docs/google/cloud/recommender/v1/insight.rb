@@ -25,7 +25,7 @@ module Google
         # may have associated recommendations as well.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the insight.
+        #     Identifier. Name of the insight.
         # @!attribute [rw] description
         #   @return [::String]
         #     Free-form human readable summary in English. The maximum length is 500
