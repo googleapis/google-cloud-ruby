@@ -8,7 +8,7 @@
     "name": "geminidataanalytics",
     "name_pretty": "Data Analytics API with Gemini V1 API",
     "product_documentation": "https://cloud.google.com/gemini/docs/conversational-analytics-api/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language. Note that google-cloud-gemini_data_analytics-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gemini_data_analytics instead. See the readme for more details.",
