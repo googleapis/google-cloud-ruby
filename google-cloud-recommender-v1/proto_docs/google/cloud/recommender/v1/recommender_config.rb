@@ -24,7 +24,7 @@ module Google
         # Configuration for a Recommender.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of recommender config.
+        #     Identifier. Name of recommender config.
         #     Eg,
         #     projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config
         # @!attribute [rw] recommender_generation_config
