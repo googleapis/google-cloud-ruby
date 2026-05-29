@@ -63,6 +63,8 @@ module Google
         # @param [Integer] timeout Default timeout to use in requests. Optional.
         # @param [String] endpoint Override of the endpoint host name. Optional. If the param is nil, uses the default
         #   endpoint.
+        # @param [Boolean] enable_self_signed_jwt Whether to enable self-signed JWT. Optional. If the param is nil,
+        #   it is computed based on the endpoint.
         #
         # @return [Google::Cloud::Translate::V2::Api]
         #
