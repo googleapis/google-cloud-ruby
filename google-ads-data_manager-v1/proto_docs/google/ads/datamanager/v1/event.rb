@@ -58,6 +58,10 @@ module Google
         #   @return [::Float]
         #     Optional. The conversion value associated with the event, for value-based
         #     conversions.
+        # @!attribute [rw] conversion_count
+        #   @return [::Float]
+        #     Optional. The conversion quantity associated with the event, for
+        #     counting-based conversions.
         # @!attribute [rw] event_source
         #   @return [::Google::Ads::DataManager::V1::EventSource]
         #     Optional. Signal for where the event happened (web, app, in-store, etc.).
@@ -139,6 +143,18 @@ module Google
         #   @return [::String]
         #     Optional. The mobile identifier for advertisers. This would be IDFA on iOS,
         #     AdID on Android, or other platforms’ identifiers for advertisers.
+        # @!attribute [rw] dclid
+        #   @return [::String]
+        #     Optional. The display click ID associated with this event.
+        # @!attribute [rw] impression_id
+        #   @return [::String]
+        #     Optional. The impression ID associated with this event.
+        # @!attribute [rw] match_id
+        #   @return [::String]
+        #     Optional. The match ID field used to join this event with a previous event.
+        # @!attribute [rw] encrypted_user_ids
+        #   @return [::Array<::Google::Ads::DataManager::V1::EncryptedUserId>]
+        #     Optional. Any number of encrypted user IDs.
         class AdIdentifiers
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
