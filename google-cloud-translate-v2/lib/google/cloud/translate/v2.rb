@@ -63,6 +63,8 @@ module Google
         # @param [Integer] timeout Default timeout to use in requests. Optional.
         # @param [String] endpoint Override of the endpoint host name. Optional. If the param is nil, uses the default
         #   endpoint.
+        # @param [Boolean] enable_self_signed_jwt Whether to enable self-signed JWT. Optional. If the param is nil,
+        #   it is computed based on the endpoint.
         #
         # @return [Google::Cloud::Translate::V2::Api]
         #
@@ -98,7 +100,7 @@ module Google
         #   translation = translate.translate "Hello world!", to: "la"
         #   translation.text #=> "Salve mundi!"
         #
-        def self.new project_id: nil, credentials: nil, key: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil
+        def self.new project_id: nil, credentials: nil, key: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil, enable_self_signed_jwt: nil
           project_id ||= default_project_id
 
           configuration = translation_config
@@ -116,10 +118,18 @@ module Google
           end
 
           scope ||= configuration&.scope
-          credentials ||= default_credentials scope: scope
+
+          if enable_self_signed_jwt.nil?
+            # Use self-signed JWT if the endpoint is unchanged from default (nil or default host).
+            # This logic is adapted from gapic-generator-ruby templates,
+            # simplified here since the default host is known to be global.
+            enable_self_signed_jwt = endpoint.nil? || endpoint == Service::API_HOST
+          end
+
+          credentials ||= default_credentials scope: scope, enable_self_signed_jwt: enable_self_signed_jwt
 
           unless credentials.is_a? Google::Auth::Credentials
-            credentials = Google::Cloud::Translate::V2::Credentials.new credentials, scope: scope
+            credentials = Google::Cloud::Translate::V2::Credentials.new credentials, { scope: scope, enable_self_signed_jwt: enable_self_signed_jwt }
           end
 
           project_id = resolve_project_id project_id, credentials
@@ -143,13 +153,13 @@ module Google
 
         ##
         # @private Default credentials.
-        def self.default_credentials scope: nil
+        def self.default_credentials scope: nil, enable_self_signed_jwt: nil
           translation_config&.credentials ||
             Google::Cloud::Config.credentials_from_env(
               "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON", "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
             ) ||
             Google::Cloud.configure.credentials ||
-            Google::Cloud::Translate::V2::Credentials.default(scope: scope)
+            Google::Cloud::Translate::V2::Credentials.default({ scope: scope, enable_self_signed_jwt: enable_self_signed_jwt })
         end
 
         ##

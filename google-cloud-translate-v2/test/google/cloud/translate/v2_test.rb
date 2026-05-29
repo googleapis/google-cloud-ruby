@@ -92,10 +92,38 @@ describe Google::Cloud::Translate::V2 do
       end
     end
 
+    it "enables self-signed JWT by default when using default endpoint" do
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          stubbed_default = ->(options = {}) {
+            _(options[:enable_self_signed_jwt]).must_equal true
+            default_credentials
+          }
+          Google::Cloud::Translate::V2::Credentials.stub :default, stubbed_default do
+            Google::Cloud::Translate::V2.new
+          end
+        end
+      end
+    end
+
+    it "does not enable self-signed JWT when using custom endpoint" do
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          stubbed_default = ->(options = {}) {
+            _(options[:enable_self_signed_jwt]).must_equal false
+            default_credentials
+          }
+          Google::Cloud::Translate::V2::Credentials.stub :default, stubbed_default do
+            Google::Cloud::Translate::V2.new endpoint: "custom-endpoint.com"
+          end
+        end
+      end
+    end
+
     it "uses provided project_id and credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(options[:scope]).must_be :nil?
         "translate-credentials"
       }
       stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil) {
@@ -127,9 +155,9 @@ describe Google::Cloud::Translate::V2 do
     end
 
     it "gets project_id from credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(options[:scope]).must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil) {
@@ -165,9 +193,9 @@ describe Google::Cloud::Translate::V2 do
     end
 
     it "uses provided endpoint" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(options[:scope]).must_be :nil?
         "translate-credentials"
       }
       stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil) {
