@@ -1418,9 +1418,6 @@ module Google
         # @!attribute [rw] image
         #   @return [::String]
         #     The name of the image to use for this node.
-        # @!attribute [rw] image_family
-        #   @return [::String]
-        #     The name of the image family to use for this node.
         # @!attribute [rw] image_project
         #   @return [::String]
         #     The project containing the image to use for this node.
