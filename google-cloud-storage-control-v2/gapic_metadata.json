@@ -144,6 +144,31 @@
               "methods": [
                 "test_iam_permissions"
               ]
+            },
+            "GetIntelligenceFinding": {
+              "methods": [
+                "get_intelligence_finding"
+              ]
+            },
+            "ListIntelligenceFindings": {
+              "methods": [
+                "list_intelligence_findings"
+              ]
+            },
+            "SummarizeIntelligenceFindings": {
+              "methods": [
+                "summarize_intelligence_findings"
+              ]
+            },
+            "GetIntelligenceFindingRevision": {
+              "methods": [
+                "get_intelligence_finding_revision"
+              ]
+            },
+            "ListIntelligenceFindingRevisions": {
+              "methods": [
+                "list_intelligence_finding_revisions"
+              ]
             }
           }
         }

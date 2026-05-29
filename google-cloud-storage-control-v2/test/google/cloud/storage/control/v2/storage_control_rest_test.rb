@@ -408,6 +408,285 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     end
   end
 
+  def test_get_intelligence_finding
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::IntelligenceFinding.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_intelligence_finding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_intelligence_finding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_intelligence_finding_client_stub do
+        # Create client
+        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_intelligence_finding({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_intelligence_finding name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_intelligence_finding ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_intelligence_finding({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_intelligence_finding(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_intelligence_finding_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_intelligence_findings
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_intelligence_findings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_list_intelligence_findings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_intelligence_findings_client_stub do
+        # Create client
+        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_intelligence_findings parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_intelligence_findings ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_intelligence_findings(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_intelligence_findings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_summarize_intelligence_findings
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    resource_scope = :RESOURCE_SCOPE_UNSPECIFIED
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    summarize_intelligence_findings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_summarize_intelligence_findings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, summarize_intelligence_findings_client_stub do
+        # Create client
+        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.summarize_intelligence_findings parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.summarize_intelligence_findings ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.summarize_intelligence_findings(::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, summarize_intelligence_findings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_intelligence_finding_revision
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_intelligence_finding_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_intelligence_finding_revision_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_intelligence_finding_revision_client_stub do
+        # Create client
+        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_intelligence_finding_revision({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_intelligence_finding_revision name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_intelligence_finding_revision ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_intelligence_finding_revision({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_intelligence_finding_revision(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_intelligence_finding_revision_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_intelligence_finding_revisions
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_intelligence_finding_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_list_intelligence_finding_revisions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_intelligence_finding_revisions_client_stub do
+        # Create client
+        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_intelligence_finding_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_intelligence_finding_revisions ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_intelligence_finding_revisions(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_intelligence_finding_revisions_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

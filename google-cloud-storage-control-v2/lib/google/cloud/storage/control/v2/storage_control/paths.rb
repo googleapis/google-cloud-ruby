@@ -133,6 +133,63 @@ module Google
               end
 
               ##
+              # Create a fully-qualified IntelligenceFinding resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param intelligence_finding [String]
+              #
+              # @return [::String]
+              def intelligence_finding_path project:, location:, intelligence_finding:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/intelligenceFindings/#{intelligence_finding}"
+              end
+
+              ##
+              # Create a fully-qualified IntelligenceFindingRevision resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param intelligence_finding [String]
+              # @param revision [String]
+              #
+              # @return [::String]
+              def intelligence_finding_revision_path project:, location:, intelligence_finding:, revision:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "intelligence_finding cannot contain /" if intelligence_finding.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/intelligenceFindings/#{intelligence_finding}/revisions/#{revision}"
+              end
+
+              ##
+              # Create a fully-qualified Location resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}`
+              #
+              # @param project [String]
+              # @param location [String]
+              #
+              # @return [::String]
+              def location_path project:, location:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}"
+              end
+
+              ##
               # Create a fully-qualified ManagedFolder resource string.
               #
               # The resource will be in the following format:
