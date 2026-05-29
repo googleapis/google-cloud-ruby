@@ -101,6 +101,9 @@ module Google
 
             # Google Ad Manager audience link.
             GOOGLE_AD_MANAGER_AUDIENCE_LINK = 6
+
+            # Floodlight configuration.
+            FLOODLIGHT_CONFIG = 7
           end
         end
 
