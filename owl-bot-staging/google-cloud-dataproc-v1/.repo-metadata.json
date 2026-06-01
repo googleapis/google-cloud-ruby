@@ -1,0 +1,18 @@
+{
+    "api_id": "dataproc.googleapis.com",
+    "api_shortname": "dataproc",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest",
+    "distribution_name": "google-cloud-dataproc-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "dataproc",
+    "name_pretty": "Cloud Dataproc V1 API",
+    "product_documentation": "https://cloud.google.com/dataproc",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Manages Hadoop-based clusters and jobs on Google Cloud Platform. Note that google-cloud-dataproc-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataproc instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "DATAPROC",
+    "ruby-cloud-product-url": "https://cloud.google.com/dataproc",
+    "library_type": "GAPIC_AUTO"
+}
