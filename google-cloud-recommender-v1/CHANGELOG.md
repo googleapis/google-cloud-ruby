@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2026-06-01)
+
+#### Features
+
+* Support utilization insights and cloud hub ([#33994](https://github.com/googleapis/google-cloud-ruby/issues/33994)) 
+
 ### 1.6.1 (2026-04-03)
 
 #### Documentation
