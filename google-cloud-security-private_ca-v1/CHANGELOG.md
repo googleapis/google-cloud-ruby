@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.7.0 (2026-06-01)
+
+#### Features
+
+* add allow_requester_specified_not_before_time and requested_not_before_time fields to PrivateCA v1 API ([#33986](https://github.com/googleapis/google-cloud-ruby/issues/33986)) 
+
 ### 2.6.1 (2026-04-03)
 
 #### Documentation
