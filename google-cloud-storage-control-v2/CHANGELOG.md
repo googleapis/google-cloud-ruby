@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.0 (2026-06-01)
+
+#### Features
+
+* add support for GCS Storage Control Intelligence Finding APIs ([#33987](https://github.com/googleapis/google-cloud-ruby/issues/33987)) 
+
 ### 1.10.1 (2026-04-08)
 
 #### Documentation
