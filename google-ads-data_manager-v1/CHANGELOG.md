@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2026-06-01)
+
+#### Features
+
+* add encrypted_user_id.proto and the EncryptedUserId resource ([#33995](https://github.com/googleapis/google-cloud-ruby/issues/33995)) 
+
 ### 0.4.0 (2026-05-19)
 
 #### Features
