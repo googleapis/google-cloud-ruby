@@ -52,6 +52,9 @@ module Google
         #     net.core.wmem_max
         #     net.core.optmem_max
         #     net.core.somaxconn
+        #     net.ipv4.neigh.default.gc_thresh1
+        #     net.ipv4.neigh.default.gc_thresh2
+        #     net.ipv4.neigh.default.gc_thresh3
         #     net.ipv4.tcp_rmem
         #     net.ipv4.tcp_wmem
         #     net.ipv4.tcp_tw_reuse
@@ -67,6 +70,8 @@ module Google
         #     net.netfilter.nf_conntrack_tcp_timeout_time_wait
         #     net.netfilter.nf_conntrack_tcp_timeout_established
         #     net.netfilter.nf_conntrack_acct
+        #     kernel.keys.maxkeys
+        #     kernel.keys.maxbytes
         #     kernel.shmmni
         #     kernel.shmmax
         #     kernel.shmall
@@ -905,6 +910,10 @@ module Google
         #     the latest version of it will be used. Please see
         #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
         #     for available image types.
+        # @!attribute [rw] node_image_config
+        #   @return [::Google::Cloud::Container::V1beta1::CustomImageConfig]
+        #     The node image configuration to use for this node pool.  Note that this is
+        #     only applicable for node pools using image_type=CUSTOM.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The Kubernetes labels (key/value pairs) to apply to each node. The values
@@ -1401,6 +1410,18 @@ module Google
         #     baseline is initially derived from the implicitly trusted boot image when
         #     the instance is created.
         class ShieldedInstanceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CustomImageConfig contains the information r
+        # @!attribute [rw] image
+        #   @return [::String]
+        #     The name of the image to use for this node.
+        # @!attribute [rw] image_project
+        #   @return [::String]
+        #     The project containing the image to use for this node.
+        class CustomImageConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3859,6 +3880,14 @@ module Google
         # @!attribute [rw] desired_gcfs_config
         #   @return [::Google::Cloud::Container::V1beta1::GcfsConfig]
         #     The desired GCFS config for the cluster.
+        # @!attribute [rw] desired_image
+        #   @return [::String]
+        #     The desired name of the image to use for this node.
+        #     This is used to create clusters using a custom image.
+        # @!attribute [rw] desired_image_project
+        #   @return [::String]
+        #     The project containing the desired image to use for this node.
+        #     This is used to create clusters using a custom image.
         # @!attribute [rw] desired_database_encryption
         #   @return [::Google::Cloud::Container::V1beta1::DatabaseEncryption]
         #     Configuration of etcd encryption.
@@ -4609,6 +4638,14 @@ module Google
         #     Required. The desired image type for the node pool. Please see
         #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
         #     for available image types.
+        # @!attribute [rw] image
+        #   @return [::String]
+        #     The desired name of the image name to use for this node.
+        #     This is used to create clusters using a custom image.
+        # @!attribute [rw] image_project
+        #   @return [::String]
+        #     The project containing the desired image to use for this node pool.
+        #     This is used to create clusters using a custom image.
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The desired list of Google Compute Engine
@@ -7025,6 +7062,9 @@ module Google
         #     and this field at the same time.
         #     To update the default setting, use
         #     {::Google::Cloud::Container::V1beta1::ClusterUpdate#desired_default_enable_private_nodes ClusterUpdate.desired_default_enable_private_nodes}
+        # @!attribute [rw] dataplane_v2_config
+        #   @return [::Google::Cloud::Container::V1beta1::DataplaneV2Config]
+        #     Optional. DataplaneV2Config specifies the DPv2 configuration.
         # @!attribute [rw] disable_l4_lb_firewall_reconciliation
         #   @return [::Boolean]
         #     Disable L4 load balancer VPC firewalls to enable firewall policies.
@@ -8454,6 +8494,27 @@ module Google
 
             # JobSet
             JOBSET = 16
+          end
+        end
+
+        # DataplaneV2Config is the configuration for DPv2.
+        # @!attribute [rw] scalability_mode
+        #   @return [::Google::Cloud::Container::V1beta1::DataplaneV2Config::ScalabilityMode]
+        #     Optional. Scalability mode for the cluster.
+        class DataplaneV2Config
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Options on how to scale the cluster.
+          module ScalabilityMode
+            # Default value.
+            SCALABILITY_MODE_UNSPECIFIED = 0
+
+            # Disables the scale optimized mode for DPv2.
+            DISABLED = 3
+
+            # Enables the scale optimized mode for DPv2.
+            SCALE_OPTIMIZED = 4
           end
         end
 
