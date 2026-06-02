@@ -1,5 +1,11 @@
 # Release History
 
+### 1.16.0 (2026-06-02)
+
+#### Features
+
+* add custom node image configuration ([#33996](https://github.com/googleapis/google-cloud-ruby/issues/33996)) 
+
 ### 1.15.0 (2026-05-18)
 
 #### Features
