@@ -320,7 +320,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   end
 
   describe "verified downloads" do
-    it "verifies m5d by default" do
+    it "verifies crc32c by default" do
       # Stub these values
       def file.md5; "md5="; end
       def file.crc32c; "crc32c="; end
@@ -332,17 +332,17 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
         bucket.service.mocked_service = mock
 
-        mocked_md5 = Minitest::Mock.new
-        mocked_md5.expect :md5_mock, file.md5
-        stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
-        stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+        stubbed_md5 = lambda { |_| fail "Should not be called!" }
+        mocked_crc32c = Minitest::Mock.new
+        mocked_crc32c.expect :crc32c_mock, file.crc32c
+        stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
         Google::Cloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
           Google::Cloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
             file.download tmpfile
           end
         end
-        mocked_md5.verify
+        mocked_crc32c.verify
         mock.verify
       end
     end
@@ -469,10 +469,10 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
         bucket.service.mocked_service = mock
 
-        mocked_md5 = Minitest::Mock.new
-        mocked_md5.expect :md5_mock, "NOPE="
-        stubbed_md5 = lambda { |_| mocked_md5.md5_mock }
-        stubbed_crc32c = lambda { |_| fail "Should not be called!" }
+        stubbed_md5 = lambda { |_| fail "Should not be called!" }
+        mocked_crc32c = Minitest::Mock.new
+        mocked_crc32c.expect :crc32c_mock, "NOPE!"
+        stubbed_crc32c = lambda { |_| mocked_crc32c.crc32c_mock }
 
         Google::Cloud::Storage::File::Verifier.stub :md5_for, stubbed_md5 do
           Google::Cloud::Storage::File::Verifier.stub :crc32c_for, stubbed_crc32c do
@@ -481,7 +481,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
             end
           end
         end
-        mocked_md5.verify
+        mocked_crc32c.verify
         mock.verify
       end
     end

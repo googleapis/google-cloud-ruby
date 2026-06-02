@@ -114,9 +114,9 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
       bucket = anonymous_storage.bucket bucket_name
       file = bucket.file file_name
 
-      # Stub the md5 to match.
-      def file.md5
-        "1B2M2Y8AsgTpgAmY7PhCfg=="
+      # Stub the crc32c to match.
+      def file.crc32c
+        "AAAAAA=="
       end
 
       downloaded = file.download tmpfile
