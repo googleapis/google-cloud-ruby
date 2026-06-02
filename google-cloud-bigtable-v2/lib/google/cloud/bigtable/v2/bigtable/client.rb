@@ -1410,7 +1410,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_query(instance_name: nil, app_profile_id: nil, query: nil, prepared_query: nil, proto_format: nil, resume_token: nil, params: nil)
+            # @overload execute_query(instance_name: nil, app_profile_id: nil, query: nil, prepared_query: nil, proto_format: nil, resume_token: nil, params: nil, view_parameters: nil)
             #   Pass arguments to `execute_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1472,6 +1472,13 @@ module Google
             #     inferred from the `param_types` in the `PrepareQueryRequest`. Any non-empty
             #     `Value.type` must match the corresponding `param_types` entry, or be
             #     rejected with `INVALID_ARGUMENT`.
+            #   @param view_parameters [::Hash{::String => ::Google::Cloud::Bigtable::V2::Value, ::Hash}]
+            #     Optional. This map provides the runtime values returned by the
+            #     VIEW_PARAMETERS() function calls, typically used for user-level scoping of
+            #     data based on identity.
+            #
+            #     The key is the name of the view parameter e.g. `user_id`, and
+            #     the value is the parameter value e.g. `alice@example.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::ExecuteQueryResponse>]

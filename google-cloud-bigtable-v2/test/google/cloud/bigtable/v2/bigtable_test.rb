@@ -815,6 +815,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     proto_format = {}
     resume_token = "hello world"
     params = {}
+    view_parameters = {}
 
     execute_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :execute_query, name
@@ -827,6 +828,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :proto_format, request.data_format
       assert_equal "hello world", request["resume_token"]
       assert_equal({}, request["params"].to_h)
+      assert_equal({}, request["view_parameters"].to_h)
       refute_nil options
     end
 
@@ -837,7 +839,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params }) do |response, operation|
+      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -846,7 +848,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params do |response, operation|
+      client.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -855,7 +857,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params) do |response, operation|
+      client.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -864,7 +866,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params }, grpc_options) do |response, operation|
+      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -873,7 +875,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params), grpc_options) do |response, operation|
+      client.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
