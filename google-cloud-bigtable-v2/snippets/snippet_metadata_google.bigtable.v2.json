@@ -450,6 +450,166 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_GetClientConfiguration_sync",
+      "title": "Snippet for the get_client_configuration call in the Bigtable service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#get_client_configuration.",
+      "file": "bigtable/get_client_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_client_configuration",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#get_client_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::ClientConfiguration",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "GetClientConfiguration",
+          "full_name": "google.bigtable.v2.Bigtable.GetClientConfiguration",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_OpenTable_sync",
+      "title": "Snippet for the open_table call in the Bigtable service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#open_table.",
+      "file": "bigtable/open_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "open_table",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#open_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::SessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::SessionResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "OpenTable",
+          "full_name": "google.bigtable.v2.Bigtable.OpenTable",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_OpenAuthorizedView_sync",
+      "title": "Snippet for the open_authorized_view call in the Bigtable service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#open_authorized_view.",
+      "file": "bigtable/open_authorized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "open_authorized_view",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#open_authorized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::SessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::SessionResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "OpenAuthorizedView",
+          "full_name": "google.bigtable.v2.Bigtable.OpenAuthorizedView",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtable_v2_generated_Bigtable_OpenMaterializedView_sync",
+      "title": "Snippet for the open_materialized_view call in the Bigtable service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#open_materialized_view.",
+      "file": "bigtable/open_materialized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "open_materialized_view",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#open_materialized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::SessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::SessionResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "OpenMaterializedView",
+          "full_name": "google.bigtable.v2.Bigtable.OpenMaterializedView",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

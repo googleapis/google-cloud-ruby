@@ -837,6 +837,14 @@ module Google
         #     inferred from the `param_types` in the `PrepareQueryRequest`. Any non-empty
         #     `Value.type` must match the corresponding `param_types` entry, or be
         #     rejected with `INVALID_ARGUMENT`.
+        # @!attribute [rw] view_parameters
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::V2::Value}]
+        #     Optional. This map provides the runtime values returned by the
+        #     VIEW_PARAMETERS() function calls, typically used for user-level scoping of
+        #     data based on identity.
+        #
+        #     The key is the name of the view parameter e.g. `user_id`, and
+        #     the value is the parameter value e.g. `alice@example.com`.
         class ExecuteQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -846,6 +854,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Cloud::Bigtable::V2::Value]
           class ParamsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Bigtable::V2::Value]
+          class ViewParametersEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

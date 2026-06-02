@@ -815,6 +815,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     proto_format = {}
     resume_token = "hello world"
     params = {}
+    view_parameters = {}
 
     execute_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :execute_query, name
@@ -827,6 +828,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal :proto_format, request.data_format
       assert_equal "hello world", request["resume_token"]
       assert_equal({}, request["params"].to_h)
+      assert_equal({}, request["view_parameters"].to_h)
       refute_nil options
     end
 
@@ -837,7 +839,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params }) do |response, operation|
+      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -846,7 +848,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params do |response, operation|
+      client.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -855,7 +857,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params) do |response, operation|
+      client.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -864,7 +866,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params }, grpc_options) do |response, operation|
+      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -873,7 +875,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params), grpc_options) do |response, operation|
+      client.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -883,6 +885,333 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, execute_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_client_configuration
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::ClientConfiguration.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance_name = "hello world"
+    app_profile_id = "hello world"
+
+    get_client_configuration_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_client_configuration, name
+      assert_kind_of ::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest, request
+      assert_equal "hello world", request["instance_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_client_configuration_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_client_configuration({ instance_name: instance_name, app_profile_id: app_profile_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_client_configuration instance_name: instance_name, app_profile_id: app_profile_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_client_configuration ::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new(instance_name: instance_name, app_profile_id: app_profile_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_client_configuration({ instance_name: instance_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_client_configuration(::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new(instance_name: instance_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_client_configuration_client_stub.call_rpc_count
+    end
+  end
+
+  def test_open_table
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::SessionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    open_session = {}
+
+    open_table_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :open_table, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, open_table_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      enum_input = [request_hash, request_proto].to_enum
+      client.open_table enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      stream_input = Gapic::StreamInput.new
+      client.open_table stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      enum_input = [request_hash, request_proto].to_enum
+      client.open_table enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      stream_input = Gapic::StreamInput.new
+      client.open_table stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, open_table_client_stub.call_rpc_count
+      open_table_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionRequest, r
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::OpenSessionRequest), r["open_session"]
+          assert_equal :open_session, r.payload
+        end
+      end
+    end
+  end
+
+  def test_open_authorized_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::SessionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    open_session = {}
+
+    open_authorized_view_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :open_authorized_view, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, open_authorized_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      enum_input = [request_hash, request_proto].to_enum
+      client.open_authorized_view enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      stream_input = Gapic::StreamInput.new
+      client.open_authorized_view stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      enum_input = [request_hash, request_proto].to_enum
+      client.open_authorized_view enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      stream_input = Gapic::StreamInput.new
+      client.open_authorized_view stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, open_authorized_view_client_stub.call_rpc_count
+      open_authorized_view_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionRequest, r
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::OpenSessionRequest), r["open_session"]
+          assert_equal :open_session, r.payload
+        end
+      end
+    end
+  end
+
+  def test_open_materialized_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::SessionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    open_session = {}
+
+    open_materialized_view_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :open_materialized_view, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, open_materialized_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      enum_input = [request_hash, request_proto].to_enum
+      client.open_materialized_view enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      stream_input = Gapic::StreamInput.new
+      client.open_materialized_view stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      enum_input = [request_hash, request_proto].to_enum
+      client.open_materialized_view enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { open_session: open_session }
+      request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
+      stream_input = Gapic::StreamInput.new
+      client.open_materialized_view stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, open_materialized_view_client_stub.call_rpc_count
+      open_materialized_view_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::SessionRequest, r
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::OpenSessionRequest), r["open_session"]
+          assert_equal :open_session, r.payload
+        end
+      end
     end
   end
 
