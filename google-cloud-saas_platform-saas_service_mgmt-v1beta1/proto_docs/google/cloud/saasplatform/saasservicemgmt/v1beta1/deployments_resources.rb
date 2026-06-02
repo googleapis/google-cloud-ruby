@@ -42,6 +42,30 @@ module Google
           #   @return [::Array<::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Location>]
           #     Optional. List of locations that the service is available in. Rollout
           #     refers to the list to generate a rollout plan.
+          # @!attribute [rw] application_template
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CompositeRef]
+          #     Reference to composite ApplicationTemplate.
+          #     When specified, the template components will be imported into their
+          #     equivalent UnitKind, Release and Blueprint resources.
+          #     Deleted references will not delete imported resources.
+          #     Should only be specified on source regions, and be unspecified on replica
+          #     regions.
+          # @!attribute [r] blueprint_repo
+          #   @return [::String]
+          #     Output only. Name of repository in Artifact Registry for system-generated
+          #     Blueprints, eg. Blueprints of imported ApplicationTemplates.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Saas::State]
+          #     Output only. State of the Saas.
+          #     It is always in ACTIVE state if the application_template is empty.
+          # @!attribute [r] conditions
+          #   @return [::Array<::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasCondition>]
+          #     Output only. A set of conditions which indicate the various conditions this
+          #     resource can have.
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. If the state is FAILED, the corresponding error code and
+          #     message. Defaults to code=OK for all other states.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -94,6 +118,32 @@ module Google
             class AnnotationsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # State of the Saas.
+            module State
+              # State type is unspecified.
+              STATE_TYPE_UNSPECIFIED = 0
+
+              # The Saas is ready
+              STATE_ACTIVE = 1
+
+              # In the process of importing, synchronizing or replicating
+              # ApplicationTemplates
+              STATE_RUNNING = 2
+
+              # Failure during process of importing, synchronizing or replicating
+              # ApplicationTemplate processing
+              STATE_FAILED = 3
+
+              # Deprecated: Use STATE_ACTIVE.
+              ACTIVE = 1
+
+              # Deprecated: Use STATE_RUNNING.
+              RUNNING = 2
+
+              # Deprecated: Use STATE_FAILED.
+              FAILED = 3
             end
           end
 
@@ -217,6 +267,13 @@ module Google
           #     (managed service) that the producer wants to manage with App Lifecycle
           #     Manager. Part of the App Lifecycle Manager common data model. Immutable
           #     once set.
+          # @!attribute [r] application_template_component
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ComponentRef]
+          #     Output only. Reference to component and revision in a composite
+          #     ApplicationTemplate.
+          # @!attribute [rw] app_params
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::AppParams]
+          #     AppParams contains the parameters for creating an AppHub Application.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -348,6 +405,11 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Optional. Output only. If set, indicates the time when the system will
           #     start removing the unit.
+          # @!attribute [rw] application
+          #   @return [::String]
+          #     Optional. Reference to the AppHub Application this unit belongs to.
+          #     All resources deployed in this Unit will be associated with the specified
+          #     Application.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -380,6 +442,13 @@ module Google
           #     Output only. The timestamp when the resource was last updated. Any
           #     change to the resource made by users must refresh this value.
           #     Changes to a resource made by the service should refresh this value.
+          # @!attribute [r] satisfies_pzs
+          #   @return [::Boolean]
+          #     Output only. Indicates whether the resource location satisfies Zone
+          #     Separation constraints. This is false by default.
+          # @!attribute [r] satisfies_pzi
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
           class Unit
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -492,7 +561,7 @@ module Google
           # unit to focus only on the change they have requested.
           #
           # This is a base object that contains the common fields in all unit operations.
-          # Next: 19
+          # Next: 22
           # @!attribute [rw] provision
           #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Provision]
           #     Note: The following fields are mutually exclusive: `provision`, `upgrade`, `deprovision`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -579,6 +648,10 @@ module Google
           #     Output only. The timestamp when the resource was last updated. Any
           #     change to the resource made by users must refresh this value.
           #     Changes to a resource made by the service should refresh this value.
+          # @!attribute [r] delete_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp when the resource was marked for deletion
+          #     (deletion is an asynchronous operation).
           class UnitOperation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -703,6 +776,10 @@ module Google
           # @!attribute [rw] input_variable_defaults
           #   @return [::Array<::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitVariable>]
           #     Optional. Mapping of input variables to default values. Maximum 100
+          # @!attribute [r] application_template_component
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ComponentRef]
+          #     Output only. Reference to component and revision in a composite
+          #     ApplicationTemplate.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The labels on the resource, which can be used for categorization.
@@ -830,6 +907,88 @@ module Google
           class Dependency
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # CompositeRef represents a reference to a composite resource.
+          # Next ID: 4
+          # @!attribute [rw] application_template
+          #   @return [::String]
+          #     Required. Reference to the ApplicationTemplate resource.
+          # @!attribute [rw] revision
+          #   @return [::String]
+          #     Revision of the ApplicationTemplate to use.
+          #     Changes to revision will trigger manual resynchronization.
+          #     If empty, ApplicationTemplate will be ignored.
+          # @!attribute [r] sync_operation
+          #   @return [::String]
+          #     Output only. Reference to on-going AppTemplate import and replication
+          #     operation (i.e. the operation_id for the long-running operation). This
+          #     field is opaque for external usage.
+          class CompositeRef
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ComponentRef represents a reference to a component resource.
+          # Next ID: 4
+          # @!attribute [rw] composite_ref
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CompositeRef]
+          #     Reference to the Composite ApplicationTemplate.
+          # @!attribute [rw] component
+          #   @return [::String]
+          #     Name of the component in composite.Components
+          # @!attribute [rw] revision
+          #   @return [::String]
+          #     Revision of the component.
+          #     If the component does not have a revision, this field will be explicitly
+          #     set to the revision of the composite ApplicationTemplate.
+          class ComponentRef
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # AppParams contains the parameters for creating an AppHub Application.
+          # @!attribute [rw] group
+          #   @return [::String]
+          #     Grouping used to construct the name of the AppHub Application.
+          #     Multiple UnitKinds can specify the same group to use the same Application
+          #     across their respective units.
+          #     Corresponds to the app_boundary_id in the ADC composite
+          #     ApplicationTemplate. Defaults to UnitKind.name
+          # @!attribute [rw] scope
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::AppParams::Scope]
+          #     Corresponds to the scope in the ADC composite ApplicationTemplate.
+          #     Defaults to TYPE_REGIONAL.
+          class AppParams
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Scope of an application.
+            # @!attribute [rw] type
+            #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::AppParams::Scope::Type]
+            #     Required. Scope Type.
+            class Scope
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Scope Type.
+              module Type
+                # Unspecified type.
+                TYPE_UNSPECIFIED = 0
+
+                # Regional type.
+                TYPE_REGIONAL = 1
+
+                # Global type.
+                TYPE_GLOBAL = 2
+
+                # Deprecated: Use TYPE_REGIONAL.
+                REGIONAL = 1
+
+                # Deprecated: Use TYPE_GLOBAL.
+                GLOBAL = 2
+              end
+            end
           end
         end
       end

@@ -59,6 +59,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Enumeration of variable types.
+            # `STRUCT` and `LIST` values should be JSON-encoded strings.
             module Type
               # Variable type is unspecified.
               TYPE_UNSPECIFIED = 0
@@ -71,6 +72,12 @@ module Google
 
               # Variable type is bool.
               BOOL = 3
+
+              # Variable type is struct.
+              STRUCT = 4
+
+              # Variable type is list.
+              LIST = 5
             end
           end
 
@@ -128,6 +135,13 @@ module Google
               # Condition type is operationError.
               # True when the last unit operation fails with a non-ignorable error.
               TYPE_OPERATION_ERROR = 4
+
+              # Indicates if AppHub app has been created or if Apphub app has already
+              # existed.
+              TYPE_APP_CREATED_OR_ALREADY_EXISTS = 5
+
+              # Indicates if services and workloads have been registered with AppHub.
+              TYPE_APP_COMPONENTS_REGISTERED = 6
             end
           end
 
@@ -191,6 +205,62 @@ module Google
 
               # Indicates if services and workloads have been registered with AppHub.
               TYPE_APP_COMPONENTS_REGISTERED = 7
+
+              # Indicates if the UnitOperation's core workload execution completed
+              # successfully.
+              # The workload is the core execution operation performed for a
+              # UnitOperation (e.g., provisioning, updating, or deprovisioning
+              # resources) excluding post-operation checks.
+              TYPE_WORKLOAD_SUCCEEDED = 8
+            end
+          end
+
+          # SaasCondition describes the status of a Saas.
+          # @!attribute [rw] status
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasCondition::Status]
+          #     Required. Status of the condition.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasCondition::Type]
+          #     Required. Type of the condition.
+          # @!attribute [rw] last_transition_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Required. Last time the condition transited from one status to another.
+          # @!attribute [rw] message
+          #   @return [::String]
+          #     Required. Human readable message indicating details about the last
+          #     transition.
+          # @!attribute [rw] reason
+          #   @return [::String]
+          #     Required. Brief reason for the condition's last transition.
+          class SaasCondition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enumeration of condition statuses.
+            module Status
+              # Condition status is unspecified.
+              STATUS_UNSPECIFIED = 0
+
+              # Condition is unknown.
+              STATUS_UNKNOWN = 1
+
+              # Condition is true.
+              STATUS_TRUE = 2
+
+              # Condition is false.
+              STATUS_FALSE = 3
+            end
+
+            # Enumeration of condition types.
+            module Type
+              # Condition type is unspecified.
+              TYPE_UNSPECIFIED = 0
+
+              # Condition type is ready.
+              TYPE_READY = 1
+
+              # Condition type is synchronized.
+              TYPE_SYNCHRONIZED = 2
             end
           end
 
