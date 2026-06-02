@@ -1098,7 +1098,7 @@ module Google
         #   downloaded.rewind
         #   downloaded.read #=> "world"
         #
-        def download path = nil, verify: :md5, encryption_key: nil, range: nil,
+        def download path = nil, verify: :crc32c, encryption_key: nil, range: nil,
                      skip_decompress: nil
           ensure_service!
           if path.nil?
@@ -2279,7 +2279,7 @@ module Google
           [dest_bucket, dest_path]
         end
 
-        def verify_file! file, verify = :md5
+        def verify_file! file, verify = :crc32c
           verify_md5    = verify == :md5 || verify == :all
           verify_crc32c = verify == :crc32c || verify == :all
           Verifier.verify_md5! self, file    if verify_md5    && md5
