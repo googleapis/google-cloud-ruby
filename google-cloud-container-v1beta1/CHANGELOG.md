@@ -1,5 +1,15 @@
 # Release History
 
+### 0.56.0 (2026-06-02)
+
+### ⚠ BREAKING CHANGES
+
+* remove image_family from container.v1beta1.CustomImageConfig ([#33992](https://github.com/googleapis/google-cloud-ruby/issues/33992))
+
+#### Bug Fixes
+
+* remove image_family from container.v1beta1.CustomImageConfig ([#33992](https://github.com/googleapis/google-cloud-ruby/issues/33992)) 
+
 ### 0.55.0 (2026-05-18)
 
 #### Features
