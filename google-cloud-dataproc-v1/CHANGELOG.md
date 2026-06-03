@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2026-06-03)
+
+#### Features
+
+* Add vcore_seconds and memory_mb_seconds to YarnApplication in Dataproc v1 ([#34001](https://github.com/googleapis/google-cloud-ruby/issues/34001)) 
+
 ### 1.13.0 (2026-05-08)
 
 #### Features
