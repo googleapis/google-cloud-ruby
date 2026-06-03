@@ -394,7 +394,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_workstation_clusters(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_workstation_clusters(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_workstation_clusters` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -406,6 +406,9 @@ module Google
             #   @param page_token [::String]
             #     Optional. next_page_token value returned from a previous List request, if
             #     any.
+            #   @param filter [::String]
+            #     Optional. Filter the WorkstationClusters to be listed. Possible filters are
+            #     described in https://google.aip.dev/160.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationCluster>]
@@ -502,7 +505,7 @@ module Google
             #   @param workstation_cluster [::Google::Cloud::Workstations::V1beta::WorkstationCluster, ::Hash]
             #     Required. Workstation cluster to create.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -602,7 +605,7 @@ module Google
             #     Required. Mask that specifies which fields in the workstation cluster
             #     should be updated.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param allow_missing [::Boolean]
             #     Optional. If set, and the workstation cluster is not found, a new
@@ -703,7 +706,7 @@ module Google
             #   @param name [::String]
             #     Required. Name of the workstation cluster to delete.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     apply it.
             #   @param etag [::String]
             #     Optional. If set, the request will be rejected if the latest version of the
@@ -884,7 +887,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_workstation_configs(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_workstation_configs(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_workstation_configs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -896,6 +899,9 @@ module Google
             #   @param page_token [::String]
             #     Optional. next_page_token value returned from a previous List request, if
             #     any.
+            #   @param filter [::String]
+            #     Optional. Filter the WorkstationConfigs to be listed. Possible filters are
+            #     described in https://google.aip.dev/160.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationConfig>]
@@ -1087,9 +1093,9 @@ module Google
             #   @param workstation_config_id [::String]
             #     Required. ID to use for the workstation configuration.
             #   @param workstation_config [::Google::Cloud::Workstations::V1beta::WorkstationConfig, ::Hash]
-            #     Required. Config to create.
+            #     Required. Workstation configuration to create.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1184,12 +1190,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param workstation_config [::Google::Cloud::Workstations::V1beta::WorkstationConfig, ::Hash]
-            #     Required. Config to update.
+            #     Required. Workstation configuration to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask specifying which fields in the workstation configuration
             #     should be updated.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param allow_missing [::Boolean]
             #     Optional. If set and the workstation configuration is not found, a new
@@ -1290,7 +1296,7 @@ module Google
             #   @param name [::String]
             #     Required. Name of the workstation configuration to delete.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param etag [::String]
             #     Optional. If set, the request is rejected if the latest version of the
@@ -1471,7 +1477,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_workstations(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_workstations(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_workstations` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1483,6 +1489,9 @@ module Google
             #   @param page_token [::String]
             #     Optional. next_page_token value returned from a previous List request, if
             #     any.
+            #   @param filter [::String]
+            #     Optional. Filter the Workstations to be listed. Possible filters are
+            #     described in https://google.aip.dev/160.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Workstations::V1beta::Workstation>]
@@ -1674,9 +1683,13 @@ module Google
             #   @param workstation_id [::String]
             #     Required. ID to use for the workstation.
             #   @param workstation [::Google::Cloud::Workstations::V1beta::Workstation, ::Hash]
-            #     Required. Workstation to create.
+            #     Required. Workstation to create. If source_workstation is specified, the
+            #     user must have `workstations.workstations.use` permission on the source
+            #     workstation, and the Cloud Workstations Service Agent for the project where
+            #     you are creating the new workstation must have compute.disks.createSnapshot
+            #     and compute.snapshots.useReadOnly on the source project.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1773,15 +1786,14 @@ module Google
             #   @param workstation [::Google::Cloud::Workstations::V1beta::Workstation, ::Hash]
             #     Required. Workstation to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Mask specifying which fields in the workstation configuration
-            #     should be updated.
+            #     Required. Mask specifying which fields in the workstation should be
+            #     updated.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param allow_missing [::Boolean]
-            #     Optional. If set and the workstation configuration is not found, a new
-            #     workstation configuration is created. In this situation, update_mask
-            #     is ignored.
+            #     Optional. If set and the workstation is not found, a new workstation is
+            #     created. In this situation, update_mask is ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1877,7 +1889,7 @@ module Google
             #   @param name [::String]
             #     Required. Name of the workstation to delete.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param etag [::String]
             #     Optional. If set, the request will be rejected if the latest version of the
@@ -1969,7 +1981,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload start_workstation(name: nil, validate_only: nil, etag: nil)
+            # @overload start_workstation(name: nil, validate_only: nil, etag: nil, boost_config: nil)
             #   Pass arguments to `start_workstation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1977,11 +1989,14 @@ module Google
             #   @param name [::String]
             #     Required. Name of the workstation to start.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param etag [::String]
             #     Optional. If set, the request will be rejected if the latest version of the
             #     workstation on the server does not have this ETag.
+            #   @param boost_config [::String]
+            #     Optional. If set, the workstation starts using the boost configuration with
+            #     the specified ID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2077,7 +2092,7 @@ module Google
             #   @param name [::String]
             #     Required. Name of the workstation to stop.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the result, but do not
             #     actually apply it.
             #   @param etag [::String]
             #     Optional. If set, the request will be rejected if the latest version of the
@@ -2159,6 +2174,8 @@ module Google
             ##
             # Returns a short-lived credential that can be used to send authenticated and
             # authorized traffic to a workstation.
+            # Once generated this token cannot be revoked and is good for the lifetime
+            # of the token.
             #
             # @overload generate_access_token(request, options = nil)
             #   Pass arguments to `generate_access_token` via a request object, either of type
@@ -2170,7 +2187,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_access_token(expire_time: nil, ttl: nil, workstation: nil)
+            # @overload generate_access_token(expire_time: nil, ttl: nil, workstation: nil, port: nil)
             #   Pass arguments to `generate_access_token` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2191,6 +2208,12 @@ module Google
             #   @param workstation [::String]
             #     Required. Name of the workstation for which the access token should be
             #     generated.
+            #   @param port [::Integer]
+            #     Optional. Port for which the access token should be generated. If
+            #     specified, the generated access token grants access only to the
+            #     specified port of the workstation. If specified, values must be within the
+            #     range [1 - 65535]. If not specified, the generated access token grants
+            #     access to all ports of the workstation.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Workstations::V1beta::GenerateAccessTokenResponse]
@@ -2251,6 +2274,107 @@ module Google
 
               @workstations_stub.call_rpc :generate_access_token, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Pushes credentials to a running workstation on behalf of a user. Once
+            # complete, supported credential types (application_default_credentials) are
+            # made available to processes running in the user container.
+            #
+            # @overload push_credentials(request, options = nil)
+            #   Pass arguments to `push_credentials` via a request object, either of type
+            #   {::Google::Cloud::Workstations::V1beta::PushCredentialsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Workstations::V1beta::PushCredentialsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload push_credentials(workstation: nil, application_default_credentials: nil)
+            #   Pass arguments to `push_credentials` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param workstation [::String]
+            #     Required. Name of the workstation for which the credentials should be
+            #     pushed.
+            #   @param application_default_credentials [::Google::Cloud::Workstations::V1beta::PushCredentialsRequest::OAuthToken, ::Hash]
+            #     Optional. Credentials used by Cloud Client Libraries, Google API Client
+            #     Libraries, and other tooling within the user conainer:
+            #     https://cloud.google.com/docs/authentication/application-default-credentials
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/workstations/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Workstations::V1beta::Workstations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Workstations::V1beta::PushCredentialsRequest.new
+            #
+            #   # Call the push_credentials method.
+            #   result = client.push_credentials request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def push_credentials request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Workstations::V1beta::PushCredentialsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.push_credentials.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Workstations::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.workstation
+                header_params["workstation"] = request.workstation
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.push_credentials.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.push_credentials.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @workstations_stub.call_rpc :push_credentials, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2539,6 +2663,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :generate_access_token
+                ##
+                # RPC-specific configuration for `push_credentials`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :push_credentials
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2582,6 +2711,8 @@ module Google
                   @stop_workstation = ::Gapic::Config::Method.new stop_workstation_config
                   generate_access_token_config = parent_rpcs.generate_access_token if parent_rpcs.respond_to? :generate_access_token
                   @generate_access_token = ::Gapic::Config::Method.new generate_access_token_config
+                  push_credentials_config = parent_rpcs.push_credentials if parent_rpcs.respond_to? :push_credentials
+                  @push_credentials = ::Gapic::Config::Method.new push_credentials_config
 
                   yield self if block_given?
                 end

@@ -27,7 +27,7 @@ module Google
         # VPC network they're attached to.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Full name of this workstation cluster.
+        #     Identifier. Full name of this workstation cluster.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Human-readable name for this workstation cluster.
@@ -80,16 +80,53 @@ module Google
         # @!attribute [rw] private_cluster_config
         #   @return [::Google::Cloud::Workstations::V1beta::WorkstationCluster::PrivateClusterConfig]
         #     Optional. Configuration for private workstation cluster.
+        # @!attribute [rw] domain_config
+        #   @return [::Google::Cloud::Workstations::V1beta::WorkstationCluster::DomainConfig]
+        #     Optional. Configuration options for a custom domain.
         # @!attribute [r] degraded
         #   @return [::Boolean]
         #     Output only. Whether this workstation cluster is in degraded mode, in which
-        #     case it may require user action to restore full functionality. Details can
-        #     be found in
-        #     {::Google::Cloud::Workstations::V1beta::WorkstationCluster#conditions conditions}.
+        #     case it may require user action to restore full functionality. The
+        #     {::Google::Cloud::Workstations::V1beta::WorkstationCluster#conditions conditions}
+        #     field contains detailed information about the status of the cluster.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Rpc::Status>]
         #     Output only. Status conditions describing the workstation cluster's current
         #     state.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
+        # @!attribute [rw] gateway_config
+        #   @return [::Google::Cloud::Workstations::V1beta::WorkstationCluster::GatewayConfig]
+        #     Optional. Configuration options for Cluster HTTP Gateway.
+        # @!attribute [rw] workstation_authorization_url
+        #   @return [::String]
+        #     Optional. Specifies the redirect URL for unauthorized requests received by
+        #     workstation VMs in this cluster.
+        #
+        #     Redirects to this endpoint will send a base64 encoded `state` query param
+        #     containing the target workstation name and original request hostname. The
+        #     endpoint is responsible for retrieving a token using `GenerateAccessToken`
+        #     and redirecting back to the original hostname with the token.
+        # @!attribute [rw] workstation_launch_url
+        #   @return [::String]
+        #     Optional. Specifies the launch URL for workstations in this cluster.
+        #     Requests sent to unstarted workstations will be redirected to this URL.
+        #
+        #     Requests redirected to the launch endpoint will be sent with a
+        #     `workstation` and `project` query parameter containing the full workstation
+        #     resource name and project ID, respectively. The launch endpoint is
+        #     responsible for starting the workstation, polling it until it reaches
+        #     `STATE_RUNNING`, and then issuing a redirect to the workstation's host URL.
         class WorkstationCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,7 +145,7 @@ module Google
           # @!attribute [r] service_attachment_uri
           #   @return [::String]
           #     Output only. Service attachment URI for the workstation cluster. The
-          #     service attachemnt is created when private endpoint is enabled. To access
+          #     service attachment is created when private endpoint is enabled. To access
           #     workstations in the workstation cluster, configure access to the managed
           #     service using [Private Service
           #     Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-services).
@@ -118,6 +155,25 @@ module Google
           #     workstation cluster's service attachment. By default, the workstation
           #     cluster's project and the VPC host project (if different) are allowed.
           class PrivateClusterConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration options for a custom domain.
+          # @!attribute [rw] domain
+          #   @return [::String]
+          #     Immutable. Domain used by Workstations for HTTP ingress.
+          class DomainConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration options for Cluster HTTP Gateway.
+          # @!attribute [rw] http2_enabled
+          #   @return [::Boolean]
+          #     Optional. Whether HTTP/2 is enabled for this workstation cluster.
+          #     Defaults to false.
+          class GatewayConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -139,6 +195,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A workstation configuration resource in the Cloud Workstations API.
@@ -152,7 +217,7 @@ module Google
         # teams or to individual developers.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Full name of this workstation configuration.
+        #     Identifier. Full name of this workstation configuration.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Human-readable name for this workstation configuration.
@@ -223,6 +288,22 @@ module Google
         #     Warning: A value of `"0s"` indicates that Cloud Workstations VMs created
         #     with this configuration have no maximum running time. This is strongly
         #     discouraged because you incur costs and will not pick up security updates.
+        # @!attribute [rw] max_usable_workstations
+        #   @return [::Integer]
+        #     Optional. Maximum number of workstations under this configuration a user
+        #     can have `workstations.workstation.use` permission on.
+        #
+        #     Only enforced on CreateWorkstation API calls on the user issuing the API
+        #     request. Can be overridden by:
+        #
+        #     - granting a user
+        #     workstations.workstationConfigs.exemptMaxUsableWorkstationLimit permission,
+        #     or
+        #     - having a user with that permission create a workstation and
+        #     granting another user `workstations.workstation.use` permission on
+        #     that workstation.
+        #
+        #     If not specified, defaults to `0`, which indicates unlimited.
         # @!attribute [rw] host
         #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host]
         #     Optional. Runtime host for the workstation.
@@ -273,20 +354,69 @@ module Google
         #     Immutable after the workstation configuration is created.
         # @!attribute [r] degraded
         #   @return [::Boolean]
-        #     Output only. Whether this resource is degraded, in which case it may
-        #     require user action to restore full functionality. See also the
+        #     Output only. Whether this workstation configuration is in degraded mode, in
+        #     which case it may require user action to restore full functionality. The
         #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig#conditions conditions}
-        #     field.
+        #     field contains detailed information about the status of the configuration.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Rpc::Status>]
-        #     Output only. Status conditions describing the current resource state.
+        #     Output only. Status conditions describing the workstation configuration's
+        #     current state.
         # @!attribute [rw] enable_audit_agent
         #   @return [::Boolean]
         #     Optional. Whether to enable Linux `auditd` logging on the workstation. When
-        #     enabled, a service account must also be specified that has
-        #     `logging.buckets.write` permission on the project. Operating system audit
+        #     enabled, a
+        #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance#service_account service_account}
+        #     must also be specified that has `roles/logging.logWriter` and
+        #     `roles/monitoring.metricWriter` on the project. Operating system audit
         #     logging is distinct from [Cloud Audit
-        #     Logs](https://cloud.google.com/workstations/docs/audit-logging).
+        #     Logs](https://cloud.google.com/workstations/docs/audit-logging) and
+        #     [Container output
+        #     logging](https://cloud.google.com/workstations/docs/container-output-logging#overview).
+        #     Operating system audit logs are available in the
+        #     [Cloud Logging](https://cloud.google.com/logging/docs) console by querying:
+        #
+        #         resource.type="gce_instance"
+        #         log_name:"/logs/linux-auditd"
+        # @!attribute [rw] http_options
+        #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::HttpOptions]
+        #     Optional. HTTP options that customize the behavior of the workstation
+        #     service's HTTP proxy.
+        # @!attribute [rw] disable_tcp_connections
+        #   @return [::Boolean]
+        #     Optional. Disables support for plain TCP connections in the workstation.
+        #     By default the service supports TCP connections through a websocket relay.
+        #     Setting this option to true disables that relay, which prevents the usage
+        #     of services that require plain TCP connections, such as SSH.
+        #     When enabled, all communication must occur over HTTPS or WSS.
+        # @!attribute [rw] allowed_ports
+        #   @return [::Array<::Google::Cloud::Workstations::V1beta::WorkstationConfig::PortRange>]
+        #     Optional. A list of
+        #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PortRange PortRange}s
+        #     specifying single ports or ranges of ports that are externally accessible
+        #     in the workstation. Allowed ports must be one of 22, 80, or within range
+        #     1024-65535. If not specified defaults to ports 22, 80, and ports
+        #     1024-65535.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [rw] grant_workstation_admin_role_on_create
+        #   @return [::Boolean]
+        #     Optional. Grant creator of a workstation `roles/workstations.policyAdmin`
+        #     role along with `roles/workstations.user` role on the workstation created
+        #     by them. This allows workstation users to share access to either their
+        #     entire workstation, or individual ports. Defaults to false.
+        # @!attribute [rw] enable_pushing_credentials
+        #   @return [::Boolean]
+        #     Optional. Enables pushing user provided credentials to Workstations by
+        #     calling workstations.pushCredentials. If application_default_credentials
+        #     are supplied to pushCredentials, the provided token is returned when tools
+        #     and applications running in the user container make a request for Default
+        #     Application Credentials. Please note that any credentials supplied are made
+        #     available to all users with access to the workstation.
         class WorkstationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -311,10 +441,12 @@ module Google
             #   @return [::String]
             #     Optional. The email address of the service account for Cloud
             #     Workstations VMs created with this configuration. When specified, be
-            #     sure that the service account has `logginglogEntries.create` permission
-            #     on the project so it can write logs out to Cloud Logging. If using a
-            #     custom container image, the service account must have permissions to
-            #     pull the specified image.
+            #     sure that the service account has `logging.logEntries.create` and
+            #     `monitoring.timeSeries.create` permissions on the project so it can
+            #     write logs out to Cloud Logging. If using a custom container image, the
+            #     service account must have [Artifact Registry
+            #     Reader](https://cloud.google.com/artifact-registry/docs/access-control#roles)
+            #     permission to pull the specified image.
             #
             #     If you as the administrator want to be able to `ssh` into the
             #     underlying VM, you need to set this value to a service account
@@ -330,9 +462,8 @@ module Google
             #   @return [::Array<::String>]
             #     Optional. Scopes to grant to the
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance#service_account service_account}.
-            #     Various scopes are automatically added based on feature usage. When
-            #     specified, users of workstations under this configuration must have
-            #     `iam.serviceAccounts.actAs` on the service account.
+            #     When specified, users of workstations under this configuration must
+            #     have `iam.serviceAccounts.actAs` on the service account.
             # @!attribute [rw] tags
             #   @return [::Array<::String>]
             #     Optional. Network tags to add to the Compute Engine VMs backing the
@@ -363,7 +494,9 @@ module Google
             # @!attribute [rw] enable_nested_virtualization
             #   @return [::Boolean]
             #     Optional. Whether to enable nested virtualization on Cloud Workstations
-            #     VMs created under this workstation configuration.
+            #     VMs created using this workstation configuration.
+            #
+            #     Defaults to false.
             #
             #     Nested virtualization lets you run virtual machine (VM) instances
             #     inside your workstation. Before enabling nested virtualization,
@@ -386,16 +519,6 @@ module Google
             #     workstation configurations that specify a
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance#machine_type machine_type}
             #     in the N1 or N2 machine series.
-            #     * **GPUs**: nested virtualization may not be enabled on workstation
-            #     configurations with accelerators.
-            #     * **Operating System**: Because
-            #     [Container-Optimized
-            #     OS](https://cloud.google.com/compute/docs/images/os-details#container-optimized_os_cos)
-            #     does not support nested virtualization, when nested virtualization is
-            #     enabled, the underlying Compute Engine VM instances boot from an
-            #     [Ubuntu
-            #     LTS](https://cloud.google.com/compute/docs/images/os-details#ubuntu_lts)
-            #     image.
             # @!attribute [rw] shielded_instance_config
             #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::GceShieldedInstanceConfig]
             #     Optional. A set of Compute Engine Shielded instance options.
@@ -410,6 +533,56 @@ module Google
             #   @return [::Array<::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::Accelerator>]
             #     Optional. A list of the type and count of accelerator cards attached to
             #     the instance.
+            # @!attribute [rw] boost_configs
+            #   @return [::Array<::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::BoostConfig>]
+            #     Optional. A list of the boost configurations that workstations created
+            #     using this workstation configuration are allowed to use. If specified,
+            #     users will have the option to choose from the list of boost configs
+            #     when starting a workstation.
+            # @!attribute [rw] disable_ssh
+            #   @return [::Boolean]
+            #     Optional. Whether to disable SSH access to the VM.
+            # @!attribute [rw] vm_tags
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. Resource manager tags to be bound to this instance.
+            #     Tag keys and values have the same definition as [resource manager
+            #     tags](https://cloud.google.com/resource-manager/docs/tags/tags-overview).
+            #     Keys must be in the format `tagKeys/{tag_key_id}`, and
+            #     values are in the format `tagValues/456`.
+            # @!attribute [rw] reservation_affinity
+            #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::ReservationAffinity]
+            #     Optional.
+            #     [ReservationAffinity](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources)
+            #     specifies a reservation that can be consumed to create VM
+            #     instances. If SPECIFIC_RESERVATION is specified, Cloud Workstations
+            #     will only create VMs in the zone where the reservation is located.
+            #     This would affect availability since the service will no longer be
+            #     resilient to zonal outages. If ANY_RESERVATION is specified, creating
+            #     reservations in both zones that the config creates VMs in will ensure
+            #     higher availability.
+            #     **Important Considerations for Reservation Affinity:**
+            #
+            #     *   This feature is intended for advanced users and requires
+            #     familiarity with Google Compute Engine reservations.
+            #     *   Using reservations incurs charges, regardless of utilization.
+            #     *   The resources in the pool will consume the specified
+            #         reservation. Take this into account when setting the
+            #         pool size.
+            # @!attribute [rw] startup_script_uri
+            #   @return [::String]
+            #     Optional. Link to the startup script stored in Cloud Storage. This
+            #     script will be run on the host workstation VM when the VM is created.
+            #     The URI must be of the form gs://\\{bucket-name}/\\{object-name}. If
+            #     specifying a startup script, the service account must have [Permission
+            #     to access the bucket and script file in Cloud
+            #     Storage](https://cloud.google.com/storage/docs/access-control/iam-permissions).
+            #     Otherwise, the script must be publicly accessible.
+            #     Note that the service regularly updates the OS version of the host VM,
+            #     and it is the responsibility of the user to ensure the script stays
+            #     compatible with the OS version.
+            # @!attribute [rw] instance_metadata
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. Custom metadata to apply to Compute Engine instances.
             class GceInstance
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -451,13 +624,157 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+
+              # A boost configuration is a set of resources that a workstation can use
+              # to increase its performance. If you specify a boost configuration, upon
+              # startup, workstation users can choose to use a VM provisioned under the
+              # boost config by passing the boost config ID in the start request. If
+              # the workstation user does not provide a boost config ID  in the start
+              # request, the system will choose a VM from the pool provisioned under
+              # the default config.
+              # @!attribute [rw] id
+              #   @return [::String]
+              #     Required. The ID to be used for the boost configuration.
+              # @!attribute [rw] machine_type
+              #   @return [::String]
+              #     Optional. The type of machine that boosted VM instances will use—for
+              #     example, `e2-standard-4`. For more information about machine types
+              #     that Cloud Workstations supports, see the list of [available machine
+              #     types](https://cloud.google.com/workstations/docs/available-machine-types).
+              #     Defaults to `e2-standard-4`.
+              # @!attribute [rw] accelerators
+              #   @return [::Array<::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::Accelerator>]
+              #     Optional. A list of the type and count of accelerator cards attached
+              #     to the boost instance. Defaults to `none`.
+              # @!attribute [rw] boot_disk_size_gb
+              #   @return [::Integer]
+              #     Optional. The size of the boot disk for the VM in gigabytes (GB).
+              #     The minimum boot disk size is `30` GB. Defaults to `50` GB.
+              # @!attribute [rw] enable_nested_virtualization
+              #   @return [::Boolean]
+              #     Optional. Whether to enable nested virtualization on boosted Cloud
+              #     Workstations VMs running using this boost configuration.
+              #
+              #     Defaults to false.
+              #
+              #     Nested virtualization lets you run virtual machine (VM) instances
+              #     inside your workstation. Before enabling nested virtualization,
+              #     consider the following important considerations. Cloud Workstations
+              #     instances are subject to the [same restrictions as Compute Engine
+              #     instances](https://cloud.google.com/compute/docs/instances/nested-virtualization/overview#restrictions):
+              #
+              #     * **Organization policy**: projects, folders, or
+              #     organizations may be restricted from creating nested VMs if the
+              #     **Disable VM nested virtualization** constraint is enforced in
+              #     the organization policy. For more information, see the
+              #     Compute Engine section,
+              #     [Checking whether nested virtualization is
+              #     allowed](https://cloud.google.com/compute/docs/instances/nested-virtualization/managing-constraint#checking_whether_nested_virtualization_is_allowed).
+              #     * **Performance**: nested VMs might experience a 10% or greater
+              #     decrease in performance for workloads that are CPU-bound and
+              #     possibly greater than a 10% decrease for workloads that are
+              #     input/output bound.
+              #     * **Machine Type**: nested virtualization can only be enabled on
+              #     boost configurations that specify a
+              #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::BoostConfig#machine_type machine_type}
+              #     in the N1 or N2 machine series.
+              # @!attribute [rw] pool_size
+              #   @return [::Integer]
+              #     Optional. The number of boost VMs that the system should keep idle so
+              #     that workstations can be boosted quickly. Defaults to `0`.
+              # @!attribute [rw] reservation_affinity
+              #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::ReservationAffinity]
+              #     Optional.
+              #     [ReservationAffinity](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources)
+              #     specifies a reservation that can be consumed to create boost VM
+              #     instances. If SPECIFIC_RESERVATION is specified, Cloud Workstations
+              #     will only create VMs in the zone where the reservation is located.
+              #     This would affect availability since the service will no longer be
+              #     resilient to zonal outages. If ANY_RESERVATION is specified, creating
+              #     reservations in both zones that the config creates VMs in will ensure
+              #     higher availability.
+              #     **Important Considerations for Reservation Affinity:**
+              #
+              #     *   This feature is intended for advanced users and requires
+              #     familiarity with Google Compute Engine reservations.
+              #     *   Using reservations incurs charges, regardless of utilization.
+              #     *   The resources in the pool will consume the specified
+              #         reservation. Take this into account when setting the
+              #         pool size.
+              class BoostConfig
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # ReservationAffinity is the configuration of the desired reservation
+              # from which instances can consume resources.
+              # @!attribute [rw] consume_reservation_type
+              #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::Host::GceInstance::ReservationAffinity::Type]
+              #     Optional. Corresponds to the type of reservation consumption.
+              # @!attribute [rw] key
+              #   @return [::String]
+              #     Optional. Corresponds to the label key of reservation resource.
+              # @!attribute [rw] values
+              #   @return [::Array<::String>]
+              #     Optional. Corresponds to the label values of reservation resources.
+              #     Valid values are either the name of a reservation in the same project
+              #     or "projects/\\{project}/reservations/\\{reservation}" to target a shared
+              #     reservation in the same zone but in a different project.
+              class ReservationAffinity
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Indicates whether to consume capacity from a reservation or not.
+                module Type
+                  # Default value. This should not be used.
+                  TYPE_UNSPECIFIED = 0
+
+                  # Do not consume from any reserved capacity.
+                  NO_RESERVATION = 1
+
+                  # Consume any reservation available.
+                  ANY_RESERVATION = 2
+
+                  # Must consume from a specific reservation. Must specify key value
+                  # fields for specifying the reservations.
+                  SPECIFIC_RESERVATION = 3
+                end
+              end
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class VmTagsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class InstanceMetadataEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
 
-          # A directory to persist across workstation sessions.
+          # A directory to persist across workstation sessions. Updates to this field
+          # will not update existing workstations and will only take effect on new
+          # workstations.
           # @!attribute [rw] gce_pd
           #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceRegionalPersistentDisk]
           #     A PersistentDirectory backed by a Compute Engine persistent disk.
+          #
+          #     Note: The following fields are mutually exclusive: `gce_pd`, `gce_hd`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] gce_hd
+          #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceHyperdiskBalancedHighAvailability]
+          #     A PersistentDirectory backed by a Compute Engine hyperdisk high
+          #     availability disk.
+          #
+          #     Note: The following fields are mutually exclusive: `gce_hd`, `gce_pd`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mount_path
           #   @return [::String]
           #     Optional. Location of this directory in the running workstation.
@@ -465,7 +782,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # A PersistentDirectory backed by a Compute Engine regional persistent
+            # A Persistent Directory backed by a Compute Engine regional persistent
             # disk. The
             # {::Google::Cloud::Workstations::V1beta::WorkstationConfig#persistent_directories persistent_directories}
             # field is repeated, but it may contain only one entry. It creates a
@@ -487,6 +804,10 @@ module Google
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceRegionalPersistentDisk#disk_type disk_type}
             #     must be
             #     `"pd-balanced"` or `"pd-ssd"`.
+            # @!attribute [rw] max_size_gb
+            #   @return [::Integer]
+            #     Optional. Maximum size in GB to which this persistent directory can be
+            #     resized. Defaults to unlimited if not set.
             # @!attribute [rw] fs_type
             #   @return [::String]
             #     Optional. Type of file system that the disk should be formatted with.
@@ -506,13 +827,81 @@ module Google
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceRegionalPersistentDisk#size_gb size_gb}
             #     and
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceRegionalPersistentDisk#fs_type fs_type}
-            #     must be empty.
+            #     must be empty. Must be formatted as ext4 file system with no
+            #     partitions.
             # @!attribute [rw] reclaim_policy
             #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceRegionalPersistentDisk::ReclaimPolicy]
             #     Optional. Whether the persistent disk should be deleted when the
             #     workstation is deleted. Valid values are `DELETE` and `RETAIN`.
             #     Defaults to `DELETE`.
+            # @!attribute [rw] archive_timeout
+            #   @return [::Google::Protobuf::Duration]
+            #     Optional. Number of seconds to wait after initially creating or
+            #     subsequently shutting down the workstation before converting its disk
+            #     into a snapshot. This generally saves costs at the expense of greater
+            #     startup time on next workstation start, as the service will need to
+            #     create a disk from the archival snapshot.
+            #
+            #     A value of `"0s"` indicates that the disk will never be archived.
             class GceRegionalPersistentDisk
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Value representing what should happen to the disk after the workstation
+              # is deleted.
+              module ReclaimPolicy
+                # Do not use.
+                RECLAIM_POLICY_UNSPECIFIED = 0
+
+                # Delete the persistent disk when deleting the workstation.
+                DELETE = 1
+
+                # Keep the persistent disk when deleting the workstation.
+                # An administrator must manually delete the disk.
+                RETAIN = 2
+              end
+            end
+
+            # A Persistent Directory backed by a Compute Engine
+            # [Hyperdisk Balanced High Availability
+            # Disk](https://cloud.google.com/compute/docs/disks/hd-types/hyperdisk-balanced-ha).
+            # This is a high-availability block storage solution that offers a balance
+            # between performance and cost for most general-purpose workloads.
+            # @!attribute [rw] size_gb
+            #   @return [::Integer]
+            #     Optional. The GB capacity of a persistent home directory for each
+            #     workstation created with this configuration. Must be empty if
+            #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceHyperdiskBalancedHighAvailability#source_snapshot source_snapshot}
+            #     is set.
+            #
+            #     Valid values are `10`, `50`, `100`, `200`, `500`, or `1000`.
+            #     Defaults to `200`.
+            # @!attribute [rw] max_size_gb
+            #   @return [::Integer]
+            #     Optional. Maximum size in GB to which this persistent directory can be
+            #     resized. Defaults to unlimited if not set.
+            # @!attribute [rw] source_snapshot
+            #   @return [::String]
+            #     Optional. Name of the snapshot to use as the source for the disk. If
+            #     set,
+            #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceHyperdiskBalancedHighAvailability#size_gb size_gb}
+            #     must be empty. Must be formatted as ext4 file system with no
+            #     partitions.
+            # @!attribute [rw] reclaim_policy
+            #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig::PersistentDirectory::GceHyperdiskBalancedHighAvailability::ReclaimPolicy]
+            #     Optional. Whether the persistent disk should be deleted when the
+            #     workstation is deleted. Valid values are `DELETE` and `RETAIN`.
+            #     Defaults to `DELETE`.
+            # @!attribute [rw] archive_timeout
+            #   @return [::Google::Protobuf::Duration]
+            #     Optional. Number of seconds to wait after initially creating or
+            #     subsequently shutting down the workstation before converting its disk
+            #     into a snapshot. This generally saves costs at the expense of greater
+            #     startup time on next workstation start, as the service will need to
+            #     create a disk from the archival snapshot.
+            #
+            #     A value of `"0s"` indicates that the disk will never be archived.
+            class GceHyperdiskBalancedHighAvailability
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
@@ -553,10 +942,19 @@ module Google
             #     Optional. Name of the snapshot to use as the source for the disk. Must
             #     be empty if
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::EphemeralDirectory::GcePersistentDisk#source_image source_image}
-            #     is set. Updating
+            #     is set. Must be empty if
+            #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::EphemeralDirectory::GcePersistentDisk#read_only read_only}
+            #     is false. Updating
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::EphemeralDirectory::GcePersistentDisk#source_snapshot source_snapshot}
             #     will update content in the ephemeral directory after the workstation is
-            #     restarted. This field is mutable.
+            #     restarted.
+            #
+            #     Only file systems supported by Container-Optimized OS (COS)
+            #     are explicitly supported. For a list of supported file systems, see
+            #     [the filesystems available in Container-Optimized
+            #     OS](https://cloud.google.com/container-optimized-os/docs/concepts/supported-filesystems).
+            #
+            #     This field is mutable.
             # @!attribute [rw] source_image
             #   @return [::String]
             #     Optional. Name of the disk image to use as the source for the disk.
@@ -565,7 +963,14 @@ module Google
             #     is set. Updating
             #     {::Google::Cloud::Workstations::V1beta::WorkstationConfig::EphemeralDirectory::GcePersistentDisk#source_image source_image}
             #     will update content in the ephemeral directory after the workstation is
-            #     restarted. This field is mutable.
+            #     restarted.
+            #
+            #     Only file systems supported by Container-Optimized OS (COS)
+            #     are explicitly supported. For a list of supported file systems, please
+            #     refer to the [COS
+            #     documentation](https://cloud.google.com/container-optimized-os/docs/concepts/supported-filesystems).
+            #
+            #     This field is mutable.
             # @!attribute [rw] read_only
             #   @return [::Boolean]
             #     Optional. Whether the disk is read only. If true, the disk may be
@@ -590,7 +995,10 @@ module Google
           #     [custom container
           #     images](https://cloud.google.com/workstations/docs/custom-container-images).
           #     If using a private image, the `host.gceInstance.serviceAccount` field
-          #     must be specified in the workstation configuration and must have
+          #     must be specified in the workstation configuration.
+          #     If using a custom container image, the service account must have
+          #     [Artifact Registry
+          #     Reader](https://cloud.google.com/artifact-registry/docs/access-control#roles)
           #     permission to pull the specified image. Otherwise, the image must be
           #     publicly accessible.
           # @!attribute [rw] command
@@ -661,6 +1069,50 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # HTTP options for the running workstations.
+          # @!attribute [rw] allowed_unauthenticated_cors_preflight_requests
+          #   @return [::Boolean]
+          #     Optional. By default, the workstations service makes sure that all
+          #     requests to the workstation are authenticated. CORS preflight requests do
+          #     not include cookies or custom headers, and so are considered
+          #     unauthenticated and blocked by the workstations service. Enabling this
+          #     option allows these unauthenticated CORS preflight requests through to
+          #     the workstation, where it becomes the responsibility of the destination
+          #     server in the workstation to validate the request.
+          # @!attribute [rw] disable_localhost_replacement
+          #   @return [::Boolean]
+          #     Optional. By default, the workstations service replaces references to
+          #     localhost, 127.0.0.1, and 0.0.0.0 with the workstation's hostname in http
+          #     responses from the workstation so that applications under development run
+          #     properly on the workstation. This may intefere with some applications,
+          #     and so this option allows that behavior to be disabled.
+          class HttpOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A PortRange defines a range of ports. Both
+          # {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PortRange#first first}
+          # and
+          # {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PortRange#last last}
+          # are inclusive. To specify a single port, both
+          # {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PortRange#first first}
+          # and
+          # {::Google::Cloud::Workstations::V1beta::WorkstationConfig::PortRange#last last}
+          # should be the same.
+          # @!attribute [rw] first
+          #   @return [::Integer]
+          #     Required. Starting port number for the current range of ports.
+          #     Valid ports are 22, 80, and ports within the range 1024-65535.
+          # @!attribute [rw] last
+          #   @return [::Integer]
+          #     Required. Ending port number for the current range of ports.
+          #     Valid ports are 22, 80, and ports within the range 1024-65535.
+          class PortRange
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -683,7 +1135,7 @@ module Google
         # A single instance of a developer workstation with its own persistent storage.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Full name of this workstation.
+        #     Identifier. Full name of this workstation.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Human-readable name for this workstation.
@@ -721,6 +1173,9 @@ module Google
         #     Optional. Checksum computed by the server. May be sent on update and delete
         #     requests to make sure that the client has an up-to-date value before
         #     proceeding.
+        # @!attribute [rw] persistent_directories
+        #   @return [::Array<::Google::Cloud::Workstations::V1beta::Workstation::WorkstationPersistentDirectory>]
+        #     Optional. Directories to persist across workstation sessions.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Workstations::V1beta::Workstation::State]
         #     Output only. Current state of the workstation.
@@ -735,9 +1190,94 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Environment variables passed to the workstation container's
         #     entrypoint.
+        # @!attribute [r] kms_key
+        #   @return [::String]
+        #     Output only. The name of the Google Cloud KMS encryption key used to
+        #     encrypt this workstation. The KMS key can only be configured in the
+        #     WorkstationConfig. The expected format is
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        # @!attribute [r] boost_configs
+        #   @return [::Array<::Google::Cloud::Workstations::V1beta::Workstation::WorkstationBoostConfig>]
+        #     Output only. List of available boost configuration IDs that this
+        #     workstation can be boosted up to.
+        # @!attribute [rw] source_workstation
+        #   @return [::String]
+        #     Optional. The source workstation from which this workstation's persistent
+        #     directories were cloned on creation.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] runtime_host
+        #   @return [::Google::Cloud::Workstations::V1beta::Workstation::RuntimeHost]
+        #     Optional. Output only. Runtime host for the workstation when in
+        #     STATE_RUNNING.
+        # @!attribute [r] degraded
+        #   @return [::Boolean]
+        #     Output only. Whether this workstation is in degraded mode, in which case it
+        #     may require user action to restore full functionality. The
+        #     {::Google::Cloud::Workstations::V1beta::Workstation#conditions conditions} field
+        #     contains detailed information about the status of the workstation.
+        # @!attribute [r] conditions
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. Status conditions describing the workstation's current state.
         class Workstation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A directory to persist across workstation sessions. Updates to this field
+          # will only take effect on this workstation after it is restarted.
+          # @!attribute [rw] mount_path
+          #   @return [::String]
+          #     Optional. The mount path of the persistent directory.
+          # @!attribute [rw] size_gb
+          #   @return [::Integer]
+          #     Optional. Size of the persistent directory in GB. If specified in an
+          #     update request, this is the desired size of the directory.
+          class WorkstationPersistentDirectory
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Boost configuration for this workstation. This object is populated from the
+          # parent workstation configuration.
+          # @!attribute [r] id
+          #   @return [::String]
+          #     Output only. Boost configuration ID.
+          # @!attribute [r] running
+          #   @return [::Boolean]
+          #     Output only. Whether or not the current workstation is actively boosted
+          #     with this id.
+          class WorkstationBoostConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Runtime host for the workstation.
+          # @!attribute [rw] gce_instance_host
+          #   @return [::Google::Cloud::Workstations::V1beta::Workstation::RuntimeHost::GceInstanceHost]
+          #     Specifies a Compute Engine instance as the host.
+          class RuntimeHost
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The Compute Engine instance host.
+            # @!attribute [r] name
+            #   @return [::String]
+            #     Optional. Output only. The name of the Compute Engine instance.
+            # @!attribute [r] id
+            #   @return [::String]
+            #     Optional. Output only. The ID of the Compute Engine instance.
+            # @!attribute [r] zone
+            #   @return [::String]
+            #     Optional. Output only. The zone of the Compute Engine instance.
+            class GceInstanceHost
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -807,6 +1347,10 @@ module Google
         #   @return [::String]
         #     Optional. next_page_token value returned from a previous List request, if
         #     any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter the WorkstationClusters to be listed. Possible filters are
+        #     described in https://google.aip.dev/160.
         class ListWorkstationClustersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -840,7 +1384,7 @@ module Google
         #     Required. Workstation cluster to create.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         class CreateWorkstationClusterRequest
           include ::Google::Protobuf::MessageExts
@@ -857,7 +1401,7 @@ module Google
         #     should be updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
@@ -875,7 +1419,7 @@ module Google
         #     Required. Name of the workstation cluster to delete.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     apply it.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -911,6 +1455,10 @@ module Google
         #   @return [::String]
         #     Optional. next_page_token value returned from a previous List request, if
         #     any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter the WorkstationConfigs to be listed. Possible filters are
+        #     described in https://google.aip.dev/160.
         class ListWorkstationConfigsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -973,10 +1521,10 @@ module Google
         #     Required. ID to use for the workstation configuration.
         # @!attribute [rw] workstation_config
         #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig]
-        #     Required. Config to create.
+        #     Required. Workstation configuration to create.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         class CreateWorkstationConfigRequest
           include ::Google::Protobuf::MessageExts
@@ -986,14 +1534,14 @@ module Google
         # Request message for UpdateWorkstationConfig.
         # @!attribute [rw] workstation_config
         #   @return [::Google::Cloud::Workstations::V1beta::WorkstationConfig]
-        #     Required. Config to update.
+        #     Required. Workstation configuration to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask specifying which fields in the workstation configuration
         #     should be updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
@@ -1011,7 +1559,7 @@ module Google
         #     Required. Name of the workstation configuration to delete.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -1047,6 +1595,10 @@ module Google
         #   @return [::String]
         #     Optional. next_page_token value returned from a previous List request, if
         #     any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter the Workstations to be listed. Possible filters are
+        #     described in https://google.aip.dev/160.
         class ListWorkstationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1109,10 +1661,14 @@ module Google
         #     Required. ID to use for the workstation.
         # @!attribute [rw] workstation
         #   @return [::Google::Cloud::Workstations::V1beta::Workstation]
-        #     Required. Workstation to create.
+        #     Required. Workstation to create. If source_workstation is specified, the
+        #     user must have `workstations.workstations.use` permission on the source
+        #     workstation, and the Cloud Workstations Service Agent for the project where
+        #     you are creating the new workstation must have compute.disks.createSnapshot
+        #     and compute.snapshots.useReadOnly on the source project.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         class CreateWorkstationRequest
           include ::Google::Protobuf::MessageExts
@@ -1125,17 +1681,16 @@ module Google
         #     Required. Workstation to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Mask specifying which fields in the workstation configuration
-        #     should be updated.
+        #     Required. Mask specifying which fields in the workstation should be
+        #     updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     Optional. If set and the workstation configuration is not found, a new
-        #     workstation configuration is created. In this situation, update_mask
-        #     is ignored.
+        #     Optional. If set and the workstation is not found, a new workstation is
+        #     created. In this situation, update_mask is ignored.
         class UpdateWorkstationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1147,7 +1702,7 @@ module Google
         #     Required. Name of the workstation to delete.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -1164,12 +1719,16 @@ module Google
         #     Required. Name of the workstation to start.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. If set, the request will be rejected if the latest version of the
         #     workstation on the server does not have this ETag.
+        # @!attribute [rw] boost_config
+        #   @return [::String]
+        #     Optional. If set, the workstation starts using the boost configuration with
+        #     the specified ID.
         class StartWorkstationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1181,7 +1740,7 @@ module Google
         #     Required. Name of the workstation to stop.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the result, but do not
         #     actually apply it.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -1212,6 +1771,13 @@ module Google
         #   @return [::String]
         #     Required. Name of the workstation for which the access token should be
         #     generated.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Optional. Port for which the access token should be generated. If
+        #     specified, the generated access token grants access only to the
+        #     specified port of the workstation. If specified, values must be within the
+        #     range [1 - 65535]. If not specified, the generated access token grants
+        #     access to all ports of the workstation.
         class GenerateAccessTokenRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1228,6 +1794,49 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Time at which the generated token will expire.
         class GenerateAccessTokenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for PushCredentials.
+        # @!attribute [rw] workstation
+        #   @return [::String]
+        #     Required. Name of the workstation for which the credentials should be
+        #     pushed.
+        # @!attribute [rw] application_default_credentials
+        #   @return [::Google::Cloud::Workstations::V1beta::PushCredentialsRequest::OAuthToken]
+        #     Optional. Credentials used by Cloud Client Libraries, Google API Client
+        #     Libraries, and other tooling within the user conainer:
+        #     https://cloud.google.com/docs/authentication/application-default-credentials
+        class PushCredentialsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # OAuth token.
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     Optional. The email address encapsulated in the OAuth token.
+          # @!attribute [rw] scopes
+          #   @return [::String]
+          #     Optional. The scopes encapsulated in the OAuth token.
+          #     See https://developers.google.com/identity/protocols/oauth2/scopes for
+          #     more information.
+          # @!attribute [rw] access_token
+          #   @return [::String]
+          #     Required. The OAuth token.
+          # @!attribute [rw] expire_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. The time the OAuth access token will expire. This should be the
+          #     time the access token was generated plus the expires_in offset returned
+          #     from the Access Token Response.
+          class OAuthToken
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metadata message for PushCredentials.
+        class PushCredentialsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
