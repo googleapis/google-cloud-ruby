@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-06-03)
+
+#### Features
+
+* Add new Unit Conditions for App creation and registration ([#33985](https://github.com/googleapis/google-cloud-ruby/issues/33985)) 
+
 ### 0.5.2 (2026-04-15)
 
 #### Documentation
