@@ -1,5 +1,19 @@
 # Release History
 
+### 1.13.0 (2026-06-03)
+
+#### Features
+
+* add session based protocol 
+* add value_bitmask_filter to the read API 
+* Add view parameters to ExecuteQueryRequest ([#33815](https://github.com/googleapis/google-cloud-ruby/issues/33815)) 
+#### Bug Fixes
+
+* Existing value `SESSION_TYPE_TEST = -1` is changed to `SESSION_TYPE_TEST = 9999` in enum `SessionType` 
+#### Documentation
+
+* update various comments 
+
 ### 1.12.0 (2026-03-19)
 
 #### Features
