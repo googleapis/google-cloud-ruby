@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-gemini_data_analytics-v1beta is the official client library for the Data Analytics API with Gemini V1BETA API. Note that google-cloud-gemini_data_analytics-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gemini_data_analytics instead. See the readme for more details."
-  gem.summary       = "API Client library for the Data Analytics API with Gemini V1BETA API"
+  gem.description   = "The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language. Note that google-cloud-gemini_data_analytics-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gemini_data_analytics instead. See the readme for more details."
+  gem.summary       = "The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

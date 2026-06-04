@@ -53,6 +53,17 @@ module Google
         #     Optional. Open-ended and user-defined labels that can be set by the client
         #     to tag a conversation (e.g. to filter conversations for specific
         #     surfaces/products).
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. Customer managed encryption key (CMEK) to use for encrypting the
+        #     Conversation resources. Encryption will happen at Titan layer, we will pass
+        #     the KMS key to Titan.
+        #
+        #     Format:
+        #     projects/\\{project_id}/locations/\\{location}/keyRings/\\{key_ring_name}/cryptoKeys/\\{key_name}.
+        # @!attribute [rw] memory_paused
+        #   @return [::Boolean]
+        #     Optional. Whether memory is paused for this conversation.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -111,8 +122,9 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
-        #     requested. The max page size is 100. All larger page sizes will be coerced
-        #     to 100. If unspecified, server will pick 50 as an approperiate default.
+        #     requested. The max page size is `100`. All larger page sizes will be
+        #     coerced to `100`. If unspecified, server will pick `50` as an appropriate
+        #     default.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.

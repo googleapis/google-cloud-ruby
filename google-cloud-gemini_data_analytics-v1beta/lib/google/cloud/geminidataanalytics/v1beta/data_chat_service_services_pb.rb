@@ -36,7 +36,7 @@ module Google
             self.service_name = 'google.cloud.geminidataanalytics.v1beta.DataChatService'
 
             # Answers a data question by generating a stream of
-            # [Message][google.cloud.geminidataanalytics.v1alpha.Message] objects.
+            # [Message][google.cloud.geminidataanalytics.v1.Message] objects.
             rpc :Chat, ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest, stream(::Google::Cloud::GeminiDataAnalytics::V1beta::Message)
             # Creates a new conversation to persist the conversation history. Each
             # conversation will have multiple messages associated with it.
