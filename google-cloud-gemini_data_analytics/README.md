@@ -1,8 +1,8 @@
 # Ruby Client for the Data Analytics API with Gemini API
 
-API Client library for the Data Analytics API with Gemini API
+The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.
 
-google-cloud-gemini_data_analytics is the official client library for the Data Analytics API with Gemini API.
+The Gemini Data Analytics API enables developers to build intelligent data analytics applications. Leverage AI-powered chat interfaces to allow users to interact with and analyze structured data using natural language.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-gemini_data_analytics-v*`.
