@@ -72,20 +72,27 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
 
     # Create request parameters for a server streaming method.
     inline_context = {}
+    looker_settings = {}
     project = "hello world"
     parent = "hello world"
     messages = [{}]
+    credentials = {}
     thinking_mode = :THINKING_MODE_UNSPECIFIED
+    model = :MODEL_UNSPECIFIED
 
     chat_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :chat, name
       assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::Context), request["inline_context"]
       assert_equal :inline_context, request.context_provider
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::LookerSettings), request["looker_settings"]
+      assert_equal :looker_settings, request.datasource_settings
       assert_equal "hello world", request["project"]
       assert_equal "hello world", request["parent"]
       assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, request["messages"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::GeminiDataAnalytics::V1beta::Credentials), request["credentials"]
       assert_equal :THINKING_MODE_UNSPECIFIED, request["thinking_mode"]
+      assert_equal :MODEL_UNSPECIFIED, request["model"]
       refute_nil options
     end
 
@@ -96,7 +103,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use hash object
-      client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode }) do |response, operation|
+      client.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -105,7 +112,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use named arguments
-      client.chat inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode do |response, operation|
+      client.chat inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -114,7 +121,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use protobuf object
-      client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode) do |response, operation|
+      client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -123,7 +130,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use hash object with options
-      client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode }, grpc_options) do |response, operation|
+      client.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r
@@ -132,7 +139,7 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode), grpc_options) do |response, operation|
+      client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::GeminiDataAnalytics::V1beta::Message, r

@@ -61,11 +61,17 @@ module Google
         end
 
         # Message representing references to BigQuery tables and property graphs.
-        # At least one of `table_references` or `property_graph_references` must be
-        # populated.
+        # At least one of `table_references`, `property_graph_references`, or
+        # `search_scope` must be populated.
         # @!attribute [rw] table_references
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryTableReference>]
         #     Optional. References to BigQuery tables.
+        # @!attribute [rw] property_graph_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryPropertyGraphReference>]
+        #     Optional. Preview feature. References to BigQuery property graphs.
+        #     Note: Data sources must exclusively use either tables or property graphs,
+        #     not both. When using property graphs, a maximum of one graph reference is
+        #     supported.
         class BigQueryTableReferences
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -92,7 +98,7 @@ module Google
         # Message representing references to Looker Studio datasources.
         # @!attribute [rw] studio_references
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::StudioDatasourceReference>]
-        #     The references to the studio datasources.
+        #     Optional. The references to the studio datasources.
         class StudioDatasourceReferences
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,6 +127,43 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message representing a table including its schema.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     Required. The name of the table as defined in the database.
+        #
+        #     Note: The precise rules for table naming, including valid characters,
+        #     length limits, and case sensitivity, are determined by the specific
+        #     database system.
+        #
+        #     Requirements:
+        #     - Exact Match: The provided name must be identical to the name stored
+        #       in the database.
+        #     - Case Sensitivity: Respect the case sensitivity rules of the specific
+        #       database system and how the table was created. For example, "Orders"
+        #       and "orders" may be distinct table names.
+        #     - Special Characters/Keywords: If the table name includes spaces, special
+        #       characters, or is a database reserved keyword, provide the literal name
+        #       as it is stored. Do not add any database-specific identifier quoting
+        #       characters (e.g., ", `, []).
+        #
+        #     Examples:
+        #       - Simple name: "orders", "UserActivity"
+        #       - Case sensitive: "MyTable"
+        #       - Name with spaces: "Order Details"
+        #       - Name with other special characters: "user/data", "order-items"
+        #       - Name that is a keyword: "Group", "Order"
+        #
+        #     Permissions: The caller's credentials must have the necessary database
+        #     permissions to access the table's schema and data.
+        # @!attribute [rw] schema
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Schema]
+        #     Optional. The schema of the table.
+        class DatabaseTableReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message representing a reference to a single AlloyDB database.
         # @!attribute [rw] project_id
         #   @return [::String]
@@ -140,6 +183,11 @@ module Google
         # @!attribute [rw] table_ids
         #   @return [::Array<::String>]
         #     Optional. The table ids. Denotes all tables if unset.
+        # @!attribute [rw] database_table_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::DatabaseTableReference>]
+        #     Optional. References to tables within the database. Each reference
+        #     specifies a table and can optionally include the table's schema to provide
+        #     context for the query.
         class AlloyDbDatabaseReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -166,9 +214,6 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The project the instance belongs to.
-        # @!attribute [rw] region
-        #   @return [::String]
-        #     Required. The region of the instance.
         # @!attribute [rw] instance_id
         #   @return [::String]
         #     Required. The instance id.
@@ -178,6 +223,22 @@ module Google
         # @!attribute [rw] table_ids
         #   @return [::Array<::String>]
         #     Optional. The table ids. Denotes all tables if unset.
+        # @!attribute [rw] database_table_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::DatabaseTableReference>]
+        #     Optional. References to tables within the database. Each reference
+        #     specifies a table and can optionally include the table's schema to provide
+        #     context for the query.
+        # @!attribute [rw] priority
+        #   @return [::String]
+        #     Optional. Priority for the queries to Spanner. Should be a value supported
+        #     by Cloud Spanner e.g.: LOW, MEDIUM, HIGH. Unsupported values will be
+        #     ignored. See
+        #     https://docs.cloud.google.com/spanner/docs/reference/rest/v1/RequestOptions#Priority
+        #     for complete list.
+        # @!attribute [rw] request_tag
+        #   @return [::String]
+        #     Tag to be attached to all queries to Spanner. Allows to identify and
+        #     monitor queries sent to Spanner by the GDA service.
         class SpannerDatabaseReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -228,6 +289,11 @@ module Google
         # @!attribute [rw] table_ids
         #   @return [::Array<::String>]
         #     Optional. The table ids. Denotes all tables if unset.
+        # @!attribute [rw] database_table_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::DatabaseTableReference>]
+        #     Optional. References to tables within the database. Each reference
+        #     specifies a table and can optionally include the table's schema to provide
+        #     context for the query.
         class CloudSqlDatabaseReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -250,8 +316,10 @@ module Google
         #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::LookerExploreReference>]
         #     Required. References to Looker explores.
         # @!attribute [rw] credentials
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Credentials]
-        #     Optional. The credentials to use when calling the Looker API.
+        #     Optional. Deprecated: Use credentials in ChatRequest.
+        #     The credentials to use when calling the Looker API.
         #
         #     Currently supports both OAuth token and API key-based credentials, as
         #     described in
@@ -293,6 +361,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message representing a reference to a single BigQuery property graph.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The project that the property graph belongs to.
+        # @!attribute [rw] dataset_id
+        #   @return [::String]
+        #     Required. The dataset that the property graph belongs to.
+        # @!attribute [rw] property_graph_id
+        #   @return [::String]
+        #     Required. The property graph id.
+        class BigQueryPropertyGraphReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message representing a private Looker instance info required if the Looker
         # instance is behind a private network.
         # @!attribute [rw] looker_instance_id
@@ -311,32 +394,37 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryTableReference]
         #     A reference to a BigQuery table.
         #
-        #     Note: The following fields are mutually exclusive: `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] studio_datasource_id
         #   @return [::String]
         #     A reference to a Looker Studio datasource.
         #
-        #     Note: The following fields are mutually exclusive: `studio_datasource_id`, `bigquery_table_reference`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `studio_datasource_id`, `bigquery_table_reference`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] looker_explore_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerExploreReference]
         #     A reference to a Looker explore.
         #
-        #     Note: The following fields are mutually exclusive: `looker_explore_reference`, `bigquery_table_reference`, `studio_datasource_id`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `looker_explore_reference`, `bigquery_table_reference`, `studio_datasource_id`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] alloy_db_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AlloyDbReference]
         #     A reference to an AlloyDB database.
         #
-        #     Note: The following fields are mutually exclusive: `alloy_db_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `alloy_db_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `spanner_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spanner_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SpannerReference]
         #     A reference to a Spanner database.
         #
-        #     Note: The following fields are mutually exclusive: `spanner_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `spanner_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `cloud_sql_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::CloudSqlReference]
         #     A reference to a CloudSQL database.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `bigquery_property_graph_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bigquery_property_graph_reference
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryPropertyGraphReference]
+        #     A reference to a BigQuery property graph.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_property_graph_reference`, `bigquery_table_reference`, `studio_datasource_id`, `looker_explore_reference`, `alloy_db_reference`, `spanner_reference`, `cloud_sql_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Schema]
         #     Optional. The schema of the datasource.
@@ -418,8 +506,6 @@ module Google
         # @!attribute [rw] category
         #   @return [::String]
         #     Optional. Field category, not required, currently only useful for Looker.
-        #     We are using a string to avoid depending on an external package and keep
-        #     this package self-contained.
         # @!attribute [rw] value_format
         #   @return [::String]
         #     Optional. Looker only. Value format of the field.

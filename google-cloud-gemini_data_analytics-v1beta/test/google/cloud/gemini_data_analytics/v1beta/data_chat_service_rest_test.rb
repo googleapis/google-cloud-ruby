@@ -87,10 +87,13 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
 
     # Create request parameters for a unary method.
     inline_context = {}
+    looker_settings = {}
     project = "hello world"
     parent = "hello world"
     messages = [{}]
+    credentials = {}
     thinking_mode = :THINKING_MODE_UNSPECIFIED
+    model = :MODEL_UNSPECIFIED
 
     chat_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -106,27 +109,27 @@ class ::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Rest::Clien
         end
 
         # Use hash object
-        client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode }) do |_result, response|
+        client.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.chat inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode do |_result, response|
+        client.chat inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode) do |_result, response|
+        client.chat ::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.chat({ inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode }, call_options) do |_result, response|
+        client.chat({ inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, project: project, parent: parent, messages: messages, thinking_mode: thinking_mode), call_options) do |_result, response|
+        client.chat(::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest.new(inline_context: inline_context, looker_settings: looker_settings, project: project, parent: parent, messages: messages, credentials: credentials, thinking_mode: thinking_mode, model: model), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 

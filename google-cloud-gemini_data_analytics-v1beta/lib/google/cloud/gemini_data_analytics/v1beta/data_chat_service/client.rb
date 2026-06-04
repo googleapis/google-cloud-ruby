@@ -208,7 +208,7 @@ module Google
 
             ##
             # Answers a data question by generating a stream of
-            # [Message][google.cloud.geminidataanalytics.v1alpha.Message] objects.
+            # [Message][google.cloud.geminidataanalytics.v1.Message] objects.
             #
             # @overload chat(request, options = nil)
             #   Pass arguments to `chat` via a request object, either of type
@@ -220,7 +220,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload chat(inline_context: nil, conversation_reference: nil, data_agent_context: nil, client_managed_resource_context: nil, project: nil, parent: nil, messages: nil, thinking_mode: nil)
+            # @overload chat(inline_context: nil, conversation_reference: nil, data_agent_context: nil, client_managed_resource_context: nil, looker_settings: nil, project: nil, parent: nil, messages: nil, credentials: nil, thinking_mode: nil, model: nil)
             #   Pass arguments to `chat` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -248,16 +248,31 @@ module Google
             #     conversations and agents resources.
             #
             #     Note: The following parameters are mutually exclusive: `client_managed_resource_context`, `inline_context`, `conversation_reference`, `data_agent_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param looker_settings [::Google::Cloud::GeminiDataAnalytics::V1beta::LookerSettings, ::Hash]
+            #     Optional. Looker specific settings.
             #   @param project [::String]
-            #     Optional. The Google Cloud project to be used for quota and billing.
+            #     Optional. Deprecated: Use `parent` field instead.
+            #     The Google Cloud project to be used for quota and billing.
             #   @param parent [::String]
             #     Required. The parent value for chat request.
             #     Pattern: `projects/{project}/locations/{location}`
             #   @param messages [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::Message, ::Hash>]
             #     Required. Content of current conversation.
+            #   @param credentials [::Google::Cloud::GeminiDataAnalytics::V1beta::Credentials, ::Hash]
+            #     Optional. The credentials to use when calling the data source(s) specified
+            #     in the context.
+            #
+            #     This field can be used to provide credentials for various data sources.
+            #     For example, when connecting to Looker, it currently supports both OAuth
+            #     token and API key-based credentials, as described in
+            #     [Authentication with an
+            #     SDK](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
             #   @param thinking_mode [::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest::ThinkingMode]
             #     Optional. The thinking mode to use for the agent loop.
             #     Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+            #   @param model [::Google::Cloud::GeminiDataAnalytics::V1beta::ChatRequest::Model]
+            #     Optional. The model to use for the agent loop when processing the request.
+            #     This setting only has an effect when context.options.model is not set.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::GeminiDataAnalytics::V1beta::Message>]
@@ -622,8 +637,9 @@ module Google
             #     Format: `projects/{project}/locations/{location}`
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
-            #     requested. The max page size is 100. All larger page sizes will be coerced
-            #     to 100. If unspecified, server will pick 50 as an approperiate default.
+            #     requested. The max page size is `100`. All larger page sizes will be
+            #     coerced to `100`. If unspecified, server will pick `50` as an appropriate
+            #     default.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
@@ -726,8 +742,9 @@ module Google
             #     `projects/{project}/locations/{location}/conversations/{conversation_id}`
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
-            #     requested. The max page size is 100. All larger page sizes will be coerced
-            #     to 100. If unspecified, server will pick 50 as an approperiate default.
+            #     requested. The max page size is `100`. All larger page sizes will be
+            #     coerced to `100`. If unspecified, server will pick `50` as an appropriate
+            #     default.
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
