@@ -963,7 +963,7 @@ module Google
         #   omitted, a new StringIO instance will be written to and returned.
         #   Optional.
         # @param [Symbol] verify The verification algorithm used to ensure the
-        #   downloaded file contents are correct. Default is `:md5`.
+        #   downloaded file contents are correct. Default is `:crc32c`.
         #
         #   Acceptable values are:
         #

@@ -126,6 +126,39 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     end
   end
 
+  it "downloads a public file and verifies the actual crc32c" do
+    file_name = "public-file.txt"
+    Tempfile.open "google-cloud" do |tmpfile|
+      tmpfile.write "yay!"
+
+      mock = Minitest::Mock.new
+      mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name], **get_bucket_args
+      mock.expect :get_object, find_file_gapi(bucket_name, file_name), [bucket_name, file_name], **get_object_args
+      mock.expect :get_object, [tmpfile, download_http_resp],
+        [bucket_name, file_name], download_dest: tmpfile, generation: 1234567890, user_project: nil, options: {}
+
+      anonymous_storage.service.mocked_service = mock
+
+      bucket = anonymous_storage.bucket bucket_name
+      file = bucket.file file_name
+
+      # Stub the crc32c to match.
+      def file.crc32c
+        "AAAAAA=="
+      end
+
+      downloaded = file.download tmpfile
+      _(downloaded).must_be_kind_of Tempfile
+      _(downloaded.size).must_be :>, 0
+
+      local_data = downloaded.read
+      local_crc32c = Digest::CRC32c.base64digest local_data
+      _(local_crc32c).must_equal "AAAAAA=="
+
+      mock.verify
+    end
+  end
+
   def find_bucket_gapi name = nil
     Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name).to_json
   end
