@@ -475,26 +475,31 @@ module Google
         #   @return [::String]
         #     String data to inspect or redact.
         #
-        #     Note: The following fields are mutually exclusive: `value`, `table`, `byte_item`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `value`, `table`, `byte_item`, `conversation`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::Dlp::V2::Table]
         #     Structured content for inspection. See
         #     https://cloud.google.com/sensitive-data-protection/docs/inspecting-text#inspecting_a_table
         #     to learn more.
         #
-        #     Note: The following fields are mutually exclusive: `table`, `value`, `byte_item`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `table`, `value`, `byte_item`, `conversation`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] byte_item
         #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     Content data to inspect or redact. Replaces `type` and `data`.
         #
-        #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `byte_item`, `value`, `table`, `conversation`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conversation
         #   @return [::Google::Cloud::Dlp::V2::Conversation]
         #     Represents a conversation (either complete or a slice).
         #     It is assumed that all included messages are contiguous and ordered in
         #     chronological order.
         #
-        #     Note: The following fields are mutually exclusive: `conversation`, `value`, `table`, `byte_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `conversation`, `value`, `table`, `byte_item`, `batch_content_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] batch_content_item
+        #   @return [::Google::Cloud::Dlp::V2::BatchContentItem]
+        #     Represents a batch of items to inspect.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_content_item`, `value`, `table`, `byte_item`, `conversation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] content_metadata
         #   @return [::Google::Cloud::Dlp::V2::ContentMetadata]
         #     User provided metadata for the content.
@@ -536,7 +541,7 @@ module Google
         # @!attribute [rw] participant_id
         #   @return [::String]
         #     Optional. The identifier of the participant,
-        #     for example, 'test-user' or 'gemini'.
+        #     for example 'test-user' or 'gemini'.
         #     The participant ID can contain lowercase letters, numbers, and hyphens;
         #     that is, it must match the regular expression:
         #     `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
@@ -558,6 +563,24 @@ module Google
             # it during inspection or redacted from it during de-identification.
             CONTEXT = 2
           end
+        end
+
+        # Represents a batch of content to inspect or redact.
+        # @!attribute [rw] string_value_batch
+        #   @return [::Google::Cloud::Dlp::V2::StringValueBatch]
+        #     Optional. Represents a batch of string values to inspect or redact.
+        class BatchContentItem
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a batch of string values to inspect or redact.
+        # @!attribute [rw] values
+        #   @return [::Array<::String>]
+        #     Optional. Represents string data to inspect or redact.
+        class StringValueBatch
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Structured content to inspect. Up to 50,000 `Value`s per request allowed. See
@@ -731,27 +754,32 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::RecordLocation]
         #     Location within a row or record of a database table.
         #
-        #     Note: The following fields are mutually exclusive: `record_location`, `image_location`, `document_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `record_location`, `image_location`, `document_location`, `metadata_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_location
         #   @return [::Google::Cloud::Dlp::V2::ImageLocation]
         #     Location within an image's pixels.
         #
-        #     Note: The following fields are mutually exclusive: `image_location`, `record_location`, `document_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `image_location`, `record_location`, `document_location`, `metadata_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_location
         #   @return [::Google::Cloud::Dlp::V2::DocumentLocation]
         #     Location data for document files.
         #
-        #     Note: The following fields are mutually exclusive: `document_location`, `record_location`, `image_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `document_location`, `record_location`, `image_location`, `metadata_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata_location
         #   @return [::Google::Cloud::Dlp::V2::MetadataLocation]
         #     Location within the metadata for inspected content.
         #
-        #     Note: The following fields are mutually exclusive: `metadata_location`, `record_location`, `image_location`, `document_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `metadata_location`, `record_location`, `image_location`, `document_location`, `conversation_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conversation_location
         #   @return [::Google::Cloud::Dlp::V2::ConversationLocation]
         #     Location within a conversation.
         #
-        #     Note: The following fields are mutually exclusive: `conversation_location`, `record_location`, `image_location`, `document_location`, `metadata_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `conversation_location`, `record_location`, `image_location`, `document_location`, `metadata_location`, `batch_content_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] batch_content_location
+        #   @return [::Google::Cloud::Dlp::V2::BatchContentLocation]
+        #     Location within a batch of content.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_content_location`, `record_location`, `image_location`, `document_location`, `metadata_location`, `conversation_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Finding container modification timestamp, if applicable. For Cloud Storage,
@@ -790,6 +818,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Location within a batch of content.
+        # @!attribute [rw] item_index
+        #   @return [::Integer]
+        #     Matches an index of a batch item in the batch provided in the request.
+        class BatchContentLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata Location
