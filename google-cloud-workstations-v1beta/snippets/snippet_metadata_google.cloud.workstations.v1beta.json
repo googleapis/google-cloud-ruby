@@ -810,6 +810,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "workstations_v1beta_generated_Workstations_PushCredentials_sync",
+      "title": "Snippet for the push_credentials call in the Workstations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Workstations::V1beta::Workstations::Client#push_credentials.",
+      "file": "workstations/push_credentials.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "push_credentials",
+        "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client#push_credentials",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Workstations::V1beta::PushCredentialsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Workstations::Client",
+          "full_name": "::Google::Cloud::Workstations::V1beta::Workstations::Client"
+        },
+        "method": {
+          "short_name": "PushCredentials",
+          "full_name": "google.cloud.workstations.v1beta.Workstations.PushCredentials",
+          "service": {
+            "short_name": "Workstations",
+            "full_name": "google.cloud.workstations.v1beta.Workstations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
