@@ -102,32 +102,32 @@ class ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Rest::Cl
     ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Rest::ServiceStub.stub :transcode_annotate_video_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, annotate_video_client_stub do
         # Create client
-        client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }) do |_result, response|
+        c.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.annotate_video input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id do |_result, response|
+        c.annotate_video input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.annotate_video ::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id) do |_result, response|
+        c.annotate_video ::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }, call_options) do |_result, response|
+        c.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.annotate_video(::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id), call_options) do |_result, response|
+        c.annotate_video(::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
