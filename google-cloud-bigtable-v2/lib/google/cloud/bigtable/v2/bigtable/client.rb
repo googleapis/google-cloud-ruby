@@ -361,6 +361,9 @@ module Google
             # which can be used to break up the data for distributed tasks like
             # mapreduces.
             #
+            # If a `row_range` is provided in the request, the returned samples will be
+            # restricted to the specified range.
+            #
             # @overload sample_row_keys(request, options = nil)
             #   Pass arguments to `sample_row_keys` via a request object, either of type
             #   {::Google::Cloud::Bigtable::V2::SampleRowKeysRequest} or an equivalent Hash.
@@ -371,7 +374,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, materialized_view_name: nil, app_profile_id: nil)
+            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, materialized_view_name: nil, app_profile_id: nil, row_range: nil)
             #   Pass arguments to `sample_row_keys` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -395,6 +398,11 @@ module Google
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
+            #   @param row_range [::Google::Cloud::Bigtable::V2::RowRange, ::Hash]
+            #     Optional. The row range to sample. If not specified, samples
+            #     from all rows.
+            #     The output will always return the end key in the range as the last sample
+            #     returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::SampleRowKeysResponse>]

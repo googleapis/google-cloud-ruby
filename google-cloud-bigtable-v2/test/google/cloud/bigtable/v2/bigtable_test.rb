@@ -164,6 +164,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     authorized_view_name = "hello world"
     materialized_view_name = "hello world"
     app_profile_id = "hello world"
+    row_range = {}
 
     sample_row_keys_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :sample_row_keys, name
@@ -172,6 +173,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal "hello world", request["authorized_view_name"]
       assert_equal "hello world", request["materialized_view_name"]
       assert_equal "hello world", request["app_profile_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowRange), request["row_range"]
       refute_nil options
     end
 
@@ -182,7 +184,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id }) do |response, operation|
+      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -191,7 +193,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.sample_row_keys table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id do |response, operation|
+      client.sample_row_keys table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -200,7 +202,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id) do |response, operation|
+      client.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -209,7 +211,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -218,7 +220,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+      client.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
