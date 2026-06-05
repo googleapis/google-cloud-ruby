@@ -211,6 +211,12 @@ module Google
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
         #     "default" application profile will be used.
+        # @!attribute [rw] row_range
+        #   @return [::Google::Cloud::Bigtable::V2::RowRange]
+        #     Optional. The row range to sample. If not specified, samples
+        #     from all rows.
+        #     The output will always return the end key in the range as the last sample
+        #     returned.
         class SampleRowKeysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,17 +225,21 @@ module Google
         # Response message for Bigtable.SampleRowKeys.
         # @!attribute [rw] row_key
         #   @return [::String]
-        #     Sorted streamed sequence of sample row keys in the table. The table might
-        #     have contents before the first row key in the list and after the last one,
-        #     but a key containing the empty string indicates "end of table" and will be
-        #     the last response given, if present.
+        #     Sorted streamed sequence of sample row keys in the table, restricted to
+        #     the row_range if specified in the request. The table might have contents
+        #     before the first row key in the list and after the last one, but a key
+        #     containing the empty string indicates "end of table" and will be the last
+        #     response given, if present and within the row-range specified in the
+        #     request.
         #     Note that row keys in this list may not have ever been written to or read
         #     from, and users should therefore not make any assumptions about the row key
         #     structure that are specific to their use case.
         # @!attribute [rw] offset_bytes
         #   @return [::Integer]
         #     Approximate total storage space used by all rows in the table which precede
-        #     `row_key`. Buffering the contents of all rows between two subsequent
+        #     `row_key` (and if a row-range is specified in the request, which follow
+        #     what would have been the previous sample before the row-range start).
+        #     Buffering the contents of all rows between two subsequent
         #     samples would require space roughly equal to the difference in their
         #     `offset_bytes` fields.
         class SampleRowKeysResponse

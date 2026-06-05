@@ -43,6 +43,9 @@ module Google
             # delimit contiguous sections of the table of approximately equal size,
             # which can be used to break up the data for distributed tasks like
             # mapreduces.
+            #
+            # If a `row_range` is provided in the request, the returned samples will be
+            # restricted to the specified range.
             rpc :SampleRowKeys, ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest, stream(::Google::Cloud::Bigtable::V2::SampleRowKeysResponse)
             # Mutates a row atomically. Cells already present in the row are left
             # unchanged unless explicitly changed by `mutation`.
