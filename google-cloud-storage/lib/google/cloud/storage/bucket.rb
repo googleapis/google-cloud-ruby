@@ -1410,10 +1410,71 @@ module Google
                                 user_project: user_project
         end
 
+        ##
+        # The bucket's IP filter configuration.
+        # This value can be modified by calling {#ip_filter=}.
+        #
+        # @return [Google::Apis::StorageV1::Bucket::IpFilter, nil] The bucket's IP filter configuration,
+        #   or `nil` if not configured.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   ip_filter = bucket.ip_filter
+        #   if ip_filter
+        #     puts "Mode: #{ip_filter.mode}"
+        #     puts "Public CIDR: #{ip_filter.public_network_source&.allowed_ip_cidr_ranges}"
+        #   end
+        #
         def ip_filter
           @gapi.ip_filter
         end
 
+        ##
+        # Sets the value for IP filter in the bucket. This value can
+        # be queried by calling {#ip_filter}.
+        #
+        # @param [Google::Apis::StorageV1::Bucket::IpFilter, Hash] new_ip_filter The bucket's new IP filter.
+        #   Acceptable Hash structure:
+        #   - :mode - [String] The mode of the IP filter. Acceptable values are: "Disabled", "Enforced", "Preview"
+        #   - :public_network_source - [Hash] The public network source configuration:
+        #     - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for public access.
+        #   - :vpc_network_sources - [Array<Hash>] The VPC network sources configuration:
+        #     - :network - [String] The VPC network resource path, e.g. "projects/PROJECT_ID/global/networks/NETWORK_NAME".
+        #     - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for VPC access.
+        #   - :allow_cross_org_vpcs - [Boolean] Whether to allow cross-org VPC access.
+        #   - :allow_all_service_agent_access - [Boolean] Whether to allow all service agent access.
+        #
+        # @example Enable IP filter with Hash:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.ip_filter = {
+        #     mode: "Enabled",
+        #     allow_all_service_agent_access: true,
+        #     public_network_source: {
+        #       allowed_ip_cidr_ranges: ["0.0.0.0/0", "::/0"]
+        #     }
+        #   }
+        #
+        # @example Clear/delete IP filter:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.ip_filter = {
+        #     mode: "Disabled",
+        #     public_network_source: {
+        #       allowed_ip_cidr_ranges: []
+        #     }
+        #   }
+        #
         def ip_filter= new_ip_filter
           @gapi.ip_filter = new_ip_filter || {}
           patch_gapi! :ip_filter

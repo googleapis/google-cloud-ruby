@@ -12,31 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_create_bucket_with_ip_filter]
-def create_bucket_with_ip_filter bucket_name:
-  # The ID to give your GCS bucket
+# [START storage_list_bucket_ip_filters]
+def list_bucket_ip_filters bucket_name:
+  # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  ip_filter = {
-    mode: "Disabled",
-    public_network_source: {
-      allowed_ip_cidr_ranges: [
-        "0.0.0.0/0", "::/0"
-      ]
-    }
-  }
+  bucket = storage.bucket bucket_name
 
-  bucket = storage.create_bucket bucket_name do |b|
-    b.ip_filter = ip_filter
-    b.uniform_bucket_level_access = true
+  ip_filter = bucket.ip_filter
+  if ip_filter
+    puts "IP filter mode: #{ip_filter.mode}"
+    if ip_filter.public_network_source
+      ip_filter.public_network_source.allowed_ip_cidr_ranges.each do |range|
+        puts "Allowed range: #{range}"
+      end
+    end
+  else
+    puts "No IP filter configured on bucket #{bucket_name}."
   end
-  puts "Created bucket #{bucket_name} with IP filter."
 end
-# [END storage_create_bucket_with_ip_filter]
+# [END storage_list_bucket_ip_filters]
 
 if $PROGRAM_NAME == __FILE__
-  create_bucket_with_ip_filter bucket_name: ARGV.shift
+  list_bucket_ip_filters bucket_name: ARGV.shift
 end
