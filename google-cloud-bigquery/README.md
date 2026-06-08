@@ -113,3 +113,5 @@ questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com). For more
 see the [Troubleshooting
 guide](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.TROUBLESHOOTING.html)
+
+# Test comment to verify CI failures
