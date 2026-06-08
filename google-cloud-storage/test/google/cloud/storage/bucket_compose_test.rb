@@ -267,4 +267,18 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
 
     mock.verify
   end
+
+  it "can compose a new file with delete_source_objects option" do
+    mock = Minitest::Mock.new
+    req = compose_request [file_gapi, file_2_gapi], delete_source_objects: true
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: {retries: 0})
+
+    bucket.service.mocked_service = mock
+
+    new_file = bucket.compose [file, file_2], file_3_name, delete_source_objects: true
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
+
+    mock.verify
+  end
 end

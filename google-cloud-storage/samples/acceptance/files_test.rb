@@ -16,6 +16,7 @@ require_relative "helper"
 require_relative "../storage_generate_signed_url_v2"
 require_relative "../storage_change_file_storage_class"
 require_relative "../storage_compose_file"
+require_relative "../storage_compose_file_delete_source_objects"
 require_relative "../storage_copy_file"
 require_relative "../storage_copy_file_archived_generation"
 require_relative "../storage_delete_file"
@@ -429,6 +430,24 @@ describe "Files Snippets" do
     end
 
     refute_nil bucket.file remote_file_name
+  end
+
+  it "compose_file_delete_source_objects" do
+    file_1 = bucket.create_file local_file, file_1_name
+    file_2 = bucket.create_file local_file, file_2_name
+
+    expected_out = "Composed new file #{remote_file_name} in the bucket #{bucket.name} " \
+                   "by combining #{file_1.name} and #{file_2.name} and deleted source objects\n"
+    assert_output expected_out do
+      compose_file_delete_source_objects bucket_name:           bucket.name,
+                                         first_file_name:       file_1.name,
+                                         second_file_name:      file_2.name,
+                                         destination_file_name: remote_file_name
+    end
+
+    refute_nil bucket.file remote_file_name
+    assert_nil bucket.file file_1.name
+    assert_nil bucket.file file_2.name
   end
 
   it "copy_file" do

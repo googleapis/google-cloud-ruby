@@ -549,10 +549,12 @@ module Google
                          if_generation_match: nil,
                          if_metageneration_match: nil,
                          user_project: nil,
+                         delete_source_objects: nil,
                          options: {}
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
-                                                                    destination: destination_gapi
+                                                                    destination: destination_gapi,
+                                                                    delete_source_objects: delete_source_objects
 
           if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
