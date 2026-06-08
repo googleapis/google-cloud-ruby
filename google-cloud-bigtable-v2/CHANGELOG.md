@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2026-06-08)
+
+#### Features
+
+* add support for filtering SampleRowKeys to a specific row_range ([#34020](https://github.com/googleapis/google-cloud-ruby/issues/34020)) 
+
 ### 1.13.0 (2026-06-03)
 
 #### Features
