@@ -171,7 +171,12 @@ describe "schemas" do
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output /Received a binary-encoded message:\n\{"name"\s*=>\s*"Alaska",\s*"post_abbr"\s*=>\s*"AK"\}/ do
+        expected = /
+          Received\ a\ binary-encoded\ message:\n
+          \{"name"\s*=>\s*"Alaska",\s*
+          "post_abbr"\s*=>\s*"AK"\}
+        /x
+        assert_output expected do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: avsc_file
         end
       end
@@ -195,7 +200,12 @@ describe "schemas" do
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output /Received a JSON-encoded message:\n\{"name"\s*=>\s*"Alaska",\s*"post_abbr"\s*=>\s*"AK"\}/ do
+        expected = /
+          Received\ a\ JSON-encoded\ message:\n
+          \{"name"\s*=>\s*"Alaska",\s*
+          "post_abbr"\s*=>\s*"AK"\}
+        /x
+        assert_output expected do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: nil
         end
       end
@@ -266,8 +276,19 @@ describe "schemas" do
         out, _err = capture_io do
           subscribe_avro_records_with_revisions subscription_id: @subscription.name
         end
-        assert_match /Received a binary-encoded message:\n\{"name"\s*=>\s*"Alaska",\s*"post_abbr"\s*=>\s*"AK"\}/, out
-        assert_match /Received a binary-encoded message:\n\{"name"\s*=>\s*"California",\s*"post_abbr"\s*=>\s*"CA",\s*"population"\s*=>\s*39000000\}/, out
+        expected_alaska = /
+          Received\ a\ binary-encoded\ message:\n
+          \{"name"\s*=>\s*"Alaska",\s*
+          "post_abbr"\s*=>\s*"AK"\}
+        /x
+        assert_match expected_alaska, out
+        expected_california = /
+          Received\ a\ binary-encoded\ message:\n
+          \{"name"\s*=>\s*"California",\s*
+          "post_abbr"\s*=>\s*"CA",\s*
+          "population"\s*=>\s*39000000\}
+        /x
+        assert_match expected_california, out
       end
     end
   end
