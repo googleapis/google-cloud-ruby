@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2026-06-08)
+
+#### Features
+
+* Custom domain and HTTP/2 support for Workstation Clusters ([#34008](https://github.com/googleapis/google-cloud-ruby/issues/34008)) 
+
 ### 0.8.1 (2026-04-03)
 
 #### Documentation
