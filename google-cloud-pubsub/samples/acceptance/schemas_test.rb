@@ -161,6 +161,7 @@ describe "schemas" do
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
+      sleep 5
 
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
@@ -170,7 +171,7 @@ describe "schemas" do
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output "Received a binary-encoded message:\n{\"name\" => \"Alaska\", \"post_abbr\" => \"AK\"}\n" do
+        assert_output /Received a binary-encoded message:\n\{"name"\s*=>\s*"Alaska",\s*"post_abbr"\s*=>\s*"AK"\}/ do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: avsc_file
         end
       end
@@ -187,13 +188,14 @@ describe "schemas" do
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
+      sleep 5
 
       publisher = pubsub.publisher @topic.name
       publisher.publish record.to_json
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output "Received a JSON-encoded message:\n{\"name\" => \"Alaska\", \"post_abbr\" => \"AK\"}\n" do
+        assert_output /Received a JSON-encoded message:\n\{"name"\s*=>\s*"Alaska",\s*"post_abbr"\s*=>\s*"AK"\}/ do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: nil
         end
       end
@@ -240,6 +242,7 @@ describe "schemas" do
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
+      sleep 5
 
       # Publish message 1 (Old format - valid for both).
       writer = Avro::IO::DatumWriter.new avro_schema
@@ -260,9 +263,11 @@ describe "schemas" do
 
       # Verify we can subscribe and decode both.
       expect_with_retry "pubsub_subscribe_avro_records_with_revisions" do
-        assert_output /Received a binary-encoded message:.*Alaska.*Received a binary-encoded message:.*California/m do
+        out, _err = capture_io do
           subscribe_avro_records_with_revisions subscription_id: @subscription.name
         end
+        assert_match /Received a binary-encoded message:\n\{"name"\s*=>\s*"Alaska",\s*"post_abbr"\s*=>\s*"AK"\}/, out
+        assert_match /Received a binary-encoded message:\n\{"name"\s*=>\s*"California",\s*"post_abbr"\s*=>\s*"CA",\s*"population"\s*=>\s*39000000\}/, out
       end
     end
   end
