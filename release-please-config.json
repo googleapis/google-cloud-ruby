@@ -1915,6 +1915,10 @@
       "component": "google-cloud-workstations-v1beta",
       "version_file": "lib/google/cloud/workstations/v1beta/version.rb"
     },
+    "google-developers-developer_knowledge-v1": {
+      "component": "google-developers-developer_knowledge-v1",
+      "version_file": "lib/google/developers/developer_knowledge/v1/version.rb"
+    },
     "google-iam-client": {
       "component": "google-iam-client",
       "version_file": "lib/google/iam/client/version.rb"
