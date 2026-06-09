@@ -155,10 +155,57 @@ module Google
             rpc :CreateDbSystem, ::Google::Cloud::OracleDatabase::V1::CreateDbSystemRequest, ::Google::Longrunning::Operation
             # Deletes a single DbSystem.
             rpc :DeleteDbSystem, ::Google::Cloud::OracleDatabase::V1::DeleteDbSystemRequest, ::Google::Longrunning::Operation
+            # Lists all the GoldengateDeployments for the given project and location.
+            rpc :ListGoldengateDeployments, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentsResponse
+            # Gets details of a single GoldengateDeployment.
+            rpc :GetGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeployment
+            # Creates a new GoldengateDeployment in a given project and location.
+            rpc :CreateGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateDeploymentRequest, ::Google::Longrunning::Operation
+            # Deletes a single GoldengateDeployment.
+            rpc :DeleteGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateDeploymentRequest, ::Google::Longrunning::Operation
+            # Stops a single GoldengateDeployment.
+            rpc :StopGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::StopGoldengateDeploymentRequest, ::Google::Longrunning::Operation
+            # Starts a single GoldengateDeployment.
+            rpc :StartGoldengateDeployment, ::Google::Cloud::OracleDatabase::V1::StartGoldengateDeploymentRequest, ::Google::Longrunning::Operation
+            # Lists all the GoldengateConnections for the given project and location.
+            rpc :ListGoldengateConnections, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionsResponse
+            # Gets details of a single GoldengateConnection.
+            rpc :GetGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateConnection
+            # Creates a new GoldengateConnection in a given project and location.
+            rpc :CreateGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateConnectionRequest, ::Google::Longrunning::Operation
+            # Deletes a single GoldengateConnection.
+            rpc :DeleteGoldengateConnection, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateConnectionRequest, ::Google::Longrunning::Operation
+            # Gets details of a single GoldengateDeploymentVersion.
+            rpc :GetGoldengateDeploymentVersion, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion
+            # Lists GoldengateDeploymentVersions in a given project and location.
+            rpc :ListGoldengateDeploymentVersions, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsResponse
+            # Gets details of a single GoldenGateDeploymentType.
+            rpc :GetGoldengateDeploymentType, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType
+            # Lists GoldenGateDeploymentTypes in a given project and location.
+            rpc :ListGoldengateDeploymentTypes, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentTypesRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentTypesResponse
+            # Gets details of a single GoldengateDeploymentEnvironment.
+            rpc :GetGoldengateDeploymentEnvironment, ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment
+            # Lists GoldengateDeploymentEnvironments in a given project and location.
+            rpc :ListGoldengateDeploymentEnvironments, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsResponse
+            # Gets details of a single GoldengateConnectionType.
+            rpc :GetGoldengateConnectionType, ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType
+            # Lists GoldengateConnectionTypes in a given project and location.
+            rpc :ListGoldengateConnectionTypes, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionTypesRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionTypesResponse
             # List DbVersions for the given project and location.
             rpc :ListDbVersions, ::Google::Cloud::OracleDatabase::V1::ListDbVersionsRequest, ::Google::Cloud::OracleDatabase::V1::ListDbVersionsResponse
             # List DatabaseCharacterSets for the given project and location.
             rpc :ListDatabaseCharacterSets, ::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsRequest, ::Google::Cloud::OracleDatabase::V1::ListDatabaseCharacterSetsResponse
+            # Lists GoldengateConnectionAssignments in a given project and location.
+            rpc :ListGoldengateConnectionAssignments, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionAssignmentsRequest, ::Google::Cloud::OracleDatabase::V1::ListGoldengateConnectionAssignmentsResponse
+            # Gets details of a single GoldengateConnectionAssignment.
+            rpc :GetGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionAssignmentRequest, ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionAssignment
+            # Creates a new GoldengateConnectionAssignment in a given project and
+            # location.
+            rpc :CreateGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::CreateGoldengateConnectionAssignmentRequest, ::Google::Longrunning::Operation
+            # Deletes a single GoldengateConnectionAssignment.
+            rpc :DeleteGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::DeleteGoldengateConnectionAssignmentRequest, ::Google::Longrunning::Operation
+            # Tests a single GoldengateConnectionAssignment.
+            rpc :TestGoldengateConnectionAssignment, ::Google::Cloud::OracleDatabase::V1::TestGoldengateConnectionAssignmentRequest, ::Google::Cloud::OracleDatabase::V1::TestGoldengateConnectionAssignmentResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -248,7 +248,8 @@ module Google
             # The storage management is unspecified.
             STORAGE_MANAGEMENT_UNSPECIFIED = 0
 
-            # Automatic storage management.
+            # Automatic storage management. This option is not supported. Only LVM is
+            # supported.
             ASM = 1
 
             # Logical Volume management.
@@ -371,6 +372,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListDbSystemsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
