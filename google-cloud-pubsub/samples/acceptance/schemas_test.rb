@@ -161,16 +161,15 @@ describe "schemas" do
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
-      sleep 5
 
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
       publisher = pubsub.publisher @topic.name
-      publisher.publish buffer
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
+        publisher.publish buffer
         expected = /
           Received\ a\ binary-encoded\ message:\n
           \{"name"\s*=>\s*"Alaska",\s*
@@ -193,13 +192,12 @@ describe "schemas" do
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
-      sleep 5
 
       publisher = pubsub.publisher @topic.name
-      publisher.publish record.to_json
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
+        publisher.publish record.to_json
         expected = /
           Received\ a\ JSON-encoded\ message:\n
           \{"name"\s*=>\s*"Alaska",\s*
@@ -252,14 +250,13 @@ describe "schemas" do
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
-      sleep 5
+
+      publisher = pubsub.publisher @topic.name
 
       # Publish message 1 (Old format - valid for both).
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
-      publisher = pubsub.publisher @topic.name
-      publisher.publish buffer
 
       # Publish message 2 (New format - valid only for Rev B).
       avsc_definition_plus = File.read avsc_revision_file
@@ -269,10 +266,11 @@ describe "schemas" do
       writer_plus = Avro::IO::DatumWriter.new avro_schema_plus
       buffer_plus = StringIO.new
       writer_plus.write record_plus, Avro::IO::BinaryEncoder.new(buffer_plus)
-      publisher.publish buffer_plus
 
       # Verify we can subscribe and decode both.
       expect_with_retry "pubsub_subscribe_avro_records_with_revisions" do
+        publisher.publish buffer
+        publisher.publish buffer_plus
         out, _err = capture_io do
           subscribe_avro_records_with_revisions subscription_id: @subscription.name
         end
