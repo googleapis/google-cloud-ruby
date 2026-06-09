@@ -482,6 +482,11 @@ module Google
         #     minute timestamp within the past 7 days.
         #
         #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auto_commit_transaction
+        #   @return [::Boolean]
+        #     Optional. Automatically commits the transaction after the pipeline has been
+        #     executed. Only permitted in combination with `transaction` or
+        #     `new_transaction`.
         class ExecutePipelineRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1024,6 +1029,9 @@ module Google
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
         #     For example:
         #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+        #
+        #     Use `projects/{project_id}/databases/{database_id}/documents` to list
+        #     top-level collections.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of results to return.

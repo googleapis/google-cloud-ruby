@@ -598,6 +598,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     database = "hello world"
     structured_pipeline = {}
     transaction = "hello world"
+    auto_commit_transaction = true
 
     execute_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -613,27 +614,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }) do |_result, response|
+        client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction do |_result, response|
+        client.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction) do |_result, response|
+        client.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }, call_options) do |_result, response|
+        client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction), call_options) do |_result, response|
+        client.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 

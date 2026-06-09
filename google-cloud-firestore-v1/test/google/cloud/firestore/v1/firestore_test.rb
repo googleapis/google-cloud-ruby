@@ -682,6 +682,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     database = "hello world"
     structured_pipeline = {}
     transaction = "hello world"
+    auto_commit_transaction = true
 
     execute_pipeline_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :execute_pipeline, name
@@ -691,6 +692,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal :structured_pipeline, request.pipeline_type
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
+      assert_equal true, request["auto_commit_transaction"]
       refute_nil options
     end
 
@@ -701,7 +703,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }) do |response, operation|
+      client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -710,7 +712,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction do |response, operation|
+      client.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -719,7 +721,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction) do |response, operation|
+      client.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -728,7 +730,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction }, grpc_options) do |response, operation|
+      client.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -737,7 +739,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction), grpc_options) do |response, operation|
+      client.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
