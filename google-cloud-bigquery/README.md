@@ -115,3 +115,4 @@ see the [Troubleshooting
 guide](https://googleapis.dev/ruby/google-cloud-bigquery/latest/file.TROUBLESHOOTING.html)
 
 # Test comment to verify CI failures
+# Test comment 2
