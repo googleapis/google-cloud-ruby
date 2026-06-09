@@ -207,6 +207,9 @@ module Google
           # @!attribute [rw] text
           #   @return [::String]
           #     Text used for citation.
+          # @!attribute [rw] requires_attribution
+          #   @return [::Boolean]
+          #     Whether this citation requires attribution to be shown to the end users.
           class CitedChunk
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

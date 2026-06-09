@@ -21,6 +21,28 @@ module Google
   module Cloud
     module Ces
       module V1beta
+        # Request message for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#run_evaluation_result_metrics EvaluationService.RunEvaluationResultMetrics}.
+        # @!attribute [rw] evaluation_result_id
+        #   @return [::String]
+        #     Required. The evaluation result to run metrics for.
+        #     Format:
+        #     `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result_id}`
+        class RunEvaluationResultMetricsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#run_evaluation_result_metrics EvaluationService.RunEvaluationResultMetrics}.
+        # @!attribute [r] status
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationResult::Outcome]
+        #     Output only. The status of the evaluation result metrics calculation.
+        class RunEvaluationResultMetricsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
         # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#run_evaluation EvaluationService.RunEvaluation}.
         # @!attribute [rw] evaluation_run
@@ -964,8 +986,26 @@ module Google
           end
         end
 
+        # Request message for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#export_evaluation_results EvaluationService.ExportEvaluationResults}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the evaluation to export evaluation results
+        #     from. Format:
+        #     `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the evaluation results to export.
+        # @!attribute [rw] export_options
+        #   @return [::Google::Cloud::Ces::V1beta::ExportOptions]
+        #     Optional. The export options for the evaluation results.
+        class ExportEvaluationResultsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
-        # [EvaluationService.ExportEvaluationResults][google.cloud.ces.v1beta.EvaluationService.ExportEvaluationResults].
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#export_evaluation_results EvaluationService.ExportEvaluationResults}.
         # @!attribute [rw] evaluation_results_content
         #   @return [::String]
         #     The content of the exported Evaluation Results. This will be populated if
@@ -984,8 +1024,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#export_evaluation_runs EvaluationService.ExportEvaluationRuns}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the app to export evaluation runs from.
+        #     Format: `projects/{project}/locations/{location}/apps/{app}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the evaluation runs to export.
+        # @!attribute [rw] export_options
+        #   @return [::Google::Cloud::Ces::V1beta::ExportOptions]
+        #     Optional. The export options for the evaluation runs.
+        class ExportEvaluationRunsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
-        # [EvaluationService.ExportEvaluationRuns][google.cloud.ces.v1beta.EvaluationService.ExportEvaluationRuns].
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#export_evaluation_runs EvaluationService.ExportEvaluationRuns}.
         # @!attribute [rw] evaluation_runs_content
         #   @return [::String]
         #     The content of the exported Evaluation Runs. This will be populated if
@@ -1000,6 +1057,27 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `evaluation_runs_uri`, `evaluation_runs_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExportEvaluationRunsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Operation metadata for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#export_evaluation_runs EvaluationService.ExportEvaluationRuns}.
+        class ExportEvaluationRunsOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Operation metadata for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#export_evaluation_results EvaluationService.ExportEvaluationResults}.
+        class ExportEvaluationResultsOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Operation metadata for
+        # {::Google::Cloud::Ces::V1beta::EvaluationService::Client#run_evaluation_result_metrics EvaluationService.RunEvaluationResultMetrics}.
+        class RunEvaluationResultMetricsOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

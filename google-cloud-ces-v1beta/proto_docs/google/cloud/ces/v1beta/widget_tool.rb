@@ -45,9 +45,45 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::WidgetTool::DataMapping]
         #     Optional. The mapping that defines how data from a source tool is mapped to
         #     the widget's input parameters.
+        # @!attribute [rw] text_response_config
+        #   @return [::Google::Cloud::Ces::V1beta::WidgetTool::TextResponseConfig]
+        #     Optional. Configuration for always-included text responses.
         class WidgetTool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for the text response returned with the widget.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Ces::V1beta::WidgetTool::TextResponseConfig::Type]
+          #     Optional. The strategy for providing the text response.
+          # @!attribute [rw] static_text
+          #   @return [::String]
+          #     Optional. The static text response to return when type is STATIC.
+          # @!attribute [rw] text_response_instruction
+          #   @return [::String]
+          #     Optional. Instruction for the LLM on how to generate the text response.
+          #     Used as the description for the text response parameter if type is
+          #     LLM_GENERATED.
+          class TextResponseConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Defines how the text response is produced.
+            module Type
+              # Unspecified type.
+              TYPE_UNSPECIFIED = 0
+
+              # The LLM dynamically decides whether to generate a text response
+              # alongside the widget based on the conversation context.
+              NONE = 1
+
+              # The LLM is explicitly required to generate a text response.
+              LLM_GENERATED = 2
+
+              # A pre-defined static text response is always used.
+              STATIC = 3
+            end
+          end
 
           # Configuration for mapping data from a source tool to the widget's input
           # parameters.

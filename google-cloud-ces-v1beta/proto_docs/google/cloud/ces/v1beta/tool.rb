@@ -27,58 +27,63 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::ClientFunction]
         #     Optional. The client function.
         #
-        #     Note: The following fields are mutually exclusive: `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] open_api_tool
         #   @return [::Google::Cloud::Ces::V1beta::OpenApiTool]
         #     Optional. The open API tool.
         #
-        #     Note: The following fields are mutually exclusive: `open_api_tool`, `client_function`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `open_api_tool`, `client_function`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_search_tool
         #   @return [::Google::Cloud::Ces::V1beta::GoogleSearchTool]
         #     Optional. The google search tool.
         #
-        #     Note: The following fields are mutually exclusive: `google_search_tool`, `client_function`, `open_api_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `google_search_tool`, `client_function`, `open_api_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] connector_tool
         #   @return [::Google::Cloud::Ces::V1beta::ConnectorTool]
         #     Optional. The Integration Connector tool.
         #
-        #     Note: The following fields are mutually exclusive: `connector_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `connector_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_store_tool
         #   @return [::Google::Cloud::Ces::V1beta::DataStoreTool]
         #     Optional. The data store tool.
         #
-        #     Note: The following fields are mutually exclusive: `data_store_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `data_store_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] python_function
         #   @return [::Google::Cloud::Ces::V1beta::PythonFunction]
         #     Optional. The python function tool.
         #
-        #     Note: The following fields are mutually exclusive: `python_function`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `python_function`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mcp_tool
         #   @return [::Google::Cloud::Ces::V1beta::McpTool]
         #     Optional. The MCP tool. An MCP tool cannot be created or updated directly
         #     and is managed by the MCP toolset.
         #
-        #     Note: The following fields are mutually exclusive: `mcp_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mcp_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] file_search_tool
         #   @return [::Google::Cloud::Ces::V1beta::FileSearchTool]
         #     Optional. The file search tool.
         #
-        #     Note: The following fields are mutually exclusive: `file_search_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `file_search_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `system_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] system_tool
         #   @return [::Google::Cloud::Ces::V1beta::SystemTool]
         #     Optional. The system tool.
         #
-        #     Note: The following fields are mutually exclusive: `system_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `system_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `agent_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] agent_tool
         #   @return [::Google::Cloud::Ces::V1beta::AgentTool]
         #     Optional. The agent tool.
         #
-        #     Note: The following fields are mutually exclusive: `agent_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `agent_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `widget_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] widget_tool
         #   @return [::Google::Cloud::Ces::V1beta::WidgetTool]
         #     Optional. The widget tool.
         #
-        #     Note: The following fields are mutually exclusive: `widget_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `widget_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `remote_agent_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] remote_agent_tool
+        #   @return [::Google::Cloud::Ces::V1beta::RemoteAgentTool]
+        #     Optional. The remote agent tool.
+        #
+        #     Note: The following fields are mutually exclusive: `remote_agent_tool`, `client_function`, `open_api_tool`, `google_search_tool`, `connector_tool`, `data_store_tool`, `python_function`, `mcp_tool`, `file_search_tool`, `system_tool`, `agent_tool`, `widget_tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the tool. Format:
@@ -98,6 +103,11 @@ module Google
         # @!attribute [rw] execution_type
         #   @return [::Google::Cloud::Ces::V1beta::ExecutionType]
         #     Optional. The execution type of the tool.
+        # @!attribute [rw] timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The timeout for the tool execution. If not set, the default
+        #     timeout is 30 seconds for `SYNCHRONOUS` tools and 60 seconds for
+        #     `ASYNCHRONOUS` tools.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when the tool was created.

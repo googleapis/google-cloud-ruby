@@ -112,6 +112,9 @@ module Google
         # @!attribute [rw] client_certificate_settings
         #   @return [::Google::Cloud::Ces::V1beta::ClientCertificateSettings]
         #     Optional. The default client certificate settings for the app.
+        # @!attribute [rw] vpc_sc_settings
+        #   @return [::Google::Cloud::Ces::V1beta::VpcScSettings]
+        #     Optional. VPC-SC settings for the app.
         # @!attribute [rw] locked
         #   @return [::Boolean]
         #     Optional. Indicates whether the app is locked for changes. If the app is
@@ -124,6 +127,9 @@ module Google
         # @!attribute [rw] evaluation_settings
         #   @return [::Google::Cloud::Ces::V1beta::EvaluationSettings]
         #     Optional. The evaluation settings for the app.
+        # @!attribute [r] validation_errors
+        #   @return [::Array<::String>]
+        #     Output only. Misconfigurations or warnings in the app.
         class App
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -384,11 +390,20 @@ module Google
         #     Optional. Configuration for how sensitive data should be redacted.
         # @!attribute [rw] audio_recording_config
         #   @return [::Google::Cloud::Ces::V1beta::AudioRecordingConfig]
-        #     Optional. Configuration for how audio interactions should be recorded.
+        #     Optional. Configuration for how audio interactions should be recorded. The
+        #     audio is subject to redaction as configured in
+        #     {::Google::Cloud::Ces::V1beta::LoggingSettings#redaction_config RedactionConfig}.
+        # @!attribute [rw] unredacted_audio_recording_config
+        #   @return [::Google::Cloud::Ces::V1beta::AudioRecordingConfig]
+        #     Optional. Configures an additional recording of unredacted audio. This can
+        #     be used to maintain a raw audio copy when audio redaction is
+        #     {::Google::Cloud::Ces::V1beta::RedactionConfig#enable_redaction enabled},
+        #     typically for auditing or monitoring purposes.
         # @!attribute [rw] bigquery_export_settings
         #   @return [::Google::Cloud::Ces::V1beta::BigQueryExportSettings]
-        #     Optional. Settings to describe the BigQuery export behaviors for the app.
-        #     The conversation data will be exported to BigQuery tables if it is enabled.
+        #     Optional. Configures the BigQuery export behaviors for the app. The
+        #     conversation data is subject to redaction as configured in
+        #     {::Google::Cloud::Ces::V1beta::LoggingSettings#redaction_config RedactionConfig}.
         # @!attribute [rw] cloud_logging_settings
         #   @return [::Google::Cloud::Ces::V1beta::CloudLoggingSettings]
         #     Optional. Settings to describe the Cloud Logging behaviors for the app.
@@ -613,6 +628,13 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::EvaluationToolCallBehaviour]
         #     Optional. Configures the default tool call behaviour for scenario
         #     evaluations.
+        # @!attribute [rw] metrics_config
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsConfig]
+        #     Optional. Configures the default metrics for evaluations.
+        # @!attribute [rw] scenario_execution_mode
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationSettings::ScenarioExecutionMode]
+        #     Optional. The execution mode for scenario evaluations. If not provided,
+        #     will default to QUALITY_OPTIMIZED.
         class EvaluationSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -627,6 +649,18 @@ module Google
 
             # The agent starts the conversation.
             AGENT = 2
+          end
+
+          # The execution mode for scenario evaluations.
+          module ScenarioExecutionMode
+            # Unspecified execution mode. Defaults to QUALITY_OPTIMIZED.
+            SCENARIO_EXECUTION_MODE_UNSPECIFIED = 0
+
+            # Quality optimized mode.
+            QUALITY_OPTIMIZED = 1
+
+            # Speed optimized mode.
+            SPEED_OPTIMIZED = 2
           end
         end
 
@@ -647,6 +681,19 @@ module Google
         #     key is not encrypted.
         #     Format: `projects/{project}/secrets/{secret}/versions/{version}`
         class ClientCertificateSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # VPC-SC settings for the app.
+        # @!attribute [rw] allowed_origins
+        #   @return [::Array<::String>]
+        #     Optional. The allowed HTTP(s) origins that OpenAPI tools in the App are
+        #     able to directly call when VPC Service Controls are enabled. These strings
+        #     must match the origin exactly, including the port if specified. For
+        #     example, "https://example.com" or "https://example.com:443". This list does
+        #     not yet apply to Python tools that may make direct HTTP calls.
+        class VpcScSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

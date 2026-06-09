@@ -3080,6 +3080,280 @@ module Google
               end
 
               ##
+              # Exports evaluations runs.
+              #
+              # @overload export_evaluation_runs(request, options = nil)
+              #   Pass arguments to `export_evaluation_runs` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload export_evaluation_runs(parent: nil, names: nil, export_options: nil)
+              #   Pass arguments to `export_evaluation_runs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the app to export evaluation runs from.
+              #     Format: `projects/{project}/locations/{location}/apps/{app}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the evaluation runs to export.
+              #   @param export_options [::Google::Cloud::Ces::V1beta::ExportOptions, ::Hash]
+              #     Optional. The export options for the evaluation runs.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new
+              #
+              #   # Call the export_evaluation_runs method.
+              #   result = client.export_evaluation_runs request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def export_evaluation_runs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.export_evaluation_runs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.export_evaluation_runs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.export_evaluation_runs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @evaluation_service_stub.export_evaluation_runs request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Exports evaluations results.
+              #
+              # @overload export_evaluation_results(request, options = nil)
+              #   Pass arguments to `export_evaluation_results` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload export_evaluation_results(parent: nil, names: nil, export_options: nil)
+              #   Pass arguments to `export_evaluation_results` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the evaluation to export evaluation results
+              #     from. Format:
+              #     `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the evaluation results to export.
+              #   @param export_options [::Google::Cloud::Ces::V1beta::ExportOptions, ::Hash]
+              #     Optional. The export options for the evaluation results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new
+              #
+              #   # Call the export_evaluation_results method.
+              #   result = client.export_evaluation_results request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def export_evaluation_results request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.export_evaluation_results.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.export_evaluation_results.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.export_evaluation_results.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @evaluation_service_stub.export_evaluation_results request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Runs metrics on an existing evaluation result.
+              #
+              # @overload run_evaluation_result_metrics(request, options = nil)
+              #   Pass arguments to `run_evaluation_result_metrics` via a request object, either of type
+              #   {::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload run_evaluation_result_metrics(evaluation_result_id: nil)
+              #   Pass arguments to `run_evaluation_result_metrics` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param evaluation_result_id [::String]
+              #     Required. The evaluation result to run metrics for.
+              #     Format:
+              #     `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/ces/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Ces::V1beta::EvaluationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new
+              #
+              #   # Call the run_evaluation_result_metrics method.
+              #   result = client.run_evaluation_result_metrics request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def run_evaluation_result_metrics request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.run_evaluation_result_metrics.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Ces::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.run_evaluation_result_metrics.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.run_evaluation_result_metrics.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @evaluation_service_stub.run_evaluation_result_metrics request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the EvaluationService REST API.
               #
               # This class represents the configuration for EvaluationService REST,
@@ -3392,6 +3666,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :export_evaluations
+                  ##
+                  # RPC-specific configuration for `export_evaluation_runs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_evaluation_runs
+                  ##
+                  # RPC-specific configuration for `export_evaluation_results`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_evaluation_results
+                  ##
+                  # RPC-specific configuration for `run_evaluation_result_metrics`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :run_evaluation_result_metrics
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3459,6 +3748,12 @@ module Google
                     @test_persona_voice = ::Gapic::Config::Method.new test_persona_voice_config
                     export_evaluations_config = parent_rpcs.export_evaluations if parent_rpcs.respond_to? :export_evaluations
                     @export_evaluations = ::Gapic::Config::Method.new export_evaluations_config
+                    export_evaluation_runs_config = parent_rpcs.export_evaluation_runs if parent_rpcs.respond_to? :export_evaluation_runs
+                    @export_evaluation_runs = ::Gapic::Config::Method.new export_evaluation_runs_config
+                    export_evaluation_results_config = parent_rpcs.export_evaluation_results if parent_rpcs.respond_to? :export_evaluation_results
+                    @export_evaluation_results = ::Gapic::Config::Method.new export_evaluation_results_config
+                    run_evaluation_result_metrics_config = parent_rpcs.run_evaluation_result_metrics if parent_rpcs.respond_to? :run_evaluation_result_metrics
+                    @run_evaluation_result_metrics = ::Gapic::Config::Method.new run_evaluation_result_metrics_config
 
                     yield self if block_given?
                   end
