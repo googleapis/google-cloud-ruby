@@ -1,0 +1,17 @@
+{
+    "api_id": "developerknowledge.googleapis.com",
+    "api_shortname": "developerknowledge",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-developers-developer_knowledge/latest",
+    "distribution_name": "google-developers-developer_knowledge",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "developerknowledge",
+    "name_pretty": "Developer Knowledge API",
+    "product_documentation": "https://developers.google.com/knowledge",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Developer Knowledge API provides access to Google's developer knowledge.",
+    "ruby-cloud-product-url": "https://developers.google.com/knowledge",
+    "library_type": "GAPIC_MANUAL"
+}
