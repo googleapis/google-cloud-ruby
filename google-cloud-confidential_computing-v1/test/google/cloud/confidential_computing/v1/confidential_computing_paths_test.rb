@@ -53,6 +53,18 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientP
     end
   end
 
+  def test_instance_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_path project: "value0", zone: "value1", instance: "value2"
+      assert_equal "projects/value0/zones/value1/instances/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

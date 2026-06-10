@@ -44,6 +44,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Instance resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/zones/{zone}/instances/{instance}`
+            #
+            # @param project [String]
+            # @param zone [String]
+            # @param instance [String]
+            #
+            # @return [::String]
+            def instance_path project:, zone:, instance:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project}/zones/#{zone}/instances/#{instance}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
