@@ -8,7 +8,7 @@
     "name": "developerknowledge",
     "name_pretty": "Developer Knowledge API",
     "product_documentation": "https://developers.google.com/knowledge",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Developer Knowledge API provides access to Google's developer knowledge.",
