@@ -290,6 +290,96 @@
                 "delete_db_system"
               ]
             },
+            "ListGoldengateDeployments": {
+              "methods": [
+                "list_goldengate_deployments"
+              ]
+            },
+            "GetGoldengateDeployment": {
+              "methods": [
+                "get_goldengate_deployment"
+              ]
+            },
+            "CreateGoldengateDeployment": {
+              "methods": [
+                "create_goldengate_deployment"
+              ]
+            },
+            "DeleteGoldengateDeployment": {
+              "methods": [
+                "delete_goldengate_deployment"
+              ]
+            },
+            "StopGoldengateDeployment": {
+              "methods": [
+                "stop_goldengate_deployment"
+              ]
+            },
+            "StartGoldengateDeployment": {
+              "methods": [
+                "start_goldengate_deployment"
+              ]
+            },
+            "ListGoldengateConnections": {
+              "methods": [
+                "list_goldengate_connections"
+              ]
+            },
+            "GetGoldengateConnection": {
+              "methods": [
+                "get_goldengate_connection"
+              ]
+            },
+            "CreateGoldengateConnection": {
+              "methods": [
+                "create_goldengate_connection"
+              ]
+            },
+            "DeleteGoldengateConnection": {
+              "methods": [
+                "delete_goldengate_connection"
+              ]
+            },
+            "GetGoldengateDeploymentVersion": {
+              "methods": [
+                "get_goldengate_deployment_version"
+              ]
+            },
+            "ListGoldengateDeploymentVersions": {
+              "methods": [
+                "list_goldengate_deployment_versions"
+              ]
+            },
+            "GetGoldengateDeploymentType": {
+              "methods": [
+                "get_goldengate_deployment_type"
+              ]
+            },
+            "ListGoldengateDeploymentTypes": {
+              "methods": [
+                "list_goldengate_deployment_types"
+              ]
+            },
+            "GetGoldengateDeploymentEnvironment": {
+              "methods": [
+                "get_goldengate_deployment_environment"
+              ]
+            },
+            "ListGoldengateDeploymentEnvironments": {
+              "methods": [
+                "list_goldengate_deployment_environments"
+              ]
+            },
+            "GetGoldengateConnectionType": {
+              "methods": [
+                "get_goldengate_connection_type"
+              ]
+            },
+            "ListGoldengateConnectionTypes": {
+              "methods": [
+                "list_goldengate_connection_types"
+              ]
+            },
             "ListDbVersions": {
               "methods": [
                 "list_db_versions"
@@ -298,6 +388,31 @@
             "ListDatabaseCharacterSets": {
               "methods": [
                 "list_database_character_sets"
+              ]
+            },
+            "ListGoldengateConnectionAssignments": {
+              "methods": [
+                "list_goldengate_connection_assignments"
+              ]
+            },
+            "GetGoldengateConnectionAssignment": {
+              "methods": [
+                "get_goldengate_connection_assignment"
+              ]
+            },
+            "CreateGoldengateConnectionAssignment": {
+              "methods": [
+                "create_goldengate_connection_assignment"
+              ]
+            },
+            "DeleteGoldengateConnectionAssignment": {
+              "methods": [
+                "delete_goldengate_connection_assignment"
+              ]
+            },
+            "TestGoldengateConnectionAssignment": {
+              "methods": [
+                "test_goldengate_connection_assignment"
               ]
             }
           }

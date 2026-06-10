@@ -149,12 +149,12 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties::State]
         #     Output only. State of the cluster.
-        # @!attribute [r] scan_listener_port_tcp
+        # @!attribute [rw] scan_listener_port_tcp
         #   @return [::Integer]
-        #     Output only. SCAN listener port - TCP
-        # @!attribute [r] scan_listener_port_tcp_ssl
+        #     Optional. SCAN listener port - TCP
+        # @!attribute [rw] scan_listener_port_tcp_ssl
         #   @return [::Integer]
-        #     Output only. SCAN listener port - TLS
+        #     Optional. SCAN listener port - TLS
         # @!attribute [r] domain
         #   @return [::String]
         #     Output only. Parent DNS domain where SCAN DNS and hosts names are

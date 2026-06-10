@@ -149,6 +149,90 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientPathsTest < Min
     end
   end
 
+  def test_goldengate_connection_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_connection_path project: "value0", location: "value1", goldengate_connection: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateConnections/value2", path
+    end
+  end
+
+  def test_goldengate_connection_assignment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_connection_assignment_path project: "value0", location: "value1", goldengate_connection_assignment: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateConnectionAssignments/value2", path
+    end
+  end
+
+  def test_goldengate_connection_type_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_connection_type_path project: "value0", location: "value1", goldengate_connection_type: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateConnectionTypes/value2", path
+    end
+  end
+
+  def test_goldengate_deployment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_deployment_path project: "value0", location: "value1", goldengate_deployment: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateDeployments/value2", path
+    end
+  end
+
+  def test_goldengate_deployment_environment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_deployment_environment_path project: "value0", location: "value1", goldengate_deployment_environment: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateDeploymentEnvironments/value2", path
+    end
+  end
+
+  def test_goldengate_deployment_type_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_deployment_type_path project: "value0", location: "value1", goldengate_deployment_type: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateDeploymentTypes/value2", path
+    end
+  end
+
+  def test_goldengate_deployment_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.goldengate_deployment_version_path project: "value0", location: "value1", goldengate_deployment_version: "value2"
+      assert_equal "projects/value0/locations/value1/goldengateDeploymentVersions/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -206,6 +290,18 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientPathsTest < Min
 
       path = client.pluggable_database_path project: "value0", location: "value1", pluggable_database: "value2"
       assert_equal "projects/value0/locations/value1/pluggableDatabases/value2", path
+    end
+  end
+
+  def test_secret_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.secret_version_path project: "value0", secret: "value1", secret_version: "value2"
+      assert_equal "projects/value0/secrets/value1/versions/value2", path
     end
   end
 end

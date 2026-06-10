@@ -52,6 +52,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token for fetching next page of response.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListCloudExadataInfrastructuresResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,6 +155,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to fetch the next page of results.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListCloudVmClustersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,6 +456,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListAutonomousDatabasesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -588,7 +600,8 @@ module Google
         #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
         # @!attribute [rw] peer_autonomous_database
         #   @return [::String]
-        #     Required. The peer database name to switch over to.
+        #     Optional. The peer database name to switch over to. Required for
+        #     cross-region standby, and must be omitted for in-region Data Guard.
         class SwitchoverAutonomousDatabaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -601,7 +614,8 @@ module Google
         #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
         # @!attribute [rw] peer_autonomous_database
         #   @return [::String]
-        #     Required. The peer database name to fail over to.
+        #     Optional. The peer database name to fail over to. Required for cross-region
+        #     standby, and must be omitted for in-region Data Guard.
         class FailoverAutonomousDatabaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -838,6 +852,10 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListExadbVmClustersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
