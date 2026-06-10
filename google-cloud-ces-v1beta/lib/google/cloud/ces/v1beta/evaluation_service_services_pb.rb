@@ -100,6 +100,12 @@ module Google
             rpc :TestPersonaVoice, ::Google::Cloud::Ces::V1beta::TestPersonaVoiceRequest, ::Google::Cloud::Ces::V1beta::TestPersonaVoiceResponse
             # Exports evaluations.
             rpc :ExportEvaluations, ::Google::Cloud::Ces::V1beta::ExportEvaluationsRequest, ::Google::Longrunning::Operation
+            # Exports evaluations runs.
+            rpc :ExportEvaluationRuns, ::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest, ::Google::Longrunning::Operation
+            # Exports evaluations results.
+            rpc :ExportEvaluationResults, ::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest, ::Google::Longrunning::Operation
+            # Runs metrics on an existing evaluation result.
+            rpc :RunEvaluationResultMetrics, ::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -21,6 +21,64 @@ module Google
   module Cloud
     module Ces
       module V1beta
+        # Experiment for the deployment.
+        # @!attribute [rw] version_release
+        #   @return [::Google::Cloud::Ces::V1beta::ExperimentConfig::VersionRelease]
+        #     Optional. Version release for the experiment.
+        class ExperimentConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Version release for the experiment.
+          # @!attribute [rw] state
+          #   @return [::Google::Cloud::Ces::V1beta::ExperimentConfig::State]
+          #     Optional. State of the version release.
+          # @!attribute [rw] traffic_allocations
+          #   @return [::Array<::Google::Cloud::Ces::V1beta::ExperimentConfig::VersionRelease::TrafficAllocation>]
+          #     Optional. Traffic allocations for the version release.
+          class VersionRelease
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Traffic allocation for the version release.
+            # @!attribute [rw] id
+            #   @return [::String]
+            #     Optional. Id of the traffic allocation.
+            #     Free format string, up to 128 characters.
+            # @!attribute [rw] traffic_percentage
+            #   @return [::Integer]
+            #     Optional. Traffic percentage of the traffic allocation.
+            #     Must be between 0 and 100.
+            # @!attribute [rw] app_version
+            #   @return [::String]
+            #     Optional. App version of the traffic allocation.
+            #     Format:
+            #     `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
+            class TrafficAllocation
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # State of the experiment.
+          module State
+            # Unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # Pending state. Experiment is pending and not valid.
+            PENDING = 1
+
+            # Running state. Experiment is running and valid.
+            RUNNING = 2
+
+            # Done state. Experiment is done and no longer valid.
+            DONE = 3
+
+            # Expired state. Experiment is expired and no longer valid.
+            EXPIRED = 4
+          end
+        end
+
         # A deployment represents an immutable, queryable version of the app.
         # It is used to deploy an app version with a specific channel profile.
         # @!attribute [rw] name
@@ -52,6 +110,9 @@ module Google
         #     Output only. Etag used to ensure the object hasn't changed during a
         #     read-modify-write operation. If the etag is empty, the update will
         #     overwrite any concurrent changes.
+        # @!attribute [rw] experiment_config
+        #   @return [::Google::Cloud::Ces::V1beta::ExperimentConfig]
+        #     Optional. Experiment configuration for the deployment.
         class Deployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

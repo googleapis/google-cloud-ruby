@@ -131,6 +131,10 @@ module Google
         #   @return [::Array<::Google::Cloud::Ces::V1beta::TransferRule>]
         #     Optional. Agent transfer rules.
         #     If multiple rules match, the first one in the list will be used.
+        # @!attribute [r] validation_errors
+        #   @return [::Array<::String>]
+        #     Output only. Misconfigurations or errors in the agent that may affect agent
+        #     quality.
         class Agent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,6 +185,11 @@ module Google
           #     [`allow_playback_interruption`](https://docs.cloud.google.com/dialogflow/cx/docs/reference/rpc/google.cloud.dialogflow.cx.v3#text)
           #     set to true will be interruptable, all other messages follow the
           #     app-level barge-in settings.
+          # @!attribute [rw] language_code_variable
+          #   @return [::String]
+          #     Optional. The name of the variable that contains the language code to be
+          #     used for the Dialogflow session. If unspecified, the default language
+          #     code of the Dialogflow agent will be used.
           class RemoteDialogflowAgent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

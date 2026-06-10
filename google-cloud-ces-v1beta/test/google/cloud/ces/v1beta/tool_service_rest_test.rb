@@ -201,6 +201,7 @@ class ::Google::Cloud::Ces::V1beta::ToolService::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     toolset = "hello world"
     tool_ids = ["hello world"]
+    bypass_persistence_config = true
 
     retrieve_tools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -216,27 +217,27 @@ class ::Google::Cloud::Ces::V1beta::ToolService::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }) do |_result, response|
+        client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_tools toolset: toolset, tool_ids: tool_ids do |_result, response|
+        client.retrieve_tools toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_tools ::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids) do |_result, response|
+        client.retrieve_tools ::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }, call_options) do |_result, response|
+        client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_tools(::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids), call_options) do |_result, response|
+        client.retrieve_tools(::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

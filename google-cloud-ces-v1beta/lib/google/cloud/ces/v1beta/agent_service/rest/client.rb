@@ -4422,7 +4422,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_app_resource(agent: nil, tool: nil, toolset: nil, parent: nil, refine_instructions: nil, tool_generation_config: nil, app_generation_config: nil, evaluation_generation_config: nil, evaluation_personas_generation_config: nil, quality_report_generation_config: nil, hill_climbing_fix_config: nil)
+              # @overload generate_app_resource(agent: nil, tool: nil, toolset: nil, app_version_context: nil, parent: nil, refine_instructions: nil, tool_generation_config: nil, app_generation_config: nil, evaluation_generation_config: nil, evaluation_personas_generation_config: nil, quality_report_generation_config: nil, hill_climbing_fix_config: nil)
               #   Pass arguments to `generate_app_resource` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -4431,17 +4431,21 @@ module Google
               #     The agent resource to be used by the LLM assistant, can be empty for
               #     generating a new agent.
               #
-              #     Note: The following parameters are mutually exclusive: `agent`, `tool`, `toolset`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `agent`, `tool`, `toolset`, `app_version_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param tool [::Google::Cloud::Ces::V1beta::Tool, ::Hash]
               #     The tool resource to be used by the LLM assistant, can be empty for
               #     generating a new tool.
               #
-              #     Note: The following parameters are mutually exclusive: `tool`, `agent`, `toolset`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `tool`, `agent`, `toolset`, `app_version_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param toolset [::Google::Cloud::Ces::V1beta::Toolset, ::Hash]
               #     The toolset resource to be used by the LLM assistant, can be empty for
               #     generating a new toolset.
               #
-              #     Note: The following parameters are mutually exclusive: `toolset`, `agent`, `tool`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #     Note: The following parameters are mutually exclusive: `toolset`, `agent`, `tool`, `app_version_context`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param app_version_context [::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest::AppVersionContext, ::Hash]
+              #     The app version context specifying the base snapshot and target agent.
+              #
+              #     Note: The following parameters are mutually exclusive: `app_version_context`, `agent`, `tool`, `toolset`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. The resource name of the app to generate the resource for.
               #   @param refine_instructions [::Array<::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest::RefineInstructions, ::Hash>]

@@ -2108,6 +2108,203 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::ClientTest < Minitest::Te
     end
   end
 
+  def test_export_evaluation_runs
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    export_options = {}
+
+    export_evaluation_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_evaluation_runs, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1beta::ExportOptions), request["export_options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_evaluation_runs_client_stub do
+      # Create client
+      client = ::Google::Cloud::Ces::V1beta::EvaluationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_evaluation_runs({ parent: parent, names: names, export_options: export_options }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_evaluation_runs parent: parent, names: names, export_options: export_options do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_evaluation_runs ::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new(parent: parent, names: names, export_options: export_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_evaluation_runs({ parent: parent, names: names, export_options: export_options }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_evaluation_runs(::Google::Cloud::Ces::V1beta::ExportEvaluationRunsRequest.new(parent: parent, names: names, export_options: export_options), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_evaluation_runs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_export_evaluation_results
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    export_options = {}
+
+    export_evaluation_results_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_evaluation_results, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1beta::ExportOptions), request["export_options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_evaluation_results_client_stub do
+      # Create client
+      client = ::Google::Cloud::Ces::V1beta::EvaluationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_evaluation_results({ parent: parent, names: names, export_options: export_options }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_evaluation_results parent: parent, names: names, export_options: export_options do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_evaluation_results ::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new(parent: parent, names: names, export_options: export_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_evaluation_results({ parent: parent, names: names, export_options: export_options }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_evaluation_results(::Google::Cloud::Ces::V1beta::ExportEvaluationResultsRequest.new(parent: parent, names: names, export_options: export_options), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_evaluation_results_client_stub.call_rpc_count
+    end
+  end
+
+  def test_run_evaluation_result_metrics
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    evaluation_result_id = "hello world"
+
+    run_evaluation_result_metrics_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_evaluation_result_metrics, name
+      assert_kind_of ::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest, request
+      assert_equal "hello world", request["evaluation_result_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_evaluation_result_metrics_client_stub do
+      # Create client
+      client = ::Google::Cloud::Ces::V1beta::EvaluationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.run_evaluation_result_metrics({ evaluation_result_id: evaluation_result_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.run_evaluation_result_metrics evaluation_result_id: evaluation_result_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.run_evaluation_result_metrics ::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new(evaluation_result_id: evaluation_result_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.run_evaluation_result_metrics({ evaluation_result_id: evaluation_result_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.run_evaluation_result_metrics(::Google::Cloud::Ces::V1beta::RunEvaluationResultMetricsRequest.new(evaluation_result_id: evaluation_result_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_evaluation_result_metrics_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

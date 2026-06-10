@@ -52,6 +52,11 @@ module Google
         #     can be set in the session variables. See
         #     https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool/open-api#openapi-injection
         #     for more details.
+        # @!attribute [rw] tool_overrides
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::McpToolOverride>]
+        #     Optional. Overrides for individual tools within this toolset.
+        #     This allows overriding specific details like descriptions, names,
+        #     or pinning the tools' states so they aren't fully dynamic.
         class McpToolset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -64,6 +69,48 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Overrides associated with a given tool in a Toolset.
+        # This enables "pinning" or "overriding" of tool definitions from the external
+        # dynamic server.
+        # @!attribute [rw] tool
+        #   @return [::String]
+        #     Required. The original name of the tool as it is emitted by the MCP server.
+        # @!attribute [rw] name_override
+        #   @return [::String]
+        #     Optional. If present, this tool uses this name in the Agent instead of the
+        #     original name. This is primarily used as an alias if the MCP server offers
+        #     poorly named tools.
+        # @!attribute [rw] description_override
+        #   @return [::String]
+        #     Optional. If present, this tool uses this description instead of the
+        #     original description from the server.
+        # @!attribute [r] snapshot
+        #   @return [::Google::Cloud::Ces::V1beta::McpToolDefinition]
+        #     Output only. If present, this tool is "Pinned" and uses the snapshot values
+        #     as fallbacks if the server becomes temporarily unavailable or if no
+        #     Override is present.
+        class McpToolOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Container for a tool's core definition elements that are snapshot.
+        # Schemas in the snapshot are used as-is and cannot be overridden.
+        # @!attribute [r] description
+        #   @return [::String]
+        #     Output only. The description of the MCP tool. This can be overridden
+        #     by `description_override` in `McpToolOverride`.
+        # @!attribute [r] input_schema
+        #   @return [::Google::Cloud::Ces::V1beta::Schema]
+        #     Output only. The schema of the input arguments of the MCP tool.
+        # @!attribute [r] output_schema
+        #   @return [::Google::Cloud::Ces::V1beta::Schema]
+        #     Output only. The schema of the output arguments of the MCP tool.
+        class McpToolDefinition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

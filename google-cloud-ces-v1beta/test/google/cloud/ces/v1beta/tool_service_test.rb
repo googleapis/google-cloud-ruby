@@ -202,12 +202,14 @@ class ::Google::Cloud::Ces::V1beta::ToolService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     toolset = "hello world"
     tool_ids = ["hello world"]
+    bypass_persistence_config = true
 
     retrieve_tools_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :retrieve_tools, name
       assert_kind_of ::Google::Cloud::Ces::V1beta::RetrieveToolsRequest, request
       assert_equal "hello world", request["toolset"]
       assert_equal ["hello world"], request["tool_ids"]
+      assert_equal true, request["bypass_persistence_config"]
       refute_nil options
     end
 
@@ -218,31 +220,31 @@ class ::Google::Cloud::Ces::V1beta::ToolService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }) do |response, operation|
+      client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.retrieve_tools toolset: toolset, tool_ids: tool_ids do |response, operation|
+      client.retrieve_tools toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.retrieve_tools ::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids) do |response, operation|
+      client.retrieve_tools ::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }, grpc_options) do |response, operation|
+      client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.retrieve_tools(::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids), grpc_options) do |response, operation|
+      client.retrieve_tools(::Google::Cloud::Ces::V1beta::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

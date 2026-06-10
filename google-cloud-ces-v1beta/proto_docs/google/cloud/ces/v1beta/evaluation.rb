@@ -209,6 +209,12 @@ module Google
         #     Output only. The last 10 evaluation results for this evaluation. This is
         #     only populated if include_last_ten_results is set to true in the
         #     ListEvaluationsRequest or GetEvaluationRequest.
+        # @!attribute [rw] evaluation_metrics_threshold_override
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsThresholds]
+        #     Optional. Overrides metrics thresholds for this specific evaluation.
+        # @!attribute [rw] evaluation_metrics_config_override
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsConfig]
+        #     Optional. Overrides metrics config for this specific evaluation.
         class Evaluation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -218,42 +224,63 @@ module Google
           #   @return [::Google::Cloud::Ces::V1beta::ToolCall]
           #     Optional. Check that a specific tool was called with the parameters.
           #
-          #     Note: The following fields are mutually exclusive: `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`, `no_tool_calls`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] tool_response
           #   @return [::Google::Cloud::Ces::V1beta::ToolResponse]
           #     Optional. Check that a specific tool had the expected response.
           #
-          #     Note: The following fields are mutually exclusive: `tool_response`, `tool_call`, `agent_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `tool_response`, `tool_call`, `agent_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`, `no_tool_calls`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] agent_response
           #   @return [::Google::Cloud::Ces::V1beta::Message]
           #     Optional. Check that the agent responded with the correct response. The
           #     role "agent" is implied.
           #
-          #     Note: The following fields are mutually exclusive: `agent_response`, `tool_call`, `tool_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `agent_response`, `tool_call`, `tool_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`, `no_tool_calls`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] agent_transfer
           #   @return [::Google::Cloud::Ces::V1beta::AgentTransfer]
           #     Optional. Check that the agent transferred the conversation to a
           #     different agent.
           #
-          #     Note: The following fields are mutually exclusive: `agent_transfer`, `tool_call`, `tool_response`, `agent_response`, `updated_variables`, `mock_tool_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `agent_transfer`, `tool_call`, `tool_response`, `agent_response`, `updated_variables`, `mock_tool_response`, `no_tool_calls`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] updated_variables
           #   @return [::Google::Protobuf::Struct]
           #     Optional. Check that the agent updated the session variables to the
           #     expected values. Used to also capture agent variable updates for golden
           #     evals.
           #
-          #     Note: The following fields are mutually exclusive: `updated_variables`, `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `mock_tool_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `updated_variables`, `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `mock_tool_response`, `no_tool_calls`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mock_tool_response
           #   @return [::Google::Cloud::Ces::V1beta::ToolResponse]
           #     Optional. The tool response to mock, with the parameters of interest
           #     specified. Any parameters not specified will be hallucinated by the
           #     LLM.
           #
-          #     Note: The following fields are mutually exclusive: `mock_tool_response`, `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `updated_variables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mock_tool_response`, `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `updated_variables`, `no_tool_calls`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] no_tool_calls
+          #   @return [::Boolean]
+          #     Optional. Check that no tools were called during this turn.
+          #
+          #     Note: The following fields are mutually exclusive: `no_tool_calls`, `tool_call`, `tool_response`, `agent_response`, `agent_transfer`, `updated_variables`, `mock_tool_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] note
           #   @return [::String]
           #     Optional. A note for this requirement, useful in reporting when specific
           #     checks fail. E.g., "Check_Payment_Tool_Called".
+          # @!attribute [rw] skip_evaluation
+          #   @return [::Boolean]
+          #     Optional. If set to true, this specific expectation will not be
+          #     evaluated.
+          # @!attribute [rw] expectation_level_metrics_thresholds_override
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsThresholds::GoldenEvaluationMetricsThresholds::ExpectationLevelMetricsThresholds]
+          #     Optional. Overrides metrics at the step level.
+          # @!attribute [rw] agent_response_semantic_similarity_metrics_config_override
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsConfig::SemanticSimilarityMetricsConfig]
+          #     Optional. Overrides for agent_response semantic similarity metrics.
+          # @!attribute [rw] agent_response_hallucination_metrics_config_override
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsConfig::HallucinationMetricsConfig]
+          #     Optional. Overrides for agent_response hallucination metrics.
+          # @!attribute [rw] comparison_type
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsConfig::ComparisonType]
+          #     Optional. The comparison type to use for the expectation check.
           class GoldenExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -287,7 +314,14 @@ module Google
           # @!attribute [rw] root_span
           #   @return [::Google::Cloud::Ces::V1beta::Span]
           #     Optional. The root span of the golden turn for processing and maintaining
-          #     audio information.
+          #     audio information. The uri for the audio must contain audio saved in
+          #     16Khz sample rate.
+          # @!attribute [rw] turn_level_metrics_thresholds_override
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsThresholds::GoldenEvaluationMetricsThresholds::TurnLevelMetricsThresholds]
+          #     Optional. Overrides for turn-level metric thresholds.
+          # @!attribute [rw] hallucination_metric_behavior_override
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationMetricsThresholds::HallucinationMetricBehavior]
+          #     Optional. Override for turn-level hallucination metric behavior.
           class GoldenTurn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -297,6 +331,7 @@ module Google
           # @!attribute [rw] turns
           #   @return [::Array<::Google::Cloud::Ces::V1beta::Evaluation::GoldenTurn>]
           #     Required. The golden turns required to replay a golden conversation.
+          #     The maximum number of allowed turns is 100.
           # @!attribute [rw] evaluation_expectations
           #   @return [::Array<::String>]
           #     Optional. The evaluation expectations to evaluate the replayed
@@ -348,8 +383,8 @@ module Google
           #     Optional. The user facts to be used by the scenario.
           # @!attribute [rw] max_turns
           #   @return [::Integer]
-          #     Optional. The maximum number of turns to simulate. If not specified, the
-          #     simulation will continue until the task is complete.
+          #     Optional. The maximum number of turns to simulate. The maximum allowed
+          #     value is 100. The default value is 100.
           # @!attribute [rw] rubrics
           #   @return [::Array<::String>]
           #     Required. The rubrics to score the scenario against.
@@ -378,6 +413,9 @@ module Google
           #     Optional. The evaluation expectations to evaluate the conversation
           #     produced by the simulation against. Format:
           #     `projects/{project}/locations/{location}/apps/{app}/evaluationExpectations/{evaluationExpectation}`
+          # @!attribute [rw] scenario_execution_mode
+          #   @return [::Google::Cloud::Ces::V1beta::EvaluationSettings::ScenarioExecutionMode]
+          #     Optional. The execution mode for scenario evaluations.
           class Scenario
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -555,22 +593,29 @@ module Google
           #   @return [::Google::Cloud::Ces::V1beta::ToolCall]
           #     Output only. The result of the tool call expectation.
           #
-          #     Note: The following fields are mutually exclusive: `observed_tool_call`, `observed_tool_response`, `observed_agent_response`, `observed_agent_transfer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `observed_tool_call`, `observed_tool_response`, `observed_agent_response`, `observed_agent_transfer`, `observed_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] observed_tool_response
           #   @return [::Google::Cloud::Ces::V1beta::ToolResponse]
           #     Output only. The result of the tool response expectation.
           #
-          #     Note: The following fields are mutually exclusive: `observed_tool_response`, `observed_tool_call`, `observed_agent_response`, `observed_agent_transfer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `observed_tool_response`, `observed_tool_call`, `observed_agent_response`, `observed_agent_transfer`, `observed_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] observed_agent_response
           #   @return [::Google::Cloud::Ces::V1beta::Message]
           #     Output only. The result of the agent response expectation.
           #
-          #     Note: The following fields are mutually exclusive: `observed_agent_response`, `observed_tool_call`, `observed_tool_response`, `observed_agent_transfer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `observed_agent_response`, `observed_tool_call`, `observed_tool_response`, `observed_agent_transfer`, `observed_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] observed_agent_transfer
           #   @return [::Google::Cloud::Ces::V1beta::AgentTransfer]
           #     Output only. The result of the agent transfer expectation.
           #
-          #     Note: The following fields are mutually exclusive: `observed_agent_transfer`, `observed_tool_call`, `observed_tool_response`, `observed_agent_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `observed_agent_transfer`, `observed_tool_call`, `observed_tool_response`, `observed_agent_response`, `observed_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] observed_payload
+          #   @return [::Google::Protobuf::Struct]
+          #     Output only. An observed custom payload.
+          #     There are no expectations for custom payloads. This is only used for
+          #     metrics calculation. The outcome is always SKIPPED.
+          #
+          #     Note: The following fields are mutually exclusive: `observed_payload`, `observed_tool_call`, `observed_tool_response`, `observed_agent_response`, `observed_agent_transfer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] expectation
           #   @return [::Google::Cloud::Ces::V1beta::Evaluation::GoldenExpectation]
           #     Output only. The expectation that was evaluated.
@@ -989,6 +1034,9 @@ module Google
             # Evaluation result execution state is not specified.
             EXECUTION_STATE_UNSPECIFIED = 0
 
+            # Evaluation result execution is queued.
+            QUEUED = 5
+
             # Evaluation result execution is running.
             RUNNING = 1
 
@@ -997,6 +1045,9 @@ module Google
 
             # Evaluation result execution failed due to an internal error.
             ERROR = 3
+
+            # Evaluation result execution was cancelled.
+            CANCELLED = 4
           end
         end
 
@@ -1098,6 +1149,11 @@ module Google
         # @!attribute [r] golden_run_method
         #   @return [::Google::Cloud::Ces::V1beta::GoldenRunMethod]
         #     Output only. The method used to run the evaluation.
+        # @!attribute [r] operation
+        #   @return [::String]
+        #     Output only. The operation that created this evaluation run.
+        #     Format:
+        #     `projects/{project}/locations/{location}/operations/{operation}`
         class EvaluationRun
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1124,6 +1180,10 @@ module Google
           #     Output only. Number of completed evaluation results with an outcome of
           #     PASS. (EvaluationResult.execution_state is COMPLETED and
           #     EvaluationResult.evaluation_status is PASS).
+          # @!attribute [r] cancelled_count
+          #   @return [::Integer]
+          #     Output only. Number of evaluation results that were cancelled.
+          #     (EvaluationResult.execution_state is CANCELLED).
           class Progress
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1178,6 +1238,9 @@ module Google
             # Evaluation run state is not specified.
             EVALUATION_RUN_STATE_UNSPECIFIED = 0
 
+            # Indicates the evaluation run is queued.
+            QUEUED = 5
+
             # Evaluation run is running.
             RUNNING = 1
 
@@ -1186,6 +1249,9 @@ module Google
 
             # The evaluation run has an error.
             ERROR = 3
+
+            # Evaluation run was cancelled.
+            CANCELLED = 4
           end
         end
 
@@ -1376,6 +1442,9 @@ module Google
         # @!attribute [r] session_id
         #   @return [::String]
         #     Output only. The session ID for the conversation that caused the error.
+        # @!attribute [r] user_facing_error_message
+        #   @return [::String]
+        #     Output only. The user facing error message.
         class EvaluationErrorInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
