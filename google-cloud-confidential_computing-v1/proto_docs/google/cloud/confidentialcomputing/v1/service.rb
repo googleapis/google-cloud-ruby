@@ -97,6 +97,11 @@ module Google
         #   @return [::String]
         #     Optional. An optional indicator of the attester, only applies to certain
         #     products.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Optional. Optional resource link of the Compute Engine instance.
+        #     Format:
+        #     `projects/{project_number}/zones/{zone}/instances/{instance_id}`
         class VerifyAttestationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

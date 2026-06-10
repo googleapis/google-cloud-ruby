@@ -311,7 +311,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, nvidia_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
+              # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, nvidia_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil, instance: nil)
               #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -344,6 +344,10 @@ module Google
               #   @param attester [::String]
               #     Optional. An optional indicator of the attester, only applies to certain
               #     products.
+              #   @param instance [::String]
+              #     Optional. Optional resource link of the Compute Engine instance.
+              #     Format:
+              #     `projects/{project_number}/zones/{zone}/instances/{instance_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
