@@ -99,32 +99,32 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ClientTest < Minites
     ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ServiceStub.stub :transcode_list_domain_mappings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_domain_mappings_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_domain_mappings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_domain_mappings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_domain_mappings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_domain_mappings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_domain_mappings ::Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_domain_mappings ::Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_domain_mappings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_domain_mappings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_domain_mappings(::Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_domain_mappings(::Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ClientTest < Minites
     ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ServiceStub.stub :transcode_get_domain_mapping_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_domain_mapping_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_domain_mapping({ name: name }) do |_result, response|
+        c.get_domain_mapping({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_domain_mapping name: name do |_result, response|
+        c.get_domain_mapping name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_domain_mapping ::Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new(name: name) do |_result, response|
+        c.get_domain_mapping ::Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_domain_mapping({ name: name }, call_options) do |_result, response|
+        c.get_domain_mapping({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_domain_mapping(::Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new(name: name), call_options) do |_result, response|
+        c.get_domain_mapping(::Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ClientTest < Minites
     ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ServiceStub.stub :transcode_create_domain_mapping_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_domain_mapping_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_domain_mapping({ parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy }) do |_result, response|
+        c.create_domain_mapping({ parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_domain_mapping parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy do |_result, response|
+        c.create_domain_mapping parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_domain_mapping ::Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new(parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy) do |_result, response|
+        c.create_domain_mapping ::Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new(parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_domain_mapping({ parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy }, call_options) do |_result, response|
+        c.create_domain_mapping({ parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_domain_mapping(::Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new(parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy), call_options) do |_result, response|
+        c.create_domain_mapping(::Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new(parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ClientTest < Minites
     ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ServiceStub.stub :transcode_update_domain_mapping_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_domain_mapping_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_domain_mapping({ name: name, domain_mapping: domain_mapping, update_mask: update_mask }) do |_result, response|
+        c.update_domain_mapping({ name: name, domain_mapping: domain_mapping, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_domain_mapping name: name, domain_mapping: domain_mapping, update_mask: update_mask do |_result, response|
+        c.update_domain_mapping name: name, domain_mapping: domain_mapping, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_domain_mapping ::Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new(name: name, domain_mapping: domain_mapping, update_mask: update_mask) do |_result, response|
+        c.update_domain_mapping ::Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new(name: name, domain_mapping: domain_mapping, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_domain_mapping({ name: name, domain_mapping: domain_mapping, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_domain_mapping({ name: name, domain_mapping: domain_mapping, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_domain_mapping(::Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new(name: name, domain_mapping: domain_mapping, update_mask: update_mask), call_options) do |_result, response|
+        c.update_domain_mapping(::Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new(name: name, domain_mapping: domain_mapping, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ClientTest < Minites
     ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::ServiceStub.stub :transcode_delete_domain_mapping_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_domain_mapping_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_domain_mapping({ name: name }) do |_result, response|
+        c.delete_domain_mapping({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_domain_mapping name: name do |_result, response|
+        c.delete_domain_mapping name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_domain_mapping ::Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new(name: name) do |_result, response|
+        c.delete_domain_mapping ::Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_domain_mapping({ name: name }, call_options) do |_result, response|
+        c.delete_domain_mapping({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_domain_mapping(::Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new(name: name), call_options) do |_result, response|
+        c.delete_domain_mapping(::Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

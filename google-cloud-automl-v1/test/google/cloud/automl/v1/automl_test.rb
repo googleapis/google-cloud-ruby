@@ -84,40 +84,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dataset parent: parent, dataset: dataset do |response, operation|
+      c.create_dataset parent: parent, dataset: dataset do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dataset ::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
+      c.create_dataset ::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dataset(::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
+      c.create_dataset(::Google::Cloud::AutoML::V1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dataset({ name: name }) do |response, operation|
+      c.get_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dataset name: name do |response, operation|
+      c.get_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dataset ::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name) do |response, operation|
+      c.get_dataset ::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dataset(::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dataset(::Google::Cloud::AutoML::V1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_datasets ::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_datasets ::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_datasets(::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_datasets(::Google::Cloud::AutoML::V1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -276,36 +276,36 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_dataset({ dataset: dataset, update_mask: update_mask }) do |response, operation|
+      c.update_dataset({ dataset: dataset, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_dataset dataset: dataset, update_mask: update_mask do |response, operation|
+      c.update_dataset dataset: dataset, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_dataset ::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |response, operation|
+      c.update_dataset ::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_dataset({ dataset: dataset, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_dataset({ dataset: dataset, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_dataset(::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_dataset(::Google::Cloud::AutoML::V1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -334,40 +334,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dataset({ name: name }) do |response, operation|
+      c.delete_dataset({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dataset name: name do |response, operation|
+      c.delete_dataset name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dataset ::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name) do |response, operation|
+      c.delete_dataset ::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_dataset({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dataset(::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_dataset(::Google::Cloud::AutoML::V1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -399,40 +399,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, import_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_data({ name: name, input_config: input_config }) do |response, operation|
+      c.import_data({ name: name, input_config: input_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_data name: name, input_config: input_config do |response, operation|
+      c.import_data name: name, input_config: input_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_data ::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config) do |response, operation|
+      c.import_data ::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_data({ name: name, input_config: input_config }, grpc_options) do |response, operation|
+      c.import_data({ name: name, input_config: input_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_data(::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config), grpc_options) do |response, operation|
+      c.import_data(::Google::Cloud::AutoML::V1::ImportDataRequest.new(name: name, input_config: input_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -464,40 +464,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_data_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_data({ name: name, output_config: output_config }) do |response, operation|
+      c.export_data({ name: name, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_data name: name, output_config: output_config do |response, operation|
+      c.export_data name: name, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_data ::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config) do |response, operation|
+      c.export_data ::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_data({ name: name, output_config: output_config }, grpc_options) do |response, operation|
+      c.export_data({ name: name, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_data(::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
+      c.export_data(::Google::Cloud::AutoML::V1::ExportDataRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -527,36 +527,36 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_annotation_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_annotation_spec({ name: name }) do |response, operation|
+      c.get_annotation_spec({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_annotation_spec name: name do |response, operation|
+      c.get_annotation_spec name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_annotation_spec ::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name) do |response, operation|
+      c.get_annotation_spec ::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_annotation_spec({ name: name }, grpc_options) do |response, operation|
+      c.get_annotation_spec({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_annotation_spec(::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_annotation_spec(::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -587,40 +587,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_model({ parent: parent, model: model }) do |response, operation|
+      c.create_model({ parent: parent, model: model }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_model parent: parent, model: model do |response, operation|
+      c.create_model parent: parent, model: model do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_model ::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model) do |response, operation|
+      c.create_model ::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_model({ parent: parent, model: model }, grpc_options) do |response, operation|
+      c.create_model({ parent: parent, model: model }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_model(::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model), grpc_options) do |response, operation|
+      c.create_model(::Google::Cloud::AutoML::V1::CreateModelRequest.new(parent: parent, model: model), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -650,36 +650,36 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_model({ name: name }) do |response, operation|
+      c.get_model({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_model name: name do |response, operation|
+      c.get_model name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_model ::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name) do |response, operation|
+      c.get_model ::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_model({ name: name }, grpc_options) do |response, operation|
+      c.get_model({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_model(::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_model(::Google::Cloud::AutoML::V1::GetModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -714,40 +714,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_models_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_models ::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_models ::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_models(::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_models(::Google::Cloud::AutoML::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -777,40 +777,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_model({ name: name }) do |response, operation|
+      c.delete_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_model name: name do |response, operation|
+      c.delete_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_model ::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name) do |response, operation|
+      c.delete_model ::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_model({ name: name }, grpc_options) do |response, operation|
+      c.delete_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_model(::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_model(::Google::Cloud::AutoML::V1::DeleteModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -842,36 +842,36 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_model({ model: model, update_mask: update_mask }) do |response, operation|
+      c.update_model({ model: model, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_model model: model, update_mask: update_mask do |response, operation|
+      c.update_model model: model, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_model ::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask) do |response, operation|
+      c.update_model ::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_model({ model: model, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_model({ model: model, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_model(::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_model(::Google::Cloud::AutoML::V1::UpdateModelRequest.new(model: model, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -903,40 +903,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, deploy_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }) do |response, operation|
+      c.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_model image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name do |response, operation|
+      c.deploy_model image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_model ::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name) do |response, operation|
+      c.deploy_model ::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }, grpc_options) do |response, operation|
+      c.deploy_model({ image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_model(::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name), grpc_options) do |response, operation|
+      c.deploy_model(::Google::Cloud::AutoML::V1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -966,40 +966,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, undeploy_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_model({ name: name }) do |response, operation|
+      c.undeploy_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_model name: name do |response, operation|
+      c.undeploy_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_model ::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name) do |response, operation|
+      c.undeploy_model ::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_model({ name: name }, grpc_options) do |response, operation|
+      c.undeploy_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_model(::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.undeploy_model(::Google::Cloud::AutoML::V1::UndeployModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1031,40 +1031,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_model({ name: name, output_config: output_config }) do |response, operation|
+      c.export_model({ name: name, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_model name: name, output_config: output_config do |response, operation|
+      c.export_model name: name, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_model ::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config) do |response, operation|
+      c.export_model ::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_model({ name: name, output_config: output_config }, grpc_options) do |response, operation|
+      c.export_model({ name: name, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_model(::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
+      c.export_model(::Google::Cloud::AutoML::V1::ExportModelRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1094,36 +1094,36 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_model_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_model_evaluation({ name: name }) do |response, operation|
+      c.get_model_evaluation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_model_evaluation name: name do |response, operation|
+      c.get_model_evaluation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_model_evaluation ::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name) do |response, operation|
+      c.get_model_evaluation ::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_model_evaluation({ name: name }, grpc_options) do |response, operation|
+      c.get_model_evaluation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_model_evaluation(::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_model_evaluation(::Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1158,40 +1158,40 @@ class ::Google::Cloud::AutoML::V1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_model_evaluations_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_model_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_model_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_model_evaluations ::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_model_evaluations ::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_model_evaluations(::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_model_evaluations(::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -99,32 +99,32 @@ class ::Google::Cloud::AutoML::V1::PredictionService::Rest::ClientTest < Minites
     ::Google::Cloud::AutoML::V1::PredictionService::Rest::ServiceStub.stub :transcode_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.predict({ name: name, payload: payload, params: params }) do |_result, response|
+        c.predict({ name: name, payload: payload, params: params }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.predict name: name, payload: payload, params: params do |_result, response|
+        c.predict name: name, payload: payload, params: params do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.predict ::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params) do |_result, response|
+        c.predict ::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.predict({ name: name, payload: payload, params: params }, call_options) do |_result, response|
+        c.predict({ name: name, payload: payload, params: params }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.predict(::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params), call_options) do |_result, response|
+        c.predict(::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::AutoML::V1::PredictionService::Rest::ClientTest < Minites
     ::Google::Cloud::AutoML::V1::PredictionService::Rest::ServiceStub.stub :transcode_batch_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }) do |_result, response|
+        c.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_predict name: name, input_config: input_config, output_config: output_config, params: params do |_result, response|
+        c.batch_predict name: name, input_config: input_config, output_config: output_config, params: params do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_predict ::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params) do |_result, response|
+        c.batch_predict ::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }, call_options) do |_result, response|
+        c.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_predict(::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params), call_options) do |_result, response|
+        c.batch_predict(::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -88,40 +88,40 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_ingress_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_ingress_rules({ parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address }) do |response, operation|
+      c.list_ingress_rules({ parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_ingress_rules parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address do |response, operation|
+      c.list_ingress_rules parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_ingress_rules ::Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address) do |response, operation|
+      c.list_ingress_rules ::Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_ingress_rules({ parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address }, grpc_options) do |response, operation|
+      c.list_ingress_rules({ parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_ingress_rules(::Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address), grpc_options) do |response, operation|
+      c.list_ingress_rules(::Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_update_ingress_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_ingress_rules({ name: name, ingress_rules: ingress_rules }) do |response, operation|
+      c.batch_update_ingress_rules({ name: name, ingress_rules: ingress_rules }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_ingress_rules name: name, ingress_rules: ingress_rules do |response, operation|
+      c.batch_update_ingress_rules name: name, ingress_rules: ingress_rules do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_ingress_rules ::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new(name: name, ingress_rules: ingress_rules) do |response, operation|
+      c.batch_update_ingress_rules ::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new(name: name, ingress_rules: ingress_rules) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_ingress_rules({ name: name, ingress_rules: ingress_rules }, grpc_options) do |response, operation|
+      c.batch_update_ingress_rules({ name: name, ingress_rules: ingress_rules }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_ingress_rules(::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new(name: name, ingress_rules: ingress_rules), grpc_options) do |response, operation|
+      c.batch_update_ingress_rules(::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new(name: name, ingress_rules: ingress_rules), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_ingress_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_ingress_rule({ parent: parent, rule: rule }) do |response, operation|
+      c.create_ingress_rule({ parent: parent, rule: rule }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_ingress_rule parent: parent, rule: rule do |response, operation|
+      c.create_ingress_rule parent: parent, rule: rule do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_ingress_rule ::Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new(parent: parent, rule: rule) do |response, operation|
+      c.create_ingress_rule ::Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new(parent: parent, rule: rule) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_ingress_rule({ parent: parent, rule: rule }, grpc_options) do |response, operation|
+      c.create_ingress_rule({ parent: parent, rule: rule }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_ingress_rule(::Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new(parent: parent, rule: rule), grpc_options) do |response, operation|
+      c.create_ingress_rule(::Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new(parent: parent, rule: rule), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_ingress_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_ingress_rule({ name: name }) do |response, operation|
+      c.get_ingress_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_ingress_rule name: name do |response, operation|
+      c.get_ingress_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_ingress_rule ::Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new(name: name) do |response, operation|
+      c.get_ingress_rule ::Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_ingress_rule({ name: name }, grpc_options) do |response, operation|
+      c.get_ingress_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_ingress_rule(::Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_ingress_rule(::Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -333,36 +333,36 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_ingress_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_ingress_rule({ name: name, rule: rule, update_mask: update_mask }) do |response, operation|
+      c.update_ingress_rule({ name: name, rule: rule, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_ingress_rule name: name, rule: rule, update_mask: update_mask do |response, operation|
+      c.update_ingress_rule name: name, rule: rule, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_ingress_rule ::Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new(name: name, rule: rule, update_mask: update_mask) do |response, operation|
+      c.update_ingress_rule ::Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new(name: name, rule: rule, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_ingress_rule({ name: name, rule: rule, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_ingress_rule({ name: name, rule: rule, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_ingress_rule(::Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new(name: name, rule: rule, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_ingress_rule(::Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new(name: name, rule: rule, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,36 +391,36 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_ingress_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::Firewall::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_ingress_rule({ name: name }) do |response, operation|
+      c.delete_ingress_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_ingress_rule name: name do |response, operation|
+      c.delete_ingress_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_ingress_rule ::Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new(name: name) do |response, operation|
+      c.delete_ingress_rule ::Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_ingress_rule({ name: name }, grpc_options) do |response, operation|
+      c.delete_ingress_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_ingress_rule(::Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_ingress_rule(::Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

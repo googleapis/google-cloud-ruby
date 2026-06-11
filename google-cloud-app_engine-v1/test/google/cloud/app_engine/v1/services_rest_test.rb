@@ -99,32 +99,32 @@ class ::Google::Cloud::AppEngine::V1::Services::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::AppEngine::V1::Services::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_services parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_services ::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AppEngine::V1::Services::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::AppEngine::V1::Services::Rest::ServiceStub.stub :transcode_get_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service({ name: name }) do |_result, response|
+        c.get_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service name: name do |_result, response|
+        c.get_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service ::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name) do |_result, response|
+        c.get_service ::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service({ name: name }, call_options) do |_result, response|
+        c.get_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service(::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_service(::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::AppEngine::V1::Services::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::AppEngine::V1::Services::Rest::ServiceStub.stub :transcode_update_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }) do |_result, response|
+        c.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_service name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic do |_result, response|
+        c.update_service name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_service ::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic) do |_result, response|
+        c.update_service ::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }, call_options) do |_result, response|
+        c.update_service({ name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_service(::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic), call_options) do |_result, response|
+        c.update_service(::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::AppEngine::V1::Services::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::AppEngine::V1::Services::Rest::ServiceStub.stub :transcode_delete_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Services::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service({ name: name }) do |_result, response|
+        c.delete_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service name: name do |_result, response|
+        c.delete_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service ::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name) do |_result, response|
+        c.delete_service ::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service({ name: name }, call_options) do |_result, response|
+        c.delete_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service(::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_service(::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

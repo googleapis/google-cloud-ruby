@@ -88,40 +88,40 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_authorized_certificates_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_authorized_certificates({ parent: parent, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_authorized_certificates({ parent: parent, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_authorized_certificates parent: parent, view: view, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_authorized_certificates parent: parent, view: view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_authorized_certificates ::Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_authorized_certificates ::Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_authorized_certificates({ parent: parent, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_authorized_certificates({ parent: parent, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_authorized_certificates(::Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_authorized_certificates(::Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_authorized_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_authorized_certificate({ name: name, view: view }) do |response, operation|
+      c.get_authorized_certificate({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_authorized_certificate name: name, view: view do |response, operation|
+      c.get_authorized_certificate name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_authorized_certificate ::Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new(name: name, view: view) do |response, operation|
+      c.get_authorized_certificate ::Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_authorized_certificate({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_authorized_certificate({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_authorized_certificate(::Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_authorized_certificate(::Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, create_authorized_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_authorized_certificate({ parent: parent, certificate: certificate }) do |response, operation|
+      c.create_authorized_certificate({ parent: parent, certificate: certificate }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_authorized_certificate parent: parent, certificate: certificate do |response, operation|
+      c.create_authorized_certificate parent: parent, certificate: certificate do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_authorized_certificate ::Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new(parent: parent, certificate: certificate) do |response, operation|
+      c.create_authorized_certificate ::Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new(parent: parent, certificate: certificate) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_authorized_certificate({ parent: parent, certificate: certificate }, grpc_options) do |response, operation|
+      c.create_authorized_certificate({ parent: parent, certificate: certificate }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_authorized_certificate(::Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new(parent: parent, certificate: certificate), grpc_options) do |response, operation|
+      c.create_authorized_certificate(::Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new(parent: parent, certificate: certificate), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +275,36 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, update_authorized_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_authorized_certificate({ name: name, certificate: certificate, update_mask: update_mask }) do |response, operation|
+      c.update_authorized_certificate({ name: name, certificate: certificate, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_authorized_certificate name: name, certificate: certificate, update_mask: update_mask do |response, operation|
+      c.update_authorized_certificate name: name, certificate: certificate, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_authorized_certificate ::Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new(name: name, certificate: certificate, update_mask: update_mask) do |response, operation|
+      c.update_authorized_certificate ::Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new(name: name, certificate: certificate, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_authorized_certificate({ name: name, certificate: certificate, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_authorized_certificate({ name: name, certificate: certificate, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_authorized_certificate(::Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new(name: name, certificate: certificate, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_authorized_certificate(::Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new(name: name, certificate: certificate, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -333,36 +333,36 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, delete_authorized_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
+      c = ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_authorized_certificate({ name: name }) do |response, operation|
+      c.delete_authorized_certificate({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_authorized_certificate name: name do |response, operation|
+      c.delete_authorized_certificate name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_authorized_certificate ::Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new(name: name) do |response, operation|
+      c.delete_authorized_certificate ::Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_authorized_certificate({ name: name }, grpc_options) do |response, operation|
+      c.delete_authorized_certificate({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_authorized_certificate(::Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_authorized_certificate(::Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

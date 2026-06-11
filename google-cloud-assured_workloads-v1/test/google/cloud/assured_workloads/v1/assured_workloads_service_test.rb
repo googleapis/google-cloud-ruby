@@ -86,40 +86,40 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, create_workload_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workload({ parent: parent, workload: workload, external_id: external_id }) do |response, operation|
+      c.create_workload({ parent: parent, workload: workload, external_id: external_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workload parent: parent, workload: workload, external_id: external_id do |response, operation|
+      c.create_workload parent: parent, workload: workload, external_id: external_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workload ::Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id) do |response, operation|
+      c.create_workload ::Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workload({ parent: parent, workload: workload, external_id: external_id }, grpc_options) do |response, operation|
+      c.create_workload({ parent: parent, workload: workload, external_id: external_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workload(::Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id), grpc_options) do |response, operation|
+      c.create_workload(::Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, update_workload_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workload({ workload: workload, update_mask: update_mask }) do |response, operation|
+      c.update_workload({ workload: workload, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workload workload: workload, update_mask: update_mask do |response, operation|
+      c.update_workload workload: workload, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workload ::Google::Cloud::AssuredWorkloads::V1::UpdateWorkloadRequest.new(workload: workload, update_mask: update_mask) do |response, operation|
+      c.update_workload ::Google::Cloud::AssuredWorkloads::V1::UpdateWorkloadRequest.new(workload: workload, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workload({ workload: workload, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_workload({ workload: workload, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workload(::Google::Cloud::AssuredWorkloads::V1::UpdateWorkloadRequest.new(workload: workload, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_workload(::Google::Cloud::AssuredWorkloads::V1::UpdateWorkloadRequest.new(workload: workload, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,36 +211,36 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, restrict_allowed_resources_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restrict_allowed_resources({ name: name, restriction_type: restriction_type }) do |response, operation|
+      c.restrict_allowed_resources({ name: name, restriction_type: restriction_type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restrict_allowed_resources name: name, restriction_type: restriction_type do |response, operation|
+      c.restrict_allowed_resources name: name, restriction_type: restriction_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restrict_allowed_resources ::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type) do |response, operation|
+      c.restrict_allowed_resources ::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restrict_allowed_resources({ name: name, restriction_type: restriction_type }, grpc_options) do |response, operation|
+      c.restrict_allowed_resources({ name: name, restriction_type: restriction_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restrict_allowed_resources(::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type), grpc_options) do |response, operation|
+      c.restrict_allowed_resources(::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, delete_workload_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workload({ name: name, etag: etag }) do |response, operation|
+      c.delete_workload({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workload name: name, etag: etag do |response, operation|
+      c.delete_workload name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workload ::Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_workload ::Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workload({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_workload({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workload(::Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_workload(::Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +329,36 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, get_workload_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workload({ name: name }) do |response, operation|
+      c.get_workload({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workload name: name do |response, operation|
+      c.get_workload name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workload ::Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new(name: name) do |response, operation|
+      c.get_workload ::Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workload({ name: name }, grpc_options) do |response, operation|
+      c.get_workload({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workload(::Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workload(::Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -393,40 +393,40 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, list_workloads_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workloads ::Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_workloads ::Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workloads(::Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_workloads(::Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -464,40 +464,40 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, list_violations_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_violations({ parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_violations({ parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_violations parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_violations parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_violations ::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest.new(parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_violations ::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest.new(parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_violations({ parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_violations({ parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_violations(::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest.new(parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_violations(::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest.new(parent: parent, interval: interval, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -527,36 +527,36 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, get_violation_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_violation({ name: name }) do |response, operation|
+      c.get_violation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_violation name: name do |response, operation|
+      c.get_violation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_violation ::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest.new(name: name) do |response, operation|
+      c.get_violation ::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_violation({ name: name }, grpc_options) do |response, operation|
+      c.get_violation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_violation(::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_violation(::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -589,36 +589,36 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
 
     Gapic::ServiceStub.stub :new, acknowledge_violation_client_stub do
       # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
+      c = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.acknowledge_violation({ name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy }) do |response, operation|
+      c.acknowledge_violation({ name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.acknowledge_violation name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy do |response, operation|
+      c.acknowledge_violation name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.acknowledge_violation ::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest.new(name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy) do |response, operation|
+      c.acknowledge_violation ::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest.new(name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.acknowledge_violation({ name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy }, grpc_options) do |response, operation|
+      c.acknowledge_violation({ name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.acknowledge_violation(::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest.new(name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy), grpc_options) do |response, operation|
+      c.acknowledge_violation(::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest.new(name: name, comment: comment, non_compliant_org_policy: non_compliant_org_policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

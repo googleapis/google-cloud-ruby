@@ -97,32 +97,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_lookup_service_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_service_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_service_project_attachment({ name: name }) do |_result, response|
+        c.lookup_service_project_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_service_project_attachment name: name do |_result, response|
+        c.lookup_service_project_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_service_project_attachment ::Google::Cloud::AppHub::V1::LookupServiceProjectAttachmentRequest.new(name: name) do |_result, response|
+        c.lookup_service_project_attachment ::Google::Cloud::AppHub::V1::LookupServiceProjectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_service_project_attachment({ name: name }, call_options) do |_result, response|
+        c.lookup_service_project_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_service_project_attachment(::Google::Cloud::AppHub::V1::LookupServiceProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.lookup_service_project_attachment(::Google::Cloud::AppHub::V1::LookupServiceProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_service_project_attachments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_service_project_attachments_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_service_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_service_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_service_project_attachments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_service_project_attachments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_service_project_attachments ::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_service_project_attachments ::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_service_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_service_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_service_project_attachments(::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_service_project_attachments(::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_create_service_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service_project_attachment({ parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id }) do |_result, response|
+        c.create_service_project_attachment({ parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service_project_attachment parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id do |_result, response|
+        c.create_service_project_attachment parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service_project_attachment ::Google::Cloud::AppHub::V1::CreateServiceProjectAttachmentRequest.new(parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id) do |_result, response|
+        c.create_service_project_attachment ::Google::Cloud::AppHub::V1::CreateServiceProjectAttachmentRequest.new(parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service_project_attachment({ parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id }, call_options) do |_result, response|
+        c.create_service_project_attachment({ parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service_project_attachment(::Google::Cloud::AppHub::V1::CreateServiceProjectAttachmentRequest.new(parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id), call_options) do |_result, response|
+        c.create_service_project_attachment(::Google::Cloud::AppHub::V1::CreateServiceProjectAttachmentRequest.new(parent: parent, service_project_attachment_id: service_project_attachment_id, service_project_attachment: service_project_attachment, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_service_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service_project_attachment({ name: name }) do |_result, response|
+        c.get_service_project_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service_project_attachment name: name do |_result, response|
+        c.get_service_project_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service_project_attachment ::Google::Cloud::AppHub::V1::GetServiceProjectAttachmentRequest.new(name: name) do |_result, response|
+        c.get_service_project_attachment ::Google::Cloud::AppHub::V1::GetServiceProjectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service_project_attachment({ name: name }, call_options) do |_result, response|
+        c.get_service_project_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service_project_attachment(::Google::Cloud::AppHub::V1::GetServiceProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_service_project_attachment(::Google::Cloud::AppHub::V1::GetServiceProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_delete_service_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service_project_attachment({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_service_project_attachment({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service_project_attachment name: name, request_id: request_id do |_result, response|
+        c.delete_service_project_attachment name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service_project_attachment ::Google::Cloud::AppHub::V1::DeleteServiceProjectAttachmentRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_service_project_attachment ::Google::Cloud::AppHub::V1::DeleteServiceProjectAttachmentRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service_project_attachment({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_service_project_attachment({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service_project_attachment(::Google::Cloud::AppHub::V1::DeleteServiceProjectAttachmentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_service_project_attachment(::Google::Cloud::AppHub::V1::DeleteServiceProjectAttachmentRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_detach_service_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, detach_service_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.detach_service_project_attachment({ name: name }) do |_result, response|
+        c.detach_service_project_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.detach_service_project_attachment name: name do |_result, response|
+        c.detach_service_project_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.detach_service_project_attachment ::Google::Cloud::AppHub::V1::DetachServiceProjectAttachmentRequest.new(name: name) do |_result, response|
+        c.detach_service_project_attachment ::Google::Cloud::AppHub::V1::DetachServiceProjectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.detach_service_project_attachment({ name: name }, call_options) do |_result, response|
+        c.detach_service_project_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.detach_service_project_attachment(::Google::Cloud::AppHub::V1::DetachServiceProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.detach_service_project_attachment(::Google::Cloud::AppHub::V1::DetachServiceProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_discovered_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_discovered_services_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_discovered_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_discovered_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_discovered_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_discovered_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_discovered_services ::Google::Cloud::AppHub::V1::ListDiscoveredServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_discovered_services ::Google::Cloud::AppHub::V1::ListDiscoveredServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_discovered_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_discovered_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_discovered_services(::Google::Cloud::AppHub::V1::ListDiscoveredServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_discovered_services(::Google::Cloud::AppHub::V1::ListDiscoveredServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_discovered_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_discovered_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_discovered_service({ name: name }) do |_result, response|
+        c.get_discovered_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_discovered_service name: name do |_result, response|
+        c.get_discovered_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_discovered_service ::Google::Cloud::AppHub::V1::GetDiscoveredServiceRequest.new(name: name) do |_result, response|
+        c.get_discovered_service ::Google::Cloud::AppHub::V1::GetDiscoveredServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_discovered_service({ name: name }, call_options) do |_result, response|
+        c.get_discovered_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_discovered_service(::Google::Cloud::AppHub::V1::GetDiscoveredServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_discovered_service(::Google::Cloud::AppHub::V1::GetDiscoveredServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_lookup_discovered_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_discovered_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_discovered_service({ parent: parent, uri: uri }) do |_result, response|
+        c.lookup_discovered_service({ parent: parent, uri: uri }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_discovered_service parent: parent, uri: uri do |_result, response|
+        c.lookup_discovered_service parent: parent, uri: uri do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_discovered_service ::Google::Cloud::AppHub::V1::LookupDiscoveredServiceRequest.new(parent: parent, uri: uri) do |_result, response|
+        c.lookup_discovered_service ::Google::Cloud::AppHub::V1::LookupDiscoveredServiceRequest.new(parent: parent, uri: uri) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_discovered_service({ parent: parent, uri: uri }, call_options) do |_result, response|
+        c.lookup_discovered_service({ parent: parent, uri: uri }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_discovered_service(::Google::Cloud::AppHub::V1::LookupDiscoveredServiceRequest.new(parent: parent, uri: uri), call_options) do |_result, response|
+        c.lookup_discovered_service(::Google::Cloud::AppHub::V1::LookupDiscoveredServiceRequest.new(parent: parent, uri: uri), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -600,32 +600,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::AppHub::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_services ::Google::Cloud::AppHub::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::AppHub::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::AppHub::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -657,32 +657,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_create_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }) do |_result, response|
+        c.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service parent: parent, service_id: service_id, service: service, request_id: request_id do |_result, response|
+        c.create_service parent: parent, service_id: service_id, service: service, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service ::Google::Cloud::AppHub::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id) do |_result, response|
+        c.create_service ::Google::Cloud::AppHub::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }, call_options) do |_result, response|
+        c.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service(::Google::Cloud::AppHub::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id), call_options) do |_result, response|
+        c.create_service(::Google::Cloud::AppHub::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -711,32 +711,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service({ name: name }) do |_result, response|
+        c.get_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service name: name do |_result, response|
+        c.get_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service ::Google::Cloud::AppHub::V1::GetServiceRequest.new(name: name) do |_result, response|
+        c.get_service ::Google::Cloud::AppHub::V1::GetServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service({ name: name }, call_options) do |_result, response|
+        c.get_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service(::Google::Cloud::AppHub::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_service(::Google::Cloud::AppHub::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -767,32 +767,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_update_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_service({ update_mask: update_mask, service: service, request_id: request_id }) do |_result, response|
+        c.update_service({ update_mask: update_mask, service: service, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_service update_mask: update_mask, service: service, request_id: request_id do |_result, response|
+        c.update_service update_mask: update_mask, service: service, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_service ::Google::Cloud::AppHub::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id) do |_result, response|
+        c.update_service ::Google::Cloud::AppHub::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_service({ update_mask: update_mask, service: service, request_id: request_id }, call_options) do |_result, response|
+        c.update_service({ update_mask: update_mask, service: service, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_service(::Google::Cloud::AppHub::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id), call_options) do |_result, response|
+        c.update_service(::Google::Cloud::AppHub::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -822,32 +822,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_delete_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_service({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service name: name, request_id: request_id do |_result, response|
+        c.delete_service name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service ::Google::Cloud::AppHub::V1::DeleteServiceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_service ::Google::Cloud::AppHub::V1::DeleteServiceRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_service({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service(::Google::Cloud::AppHub::V1::DeleteServiceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_service(::Google::Cloud::AppHub::V1::DeleteServiceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -880,32 +880,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_discovered_workloads_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_discovered_workloads_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_discovered_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_discovered_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_discovered_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_discovered_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_discovered_workloads ::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_discovered_workloads ::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_discovered_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_discovered_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_discovered_workloads(::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_discovered_workloads(::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -934,32 +934,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_discovered_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_discovered_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_discovered_workload({ name: name }) do |_result, response|
+        c.get_discovered_workload({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_discovered_workload name: name do |_result, response|
+        c.get_discovered_workload name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_discovered_workload ::Google::Cloud::AppHub::V1::GetDiscoveredWorkloadRequest.new(name: name) do |_result, response|
+        c.get_discovered_workload ::Google::Cloud::AppHub::V1::GetDiscoveredWorkloadRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_discovered_workload({ name: name }, call_options) do |_result, response|
+        c.get_discovered_workload({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_discovered_workload(::Google::Cloud::AppHub::V1::GetDiscoveredWorkloadRequest.new(name: name), call_options) do |_result, response|
+        c.get_discovered_workload(::Google::Cloud::AppHub::V1::GetDiscoveredWorkloadRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -989,32 +989,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_lookup_discovered_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_discovered_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_discovered_workload({ parent: parent, uri: uri }) do |_result, response|
+        c.lookup_discovered_workload({ parent: parent, uri: uri }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_discovered_workload parent: parent, uri: uri do |_result, response|
+        c.lookup_discovered_workload parent: parent, uri: uri do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_discovered_workload ::Google::Cloud::AppHub::V1::LookupDiscoveredWorkloadRequest.new(parent: parent, uri: uri) do |_result, response|
+        c.lookup_discovered_workload ::Google::Cloud::AppHub::V1::LookupDiscoveredWorkloadRequest.new(parent: parent, uri: uri) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_discovered_workload({ parent: parent, uri: uri }, call_options) do |_result, response|
+        c.lookup_discovered_workload({ parent: parent, uri: uri }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_discovered_workload(::Google::Cloud::AppHub::V1::LookupDiscoveredWorkloadRequest.new(parent: parent, uri: uri), call_options) do |_result, response|
+        c.lookup_discovered_workload(::Google::Cloud::AppHub::V1::LookupDiscoveredWorkloadRequest.new(parent: parent, uri: uri), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1047,32 +1047,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_workloads_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workloads_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workloads ::Google::Cloud::AppHub::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_workloads ::Google::Cloud::AppHub::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workloads(::Google::Cloud::AppHub::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_workloads(::Google::Cloud::AppHub::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1104,32 +1104,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_create_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workload({ parent: parent, workload_id: workload_id, workload: workload, request_id: request_id }) do |_result, response|
+        c.create_workload({ parent: parent, workload_id: workload_id, workload: workload, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workload parent: parent, workload_id: workload_id, workload: workload, request_id: request_id do |_result, response|
+        c.create_workload parent: parent, workload_id: workload_id, workload: workload, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workload ::Google::Cloud::AppHub::V1::CreateWorkloadRequest.new(parent: parent, workload_id: workload_id, workload: workload, request_id: request_id) do |_result, response|
+        c.create_workload ::Google::Cloud::AppHub::V1::CreateWorkloadRequest.new(parent: parent, workload_id: workload_id, workload: workload, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workload({ parent: parent, workload_id: workload_id, workload: workload, request_id: request_id }, call_options) do |_result, response|
+        c.create_workload({ parent: parent, workload_id: workload_id, workload: workload, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workload(::Google::Cloud::AppHub::V1::CreateWorkloadRequest.new(parent: parent, workload_id: workload_id, workload: workload, request_id: request_id), call_options) do |_result, response|
+        c.create_workload(::Google::Cloud::AppHub::V1::CreateWorkloadRequest.new(parent: parent, workload_id: workload_id, workload: workload, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1158,32 +1158,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workload({ name: name }) do |_result, response|
+        c.get_workload({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workload name: name do |_result, response|
+        c.get_workload name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workload ::Google::Cloud::AppHub::V1::GetWorkloadRequest.new(name: name) do |_result, response|
+        c.get_workload ::Google::Cloud::AppHub::V1::GetWorkloadRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workload({ name: name }, call_options) do |_result, response|
+        c.get_workload({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workload(::Google::Cloud::AppHub::V1::GetWorkloadRequest.new(name: name), call_options) do |_result, response|
+        c.get_workload(::Google::Cloud::AppHub::V1::GetWorkloadRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1214,32 +1214,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_update_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_workload({ update_mask: update_mask, workload: workload, request_id: request_id }) do |_result, response|
+        c.update_workload({ update_mask: update_mask, workload: workload, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_workload update_mask: update_mask, workload: workload, request_id: request_id do |_result, response|
+        c.update_workload update_mask: update_mask, workload: workload, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_workload ::Google::Cloud::AppHub::V1::UpdateWorkloadRequest.new(update_mask: update_mask, workload: workload, request_id: request_id) do |_result, response|
+        c.update_workload ::Google::Cloud::AppHub::V1::UpdateWorkloadRequest.new(update_mask: update_mask, workload: workload, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_workload({ update_mask: update_mask, workload: workload, request_id: request_id }, call_options) do |_result, response|
+        c.update_workload({ update_mask: update_mask, workload: workload, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_workload(::Google::Cloud::AppHub::V1::UpdateWorkloadRequest.new(update_mask: update_mask, workload: workload, request_id: request_id), call_options) do |_result, response|
+        c.update_workload(::Google::Cloud::AppHub::V1::UpdateWorkloadRequest.new(update_mask: update_mask, workload: workload, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1269,32 +1269,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_delete_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workload({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_workload({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workload name: name, request_id: request_id do |_result, response|
+        c.delete_workload name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workload ::Google::Cloud::AppHub::V1::DeleteWorkloadRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_workload ::Google::Cloud::AppHub::V1::DeleteWorkloadRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workload({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_workload({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workload(::Google::Cloud::AppHub::V1::DeleteWorkloadRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_workload(::Google::Cloud::AppHub::V1::DeleteWorkloadRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1327,32 +1327,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_list_applications_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_applications_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_applications({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_applications({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_applications parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_applications parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_applications ::Google::Cloud::AppHub::V1::ListApplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_applications ::Google::Cloud::AppHub::V1::ListApplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_applications({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_applications({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_applications(::Google::Cloud::AppHub::V1::ListApplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_applications(::Google::Cloud::AppHub::V1::ListApplicationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1384,32 +1384,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_create_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_application({ parent: parent, application_id: application_id, application: application, request_id: request_id }) do |_result, response|
+        c.create_application({ parent: parent, application_id: application_id, application: application, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_application parent: parent, application_id: application_id, application: application, request_id: request_id do |_result, response|
+        c.create_application parent: parent, application_id: application_id, application: application, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_application ::Google::Cloud::AppHub::V1::CreateApplicationRequest.new(parent: parent, application_id: application_id, application: application, request_id: request_id) do |_result, response|
+        c.create_application ::Google::Cloud::AppHub::V1::CreateApplicationRequest.new(parent: parent, application_id: application_id, application: application, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_application({ parent: parent, application_id: application_id, application: application, request_id: request_id }, call_options) do |_result, response|
+        c.create_application({ parent: parent, application_id: application_id, application: application, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_application(::Google::Cloud::AppHub::V1::CreateApplicationRequest.new(parent: parent, application_id: application_id, application: application, request_id: request_id), call_options) do |_result, response|
+        c.create_application(::Google::Cloud::AppHub::V1::CreateApplicationRequest.new(parent: parent, application_id: application_id, application: application, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1438,32 +1438,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_get_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_application({ name: name }) do |_result, response|
+        c.get_application({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_application name: name do |_result, response|
+        c.get_application name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_application ::Google::Cloud::AppHub::V1::GetApplicationRequest.new(name: name) do |_result, response|
+        c.get_application ::Google::Cloud::AppHub::V1::GetApplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_application({ name: name }, call_options) do |_result, response|
+        c.get_application({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_application(::Google::Cloud::AppHub::V1::GetApplicationRequest.new(name: name), call_options) do |_result, response|
+        c.get_application(::Google::Cloud::AppHub::V1::GetApplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1494,32 +1494,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_update_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_application({ update_mask: update_mask, application: application, request_id: request_id }) do |_result, response|
+        c.update_application({ update_mask: update_mask, application: application, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_application update_mask: update_mask, application: application, request_id: request_id do |_result, response|
+        c.update_application update_mask: update_mask, application: application, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_application ::Google::Cloud::AppHub::V1::UpdateApplicationRequest.new(update_mask: update_mask, application: application, request_id: request_id) do |_result, response|
+        c.update_application ::Google::Cloud::AppHub::V1::UpdateApplicationRequest.new(update_mask: update_mask, application: application, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_application({ update_mask: update_mask, application: application, request_id: request_id }, call_options) do |_result, response|
+        c.update_application({ update_mask: update_mask, application: application, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_application(::Google::Cloud::AppHub::V1::UpdateApplicationRequest.new(update_mask: update_mask, application: application, request_id: request_id), call_options) do |_result, response|
+        c.update_application(::Google::Cloud::AppHub::V1::UpdateApplicationRequest.new(update_mask: update_mask, application: application, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1549,32 +1549,32 @@ class ::Google::Cloud::AppHub::V1::AppHub::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::AppHub::V1::AppHub::Rest::ServiceStub.stub :transcode_delete_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppHub::V1::AppHub::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_application({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_application({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_application name: name, request_id: request_id do |_result, response|
+        c.delete_application name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_application ::Google::Cloud::AppHub::V1::DeleteApplicationRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_application ::Google::Cloud::AppHub::V1::DeleteApplicationRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_application({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_application({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_application(::Google::Cloud::AppHub::V1::DeleteApplicationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_application(::Google::Cloud::AppHub::V1::DeleteApplicationRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
