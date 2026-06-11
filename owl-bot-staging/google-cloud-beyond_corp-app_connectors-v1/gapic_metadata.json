@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.beyondcorp.appconnectors.v1",
+  "libraryPackage": "::Google::Cloud::BeyondCorp::AppConnectors::V1",
+  "services": {
+    "AppConnectorsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client",
+          "rpcs": {
+            "ListAppConnectors": {
+              "methods": [
+                "list_app_connectors"
+              ]
+            },
+            "GetAppConnector": {
+              "methods": [
+                "get_app_connector"
+              ]
+            },
+            "CreateAppConnector": {
+              "methods": [
+                "create_app_connector"
+              ]
+            },
+            "UpdateAppConnector": {
+              "methods": [
+                "update_app_connector"
+              ]
+            },
+            "DeleteAppConnector": {
+              "methods": [
+                "delete_app_connector"
+              ]
+            },
+            "ReportStatus": {
+              "methods": [
+                "report_status"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
