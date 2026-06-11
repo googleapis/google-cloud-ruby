@@ -12,6 +12,526 @@
   },
   "snippets": [
     {
+      "region_tag": "dataform_v1beta1_generated_Dataform_GetTeamFolder_sync",
+      "title": "Snippet for the get_team_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_team_folder.",
+      "file": "dataform/get_team_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_team_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#get_team_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::TeamFolder",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "GetTeamFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.GetTeamFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_CreateTeamFolder_sync",
+      "title": "Snippet for the create_team_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_team_folder.",
+      "file": "dataform/create_team_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_team_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#create_team_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::TeamFolder",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "CreateTeamFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.CreateTeamFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_UpdateTeamFolder_sync",
+      "title": "Snippet for the update_team_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#update_team_folder.",
+      "file": "dataform/update_team_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_team_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#update_team_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::TeamFolder",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "UpdateTeamFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.UpdateTeamFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_DeleteTeamFolder_sync",
+      "title": "Snippet for the delete_team_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_team_folder.",
+      "file": "dataform/delete_team_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_team_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_team_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "DeleteTeamFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.DeleteTeamFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_QueryTeamFolderContents_sync",
+      "title": "Snippet for the query_team_folder_contents call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_team_folder_contents.",
+      "file": "dataform/query_team_folder_contents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_team_folder_contents",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#query_team_folder_contents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "QueryTeamFolderContents",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.QueryTeamFolderContents",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_SearchTeamFolders_sync",
+      "title": "Snippet for the search_team_folders call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#search_team_folders.",
+      "file": "dataform/search_team_folders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_team_folders",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#search_team_folders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "SearchTeamFolders",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.SearchTeamFolders",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_GetFolder_sync",
+      "title": "Snippet for the get_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_folder.",
+      "file": "dataform/get_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#get_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::GetFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::Folder",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "GetFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.GetFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_CreateFolder_sync",
+      "title": "Snippet for the create_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_folder.",
+      "file": "dataform/create_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#create_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::CreateFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::Folder",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "CreateFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.CreateFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_UpdateFolder_sync",
+      "title": "Snippet for the update_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#update_folder.",
+      "file": "dataform/update_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#update_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::Folder",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "UpdateFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.UpdateFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_DeleteFolder_sync",
+      "title": "Snippet for the delete_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_folder.",
+      "file": "dataform/delete_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "DeleteFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.DeleteFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_QueryFolderContents_sync",
+      "title": "Snippet for the query_folder_contents call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_folder_contents.",
+      "file": "dataform/query_folder_contents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_folder_contents",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#query_folder_contents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "QueryFolderContents",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.QueryFolderContents",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_QueryUserRootContents_sync",
+      "title": "Snippet for the query_user_root_contents call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_user_root_contents.",
+      "file": "dataform/query_user_root_contents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_user_root_contents",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#query_user_root_contents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "QueryUserRootContents",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.QueryUserRootContents",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_MoveFolder_sync",
+      "title": "Snippet for the move_folder call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#move_folder.",
+      "file": "dataform/move_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "move_folder",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#move_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::MoveFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "MoveFolder",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.MoveFolder",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataform_v1beta1_generated_Dataform_ListRepositories_sync",
       "title": "Snippet for the list_repositories call in the Dataform service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_repositories.",
@@ -207,6 +727,46 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_MoveRepository_sync",
+      "title": "Snippet for the move_repository call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#move_repository.",
+      "file": "dataform/move_repository.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "move_repository",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#move_repository",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "MoveRepository",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.MoveRepository",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]
@@ -2155,6 +2715,126 @@
         "method": {
           "short_name": "UpdateConfig",
           "full_name": "google.cloud.dataform.v1beta1.Dataform.UpdateConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_iam_policy.",
+      "file": "dataform/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.GetIamPolicy",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#set_iam_policy.",
+      "file": "dataform/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.SetIamPolicy",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#test_iam_permissions.",
+      "file": "dataform/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.TestIamPermissions",
           "service": {
             "short_name": "Dataform",
             "full_name": "google.cloud.dataform.v1beta1.Dataform"

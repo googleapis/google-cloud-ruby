@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-dataform-v1beta1",
+    "version": "0.14.1",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.longrunning",
+        "version": "longrunning"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "dataform_v1beta1_generated_Operations_ListOperations_sync",
+      "title": "Snippet for the list_operations call in the Operations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Longrunning::Operations::Client#list_operations.",
+      "file": "operations/list_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_operations",
+        "full_name": "::Google::Longrunning::Operations::Client#list_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Longrunning::ListOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::ListOperationsResponse",
+        "client": {
+          "short_name": "Operations::Client",
+          "full_name": "::Google::Longrunning::Operations::Client"
+        },
+        "method": {
+          "short_name": "ListOperations",
+          "full_name": "google.longrunning.Operations.ListOperations",
+          "service": {
+            "short_name": "Operations",
+            "full_name": "google.longrunning.Operations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Operations_GetOperation_sync",
+      "title": "Snippet for the get_operation call in the Operations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Longrunning::Operations::Client#get_operation.",
+      "file": "operations/get_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_operation",
+        "full_name": "::Google::Longrunning::Operations::Client#get_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Longrunning::GetOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Operations::Client",
+          "full_name": "::Google::Longrunning::Operations::Client"
+        },
+        "method": {
+          "short_name": "GetOperation",
+          "full_name": "google.longrunning.Operations.GetOperation",
+          "service": {
+            "short_name": "Operations",
+            "full_name": "google.longrunning.Operations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Operations_DeleteOperation_sync",
+      "title": "Snippet for the delete_operation call in the Operations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Longrunning::Operations::Client#delete_operation.",
+      "file": "operations/delete_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_operation",
+        "full_name": "::Google::Longrunning::Operations::Client#delete_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Longrunning::DeleteOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Operations::Client",
+          "full_name": "::Google::Longrunning::Operations::Client"
+        },
+        "method": {
+          "short_name": "DeleteOperation",
+          "full_name": "google.longrunning.Operations.DeleteOperation",
+          "service": {
+            "short_name": "Operations",
+            "full_name": "google.longrunning.Operations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Operations_CancelOperation_sync",
+      "title": "Snippet for the cancel_operation call in the Operations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Longrunning::Operations::Client#cancel_operation.",
+      "file": "operations/cancel_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_operation",
+        "full_name": "::Google::Longrunning::Operations::Client#cancel_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Longrunning::CancelOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Operations::Client",
+          "full_name": "::Google::Longrunning::Operations::Client"
+        },
+        "method": {
+          "short_name": "CancelOperation",
+          "full_name": "google.longrunning.Operations.CancelOperation",
+          "service": {
+            "short_name": "Operations",
+            "full_name": "google.longrunning.Operations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Operations_WaitOperation_sync",
+      "title": "Snippet for the wait_operation call in the Operations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Longrunning::Operations::Client#wait_operation.",
+      "file": "operations/wait_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "wait_operation",
+        "full_name": "::Google::Longrunning::Operations::Client#wait_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Longrunning::WaitOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Operations::Client",
+          "full_name": "::Google::Longrunning::Operations::Client"
+        },
+        "method": {
+          "short_name": "WaitOperation",
+          "full_name": "google.longrunning.Operations.WaitOperation",
+          "service": {
+            "short_name": "Operations",
+            "full_name": "google.longrunning.Operations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
