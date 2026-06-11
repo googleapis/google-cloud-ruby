@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Clien
 
     Gapic::ServiceStub.stub :new, get_shipping_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_shipping_settings({ name: name }) do |response, operation|
+      c.get_shipping_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_shipping_settings name: name do |response, operation|
+      c.get_shipping_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_shipping_settings ::Google::Shopping::Merchant::Accounts::V1::GetShippingSettingsRequest.new(name: name) do |response, operation|
+      c.get_shipping_settings ::Google::Shopping::Merchant::Accounts::V1::GetShippingSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_shipping_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_shipping_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_shipping_settings(::Google::Shopping::Merchant::Accounts::V1::GetShippingSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_shipping_settings(::Google::Shopping::Merchant::Accounts::V1::GetShippingSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Clien
 
     Gapic::ServiceStub.stub :new, insert_shipping_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_shipping_settings({ parent: parent, shipping_setting: shipping_setting }) do |response, operation|
+      c.insert_shipping_settings({ parent: parent, shipping_setting: shipping_setting }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_shipping_settings parent: parent, shipping_setting: shipping_setting do |response, operation|
+      c.insert_shipping_settings parent: parent, shipping_setting: shipping_setting do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_shipping_settings ::Google::Shopping::Merchant::Accounts::V1::InsertShippingSettingsRequest.new(parent: parent, shipping_setting: shipping_setting) do |response, operation|
+      c.insert_shipping_settings ::Google::Shopping::Merchant::Accounts::V1::InsertShippingSettingsRequest.new(parent: parent, shipping_setting: shipping_setting) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_shipping_settings({ parent: parent, shipping_setting: shipping_setting }, grpc_options) do |response, operation|
+      c.insert_shipping_settings({ parent: parent, shipping_setting: shipping_setting }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_shipping_settings(::Google::Shopping::Merchant::Accounts::V1::InsertShippingSettingsRequest.new(parent: parent, shipping_setting: shipping_setting), grpc_options) do |response, operation|
+      c.insert_shipping_settings(::Google::Shopping::Merchant::Accounts::V1::InsertShippingSettingsRequest.new(parent: parent, shipping_setting: shipping_setting), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

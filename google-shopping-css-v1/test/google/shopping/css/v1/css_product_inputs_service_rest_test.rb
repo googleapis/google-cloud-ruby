@@ -99,32 +99,32 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::Rest::ClientTest < M
     ::Google::Shopping::Css::V1::CssProductInputsService::Rest::ServiceStub.stub :transcode_insert_css_product_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_css_product_input_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::CssProductInputsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::CssProductInputsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }) do |_result, response|
+        c.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert_css_product_input parent: parent, css_product_input: css_product_input, feed_id: feed_id do |_result, response|
+        c.insert_css_product_input parent: parent, css_product_input: css_product_input, feed_id: feed_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert_css_product_input ::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id) do |_result, response|
+        c.insert_css_product_input ::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }, call_options) do |_result, response|
+        c.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert_css_product_input(::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id), call_options) do |_result, response|
+        c.insert_css_product_input(::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::Rest::ClientTest < M
     ::Google::Shopping::Css::V1::CssProductInputsService::Rest::ServiceStub.stub :transcode_update_css_product_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_css_product_input_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::CssProductInputsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::CssProductInputsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }) do |_result, response|
+        c.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_css_product_input css_product_input: css_product_input, update_mask: update_mask do |_result, response|
+        c.update_css_product_input css_product_input: css_product_input, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_css_product_input ::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask) do |_result, response|
+        c.update_css_product_input ::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_css_product_input(::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask), call_options) do |_result, response|
+        c.update_css_product_input(::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::Rest::ClientTest < M
     ::Google::Shopping::Css::V1::CssProductInputsService::Rest::ServiceStub.stub :transcode_delete_css_product_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_css_product_input_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::CssProductInputsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::CssProductInputsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }) do |_result, response|
+        c.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_css_product_input name: name, supplemental_feed_id: supplemental_feed_id do |_result, response|
+        c.delete_css_product_input name: name, supplemental_feed_id: supplemental_feed_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_css_product_input ::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id) do |_result, response|
+        c.delete_css_product_input ::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }, call_options) do |_result, response|
+        c.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_css_product_input(::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id), call_options) do |_result, response|
+        c.delete_css_product_input(::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

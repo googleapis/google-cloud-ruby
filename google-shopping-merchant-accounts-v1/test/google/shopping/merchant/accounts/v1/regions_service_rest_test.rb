@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_get_region_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_region_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_region({ name: name }) do |_result, response|
+        c.get_region({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_region name: name do |_result, response|
+        c.get_region name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_region ::Google::Shopping::Merchant::Accounts::V1::GetRegionRequest.new(name: name) do |_result, response|
+        c.get_region ::Google::Shopping::Merchant::Accounts::V1::GetRegionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_region({ name: name }, call_options) do |_result, response|
+        c.get_region({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_region(::Google::Shopping::Merchant::Accounts::V1::GetRegionRequest.new(name: name), call_options) do |_result, response|
+        c.get_region(::Google::Shopping::Merchant::Accounts::V1::GetRegionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_create_region_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_region_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_region({ parent: parent, region_id: region_id, region: region }) do |_result, response|
+        c.create_region({ parent: parent, region_id: region_id, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_region parent: parent, region_id: region_id, region: region do |_result, response|
+        c.create_region parent: parent, region_id: region_id, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_region ::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest.new(parent: parent, region_id: region_id, region: region) do |_result, response|
+        c.create_region ::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest.new(parent: parent, region_id: region_id, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_region({ parent: parent, region_id: region_id, region: region }, call_options) do |_result, response|
+        c.create_region({ parent: parent, region_id: region_id, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_region(::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest.new(parent: parent, region_id: region_id, region: region), call_options) do |_result, response|
+        c.create_region(::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest.new(parent: parent, region_id: region_id, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_batch_create_regions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_regions_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_regions({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_regions({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_regions parent: parent, requests: requests do |_result, response|
+        c.batch_create_regions parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_regions ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_regions ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_regions({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_regions({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_regions(::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_regions(::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_update_region_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_region_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_region({ region: region, update_mask: update_mask }) do |_result, response|
+        c.update_region({ region: region, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_region region: region, update_mask: update_mask do |_result, response|
+        c.update_region region: region, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_region ::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest.new(region: region, update_mask: update_mask) do |_result, response|
+        c.update_region ::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest.new(region: region, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_region({ region: region, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_region({ region: region, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_region(::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest.new(region: region, update_mask: update_mask), call_options) do |_result, response|
+        c.update_region(::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest.new(region: region, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_batch_update_regions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_regions_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_regions({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_regions({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_regions parent: parent, requests: requests do |_result, response|
+        c.batch_update_regions parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_regions ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_regions ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_regions({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_regions({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_regions(::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_regions(::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_delete_region_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_region_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_region({ name: name }) do |_result, response|
+        c.delete_region({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_region name: name do |_result, response|
+        c.delete_region name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_region ::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest.new(name: name) do |_result, response|
+        c.delete_region ::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_region({ name: name }, call_options) do |_result, response|
+        c.delete_region({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_region(::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_region(::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -427,32 +427,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_batch_delete_regions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_delete_regions_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_delete_regions({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_delete_regions({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_delete_regions parent: parent, requests: requests do |_result, response|
+        c.batch_delete_regions parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_delete_regions ::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_delete_regions ::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_delete_regions({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_delete_regions({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_delete_regions(::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_delete_regions(::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ClientTe
     ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::ServiceStub.stub :transcode_list_regions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_regions_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_regions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_regions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_regions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_regions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_regions ::Google::Shopping::Merchant::Accounts::V1::ListRegionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_regions ::Google::Shopping::Merchant::Accounts::V1::ListRegionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_regions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_regions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_regions(::Google::Shopping::Merchant::Accounts::V1::ListRegionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_regions(::Google::Shopping::Merchant::Accounts::V1::ListRegionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

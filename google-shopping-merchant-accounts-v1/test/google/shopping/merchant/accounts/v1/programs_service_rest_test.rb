@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ServiceStub.stub :transcode_get_program_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_program_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_program({ name: name }) do |_result, response|
+        c.get_program({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_program name: name do |_result, response|
+        c.get_program name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_program ::Google::Shopping::Merchant::Accounts::V1::GetProgramRequest.new(name: name) do |_result, response|
+        c.get_program ::Google::Shopping::Merchant::Accounts::V1::GetProgramRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_program({ name: name }, call_options) do |_result, response|
+        c.get_program({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_program(::Google::Shopping::Merchant::Accounts::V1::GetProgramRequest.new(name: name), call_options) do |_result, response|
+        c.get_program(::Google::Shopping::Merchant::Accounts::V1::GetProgramRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ServiceStub.stub :transcode_list_programs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_programs_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_programs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_programs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_programs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_programs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_programs ::Google::Shopping::Merchant::Accounts::V1::ListProgramsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_programs ::Google::Shopping::Merchant::Accounts::V1::ListProgramsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_programs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_programs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_programs(::Google::Shopping::Merchant::Accounts::V1::ListProgramsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_programs(::Google::Shopping::Merchant::Accounts::V1::ListProgramsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ServiceStub.stub :transcode_enable_program_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enable_program_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enable_program({ name: name }) do |_result, response|
+        c.enable_program({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enable_program name: name do |_result, response|
+        c.enable_program name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enable_program ::Google::Shopping::Merchant::Accounts::V1::EnableProgramRequest.new(name: name) do |_result, response|
+        c.enable_program ::Google::Shopping::Merchant::Accounts::V1::EnableProgramRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enable_program({ name: name }, call_options) do |_result, response|
+        c.enable_program({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enable_program(::Google::Shopping::Merchant::Accounts::V1::EnableProgramRequest.new(name: name), call_options) do |_result, response|
+        c.enable_program(::Google::Shopping::Merchant::Accounts::V1::EnableProgramRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::ServiceStub.stub :transcode_disable_program_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, disable_program_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.disable_program({ name: name }) do |_result, response|
+        c.disable_program({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_program name: name do |_result, response|
+        c.disable_program name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_program ::Google::Shopping::Merchant::Accounts::V1::DisableProgramRequest.new(name: name) do |_result, response|
+        c.disable_program ::Google::Shopping::Merchant::Accounts::V1::DisableProgramRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_program({ name: name }, call_options) do |_result, response|
+        c.disable_program({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_program(::Google::Shopping::Merchant::Accounts::V1::DisableProgramRequest.new(name: name), call_options) do |_result, response|
+        c.disable_program(::Google::Shopping::Merchant::Accounts::V1::DisableProgramRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

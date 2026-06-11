@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Res
     ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::ServiceStub.stub :transcode_get_terms_of_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_terms_of_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_terms_of_service({ name: name }) do |_result, response|
+        c.get_terms_of_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_terms_of_service name: name do |_result, response|
+        c.get_terms_of_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_terms_of_service ::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceRequest.new(name: name) do |_result, response|
+        c.get_terms_of_service ::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_terms_of_service({ name: name }, call_options) do |_result, response|
+        c.get_terms_of_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_terms_of_service(::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_terms_of_service(::Google::Shopping::Merchant::Accounts::V1beta::GetTermsOfServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Res
     ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::ServiceStub.stub :transcode_retrieve_latest_terms_of_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_latest_terms_of_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_latest_terms_of_service({ region_code: region_code, kind: kind }) do |_result, response|
+        c.retrieve_latest_terms_of_service({ region_code: region_code, kind: kind }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_latest_terms_of_service region_code: region_code, kind: kind do |_result, response|
+        c.retrieve_latest_terms_of_service region_code: region_code, kind: kind do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_latest_terms_of_service ::Google::Shopping::Merchant::Accounts::V1beta::RetrieveLatestTermsOfServiceRequest.new(region_code: region_code, kind: kind) do |_result, response|
+        c.retrieve_latest_terms_of_service ::Google::Shopping::Merchant::Accounts::V1beta::RetrieveLatestTermsOfServiceRequest.new(region_code: region_code, kind: kind) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_latest_terms_of_service({ region_code: region_code, kind: kind }, call_options) do |_result, response|
+        c.retrieve_latest_terms_of_service({ region_code: region_code, kind: kind }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_latest_terms_of_service(::Google::Shopping::Merchant::Accounts::V1beta::RetrieveLatestTermsOfServiceRequest.new(region_code: region_code, kind: kind), call_options) do |_result, response|
+        c.retrieve_latest_terms_of_service(::Google::Shopping::Merchant::Accounts::V1beta::RetrieveLatestTermsOfServiceRequest.new(region_code: region_code, kind: kind), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Res
     ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::ServiceStub.stub :transcode_accept_terms_of_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, accept_terms_of_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.accept_terms_of_service({ name: name, account: account, region_code: region_code }) do |_result, response|
+        c.accept_terms_of_service({ name: name, account: account, region_code: region_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.accept_terms_of_service name: name, account: account, region_code: region_code do |_result, response|
+        c.accept_terms_of_service name: name, account: account, region_code: region_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.accept_terms_of_service ::Google::Shopping::Merchant::Accounts::V1beta::AcceptTermsOfServiceRequest.new(name: name, account: account, region_code: region_code) do |_result, response|
+        c.accept_terms_of_service ::Google::Shopping::Merchant::Accounts::V1beta::AcceptTermsOfServiceRequest.new(name: name, account: account, region_code: region_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.accept_terms_of_service({ name: name, account: account, region_code: region_code }, call_options) do |_result, response|
+        c.accept_terms_of_service({ name: name, account: account, region_code: region_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.accept_terms_of_service(::Google::Shopping::Merchant::Accounts::V1beta::AcceptTermsOfServiceRequest.new(name: name, account: account, region_code: region_code), call_options) do |_result, response|
+        c.accept_terms_of_service(::Google::Shopping::Merchant::Accounts::V1beta::AcceptTermsOfServiceRequest.new(name: name, account: account, region_code: region_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

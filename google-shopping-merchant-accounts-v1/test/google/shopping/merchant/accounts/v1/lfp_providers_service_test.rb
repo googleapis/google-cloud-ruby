@@ -86,40 +86,40 @@ class ::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::ClientTes
 
     Gapic::ServiceStub.stub :new, find_lfp_providers_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.find_lfp_providers parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.find_lfp_providers parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.find_lfp_providers ::Google::Shopping::Merchant::Accounts::V1::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.find_lfp_providers ::Google::Shopping::Merchant::Accounts::V1::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.find_lfp_providers(::Google::Shopping::Merchant::Accounts::V1::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.find_lfp_providers(::Google::Shopping::Merchant::Accounts::V1::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::ClientTes
 
     Gapic::ServiceStub.stub :new, link_lfp_provider_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.link_lfp_provider({ name: name, external_account_id: external_account_id }) do |response, operation|
+      c.link_lfp_provider({ name: name, external_account_id: external_account_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.link_lfp_provider name: name, external_account_id: external_account_id do |response, operation|
+      c.link_lfp_provider name: name, external_account_id: external_account_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.link_lfp_provider ::Google::Shopping::Merchant::Accounts::V1::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id) do |response, operation|
+      c.link_lfp_provider ::Google::Shopping::Merchant::Accounts::V1::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.link_lfp_provider({ name: name, external_account_id: external_account_id }, grpc_options) do |response, operation|
+      c.link_lfp_provider({ name: name, external_account_id: external_account_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.link_lfp_provider(::Google::Shopping::Merchant::Accounts::V1::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id), grpc_options) do |response, operation|
+      c.link_lfp_provider(::Google::Shopping::Merchant::Accounts::V1::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

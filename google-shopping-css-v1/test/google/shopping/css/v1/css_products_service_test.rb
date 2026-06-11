@@ -82,36 +82,36 @@ class ::Google::Shopping::Css::V1::CssProductsService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_css_product_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::CssProductsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::CssProductsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_css_product({ name: name }) do |response, operation|
+      c.get_css_product({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_css_product name: name do |response, operation|
+      c.get_css_product name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_css_product ::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name) do |response, operation|
+      c.get_css_product ::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_css_product({ name: name }, grpc_options) do |response, operation|
+      c.get_css_product({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_css_product(::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_css_product(::Google::Shopping::Css::V1::GetCssProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Shopping::Css::V1::CssProductsService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_css_products_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::CssProductsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::CssProductsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_css_products parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_css_products parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_css_products ::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_css_products ::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_css_products({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_css_products(::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_css_products(::Google::Shopping::Css::V1::ListCssProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

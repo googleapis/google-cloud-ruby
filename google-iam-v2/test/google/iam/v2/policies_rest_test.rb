@@ -99,32 +99,32 @@ class ::Google::Iam::V2::Policies::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V2::Policies::Rest::ServiceStub.stub :transcode_list_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_policies_client_stub do
         # Create client
-        client = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
+        c = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_policies ::Google::Iam::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_policies ::Google::Iam::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_policies(::Google::Iam::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_policies(::Google::Iam::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Iam::V2::Policies::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V2::Policies::Rest::ServiceStub.stub :transcode_get_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
+        c = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_policy({ name: name }) do |_result, response|
+        c.get_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_policy name: name do |_result, response|
+        c.get_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_policy ::Google::Iam::V2::GetPolicyRequest.new(name: name) do |_result, response|
+        c.get_policy ::Google::Iam::V2::GetPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_policy({ name: name }, call_options) do |_result, response|
+        c.get_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_policy(::Google::Iam::V2::GetPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_policy(::Google::Iam::V2::GetPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Iam::V2::Policies::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V2::Policies::Rest::ServiceStub.stub :transcode_create_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
+        c = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_policy({ parent: parent, policy: policy, policy_id: policy_id }) do |_result, response|
+        c.create_policy({ parent: parent, policy: policy, policy_id: policy_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_policy parent: parent, policy: policy, policy_id: policy_id do |_result, response|
+        c.create_policy parent: parent, policy: policy, policy_id: policy_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_policy ::Google::Iam::V2::CreatePolicyRequest.new(parent: parent, policy: policy, policy_id: policy_id) do |_result, response|
+        c.create_policy ::Google::Iam::V2::CreatePolicyRequest.new(parent: parent, policy: policy, policy_id: policy_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_policy({ parent: parent, policy: policy, policy_id: policy_id }, call_options) do |_result, response|
+        c.create_policy({ parent: parent, policy: policy, policy_id: policy_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_policy(::Google::Iam::V2::CreatePolicyRequest.new(parent: parent, policy: policy, policy_id: policy_id), call_options) do |_result, response|
+        c.create_policy(::Google::Iam::V2::CreatePolicyRequest.new(parent: parent, policy: policy, policy_id: policy_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Iam::V2::Policies::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V2::Policies::Rest::ServiceStub.stub :transcode_update_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
+        c = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_policy({ policy: policy }) do |_result, response|
+        c.update_policy({ policy: policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_policy policy: policy do |_result, response|
+        c.update_policy policy: policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_policy ::Google::Iam::V2::UpdatePolicyRequest.new(policy: policy) do |_result, response|
+        c.update_policy ::Google::Iam::V2::UpdatePolicyRequest.new(policy: policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_policy({ policy: policy }, call_options) do |_result, response|
+        c.update_policy({ policy: policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_policy(::Google::Iam::V2::UpdatePolicyRequest.new(policy: policy), call_options) do |_result, response|
+        c.update_policy(::Google::Iam::V2::UpdatePolicyRequest.new(policy: policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Iam::V2::Policies::Rest::ClientTest < Minitest::Test
     ::Google::Iam::V2::Policies::Rest::ServiceStub.stub :transcode_delete_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
+        c = ::Google::Iam::V2::Policies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_policy({ name: name, etag: etag }) do |_result, response|
+        c.delete_policy({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_policy name: name, etag: etag do |_result, response|
+        c.delete_policy name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_policy ::Google::Iam::V2::DeletePolicyRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_policy ::Google::Iam::V2::DeletePolicyRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_policy({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_policy({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_policy(::Google::Iam::V2::DeletePolicyRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_policy(::Google::Iam::V2::DeletePolicyRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

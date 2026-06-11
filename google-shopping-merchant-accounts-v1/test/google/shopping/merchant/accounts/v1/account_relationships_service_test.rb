@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::C
 
     Gapic::ServiceStub.stub :new, get_account_relationship_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_account_relationship({ name: name }) do |response, operation|
+      c.get_account_relationship({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_account_relationship name: name do |response, operation|
+      c.get_account_relationship name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_account_relationship ::Google::Shopping::Merchant::Accounts::V1::GetAccountRelationshipRequest.new(name: name) do |response, operation|
+      c.get_account_relationship ::Google::Shopping::Merchant::Accounts::V1::GetAccountRelationshipRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_account_relationship({ name: name }, grpc_options) do |response, operation|
+      c.get_account_relationship({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_account_relationship(::Google::Shopping::Merchant::Accounts::V1::GetAccountRelationshipRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_account_relationship(::Google::Shopping::Merchant::Accounts::V1::GetAccountRelationshipRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::C
 
     Gapic::ServiceStub.stub :new, update_account_relationship_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_account_relationship({ account_relationship: account_relationship, update_mask: update_mask }) do |response, operation|
+      c.update_account_relationship({ account_relationship: account_relationship, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_account_relationship account_relationship: account_relationship, update_mask: update_mask do |response, operation|
+      c.update_account_relationship account_relationship: account_relationship, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_account_relationship ::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRelationshipRequest.new(account_relationship: account_relationship, update_mask: update_mask) do |response, operation|
+      c.update_account_relationship ::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRelationshipRequest.new(account_relationship: account_relationship, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_account_relationship({ account_relationship: account_relationship, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_account_relationship({ account_relationship: account_relationship, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_account_relationship(::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRelationshipRequest.new(account_relationship: account_relationship, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_account_relationship(::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRelationshipRequest.new(account_relationship: account_relationship, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,40 +204,40 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::C
 
     Gapic::ServiceStub.stub :new, list_account_relationships_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_account_relationships({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_account_relationships({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_account_relationships parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_account_relationships parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_account_relationships ::Google::Shopping::Merchant::Accounts::V1::ListAccountRelationshipsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_account_relationships ::Google::Shopping::Merchant::Accounts::V1::ListAccountRelationshipsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_account_relationships({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_account_relationships({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_account_relationships(::Google::Shopping::Merchant::Accounts::V1::ListAccountRelationshipsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_account_relationships(::Google::Shopping::Merchant::Accounts::V1::ListAccountRelationshipsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

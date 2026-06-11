@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ServiceStub.stub :transcode_get_homepage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_homepage_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_homepage({ name: name }) do |_result, response|
+        c.get_homepage({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_homepage name: name do |_result, response|
+        c.get_homepage name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_homepage ::Google::Shopping::Merchant::Accounts::V1::GetHomepageRequest.new(name: name) do |_result, response|
+        c.get_homepage ::Google::Shopping::Merchant::Accounts::V1::GetHomepageRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_homepage({ name: name }, call_options) do |_result, response|
+        c.get_homepage({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_homepage(::Google::Shopping::Merchant::Accounts::V1::GetHomepageRequest.new(name: name), call_options) do |_result, response|
+        c.get_homepage(::Google::Shopping::Merchant::Accounts::V1::GetHomepageRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ServiceStub.stub :transcode_update_homepage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_homepage_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_homepage({ homepage: homepage, update_mask: update_mask }) do |_result, response|
+        c.update_homepage({ homepage: homepage, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_homepage homepage: homepage, update_mask: update_mask do |_result, response|
+        c.update_homepage homepage: homepage, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_homepage ::Google::Shopping::Merchant::Accounts::V1::UpdateHomepageRequest.new(homepage: homepage, update_mask: update_mask) do |_result, response|
+        c.update_homepage ::Google::Shopping::Merchant::Accounts::V1::UpdateHomepageRequest.new(homepage: homepage, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_homepage({ homepage: homepage, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_homepage({ homepage: homepage, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_homepage(::Google::Shopping::Merchant::Accounts::V1::UpdateHomepageRequest.new(homepage: homepage, update_mask: update_mask), call_options) do |_result, response|
+        c.update_homepage(::Google::Shopping::Merchant::Accounts::V1::UpdateHomepageRequest.new(homepage: homepage, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ServiceStub.stub :transcode_claim_homepage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, claim_homepage_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.claim_homepage({ name: name, overwrite: overwrite }) do |_result, response|
+        c.claim_homepage({ name: name, overwrite: overwrite }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.claim_homepage name: name, overwrite: overwrite do |_result, response|
+        c.claim_homepage name: name, overwrite: overwrite do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.claim_homepage ::Google::Shopping::Merchant::Accounts::V1::ClaimHomepageRequest.new(name: name, overwrite: overwrite) do |_result, response|
+        c.claim_homepage ::Google::Shopping::Merchant::Accounts::V1::ClaimHomepageRequest.new(name: name, overwrite: overwrite) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.claim_homepage({ name: name, overwrite: overwrite }, call_options) do |_result, response|
+        c.claim_homepage({ name: name, overwrite: overwrite }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.claim_homepage(::Google::Shopping::Merchant::Accounts::V1::ClaimHomepageRequest.new(name: name, overwrite: overwrite), call_options) do |_result, response|
+        c.claim_homepage(::Google::Shopping::Merchant::Accounts::V1::ClaimHomepageRequest.new(name: name, overwrite: overwrite), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ClientT
     ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::ServiceStub.stub :transcode_unclaim_homepage_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, unclaim_homepage_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::HomepageService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.unclaim_homepage({ name: name }) do |_result, response|
+        c.unclaim_homepage({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unclaim_homepage name: name do |_result, response|
+        c.unclaim_homepage name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unclaim_homepage ::Google::Shopping::Merchant::Accounts::V1::UnclaimHomepageRequest.new(name: name) do |_result, response|
+        c.unclaim_homepage ::Google::Shopping::Merchant::Accounts::V1::UnclaimHomepageRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unclaim_homepage({ name: name }, call_options) do |_result, response|
+        c.unclaim_homepage({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unclaim_homepage(::Google::Shopping::Merchant::Accounts::V1::UnclaimHomepageRequest.new(name: name), call_options) do |_result, response|
+        c.unclaim_homepage(::Google::Shopping::Merchant::Accounts::V1::UnclaimHomepageRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

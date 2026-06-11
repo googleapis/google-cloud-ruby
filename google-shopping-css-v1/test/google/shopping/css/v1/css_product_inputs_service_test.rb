@@ -86,36 +86,36 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, insert_css_product_input_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::CssProductInputsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::CssProductInputsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }) do |response, operation|
+      c.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_css_product_input parent: parent, css_product_input: css_product_input, feed_id: feed_id do |response, operation|
+      c.insert_css_product_input parent: parent, css_product_input: css_product_input, feed_id: feed_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_css_product_input ::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id) do |response, operation|
+      c.insert_css_product_input ::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }, grpc_options) do |response, operation|
+      c.insert_css_product_input({ parent: parent, css_product_input: css_product_input, feed_id: feed_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_css_product_input(::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id), grpc_options) do |response, operation|
+      c.insert_css_product_input(::Google::Shopping::Css::V1::InsertCssProductInputRequest.new(parent: parent, css_product_input: css_product_input, feed_id: feed_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,36 +146,36 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, update_css_product_input_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::CssProductInputsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::CssProductInputsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }) do |response, operation|
+      c.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_css_product_input css_product_input: css_product_input, update_mask: update_mask do |response, operation|
+      c.update_css_product_input css_product_input: css_product_input, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_css_product_input ::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask) do |response, operation|
+      c.update_css_product_input ::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_css_product_input({ css_product_input: css_product_input, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_css_product_input(::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_css_product_input(::Google::Shopping::Css::V1::UpdateCssProductInputRequest.new(css_product_input: css_product_input, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -207,36 +207,36 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, delete_css_product_input_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::CssProductInputsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::CssProductInputsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }) do |response, operation|
+      c.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_css_product_input name: name, supplemental_feed_id: supplemental_feed_id do |response, operation|
+      c.delete_css_product_input name: name, supplemental_feed_id: supplemental_feed_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_css_product_input ::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id) do |response, operation|
+      c.delete_css_product_input ::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }, grpc_options) do |response, operation|
+      c.delete_css_product_input({ name: name, supplemental_feed_id: supplemental_feed_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_css_product_input(::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id), grpc_options) do |response, operation|
+      c.delete_css_product_input(::Google::Shopping::Css::V1::DeleteCssProductInputRequest.new(name: name, supplemental_feed_id: supplemental_feed_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
