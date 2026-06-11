@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.4.0 (2026-06-11)
+
+#### Features
+
+* add instance field to VerifyAttestationRequest ([#34033](https://github.com/googleapis/google-cloud-ruby/issues/34033)) 
+* update gapic-common dependency to 1.3 and document retry jitter ([#34043](https://github.com/googleapis/google-cloud-ruby/issues/34043)) 
+
 ### 2.3.0 (2026-04-02)
 
 #### Features
