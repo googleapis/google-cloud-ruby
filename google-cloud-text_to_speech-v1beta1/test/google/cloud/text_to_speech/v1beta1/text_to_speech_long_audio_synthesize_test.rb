@@ -90,40 +90,40 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::C
 
     Gapic::ServiceStub.stub :new, synthesize_long_audio_client_stub do
       # Create client
-      client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client.new do |config|
+      c = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }) do |response, operation|
+      c.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.synthesize_long_audio parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice do |response, operation|
+      c.synthesize_long_audio parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.synthesize_long_audio ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice) do |response, operation|
+      c.synthesize_long_audio ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }, grpc_options) do |response, operation|
+      c.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.synthesize_long_audio(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice), grpc_options) do |response, operation|
+      c.synthesize_long_audio(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

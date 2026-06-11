@@ -90,40 +90,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_orchestration_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_orchestration_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_orchestration_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_orchestration_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_orchestration_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_orchestration_clusters ::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_orchestration_clusters ::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_orchestration_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_orchestration_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_orchestration_clusters(::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_orchestration_clusters(::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_orchestration_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_orchestration_cluster({ name: name }) do |response, operation|
+      c.get_orchestration_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_orchestration_cluster name: name do |response, operation|
+      c.get_orchestration_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_orchestration_cluster ::Google::Cloud::TelcoAutomation::V1::GetOrchestrationClusterRequest.new(name: name) do |response, operation|
+      c.get_orchestration_cluster ::Google::Cloud::TelcoAutomation::V1::GetOrchestrationClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_orchestration_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_orchestration_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_orchestration_cluster(::Google::Cloud::TelcoAutomation::V1::GetOrchestrationClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_orchestration_cluster(::Google::Cloud::TelcoAutomation::V1::GetOrchestrationClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_orchestration_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_orchestration_cluster({ parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id }) do |response, operation|
+      c.create_orchestration_cluster({ parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_orchestration_cluster parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id do |response, operation|
+      c.create_orchestration_cluster parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_orchestration_cluster ::Google::Cloud::TelcoAutomation::V1::CreateOrchestrationClusterRequest.new(parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id) do |response, operation|
+      c.create_orchestration_cluster ::Google::Cloud::TelcoAutomation::V1::CreateOrchestrationClusterRequest.new(parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_orchestration_cluster({ parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_orchestration_cluster({ parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_orchestration_cluster(::Google::Cloud::TelcoAutomation::V1::CreateOrchestrationClusterRequest.new(parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.create_orchestration_cluster(::Google::Cloud::TelcoAutomation::V1::CreateOrchestrationClusterRequest.new(parent: parent, orchestration_cluster_id: orchestration_cluster_id, orchestration_cluster: orchestration_cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -282,40 +282,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_orchestration_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_orchestration_cluster({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_orchestration_cluster({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_orchestration_cluster name: name, request_id: request_id do |response, operation|
+      c.delete_orchestration_cluster name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_orchestration_cluster ::Google::Cloud::TelcoAutomation::V1::DeleteOrchestrationClusterRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_orchestration_cluster ::Google::Cloud::TelcoAutomation::V1::DeleteOrchestrationClusterRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_orchestration_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_orchestration_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_orchestration_cluster(::Google::Cloud::TelcoAutomation::V1::DeleteOrchestrationClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_orchestration_cluster(::Google::Cloud::TelcoAutomation::V1::DeleteOrchestrationClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -353,40 +353,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_edge_slms_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_edge_slms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_edge_slms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_edge_slms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_edge_slms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_edge_slms ::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_edge_slms ::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_edge_slms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_edge_slms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_edge_slms(::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_edge_slms(::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -416,36 +416,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_edge_slm_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_edge_slm({ name: name }) do |response, operation|
+      c.get_edge_slm({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_edge_slm name: name do |response, operation|
+      c.get_edge_slm name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_edge_slm ::Google::Cloud::TelcoAutomation::V1::GetEdgeSlmRequest.new(name: name) do |response, operation|
+      c.get_edge_slm ::Google::Cloud::TelcoAutomation::V1::GetEdgeSlmRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_edge_slm({ name: name }, grpc_options) do |response, operation|
+      c.get_edge_slm({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_edge_slm(::Google::Cloud::TelcoAutomation::V1::GetEdgeSlmRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_edge_slm(::Google::Cloud::TelcoAutomation::V1::GetEdgeSlmRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -480,40 +480,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_edge_slm_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_edge_slm({ parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id }) do |response, operation|
+      c.create_edge_slm({ parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_edge_slm parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id do |response, operation|
+      c.create_edge_slm parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_edge_slm ::Google::Cloud::TelcoAutomation::V1::CreateEdgeSlmRequest.new(parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id) do |response, operation|
+      c.create_edge_slm ::Google::Cloud::TelcoAutomation::V1::CreateEdgeSlmRequest.new(parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_edge_slm({ parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_edge_slm({ parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_edge_slm(::Google::Cloud::TelcoAutomation::V1::CreateEdgeSlmRequest.new(parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id), grpc_options) do |response, operation|
+      c.create_edge_slm(::Google::Cloud::TelcoAutomation::V1::CreateEdgeSlmRequest.new(parent: parent, edge_slm_id: edge_slm_id, edge_slm: edge_slm, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -545,40 +545,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_edge_slm_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_edge_slm({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_edge_slm({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_edge_slm name: name, request_id: request_id do |response, operation|
+      c.delete_edge_slm name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_edge_slm ::Google::Cloud::TelcoAutomation::V1::DeleteEdgeSlmRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_edge_slm ::Google::Cloud::TelcoAutomation::V1::DeleteEdgeSlmRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_edge_slm({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_edge_slm({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_edge_slm(::Google::Cloud::TelcoAutomation::V1::DeleteEdgeSlmRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_edge_slm(::Google::Cloud::TelcoAutomation::V1::DeleteEdgeSlmRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -612,36 +612,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_blueprint({ parent: parent, blueprint_id: blueprint_id, blueprint: blueprint }) do |response, operation|
+      c.create_blueprint({ parent: parent, blueprint_id: blueprint_id, blueprint: blueprint }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_blueprint parent: parent, blueprint_id: blueprint_id, blueprint: blueprint do |response, operation|
+      c.create_blueprint parent: parent, blueprint_id: blueprint_id, blueprint: blueprint do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_blueprint ::Google::Cloud::TelcoAutomation::V1::CreateBlueprintRequest.new(parent: parent, blueprint_id: blueprint_id, blueprint: blueprint) do |response, operation|
+      c.create_blueprint ::Google::Cloud::TelcoAutomation::V1::CreateBlueprintRequest.new(parent: parent, blueprint_id: blueprint_id, blueprint: blueprint) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_blueprint({ parent: parent, blueprint_id: blueprint_id, blueprint: blueprint }, grpc_options) do |response, operation|
+      c.create_blueprint({ parent: parent, blueprint_id: blueprint_id, blueprint: blueprint }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_blueprint(::Google::Cloud::TelcoAutomation::V1::CreateBlueprintRequest.new(parent: parent, blueprint_id: blueprint_id, blueprint: blueprint), grpc_options) do |response, operation|
+      c.create_blueprint(::Google::Cloud::TelcoAutomation::V1::CreateBlueprintRequest.new(parent: parent, blueprint_id: blueprint_id, blueprint: blueprint), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -672,36 +672,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_blueprint({ blueprint: blueprint, update_mask: update_mask }) do |response, operation|
+      c.update_blueprint({ blueprint: blueprint, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_blueprint blueprint: blueprint, update_mask: update_mask do |response, operation|
+      c.update_blueprint blueprint: blueprint, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_blueprint ::Google::Cloud::TelcoAutomation::V1::UpdateBlueprintRequest.new(blueprint: blueprint, update_mask: update_mask) do |response, operation|
+      c.update_blueprint ::Google::Cloud::TelcoAutomation::V1::UpdateBlueprintRequest.new(blueprint: blueprint, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_blueprint({ blueprint: blueprint, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_blueprint({ blueprint: blueprint, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_blueprint(::Google::Cloud::TelcoAutomation::V1::UpdateBlueprintRequest.new(blueprint: blueprint, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_blueprint(::Google::Cloud::TelcoAutomation::V1::UpdateBlueprintRequest.new(blueprint: blueprint, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -732,36 +732,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_blueprint({ name: name, view: view }) do |response, operation|
+      c.get_blueprint({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_blueprint name: name, view: view do |response, operation|
+      c.get_blueprint name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_blueprint ::Google::Cloud::TelcoAutomation::V1::GetBlueprintRequest.new(name: name, view: view) do |response, operation|
+      c.get_blueprint ::Google::Cloud::TelcoAutomation::V1::GetBlueprintRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_blueprint({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_blueprint({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_blueprint(::Google::Cloud::TelcoAutomation::V1::GetBlueprintRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_blueprint(::Google::Cloud::TelcoAutomation::V1::GetBlueprintRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -790,36 +790,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_blueprint({ name: name }) do |response, operation|
+      c.delete_blueprint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_blueprint name: name do |response, operation|
+      c.delete_blueprint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_blueprint ::Google::Cloud::TelcoAutomation::V1::DeleteBlueprintRequest.new(name: name) do |response, operation|
+      c.delete_blueprint ::Google::Cloud::TelcoAutomation::V1::DeleteBlueprintRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_blueprint({ name: name }, grpc_options) do |response, operation|
+      c.delete_blueprint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_blueprint(::Google::Cloud::TelcoAutomation::V1::DeleteBlueprintRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_blueprint(::Google::Cloud::TelcoAutomation::V1::DeleteBlueprintRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -854,40 +854,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_blueprints_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_blueprints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_blueprints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_blueprints parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_blueprints parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_blueprints ::Google::Cloud::TelcoAutomation::V1::ListBlueprintsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_blueprints ::Google::Cloud::TelcoAutomation::V1::ListBlueprintsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_blueprints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_blueprints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_blueprints(::Google::Cloud::TelcoAutomation::V1::ListBlueprintsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_blueprints(::Google::Cloud::TelcoAutomation::V1::ListBlueprintsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -917,36 +917,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, approve_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.approve_blueprint({ name: name }) do |response, operation|
+      c.approve_blueprint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.approve_blueprint name: name do |response, operation|
+      c.approve_blueprint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.approve_blueprint ::Google::Cloud::TelcoAutomation::V1::ApproveBlueprintRequest.new(name: name) do |response, operation|
+      c.approve_blueprint ::Google::Cloud::TelcoAutomation::V1::ApproveBlueprintRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.approve_blueprint({ name: name }, grpc_options) do |response, operation|
+      c.approve_blueprint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.approve_blueprint(::Google::Cloud::TelcoAutomation::V1::ApproveBlueprintRequest.new(name: name), grpc_options) do |response, operation|
+      c.approve_blueprint(::Google::Cloud::TelcoAutomation::V1::ApproveBlueprintRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -975,36 +975,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, propose_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.propose_blueprint({ name: name }) do |response, operation|
+      c.propose_blueprint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.propose_blueprint name: name do |response, operation|
+      c.propose_blueprint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.propose_blueprint ::Google::Cloud::TelcoAutomation::V1::ProposeBlueprintRequest.new(name: name) do |response, operation|
+      c.propose_blueprint ::Google::Cloud::TelcoAutomation::V1::ProposeBlueprintRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.propose_blueprint({ name: name }, grpc_options) do |response, operation|
+      c.propose_blueprint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.propose_blueprint(::Google::Cloud::TelcoAutomation::V1::ProposeBlueprintRequest.new(name: name), grpc_options) do |response, operation|
+      c.propose_blueprint(::Google::Cloud::TelcoAutomation::V1::ProposeBlueprintRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1033,36 +1033,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, reject_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reject_blueprint({ name: name }) do |response, operation|
+      c.reject_blueprint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reject_blueprint name: name do |response, operation|
+      c.reject_blueprint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reject_blueprint ::Google::Cloud::TelcoAutomation::V1::RejectBlueprintRequest.new(name: name) do |response, operation|
+      c.reject_blueprint ::Google::Cloud::TelcoAutomation::V1::RejectBlueprintRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reject_blueprint({ name: name }, grpc_options) do |response, operation|
+      c.reject_blueprint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reject_blueprint(::Google::Cloud::TelcoAutomation::V1::RejectBlueprintRequest.new(name: name), grpc_options) do |response, operation|
+      c.reject_blueprint(::Google::Cloud::TelcoAutomation::V1::RejectBlueprintRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1095,40 +1095,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_blueprint_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_blueprint_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_blueprint_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_blueprint_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_blueprint_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_blueprint_revisions ::Google::Cloud::TelcoAutomation::V1::ListBlueprintRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_blueprint_revisions ::Google::Cloud::TelcoAutomation::V1::ListBlueprintRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_blueprint_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_blueprint_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_blueprint_revisions(::Google::Cloud::TelcoAutomation::V1::ListBlueprintRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_blueprint_revisions(::Google::Cloud::TelcoAutomation::V1::ListBlueprintRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1164,40 +1164,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, search_blueprint_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_blueprint_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_blueprint_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_blueprint_revisions parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_blueprint_revisions parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_blueprint_revisions ::Google::Cloud::TelcoAutomation::V1::SearchBlueprintRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_blueprint_revisions ::Google::Cloud::TelcoAutomation::V1::SearchBlueprintRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_blueprint_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_blueprint_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_blueprint_revisions(::Google::Cloud::TelcoAutomation::V1::SearchBlueprintRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_blueprint_revisions(::Google::Cloud::TelcoAutomation::V1::SearchBlueprintRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1233,40 +1233,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, search_deployment_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_deployment_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_deployment_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_deployment_revisions parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_deployment_revisions parent: parent, query: query, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_deployment_revisions ::Google::Cloud::TelcoAutomation::V1::SearchDeploymentRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_deployment_revisions ::Google::Cloud::TelcoAutomation::V1::SearchDeploymentRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_deployment_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_deployment_revisions({ parent: parent, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_deployment_revisions(::Google::Cloud::TelcoAutomation::V1::SearchDeploymentRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_deployment_revisions(::Google::Cloud::TelcoAutomation::V1::SearchDeploymentRevisionsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1296,36 +1296,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, discard_blueprint_changes_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.discard_blueprint_changes({ name: name }) do |response, operation|
+      c.discard_blueprint_changes({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.discard_blueprint_changes name: name do |response, operation|
+      c.discard_blueprint_changes name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.discard_blueprint_changes ::Google::Cloud::TelcoAutomation::V1::DiscardBlueprintChangesRequest.new(name: name) do |response, operation|
+      c.discard_blueprint_changes ::Google::Cloud::TelcoAutomation::V1::DiscardBlueprintChangesRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.discard_blueprint_changes({ name: name }, grpc_options) do |response, operation|
+      c.discard_blueprint_changes({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.discard_blueprint_changes(::Google::Cloud::TelcoAutomation::V1::DiscardBlueprintChangesRequest.new(name: name), grpc_options) do |response, operation|
+      c.discard_blueprint_changes(::Google::Cloud::TelcoAutomation::V1::DiscardBlueprintChangesRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1358,40 +1358,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_public_blueprints_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_public_blueprints({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_public_blueprints({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_public_blueprints parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_public_blueprints parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_public_blueprints ::Google::Cloud::TelcoAutomation::V1::ListPublicBlueprintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_public_blueprints ::Google::Cloud::TelcoAutomation::V1::ListPublicBlueprintsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_public_blueprints({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_public_blueprints({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_public_blueprints(::Google::Cloud::TelcoAutomation::V1::ListPublicBlueprintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_public_blueprints(::Google::Cloud::TelcoAutomation::V1::ListPublicBlueprintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1421,36 +1421,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_public_blueprint_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_public_blueprint({ name: name }) do |response, operation|
+      c.get_public_blueprint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_public_blueprint name: name do |response, operation|
+      c.get_public_blueprint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_public_blueprint ::Google::Cloud::TelcoAutomation::V1::GetPublicBlueprintRequest.new(name: name) do |response, operation|
+      c.get_public_blueprint ::Google::Cloud::TelcoAutomation::V1::GetPublicBlueprintRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_public_blueprint({ name: name }, grpc_options) do |response, operation|
+      c.get_public_blueprint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_public_blueprint(::Google::Cloud::TelcoAutomation::V1::GetPublicBlueprintRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_public_blueprint(::Google::Cloud::TelcoAutomation::V1::GetPublicBlueprintRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1483,36 +1483,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |response, operation|
+      c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |response, operation|
+      c.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_deployment ::Google::Cloud::TelcoAutomation::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |response, operation|
+      c.create_deployment ::Google::Cloud::TelcoAutomation::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, grpc_options) do |response, operation|
+      c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_deployment(::Google::Cloud::TelcoAutomation::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), grpc_options) do |response, operation|
+      c.create_deployment(::Google::Cloud::TelcoAutomation::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1543,36 +1543,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_deployment({ deployment: deployment, update_mask: update_mask }) do |response, operation|
+      c.update_deployment({ deployment: deployment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_deployment deployment: deployment, update_mask: update_mask do |response, operation|
+      c.update_deployment deployment: deployment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_deployment ::Google::Cloud::TelcoAutomation::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask) do |response, operation|
+      c.update_deployment ::Google::Cloud::TelcoAutomation::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_deployment({ deployment: deployment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_deployment({ deployment: deployment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_deployment(::Google::Cloud::TelcoAutomation::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_deployment(::Google::Cloud::TelcoAutomation::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1603,36 +1603,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_deployment({ name: name, view: view }) do |response, operation|
+      c.get_deployment({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_deployment name: name, view: view do |response, operation|
+      c.get_deployment name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_deployment ::Google::Cloud::TelcoAutomation::V1::GetDeploymentRequest.new(name: name, view: view) do |response, operation|
+      c.get_deployment ::Google::Cloud::TelcoAutomation::V1::GetDeploymentRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_deployment({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_deployment({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_deployment(::Google::Cloud::TelcoAutomation::V1::GetDeploymentRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_deployment(::Google::Cloud::TelcoAutomation::V1::GetDeploymentRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1661,36 +1661,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, remove_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_deployment({ name: name }) do |response, operation|
+      c.remove_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_deployment name: name do |response, operation|
+      c.remove_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_deployment ::Google::Cloud::TelcoAutomation::V1::RemoveDeploymentRequest.new(name: name) do |response, operation|
+      c.remove_deployment ::Google::Cloud::TelcoAutomation::V1::RemoveDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_deployment({ name: name }, grpc_options) do |response, operation|
+      c.remove_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_deployment(::Google::Cloud::TelcoAutomation::V1::RemoveDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.remove_deployment(::Google::Cloud::TelcoAutomation::V1::RemoveDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1725,40 +1725,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_deployments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_deployments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_deployments parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_deployments parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_deployments ::Google::Cloud::TelcoAutomation::V1::ListDeploymentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_deployments ::Google::Cloud::TelcoAutomation::V1::ListDeploymentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_deployments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_deployments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_deployments(::Google::Cloud::TelcoAutomation::V1::ListDeploymentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_deployments(::Google::Cloud::TelcoAutomation::V1::ListDeploymentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1792,40 +1792,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_deployment_revisions_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_deployment_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_deployment_revisions name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_deployment_revisions ::Google::Cloud::TelcoAutomation::V1::ListDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_deployment_revisions ::Google::Cloud::TelcoAutomation::V1::ListDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_deployment_revisions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_deployment_revisions(::Google::Cloud::TelcoAutomation::V1::ListDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_deployment_revisions(::Google::Cloud::TelcoAutomation::V1::ListDeploymentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1855,36 +1855,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, discard_deployment_changes_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.discard_deployment_changes({ name: name }) do |response, operation|
+      c.discard_deployment_changes({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.discard_deployment_changes name: name do |response, operation|
+      c.discard_deployment_changes name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.discard_deployment_changes ::Google::Cloud::TelcoAutomation::V1::DiscardDeploymentChangesRequest.new(name: name) do |response, operation|
+      c.discard_deployment_changes ::Google::Cloud::TelcoAutomation::V1::DiscardDeploymentChangesRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.discard_deployment_changes({ name: name }, grpc_options) do |response, operation|
+      c.discard_deployment_changes({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.discard_deployment_changes(::Google::Cloud::TelcoAutomation::V1::DiscardDeploymentChangesRequest.new(name: name), grpc_options) do |response, operation|
+      c.discard_deployment_changes(::Google::Cloud::TelcoAutomation::V1::DiscardDeploymentChangesRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1913,36 +1913,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, apply_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.apply_deployment({ name: name }) do |response, operation|
+      c.apply_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.apply_deployment name: name do |response, operation|
+      c.apply_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.apply_deployment ::Google::Cloud::TelcoAutomation::V1::ApplyDeploymentRequest.new(name: name) do |response, operation|
+      c.apply_deployment ::Google::Cloud::TelcoAutomation::V1::ApplyDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.apply_deployment({ name: name }, grpc_options) do |response, operation|
+      c.apply_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.apply_deployment(::Google::Cloud::TelcoAutomation::V1::ApplyDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.apply_deployment(::Google::Cloud::TelcoAutomation::V1::ApplyDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1971,36 +1971,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, compute_deployment_status_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.compute_deployment_status({ name: name }) do |response, operation|
+      c.compute_deployment_status({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.compute_deployment_status name: name do |response, operation|
+      c.compute_deployment_status name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.compute_deployment_status ::Google::Cloud::TelcoAutomation::V1::ComputeDeploymentStatusRequest.new(name: name) do |response, operation|
+      c.compute_deployment_status ::Google::Cloud::TelcoAutomation::V1::ComputeDeploymentStatusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.compute_deployment_status({ name: name }, grpc_options) do |response, operation|
+      c.compute_deployment_status({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.compute_deployment_status(::Google::Cloud::TelcoAutomation::V1::ComputeDeploymentStatusRequest.new(name: name), grpc_options) do |response, operation|
+      c.compute_deployment_status(::Google::Cloud::TelcoAutomation::V1::ComputeDeploymentStatusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2031,36 +2031,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, rollback_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.rollback_deployment({ name: name, revision_id: revision_id }) do |response, operation|
+      c.rollback_deployment({ name: name, revision_id: revision_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback_deployment name: name, revision_id: revision_id do |response, operation|
+      c.rollback_deployment name: name, revision_id: revision_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback_deployment ::Google::Cloud::TelcoAutomation::V1::RollbackDeploymentRequest.new(name: name, revision_id: revision_id) do |response, operation|
+      c.rollback_deployment ::Google::Cloud::TelcoAutomation::V1::RollbackDeploymentRequest.new(name: name, revision_id: revision_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback_deployment({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
+      c.rollback_deployment({ name: name, revision_id: revision_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback_deployment(::Google::Cloud::TelcoAutomation::V1::RollbackDeploymentRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
+      c.rollback_deployment(::Google::Cloud::TelcoAutomation::V1::RollbackDeploymentRequest.new(name: name, revision_id: revision_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2089,36 +2089,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_hydrated_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_hydrated_deployment({ name: name }) do |response, operation|
+      c.get_hydrated_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_hydrated_deployment name: name do |response, operation|
+      c.get_hydrated_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_hydrated_deployment ::Google::Cloud::TelcoAutomation::V1::GetHydratedDeploymentRequest.new(name: name) do |response, operation|
+      c.get_hydrated_deployment ::Google::Cloud::TelcoAutomation::V1::GetHydratedDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_hydrated_deployment({ name: name }, grpc_options) do |response, operation|
+      c.get_hydrated_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_hydrated_deployment(::Google::Cloud::TelcoAutomation::V1::GetHydratedDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_hydrated_deployment(::Google::Cloud::TelcoAutomation::V1::GetHydratedDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2151,40 +2151,40 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_hydrated_deployments_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hydrated_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_hydrated_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hydrated_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_hydrated_deployments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hydrated_deployments ::Google::Cloud::TelcoAutomation::V1::ListHydratedDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_hydrated_deployments ::Google::Cloud::TelcoAutomation::V1::ListHydratedDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hydrated_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_hydrated_deployments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hydrated_deployments(::Google::Cloud::TelcoAutomation::V1::ListHydratedDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_hydrated_deployments(::Google::Cloud::TelcoAutomation::V1::ListHydratedDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2216,36 +2216,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_hydrated_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_hydrated_deployment({ hydrated_deployment: hydrated_deployment, update_mask: update_mask }) do |response, operation|
+      c.update_hydrated_deployment({ hydrated_deployment: hydrated_deployment, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_hydrated_deployment hydrated_deployment: hydrated_deployment, update_mask: update_mask do |response, operation|
+      c.update_hydrated_deployment hydrated_deployment: hydrated_deployment, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_hydrated_deployment ::Google::Cloud::TelcoAutomation::V1::UpdateHydratedDeploymentRequest.new(hydrated_deployment: hydrated_deployment, update_mask: update_mask) do |response, operation|
+      c.update_hydrated_deployment ::Google::Cloud::TelcoAutomation::V1::UpdateHydratedDeploymentRequest.new(hydrated_deployment: hydrated_deployment, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_hydrated_deployment({ hydrated_deployment: hydrated_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_hydrated_deployment({ hydrated_deployment: hydrated_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_hydrated_deployment(::Google::Cloud::TelcoAutomation::V1::UpdateHydratedDeploymentRequest.new(hydrated_deployment: hydrated_deployment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_hydrated_deployment(::Google::Cloud::TelcoAutomation::V1::UpdateHydratedDeploymentRequest.new(hydrated_deployment: hydrated_deployment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2274,36 +2274,36 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, apply_hydrated_deployment_client_stub do
       # Create client
-      client = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
+      c = ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.apply_hydrated_deployment({ name: name }) do |response, operation|
+      c.apply_hydrated_deployment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.apply_hydrated_deployment name: name do |response, operation|
+      c.apply_hydrated_deployment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.apply_hydrated_deployment ::Google::Cloud::TelcoAutomation::V1::ApplyHydratedDeploymentRequest.new(name: name) do |response, operation|
+      c.apply_hydrated_deployment ::Google::Cloud::TelcoAutomation::V1::ApplyHydratedDeploymentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.apply_hydrated_deployment({ name: name }, grpc_options) do |response, operation|
+      c.apply_hydrated_deployment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.apply_hydrated_deployment(::Google::Cloud::TelcoAutomation::V1::ApplyHydratedDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+      c.apply_hydrated_deployment(::Google::Cloud::TelcoAutomation::V1::ApplyHydratedDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

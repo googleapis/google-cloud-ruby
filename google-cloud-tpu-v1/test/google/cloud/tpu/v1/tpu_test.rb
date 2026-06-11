@@ -86,40 +86,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_nodes_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_nodes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_nodes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_nodes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_nodes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_nodes ::Google::Cloud::Tpu::V1::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_nodes ::Google::Cloud::Tpu::V1::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_nodes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_nodes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_nodes(::Google::Cloud::Tpu::V1::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_nodes(::Google::Cloud::Tpu::V1::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_node_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_node({ name: name }) do |response, operation|
+      c.get_node({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_node name: name do |response, operation|
+      c.get_node name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_node ::Google::Cloud::Tpu::V1::GetNodeRequest.new(name: name) do |response, operation|
+      c.get_node ::Google::Cloud::Tpu::V1::GetNodeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_node({ name: name }, grpc_options) do |response, operation|
+      c.get_node({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_node(::Google::Cloud::Tpu::V1::GetNodeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_node(::Google::Cloud::Tpu::V1::GetNodeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_node_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_node({ parent: parent, node_id: node_id, node: node }) do |response, operation|
+      c.create_node({ parent: parent, node_id: node_id, node: node }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_node parent: parent, node_id: node_id, node: node do |response, operation|
+      c.create_node parent: parent, node_id: node_id, node: node do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_node ::Google::Cloud::Tpu::V1::CreateNodeRequest.new(parent: parent, node_id: node_id, node: node) do |response, operation|
+      c.create_node ::Google::Cloud::Tpu::V1::CreateNodeRequest.new(parent: parent, node_id: node_id, node: node) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_node({ parent: parent, node_id: node_id, node: node }, grpc_options) do |response, operation|
+      c.create_node({ parent: parent, node_id: node_id, node: node }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_node(::Google::Cloud::Tpu::V1::CreateNodeRequest.new(parent: parent, node_id: node_id, node: node), grpc_options) do |response, operation|
+      c.create_node(::Google::Cloud::Tpu::V1::CreateNodeRequest.new(parent: parent, node_id: node_id, node: node), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -274,40 +274,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_node_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_node({ name: name }) do |response, operation|
+      c.delete_node({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_node name: name do |response, operation|
+      c.delete_node name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_node ::Google::Cloud::Tpu::V1::DeleteNodeRequest.new(name: name) do |response, operation|
+      c.delete_node ::Google::Cloud::Tpu::V1::DeleteNodeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_node({ name: name }, grpc_options) do |response, operation|
+      c.delete_node({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_node(::Google::Cloud::Tpu::V1::DeleteNodeRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_node(::Google::Cloud::Tpu::V1::DeleteNodeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -339,40 +339,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, reimage_node_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reimage_node({ name: name, tensorflow_version: tensorflow_version }) do |response, operation|
+      c.reimage_node({ name: name, tensorflow_version: tensorflow_version }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reimage_node name: name, tensorflow_version: tensorflow_version do |response, operation|
+      c.reimage_node name: name, tensorflow_version: tensorflow_version do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reimage_node ::Google::Cloud::Tpu::V1::ReimageNodeRequest.new(name: name, tensorflow_version: tensorflow_version) do |response, operation|
+      c.reimage_node ::Google::Cloud::Tpu::V1::ReimageNodeRequest.new(name: name, tensorflow_version: tensorflow_version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reimage_node({ name: name, tensorflow_version: tensorflow_version }, grpc_options) do |response, operation|
+      c.reimage_node({ name: name, tensorflow_version: tensorflow_version }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reimage_node(::Google::Cloud::Tpu::V1::ReimageNodeRequest.new(name: name, tensorflow_version: tensorflow_version), grpc_options) do |response, operation|
+      c.reimage_node(::Google::Cloud::Tpu::V1::ReimageNodeRequest.new(name: name, tensorflow_version: tensorflow_version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -402,40 +402,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, stop_node_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_node({ name: name }) do |response, operation|
+      c.stop_node({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_node name: name do |response, operation|
+      c.stop_node name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_node ::Google::Cloud::Tpu::V1::StopNodeRequest.new(name: name) do |response, operation|
+      c.stop_node ::Google::Cloud::Tpu::V1::StopNodeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_node({ name: name }, grpc_options) do |response, operation|
+      c.stop_node({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_node(::Google::Cloud::Tpu::V1::StopNodeRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_node(::Google::Cloud::Tpu::V1::StopNodeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -465,40 +465,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, start_node_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_node({ name: name }) do |response, operation|
+      c.start_node({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_node name: name do |response, operation|
+      c.start_node name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_node ::Google::Cloud::Tpu::V1::StartNodeRequest.new(name: name) do |response, operation|
+      c.start_node ::Google::Cloud::Tpu::V1::StartNodeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_node({ name: name }, grpc_options) do |response, operation|
+      c.start_node({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_node(::Google::Cloud::Tpu::V1::StartNodeRequest.new(name: name), grpc_options) do |response, operation|
+      c.start_node(::Google::Cloud::Tpu::V1::StartNodeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -536,40 +536,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tensor_flow_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tensor_flow_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_tensor_flow_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tensor_flow_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_tensor_flow_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tensor_flow_versions ::Google::Cloud::Tpu::V1::ListTensorFlowVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_tensor_flow_versions ::Google::Cloud::Tpu::V1::ListTensorFlowVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tensor_flow_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_tensor_flow_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tensor_flow_versions(::Google::Cloud::Tpu::V1::ListTensorFlowVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_tensor_flow_versions(::Google::Cloud::Tpu::V1::ListTensorFlowVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -599,36 +599,36 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_tensor_flow_version_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tensor_flow_version({ name: name }) do |response, operation|
+      c.get_tensor_flow_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tensor_flow_version name: name do |response, operation|
+      c.get_tensor_flow_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tensor_flow_version ::Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new(name: name) do |response, operation|
+      c.get_tensor_flow_version ::Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tensor_flow_version({ name: name }, grpc_options) do |response, operation|
+      c.get_tensor_flow_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tensor_flow_version(::Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tensor_flow_version(::Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -665,40 +665,40 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_accelerator_types_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_accelerator_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_accelerator_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_accelerator_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_accelerator_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_accelerator_types ::Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_accelerator_types ::Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_accelerator_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_accelerator_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_accelerator_types(::Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_accelerator_types(::Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -728,36 +728,36 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_accelerator_type_client_stub do
       # Create client
-      client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+      c = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_accelerator_type({ name: name }) do |response, operation|
+      c.get_accelerator_type({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_accelerator_type name: name do |response, operation|
+      c.get_accelerator_type name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_accelerator_type ::Google::Cloud::Tpu::V1::GetAcceleratorTypeRequest.new(name: name) do |response, operation|
+      c.get_accelerator_type ::Google::Cloud::Tpu::V1::GetAcceleratorTypeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_accelerator_type({ name: name }, grpc_options) do |response, operation|
+      c.get_accelerator_type({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_accelerator_type(::Google::Cloud::Tpu::V1::GetAcceleratorTypeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_accelerator_type(::Google::Cloud::Tpu::V1::GetAcceleratorTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

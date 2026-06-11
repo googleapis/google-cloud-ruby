@@ -101,32 +101,32 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::R
     ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Rest::ServiceStub.stub :transcode_synthesize_long_audio_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, synthesize_long_audio_client_stub do
         # Create client
-        client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Rest::Client.new do |config|
+        c = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }) do |_result, response|
+        c.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.synthesize_long_audio parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice do |_result, response|
+        c.synthesize_long_audio parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.synthesize_long_audio ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice) do |_result, response|
+        c.synthesize_long_audio ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }, call_options) do |_result, response|
+        c.synthesize_long_audio({ parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.synthesize_long_audio(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice), call_options) do |_result, response|
+        c.synthesize_long_audio(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeLongAudioRequest.new(parent: parent, input: input, audio_config: audio_config, output_gcs_uri: output_gcs_uri, voice: voice), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
