@@ -537,7 +537,7 @@
   "google-cloud-managed_identities+FILLER": "0.0.0",
   "google-cloud-managed_identities-v1": "1.8.0",
   "google-cloud-managed_identities-v1+FILLER": "0.0.0",
-  "google-cloud-managed_kafka": "2.2.0",
+  "google-cloud-managed_kafka": "2.3.0",
   "google-cloud-managed_kafka+FILLER": "0.0.0",
   "google-cloud-managed_kafka-schema_registry": "0.2.0",
   "google-cloud-managed_kafka-schema_registry+FILLER": "0.0.0",
