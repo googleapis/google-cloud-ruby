@@ -84,36 +84,36 @@ class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_snooze_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_snooze({ parent: parent, snooze: snooze }) do |response, operation|
+      c.create_snooze({ parent: parent, snooze: snooze }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_snooze parent: parent, snooze: snooze do |response, operation|
+      c.create_snooze parent: parent, snooze: snooze do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_snooze ::Google::Cloud::Monitoring::V3::CreateSnoozeRequest.new(parent: parent, snooze: snooze) do |response, operation|
+      c.create_snooze ::Google::Cloud::Monitoring::V3::CreateSnoozeRequest.new(parent: parent, snooze: snooze) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_snooze({ parent: parent, snooze: snooze }, grpc_options) do |response, operation|
+      c.create_snooze({ parent: parent, snooze: snooze }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_snooze(::Google::Cloud::Monitoring::V3::CreateSnoozeRequest.new(parent: parent, snooze: snooze), grpc_options) do |response, operation|
+      c.create_snooze(::Google::Cloud::Monitoring::V3::CreateSnoozeRequest.new(parent: parent, snooze: snooze), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,40 +148,40 @@ class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_snoozes_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_snoozes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_snoozes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_snoozes parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_snoozes parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_snoozes ::Google::Cloud::Monitoring::V3::ListSnoozesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_snoozes ::Google::Cloud::Monitoring::V3::ListSnoozesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_snoozes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_snoozes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_snoozes(::Google::Cloud::Monitoring::V3::ListSnoozesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_snoozes(::Google::Cloud::Monitoring::V3::ListSnoozesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -211,36 +211,36 @@ class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_snooze_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_snooze({ name: name }) do |response, operation|
+      c.get_snooze({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_snooze name: name do |response, operation|
+      c.get_snooze name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_snooze ::Google::Cloud::Monitoring::V3::GetSnoozeRequest.new(name: name) do |response, operation|
+      c.get_snooze ::Google::Cloud::Monitoring::V3::GetSnoozeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_snooze({ name: name }, grpc_options) do |response, operation|
+      c.get_snooze({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_snooze(::Google::Cloud::Monitoring::V3::GetSnoozeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_snooze(::Google::Cloud::Monitoring::V3::GetSnoozeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_snooze_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::SnoozeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_snooze({ snooze: snooze, update_mask: update_mask }) do |response, operation|
+      c.update_snooze({ snooze: snooze, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_snooze snooze: snooze, update_mask: update_mask do |response, operation|
+      c.update_snooze snooze: snooze, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_snooze ::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest.new(snooze: snooze, update_mask: update_mask) do |response, operation|
+      c.update_snooze ::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest.new(snooze: snooze, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_snooze({ snooze: snooze, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_snooze({ snooze: snooze, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_snooze(::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest.new(snooze: snooze, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_snooze(::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest.new(snooze: snooze, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
