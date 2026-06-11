@@ -84,36 +84,36 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_question_client_stub do
       # Create client
-      client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+      c = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_question({ name: name, read_mask: read_mask }) do |response, operation|
+      c.get_question({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_question name: name, read_mask: read_mask do |response, operation|
+      c.get_question name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_question ::Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new(name: name, read_mask: read_mask) do |response, operation|
+      c.get_question ::Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_question({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.get_question({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_question(::Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
+      c.get_question(::Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_question_client_stub do
       # Create client
-      client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+      c = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_question({ parent: parent, question: question }) do |response, operation|
+      c.create_question({ parent: parent, question: question }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_question parent: parent, question: question do |response, operation|
+      c.create_question parent: parent, question: question do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_question ::Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new(parent: parent, question: question) do |response, operation|
+      c.create_question ::Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new(parent: parent, question: question) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_question({ parent: parent, question: question }, grpc_options) do |response, operation|
+      c.create_question({ parent: parent, question: question }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_question(::Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new(parent: parent, question: question), grpc_options) do |response, operation|
+      c.create_question(::Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new(parent: parent, question: question), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,36 +204,36 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, execute_question_client_stub do
       # Create client
-      client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+      c = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_question({ name: name, interpretation_index: interpretation_index }) do |response, operation|
+      c.execute_question({ name: name, interpretation_index: interpretation_index }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_question name: name, interpretation_index: interpretation_index do |response, operation|
+      c.execute_question name: name, interpretation_index: interpretation_index do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_question ::Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new(name: name, interpretation_index: interpretation_index) do |response, operation|
+      c.execute_question ::Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new(name: name, interpretation_index: interpretation_index) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_question({ name: name, interpretation_index: interpretation_index }, grpc_options) do |response, operation|
+      c.execute_question({ name: name, interpretation_index: interpretation_index }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_question(::Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new(name: name, interpretation_index: interpretation_index), grpc_options) do |response, operation|
+      c.execute_question(::Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new(name: name, interpretation_index: interpretation_index), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -262,36 +262,36 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_user_feedback_client_stub do
       # Create client
-      client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+      c = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_user_feedback({ name: name }) do |response, operation|
+      c.get_user_feedback({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_user_feedback name: name do |response, operation|
+      c.get_user_feedback name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_user_feedback ::Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new(name: name) do |response, operation|
+      c.get_user_feedback ::Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_user_feedback({ name: name }, grpc_options) do |response, operation|
+      c.get_user_feedback({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_user_feedback(::Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_user_feedback(::Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,36 +322,36 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_user_feedback_client_stub do
       # Create client
-      client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+      c = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_user_feedback({ user_feedback: user_feedback, update_mask: update_mask }) do |response, operation|
+      c.update_user_feedback({ user_feedback: user_feedback, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_user_feedback user_feedback: user_feedback, update_mask: update_mask do |response, operation|
+      c.update_user_feedback user_feedback: user_feedback, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_user_feedback ::Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new(user_feedback: user_feedback, update_mask: update_mask) do |response, operation|
+      c.update_user_feedback ::Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new(user_feedback: user_feedback, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_user_feedback({ user_feedback: user_feedback, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_user_feedback({ user_feedback: user_feedback, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_user_feedback(::Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new(user_feedback: user_feedback, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_user_feedback(::Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new(user_feedback: user_feedback, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

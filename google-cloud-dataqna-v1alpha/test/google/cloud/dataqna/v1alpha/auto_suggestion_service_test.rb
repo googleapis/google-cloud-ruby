@@ -88,36 +88,36 @@ class ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, suggest_queries_client_stub do
       # Create client
-      client = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new do |config|
+      c = ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.suggest_queries({ parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types }) do |response, operation|
+      c.suggest_queries({ parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.suggest_queries parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types do |response, operation|
+      c.suggest_queries parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.suggest_queries ::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new(parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types) do |response, operation|
+      c.suggest_queries ::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new(parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.suggest_queries({ parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types }, grpc_options) do |response, operation|
+      c.suggest_queries({ parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.suggest_queries(::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new(parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types), grpc_options) do |response, operation|
+      c.suggest_queries(::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new(parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

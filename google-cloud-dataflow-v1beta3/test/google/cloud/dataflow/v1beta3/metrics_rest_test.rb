@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::ServiceStub.stub :transcode_get_job_metrics_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_metrics_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }) do |_result, response|
+        c.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job_metrics project_id: project_id, job_id: job_id, start_time: start_time, location: location do |_result, response|
+        c.get_job_metrics project_id: project_id, job_id: job_id, start_time: start_time, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job_metrics ::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location) do |_result, response|
+        c.get_job_metrics ::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }, call_options) do |_result, response|
+        c.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job_metrics(::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location), call_options) do |_result, response|
+        c.get_job_metrics(::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::ServiceStub.stub :transcode_get_job_execution_details_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_execution_details_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job_execution_details project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token do |_result, response|
+        c.get_job_execution_details project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job_execution_details ::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token) do |_result, response|
+        c.get_job_execution_details ::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job_execution_details(::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.get_job_execution_details(::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -219,32 +219,32 @@ class ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::ServiceStub.stub :transcode_get_stage_execution_details_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_stage_execution_details_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |_result, response|
+        c.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_stage_execution_details project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |_result, response|
+        c.get_stage_execution_details project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_stage_execution_details ::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |_result, response|
+        c.get_stage_execution_details ::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
+        c.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_stage_execution_details(::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), call_options) do |_result, response|
+        c.get_stage_execution_details(::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

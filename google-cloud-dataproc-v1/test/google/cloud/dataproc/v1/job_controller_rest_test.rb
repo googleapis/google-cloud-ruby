@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_submit_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, submit_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.submit_job({ project_id: project_id, region: region, job: job, request_id: request_id }) do |_result, response|
+        c.submit_job({ project_id: project_id, region: region, job: job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_job project_id: project_id, region: region, job: job, request_id: request_id do |_result, response|
+        c.submit_job project_id: project_id, region: region, job: job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_job ::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |_result, response|
+        c.submit_job ::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_job({ project_id: project_id, region: region, job: job, request_id: request_id }, call_options) do |_result, response|
+        c.submit_job({ project_id: project_id, region: region, job: job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_job(::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), call_options) do |_result, response|
+        c.submit_job(::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_submit_job_as_operation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, submit_job_as_operation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.submit_job_as_operation({ project_id: project_id, region: region, job: job, request_id: request_id }) do |_result, response|
+        c.submit_job_as_operation({ project_id: project_id, region: region, job: job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_job_as_operation project_id: project_id, region: region, job: job, request_id: request_id do |_result, response|
+        c.submit_job_as_operation project_id: project_id, region: region, job: job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_job_as_operation ::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |_result, response|
+        c.submit_job_as_operation ::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_job_as_operation({ project_id: project_id, region: region, job: job, request_id: request_id }, call_options) do |_result, response|
+        c.submit_job_as_operation({ project_id: project_id, region: region, job: job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_job_as_operation(::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), call_options) do |_result, response|
+        c.submit_job_as_operation(::Google::Cloud::Dataproc::V1::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_get_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job({ project_id: project_id, region: region, job_id: job_id }) do |_result, response|
+        c.get_job({ project_id: project_id, region: region, job_id: job_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job project_id: project_id, region: region, job_id: job_id do |_result, response|
+        c.get_job project_id: project_id, region: region, job_id: job_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job ::Google::Cloud::Dataproc::V1::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |_result, response|
+        c.get_job ::Google::Cloud::Dataproc::V1::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job({ project_id: project_id, region: region, job_id: job_id }, call_options) do |_result, response|
+        c.get_job({ project_id: project_id, region: region, job_id: job_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job(::Google::Cloud::Dataproc::V1::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id), call_options) do |_result, response|
+        c.get_job(::Google::Cloud::Dataproc::V1::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -273,32 +273,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_list_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_jobs({ project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter }) do |_result, response|
+        c.list_jobs({ project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_jobs project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter do |_result, response|
+        c.list_jobs project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_jobs ::Google::Cloud::Dataproc::V1::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter) do |_result, response|
+        c.list_jobs ::Google::Cloud::Dataproc::V1::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_jobs({ project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter }, call_options) do |_result, response|
+        c.list_jobs({ project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_jobs(::Google::Cloud::Dataproc::V1::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter), call_options) do |_result, response|
+        c.list_jobs(::Google::Cloud::Dataproc::V1::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -331,32 +331,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_update_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_job({ project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask }) do |_result, response|
+        c.update_job({ project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_job project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask do |_result, response|
+        c.update_job project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_job ::Google::Cloud::Dataproc::V1::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask) do |_result, response|
+        c.update_job ::Google::Cloud::Dataproc::V1::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_job({ project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_job({ project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_job(::Google::Cloud::Dataproc::V1::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask), call_options) do |_result, response|
+        c.update_job(::Google::Cloud::Dataproc::V1::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -387,32 +387,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_cancel_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_job({ project_id: project_id, region: region, job_id: job_id }) do |_result, response|
+        c.cancel_job({ project_id: project_id, region: region, job_id: job_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_job project_id: project_id, region: region, job_id: job_id do |_result, response|
+        c.cancel_job project_id: project_id, region: region, job_id: job_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_job ::Google::Cloud::Dataproc::V1::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |_result, response|
+        c.cancel_job ::Google::Cloud::Dataproc::V1::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_job({ project_id: project_id, region: region, job_id: job_id }, call_options) do |_result, response|
+        c.cancel_job({ project_id: project_id, region: region, job_id: job_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_job(::Google::Cloud::Dataproc::V1::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id), call_options) do |_result, response|
+        c.cancel_job(::Google::Cloud::Dataproc::V1::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -443,32 +443,32 @@ class ::Google::Cloud::Dataproc::V1::JobController::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataproc::V1::JobController::Rest::ServiceStub.stub :transcode_delete_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_job({ project_id: project_id, region: region, job_id: job_id }) do |_result, response|
+        c.delete_job({ project_id: project_id, region: region, job_id: job_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_job project_id: project_id, region: region, job_id: job_id do |_result, response|
+        c.delete_job project_id: project_id, region: region, job_id: job_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_job ::Google::Cloud::Dataproc::V1::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |_result, response|
+        c.delete_job ::Google::Cloud::Dataproc::V1::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_job({ project_id: project_id, region: region, job_id: job_id }, call_options) do |_result, response|
+        c.delete_job({ project_id: project_id, region: region, job_id: job_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_job(::Google::Cloud::Dataproc::V1::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id), call_options) do |_result, response|
+        c.delete_job(::Google::Cloud::Dataproc::V1::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

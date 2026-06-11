@@ -88,40 +88,40 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_available_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_available_versions({ parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only }) do |response, operation|
+      c.list_available_versions({ parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_available_versions parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only do |response, operation|
+      c.list_available_versions parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_available_versions ::Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only) do |response, operation|
+      c.list_available_versions ::Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_available_versions({ parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only }, grpc_options) do |response, operation|
+      c.list_available_versions({ parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_available_versions(::Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only), grpc_options) do |response, operation|
+      c.list_available_versions(::Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, latest_patch_only: latest_patch_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -159,40 +159,40 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::DataFusion::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::DataFusion::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::DataFusion::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::DataFusion::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -222,36 +222,36 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::DataFusion::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::DataFusion::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::DataFusion::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::DataFusion::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,40 +284,40 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::DataFusion::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
+      c.create_instance ::Google::Cloud::DataFusion::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::DataFusion::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::DataFusion::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -347,40 +347,40 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name }) do |response, operation|
+      c.delete_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name do |response, operation|
+      c.delete_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::DataFusion::V1::DeleteInstanceRequest.new(name: name) do |response, operation|
+      c.delete_instance ::Google::Cloud::DataFusion::V1::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::DataFusion::V1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::DataFusion::V1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -412,40 +412,40 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ instance: instance, update_mask: update_mask }) do |response, operation|
+      c.update_instance({ instance: instance, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance instance: instance, update_mask: update_mask do |response, operation|
+      c.update_instance instance: instance, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::DataFusion::V1::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask) do |response, operation|
+      c.update_instance ::Google::Cloud::DataFusion::V1::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ instance: instance, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_instance({ instance: instance, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::DataFusion::V1::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::DataFusion::V1::UpdateInstanceRequest.new(instance: instance, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -475,40 +475,40 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, restart_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
+      c = ::Google::Cloud::DataFusion::V1::DataFusion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restart_instance({ name: name }) do |response, operation|
+      c.restart_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restart_instance name: name do |response, operation|
+      c.restart_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restart_instance ::Google::Cloud::DataFusion::V1::RestartInstanceRequest.new(name: name) do |response, operation|
+      c.restart_instance ::Google::Cloud::DataFusion::V1::RestartInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restart_instance({ name: name }, grpc_options) do |response, operation|
+      c.restart_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restart_instance(::Google::Cloud::DataFusion::V1::RestartInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.restart_instance(::Google::Cloud::DataFusion::V1::RestartInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

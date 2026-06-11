@@ -98,32 +98,32 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ClientTest 
     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ServiceStub.stub :transcode_create_autoscaling_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_autoscaling_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_autoscaling_policy({ parent: parent, policy: policy }) do |_result, response|
+        c.create_autoscaling_policy({ parent: parent, policy: policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_autoscaling_policy parent: parent, policy: policy do |_result, response|
+        c.create_autoscaling_policy parent: parent, policy: policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_autoscaling_policy ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new(parent: parent, policy: policy) do |_result, response|
+        c.create_autoscaling_policy ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new(parent: parent, policy: policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_autoscaling_policy({ parent: parent, policy: policy }, call_options) do |_result, response|
+        c.create_autoscaling_policy({ parent: parent, policy: policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_autoscaling_policy(::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new(parent: parent, policy: policy), call_options) do |_result, response|
+        c.create_autoscaling_policy(::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new(parent: parent, policy: policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ClientTest 
     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ServiceStub.stub :transcode_update_autoscaling_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_autoscaling_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_autoscaling_policy({ policy: policy }) do |_result, response|
+        c.update_autoscaling_policy({ policy: policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_autoscaling_policy policy: policy do |_result, response|
+        c.update_autoscaling_policy policy: policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_autoscaling_policy ::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest.new(policy: policy) do |_result, response|
+        c.update_autoscaling_policy ::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest.new(policy: policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_autoscaling_policy({ policy: policy }, call_options) do |_result, response|
+        c.update_autoscaling_policy({ policy: policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_autoscaling_policy(::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest.new(policy: policy), call_options) do |_result, response|
+        c.update_autoscaling_policy(::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest.new(policy: policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ClientTest 
     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ServiceStub.stub :transcode_get_autoscaling_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_autoscaling_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_autoscaling_policy({ name: name }) do |_result, response|
+        c.get_autoscaling_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_autoscaling_policy name: name do |_result, response|
+        c.get_autoscaling_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_autoscaling_policy ::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest.new(name: name) do |_result, response|
+        c.get_autoscaling_policy ::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_autoscaling_policy({ name: name }, call_options) do |_result, response|
+        c.get_autoscaling_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_autoscaling_policy(::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_autoscaling_policy(::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ClientTest 
     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ServiceStub.stub :transcode_list_autoscaling_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_autoscaling_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_autoscaling_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_autoscaling_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_autoscaling_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_autoscaling_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_autoscaling_policies ::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_autoscaling_policies ::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_autoscaling_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_autoscaling_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_autoscaling_policies(::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_autoscaling_policies(::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -316,32 +316,32 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ClientTest 
     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ServiceStub.stub :transcode_delete_autoscaling_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_autoscaling_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_autoscaling_policy({ name: name }) do |_result, response|
+        c.delete_autoscaling_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_autoscaling_policy name: name do |_result, response|
+        c.delete_autoscaling_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_autoscaling_policy ::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest.new(name: name) do |_result, response|
+        c.delete_autoscaling_policy ::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_autoscaling_policy({ name: name }, call_options) do |_result, response|
+        c.delete_autoscaling_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_autoscaling_policy(::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_autoscaling_policy(::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

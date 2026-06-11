@@ -84,36 +84,36 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::ClientTes
 
     Gapic::ServiceStub.stub :new, replace_taxonomy_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.replace_taxonomy({ name: name, serialized_taxonomy: serialized_taxonomy }) do |response, operation|
+      c.replace_taxonomy({ name: name, serialized_taxonomy: serialized_taxonomy }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.replace_taxonomy name: name, serialized_taxonomy: serialized_taxonomy do |response, operation|
+      c.replace_taxonomy name: name, serialized_taxonomy: serialized_taxonomy do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.replace_taxonomy ::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest.new(name: name, serialized_taxonomy: serialized_taxonomy) do |response, operation|
+      c.replace_taxonomy ::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest.new(name: name, serialized_taxonomy: serialized_taxonomy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.replace_taxonomy({ name: name, serialized_taxonomy: serialized_taxonomy }, grpc_options) do |response, operation|
+      c.replace_taxonomy({ name: name, serialized_taxonomy: serialized_taxonomy }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.replace_taxonomy(::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest.new(name: name, serialized_taxonomy: serialized_taxonomy), grpc_options) do |response, operation|
+      c.replace_taxonomy(::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest.new(name: name, serialized_taxonomy: serialized_taxonomy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -145,36 +145,36 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::ClientTes
 
     Gapic::ServiceStub.stub :new, import_taxonomies_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_taxonomies({ parent: parent, inline_source: inline_source }) do |response, operation|
+      c.import_taxonomies({ parent: parent, inline_source: inline_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_taxonomies parent: parent, inline_source: inline_source do |response, operation|
+      c.import_taxonomies parent: parent, inline_source: inline_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_taxonomies ::Google::Cloud::DataCatalog::V1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source) do |response, operation|
+      c.import_taxonomies ::Google::Cloud::DataCatalog::V1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_taxonomies({ parent: parent, inline_source: inline_source }, grpc_options) do |response, operation|
+      c.import_taxonomies({ parent: parent, inline_source: inline_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_taxonomies(::Google::Cloud::DataCatalog::V1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source), grpc_options) do |response, operation|
+      c.import_taxonomies(::Google::Cloud::DataCatalog::V1::ImportTaxonomiesRequest.new(parent: parent, inline_source: inline_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,36 +208,36 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::ClientTes
 
     Gapic::ServiceStub.stub :new, export_taxonomies_client_stub do
       # Create client
-      client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
+      c = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }) do |response, operation|
+      c.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_taxonomies parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies do |response, operation|
+      c.export_taxonomies parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_taxonomies ::Google::Cloud::DataCatalog::V1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies) do |response, operation|
+      c.export_taxonomies ::Google::Cloud::DataCatalog::V1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }, grpc_options) do |response, operation|
+      c.export_taxonomies({ parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_taxonomies(::Google::Cloud::DataCatalog::V1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies), grpc_options) do |response, operation|
+      c.export_taxonomies(::Google::Cloud::DataCatalog::V1::ExportTaxonomiesRequest.new(parent: parent, taxonomies: taxonomies, serialized_taxonomies: serialized_taxonomies), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

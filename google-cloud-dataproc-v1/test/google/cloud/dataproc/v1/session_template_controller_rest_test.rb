@@ -98,32 +98,32 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ClientTest
     ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ServiceStub.stub :transcode_create_session_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_session_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_session_template({ parent: parent, session_template: session_template }) do |_result, response|
+        c.create_session_template({ parent: parent, session_template: session_template }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_session_template parent: parent, session_template: session_template do |_result, response|
+        c.create_session_template parent: parent, session_template: session_template do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_session_template ::Google::Cloud::Dataproc::V1::CreateSessionTemplateRequest.new(parent: parent, session_template: session_template) do |_result, response|
+        c.create_session_template ::Google::Cloud::Dataproc::V1::CreateSessionTemplateRequest.new(parent: parent, session_template: session_template) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_session_template({ parent: parent, session_template: session_template }, call_options) do |_result, response|
+        c.create_session_template({ parent: parent, session_template: session_template }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_session_template(::Google::Cloud::Dataproc::V1::CreateSessionTemplateRequest.new(parent: parent, session_template: session_template), call_options) do |_result, response|
+        c.create_session_template(::Google::Cloud::Dataproc::V1::CreateSessionTemplateRequest.new(parent: parent, session_template: session_template), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ClientTest
     ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ServiceStub.stub :transcode_update_session_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_session_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_session_template({ session_template: session_template }) do |_result, response|
+        c.update_session_template({ session_template: session_template }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_session_template session_template: session_template do |_result, response|
+        c.update_session_template session_template: session_template do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_session_template ::Google::Cloud::Dataproc::V1::UpdateSessionTemplateRequest.new(session_template: session_template) do |_result, response|
+        c.update_session_template ::Google::Cloud::Dataproc::V1::UpdateSessionTemplateRequest.new(session_template: session_template) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_session_template({ session_template: session_template }, call_options) do |_result, response|
+        c.update_session_template({ session_template: session_template }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_session_template(::Google::Cloud::Dataproc::V1::UpdateSessionTemplateRequest.new(session_template: session_template), call_options) do |_result, response|
+        c.update_session_template(::Google::Cloud::Dataproc::V1::UpdateSessionTemplateRequest.new(session_template: session_template), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ClientTest
     ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ServiceStub.stub :transcode_get_session_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_session_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_session_template({ name: name }) do |_result, response|
+        c.get_session_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_session_template name: name do |_result, response|
+        c.get_session_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_session_template ::Google::Cloud::Dataproc::V1::GetSessionTemplateRequest.new(name: name) do |_result, response|
+        c.get_session_template ::Google::Cloud::Dataproc::V1::GetSessionTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_session_template({ name: name }, call_options) do |_result, response|
+        c.get_session_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_session_template(::Google::Cloud::Dataproc::V1::GetSessionTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.get_session_template(::Google::Cloud::Dataproc::V1::GetSessionTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ClientTest
     ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ServiceStub.stub :transcode_list_session_templates_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_session_templates_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_session_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_session_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_session_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_session_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_session_templates ::Google::Cloud::Dataproc::V1::ListSessionTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_session_templates ::Google::Cloud::Dataproc::V1::ListSessionTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_session_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_session_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_session_templates(::Google::Cloud::Dataproc::V1::ListSessionTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_session_templates(::Google::Cloud::Dataproc::V1::ListSessionTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ClientTest
     ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::ServiceStub.stub :transcode_delete_session_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_session_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::SessionTemplateController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_session_template({ name: name }) do |_result, response|
+        c.delete_session_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_session_template name: name do |_result, response|
+        c.delete_session_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_session_template ::Google::Cloud::Dataproc::V1::DeleteSessionTemplateRequest.new(name: name) do |_result, response|
+        c.delete_session_template ::Google::Cloud::Dataproc::V1::DeleteSessionTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_session_template({ name: name }, call_options) do |_result, response|
+        c.delete_session_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_session_template(::Google::Cloud::Dataproc::V1::DeleteSessionTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.delete_session_template(::Google::Cloud::Dataproc::V1::DeleteSessionTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

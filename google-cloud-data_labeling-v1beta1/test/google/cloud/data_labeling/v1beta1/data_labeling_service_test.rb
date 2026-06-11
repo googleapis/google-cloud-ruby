@@ -84,36 +84,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dataset parent: parent, dataset: dataset do |response, operation|
+      c.create_dataset parent: parent, dataset: dataset do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dataset ::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
+      c.create_dataset ::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dataset(::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
+      c.create_dataset(::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dataset({ name: name }) do |response, operation|
+      c.get_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dataset name: name do |response, operation|
+      c.get_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dataset ::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new(name: name) do |response, operation|
+      c.get_dataset ::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dataset(::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dataset(::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_datasets ::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_datasets ::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_datasets(::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_datasets(::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -269,36 +269,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dataset({ name: name }) do |response, operation|
+      c.delete_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dataset name: name do |response, operation|
+      c.delete_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dataset ::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new(name: name) do |response, operation|
+      c.delete_dataset ::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dataset(::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_dataset(::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,40 +331,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, import_data_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_data({ name: name, input_config: input_config, user_email_address: user_email_address }) do |response, operation|
+      c.import_data({ name: name, input_config: input_config, user_email_address: user_email_address }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_data name: name, input_config: input_config, user_email_address: user_email_address do |response, operation|
+      c.import_data name: name, input_config: input_config, user_email_address: user_email_address do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_data ::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new(name: name, input_config: input_config, user_email_address: user_email_address) do |response, operation|
+      c.import_data ::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new(name: name, input_config: input_config, user_email_address: user_email_address) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_data({ name: name, input_config: input_config, user_email_address: user_email_address }, grpc_options) do |response, operation|
+      c.import_data({ name: name, input_config: input_config, user_email_address: user_email_address }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_data(::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new(name: name, input_config: input_config, user_email_address: user_email_address), grpc_options) do |response, operation|
+      c.import_data(::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new(name: name, input_config: input_config, user_email_address: user_email_address), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -402,40 +402,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, export_data_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_data({ name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address }) do |response, operation|
+      c.export_data({ name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_data name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address do |response, operation|
+      c.export_data name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_data ::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new(name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address) do |response, operation|
+      c.export_data ::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new(name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_data({ name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address }, grpc_options) do |response, operation|
+      c.export_data({ name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_data(::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new(name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address), grpc_options) do |response, operation|
+      c.export_data(::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new(name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -465,36 +465,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_data_item_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_item({ name: name }) do |response, operation|
+      c.get_data_item({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_item name: name do |response, operation|
+      c.get_data_item name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_item ::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new(name: name) do |response, operation|
+      c.get_data_item ::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_item({ name: name }, grpc_options) do |response, operation|
+      c.get_data_item({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_item(::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_item(::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -529,40 +529,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_data_items_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_items parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_data_items parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_items ::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_data_items ::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_data_items({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_items(::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_data_items(::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -592,36 +592,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_annotated_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_annotated_dataset({ name: name }) do |response, operation|
+      c.get_annotated_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_annotated_dataset name: name do |response, operation|
+      c.get_annotated_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_annotated_dataset ::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new(name: name) do |response, operation|
+      c.get_annotated_dataset ::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_annotated_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_annotated_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_annotated_dataset(::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_annotated_dataset(::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -656,40 +656,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_annotated_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_annotated_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_annotated_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_annotated_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_annotated_datasets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_annotated_datasets ::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_annotated_datasets ::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_annotated_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_annotated_datasets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_annotated_datasets(::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_annotated_datasets(::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -719,36 +719,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_annotated_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_annotated_dataset({ name: name }) do |response, operation|
+      c.delete_annotated_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_annotated_dataset name: name do |response, operation|
+      c.delete_annotated_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_annotated_dataset ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new(name: name) do |response, operation|
+      c.delete_annotated_dataset ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_annotated_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_annotated_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_annotated_dataset(::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_annotated_dataset(::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -784,40 +784,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, label_image_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.label_image({ image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature }) do |response, operation|
+      c.label_image({ image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.label_image image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature do |response, operation|
+      c.label_image image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.label_image ::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new(image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature) do |response, operation|
+      c.label_image ::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new(image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.label_image({ image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature }, grpc_options) do |response, operation|
+      c.label_image({ image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.label_image(::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new(image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
+      c.label_image(::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new(image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -854,40 +854,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, label_video_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.label_video({ video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature }) do |response, operation|
+      c.label_video({ video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.label_video video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature do |response, operation|
+      c.label_video video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.label_video ::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new(video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature) do |response, operation|
+      c.label_video ::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new(video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.label_video({ video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature }, grpc_options) do |response, operation|
+      c.label_video({ video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.label_video(::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new(video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
+      c.label_video(::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new(video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -924,40 +924,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, label_text_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.label_text({ text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature }) do |response, operation|
+      c.label_text({ text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.label_text text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature do |response, operation|
+      c.label_text text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.label_text ::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new(text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature) do |response, operation|
+      c.label_text ::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new(text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.label_text({ text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature }, grpc_options) do |response, operation|
+      c.label_text({ text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.label_text(::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new(text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
+      c.label_text(::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new(text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -989,36 +989,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_example_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_example({ name: name, filter: filter }) do |response, operation|
+      c.get_example({ name: name, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_example name: name, filter: filter do |response, operation|
+      c.get_example name: name, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_example ::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new(name: name, filter: filter) do |response, operation|
+      c.get_example ::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new(name: name, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_example({ name: name, filter: filter }, grpc_options) do |response, operation|
+      c.get_example({ name: name, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_example(::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new(name: name, filter: filter), grpc_options) do |response, operation|
+      c.get_example(::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new(name: name, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1053,40 +1053,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_examples_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_examples parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_examples parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_examples ::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_examples ::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_examples(::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_examples(::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1118,36 +1118,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_annotation_spec_set_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_annotation_spec_set({ parent: parent, annotation_spec_set: annotation_spec_set }) do |response, operation|
+      c.create_annotation_spec_set({ parent: parent, annotation_spec_set: annotation_spec_set }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_annotation_spec_set parent: parent, annotation_spec_set: annotation_spec_set do |response, operation|
+      c.create_annotation_spec_set parent: parent, annotation_spec_set: annotation_spec_set do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new(parent: parent, annotation_spec_set: annotation_spec_set) do |response, operation|
+      c.create_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new(parent: parent, annotation_spec_set: annotation_spec_set) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_annotation_spec_set({ parent: parent, annotation_spec_set: annotation_spec_set }, grpc_options) do |response, operation|
+      c.create_annotation_spec_set({ parent: parent, annotation_spec_set: annotation_spec_set }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new(parent: parent, annotation_spec_set: annotation_spec_set), grpc_options) do |response, operation|
+      c.create_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new(parent: parent, annotation_spec_set: annotation_spec_set), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1176,36 +1176,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_annotation_spec_set_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_annotation_spec_set({ name: name }) do |response, operation|
+      c.get_annotation_spec_set({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_annotation_spec_set name: name do |response, operation|
+      c.get_annotation_spec_set name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new(name: name) do |response, operation|
+      c.get_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_annotation_spec_set({ name: name }, grpc_options) do |response, operation|
+      c.get_annotation_spec_set({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1240,40 +1240,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_annotation_spec_sets_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_annotation_spec_sets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_annotation_spec_sets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_annotation_spec_sets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_annotation_spec_sets parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_annotation_spec_sets ::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_annotation_spec_sets ::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_annotation_spec_sets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_annotation_spec_sets({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_annotation_spec_sets(::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_annotation_spec_sets(::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1303,36 +1303,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_annotation_spec_set_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_annotation_spec_set({ name: name }) do |response, operation|
+      c.delete_annotation_spec_set({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_annotation_spec_set name: name do |response, operation|
+      c.delete_annotation_spec_set name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new(name: name) do |response, operation|
+      c.delete_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_annotation_spec_set({ name: name }, grpc_options) do |response, operation|
+      c.delete_annotation_spec_set({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1363,40 +1363,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_instruction_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instruction({ parent: parent, instruction: instruction }) do |response, operation|
+      c.create_instruction({ parent: parent, instruction: instruction }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instruction parent: parent, instruction: instruction do |response, operation|
+      c.create_instruction parent: parent, instruction: instruction do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instruction ::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new(parent: parent, instruction: instruction) do |response, operation|
+      c.create_instruction ::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new(parent: parent, instruction: instruction) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instruction({ parent: parent, instruction: instruction }, grpc_options) do |response, operation|
+      c.create_instruction({ parent: parent, instruction: instruction }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instruction(::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new(parent: parent, instruction: instruction), grpc_options) do |response, operation|
+      c.create_instruction(::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new(parent: parent, instruction: instruction), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1426,36 +1426,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_instruction_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instruction({ name: name }) do |response, operation|
+      c.get_instruction({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instruction name: name do |response, operation|
+      c.get_instruction name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instruction ::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new(name: name) do |response, operation|
+      c.get_instruction ::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instruction({ name: name }, grpc_options) do |response, operation|
+      c.get_instruction({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instruction(::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instruction(::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1490,40 +1490,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_instructions_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instructions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_instructions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instructions parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_instructions parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instructions ::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_instructions ::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instructions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_instructions({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instructions(::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_instructions(::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1553,36 +1553,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_instruction_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instruction({ name: name }) do |response, operation|
+      c.delete_instruction({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instruction name: name do |response, operation|
+      c.delete_instruction name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instruction ::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new(name: name) do |response, operation|
+      c.delete_instruction ::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instruction({ name: name }, grpc_options) do |response, operation|
+      c.delete_instruction({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instruction(::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_instruction(::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1611,36 +1611,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_evaluation({ name: name }) do |response, operation|
+      c.get_evaluation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_evaluation name: name do |response, operation|
+      c.get_evaluation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_evaluation ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new(name: name) do |response, operation|
+      c.get_evaluation ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_evaluation({ name: name }, grpc_options) do |response, operation|
+      c.get_evaluation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_evaluation(::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_evaluation(::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1675,40 +1675,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, search_evaluations_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_evaluations ::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_evaluations ::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_evaluations(::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_evaluations(::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1742,40 +1742,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, search_example_comparisons_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_example_comparisons({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_example_comparisons({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_example_comparisons parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_example_comparisons parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_example_comparisons ::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_example_comparisons ::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_example_comparisons({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_example_comparisons({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_example_comparisons(::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_example_comparisons(::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1807,36 +1807,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_evaluation_job_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_evaluation_job({ parent: parent, job: job }) do |response, operation|
+      c.create_evaluation_job({ parent: parent, job: job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_evaluation_job parent: parent, job: job do |response, operation|
+      c.create_evaluation_job parent: parent, job: job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new(parent: parent, job: job) do |response, operation|
+      c.create_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new(parent: parent, job: job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_evaluation_job({ parent: parent, job: job }, grpc_options) do |response, operation|
+      c.create_evaluation_job({ parent: parent, job: job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
+      c.create_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1867,36 +1867,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_evaluation_job_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_evaluation_job({ evaluation_job: evaluation_job, update_mask: update_mask }) do |response, operation|
+      c.update_evaluation_job({ evaluation_job: evaluation_job, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_evaluation_job evaluation_job: evaluation_job, update_mask: update_mask do |response, operation|
+      c.update_evaluation_job evaluation_job: evaluation_job, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new(evaluation_job: evaluation_job, update_mask: update_mask) do |response, operation|
+      c.update_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new(evaluation_job: evaluation_job, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_evaluation_job({ evaluation_job: evaluation_job, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_evaluation_job({ evaluation_job: evaluation_job, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new(evaluation_job: evaluation_job, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new(evaluation_job: evaluation_job, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1925,36 +1925,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_evaluation_job_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_evaluation_job({ name: name }) do |response, operation|
+      c.get_evaluation_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_evaluation_job name: name do |response, operation|
+      c.get_evaluation_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new(name: name) do |response, operation|
+      c.get_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_evaluation_job({ name: name }, grpc_options) do |response, operation|
+      c.get_evaluation_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1983,36 +1983,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, pause_evaluation_job_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_evaluation_job({ name: name }) do |response, operation|
+      c.pause_evaluation_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_evaluation_job name: name do |response, operation|
+      c.pause_evaluation_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new(name: name) do |response, operation|
+      c.pause_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_evaluation_job({ name: name }, grpc_options) do |response, operation|
+      c.pause_evaluation_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.pause_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2041,36 +2041,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, resume_evaluation_job_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_evaluation_job({ name: name }) do |response, operation|
+      c.resume_evaluation_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_evaluation_job name: name do |response, operation|
+      c.resume_evaluation_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new(name: name) do |response, operation|
+      c.resume_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_evaluation_job({ name: name }, grpc_options) do |response, operation|
+      c.resume_evaluation_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2099,36 +2099,36 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_evaluation_job_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_evaluation_job({ name: name }) do |response, operation|
+      c.delete_evaluation_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_evaluation_job name: name do |response, operation|
+      c.delete_evaluation_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new(name: name) do |response, operation|
+      c.delete_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_evaluation_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_evaluation_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2163,40 +2163,40 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_evaluation_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+      c = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_evaluation_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_evaluation_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_evaluation_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_evaluation_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_evaluation_jobs ::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_evaluation_jobs ::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_evaluation_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_evaluation_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_evaluation_jobs(::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_evaluation_jobs(::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

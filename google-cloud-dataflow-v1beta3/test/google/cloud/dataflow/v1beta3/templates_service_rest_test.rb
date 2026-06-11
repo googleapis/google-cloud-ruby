@@ -102,32 +102,32 @@ class ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::ClientTest < M
     ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::ServiceStub.stub :transcode_create_job_from_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_job_from_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_job_from_template({ project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location }) do |_result, response|
+        c.create_job_from_template({ project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_job_from_template project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location do |_result, response|
+        c.create_job_from_template project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_job_from_template ::Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest.new(project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location) do |_result, response|
+        c.create_job_from_template ::Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest.new(project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_job_from_template({ project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location }, call_options) do |_result, response|
+        c.create_job_from_template({ project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_job_from_template(::Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest.new(project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location), call_options) do |_result, response|
+        c.create_job_from_template(::Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest.new(project_id: project_id, job_name: job_name, gcs_path: gcs_path, parameters: parameters, environment: environment, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -160,32 +160,32 @@ class ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::ClientTest < M
     ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::ServiceStub.stub :transcode_launch_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, launch_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.launch_template({ project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location }) do |_result, response|
+        c.launch_template({ project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.launch_template project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location do |_result, response|
+        c.launch_template project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.launch_template ::Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new(project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location) do |_result, response|
+        c.launch_template ::Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new(project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.launch_template({ project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location }, call_options) do |_result, response|
+        c.launch_template({ project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.launch_template(::Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new(project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location), call_options) do |_result, response|
+        c.launch_template(::Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new(project_id: project_id, validate_only: validate_only, gcs_path: gcs_path, launch_parameters: launch_parameters, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -217,32 +217,32 @@ class ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::ClientTest < M
     ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::ServiceStub.stub :transcode_get_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataflow::V1beta3::TemplatesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_template({ project_id: project_id, gcs_path: gcs_path, view: view, location: location }) do |_result, response|
+        c.get_template({ project_id: project_id, gcs_path: gcs_path, view: view, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_template project_id: project_id, gcs_path: gcs_path, view: view, location: location do |_result, response|
+        c.get_template project_id: project_id, gcs_path: gcs_path, view: view, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_template ::Google::Cloud::Dataflow::V1beta3::GetTemplateRequest.new(project_id: project_id, gcs_path: gcs_path, view: view, location: location) do |_result, response|
+        c.get_template ::Google::Cloud::Dataflow::V1beta3::GetTemplateRequest.new(project_id: project_id, gcs_path: gcs_path, view: view, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_template({ project_id: project_id, gcs_path: gcs_path, view: view, location: location }, call_options) do |_result, response|
+        c.get_template({ project_id: project_id, gcs_path: gcs_path, view: view, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_template(::Google::Cloud::Dataflow::V1beta3::GetTemplateRequest.new(project_id: project_id, gcs_path: gcs_path, view: view, location: location), call_options) do |_result, response|
+        c.get_template(::Google::Cloud::Dataflow::V1beta3::GetTemplateRequest.new(project_id: project_id, gcs_path: gcs_path, view: view, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
