@@ -90,40 +90,40 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_alert_policies_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_alert_policies({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_alert_policies({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_alert_policies name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_alert_policies name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_alert_policies ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_alert_policies ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_alert_policies({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_alert_policies({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_alert_policies(::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_alert_policies(::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_alert_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_alert_policy({ name: name }) do |response, operation|
+      c.get_alert_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_alert_policy name: name do |response, operation|
+      c.get_alert_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_alert_policy ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name) do |response, operation|
+      c.get_alert_policy ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_alert_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_alert_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_alert_policy(::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_alert_policy(::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_alert_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_alert_policy({ name: name, alert_policy: alert_policy }) do |response, operation|
+      c.create_alert_policy({ name: name, alert_policy: alert_policy }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_alert_policy name: name, alert_policy: alert_policy do |response, operation|
+      c.create_alert_policy name: name, alert_policy: alert_policy do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_alert_policy ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy) do |response, operation|
+      c.create_alert_policy ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_alert_policy({ name: name, alert_policy: alert_policy }, grpc_options) do |response, operation|
+      c.create_alert_policy({ name: name, alert_policy: alert_policy }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_alert_policy(::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy), grpc_options) do |response, operation|
+      c.create_alert_policy(::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_alert_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_alert_policy({ name: name }) do |response, operation|
+      c.delete_alert_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_alert_policy name: name do |response, operation|
+      c.delete_alert_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_alert_policy ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name) do |response, operation|
+      c.delete_alert_policy ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_alert_policy({ name: name }, grpc_options) do |response, operation|
+      c.delete_alert_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_alert_policy(::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_alert_policy(::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_alert_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_alert_policy({ update_mask: update_mask, alert_policy: alert_policy }) do |response, operation|
+      c.update_alert_policy({ update_mask: update_mask, alert_policy: alert_policy }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_alert_policy update_mask: update_mask, alert_policy: alert_policy do |response, operation|
+      c.update_alert_policy update_mask: update_mask, alert_policy: alert_policy do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_alert_policy ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy) do |response, operation|
+      c.update_alert_policy ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_alert_policy({ update_mask: update_mask, alert_policy: alert_policy }, grpc_options) do |response, operation|
+      c.update_alert_policy({ update_mask: update_mask, alert_policy: alert_policy }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_alert_policy(::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy), grpc_options) do |response, operation|
+      c.update_alert_policy(::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

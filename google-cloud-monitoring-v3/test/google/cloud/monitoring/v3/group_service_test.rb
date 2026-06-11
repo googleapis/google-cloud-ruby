@@ -89,40 +89,40 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_groups_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_groups({ name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_groups({ name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_groups name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_groups name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_groups ::Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_groups ::Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_groups({ name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_groups({ name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_groups(::Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_groups(::Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name, children_of_group: children_of_group, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -152,36 +152,36 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_group({ name: name }) do |response, operation|
+      c.get_group({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_group name: name do |response, operation|
+      c.get_group name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_group ::Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name) do |response, operation|
+      c.get_group ::Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_group({ name: name }, grpc_options) do |response, operation|
+      c.get_group({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_group(::Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_group(::Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -214,36 +214,36 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_group({ name: name, group: group, validate_only: validate_only }) do |response, operation|
+      c.create_group({ name: name, group: group, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_group name: name, group: group, validate_only: validate_only do |response, operation|
+      c.create_group name: name, group: group, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_group ::Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only) do |response, operation|
+      c.create_group ::Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_group({ name: name, group: group, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_group({ name: name, group: group, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_group(::Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_group(::Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -274,36 +274,36 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_group({ group: group, validate_only: validate_only }) do |response, operation|
+      c.update_group({ group: group, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_group group: group, validate_only: validate_only do |response, operation|
+      c.update_group group: group, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_group ::Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only) do |response, operation|
+      c.update_group ::Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_group({ group: group, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_group({ group: group, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_group(::Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_group(::Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -334,36 +334,36 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_group_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_group({ name: name, recursive: recursive }) do |response, operation|
+      c.delete_group({ name: name, recursive: recursive }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_group name: name, recursive: recursive do |response, operation|
+      c.delete_group name: name, recursive: recursive do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_group ::Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive) do |response, operation|
+      c.delete_group ::Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_group({ name: name, recursive: recursive }, grpc_options) do |response, operation|
+      c.delete_group({ name: name, recursive: recursive }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_group(::Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive), grpc_options) do |response, operation|
+      c.delete_group(::Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,40 +400,40 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_group_members_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_group_members({ name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval }) do |response, operation|
+      c.list_group_members({ name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_group_members name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval do |response, operation|
+      c.list_group_members name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_group_members ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval) do |response, operation|
+      c.list_group_members ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_group_members({ name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval }, grpc_options) do |response, operation|
+      c.list_group_members({ name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_group_members(::Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval), grpc_options) do |response, operation|
+      c.list_group_members(::Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

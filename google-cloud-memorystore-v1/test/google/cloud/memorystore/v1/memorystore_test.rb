@@ -90,40 +90,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Memorystore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::Memorystore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Memorystore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Memorystore::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Memorystore::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Memorystore::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Memorystore::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Memorystore::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Memorystore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
+      c.create_instance ::Google::Cloud::Memorystore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Memorystore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Memorystore::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |response, operation|
+      c.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Memorystore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |response, operation|
+      c.update_instance ::Google::Cloud::Memorystore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Memorystore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::Memorystore::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name, request_id: request_id do |response, operation|
+      c.delete_instance name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Memorystore::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_instance ::Google::Cloud::Memorystore::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Memorystore::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Memorystore::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -412,36 +412,36 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_certificate_authority({ name: name }) do |response, operation|
+      c.get_certificate_authority({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_certificate_authority name: name do |response, operation|
+      c.get_certificate_authority name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_certificate_authority ::Google::Cloud::Memorystore::V1::GetCertificateAuthorityRequest.new(name: name) do |response, operation|
+      c.get_certificate_authority ::Google::Cloud::Memorystore::V1::GetCertificateAuthorityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_certificate_authority({ name: name }, grpc_options) do |response, operation|
+      c.get_certificate_authority({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_certificate_authority(::Google::Cloud::Memorystore::V1::GetCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_certificate_authority(::Google::Cloud::Memorystore::V1::GetCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -470,36 +470,36 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_shared_regional_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_shared_regional_certificate_authority({ name: name }) do |response, operation|
+      c.get_shared_regional_certificate_authority({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_shared_regional_certificate_authority name: name do |response, operation|
+      c.get_shared_regional_certificate_authority name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_shared_regional_certificate_authority ::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest.new(name: name) do |response, operation|
+      c.get_shared_regional_certificate_authority ::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_shared_regional_certificate_authority({ name: name }, grpc_options) do |response, operation|
+      c.get_shared_regional_certificate_authority({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_shared_regional_certificate_authority(::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_shared_regional_certificate_authority(::Google::Cloud::Memorystore::V1::GetSharedRegionalCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -532,40 +532,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, reschedule_maintenance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
+      c.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reschedule_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
+      c.reschedule_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reschedule_maintenance ::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
+      c.reschedule_maintenance ::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
+      c.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reschedule_maintenance(::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
+      c.reschedule_maintenance(::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -599,40 +599,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_backup_collections_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backup_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_backup_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backup_collections ::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_backup_collections ::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backup_collections(::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_backup_collections(::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -662,36 +662,36 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_backup_collection_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup_collection({ name: name }) do |response, operation|
+      c.get_backup_collection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup_collection name: name do |response, operation|
+      c.get_backup_collection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup_collection ::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest.new(name: name) do |response, operation|
+      c.get_backup_collection ::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup_collection({ name: name }, grpc_options) do |response, operation|
+      c.get_backup_collection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup_collection(::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup_collection(::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -724,40 +724,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_backups_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_backups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backups ::Google::Cloud::Memorystore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_backups ::Google::Cloud::Memorystore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backups(::Google::Cloud::Memorystore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_backups(::Google::Cloud::Memorystore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -787,36 +787,36 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup({ name: name }) do |response, operation|
+      c.get_backup({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup name: name do |response, operation|
+      c.get_backup name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup ::Google::Cloud::Memorystore::V1::GetBackupRequest.new(name: name) do |response, operation|
+      c.get_backup ::Google::Cloud::Memorystore::V1::GetBackupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup({ name: name }, grpc_options) do |response, operation|
+      c.get_backup({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup(::Google::Cloud::Memorystore::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup(::Google::Cloud::Memorystore::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -847,40 +847,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backup({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_backup({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backup name: name, request_id: request_id do |response, operation|
+      c.delete_backup name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backup ::Google::Cloud::Memorystore::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_backup ::Google::Cloud::Memorystore::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backup({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_backup({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backup(::Google::Cloud::Memorystore::V1::DeleteBackupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_backup(::Google::Cloud::Memorystore::V1::DeleteBackupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -913,40 +913,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_backup({ gcs_bucket: gcs_bucket, name: name }) do |response, operation|
+      c.export_backup({ gcs_bucket: gcs_bucket, name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_backup gcs_bucket: gcs_bucket, name: name do |response, operation|
+      c.export_backup gcs_bucket: gcs_bucket, name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_backup ::Google::Cloud::Memorystore::V1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name) do |response, operation|
+      c.export_backup ::Google::Cloud::Memorystore::V1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_backup({ gcs_bucket: gcs_bucket, name: name }, grpc_options) do |response, operation|
+      c.export_backup({ gcs_bucket: gcs_bucket, name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_backup(::Google::Cloud::Memorystore::V1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name), grpc_options) do |response, operation|
+      c.export_backup(::Google::Cloud::Memorystore::V1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -981,40 +981,40 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, backup_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
+      c = ::Google::Cloud::Memorystore::V1::Memorystore::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.backup_instance({ name: name, ttl: ttl, backup_id: backup_id }) do |response, operation|
+      c.backup_instance({ name: name, ttl: ttl, backup_id: backup_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.backup_instance name: name, ttl: ttl, backup_id: backup_id do |response, operation|
+      c.backup_instance name: name, ttl: ttl, backup_id: backup_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.backup_instance ::Google::Cloud::Memorystore::V1::BackupInstanceRequest.new(name: name, ttl: ttl, backup_id: backup_id) do |response, operation|
+      c.backup_instance ::Google::Cloud::Memorystore::V1::BackupInstanceRequest.new(name: name, ttl: ttl, backup_id: backup_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.backup_instance({ name: name, ttl: ttl, backup_id: backup_id }, grpc_options) do |response, operation|
+      c.backup_instance({ name: name, ttl: ttl, backup_id: backup_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.backup_instance(::Google::Cloud::Memorystore::V1::BackupInstanceRequest.new(name: name, ttl: ttl, backup_id: backup_id), grpc_options) do |response, operation|
+      c.backup_instance(::Google::Cloud::Memorystore::V1::BackupInstanceRequest.new(name: name, ttl: ttl, backup_id: backup_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
