@@ -82,36 +82,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_evaluation({ name: name }) do |response, operation|
+      c.get_evaluation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_evaluation name: name do |response, operation|
+      c.get_evaluation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name) do |response, operation|
+      c.get_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_evaluation({ name: name }, grpc_options) do |response, operation|
+      c.get_evaluation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_evaluations_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_evaluations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_evaluations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_evaluations ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_evaluations ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_evaluations(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_evaluations(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -209,40 +209,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_evaluation({ parent: parent, evaluation: evaluation }) do |response, operation|
+      c.create_evaluation({ parent: parent, evaluation: evaluation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_evaluation parent: parent, evaluation: evaluation do |response, operation|
+      c.create_evaluation parent: parent, evaluation: evaluation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation) do |response, operation|
+      c.create_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_evaluation({ parent: parent, evaluation: evaluation }, grpc_options) do |response, operation|
+      c.create_evaluation({ parent: parent, evaluation: evaluation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation), grpc_options) do |response, operation|
+      c.create_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_evaluation_results_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_evaluation_results evaluation: evaluation, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_evaluation_results evaluation: evaluation, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_evaluation_results ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_evaluation_results ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_evaluation_results(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_evaluation_results(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

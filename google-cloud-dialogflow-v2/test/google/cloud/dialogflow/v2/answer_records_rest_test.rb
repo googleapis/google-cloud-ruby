@@ -100,32 +100,32 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::ClientTest < Minites
     ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::ServiceStub.stub :transcode_list_answer_records_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_answer_records_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_answer_records parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_answer_records parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_answer_records ::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_answer_records ::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_answer_records(::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_answer_records(::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::ClientTest < Minites
     ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::ServiceStub.stub :transcode_update_answer_record_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_answer_record_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_answer_record({ answer_record: answer_record, update_mask: update_mask }) do |_result, response|
+        c.update_answer_record({ answer_record: answer_record, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_answer_record answer_record: answer_record, update_mask: update_mask do |_result, response|
+        c.update_answer_record answer_record: answer_record, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_answer_record ::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask) do |_result, response|
+        c.update_answer_record ::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_answer_record({ answer_record: answer_record, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_answer_record({ answer_record: answer_record, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_answer_record(::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask), call_options) do |_result, response|
+        c.update_answer_record(::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

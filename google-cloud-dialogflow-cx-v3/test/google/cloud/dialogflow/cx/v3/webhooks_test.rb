@@ -86,40 +86,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_webhooks_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_webhooks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_webhooks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_webhooks ::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_webhooks ::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_webhooks(::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_webhooks(::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_webhook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_webhook({ name: name }) do |response, operation|
+      c.get_webhook({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_webhook name: name do |response, operation|
+      c.get_webhook name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_webhook ::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name) do |response, operation|
+      c.get_webhook ::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_webhook({ name: name }, grpc_options) do |response, operation|
+      c.get_webhook({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_webhook(::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_webhook(::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_webhook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_webhook({ parent: parent, webhook: webhook }) do |response, operation|
+      c.create_webhook({ parent: parent, webhook: webhook }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_webhook parent: parent, webhook: webhook do |response, operation|
+      c.create_webhook parent: parent, webhook: webhook do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_webhook ::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook) do |response, operation|
+      c.create_webhook ::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_webhook({ parent: parent, webhook: webhook }, grpc_options) do |response, operation|
+      c.create_webhook({ parent: parent, webhook: webhook }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_webhook(::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook), grpc_options) do |response, operation|
+      c.create_webhook(::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +269,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_webhook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_webhook({ webhook: webhook, update_mask: update_mask }) do |response, operation|
+      c.update_webhook({ webhook: webhook, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_webhook webhook: webhook, update_mask: update_mask do |response, operation|
+      c.update_webhook webhook: webhook, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_webhook ::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask) do |response, operation|
+      c.update_webhook ::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_webhook({ webhook: webhook, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_webhook({ webhook: webhook, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_webhook(::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_webhook(::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +329,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_webhook_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_webhook({ name: name, force: force }) do |response, operation|
+      c.delete_webhook({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_webhook name: name, force: force do |response, operation|
+      c.delete_webhook name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_webhook ::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force) do |response, operation|
+      c.delete_webhook ::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_webhook({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_webhook({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_webhook(::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_webhook(::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

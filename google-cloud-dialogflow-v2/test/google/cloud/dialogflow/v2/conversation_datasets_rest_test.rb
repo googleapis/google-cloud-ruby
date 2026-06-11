@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ServiceStub.stub :transcode_create_conversation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_conversation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }) do |_result, response|
+        c.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_conversation_dataset parent: parent, conversation_dataset: conversation_dataset do |_result, response|
+        c.create_conversation_dataset parent: parent, conversation_dataset: conversation_dataset do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_conversation_dataset ::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset) do |_result, response|
+        c.create_conversation_dataset ::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }, call_options) do |_result, response|
+        c.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_conversation_dataset(::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset), call_options) do |_result, response|
+        c.create_conversation_dataset(::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ServiceStub.stub :transcode_get_conversation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conversation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conversation_dataset({ name: name }) do |_result, response|
+        c.get_conversation_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conversation_dataset name: name do |_result, response|
+        c.get_conversation_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conversation_dataset ::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name) do |_result, response|
+        c.get_conversation_dataset ::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conversation_dataset({ name: name }, call_options) do |_result, response|
+        c.get_conversation_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conversation_dataset(::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.get_conversation_dataset(::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ServiceStub.stub :transcode_list_conversation_datasets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conversation_datasets_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversation_datasets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_conversation_datasets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversation_datasets ::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_conversation_datasets ::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversation_datasets(::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_conversation_datasets(::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ServiceStub.stub :transcode_delete_conversation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_conversation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_conversation_dataset({ name: name }) do |_result, response|
+        c.delete_conversation_dataset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_conversation_dataset name: name do |_result, response|
+        c.delete_conversation_dataset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_conversation_dataset ::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name) do |_result, response|
+        c.delete_conversation_dataset ::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_conversation_dataset({ name: name }, call_options) do |_result, response|
+        c.delete_conversation_dataset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_conversation_dataset(::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name), call_options) do |_result, response|
+        c.delete_conversation_dataset(::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::ServiceStub.stub :transcode_import_conversation_data_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_conversation_data_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_conversation_data({ name: name, input_config: input_config }) do |_result, response|
+        c.import_conversation_data({ name: name, input_config: input_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_conversation_data name: name, input_config: input_config do |_result, response|
+        c.import_conversation_data name: name, input_config: input_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_conversation_data ::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config) do |_result, response|
+        c.import_conversation_data ::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_conversation_data({ name: name, input_config: input_config }, call_options) do |_result, response|
+        c.import_conversation_data({ name: name, input_config: input_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_conversation_data(::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config), call_options) do |_result, response|
+        c.import_conversation_data(::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

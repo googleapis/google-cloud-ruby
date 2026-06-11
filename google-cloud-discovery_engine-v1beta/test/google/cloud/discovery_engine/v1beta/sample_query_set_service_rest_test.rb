@@ -97,32 +97,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Cli
     ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::ServiceStub.stub :transcode_get_sample_query_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_sample_query_set_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_sample_query_set({ name: name }) do |_result, response|
+        c.get_sample_query_set({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_sample_query_set name: name do |_result, response|
+        c.get_sample_query_set name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQuerySetRequest.new(name: name) do |_result, response|
+        c.get_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQuerySetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_sample_query_set({ name: name }, call_options) do |_result, response|
+        c.get_sample_query_set({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQuerySetRequest.new(name: name), call_options) do |_result, response|
+        c.get_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQuerySetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Cli
     ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::ServiceStub.stub :transcode_list_sample_query_sets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sample_query_sets_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sample_query_sets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_sample_query_sets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sample_query_sets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_sample_query_sets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sample_query_sets ::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_sample_query_sets ::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sample_query_sets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_sample_query_sets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sample_query_sets(::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_sample_query_sets(::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Cli
     ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::ServiceStub.stub :transcode_create_sample_query_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_sample_query_set_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_sample_query_set({ parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id }) do |_result, response|
+        c.create_sample_query_set({ parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_sample_query_set parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id do |_result, response|
+        c.create_sample_query_set parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQuerySetRequest.new(parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id) do |_result, response|
+        c.create_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQuerySetRequest.new(parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_sample_query_set({ parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id }, call_options) do |_result, response|
+        c.create_sample_query_set({ parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQuerySetRequest.new(parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id), call_options) do |_result, response|
+        c.create_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQuerySetRequest.new(parent: parent, sample_query_set: sample_query_set, sample_query_set_id: sample_query_set_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Cli
     ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::ServiceStub.stub :transcode_update_sample_query_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_sample_query_set_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_sample_query_set({ sample_query_set: sample_query_set, update_mask: update_mask }) do |_result, response|
+        c.update_sample_query_set({ sample_query_set: sample_query_set, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_sample_query_set sample_query_set: sample_query_set, update_mask: update_mask do |_result, response|
+        c.update_sample_query_set sample_query_set: sample_query_set, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQuerySetRequest.new(sample_query_set: sample_query_set, update_mask: update_mask) do |_result, response|
+        c.update_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQuerySetRequest.new(sample_query_set: sample_query_set, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_sample_query_set({ sample_query_set: sample_query_set, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_sample_query_set({ sample_query_set: sample_query_set, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQuerySetRequest.new(sample_query_set: sample_query_set, update_mask: update_mask), call_options) do |_result, response|
+        c.update_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQuerySetRequest.new(sample_query_set: sample_query_set, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Cli
     ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::ServiceStub.stub :transcode_delete_sample_query_set_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_sample_query_set_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_sample_query_set({ name: name }) do |_result, response|
+        c.delete_sample_query_set({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_sample_query_set name: name do |_result, response|
+        c.delete_sample_query_set name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQuerySetRequest.new(name: name) do |_result, response|
+        c.delete_sample_query_set ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQuerySetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_sample_query_set({ name: name }, call_options) do |_result, response|
+        c.delete_sample_query_set({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQuerySetRequest.new(name: name), call_options) do |_result, response|
+        c.delete_sample_query_set(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQuerySetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

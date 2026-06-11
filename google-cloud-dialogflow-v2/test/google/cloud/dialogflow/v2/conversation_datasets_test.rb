@@ -84,40 +84,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_conversation_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }) do |response, operation|
+      c.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversation_dataset parent: parent, conversation_dataset: conversation_dataset do |response, operation|
+      c.create_conversation_dataset parent: parent, conversation_dataset: conversation_dataset do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversation_dataset ::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset) do |response, operation|
+      c.create_conversation_dataset ::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }, grpc_options) do |response, operation|
+      c.create_conversation_dataset({ parent: parent, conversation_dataset: conversation_dataset }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversation_dataset(::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset), grpc_options) do |response, operation|
+      c.create_conversation_dataset(::Google::Cloud::Dialogflow::V2::CreateConversationDatasetRequest.new(parent: parent, conversation_dataset: conversation_dataset), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_conversation_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation_dataset({ name: name }) do |response, operation|
+      c.get_conversation_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation_dataset name: name do |response, operation|
+      c.get_conversation_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation_dataset ::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name) do |response, operation|
+      c.get_conversation_dataset ::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_conversation_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation_dataset(::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conversation_dataset(::Google::Cloud::Dialogflow::V2::GetConversationDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,40 +209,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_conversation_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversation_datasets parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_conversation_datasets parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversation_datasets ::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_conversation_datasets ::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_conversation_datasets({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversation_datasets(::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_conversation_datasets(::Google::Cloud::Dialogflow::V2::ListConversationDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -272,40 +272,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_conversation_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversation_dataset({ name: name }) do |response, operation|
+      c.delete_conversation_dataset({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversation_dataset name: name do |response, operation|
+      c.delete_conversation_dataset name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversation_dataset ::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name) do |response, operation|
+      c.delete_conversation_dataset ::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversation_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_conversation_dataset({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversation_dataset(::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_conversation_dataset(::Google::Cloud::Dialogflow::V2::DeleteConversationDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -337,40 +337,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, import_conversation_data_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_conversation_data({ name: name, input_config: input_config }) do |response, operation|
+      c.import_conversation_data({ name: name, input_config: input_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_conversation_data name: name, input_config: input_config do |response, operation|
+      c.import_conversation_data name: name, input_config: input_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_conversation_data ::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config) do |response, operation|
+      c.import_conversation_data ::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_conversation_data({ name: name, input_config: input_config }, grpc_options) do |response, operation|
+      c.import_conversation_data({ name: name, input_config: input_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_conversation_data(::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config), grpc_options) do |response, operation|
+      c.import_conversation_data(::Google::Cloud::Dialogflow::V2::ImportConversationDataRequest.new(name: name, input_config: input_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

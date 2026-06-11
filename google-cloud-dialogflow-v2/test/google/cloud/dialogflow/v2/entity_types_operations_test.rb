@@ -91,40 +91,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::OperationsTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_operations_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
+      c.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_operations name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
+      c.list_operations name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
+      c.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
+      c.list_operations({ name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
+      c.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -154,40 +154,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::OperationsTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_operation({ name: name }) do |response, operation|
+      c.get_operation({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_operation name: name do |response, operation|
+      c.get_operation name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_operation ::Google::Longrunning::GetOperationRequest.new(name: name) do |response, operation|
+      c.get_operation ::Google::Longrunning::GetOperationRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_operation({ name: name }, grpc_options) do |response, operation|
+      c.get_operation({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_operation(::Google::Longrunning::GetOperationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_operation(::Google::Longrunning::GetOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -217,36 +217,36 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::OperationsTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_operation({ name: name }) do |response, operation|
+      c.delete_operation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_operation name: name do |response, operation|
+      c.delete_operation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_operation ::Google::Longrunning::DeleteOperationRequest.new(name: name) do |response, operation|
+      c.delete_operation ::Google::Longrunning::DeleteOperationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_operation({ name: name }, grpc_options) do |response, operation|
+      c.delete_operation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_operation(::Google::Longrunning::DeleteOperationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_operation(::Google::Longrunning::DeleteOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +275,36 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::OperationsTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, cancel_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_operation({ name: name }) do |response, operation|
+      c.cancel_operation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_operation name: name do |response, operation|
+      c.cancel_operation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_operation ::Google::Longrunning::CancelOperationRequest.new(name: name) do |response, operation|
+      c.cancel_operation ::Google::Longrunning::CancelOperationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_operation({ name: name }, grpc_options) do |response, operation|
+      c.cancel_operation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_operation(::Google::Longrunning::CancelOperationRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_operation(::Google::Longrunning::CancelOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,40 +335,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::OperationsTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, wait_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.wait_operation({ name: name, timeout: timeout }) do |response, operation|
+      c.wait_operation({ name: name, timeout: timeout }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.wait_operation name: name, timeout: timeout do |response, operation|
+      c.wait_operation name: name, timeout: timeout do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.wait_operation ::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout) do |response, operation|
+      c.wait_operation ::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.wait_operation({ name: name, timeout: timeout }, grpc_options) do |response, operation|
+      c.wait_operation({ name: name, timeout: timeout }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.wait_operation(::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout), grpc_options) do |response, operation|
+      c.wait_operation(::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

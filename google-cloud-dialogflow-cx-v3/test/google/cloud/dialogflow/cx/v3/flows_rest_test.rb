@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_create_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_flow({ parent: parent, flow: flow, language_code: language_code }) do |_result, response|
+        c.create_flow({ parent: parent, flow: flow, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_flow parent: parent, flow: flow, language_code: language_code do |_result, response|
+        c.create_flow parent: parent, flow: flow, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_flow ::Google::Cloud::Dialogflow::CX::V3::CreateFlowRequest.new(parent: parent, flow: flow, language_code: language_code) do |_result, response|
+        c.create_flow ::Google::Cloud::Dialogflow::CX::V3::CreateFlowRequest.new(parent: parent, flow: flow, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_flow({ parent: parent, flow: flow, language_code: language_code }, call_options) do |_result, response|
+        c.create_flow({ parent: parent, flow: flow, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_flow(::Google::Cloud::Dialogflow::CX::V3::CreateFlowRequest.new(parent: parent, flow: flow, language_code: language_code), call_options) do |_result, response|
+        c.create_flow(::Google::Cloud::Dialogflow::CX::V3::CreateFlowRequest.new(parent: parent, flow: flow, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_delete_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_flow({ name: name, force: force }) do |_result, response|
+        c.delete_flow({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_flow name: name, force: force do |_result, response|
+        c.delete_flow name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_flow ::Google::Cloud::Dialogflow::CX::V3::DeleteFlowRequest.new(name: name, force: force) do |_result, response|
+        c.delete_flow ::Google::Cloud::Dialogflow::CX::V3::DeleteFlowRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_flow({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_flow({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_flow(::Google::Cloud::Dialogflow::CX::V3::DeleteFlowRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_flow(::Google::Cloud::Dialogflow::CX::V3::DeleteFlowRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_list_flows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_flows_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_flows({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |_result, response|
+        c.list_flows({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_flows parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |_result, response|
+        c.list_flows parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_flows ::Google::Cloud::Dialogflow::CX::V3::ListFlowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |_result, response|
+        c.list_flows ::Google::Cloud::Dialogflow::CX::V3::ListFlowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_flows({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, call_options) do |_result, response|
+        c.list_flows({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_flows(::Google::Cloud::Dialogflow::CX::V3::ListFlowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), call_options) do |_result, response|
+        c.list_flows(::Google::Cloud::Dialogflow::CX::V3::ListFlowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_get_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_flow({ name: name, language_code: language_code }) do |_result, response|
+        c.get_flow({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_flow name: name, language_code: language_code do |_result, response|
+        c.get_flow name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_flow ::Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.get_flow ::Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_flow({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.get_flow({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_flow(::Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.get_flow(::Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_update_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_flow({ flow: flow, update_mask: update_mask, language_code: language_code }) do |_result, response|
+        c.update_flow({ flow: flow, update_mask: update_mask, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_flow flow: flow, update_mask: update_mask, language_code: language_code do |_result, response|
+        c.update_flow flow: flow, update_mask: update_mask, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_flow ::Google::Cloud::Dialogflow::CX::V3::UpdateFlowRequest.new(flow: flow, update_mask: update_mask, language_code: language_code) do |_result, response|
+        c.update_flow ::Google::Cloud::Dialogflow::CX::V3::UpdateFlowRequest.new(flow: flow, update_mask: update_mask, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_flow({ flow: flow, update_mask: update_mask, language_code: language_code }, call_options) do |_result, response|
+        c.update_flow({ flow: flow, update_mask: update_mask, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_flow(::Google::Cloud::Dialogflow::CX::V3::UpdateFlowRequest.new(flow: flow, update_mask: update_mask, language_code: language_code), call_options) do |_result, response|
+        c.update_flow(::Google::Cloud::Dialogflow::CX::V3::UpdateFlowRequest.new(flow: flow, update_mask: update_mask, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_train_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, train_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.train_flow({ name: name }) do |_result, response|
+        c.train_flow({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.train_flow name: name do |_result, response|
+        c.train_flow name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.train_flow ::Google::Cloud::Dialogflow::CX::V3::TrainFlowRequest.new(name: name) do |_result, response|
+        c.train_flow ::Google::Cloud::Dialogflow::CX::V3::TrainFlowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.train_flow({ name: name }, call_options) do |_result, response|
+        c.train_flow({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.train_flow(::Google::Cloud::Dialogflow::CX::V3::TrainFlowRequest.new(name: name), call_options) do |_result, response|
+        c.train_flow(::Google::Cloud::Dialogflow::CX::V3::TrainFlowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_validate_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_flow({ name: name, language_code: language_code }) do |_result, response|
+        c.validate_flow({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_flow name: name, language_code: language_code do |_result, response|
+        c.validate_flow name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_flow ::Google::Cloud::Dialogflow::CX::V3::ValidateFlowRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.validate_flow ::Google::Cloud::Dialogflow::CX::V3::ValidateFlowRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_flow({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.validate_flow({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_flow(::Google::Cloud::Dialogflow::CX::V3::ValidateFlowRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.validate_flow(::Google::Cloud::Dialogflow::CX::V3::ValidateFlowRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_get_flow_validation_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_flow_validation_result_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_flow_validation_result({ name: name, language_code: language_code }) do |_result, response|
+        c.get_flow_validation_result({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_flow_validation_result name: name, language_code: language_code do |_result, response|
+        c.get_flow_validation_result name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_flow_validation_result ::Google::Cloud::Dialogflow::CX::V3::GetFlowValidationResultRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.get_flow_validation_result ::Google::Cloud::Dialogflow::CX::V3::GetFlowValidationResultRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_flow_validation_result({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.get_flow_validation_result({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_flow_validation_result(::Google::Cloud::Dialogflow::CX::V3::GetFlowValidationResultRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.get_flow_validation_result(::Google::Cloud::Dialogflow::CX::V3::GetFlowValidationResultRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_import_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }) do |_result, response|
+        c.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_flow parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy do |_result, response|
+        c.import_flow parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_flow ::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy) do |_result, response|
+        c.import_flow ::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }, call_options) do |_result, response|
+        c.import_flow({ parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_flow(::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy), call_options) do |_result, response|
+        c.import_flow(::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest.new(parent: parent, flow_uri: flow_uri, import_option: import_option, flow_import_strategy: flow_import_strategy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::ServiceStub.stub :transcode_export_flow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_flow_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_flow({ name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows }) do |_result, response|
+        c.export_flow({ name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_flow name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows do |_result, response|
+        c.export_flow name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_flow ::Google::Cloud::Dialogflow::CX::V3::ExportFlowRequest.new(name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows) do |_result, response|
+        c.export_flow ::Google::Cloud::Dialogflow::CX::V3::ExportFlowRequest.new(name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_flow({ name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows }, call_options) do |_result, response|
+        c.export_flow({ name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_flow(::Google::Cloud::Dialogflow::CX::V3::ExportFlowRequest.new(name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows), call_options) do |_result, response|
+        c.export_flow(::Google::Cloud::Dialogflow::CX::V3::ExportFlowRequest.new(name: name, flow_uri: flow_uri, include_referenced_flows: include_referenced_flows), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

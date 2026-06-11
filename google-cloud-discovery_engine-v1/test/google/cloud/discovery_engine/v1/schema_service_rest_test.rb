@@ -97,32 +97,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ClientTest < Mi
     ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ServiceStub.stub :transcode_get_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_schema({ name: name }) do |_result, response|
+        c.get_schema({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_schema name: name do |_result, response|
+        c.get_schema name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_schema ::Google::Cloud::DiscoveryEngine::V1::GetSchemaRequest.new(name: name) do |_result, response|
+        c.get_schema ::Google::Cloud::DiscoveryEngine::V1::GetSchemaRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_schema({ name: name }, call_options) do |_result, response|
+        c.get_schema({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_schema(::Google::Cloud::DiscoveryEngine::V1::GetSchemaRequest.new(name: name), call_options) do |_result, response|
+        c.get_schema(::Google::Cloud::DiscoveryEngine::V1::GetSchemaRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ClientTest < Mi
     ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ServiceStub.stub :transcode_list_schemas_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_schemas_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_schemas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_schemas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_schemas ::Google::Cloud::DiscoveryEngine::V1::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_schemas ::Google::Cloud::DiscoveryEngine::V1::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_schemas(::Google::Cloud::DiscoveryEngine::V1::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_schemas(::Google::Cloud::DiscoveryEngine::V1::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ClientTest < Mi
     ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ServiceStub.stub :transcode_create_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_schema({ parent: parent, schema: schema, schema_id: schema_id }) do |_result, response|
+        c.create_schema({ parent: parent, schema: schema, schema_id: schema_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_schema parent: parent, schema: schema, schema_id: schema_id do |_result, response|
+        c.create_schema parent: parent, schema: schema, schema_id: schema_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_schema ::Google::Cloud::DiscoveryEngine::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id) do |_result, response|
+        c.create_schema ::Google::Cloud::DiscoveryEngine::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_schema({ parent: parent, schema: schema, schema_id: schema_id }, call_options) do |_result, response|
+        c.create_schema({ parent: parent, schema: schema, schema_id: schema_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_schema(::Google::Cloud::DiscoveryEngine::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), call_options) do |_result, response|
+        c.create_schema(::Google::Cloud::DiscoveryEngine::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ClientTest < Mi
     ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ServiceStub.stub :transcode_update_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_schema({ schema: schema, allow_missing: allow_missing }) do |_result, response|
+        c.update_schema({ schema: schema, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_schema schema: schema, allow_missing: allow_missing do |_result, response|
+        c.update_schema schema: schema, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_schema ::Google::Cloud::DiscoveryEngine::V1::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing) do |_result, response|
+        c.update_schema ::Google::Cloud::DiscoveryEngine::V1::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_schema({ schema: schema, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_schema({ schema: schema, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_schema(::Google::Cloud::DiscoveryEngine::V1::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_schema(::Google::Cloud::DiscoveryEngine::V1::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ClientTest < Mi
     ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::ServiceStub.stub :transcode_delete_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SchemaService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_schema({ name: name }) do |_result, response|
+        c.delete_schema({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_schema name: name do |_result, response|
+        c.delete_schema name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_schema ::Google::Cloud::DiscoveryEngine::V1::DeleteSchemaRequest.new(name: name) do |_result, response|
+        c.delete_schema ::Google::Cloud::DiscoveryEngine::V1::DeleteSchemaRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_schema({ name: name }, call_options) do |_result, response|
+        c.delete_schema({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_schema(::Google::Cloud::DiscoveryEngine::V1::DeleteSchemaRequest.new(name: name), call_options) do |_result, response|
+        c.delete_schema(::Google::Cloud::DiscoveryEngine::V1::DeleteSchemaRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

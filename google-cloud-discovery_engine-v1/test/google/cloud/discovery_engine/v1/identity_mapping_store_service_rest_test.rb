@@ -100,32 +100,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_create_identity_mapping_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_identity_mapping_store_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_identity_mapping_store({ cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store }) do |_result, response|
+        c.create_identity_mapping_store({ cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_identity_mapping_store cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store do |_result, response|
+        c.create_identity_mapping_store cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_identity_mapping_store ::Google::Cloud::DiscoveryEngine::V1::CreateIdentityMappingStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store) do |_result, response|
+        c.create_identity_mapping_store ::Google::Cloud::DiscoveryEngine::V1::CreateIdentityMappingStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_identity_mapping_store({ cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store }, call_options) do |_result, response|
+        c.create_identity_mapping_store({ cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_identity_mapping_store(::Google::Cloud::DiscoveryEngine::V1::CreateIdentityMappingStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store), call_options) do |_result, response|
+        c.create_identity_mapping_store(::Google::Cloud::DiscoveryEngine::V1::CreateIdentityMappingStoreRequest.new(cmek_config_name: cmek_config_name, parent: parent, identity_mapping_store_id: identity_mapping_store_id, identity_mapping_store: identity_mapping_store), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_get_identity_mapping_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_identity_mapping_store_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_identity_mapping_store({ name: name }) do |_result, response|
+        c.get_identity_mapping_store({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_identity_mapping_store name: name do |_result, response|
+        c.get_identity_mapping_store name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_identity_mapping_store ::Google::Cloud::DiscoveryEngine::V1::GetIdentityMappingStoreRequest.new(name: name) do |_result, response|
+        c.get_identity_mapping_store ::Google::Cloud::DiscoveryEngine::V1::GetIdentityMappingStoreRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_identity_mapping_store({ name: name }, call_options) do |_result, response|
+        c.get_identity_mapping_store({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_identity_mapping_store(::Google::Cloud::DiscoveryEngine::V1::GetIdentityMappingStoreRequest.new(name: name), call_options) do |_result, response|
+        c.get_identity_mapping_store(::Google::Cloud::DiscoveryEngine::V1::GetIdentityMappingStoreRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_delete_identity_mapping_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_identity_mapping_store_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_identity_mapping_store({ name: name }) do |_result, response|
+        c.delete_identity_mapping_store({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_identity_mapping_store name: name do |_result, response|
+        c.delete_identity_mapping_store name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_identity_mapping_store ::Google::Cloud::DiscoveryEngine::V1::DeleteIdentityMappingStoreRequest.new(name: name) do |_result, response|
+        c.delete_identity_mapping_store ::Google::Cloud::DiscoveryEngine::V1::DeleteIdentityMappingStoreRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_identity_mapping_store({ name: name }, call_options) do |_result, response|
+        c.delete_identity_mapping_store({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_identity_mapping_store(::Google::Cloud::DiscoveryEngine::V1::DeleteIdentityMappingStoreRequest.new(name: name), call_options) do |_result, response|
+        c.delete_identity_mapping_store(::Google::Cloud::DiscoveryEngine::V1::DeleteIdentityMappingStoreRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_import_identity_mappings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_identity_mappings_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store }) do |_result, response|
+        c.import_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_identity_mappings inline_source: inline_source, identity_mapping_store: identity_mapping_store do |_result, response|
+        c.import_identity_mappings inline_source: inline_source, identity_mapping_store: identity_mapping_store do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_identity_mappings ::Google::Cloud::DiscoveryEngine::V1::ImportIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store) do |_result, response|
+        c.import_identity_mappings ::Google::Cloud::DiscoveryEngine::V1::ImportIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store }, call_options) do |_result, response|
+        c.import_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_identity_mappings(::Google::Cloud::DiscoveryEngine::V1::ImportIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store), call_options) do |_result, response|
+        c.import_identity_mappings(::Google::Cloud::DiscoveryEngine::V1::ImportIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_purge_identity_mappings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, purge_identity_mappings_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.purge_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force }) do |_result, response|
+        c.purge_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.purge_identity_mappings inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force do |_result, response|
+        c.purge_identity_mappings inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.purge_identity_mappings ::Google::Cloud::DiscoveryEngine::V1::PurgeIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force) do |_result, response|
+        c.purge_identity_mappings ::Google::Cloud::DiscoveryEngine::V1::PurgeIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.purge_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force }, call_options) do |_result, response|
+        c.purge_identity_mappings({ inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.purge_identity_mappings(::Google::Cloud::DiscoveryEngine::V1::PurgeIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force), call_options) do |_result, response|
+        c.purge_identity_mappings(::Google::Cloud::DiscoveryEngine::V1::PurgeIdentityMappingsRequest.new(inline_source: inline_source, identity_mapping_store: identity_mapping_store, filter: filter, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_list_identity_mappings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_identity_mappings_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_identity_mappings({ identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_identity_mappings({ identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_identity_mappings identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_identity_mappings identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_identity_mappings ::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingsRequest.new(identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_identity_mappings ::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingsRequest.new(identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_identity_mappings({ identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_identity_mappings({ identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_identity_mappings(::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingsRequest.new(identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_identity_mappings(::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingsRequest.new(identity_mapping_store: identity_mapping_store, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::C
     ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::ServiceStub.stub :transcode_list_identity_mapping_stores_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_identity_mapping_stores_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_identity_mapping_stores({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_identity_mapping_stores({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_identity_mapping_stores parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_identity_mapping_stores parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_identity_mapping_stores ::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_identity_mapping_stores ::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_identity_mapping_stores({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_identity_mapping_stores({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_identity_mapping_stores(::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_identity_mapping_stores(::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingStoresRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

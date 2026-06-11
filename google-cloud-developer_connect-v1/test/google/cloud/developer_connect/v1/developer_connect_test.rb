@@ -90,40 +90,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connections ::Google::Cloud::DeveloperConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_connections ::Google::Cloud::DeveloperConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connections(::Google::Cloud::DeveloperConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_connections(::Google::Cloud::DeveloperConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connection({ name: name }) do |response, operation|
+      c.get_connection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connection name: name do |response, operation|
+      c.get_connection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connection ::Google::Cloud::DeveloperConnect::V1::GetConnectionRequest.new(name: name) do |response, operation|
+      c.get_connection ::Google::Cloud::DeveloperConnect::V1::GetConnectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connection({ name: name }, grpc_options) do |response, operation|
+      c.get_connection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connection(::Google::Cloud::DeveloperConnect::V1::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connection(::Google::Cloud::DeveloperConnect::V1::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connection({ parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.create_connection({ parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connection parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.create_connection parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connection ::Google::Cloud::DeveloperConnect::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.create_connection ::Google::Cloud::DeveloperConnect::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connection({ parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_connection({ parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connection(::Google::Cloud::DeveloperConnect::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_connection(::Google::Cloud::DeveloperConnect::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -290,40 +290,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connection({ update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+      c.update_connection({ update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connection update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+      c.update_connection update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connection ::Google::Cloud::DeveloperConnect::V1::UpdateConnectionRequest.new(update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+      c.update_connection ::Google::Cloud::DeveloperConnect::V1::UpdateConnectionRequest.new(update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connection({ update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_connection({ update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connection(::Google::Cloud::DeveloperConnect::V1::UpdateConnectionRequest.new(update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_connection(::Google::Cloud::DeveloperConnect::V1::UpdateConnectionRequest.new(update_mask: update_mask, connection: connection, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -359,40 +359,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connection({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_connection({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connection name: name, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_connection name: name, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connection ::Google::Cloud::DeveloperConnect::V1::DeleteConnectionRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_connection ::Google::Cloud::DeveloperConnect::V1::DeleteConnectionRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connection({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_connection({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connection(::Google::Cloud::DeveloperConnect::V1::DeleteConnectionRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_connection(::Google::Cloud::DeveloperConnect::V1::DeleteConnectionRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -430,40 +430,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_git_repository_link_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_git_repository_link({ parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.create_git_repository_link({ parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_git_repository_link parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.create_git_repository_link parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_git_repository_link ::Google::Cloud::DeveloperConnect::V1::CreateGitRepositoryLinkRequest.new(parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.create_git_repository_link ::Google::Cloud::DeveloperConnect::V1::CreateGitRepositoryLinkRequest.new(parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_git_repository_link({ parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_git_repository_link({ parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_git_repository_link(::Google::Cloud::DeveloperConnect::V1::CreateGitRepositoryLinkRequest.new(parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_git_repository_link(::Google::Cloud::DeveloperConnect::V1::CreateGitRepositoryLinkRequest.new(parent: parent, git_repository_link: git_repository_link, git_repository_link_id: git_repository_link_id, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -499,40 +499,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_git_repository_link_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_git_repository_link({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_git_repository_link({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_git_repository_link name: name, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_git_repository_link name: name, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_git_repository_link ::Google::Cloud::DeveloperConnect::V1::DeleteGitRepositoryLinkRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_git_repository_link ::Google::Cloud::DeveloperConnect::V1::DeleteGitRepositoryLinkRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_git_repository_link({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_git_repository_link({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_git_repository_link(::Google::Cloud::DeveloperConnect::V1::DeleteGitRepositoryLinkRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_git_repository_link(::Google::Cloud::DeveloperConnect::V1::DeleteGitRepositoryLinkRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -570,40 +570,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_git_repository_links_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_git_repository_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_git_repository_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_git_repository_links parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_git_repository_links parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_git_repository_links ::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_git_repository_links ::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_git_repository_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_git_repository_links({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_git_repository_links(::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_git_repository_links(::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -633,36 +633,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_git_repository_link_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_git_repository_link({ name: name }) do |response, operation|
+      c.get_git_repository_link({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_git_repository_link name: name do |response, operation|
+      c.get_git_repository_link name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_git_repository_link ::Google::Cloud::DeveloperConnect::V1::GetGitRepositoryLinkRequest.new(name: name) do |response, operation|
+      c.get_git_repository_link ::Google::Cloud::DeveloperConnect::V1::GetGitRepositoryLinkRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_git_repository_link({ name: name }, grpc_options) do |response, operation|
+      c.get_git_repository_link({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_git_repository_link(::Google::Cloud::DeveloperConnect::V1::GetGitRepositoryLinkRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_git_repository_link(::Google::Cloud::DeveloperConnect::V1::GetGitRepositoryLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -691,36 +691,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_read_write_token_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_read_write_token({ git_repository_link: git_repository_link }) do |response, operation|
+      c.fetch_read_write_token({ git_repository_link: git_repository_link }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_read_write_token git_repository_link: git_repository_link do |response, operation|
+      c.fetch_read_write_token git_repository_link: git_repository_link do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_read_write_token ::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenRequest.new(git_repository_link: git_repository_link) do |response, operation|
+      c.fetch_read_write_token ::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenRequest.new(git_repository_link: git_repository_link) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_read_write_token({ git_repository_link: git_repository_link }, grpc_options) do |response, operation|
+      c.fetch_read_write_token({ git_repository_link: git_repository_link }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_read_write_token(::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenRequest.new(git_repository_link: git_repository_link), grpc_options) do |response, operation|
+      c.fetch_read_write_token(::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenRequest.new(git_repository_link: git_repository_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -749,36 +749,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_read_token_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_read_token({ git_repository_link: git_repository_link }) do |response, operation|
+      c.fetch_read_token({ git_repository_link: git_repository_link }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_read_token git_repository_link: git_repository_link do |response, operation|
+      c.fetch_read_token git_repository_link: git_repository_link do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_read_token ::Google::Cloud::DeveloperConnect::V1::FetchReadTokenRequest.new(git_repository_link: git_repository_link) do |response, operation|
+      c.fetch_read_token ::Google::Cloud::DeveloperConnect::V1::FetchReadTokenRequest.new(git_repository_link: git_repository_link) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_read_token({ git_repository_link: git_repository_link }, grpc_options) do |response, operation|
+      c.fetch_read_token({ git_repository_link: git_repository_link }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_read_token(::Google::Cloud::DeveloperConnect::V1::FetchReadTokenRequest.new(git_repository_link: git_repository_link), grpc_options) do |response, operation|
+      c.fetch_read_token(::Google::Cloud::DeveloperConnect::V1::FetchReadTokenRequest.new(git_repository_link: git_repository_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -811,40 +811,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_linkable_git_repositories_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_linkable_git_repositories({ connection: connection, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_linkable_git_repositories({ connection: connection, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_linkable_git_repositories connection: connection, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_linkable_git_repositories connection: connection, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_linkable_git_repositories ::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_linkable_git_repositories ::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_linkable_git_repositories({ connection: connection, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_linkable_git_repositories({ connection: connection, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_linkable_git_repositories(::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_linkable_git_repositories(::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -874,36 +874,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_git_hub_installations_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_git_hub_installations({ connection: connection }) do |response, operation|
+      c.fetch_git_hub_installations({ connection: connection }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_git_hub_installations connection: connection do |response, operation|
+      c.fetch_git_hub_installations connection: connection do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_git_hub_installations ::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest.new(connection: connection) do |response, operation|
+      c.fetch_git_hub_installations ::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest.new(connection: connection) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_git_hub_installations({ connection: connection }, grpc_options) do |response, operation|
+      c.fetch_git_hub_installations({ connection: connection }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_git_hub_installations(::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest.new(connection: connection), grpc_options) do |response, operation|
+      c.fetch_git_hub_installations(::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest.new(connection: connection), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -938,36 +938,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_git_refs_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_git_refs({ git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_git_refs({ git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_git_refs git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_git_refs git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_git_refs ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest.new(git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_git_refs ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest.new(git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_git_refs({ git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_git_refs({ git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_git_refs(::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest.new(git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_git_refs(::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest.new(git_repository_link: git_repository_link, ref_type: ref_type, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1004,40 +1004,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_account_connectors_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_account_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_account_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_account_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_account_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_account_connectors ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_account_connectors ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_account_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_account_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_account_connectors(::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_account_connectors(::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1067,36 +1067,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_account_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_account_connector({ name: name }) do |response, operation|
+      c.get_account_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_account_connector name: name do |response, operation|
+      c.get_account_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_account_connector ::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new(name: name) do |response, operation|
+      c.get_account_connector ::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_account_connector({ name: name }, grpc_options) do |response, operation|
+      c.get_account_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_account_connector(::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_account_connector(::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1133,40 +1133,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_account_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_account_connector({ parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.create_account_connector({ parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_account_connector parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.create_account_connector parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_account_connector ::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new(parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.create_account_connector ::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new(parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_account_connector({ parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_account_connector({ parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_account_connector(::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new(parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_account_connector(::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new(parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1204,40 +1204,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_account_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_account_connector({ update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+      c.update_account_connector({ update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_account_connector update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+      c.update_account_connector update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_account_connector ::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new(update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+      c.update_account_connector ::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new(update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_account_connector({ update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_account_connector({ update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_account_connector(::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new(update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_account_connector(::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new(update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1275,40 +1275,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_account_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_account_connector({ name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force }) do |response, operation|
+      c.delete_account_connector({ name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_account_connector name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force do |response, operation|
+      c.delete_account_connector name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_account_connector ::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force) do |response, operation|
+      c.delete_account_connector ::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_account_connector({ name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force }, grpc_options) do |response, operation|
+      c.delete_account_connector({ name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_account_connector(::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force), grpc_options) do |response, operation|
+      c.delete_account_connector(::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1338,36 +1338,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_access_token_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_access_token({ account_connector: account_connector }) do |response, operation|
+      c.fetch_access_token({ account_connector: account_connector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_access_token account_connector: account_connector do |response, operation|
+      c.fetch_access_token account_connector: account_connector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_access_token ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new(account_connector: account_connector) do |response, operation|
+      c.fetch_access_token ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new(account_connector: account_connector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_access_token({ account_connector: account_connector }, grpc_options) do |response, operation|
+      c.fetch_access_token({ account_connector: account_connector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_access_token(::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new(account_connector: account_connector), grpc_options) do |response, operation|
+      c.fetch_access_token(::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new(account_connector: account_connector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1404,40 +1404,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_users_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_users ::Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_users ::Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_users(::Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_users(::Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1473,40 +1473,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_user_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_user({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_user({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_user name: name, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_user name: name, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_user ::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_user ::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_user({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_user({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_user(::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_user(::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1536,36 +1536,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, fetch_self_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_self({ name: name }) do |response, operation|
+      c.fetch_self({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_self name: name do |response, operation|
+      c.fetch_self name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_self ::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new(name: name) do |response, operation|
+      c.fetch_self ::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_self({ name: name }, grpc_options) do |response, operation|
+      c.fetch_self({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_self(::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new(name: name), grpc_options) do |response, operation|
+      c.fetch_self(::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1594,40 +1594,40 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_self_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_self({ name: name }) do |response, operation|
+      c.delete_self({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_self name: name do |response, operation|
+      c.delete_self name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_self ::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new(name: name) do |response, operation|
+      c.delete_self ::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_self({ name: name }, grpc_options) do |response, operation|
+      c.delete_self({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_self(::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_self(::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1657,36 +1657,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, start_o_auth_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_o_auth({ account_connector: account_connector }) do |response, operation|
+      c.start_o_auth({ account_connector: account_connector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_o_auth account_connector: account_connector do |response, operation|
+      c.start_o_auth account_connector: account_connector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_o_auth ::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new(account_connector: account_connector) do |response, operation|
+      c.start_o_auth ::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new(account_connector: account_connector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_o_auth({ account_connector: account_connector }, grpc_options) do |response, operation|
+      c.start_o_auth({ account_connector: account_connector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_o_auth(::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new(account_connector: account_connector), grpc_options) do |response, operation|
+      c.start_o_auth(::Google::Cloud::DeveloperConnect::V1::StartOAuthRequest.new(account_connector: account_connector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1718,36 +1718,36 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, finish_o_auth_client_stub do
       # Create client
-      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+      c = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.finish_o_auth({ oauth_params: oauth_params, account_connector: account_connector }) do |response, operation|
+      c.finish_o_auth({ oauth_params: oauth_params, account_connector: account_connector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.finish_o_auth oauth_params: oauth_params, account_connector: account_connector do |response, operation|
+      c.finish_o_auth oauth_params: oauth_params, account_connector: account_connector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.finish_o_auth ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new(oauth_params: oauth_params, account_connector: account_connector) do |response, operation|
+      c.finish_o_auth ::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new(oauth_params: oauth_params, account_connector: account_connector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.finish_o_auth({ oauth_params: oauth_params, account_connector: account_connector }, grpc_options) do |response, operation|
+      c.finish_o_auth({ oauth_params: oauth_params, account_connector: account_connector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.finish_o_auth(::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new(oauth_params: oauth_params, account_connector: account_connector), grpc_options) do |response, operation|
+      c.finish_o_auth(::Google::Cloud::DeveloperConnect::V1::FinishOAuthRequest.new(oauth_params: oauth_params, account_connector: account_connector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

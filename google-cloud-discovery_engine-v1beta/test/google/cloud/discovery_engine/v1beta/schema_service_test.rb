@@ -82,36 +82,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_schema({ name: name }) do |response, operation|
+      c.get_schema({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_schema name: name do |response, operation|
+      c.get_schema name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_schema ::Google::Cloud::DiscoveryEngine::V1beta::GetSchemaRequest.new(name: name) do |response, operation|
+      c.get_schema ::Google::Cloud::DiscoveryEngine::V1beta::GetSchemaRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_schema({ name: name }, grpc_options) do |response, operation|
+      c.get_schema({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_schema(::Google::Cloud::DiscoveryEngine::V1beta::GetSchemaRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_schema(::Google::Cloud::DiscoveryEngine::V1beta::GetSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_schemas_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_schemas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_schemas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_schemas ::Google::Cloud::DiscoveryEngine::V1beta::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_schemas ::Google::Cloud::DiscoveryEngine::V1beta::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_schemas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_schemas(::Google::Cloud::DiscoveryEngine::V1beta::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_schemas(::Google::Cloud::DiscoveryEngine::V1beta::ListSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -211,40 +211,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_schema({ parent: parent, schema: schema, schema_id: schema_id }) do |response, operation|
+      c.create_schema({ parent: parent, schema: schema, schema_id: schema_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_schema parent: parent, schema: schema, schema_id: schema_id do |response, operation|
+      c.create_schema parent: parent, schema: schema, schema_id: schema_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_schema ::Google::Cloud::DiscoveryEngine::V1beta::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id) do |response, operation|
+      c.create_schema ::Google::Cloud::DiscoveryEngine::V1beta::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_schema({ parent: parent, schema: schema, schema_id: schema_id }, grpc_options) do |response, operation|
+      c.create_schema({ parent: parent, schema: schema, schema_id: schema_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_schema(::Google::Cloud::DiscoveryEngine::V1beta::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), grpc_options) do |response, operation|
+      c.create_schema(::Google::Cloud::DiscoveryEngine::V1beta::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_schema({ schema: schema, allow_missing: allow_missing }) do |response, operation|
+      c.update_schema({ schema: schema, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_schema schema: schema, allow_missing: allow_missing do |response, operation|
+      c.update_schema schema: schema, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_schema ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing) do |response, operation|
+      c.update_schema ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_schema({ schema: schema, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.update_schema({ schema: schema, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_schema(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.update_schema(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSchemaRequest.new(schema: schema, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -339,40 +339,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_schema({ name: name }) do |response, operation|
+      c.delete_schema({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_schema name: name do |response, operation|
+      c.delete_schema name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_schema ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSchemaRequest.new(name: name) do |response, operation|
+      c.delete_schema ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSchemaRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_schema({ name: name }, grpc_options) do |response, operation|
+      c.delete_schema({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_schema(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSchemaRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_schema(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

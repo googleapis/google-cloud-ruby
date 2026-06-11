@@ -86,40 +86,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_engine({ parent: parent, engine: engine, engine_id: engine_id }) do |response, operation|
+      c.create_engine({ parent: parent, engine: engine, engine_id: engine_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_engine parent: parent, engine: engine, engine_id: engine_id do |response, operation|
+      c.create_engine parent: parent, engine: engine, engine_id: engine_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_engine ::Google::Cloud::DiscoveryEngine::V1beta::CreateEngineRequest.new(parent: parent, engine: engine, engine_id: engine_id) do |response, operation|
+      c.create_engine ::Google::Cloud::DiscoveryEngine::V1beta::CreateEngineRequest.new(parent: parent, engine: engine, engine_id: engine_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_engine({ parent: parent, engine: engine, engine_id: engine_id }, grpc_options) do |response, operation|
+      c.create_engine({ parent: parent, engine: engine, engine_id: engine_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_engine(::Google::Cloud::DiscoveryEngine::V1beta::CreateEngineRequest.new(parent: parent, engine: engine, engine_id: engine_id), grpc_options) do |response, operation|
+      c.create_engine(::Google::Cloud::DiscoveryEngine::V1beta::CreateEngineRequest.new(parent: parent, engine: engine, engine_id: engine_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,40 +149,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_engine({ name: name }) do |response, operation|
+      c.delete_engine({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_engine name: name do |response, operation|
+      c.delete_engine name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_engine ::Google::Cloud::DiscoveryEngine::V1beta::DeleteEngineRequest.new(name: name) do |response, operation|
+      c.delete_engine ::Google::Cloud::DiscoveryEngine::V1beta::DeleteEngineRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_engine({ name: name }, grpc_options) do |response, operation|
+      c.delete_engine({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_engine(::Google::Cloud::DiscoveryEngine::V1beta::DeleteEngineRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_engine(::Google::Cloud::DiscoveryEngine::V1beta::DeleteEngineRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -214,36 +214,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_engine({ engine: engine, update_mask: update_mask }) do |response, operation|
+      c.update_engine({ engine: engine, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_engine engine: engine, update_mask: update_mask do |response, operation|
+      c.update_engine engine: engine, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_engine ::Google::Cloud::DiscoveryEngine::V1beta::UpdateEngineRequest.new(engine: engine, update_mask: update_mask) do |response, operation|
+      c.update_engine ::Google::Cloud::DiscoveryEngine::V1beta::UpdateEngineRequest.new(engine: engine, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_engine({ engine: engine, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_engine({ engine: engine, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_engine(::Google::Cloud::DiscoveryEngine::V1beta::UpdateEngineRequest.new(engine: engine, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_engine(::Google::Cloud::DiscoveryEngine::V1beta::UpdateEngineRequest.new(engine: engine, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -272,36 +272,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_engine({ name: name }) do |response, operation|
+      c.get_engine({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_engine name: name do |response, operation|
+      c.get_engine name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_engine ::Google::Cloud::DiscoveryEngine::V1beta::GetEngineRequest.new(name: name) do |response, operation|
+      c.get_engine ::Google::Cloud::DiscoveryEngine::V1beta::GetEngineRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_engine({ name: name }, grpc_options) do |response, operation|
+      c.get_engine({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_engine(::Google::Cloud::DiscoveryEngine::V1beta::GetEngineRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_engine(::Google::Cloud::DiscoveryEngine::V1beta::GetEngineRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -336,40 +336,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_engines_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_engines({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_engines({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_engines parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_engines parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_engines ::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_engines ::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_engines({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_engines({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_engines(::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_engines(::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -399,36 +399,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, pause_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_engine({ name: name }) do |response, operation|
+      c.pause_engine({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_engine name: name do |response, operation|
+      c.pause_engine name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_engine ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new(name: name) do |response, operation|
+      c.pause_engine ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_engine({ name: name }, grpc_options) do |response, operation|
+      c.pause_engine({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_engine(::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new(name: name), grpc_options) do |response, operation|
+      c.pause_engine(::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -457,36 +457,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, resume_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_engine({ name: name }) do |response, operation|
+      c.resume_engine({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_engine name: name do |response, operation|
+      c.resume_engine name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_engine ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new(name: name) do |response, operation|
+      c.resume_engine ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_engine({ name: name }, grpc_options) do |response, operation|
+      c.resume_engine({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_engine(::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_engine(::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -515,40 +515,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, tune_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.tune_engine({ name: name }) do |response, operation|
+      c.tune_engine({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.tune_engine name: name do |response, operation|
+      c.tune_engine name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.tune_engine ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new(name: name) do |response, operation|
+      c.tune_engine ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.tune_engine({ name: name }, grpc_options) do |response, operation|
+      c.tune_engine({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.tune_engine(::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new(name: name), grpc_options) do |response, operation|
+      c.tune_engine(::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

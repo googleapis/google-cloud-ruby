@@ -98,32 +98,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ServiceStub.stub :transcode_create_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_session({ parent: parent, session: session }) do |_result, response|
+        c.create_session({ parent: parent, session: session }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_session parent: parent, session: session do |_result, response|
+        c.create_session parent: parent, session: session do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_session ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session) do |_result, response|
+        c.create_session ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_session({ parent: parent, session: session }, call_options) do |_result, response|
+        c.create_session({ parent: parent, session: session }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_session(::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session), call_options) do |_result, response|
+        c.create_session(::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ServiceStub.stub :transcode_delete_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_session({ name: name }) do |_result, response|
+        c.delete_session({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_session name: name do |_result, response|
+        c.delete_session name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_session ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name) do |_result, response|
+        c.delete_session ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_session({ name: name }, call_options) do |_result, response|
+        c.delete_session({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_session(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_session(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ServiceStub.stub :transcode_update_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_session({ session: session, update_mask: update_mask }) do |_result, response|
+        c.update_session({ session: session, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_session session: session, update_mask: update_mask do |_result, response|
+        c.update_session session: session, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_session ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask) do |_result, response|
+        c.update_session ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_session({ session: session, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_session({ session: session, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_session(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask), call_options) do |_result, response|
+        c.update_session(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ServiceStub.stub :transcode_get_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_session_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_session({ name: name, include_answer_details: include_answer_details }) do |_result, response|
+        c.get_session({ name: name, include_answer_details: include_answer_details }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_session name: name, include_answer_details: include_answer_details do |_result, response|
+        c.get_session name: name, include_answer_details: include_answer_details do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |_result, response|
+        c.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_session({ name: name, include_answer_details: include_answer_details }, call_options) do |_result, response|
+        c.get_session({ name: name, include_answer_details: include_answer_details }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), call_options) do |_result, response|
+        c.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::ServiceStub.stub :transcode_list_sessions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sessions_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sessions ::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_sessions ::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sessions(::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_sessions(::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

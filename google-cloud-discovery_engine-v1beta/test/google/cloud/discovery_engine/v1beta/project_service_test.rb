@@ -86,40 +86,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, provision_project_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }) do |response, operation|
+      c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version do |response, operation|
+      c.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.provision_project ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version) do |response, operation|
+      c.provision_project ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }, grpc_options) do |response, operation|
+      c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.provision_project(::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version), grpc_options) do |response, operation|
+      c.provision_project(::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

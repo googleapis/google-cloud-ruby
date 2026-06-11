@@ -86,40 +86,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_environments_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_environments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_environments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_environments ::Google::Cloud::Dialogflow::CX::V3::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_environments ::Google::Cloud::Dialogflow::CX::V3::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_environments(::Google::Cloud::Dialogflow::CX::V3::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_environments(::Google::Cloud::Dialogflow::CX::V3::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_environment({ name: name }) do |response, operation|
+      c.get_environment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_environment name: name do |response, operation|
+      c.get_environment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_environment ::Google::Cloud::Dialogflow::CX::V3::GetEnvironmentRequest.new(name: name) do |response, operation|
+      c.get_environment ::Google::Cloud::Dialogflow::CX::V3::GetEnvironmentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_environment({ name: name }, grpc_options) do |response, operation|
+      c.get_environment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_environment(::Google::Cloud::Dialogflow::CX::V3::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_environment(::Google::Cloud::Dialogflow::CX::V3::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,40 +209,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_environment({ parent: parent, environment: environment }) do |response, operation|
+      c.create_environment({ parent: parent, environment: environment }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_environment parent: parent, environment: environment do |response, operation|
+      c.create_environment parent: parent, environment: environment do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_environment ::Google::Cloud::Dialogflow::CX::V3::CreateEnvironmentRequest.new(parent: parent, environment: environment) do |response, operation|
+      c.create_environment ::Google::Cloud::Dialogflow::CX::V3::CreateEnvironmentRequest.new(parent: parent, environment: environment) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_environment({ parent: parent, environment: environment }, grpc_options) do |response, operation|
+      c.create_environment({ parent: parent, environment: environment }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_environment(::Google::Cloud::Dialogflow::CX::V3::CreateEnvironmentRequest.new(parent: parent, environment: environment), grpc_options) do |response, operation|
+      c.create_environment(::Google::Cloud::Dialogflow::CX::V3::CreateEnvironmentRequest.new(parent: parent, environment: environment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -274,40 +274,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, update_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_environment({ environment: environment, update_mask: update_mask }) do |response, operation|
+      c.update_environment({ environment: environment, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_environment environment: environment, update_mask: update_mask do |response, operation|
+      c.update_environment environment: environment, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_environment ::Google::Cloud::Dialogflow::CX::V3::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask) do |response, operation|
+      c.update_environment ::Google::Cloud::Dialogflow::CX::V3::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_environment({ environment: environment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_environment({ environment: environment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_environment(::Google::Cloud::Dialogflow::CX::V3::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_environment(::Google::Cloud::Dialogflow::CX::V3::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -337,36 +337,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_environment({ name: name }) do |response, operation|
+      c.delete_environment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_environment name: name do |response, operation|
+      c.delete_environment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_environment ::Google::Cloud::Dialogflow::CX::V3::DeleteEnvironmentRequest.new(name: name) do |response, operation|
+      c.delete_environment ::Google::Cloud::Dialogflow::CX::V3::DeleteEnvironmentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_environment({ name: name }, grpc_options) do |response, operation|
+      c.delete_environment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_environment(::Google::Cloud::Dialogflow::CX::V3::DeleteEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_environment(::Google::Cloud::Dialogflow::CX::V3::DeleteEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,40 +399,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, lookup_environment_history_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.lookup_environment_history({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.lookup_environment_history({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.lookup_environment_history name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.lookup_environment_history name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.lookup_environment_history ::Google::Cloud::Dialogflow::CX::V3::LookupEnvironmentHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.lookup_environment_history ::Google::Cloud::Dialogflow::CX::V3::LookupEnvironmentHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.lookup_environment_history({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.lookup_environment_history({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.lookup_environment_history(::Google::Cloud::Dialogflow::CX::V3::LookupEnvironmentHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.lookup_environment_history(::Google::Cloud::Dialogflow::CX::V3::LookupEnvironmentHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -462,40 +462,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, run_continuous_test_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_continuous_test({ environment: environment }) do |response, operation|
+      c.run_continuous_test({ environment: environment }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_continuous_test environment: environment do |response, operation|
+      c.run_continuous_test environment: environment do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_continuous_test ::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestRequest.new(environment: environment) do |response, operation|
+      c.run_continuous_test ::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestRequest.new(environment: environment) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_continuous_test({ environment: environment }, grpc_options) do |response, operation|
+      c.run_continuous_test({ environment: environment }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_continuous_test(::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestRequest.new(environment: environment), grpc_options) do |response, operation|
+      c.run_continuous_test(::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestRequest.new(environment: environment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -529,40 +529,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_continuous_test_results_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_continuous_test_results({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_continuous_test_results({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_continuous_test_results parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_continuous_test_results parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_continuous_test_results ::Google::Cloud::Dialogflow::CX::V3::ListContinuousTestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_continuous_test_results ::Google::Cloud::Dialogflow::CX::V3::ListContinuousTestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_continuous_test_results({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_continuous_test_results({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_continuous_test_results(::Google::Cloud::Dialogflow::CX::V3::ListContinuousTestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_continuous_test_results(::Google::Cloud::Dialogflow::CX::V3::ListContinuousTestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -594,40 +594,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Environments::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, deploy_flow_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_flow({ environment: environment, flow_version: flow_version }) do |response, operation|
+      c.deploy_flow({ environment: environment, flow_version: flow_version }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_flow environment: environment, flow_version: flow_version do |response, operation|
+      c.deploy_flow environment: environment, flow_version: flow_version do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_flow ::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest.new(environment: environment, flow_version: flow_version) do |response, operation|
+      c.deploy_flow ::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest.new(environment: environment, flow_version: flow_version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_flow({ environment: environment, flow_version: flow_version }, grpc_options) do |response, operation|
+      c.deploy_flow({ environment: environment, flow_version: flow_version }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_flow(::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest.new(environment: environment, flow_version: flow_version), grpc_options) do |response, operation|
+      c.deploy_flow(::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest.new(environment: environment, flow_version: flow_version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -84,40 +84,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_conversation_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversation_model({ parent: parent, conversation_model: conversation_model }) do |response, operation|
+      c.create_conversation_model({ parent: parent, conversation_model: conversation_model }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversation_model parent: parent, conversation_model: conversation_model do |response, operation|
+      c.create_conversation_model parent: parent, conversation_model: conversation_model do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversation_model ::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model) do |response, operation|
+      c.create_conversation_model ::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversation_model({ parent: parent, conversation_model: conversation_model }, grpc_options) do |response, operation|
+      c.create_conversation_model({ parent: parent, conversation_model: conversation_model }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversation_model(::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model), grpc_options) do |response, operation|
+      c.create_conversation_model(::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_conversation_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation_model({ name: name }) do |response, operation|
+      c.get_conversation_model({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation_model name: name do |response, operation|
+      c.get_conversation_model name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation_model ::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name) do |response, operation|
+      c.get_conversation_model ::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation_model({ name: name }, grpc_options) do |response, operation|
+      c.get_conversation_model({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation_model(::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conversation_model(::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,40 +209,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_conversation_models_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversation_models parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_conversation_models parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversation_models ::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_conversation_models ::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversation_models(::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_conversation_models(::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -272,40 +272,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_conversation_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversation_model({ name: name }) do |response, operation|
+      c.delete_conversation_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversation_model name: name do |response, operation|
+      c.delete_conversation_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversation_model ::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name) do |response, operation|
+      c.delete_conversation_model ::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversation_model({ name: name }, grpc_options) do |response, operation|
+      c.delete_conversation_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversation_model(::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_conversation_model(::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -335,40 +335,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, deploy_conversation_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_conversation_model({ name: name }) do |response, operation|
+      c.deploy_conversation_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_conversation_model name: name do |response, operation|
+      c.deploy_conversation_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_conversation_model ::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name) do |response, operation|
+      c.deploy_conversation_model ::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_conversation_model({ name: name }, grpc_options) do |response, operation|
+      c.deploy_conversation_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_conversation_model(::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.deploy_conversation_model(::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -398,40 +398,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, undeploy_conversation_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_conversation_model({ name: name }) do |response, operation|
+      c.undeploy_conversation_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_conversation_model name: name do |response, operation|
+      c.undeploy_conversation_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_conversation_model ::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name) do |response, operation|
+      c.undeploy_conversation_model ::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_conversation_model({ name: name }, grpc_options) do |response, operation|
+      c.undeploy_conversation_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_conversation_model(::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.undeploy_conversation_model(::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -461,36 +461,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_conversation_model_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation_model_evaluation({ name: name }) do |response, operation|
+      c.get_conversation_model_evaluation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation_model_evaluation name: name do |response, operation|
+      c.get_conversation_model_evaluation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name) do |response, operation|
+      c.get_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation_model_evaluation({ name: name }, grpc_options) do |response, operation|
+      c.get_conversation_model_evaluation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -523,40 +523,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_conversation_model_evaluations_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversation_model_evaluations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_conversation_model_evaluations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversation_model_evaluations ::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_conversation_model_evaluations ::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversation_model_evaluations(::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_conversation_model_evaluations(::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -588,40 +588,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_conversation_model_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }) do |response, operation|
+      c.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversation_model_evaluation parent: parent, conversation_model_evaluation: conversation_model_evaluation do |response, operation|
+      c.create_conversation_model_evaluation parent: parent, conversation_model_evaluation: conversation_model_evaluation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation) do |response, operation|
+      c.create_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }, grpc_options) do |response, operation|
+      c.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation), grpc_options) do |response, operation|
+      c.create_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

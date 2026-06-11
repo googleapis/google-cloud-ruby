@@ -99,32 +99,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
     ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ServiceStub.stub :transcode_write_user_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, write_user_event_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |_result, response|
+        c.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.write_user_event parent: parent, user_event: user_event, write_async: write_async do |_result, response|
+        c.write_user_event parent: parent, user_event: user_event, write_async: write_async do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.write_user_event ::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |_result, response|
+        c.write_user_event ::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, call_options) do |_result, response|
+        c.write_user_event({ parent: parent, user_event: user_event, write_async: write_async }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.write_user_event(::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), call_options) do |_result, response|
+        c.write_user_event(::Google::Cloud::DiscoveryEngine::V1::WriteUserEventRequest.new(parent: parent, user_event: user_event, write_async: write_async), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
     ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ServiceStub.stub :transcode_collect_user_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, collect_user_event_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }) do |_result, response|
+        c.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.collect_user_event parent: parent, user_event: user_event, uri: uri, ets: ets do |_result, response|
+        c.collect_user_event parent: parent, user_event: user_event, uri: uri, ets: ets do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.collect_user_event ::Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets) do |_result, response|
+        c.collect_user_event ::Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }, call_options) do |_result, response|
+        c.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.collect_user_event(::Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), call_options) do |_result, response|
+        c.collect_user_event(::Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
     ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ServiceStub.stub :transcode_purge_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, purge_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
+        c.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
+        c.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.purge_user_events ::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
+        c.purge_user_events ::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
+        c.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.purge_user_events(::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
+        c.purge_user_events(::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
     ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ServiceStub.stub :transcode_import_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_user_events({ inline_source: inline_source, parent: parent, error_config: error_config }) do |_result, response|
+        c.import_user_events({ inline_source: inline_source, parent: parent, error_config: error_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_user_events inline_source: inline_source, parent: parent, error_config: error_config do |_result, response|
+        c.import_user_events inline_source: inline_source, parent: parent, error_config: error_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_user_events ::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config) do |_result, response|
+        c.import_user_events ::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_user_events({ inline_source: inline_source, parent: parent, error_config: error_config }, call_options) do |_result, response|
+        c.import_user_events({ inline_source: inline_source, parent: parent, error_config: error_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_user_events(::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config), call_options) do |_result, response|
+        c.import_user_events(::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

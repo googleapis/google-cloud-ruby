@@ -86,40 +86,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_conversation_profiles_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversation_profiles({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_conversation_profiles({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversation_profiles parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_conversation_profiles parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversation_profiles ::Google::Cloud::Dialogflow::V2::ListConversationProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_conversation_profiles ::Google::Cloud::Dialogflow::V2::ListConversationProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversation_profiles({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_conversation_profiles({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversation_profiles(::Google::Cloud::Dialogflow::V2::ListConversationProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_conversation_profiles(::Google::Cloud::Dialogflow::V2::ListConversationProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_conversation_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation_profile({ name: name }) do |response, operation|
+      c.get_conversation_profile({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation_profile name: name do |response, operation|
+      c.get_conversation_profile name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation_profile ::Google::Cloud::Dialogflow::V2::GetConversationProfileRequest.new(name: name) do |response, operation|
+      c.get_conversation_profile ::Google::Cloud::Dialogflow::V2::GetConversationProfileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation_profile({ name: name }, grpc_options) do |response, operation|
+      c.get_conversation_profile({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation_profile(::Google::Cloud::Dialogflow::V2::GetConversationProfileRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conversation_profile(::Google::Cloud::Dialogflow::V2::GetConversationProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_conversation_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversation_profile({ parent: parent, conversation_profile: conversation_profile }) do |response, operation|
+      c.create_conversation_profile({ parent: parent, conversation_profile: conversation_profile }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversation_profile parent: parent, conversation_profile: conversation_profile do |response, operation|
+      c.create_conversation_profile parent: parent, conversation_profile: conversation_profile do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversation_profile ::Google::Cloud::Dialogflow::V2::CreateConversationProfileRequest.new(parent: parent, conversation_profile: conversation_profile) do |response, operation|
+      c.create_conversation_profile ::Google::Cloud::Dialogflow::V2::CreateConversationProfileRequest.new(parent: parent, conversation_profile: conversation_profile) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversation_profile({ parent: parent, conversation_profile: conversation_profile }, grpc_options) do |response, operation|
+      c.create_conversation_profile({ parent: parent, conversation_profile: conversation_profile }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversation_profile(::Google::Cloud::Dialogflow::V2::CreateConversationProfileRequest.new(parent: parent, conversation_profile: conversation_profile), grpc_options) do |response, operation|
+      c.create_conversation_profile(::Google::Cloud::Dialogflow::V2::CreateConversationProfileRequest.new(parent: parent, conversation_profile: conversation_profile), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +269,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_conversation_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_conversation_profile({ conversation_profile: conversation_profile, update_mask: update_mask }) do |response, operation|
+      c.update_conversation_profile({ conversation_profile: conversation_profile, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_conversation_profile conversation_profile: conversation_profile, update_mask: update_mask do |response, operation|
+      c.update_conversation_profile conversation_profile: conversation_profile, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_conversation_profile ::Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest.new(conversation_profile: conversation_profile, update_mask: update_mask) do |response, operation|
+      c.update_conversation_profile ::Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest.new(conversation_profile: conversation_profile, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_conversation_profile({ conversation_profile: conversation_profile, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_conversation_profile({ conversation_profile: conversation_profile, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_conversation_profile(::Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest.new(conversation_profile: conversation_profile, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_conversation_profile(::Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest.new(conversation_profile: conversation_profile, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_conversation_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversation_profile({ name: name }) do |response, operation|
+      c.delete_conversation_profile({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversation_profile name: name do |response, operation|
+      c.delete_conversation_profile name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversation_profile ::Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest.new(name: name) do |response, operation|
+      c.delete_conversation_profile ::Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversation_profile({ name: name }, grpc_options) do |response, operation|
+      c.delete_conversation_profile({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversation_profile(::Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_conversation_profile(::Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -389,40 +389,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, set_suggestion_feature_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config }) do |response, operation|
+      c.set_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_suggestion_feature_config conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config do |response, operation|
+      c.set_suggestion_feature_config conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_suggestion_feature_config ::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config) do |response, operation|
+      c.set_suggestion_feature_config ::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config }, grpc_options) do |response, operation|
+      c.set_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_suggestion_feature_config(::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config), grpc_options) do |response, operation|
+      c.set_suggestion_feature_config(::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -456,40 +456,40 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, clear_suggestion_feature_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.clear_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type }) do |response, operation|
+      c.clear_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.clear_suggestion_feature_config conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type do |response, operation|
+      c.clear_suggestion_feature_config conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.clear_suggestion_feature_config ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type) do |response, operation|
+      c.clear_suggestion_feature_config ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.clear_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type }, grpc_options) do |response, operation|
+      c.clear_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.clear_suggestion_feature_config(::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type), grpc_options) do |response, operation|
+      c.clear_suggestion_feature_config(::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
