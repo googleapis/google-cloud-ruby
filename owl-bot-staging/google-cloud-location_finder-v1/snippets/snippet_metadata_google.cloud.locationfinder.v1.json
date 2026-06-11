@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-location_finder-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.locationfinder.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "locationfinder_v1_generated_CloudLocationFinder_ListCloudLocations_sync",
+      "title": "Snippet for the list_cloud_locations call in the CloudLocationFinder service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client#list_cloud_locations.",
+      "file": "cloud_location_finder/list_cloud_locations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cloud_locations",
+        "full_name": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client#list_cloud_locations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LocationFinder::V1::ListCloudLocationsResponse",
+        "client": {
+          "short_name": "CloudLocationFinder::Client",
+          "full_name": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client"
+        },
+        "method": {
+          "short_name": "ListCloudLocations",
+          "full_name": "google.cloud.locationfinder.v1.CloudLocationFinder.ListCloudLocations",
+          "service": {
+            "short_name": "CloudLocationFinder",
+            "full_name": "google.cloud.locationfinder.v1.CloudLocationFinder"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "locationfinder_v1_generated_CloudLocationFinder_GetCloudLocation_sync",
+      "title": "Snippet for the get_cloud_location call in the CloudLocationFinder service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client#get_cloud_location.",
+      "file": "cloud_location_finder/get_cloud_location.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cloud_location",
+        "full_name": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client#get_cloud_location",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LocationFinder::V1::CloudLocation",
+        "client": {
+          "short_name": "CloudLocationFinder::Client",
+          "full_name": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client"
+        },
+        "method": {
+          "short_name": "GetCloudLocation",
+          "full_name": "google.cloud.locationfinder.v1.CloudLocationFinder.GetCloudLocation",
+          "service": {
+            "short_name": "CloudLocationFinder",
+            "full_name": "google.cloud.locationfinder.v1.CloudLocationFinder"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "locationfinder_v1_generated_CloudLocationFinder_SearchCloudLocations_sync",
+      "title": "Snippet for the search_cloud_locations call in the CloudLocationFinder service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client#search_cloud_locations.",
+      "file": "cloud_location_finder/search_cloud_locations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_cloud_locations",
+        "full_name": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client#search_cloud_locations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LocationFinder::V1::SearchCloudLocationsResponse",
+        "client": {
+          "short_name": "CloudLocationFinder::Client",
+          "full_name": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client"
+        },
+        "method": {
+          "short_name": "SearchCloudLocations",
+          "full_name": "google.cloud.locationfinder.v1.CloudLocationFinder.SearchCloudLocations",
+          "service": {
+            "short_name": "CloudLocationFinder",
+            "full_name": "google.cloud.locationfinder.v1.CloudLocationFinder"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
