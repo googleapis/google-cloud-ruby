@@ -1,5 +1,12 @@
 # Release History
 
+### 1.18.0 (2026-06-11)
+
+#### Features
+
+* Supporting SDP Batch Content ([#33991](https://github.com/googleapis/google-cloud-ruby/issues/33991)) 
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
 ### 1.17.0 (2026-04-09)
 
 #### Features
