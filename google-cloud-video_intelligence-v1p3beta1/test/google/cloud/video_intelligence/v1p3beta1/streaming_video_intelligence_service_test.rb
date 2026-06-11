@@ -82,7 +82,7 @@ class ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceS
 
     Gapic::ServiceStub.stub :new, streaming_annotate_video_client_stub do
       # Create client
-      client = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client.new do |config|
+      c = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -90,7 +90,7 @@ class ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceS
       request_hash = { video_config: video_config }
       request_proto = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new video_config: video_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_annotate_video enum_input do |response, operation|
+      c.streaming_annotate_video enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse, r
@@ -102,7 +102,7 @@ class ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceS
       request_hash = { video_config: video_config }
       request_proto = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new video_config: video_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_annotate_video stream_input do |response, operation|
+      c.streaming_annotate_video stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse, r
@@ -117,7 +117,7 @@ class ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceS
       request_hash = { video_config: video_config }
       request_proto = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new video_config: video_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_annotate_video enum_input, grpc_options do |response, operation|
+      c.streaming_annotate_video enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse, r
@@ -129,7 +129,7 @@ class ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceS
       request_hash = { video_config: video_config }
       request_proto = ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest.new video_config: video_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_annotate_video stream_input, grpc_options do |response, operation|
+      c.streaming_annotate_video stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse, r
