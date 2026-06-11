@@ -89,6 +89,18 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientPathsTest < Minitest::
     end
   end
 
+  def test_folder_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.folder_path project: "value0", location: "value1", folder: "value2"
+      assert_equal "projects/value0/locations/value1/folders/value2", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -146,6 +158,18 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientPathsTest < Minitest::
 
       path = client.secret_version_path project: "value0", secret: "value1", version: "value2"
       assert_equal "projects/value0/secrets/value1/versions/value2", path
+    end
+  end
+
+  def test_team_folder_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.team_folder_path project: "value0", location: "value1", team_folder: "value2"
+      assert_equal "projects/value0/locations/value1/teamFolders/value2", path
     end
   end
 

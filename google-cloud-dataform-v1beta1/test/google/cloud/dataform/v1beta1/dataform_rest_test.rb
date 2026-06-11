@@ -78,6 +78,731 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_get_team_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_team_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_team_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_team_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_team_folder ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_team_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_team_folder(::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_team_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    team_folder = {}
+    team_folder_id = "hello world"
+
+    create_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_team_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_team_folder({ parent: parent, team_folder: team_folder, team_folder_id: team_folder_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_team_folder parent: parent, team_folder: team_folder, team_folder_id: team_folder_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_team_folder ::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new(parent: parent, team_folder: team_folder, team_folder_id: team_folder_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_team_folder({ parent: parent, team_folder: team_folder, team_folder_id: team_folder_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_team_folder(::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new(parent: parent, team_folder: team_folder, team_folder_id: team_folder_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_team_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    team_folder = {}
+
+    update_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_team_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_team_folder({ update_mask: update_mask, team_folder: team_folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_team_folder update_mask: update_mask, team_folder: team_folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_team_folder ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new(update_mask: update_mask, team_folder: team_folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_team_folder({ update_mask: update_mask, team_folder: team_folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_team_folder(::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new(update_mask: update_mask, team_folder: team_folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_team_folder
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_team_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_team_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_team_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_team_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_team_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_team_folder ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_team_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_team_folder(::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_team_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_team_folder_contents
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    team_folder = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_team_folder_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_team_folder_contents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_team_folder_contents_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.query_team_folder_contents({ team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.query_team_folder_contents team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.query_team_folder_contents ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new(team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.query_team_folder_contents({ team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.query_team_folder_contents(::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new(team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_team_folder_contents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_search_team_folders
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    search_team_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_search_team_folders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, search_team_folders_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.search_team_folders({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.search_team_folders location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.search_team_folders ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.search_team_folders({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.search_team_folders(::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, search_team_folders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_folder ::Google::Cloud::Dataform::V1beta1::GetFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_folder(::Google::Cloud::Dataform::V1beta1::GetFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    folder = {}
+    folder_id = "hello world"
+
+    create_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_folder({ parent: parent, folder: folder, folder_id: folder_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_folder parent: parent, folder: folder, folder_id: folder_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_folder ::Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_folder({ parent: parent, folder: folder, folder_id: folder_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_folder(::Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    folder = {}
+
+    update_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_folder({ update_mask: update_mask, folder: folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_folder update_mask: update_mask, folder: folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_folder ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new(update_mask: update_mask, folder: folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_folder({ update_mask: update_mask, folder: folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_folder(::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new(update_mask: update_mask, folder: folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_folder
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_folder({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_folder name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_folder ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_folder({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_folder(::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_folder_contents
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    folder = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_folder_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_folder_contents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_folder_contents_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.query_folder_contents({ folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.query_folder_contents folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.query_folder_contents ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new(folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.query_folder_contents({ folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.query_folder_contents(::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new(folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_folder_contents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_query_user_root_contents
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_user_root_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_user_root_contents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, query_user_root_contents_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.query_user_root_contents({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.query_user_root_contents location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.query_user_root_contents ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.query_user_root_contents({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.query_user_root_contents(::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, query_user_root_contents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move_folder
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_containing_folder = "hello world"
+
+    move_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_move_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.move_folder({ name: name, destination_containing_folder: destination_containing_folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.move_folder name: name, destination_containing_folder: destination_containing_folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.move_folder ::Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new(name: name, destination_containing_folder: destination_containing_folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.move_folder({ name: name, destination_containing_folder: destination_containing_folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.move_folder(::Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new(name: name, destination_containing_folder: destination_containing_folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_folder_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_repositories
     # Create test objects.
     client_result = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse.new
@@ -101,32 +826,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_list_repositories_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_repositories_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_repositories parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_repositories parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_repositories ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_repositories ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_repositories(::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_repositories(::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +880,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_repository_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_repository_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_repository({ name: name }) do |_result, response|
+        c.get_repository({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_repository name: name do |_result, response|
+        c.get_repository name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_repository ::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name) do |_result, response|
+        c.get_repository ::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_repository({ name: name }, call_options) do |_result, response|
+        c.get_repository({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_repository(::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name), call_options) do |_result, response|
+        c.get_repository(::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +936,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_repository_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_repository_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |_result, response|
+        c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_repository parent: parent, repository: repository, repository_id: repository_id do |_result, response|
+        c.create_repository parent: parent, repository: repository, repository_id: repository_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_repository ::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |_result, response|
+        c.create_repository ::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, call_options) do |_result, response|
+        c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_repository(::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), call_options) do |_result, response|
+        c.create_repository(::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +991,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_repository_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_repository_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_repository({ update_mask: update_mask, repository: repository }) do |_result, response|
+        c.update_repository({ update_mask: update_mask, repository: repository }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_repository update_mask: update_mask, repository: repository do |_result, response|
+        c.update_repository update_mask: update_mask, repository: repository do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_repository ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository) do |_result, response|
+        c.update_repository ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_repository({ update_mask: update_mask, repository: repository }, call_options) do |_result, response|
+        c.update_repository({ update_mask: update_mask, repository: repository }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_repository(::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository), call_options) do |_result, response|
+        c.update_repository(::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,37 +1046,92 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_repository_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_repository_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_repository({ name: name, force: force }) do |_result, response|
+        c.delete_repository({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_repository name: name, force: force do |_result, response|
+        c.delete_repository name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_repository ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force) do |_result, response|
+        c.delete_repository ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_repository({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_repository({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_repository(::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_repository(::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, delete_repository_client_stub.call_count
+      end
+    end
+  end
+
+  def test_move_repository
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_containing_folder = "hello world"
+
+    move_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_move_repository_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, move_repository_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.move_repository({ name: name, destination_containing_folder: destination_containing_folder }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.move_repository name: name, destination_containing_folder: destination_containing_folder do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.move_repository ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new(name: name, destination_containing_folder: destination_containing_folder) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.move_repository({ name: name, destination_containing_folder: destination_containing_folder }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.move_repository(::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new(name: name, destination_containing_folder: destination_containing_folder), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, move_repository_client_stub.call_count
       end
     end
   end
@@ -378,32 +1158,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_commit_repository_changes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, commit_repository_changes_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }) do |_result, response|
+        c.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.commit_repository_changes name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations do |_result, response|
+        c.commit_repository_changes name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.commit_repository_changes ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations) do |_result, response|
+        c.commit_repository_changes ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }, call_options) do |_result, response|
+        c.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.commit_repository_changes(::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations), call_options) do |_result, response|
+        c.commit_repository_changes(::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +1214,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_read_repository_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, read_repository_file_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.read_repository_file({ name: name, commit_sha: commit_sha, path: path }) do |_result, response|
+        c.read_repository_file({ name: name, commit_sha: commit_sha, path: path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.read_repository_file name: name, commit_sha: commit_sha, path: path do |_result, response|
+        c.read_repository_file name: name, commit_sha: commit_sha, path: path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.read_repository_file ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path) do |_result, response|
+        c.read_repository_file ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.read_repository_file({ name: name, commit_sha: commit_sha, path: path }, call_options) do |_result, response|
+        c.read_repository_file({ name: name, commit_sha: commit_sha, path: path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.read_repository_file(::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path), call_options) do |_result, response|
+        c.read_repository_file(::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +1272,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_repository_directory_contents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_repository_directory_contents_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_repository_directory_contents name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_repository_directory_contents name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_repository_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_repository_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_repository_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_repository_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -548,32 +1328,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_repository_history_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_repository_history_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_repository_history name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_repository_history name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_repository_history ::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_repository_history ::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_repository_history(::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_repository_history(::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -602,32 +1382,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_compute_repository_access_token_status_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, compute_repository_access_token_status_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.compute_repository_access_token_status({ name: name }) do |_result, response|
+        c.compute_repository_access_token_status({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.compute_repository_access_token_status name: name do |_result, response|
+        c.compute_repository_access_token_status name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.compute_repository_access_token_status ::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name) do |_result, response|
+        c.compute_repository_access_token_status ::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.compute_repository_access_token_status({ name: name }, call_options) do |_result, response|
+        c.compute_repository_access_token_status({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.compute_repository_access_token_status(::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name), call_options) do |_result, response|
+        c.compute_repository_access_token_status(::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -656,32 +1436,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_remote_branches_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_remote_branches_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_remote_branches({ name: name }) do |_result, response|
+        c.fetch_remote_branches({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_remote_branches name: name do |_result, response|
+        c.fetch_remote_branches name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_remote_branches ::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name) do |_result, response|
+        c.fetch_remote_branches ::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_remote_branches({ name: name }, call_options) do |_result, response|
+        c.fetch_remote_branches({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_remote_branches(::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name), call_options) do |_result, response|
+        c.fetch_remote_branches(::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -714,32 +1494,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_list_workspaces_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workspaces_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workspaces parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_workspaces parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workspaces ::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_workspaces ::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workspaces(::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_workspaces(::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -768,32 +1548,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_workspace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workspace_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workspace({ name: name }) do |_result, response|
+        c.get_workspace({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workspace name: name do |_result, response|
+        c.get_workspace name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workspace ::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name) do |_result, response|
+        c.get_workspace ::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workspace({ name: name }, call_options) do |_result, response|
+        c.get_workspace({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workspace(::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name), call_options) do |_result, response|
+        c.get_workspace(::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -824,32 +1604,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_workspace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workspace_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }) do |_result, response|
+        c.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workspace parent: parent, workspace: workspace, workspace_id: workspace_id do |_result, response|
+        c.create_workspace parent: parent, workspace: workspace, workspace_id: workspace_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workspace ::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id) do |_result, response|
+        c.create_workspace ::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }, call_options) do |_result, response|
+        c.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workspace(::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id), call_options) do |_result, response|
+        c.create_workspace(::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -878,32 +1658,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_workspace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workspace_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workspace({ name: name }) do |_result, response|
+        c.delete_workspace({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workspace name: name do |_result, response|
+        c.delete_workspace name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workspace ::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name) do |_result, response|
+        c.delete_workspace ::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workspace({ name: name }, call_options) do |_result, response|
+        c.delete_workspace({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workspace(::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_workspace(::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -932,32 +1712,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_install_npm_packages_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, install_npm_packages_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.install_npm_packages({ workspace: workspace }) do |_result, response|
+        c.install_npm_packages({ workspace: workspace }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.install_npm_packages workspace: workspace do |_result, response|
+        c.install_npm_packages workspace: workspace do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.install_npm_packages ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace) do |_result, response|
+        c.install_npm_packages ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.install_npm_packages({ workspace: workspace }, call_options) do |_result, response|
+        c.install_npm_packages({ workspace: workspace }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.install_npm_packages(::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace), call_options) do |_result, response|
+        c.install_npm_packages(::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -988,32 +1768,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_pull_git_commits_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pull_git_commits_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }) do |_result, response|
+        c.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pull_git_commits name: name, remote_branch: remote_branch, author: author do |_result, response|
+        c.pull_git_commits name: name, remote_branch: remote_branch, author: author do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pull_git_commits ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author) do |_result, response|
+        c.pull_git_commits ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }, call_options) do |_result, response|
+        c.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pull_git_commits(::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author), call_options) do |_result, response|
+        c.pull_git_commits(::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1043,32 +1823,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_push_git_commits_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, push_git_commits_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.push_git_commits({ name: name, remote_branch: remote_branch }) do |_result, response|
+        c.push_git_commits({ name: name, remote_branch: remote_branch }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.push_git_commits name: name, remote_branch: remote_branch do |_result, response|
+        c.push_git_commits name: name, remote_branch: remote_branch do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.push_git_commits ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch) do |_result, response|
+        c.push_git_commits ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.push_git_commits({ name: name, remote_branch: remote_branch }, call_options) do |_result, response|
+        c.push_git_commits({ name: name, remote_branch: remote_branch }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.push_git_commits(::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch), call_options) do |_result, response|
+        c.push_git_commits(::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1097,32 +1877,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_file_git_statuses_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_file_git_statuses_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_file_git_statuses({ name: name }) do |_result, response|
+        c.fetch_file_git_statuses({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_file_git_statuses name: name do |_result, response|
+        c.fetch_file_git_statuses name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_file_git_statuses ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name) do |_result, response|
+        c.fetch_file_git_statuses ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_file_git_statuses({ name: name }, call_options) do |_result, response|
+        c.fetch_file_git_statuses({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_file_git_statuses(::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name), call_options) do |_result, response|
+        c.fetch_file_git_statuses(::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1152,32 +1932,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_git_ahead_behind_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_git_ahead_behind_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }) do |_result, response|
+        c.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_git_ahead_behind name: name, remote_branch: remote_branch do |_result, response|
+        c.fetch_git_ahead_behind name: name, remote_branch: remote_branch do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_git_ahead_behind ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch) do |_result, response|
+        c.fetch_git_ahead_behind ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }, call_options) do |_result, response|
+        c.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_git_ahead_behind(::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch), call_options) do |_result, response|
+        c.fetch_git_ahead_behind(::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1209,32 +1989,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_commit_workspace_changes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, commit_workspace_changes_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }) do |_result, response|
+        c.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.commit_workspace_changes name: name, author: author, commit_message: commit_message, paths: paths do |_result, response|
+        c.commit_workspace_changes name: name, author: author, commit_message: commit_message, paths: paths do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.commit_workspace_changes ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths) do |_result, response|
+        c.commit_workspace_changes ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }, call_options) do |_result, response|
+        c.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.commit_workspace_changes(::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths), call_options) do |_result, response|
+        c.commit_workspace_changes(::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1265,32 +2045,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_reset_workspace_changes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reset_workspace_changes_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reset_workspace_changes({ name: name, paths: paths, clean: clean }) do |_result, response|
+        c.reset_workspace_changes({ name: name, paths: paths, clean: clean }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reset_workspace_changes name: name, paths: paths, clean: clean do |_result, response|
+        c.reset_workspace_changes name: name, paths: paths, clean: clean do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reset_workspace_changes ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean) do |_result, response|
+        c.reset_workspace_changes ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reset_workspace_changes({ name: name, paths: paths, clean: clean }, call_options) do |_result, response|
+        c.reset_workspace_changes({ name: name, paths: paths, clean: clean }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reset_workspace_changes(::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean), call_options) do |_result, response|
+        c.reset_workspace_changes(::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1320,32 +2100,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_fetch_file_diff_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_file_diff_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_file_diff({ workspace: workspace, path: path }) do |_result, response|
+        c.fetch_file_diff({ workspace: workspace, path: path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_file_diff workspace: workspace, path: path do |_result, response|
+        c.fetch_file_diff workspace: workspace, path: path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_file_diff ::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path) do |_result, response|
+        c.fetch_file_diff ::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_file_diff({ workspace: workspace, path: path }, call_options) do |_result, response|
+        c.fetch_file_diff({ workspace: workspace, path: path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_file_diff(::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
+        c.fetch_file_diff(::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1377,32 +2157,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_directory_contents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_directory_contents_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1434,32 +2214,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_search_files_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_files_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_files workspace: workspace, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.search_files workspace: workspace, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_files ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.search_files ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_files(::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.search_files(::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1489,32 +2269,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_make_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, make_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.make_directory({ workspace: workspace, path: path }) do |_result, response|
+        c.make_directory({ workspace: workspace, path: path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.make_directory workspace: workspace, path: path do |_result, response|
+        c.make_directory workspace: workspace, path: path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.make_directory ::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path) do |_result, response|
+        c.make_directory ::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.make_directory({ workspace: workspace, path: path }, call_options) do |_result, response|
+        c.make_directory({ workspace: workspace, path: path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.make_directory(::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
+        c.make_directory(::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1544,32 +2324,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_remove_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_directory({ workspace: workspace, path: path }) do |_result, response|
+        c.remove_directory({ workspace: workspace, path: path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_directory workspace: workspace, path: path do |_result, response|
+        c.remove_directory workspace: workspace, path: path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_directory ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path) do |_result, response|
+        c.remove_directory ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_directory({ workspace: workspace, path: path }, call_options) do |_result, response|
+        c.remove_directory({ workspace: workspace, path: path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_directory(::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
+        c.remove_directory(::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1600,32 +2380,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_move_directory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, move_directory_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.move_directory({ workspace: workspace, path: path, new_path: new_path }) do |_result, response|
+        c.move_directory({ workspace: workspace, path: path, new_path: new_path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.move_directory workspace: workspace, path: path, new_path: new_path do |_result, response|
+        c.move_directory workspace: workspace, path: path, new_path: new_path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.move_directory ::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path) do |_result, response|
+        c.move_directory ::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.move_directory({ workspace: workspace, path: path, new_path: new_path }, call_options) do |_result, response|
+        c.move_directory({ workspace: workspace, path: path, new_path: new_path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.move_directory(::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path), call_options) do |_result, response|
+        c.move_directory(::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1656,32 +2436,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_read_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, read_file_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.read_file({ workspace: workspace, path: path, revision: revision }) do |_result, response|
+        c.read_file({ workspace: workspace, path: path, revision: revision }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.read_file workspace: workspace, path: path, revision: revision do |_result, response|
+        c.read_file workspace: workspace, path: path, revision: revision do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.read_file ::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision) do |_result, response|
+        c.read_file ::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.read_file({ workspace: workspace, path: path, revision: revision }, call_options) do |_result, response|
+        c.read_file({ workspace: workspace, path: path, revision: revision }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.read_file(::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision), call_options) do |_result, response|
+        c.read_file(::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1711,32 +2491,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_remove_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_file_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_file({ workspace: workspace, path: path }) do |_result, response|
+        c.remove_file({ workspace: workspace, path: path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_file workspace: workspace, path: path do |_result, response|
+        c.remove_file workspace: workspace, path: path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_file ::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path) do |_result, response|
+        c.remove_file ::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_file({ workspace: workspace, path: path }, call_options) do |_result, response|
+        c.remove_file({ workspace: workspace, path: path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_file(::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
+        c.remove_file(::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1767,32 +2547,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_move_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, move_file_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.move_file({ workspace: workspace, path: path, new_path: new_path }) do |_result, response|
+        c.move_file({ workspace: workspace, path: path, new_path: new_path }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.move_file workspace: workspace, path: path, new_path: new_path do |_result, response|
+        c.move_file workspace: workspace, path: path, new_path: new_path do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.move_file ::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path) do |_result, response|
+        c.move_file ::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.move_file({ workspace: workspace, path: path, new_path: new_path }, call_options) do |_result, response|
+        c.move_file({ workspace: workspace, path: path, new_path: new_path }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.move_file(::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path), call_options) do |_result, response|
+        c.move_file(::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1823,32 +2603,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_write_file_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, write_file_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.write_file({ workspace: workspace, path: path, contents: contents }) do |_result, response|
+        c.write_file({ workspace: workspace, path: path, contents: contents }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.write_file workspace: workspace, path: path, contents: contents do |_result, response|
+        c.write_file workspace: workspace, path: path, contents: contents do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.write_file ::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents) do |_result, response|
+        c.write_file ::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.write_file({ workspace: workspace, path: path, contents: contents }, call_options) do |_result, response|
+        c.write_file({ workspace: workspace, path: path, contents: contents }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.write_file(::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents), call_options) do |_result, response|
+        c.write_file(::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1879,32 +2659,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_list_release_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_release_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_release_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_release_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_release_configs ::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_release_configs ::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_release_configs(::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_release_configs(::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1933,32 +2713,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_release_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_release_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_release_config({ name: name }) do |_result, response|
+        c.get_release_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_release_config name: name do |_result, response|
+        c.get_release_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_release_config ::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name) do |_result, response|
+        c.get_release_config ::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_release_config({ name: name }, call_options) do |_result, response|
+        c.get_release_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_release_config(::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_release_config(::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1989,32 +2769,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_release_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_release_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }) do |_result, response|
+        c.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_release_config parent: parent, release_config: release_config, release_config_id: release_config_id do |_result, response|
+        c.create_release_config parent: parent, release_config: release_config, release_config_id: release_config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_release_config ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id) do |_result, response|
+        c.create_release_config ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }, call_options) do |_result, response|
+        c.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_release_config(::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id), call_options) do |_result, response|
+        c.create_release_config(::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2044,32 +2824,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_release_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_release_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_release_config({ update_mask: update_mask, release_config: release_config }) do |_result, response|
+        c.update_release_config({ update_mask: update_mask, release_config: release_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_release_config update_mask: update_mask, release_config: release_config do |_result, response|
+        c.update_release_config update_mask: update_mask, release_config: release_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_release_config ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config) do |_result, response|
+        c.update_release_config ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_release_config({ update_mask: update_mask, release_config: release_config }, call_options) do |_result, response|
+        c.update_release_config({ update_mask: update_mask, release_config: release_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_release_config(::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config), call_options) do |_result, response|
+        c.update_release_config(::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2098,32 +2878,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_release_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_release_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_release_config({ name: name }) do |_result, response|
+        c.delete_release_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_release_config name: name do |_result, response|
+        c.delete_release_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_release_config ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name) do |_result, response|
+        c.delete_release_config ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_release_config({ name: name }, call_options) do |_result, response|
+        c.delete_release_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_release_config(::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_release_config(::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2156,32 +2936,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_list_compilation_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_compilation_results_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_compilation_results parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_compilation_results parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_compilation_results ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_compilation_results ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_compilation_results(::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_compilation_results(::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2210,32 +2990,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_compilation_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_compilation_result_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_compilation_result({ name: name }) do |_result, response|
+        c.get_compilation_result({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_compilation_result name: name do |_result, response|
+        c.get_compilation_result name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_compilation_result ::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name) do |_result, response|
+        c.get_compilation_result ::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_compilation_result({ name: name }, call_options) do |_result, response|
+        c.get_compilation_result({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_compilation_result(::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name), call_options) do |_result, response|
+        c.get_compilation_result(::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2265,32 +3045,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_compilation_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_compilation_result_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_compilation_result({ parent: parent, compilation_result: compilation_result }) do |_result, response|
+        c.create_compilation_result({ parent: parent, compilation_result: compilation_result }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_compilation_result parent: parent, compilation_result: compilation_result do |_result, response|
+        c.create_compilation_result parent: parent, compilation_result: compilation_result do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_compilation_result ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result) do |_result, response|
+        c.create_compilation_result ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_compilation_result({ parent: parent, compilation_result: compilation_result }, call_options) do |_result, response|
+        c.create_compilation_result({ parent: parent, compilation_result: compilation_result }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_compilation_result(::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result), call_options) do |_result, response|
+        c.create_compilation_result(::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2322,32 +3102,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_compilation_result_actions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_compilation_result_actions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_compilation_result_actions name: name, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.query_compilation_result_actions name: name, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_compilation_result_actions ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.query_compilation_result_actions ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_compilation_result_actions(::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.query_compilation_result_actions(::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2378,32 +3158,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_list_workflow_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workflow_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workflow_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_workflow_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workflow_configs ::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_workflow_configs ::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workflow_configs(::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_workflow_configs(::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2432,32 +3212,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_workflow_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workflow_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workflow_config({ name: name }) do |_result, response|
+        c.get_workflow_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workflow_config name: name do |_result, response|
+        c.get_workflow_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workflow_config ::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name) do |_result, response|
+        c.get_workflow_config ::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workflow_config({ name: name }, call_options) do |_result, response|
+        c.get_workflow_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workflow_config(::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_workflow_config(::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2488,32 +3268,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_workflow_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workflow_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }) do |_result, response|
+        c.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workflow_config parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id do |_result, response|
+        c.create_workflow_config parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workflow_config ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id) do |_result, response|
+        c.create_workflow_config ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }, call_options) do |_result, response|
+        c.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workflow_config(::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id), call_options) do |_result, response|
+        c.create_workflow_config(::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2543,32 +3323,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_workflow_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_workflow_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }) do |_result, response|
+        c.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_workflow_config update_mask: update_mask, workflow_config: workflow_config do |_result, response|
+        c.update_workflow_config update_mask: update_mask, workflow_config: workflow_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_workflow_config ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config) do |_result, response|
+        c.update_workflow_config ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }, call_options) do |_result, response|
+        c.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_workflow_config(::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config), call_options) do |_result, response|
+        c.update_workflow_config(::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2597,32 +3377,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_workflow_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workflow_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workflow_config({ name: name }) do |_result, response|
+        c.delete_workflow_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workflow_config name: name do |_result, response|
+        c.delete_workflow_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workflow_config ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name) do |_result, response|
+        c.delete_workflow_config ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workflow_config({ name: name }, call_options) do |_result, response|
+        c.delete_workflow_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workflow_config(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_workflow_config(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2655,32 +3435,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_list_workflow_invocations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workflow_invocations_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workflow_invocations parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_workflow_invocations parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workflow_invocations ::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_workflow_invocations ::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workflow_invocations(::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_workflow_invocations(::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2709,32 +3489,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_workflow_invocation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workflow_invocation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workflow_invocation({ name: name }) do |_result, response|
+        c.get_workflow_invocation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workflow_invocation name: name do |_result, response|
+        c.get_workflow_invocation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workflow_invocation ::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name) do |_result, response|
+        c.get_workflow_invocation ::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workflow_invocation({ name: name }, call_options) do |_result, response|
+        c.get_workflow_invocation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workflow_invocation(::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name), call_options) do |_result, response|
+        c.get_workflow_invocation(::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2764,32 +3544,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_create_workflow_invocation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workflow_invocation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }) do |_result, response|
+        c.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workflow_invocation parent: parent, workflow_invocation: workflow_invocation do |_result, response|
+        c.create_workflow_invocation parent: parent, workflow_invocation: workflow_invocation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation) do |_result, response|
+        c.create_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }, call_options) do |_result, response|
+        c.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation), call_options) do |_result, response|
+        c.create_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2818,32 +3598,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_workflow_invocation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workflow_invocation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workflow_invocation({ name: name }) do |_result, response|
+        c.delete_workflow_invocation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workflow_invocation name: name do |_result, response|
+        c.delete_workflow_invocation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workflow_invocation ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name) do |_result, response|
+        c.delete_workflow_invocation ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workflow_invocation({ name: name }, call_options) do |_result, response|
+        c.delete_workflow_invocation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workflow_invocation(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_workflow_invocation(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2872,32 +3652,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_cancel_workflow_invocation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_workflow_invocation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_workflow_invocation({ name: name }) do |_result, response|
+        c.cancel_workflow_invocation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_workflow_invocation name: name do |_result, response|
+        c.cancel_workflow_invocation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name) do |_result, response|
+        c.cancel_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_workflow_invocation({ name: name }, call_options) do |_result, response|
+        c.cancel_workflow_invocation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2928,32 +3708,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_query_workflow_invocation_actions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_workflow_invocation_actions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_workflow_invocation_actions name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_workflow_invocation_actions name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_workflow_invocation_actions ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_workflow_invocation_actions ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_workflow_invocation_actions(::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_workflow_invocation_actions(::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2982,32 +3762,32 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_config({ name: name }) do |_result, response|
+        c.get_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_config name: name do |_result, response|
+        c.get_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_config ::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name) do |_result, response|
+        c.get_config ::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_config({ name: name }, call_options) do |_result, response|
+        c.get_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_config(::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_config(::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3037,37 +3817,203 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_update_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_config({ config: config, update_mask: update_mask }) do |_result, response|
+        c.update_config({ config: config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_config config: config, update_mask: update_mask do |_result, response|
+        c.update_config config: config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_config ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |_result, response|
+        c.update_config ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_config({ config: config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_config({ config: config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_config(::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_config(::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, update_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_iam_policy resource: resource, options: options do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create test objects.
+    client_result = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, test_iam_permissions_client_stub.call_count
       end
     end
   end

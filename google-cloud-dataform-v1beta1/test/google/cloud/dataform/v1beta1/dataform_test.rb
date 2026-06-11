@@ -63,6 +63,832 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_team_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_team_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_team_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_team_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_team_folder({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_team_folder name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_team_folder ::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_team_folder({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_team_folder(::Google::Cloud::Dataform::V1beta1::GetTeamFolderRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_team_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_team_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    team_folder = {}
+    team_folder_id = "hello world"
+
+    create_team_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_team_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1beta1::TeamFolder), request["team_folder"]
+      assert_equal "hello world", request["team_folder_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_team_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_team_folder({ parent: parent, team_folder: team_folder, team_folder_id: team_folder_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_team_folder parent: parent, team_folder: team_folder, team_folder_id: team_folder_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_team_folder ::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new(parent: parent, team_folder: team_folder, team_folder_id: team_folder_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_team_folder({ parent: parent, team_folder: team_folder, team_folder_id: team_folder_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_team_folder(::Google::Cloud::Dataform::V1beta1::CreateTeamFolderRequest.new(parent: parent, team_folder: team_folder, team_folder_id: team_folder_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_team_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_team_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::TeamFolder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    team_folder = {}
+
+    update_team_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_team_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1beta1::TeamFolder), request["team_folder"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_team_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_team_folder({ update_mask: update_mask, team_folder: team_folder }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_team_folder update_mask: update_mask, team_folder: team_folder do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_team_folder ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new(update_mask: update_mask, team_folder: team_folder) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_team_folder({ update_mask: update_mask, team_folder: team_folder }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_team_folder(::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest.new(update_mask: update_mask, team_folder: team_folder), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_team_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_team_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_team_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_team_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_team_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_team_folder({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_team_folder name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_team_folder ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_team_folder({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_team_folder(::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_team_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_team_folder_contents
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    team_folder = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_team_folder_contents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_team_folder_contents, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest, request
+      assert_equal "hello world", request["team_folder"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_team_folder_contents_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.query_team_folder_contents({ team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.query_team_folder_contents team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.query_team_folder_contents ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new(team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.query_team_folder_contents({ team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.query_team_folder_contents(::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest.new(team_folder: team_folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_team_folder_contents_client_stub.call_rpc_count
+    end
+  end
+
+  def test_search_team_folders
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    search_team_folders_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_team_folders, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest, request
+      assert_equal "hello world", request["location"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_team_folders_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.search_team_folders({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.search_team_folders location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.search_team_folders ::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.search_team_folders({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.search_team_folders(::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_team_folders_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::GetFolderRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_folder({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_folder name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_folder ::Google::Cloud::Dataform::V1beta1::GetFolderRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_folder({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_folder(::Google::Cloud::Dataform::V1beta1::GetFolderRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    folder = {}
+    folder_id = "hello world"
+
+    create_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::CreateFolderRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1beta1::Folder), request["folder"]
+      assert_equal "hello world", request["folder_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.create_folder({ parent: parent, folder: folder, folder_id: folder_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.create_folder parent: parent, folder: folder, folder_id: folder_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.create_folder ::Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.create_folder({ parent: parent, folder: folder, folder_id: folder_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.create_folder(::Google::Cloud::Dataform::V1beta1::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::Folder.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    folder = {}
+
+    update_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1beta1::Folder), request["folder"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_folder({ update_mask: update_mask, folder: folder }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_folder update_mask: update_mask, folder: folder do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_folder ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new(update_mask: update_mask, folder: folder) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_folder({ update_mask: update_mask, folder: folder }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_folder(::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest.new(update_mask: update_mask, folder: folder), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.delete_folder({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.delete_folder name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.delete_folder ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.delete_folder({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.delete_folder(::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_folder_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_folder_contents
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    folder = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_folder_contents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_folder_contents, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest, request
+      assert_equal "hello world", request["folder"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_folder_contents_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.query_folder_contents({ folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.query_folder_contents folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.query_folder_contents ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new(folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.query_folder_contents({ folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.query_folder_contents(::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest.new(folder: folder, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_folder_contents_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_user_root_contents
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    query_user_root_contents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_user_root_contents, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest, request
+      assert_equal "hello world", request["location"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_user_root_contents_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.query_user_root_contents({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.query_user_root_contents location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.query_user_root_contents ::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.query_user_root_contents({ location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.query_user_root_contents(::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsRequest.new(location: location, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_user_root_contents_client_stub.call_rpc_count
+    end
+  end
+
+  def test_move_folder
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_containing_folder = "hello world"
+
+    move_folder_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :move_folder, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::MoveFolderRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["destination_containing_folder"]
+      assert request.has_destination_containing_folder?
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, move_folder_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.move_folder({ name: name, destination_containing_folder: destination_containing_folder }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.move_folder name: name, destination_containing_folder: destination_containing_folder do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.move_folder ::Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new(name: name, destination_containing_folder: destination_containing_folder) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.move_folder({ name: name, destination_containing_folder: destination_containing_folder }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.move_folder(::Google::Cloud::Dataform::V1beta1::MoveFolderRequest.new(name: name, destination_containing_folder: destination_containing_folder), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, move_folder_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_repositories
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse.new
@@ -90,40 +916,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_repositories_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_repositories parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_repositories parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_repositories ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_repositories ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_repositories(::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_repositories(::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +979,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_repository({ name: name }) do |response, operation|
+      c.get_repository({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_repository name: name do |response, operation|
+      c.get_repository name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_repository ::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name) do |response, operation|
+      c.get_repository ::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_repository({ name: name }, grpc_options) do |response, operation|
+      c.get_repository({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_repository(::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_repository(::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +1041,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |response, operation|
+      c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_repository parent: parent, repository: repository, repository_id: repository_id do |response, operation|
+      c.create_repository parent: parent, repository: repository, repository_id: repository_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_repository ::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |response, operation|
+      c.create_repository ::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, grpc_options) do |response, operation|
+      c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_repository(::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), grpc_options) do |response, operation|
+      c.create_repository(::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +1101,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_repository({ update_mask: update_mask, repository: repository }) do |response, operation|
+      c.update_repository({ update_mask: update_mask, repository: repository }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_repository update_mask: update_mask, repository: repository do |response, operation|
+      c.update_repository update_mask: update_mask, repository: repository do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_repository ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository) do |response, operation|
+      c.update_repository ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_repository({ update_mask: update_mask, repository: repository }, grpc_options) do |response, operation|
+      c.update_repository({ update_mask: update_mask, repository: repository }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_repository(::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository), grpc_options) do |response, operation|
+      c.update_repository(::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,42 +1161,108 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_repository({ name: name, force: force }) do |response, operation|
+      c.delete_repository({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_repository name: name, force: force do |response, operation|
+      c.delete_repository name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_repository ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force) do |response, operation|
+      c.delete_repository ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_repository({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_repository({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_repository(::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_repository(::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, delete_repository_client_stub.call_rpc_count
+    end
+  end
+
+  def test_move_repository
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_containing_folder = "hello world"
+
+    move_repository_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :move_repository, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["destination_containing_folder"]
+      assert request.has_destination_containing_folder?
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, move_repository_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.move_repository({ name: name, destination_containing_folder: destination_containing_folder }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.move_repository name: name, destination_containing_folder: destination_containing_folder do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.move_repository ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new(name: name, destination_containing_folder: destination_containing_folder) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.move_repository({ name: name, destination_containing_folder: destination_containing_folder }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.move_repository(::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest.new(name: name, destination_containing_folder: destination_containing_folder), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, move_repository_client_stub.call_rpc_count
     end
   end
 
@@ -399,36 +1291,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, commit_repository_changes_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }) do |response, operation|
+      c.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit_repository_changes name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations do |response, operation|
+      c.commit_repository_changes name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit_repository_changes ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations) do |response, operation|
+      c.commit_repository_changes ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }, grpc_options) do |response, operation|
+      c.commit_repository_changes({ name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit_repository_changes(::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations), grpc_options) do |response, operation|
+      c.commit_repository_changes(::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest.new(name: name, commit_metadata: commit_metadata, required_head_commit_sha: required_head_commit_sha, file_operations: file_operations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -461,36 +1353,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, read_repository_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_repository_file({ name: name, commit_sha: commit_sha, path: path }) do |response, operation|
+      c.read_repository_file({ name: name, commit_sha: commit_sha, path: path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_repository_file name: name, commit_sha: commit_sha, path: path do |response, operation|
+      c.read_repository_file name: name, commit_sha: commit_sha, path: path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_repository_file ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path) do |response, operation|
+      c.read_repository_file ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_repository_file({ name: name, commit_sha: commit_sha, path: path }, grpc_options) do |response, operation|
+      c.read_repository_file({ name: name, commit_sha: commit_sha, path: path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_repository_file(::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path), grpc_options) do |response, operation|
+      c.read_repository_file(::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest.new(name: name, commit_sha: commit_sha, path: path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -527,40 +1419,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, query_repository_directory_contents_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_repository_directory_contents name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_repository_directory_contents name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_repository_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_repository_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_repository_directory_contents({ name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_repository_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_repository_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryRepositoryDirectoryContentsRequest.new(name: name, commit_sha: commit_sha, path: path, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -594,40 +1486,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_repository_history_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_repository_history name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_repository_history name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_repository_history ::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_repository_history ::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_repository_history({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_repository_history(::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_repository_history(::Google::Cloud::Dataform::V1beta1::FetchRepositoryHistoryRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -657,36 +1549,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, compute_repository_access_token_status_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.compute_repository_access_token_status({ name: name }) do |response, operation|
+      c.compute_repository_access_token_status({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.compute_repository_access_token_status name: name do |response, operation|
+      c.compute_repository_access_token_status name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.compute_repository_access_token_status ::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name) do |response, operation|
+      c.compute_repository_access_token_status ::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.compute_repository_access_token_status({ name: name }, grpc_options) do |response, operation|
+      c.compute_repository_access_token_status({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.compute_repository_access_token_status(::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name), grpc_options) do |response, operation|
+      c.compute_repository_access_token_status(::Google::Cloud::Dataform::V1beta1::ComputeRepositoryAccessTokenStatusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -715,36 +1607,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_remote_branches_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_remote_branches({ name: name }) do |response, operation|
+      c.fetch_remote_branches({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_remote_branches name: name do |response, operation|
+      c.fetch_remote_branches name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_remote_branches ::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name) do |response, operation|
+      c.fetch_remote_branches ::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_remote_branches({ name: name }, grpc_options) do |response, operation|
+      c.fetch_remote_branches({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_remote_branches(::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name), grpc_options) do |response, operation|
+      c.fetch_remote_branches(::Google::Cloud::Dataform::V1beta1::FetchRemoteBranchesRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -781,40 +1673,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_workspaces_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workspaces parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_workspaces parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workspaces ::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_workspaces ::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_workspaces({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workspaces(::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_workspaces(::Google::Cloud::Dataform::V1beta1::ListWorkspacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -844,36 +1736,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workspace({ name: name }) do |response, operation|
+      c.get_workspace({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workspace name: name do |response, operation|
+      c.get_workspace name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workspace ::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name) do |response, operation|
+      c.get_workspace ::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workspace({ name: name }, grpc_options) do |response, operation|
+      c.get_workspace({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workspace(::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workspace(::Google::Cloud::Dataform::V1beta1::GetWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -906,36 +1798,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }) do |response, operation|
+      c.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workspace parent: parent, workspace: workspace, workspace_id: workspace_id do |response, operation|
+      c.create_workspace parent: parent, workspace: workspace, workspace_id: workspace_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workspace ::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id) do |response, operation|
+      c.create_workspace ::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }, grpc_options) do |response, operation|
+      c.create_workspace({ parent: parent, workspace: workspace, workspace_id: workspace_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workspace(::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id), grpc_options) do |response, operation|
+      c.create_workspace(::Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new(parent: parent, workspace: workspace, workspace_id: workspace_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -964,36 +1856,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_workspace_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workspace({ name: name }) do |response, operation|
+      c.delete_workspace({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workspace name: name do |response, operation|
+      c.delete_workspace name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workspace ::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name) do |response, operation|
+      c.delete_workspace ::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workspace({ name: name }, grpc_options) do |response, operation|
+      c.delete_workspace({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workspace(::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_workspace(::Google::Cloud::Dataform::V1beta1::DeleteWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1022,36 +1914,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, install_npm_packages_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.install_npm_packages({ workspace: workspace }) do |response, operation|
+      c.install_npm_packages({ workspace: workspace }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.install_npm_packages workspace: workspace do |response, operation|
+      c.install_npm_packages workspace: workspace do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.install_npm_packages ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace) do |response, operation|
+      c.install_npm_packages ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.install_npm_packages({ workspace: workspace }, grpc_options) do |response, operation|
+      c.install_npm_packages({ workspace: workspace }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.install_npm_packages(::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace), grpc_options) do |response, operation|
+      c.install_npm_packages(::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest.new(workspace: workspace), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1084,36 +1976,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, pull_git_commits_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }) do |response, operation|
+      c.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pull_git_commits name: name, remote_branch: remote_branch, author: author do |response, operation|
+      c.pull_git_commits name: name, remote_branch: remote_branch, author: author do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pull_git_commits ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author) do |response, operation|
+      c.pull_git_commits ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }, grpc_options) do |response, operation|
+      c.pull_git_commits({ name: name, remote_branch: remote_branch, author: author }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pull_git_commits(::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author), grpc_options) do |response, operation|
+      c.pull_git_commits(::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest.new(name: name, remote_branch: remote_branch, author: author), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1144,36 +2036,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, push_git_commits_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.push_git_commits({ name: name, remote_branch: remote_branch }) do |response, operation|
+      c.push_git_commits({ name: name, remote_branch: remote_branch }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.push_git_commits name: name, remote_branch: remote_branch do |response, operation|
+      c.push_git_commits name: name, remote_branch: remote_branch do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.push_git_commits ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch) do |response, operation|
+      c.push_git_commits ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.push_git_commits({ name: name, remote_branch: remote_branch }, grpc_options) do |response, operation|
+      c.push_git_commits({ name: name, remote_branch: remote_branch }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.push_git_commits(::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch), grpc_options) do |response, operation|
+      c.push_git_commits(::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest.new(name: name, remote_branch: remote_branch), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1202,36 +2094,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_file_git_statuses_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_file_git_statuses({ name: name }) do |response, operation|
+      c.fetch_file_git_statuses({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_file_git_statuses name: name do |response, operation|
+      c.fetch_file_git_statuses name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_file_git_statuses ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name) do |response, operation|
+      c.fetch_file_git_statuses ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_file_git_statuses({ name: name }, grpc_options) do |response, operation|
+      c.fetch_file_git_statuses({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_file_git_statuses(::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name), grpc_options) do |response, operation|
+      c.fetch_file_git_statuses(::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1262,36 +2154,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_git_ahead_behind_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }) do |response, operation|
+      c.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_git_ahead_behind name: name, remote_branch: remote_branch do |response, operation|
+      c.fetch_git_ahead_behind name: name, remote_branch: remote_branch do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_git_ahead_behind ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch) do |response, operation|
+      c.fetch_git_ahead_behind ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }, grpc_options) do |response, operation|
+      c.fetch_git_ahead_behind({ name: name, remote_branch: remote_branch }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_git_ahead_behind(::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch), grpc_options) do |response, operation|
+      c.fetch_git_ahead_behind(::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest.new(name: name, remote_branch: remote_branch), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1326,36 +2218,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, commit_workspace_changes_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }) do |response, operation|
+      c.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit_workspace_changes name: name, author: author, commit_message: commit_message, paths: paths do |response, operation|
+      c.commit_workspace_changes name: name, author: author, commit_message: commit_message, paths: paths do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit_workspace_changes ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths) do |response, operation|
+      c.commit_workspace_changes ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }, grpc_options) do |response, operation|
+      c.commit_workspace_changes({ name: name, author: author, commit_message: commit_message, paths: paths }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit_workspace_changes(::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths), grpc_options) do |response, operation|
+      c.commit_workspace_changes(::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest.new(name: name, author: author, commit_message: commit_message, paths: paths), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1388,36 +2280,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, reset_workspace_changes_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reset_workspace_changes({ name: name, paths: paths, clean: clean }) do |response, operation|
+      c.reset_workspace_changes({ name: name, paths: paths, clean: clean }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reset_workspace_changes name: name, paths: paths, clean: clean do |response, operation|
+      c.reset_workspace_changes name: name, paths: paths, clean: clean do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reset_workspace_changes ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean) do |response, operation|
+      c.reset_workspace_changes ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reset_workspace_changes({ name: name, paths: paths, clean: clean }, grpc_options) do |response, operation|
+      c.reset_workspace_changes({ name: name, paths: paths, clean: clean }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reset_workspace_changes(::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean), grpc_options) do |response, operation|
+      c.reset_workspace_changes(::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest.new(name: name, paths: paths, clean: clean), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1448,36 +2340,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_file_diff_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_file_diff({ workspace: workspace, path: path }) do |response, operation|
+      c.fetch_file_diff({ workspace: workspace, path: path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_file_diff workspace: workspace, path: path do |response, operation|
+      c.fetch_file_diff workspace: workspace, path: path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_file_diff ::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path) do |response, operation|
+      c.fetch_file_diff ::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_file_diff({ workspace: workspace, path: path }, grpc_options) do |response, operation|
+      c.fetch_file_diff({ workspace: workspace, path: path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_file_diff(::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
+      c.fetch_file_diff(::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1512,40 +2404,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, query_directory_contents_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1581,40 +2473,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_files_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_files workspace: workspace, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.search_files workspace: workspace, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_files ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.search_files ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_files(::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.search_files(::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1646,36 +2538,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, make_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.make_directory({ workspace: workspace, path: path }) do |response, operation|
+      c.make_directory({ workspace: workspace, path: path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.make_directory workspace: workspace, path: path do |response, operation|
+      c.make_directory workspace: workspace, path: path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.make_directory ::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path) do |response, operation|
+      c.make_directory ::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.make_directory({ workspace: workspace, path: path }, grpc_options) do |response, operation|
+      c.make_directory({ workspace: workspace, path: path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.make_directory(::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
+      c.make_directory(::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1706,36 +2598,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_directory({ workspace: workspace, path: path }) do |response, operation|
+      c.remove_directory({ workspace: workspace, path: path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_directory workspace: workspace, path: path do |response, operation|
+      c.remove_directory workspace: workspace, path: path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_directory ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path) do |response, operation|
+      c.remove_directory ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_directory({ workspace: workspace, path: path }, grpc_options) do |response, operation|
+      c.remove_directory({ workspace: workspace, path: path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_directory(::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
+      c.remove_directory(::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1768,36 +2660,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, move_directory_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.move_directory({ workspace: workspace, path: path, new_path: new_path }) do |response, operation|
+      c.move_directory({ workspace: workspace, path: path, new_path: new_path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_directory workspace: workspace, path: path, new_path: new_path do |response, operation|
+      c.move_directory workspace: workspace, path: path, new_path: new_path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_directory ::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path) do |response, operation|
+      c.move_directory ::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_directory({ workspace: workspace, path: path, new_path: new_path }, grpc_options) do |response, operation|
+      c.move_directory({ workspace: workspace, path: path, new_path: new_path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_directory(::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path), grpc_options) do |response, operation|
+      c.move_directory(::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest.new(workspace: workspace, path: path, new_path: new_path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1830,36 +2722,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, read_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_file({ workspace: workspace, path: path, revision: revision }) do |response, operation|
+      c.read_file({ workspace: workspace, path: path, revision: revision }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_file workspace: workspace, path: path, revision: revision do |response, operation|
+      c.read_file workspace: workspace, path: path, revision: revision do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_file ::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision) do |response, operation|
+      c.read_file ::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_file({ workspace: workspace, path: path, revision: revision }, grpc_options) do |response, operation|
+      c.read_file({ workspace: workspace, path: path, revision: revision }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_file(::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision), grpc_options) do |response, operation|
+      c.read_file(::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1890,36 +2782,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_file({ workspace: workspace, path: path }) do |response, operation|
+      c.remove_file({ workspace: workspace, path: path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_file workspace: workspace, path: path do |response, operation|
+      c.remove_file workspace: workspace, path: path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_file ::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path) do |response, operation|
+      c.remove_file ::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_file({ workspace: workspace, path: path }, grpc_options) do |response, operation|
+      c.remove_file({ workspace: workspace, path: path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_file(::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
+      c.remove_file(::Google::Cloud::Dataform::V1beta1::RemoveFileRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1952,36 +2844,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, move_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.move_file({ workspace: workspace, path: path, new_path: new_path }) do |response, operation|
+      c.move_file({ workspace: workspace, path: path, new_path: new_path }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_file workspace: workspace, path: path, new_path: new_path do |response, operation|
+      c.move_file workspace: workspace, path: path, new_path: new_path do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_file ::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path) do |response, operation|
+      c.move_file ::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_file({ workspace: workspace, path: path, new_path: new_path }, grpc_options) do |response, operation|
+      c.move_file({ workspace: workspace, path: path, new_path: new_path }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_file(::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path), grpc_options) do |response, operation|
+      c.move_file(::Google::Cloud::Dataform::V1beta1::MoveFileRequest.new(workspace: workspace, path: path, new_path: new_path), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2014,36 +2906,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, write_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.write_file({ workspace: workspace, path: path, contents: contents }) do |response, operation|
+      c.write_file({ workspace: workspace, path: path, contents: contents }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.write_file workspace: workspace, path: path, contents: contents do |response, operation|
+      c.write_file workspace: workspace, path: path, contents: contents do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.write_file ::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents) do |response, operation|
+      c.write_file ::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.write_file({ workspace: workspace, path: path, contents: contents }, grpc_options) do |response, operation|
+      c.write_file({ workspace: workspace, path: path, contents: contents }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.write_file(::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents), grpc_options) do |response, operation|
+      c.write_file(::Google::Cloud::Dataform::V1beta1::WriteFileRequest.new(workspace: workspace, path: path, contents: contents), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2076,40 +2968,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_release_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_release_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_release_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_release_configs ::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_release_configs ::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_release_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_release_configs(::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_release_configs(::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2139,36 +3031,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_release_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_release_config({ name: name }) do |response, operation|
+      c.get_release_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_release_config name: name do |response, operation|
+      c.get_release_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_release_config ::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name) do |response, operation|
+      c.get_release_config ::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_release_config({ name: name }, grpc_options) do |response, operation|
+      c.get_release_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_release_config(::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_release_config(::Google::Cloud::Dataform::V1beta1::GetReleaseConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2201,36 +3093,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_release_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }) do |response, operation|
+      c.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_release_config parent: parent, release_config: release_config, release_config_id: release_config_id do |response, operation|
+      c.create_release_config parent: parent, release_config: release_config, release_config_id: release_config_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_release_config ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id) do |response, operation|
+      c.create_release_config ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }, grpc_options) do |response, operation|
+      c.create_release_config({ parent: parent, release_config: release_config, release_config_id: release_config_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_release_config(::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id), grpc_options) do |response, operation|
+      c.create_release_config(::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest.new(parent: parent, release_config: release_config, release_config_id: release_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2261,36 +3153,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_release_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_release_config({ update_mask: update_mask, release_config: release_config }) do |response, operation|
+      c.update_release_config({ update_mask: update_mask, release_config: release_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_release_config update_mask: update_mask, release_config: release_config do |response, operation|
+      c.update_release_config update_mask: update_mask, release_config: release_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_release_config ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config) do |response, operation|
+      c.update_release_config ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_release_config({ update_mask: update_mask, release_config: release_config }, grpc_options) do |response, operation|
+      c.update_release_config({ update_mask: update_mask, release_config: release_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_release_config(::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config), grpc_options) do |response, operation|
+      c.update_release_config(::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest.new(update_mask: update_mask, release_config: release_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2319,36 +3211,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_release_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_release_config({ name: name }) do |response, operation|
+      c.delete_release_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_release_config name: name do |response, operation|
+      c.delete_release_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_release_config ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name) do |response, operation|
+      c.delete_release_config ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_release_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_release_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_release_config(::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_release_config(::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2385,40 +3277,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_compilation_results_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_compilation_results parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_compilation_results parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_compilation_results ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_compilation_results ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_compilation_results(::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_compilation_results(::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2448,36 +3340,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_compilation_result_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_compilation_result({ name: name }) do |response, operation|
+      c.get_compilation_result({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_compilation_result name: name do |response, operation|
+      c.get_compilation_result name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_compilation_result ::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name) do |response, operation|
+      c.get_compilation_result ::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_compilation_result({ name: name }, grpc_options) do |response, operation|
+      c.get_compilation_result({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_compilation_result(::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_compilation_result(::Google::Cloud::Dataform::V1beta1::GetCompilationResultRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2508,36 +3400,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_compilation_result_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_compilation_result({ parent: parent, compilation_result: compilation_result }) do |response, operation|
+      c.create_compilation_result({ parent: parent, compilation_result: compilation_result }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_compilation_result parent: parent, compilation_result: compilation_result do |response, operation|
+      c.create_compilation_result parent: parent, compilation_result: compilation_result do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_compilation_result ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result) do |response, operation|
+      c.create_compilation_result ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_compilation_result({ parent: parent, compilation_result: compilation_result }, grpc_options) do |response, operation|
+      c.create_compilation_result({ parent: parent, compilation_result: compilation_result }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_compilation_result(::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result), grpc_options) do |response, operation|
+      c.create_compilation_result(::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new(parent: parent, compilation_result: compilation_result), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2572,40 +3464,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, query_compilation_result_actions_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_compilation_result_actions name: name, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.query_compilation_result_actions name: name, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_compilation_result_actions ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.query_compilation_result_actions ::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.query_compilation_result_actions({ name: name, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_compilation_result_actions(::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.query_compilation_result_actions(::Google::Cloud::Dataform::V1beta1::QueryCompilationResultActionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2639,40 +3531,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_workflow_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workflow_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_workflow_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workflow_configs ::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_workflow_configs ::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_workflow_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workflow_configs(::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_workflow_configs(::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2702,36 +3594,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_workflow_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workflow_config({ name: name }) do |response, operation|
+      c.get_workflow_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workflow_config name: name do |response, operation|
+      c.get_workflow_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workflow_config ::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name) do |response, operation|
+      c.get_workflow_config ::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workflow_config({ name: name }, grpc_options) do |response, operation|
+      c.get_workflow_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workflow_config(::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workflow_config(::Google::Cloud::Dataform::V1beta1::GetWorkflowConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2764,36 +3656,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_workflow_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }) do |response, operation|
+      c.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workflow_config parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id do |response, operation|
+      c.create_workflow_config parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workflow_config ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id) do |response, operation|
+      c.create_workflow_config ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }, grpc_options) do |response, operation|
+      c.create_workflow_config({ parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workflow_config(::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id), grpc_options) do |response, operation|
+      c.create_workflow_config(::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest.new(parent: parent, workflow_config: workflow_config, workflow_config_id: workflow_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2824,36 +3716,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_workflow_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }) do |response, operation|
+      c.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workflow_config update_mask: update_mask, workflow_config: workflow_config do |response, operation|
+      c.update_workflow_config update_mask: update_mask, workflow_config: workflow_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workflow_config ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config) do |response, operation|
+      c.update_workflow_config ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }, grpc_options) do |response, operation|
+      c.update_workflow_config({ update_mask: update_mask, workflow_config: workflow_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workflow_config(::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config), grpc_options) do |response, operation|
+      c.update_workflow_config(::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest.new(update_mask: update_mask, workflow_config: workflow_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2882,36 +3774,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_workflow_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workflow_config({ name: name }) do |response, operation|
+      c.delete_workflow_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workflow_config name: name do |response, operation|
+      c.delete_workflow_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workflow_config ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name) do |response, operation|
+      c.delete_workflow_config ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workflow_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_workflow_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workflow_config(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_workflow_config(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2948,40 +3840,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_workflow_invocations_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+      c.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workflow_invocations parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+      c.list_workflow_invocations parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workflow_invocations ::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+      c.list_workflow_invocations ::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+      c.list_workflow_invocations({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workflow_invocations(::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+      c.list_workflow_invocations(::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3011,36 +3903,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_workflow_invocation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workflow_invocation({ name: name }) do |response, operation|
+      c.get_workflow_invocation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workflow_invocation name: name do |response, operation|
+      c.get_workflow_invocation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workflow_invocation ::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name) do |response, operation|
+      c.get_workflow_invocation ::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workflow_invocation({ name: name }, grpc_options) do |response, operation|
+      c.get_workflow_invocation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workflow_invocation(::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workflow_invocation(::Google::Cloud::Dataform::V1beta1::GetWorkflowInvocationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3071,36 +3963,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_workflow_invocation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }) do |response, operation|
+      c.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workflow_invocation parent: parent, workflow_invocation: workflow_invocation do |response, operation|
+      c.create_workflow_invocation parent: parent, workflow_invocation: workflow_invocation do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation) do |response, operation|
+      c.create_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }, grpc_options) do |response, operation|
+      c.create_workflow_invocation({ parent: parent, workflow_invocation: workflow_invocation }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation), grpc_options) do |response, operation|
+      c.create_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CreateWorkflowInvocationRequest.new(parent: parent, workflow_invocation: workflow_invocation), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3129,36 +4021,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_workflow_invocation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workflow_invocation({ name: name }) do |response, operation|
+      c.delete_workflow_invocation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workflow_invocation name: name do |response, operation|
+      c.delete_workflow_invocation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workflow_invocation ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name) do |response, operation|
+      c.delete_workflow_invocation ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workflow_invocation({ name: name }, grpc_options) do |response, operation|
+      c.delete_workflow_invocation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workflow_invocation(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_workflow_invocation(::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3187,36 +4079,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_workflow_invocation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_workflow_invocation({ name: name }) do |response, operation|
+      c.cancel_workflow_invocation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_workflow_invocation name: name do |response, operation|
+      c.cancel_workflow_invocation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name) do |response, operation|
+      c.cancel_workflow_invocation ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_workflow_invocation({ name: name }, grpc_options) do |response, operation|
+      c.cancel_workflow_invocation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_workflow_invocation(::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3249,40 +4141,40 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, query_workflow_invocation_actions_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_workflow_invocation_actions name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.query_workflow_invocation_actions name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_workflow_invocation_actions ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.query_workflow_invocation_actions ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.query_workflow_invocation_actions({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_workflow_invocation_actions(::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.query_workflow_invocation_actions(::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3312,36 +4204,36 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_config({ name: name }) do |response, operation|
+      c.get_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_config name: name do |response, operation|
+      c.get_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_config ::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name) do |response, operation|
+      c.get_config ::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_config({ name: name }, grpc_options) do |response, operation|
+      c.get_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_config(::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_config(::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3372,42 +4264,224 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_config({ config: config, update_mask: update_mask }) do |response, operation|
+      c.update_config({ config: config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_config config: config, update_mask: update_mask do |response, operation|
+      c.update_config config: config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_config ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |response, operation|
+      c.update_config ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_config({ config: config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_config({ config: config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_config(::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_config(::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, update_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_iam_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::Policy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_iam_policy, name
+      assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_iam_policy resource: resource, options: options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_set_iam_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::Policy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_iam_policy, name
+      assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create GRPC objects.
+    grpc_response = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :test_iam_permissions, name
+      assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
+      # Create client
+      c = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, test_iam_permissions_client_stub.call_rpc_count
     end
   end
 
@@ -3448,5 +4522,19 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Dataform::V1beta1::Dataform::Client, client
       assert_equal creds, client.configure.credentials
     end
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Dataform::V1beta1::Dataform::Operations, client.operations_client
   end
 end
