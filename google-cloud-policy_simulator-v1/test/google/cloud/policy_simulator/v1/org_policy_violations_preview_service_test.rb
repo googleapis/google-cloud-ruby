@@ -86,40 +86,40 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::C
 
     Gapic::ServiceStub.stub :new, list_org_policy_violations_previews_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_org_policy_violations_previews parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_org_policy_violations_previews parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_org_policy_violations_previews ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_org_policy_violations_previews ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_org_policy_violations_previews(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_org_policy_violations_previews(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::C
 
     Gapic::ServiceStub.stub :new, get_org_policy_violations_preview_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_org_policy_violations_preview({ name: name }) do |response, operation|
+      c.get_org_policy_violations_preview({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_org_policy_violations_preview name: name do |response, operation|
+      c.get_org_policy_violations_preview name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name) do |response, operation|
+      c.get_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_org_policy_violations_preview({ name: name }, grpc_options) do |response, operation|
+      c.get_org_policy_violations_preview({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::C
 
     Gapic::ServiceStub.stub :new, create_org_policy_violations_preview_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }) do |response, operation|
+      c.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_org_policy_violations_preview parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id do |response, operation|
+      c.create_org_policy_violations_preview parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id) do |response, operation|
+      c.create_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }, grpc_options) do |response, operation|
+      c.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id), grpc_options) do |response, operation|
+      c.create_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -278,40 +278,40 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::C
 
     Gapic::ServiceStub.stub :new, list_org_policy_violations_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_org_policy_violations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_org_policy_violations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_org_policy_violations ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_org_policy_violations ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_org_policy_violations(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_org_policy_violations(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -82,36 +82,36 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, check_onboarding_status_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.check_onboarding_status({ parent: parent }) do |response, operation|
+      c.check_onboarding_status({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_onboarding_status parent: parent do |response, operation|
+      c.check_onboarding_status parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_onboarding_status ::Google::Cloud::PrivilegedAccessManager::V1::CheckOnboardingStatusRequest.new(parent: parent) do |response, operation|
+      c.check_onboarding_status ::Google::Cloud::PrivilegedAccessManager::V1::CheckOnboardingStatusRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_onboarding_status({ parent: parent }, grpc_options) do |response, operation|
+      c.check_onboarding_status({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_onboarding_status(::Google::Cloud::PrivilegedAccessManager::V1::CheckOnboardingStatusRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.check_onboarding_status(::Google::Cloud::PrivilegedAccessManager::V1::CheckOnboardingStatusRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,40 +148,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, list_entitlements_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_entitlements({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_entitlements({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_entitlements parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_entitlements parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_entitlements ::Google::Cloud::PrivilegedAccessManager::V1::ListEntitlementsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_entitlements ::Google::Cloud::PrivilegedAccessManager::V1::ListEntitlementsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_entitlements({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_entitlements({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_entitlements(::Google::Cloud::PrivilegedAccessManager::V1::ListEntitlementsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_entitlements(::Google::Cloud::PrivilegedAccessManager::V1::ListEntitlementsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -219,40 +219,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, search_entitlements_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_entitlements({ parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_entitlements({ parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_entitlements parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_entitlements parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_entitlements ::Google::Cloud::PrivilegedAccessManager::V1::SearchEntitlementsRequest.new(parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_entitlements ::Google::Cloud::PrivilegedAccessManager::V1::SearchEntitlementsRequest.new(parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_entitlements({ parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_entitlements({ parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_entitlements(::Google::Cloud::PrivilegedAccessManager::V1::SearchEntitlementsRequest.new(parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_entitlements(::Google::Cloud::PrivilegedAccessManager::V1::SearchEntitlementsRequest.new(parent: parent, caller_access_type: caller_access_type, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -282,36 +282,36 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, get_entitlement_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_entitlement({ name: name }) do |response, operation|
+      c.get_entitlement({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_entitlement name: name do |response, operation|
+      c.get_entitlement name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::GetEntitlementRequest.new(name: name) do |response, operation|
+      c.get_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::GetEntitlementRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_entitlement({ name: name }, grpc_options) do |response, operation|
+      c.get_entitlement({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::GetEntitlementRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::GetEntitlementRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,40 +346,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, create_entitlement_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_entitlement({ parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id }) do |response, operation|
+      c.create_entitlement({ parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_entitlement parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id do |response, operation|
+      c.create_entitlement parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::CreateEntitlementRequest.new(parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id) do |response, operation|
+      c.create_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::CreateEntitlementRequest.new(parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_entitlement({ parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_entitlement({ parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::CreateEntitlementRequest.new(parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id), grpc_options) do |response, operation|
+      c.create_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::CreateEntitlementRequest.new(parent: parent, entitlement_id: entitlement_id, entitlement: entitlement, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -413,40 +413,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, delete_entitlement_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_entitlement({ name: name, request_id: request_id, force: force }) do |response, operation|
+      c.delete_entitlement({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_entitlement name: name, request_id: request_id, force: force do |response, operation|
+      c.delete_entitlement name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::DeleteEntitlementRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+      c.delete_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::DeleteEntitlementRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_entitlement({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+      c.delete_entitlement({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::DeleteEntitlementRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+      c.delete_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::DeleteEntitlementRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -478,40 +478,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, update_entitlement_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_entitlement({ entitlement: entitlement, update_mask: update_mask }) do |response, operation|
+      c.update_entitlement({ entitlement: entitlement, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_entitlement entitlement: entitlement, update_mask: update_mask do |response, operation|
+      c.update_entitlement entitlement: entitlement, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::UpdateEntitlementRequest.new(entitlement: entitlement, update_mask: update_mask) do |response, operation|
+      c.update_entitlement ::Google::Cloud::PrivilegedAccessManager::V1::UpdateEntitlementRequest.new(entitlement: entitlement, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_entitlement({ entitlement: entitlement, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_entitlement({ entitlement: entitlement, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::UpdateEntitlementRequest.new(entitlement: entitlement, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_entitlement(::Google::Cloud::PrivilegedAccessManager::V1::UpdateEntitlementRequest.new(entitlement: entitlement, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -549,40 +549,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, list_grants_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_grants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_grants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_grants parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_grants parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_grants ::Google::Cloud::PrivilegedAccessManager::V1::ListGrantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_grants ::Google::Cloud::PrivilegedAccessManager::V1::ListGrantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_grants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_grants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_grants(::Google::Cloud::PrivilegedAccessManager::V1::ListGrantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_grants(::Google::Cloud::PrivilegedAccessManager::V1::ListGrantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -620,40 +620,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, search_grants_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_grants({ parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_grants({ parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_grants parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_grants parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_grants ::Google::Cloud::PrivilegedAccessManager::V1::SearchGrantsRequest.new(parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_grants ::Google::Cloud::PrivilegedAccessManager::V1::SearchGrantsRequest.new(parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_grants({ parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_grants({ parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_grants(::Google::Cloud::PrivilegedAccessManager::V1::SearchGrantsRequest.new(parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_grants(::Google::Cloud::PrivilegedAccessManager::V1::SearchGrantsRequest.new(parent: parent, caller_relationship: caller_relationship, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -683,36 +683,36 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, get_grant_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_grant({ name: name }) do |response, operation|
+      c.get_grant({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_grant name: name do |response, operation|
+      c.get_grant name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_grant ::Google::Cloud::PrivilegedAccessManager::V1::GetGrantRequest.new(name: name) do |response, operation|
+      c.get_grant ::Google::Cloud::PrivilegedAccessManager::V1::GetGrantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_grant({ name: name }, grpc_options) do |response, operation|
+      c.get_grant({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_grant(::Google::Cloud::PrivilegedAccessManager::V1::GetGrantRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_grant(::Google::Cloud::PrivilegedAccessManager::V1::GetGrantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -745,36 +745,36 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, create_grant_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_grant({ parent: parent, grant: grant, request_id: request_id }) do |response, operation|
+      c.create_grant({ parent: parent, grant: grant, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_grant parent: parent, grant: grant, request_id: request_id do |response, operation|
+      c.create_grant parent: parent, grant: grant, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_grant ::Google::Cloud::PrivilegedAccessManager::V1::CreateGrantRequest.new(parent: parent, grant: grant, request_id: request_id) do |response, operation|
+      c.create_grant ::Google::Cloud::PrivilegedAccessManager::V1::CreateGrantRequest.new(parent: parent, grant: grant, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_grant({ parent: parent, grant: grant, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_grant({ parent: parent, grant: grant, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_grant(::Google::Cloud::PrivilegedAccessManager::V1::CreateGrantRequest.new(parent: parent, grant: grant, request_id: request_id), grpc_options) do |response, operation|
+      c.create_grant(::Google::Cloud::PrivilegedAccessManager::V1::CreateGrantRequest.new(parent: parent, grant: grant, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -805,36 +805,36 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, approve_grant_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.approve_grant({ name: name, reason: reason }) do |response, operation|
+      c.approve_grant({ name: name, reason: reason }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.approve_grant name: name, reason: reason do |response, operation|
+      c.approve_grant name: name, reason: reason do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.approve_grant ::Google::Cloud::PrivilegedAccessManager::V1::ApproveGrantRequest.new(name: name, reason: reason) do |response, operation|
+      c.approve_grant ::Google::Cloud::PrivilegedAccessManager::V1::ApproveGrantRequest.new(name: name, reason: reason) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.approve_grant({ name: name, reason: reason }, grpc_options) do |response, operation|
+      c.approve_grant({ name: name, reason: reason }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.approve_grant(::Google::Cloud::PrivilegedAccessManager::V1::ApproveGrantRequest.new(name: name, reason: reason), grpc_options) do |response, operation|
+      c.approve_grant(::Google::Cloud::PrivilegedAccessManager::V1::ApproveGrantRequest.new(name: name, reason: reason), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -865,36 +865,36 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, deny_grant_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deny_grant({ name: name, reason: reason }) do |response, operation|
+      c.deny_grant({ name: name, reason: reason }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deny_grant name: name, reason: reason do |response, operation|
+      c.deny_grant name: name, reason: reason do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deny_grant ::Google::Cloud::PrivilegedAccessManager::V1::DenyGrantRequest.new(name: name, reason: reason) do |response, operation|
+      c.deny_grant ::Google::Cloud::PrivilegedAccessManager::V1::DenyGrantRequest.new(name: name, reason: reason) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deny_grant({ name: name, reason: reason }, grpc_options) do |response, operation|
+      c.deny_grant({ name: name, reason: reason }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deny_grant(::Google::Cloud::PrivilegedAccessManager::V1::DenyGrantRequest.new(name: name, reason: reason), grpc_options) do |response, operation|
+      c.deny_grant(::Google::Cloud::PrivilegedAccessManager::V1::DenyGrantRequest.new(name: name, reason: reason), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -925,40 +925,40 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
 
     Gapic::ServiceStub.stub :new, revoke_grant_client_stub do
       # Create client
-      client = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
+      c = ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.revoke_grant({ name: name, reason: reason }) do |response, operation|
+      c.revoke_grant({ name: name, reason: reason }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.revoke_grant name: name, reason: reason do |response, operation|
+      c.revoke_grant name: name, reason: reason do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.revoke_grant ::Google::Cloud::PrivilegedAccessManager::V1::RevokeGrantRequest.new(name: name, reason: reason) do |response, operation|
+      c.revoke_grant ::Google::Cloud::PrivilegedAccessManager::V1::RevokeGrantRequest.new(name: name, reason: reason) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.revoke_grant({ name: name, reason: reason }, grpc_options) do |response, operation|
+      c.revoke_grant({ name: name, reason: reason }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.revoke_grant(::Google::Cloud::PrivilegedAccessManager::V1::RevokeGrantRequest.new(name: name, reason: reason), grpc_options) do |response, operation|
+      c.revoke_grant(::Google::Cloud::PrivilegedAccessManager::V1::RevokeGrantRequest.new(name: name, reason: reason), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -82,36 +82,36 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_replay_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_replay({ name: name }) do |response, operation|
+      c.get_replay({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_replay name: name do |response, operation|
+      c.get_replay name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_replay ::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name) do |response, operation|
+      c.get_replay ::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_replay({ name: name }, grpc_options) do |response, operation|
+      c.get_replay({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_replay(::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_replay(::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,40 +142,40 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_replay_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_replay({ parent: parent, replay: replay }) do |response, operation|
+      c.create_replay({ parent: parent, replay: replay }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_replay parent: parent, replay: replay do |response, operation|
+      c.create_replay parent: parent, replay: replay do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_replay ::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay) do |response, operation|
+      c.create_replay ::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_replay({ parent: parent, replay: replay }, grpc_options) do |response, operation|
+      c.create_replay({ parent: parent, replay: replay }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_replay(::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay), grpc_options) do |response, operation|
+      c.create_replay(::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -209,40 +209,40 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_replay_results_client_stub do
       # Create client
-      client = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
+      c = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_replay_results parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_replay_results parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_replay_results ::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_replay_results ::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_replay_results(::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_replay_results(::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
