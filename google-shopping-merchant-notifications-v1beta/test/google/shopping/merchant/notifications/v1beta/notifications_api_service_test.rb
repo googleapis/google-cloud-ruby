@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
     Gapic::ServiceStub.stub :new, get_notification_subscription_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notification_subscription({ name: name }) do |response, operation|
+      c.get_notification_subscription({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notification_subscription name: name do |response, operation|
+      c.get_notification_subscription name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::GetNotificationSubscriptionRequest.new(name: name) do |response, operation|
+      c.get_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::GetNotificationSubscriptionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notification_subscription({ name: name }, grpc_options) do |response, operation|
+      c.get_notification_subscription({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::GetNotificationSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::GetNotificationSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
     Gapic::ServiceStub.stub :new, create_notification_subscription_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_notification_subscription({ parent: parent, notification_subscription: notification_subscription }) do |response, operation|
+      c.create_notification_subscription({ parent: parent, notification_subscription: notification_subscription }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_notification_subscription parent: parent, notification_subscription: notification_subscription do |response, operation|
+      c.create_notification_subscription parent: parent, notification_subscription: notification_subscription do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::CreateNotificationSubscriptionRequest.new(parent: parent, notification_subscription: notification_subscription) do |response, operation|
+      c.create_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::CreateNotificationSubscriptionRequest.new(parent: parent, notification_subscription: notification_subscription) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_notification_subscription({ parent: parent, notification_subscription: notification_subscription }, grpc_options) do |response, operation|
+      c.create_notification_subscription({ parent: parent, notification_subscription: notification_subscription }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::CreateNotificationSubscriptionRequest.new(parent: parent, notification_subscription: notification_subscription), grpc_options) do |response, operation|
+      c.create_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::CreateNotificationSubscriptionRequest.new(parent: parent, notification_subscription: notification_subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
     Gapic::ServiceStub.stub :new, update_notification_subscription_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_notification_subscription({ notification_subscription: notification_subscription, update_mask: update_mask }) do |response, operation|
+      c.update_notification_subscription({ notification_subscription: notification_subscription, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_notification_subscription notification_subscription: notification_subscription, update_mask: update_mask do |response, operation|
+      c.update_notification_subscription notification_subscription: notification_subscription, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::UpdateNotificationSubscriptionRequest.new(notification_subscription: notification_subscription, update_mask: update_mask) do |response, operation|
+      c.update_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::UpdateNotificationSubscriptionRequest.new(notification_subscription: notification_subscription, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_notification_subscription({ notification_subscription: notification_subscription, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_notification_subscription({ notification_subscription: notification_subscription, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::UpdateNotificationSubscriptionRequest.new(notification_subscription: notification_subscription, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::UpdateNotificationSubscriptionRequest.new(notification_subscription: notification_subscription, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
     Gapic::ServiceStub.stub :new, delete_notification_subscription_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_notification_subscription({ name: name }) do |response, operation|
+      c.delete_notification_subscription({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_notification_subscription name: name do |response, operation|
+      c.delete_notification_subscription name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::DeleteNotificationSubscriptionRequest.new(name: name) do |response, operation|
+      c.delete_notification_subscription ::Google::Shopping::Merchant::Notifications::V1beta::DeleteNotificationSubscriptionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_notification_subscription({ name: name }, grpc_options) do |response, operation|
+      c.delete_notification_subscription({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::DeleteNotificationSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_notification_subscription(::Google::Shopping::Merchant::Notifications::V1beta::DeleteNotificationSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,40 +322,40 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
     Gapic::ServiceStub.stub :new, list_notification_subscriptions_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notification_subscriptions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_notification_subscriptions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notification_subscriptions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_notification_subscriptions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notification_subscriptions ::Google::Shopping::Merchant::Notifications::V1beta::ListNotificationSubscriptionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_notification_subscriptions ::Google::Shopping::Merchant::Notifications::V1beta::ListNotificationSubscriptionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notification_subscriptions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_notification_subscriptions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notification_subscriptions(::Google::Shopping::Merchant::Notifications::V1beta::ListNotificationSubscriptionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_notification_subscriptions(::Google::Shopping::Merchant::Notifications::V1beta::ListNotificationSubscriptionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

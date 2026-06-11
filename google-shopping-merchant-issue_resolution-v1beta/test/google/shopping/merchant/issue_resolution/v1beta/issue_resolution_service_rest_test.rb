@@ -100,32 +100,32 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
     ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::ServiceStub.stub :transcode_render_account_issues_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, render_account_issues_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.render_account_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }) do |_result, response|
+        c.render_account_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.render_account_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload do |_result, response|
+        c.render_account_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.render_account_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderAccountIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload) do |_result, response|
+        c.render_account_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderAccountIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.render_account_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }, call_options) do |_result, response|
+        c.render_account_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.render_account_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderAccountIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload), call_options) do |_result, response|
+        c.render_account_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderAccountIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
     ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::ServiceStub.stub :transcode_render_product_issues_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, render_product_issues_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }) do |_result, response|
+        c.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.render_product_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload do |_result, response|
+        c.render_product_issues name: name, language_code: language_code, time_zone: time_zone, payload: payload do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.render_product_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload) do |_result, response|
+        c.render_product_issues ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }, call_options) do |_result, response|
+        c.render_product_issues({ name: name, language_code: language_code, time_zone: time_zone, payload: payload }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.render_product_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload), call_options) do |_result, response|
+        c.render_product_issues(::Google::Shopping::Merchant::IssueResolution::V1beta::RenderProductIssuesRequest.new(name: name, language_code: language_code, time_zone: time_zone, payload: payload), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionServ
     ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::ServiceStub.stub :transcode_trigger_action_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, trigger_action_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.trigger_action({ name: name, payload: payload, language_code: language_code }) do |_result, response|
+        c.trigger_action({ name: name, payload: payload, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.trigger_action name: name, payload: payload, language_code: language_code do |_result, response|
+        c.trigger_action name: name, payload: payload, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.trigger_action ::Google::Shopping::Merchant::IssueResolution::V1beta::TriggerActionRequest.new(name: name, payload: payload, language_code: language_code) do |_result, response|
+        c.trigger_action ::Google::Shopping::Merchant::IssueResolution::V1beta::TriggerActionRequest.new(name: name, payload: payload, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.trigger_action({ name: name, payload: payload, language_code: language_code }, call_options) do |_result, response|
+        c.trigger_action({ name: name, payload: payload, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.trigger_action(::Google::Shopping::Merchant::IssueResolution::V1beta::TriggerActionRequest.new(name: name, payload: payload, language_code: language_code), call_options) do |_result, response|
+        c.trigger_action(::Google::Shopping::Merchant::IssueResolution::V1beta::TriggerActionRequest.new(name: name, payload: payload, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

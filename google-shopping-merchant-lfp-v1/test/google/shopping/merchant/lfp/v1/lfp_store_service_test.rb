@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_lfp_store_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_lfp_store({ name: name }) do |response, operation|
+      c.get_lfp_store({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_lfp_store name: name do |response, operation|
+      c.get_lfp_store name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_lfp_store ::Google::Shopping::Merchant::Lfp::V1::GetLfpStoreRequest.new(name: name) do |response, operation|
+      c.get_lfp_store ::Google::Shopping::Merchant::Lfp::V1::GetLfpStoreRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_lfp_store({ name: name }, grpc_options) do |response, operation|
+      c.get_lfp_store({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_lfp_store(::Google::Shopping::Merchant::Lfp::V1::GetLfpStoreRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_lfp_store(::Google::Shopping::Merchant::Lfp::V1::GetLfpStoreRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, insert_lfp_store_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_lfp_store({ parent: parent, lfp_store: lfp_store }) do |response, operation|
+      c.insert_lfp_store({ parent: parent, lfp_store: lfp_store }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_lfp_store parent: parent, lfp_store: lfp_store do |response, operation|
+      c.insert_lfp_store parent: parent, lfp_store: lfp_store do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_lfp_store ::Google::Shopping::Merchant::Lfp::V1::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store) do |response, operation|
+      c.insert_lfp_store ::Google::Shopping::Merchant::Lfp::V1::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_lfp_store({ parent: parent, lfp_store: lfp_store }, grpc_options) do |response, operation|
+      c.insert_lfp_store({ parent: parent, lfp_store: lfp_store }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_lfp_store(::Google::Shopping::Merchant::Lfp::V1::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store), grpc_options) do |response, operation|
+      c.insert_lfp_store(::Google::Shopping::Merchant::Lfp::V1::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, delete_lfp_store_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_lfp_store({ name: name }) do |response, operation|
+      c.delete_lfp_store({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_lfp_store name: name do |response, operation|
+      c.delete_lfp_store name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_lfp_store ::Google::Shopping::Merchant::Lfp::V1::DeleteLfpStoreRequest.new(name: name) do |response, operation|
+      c.delete_lfp_store ::Google::Shopping::Merchant::Lfp::V1::DeleteLfpStoreRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_lfp_store({ name: name }, grpc_options) do |response, operation|
+      c.delete_lfp_store({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_lfp_store(::Google::Shopping::Merchant::Lfp::V1::DeleteLfpStoreRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_lfp_store(::Google::Shopping::Merchant::Lfp::V1::DeleteLfpStoreRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -264,40 +264,40 @@ class ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_lfp_stores_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Lfp::V1::LfpStoreService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_lfp_stores parent: parent, target_account: target_account, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_lfp_stores parent: parent, target_account: target_account, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_lfp_stores ::Google::Shopping::Merchant::Lfp::V1::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_lfp_stores ::Google::Shopping::Merchant::Lfp::V1::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_lfp_stores(::Google::Shopping::Merchant::Lfp::V1::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_lfp_stores(::Google::Shopping::Merchant::Lfp::V1::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

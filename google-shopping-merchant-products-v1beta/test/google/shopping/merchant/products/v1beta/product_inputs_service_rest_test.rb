@@ -99,32 +99,32 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest
     ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::ServiceStub.stub :transcode_insert_product_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_product_input_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }) do |_result, response|
+        c.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert_product_input parent: parent, product_input: product_input, data_source: data_source do |_result, response|
+        c.insert_product_input parent: parent, product_input: product_input, data_source: data_source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert_product_input ::Google::Shopping::Merchant::Products::V1beta::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source) do |_result, response|
+        c.insert_product_input ::Google::Shopping::Merchant::Products::V1beta::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }, call_options) do |_result, response|
+        c.insert_product_input({ parent: parent, product_input: product_input, data_source: data_source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert_product_input(::Google::Shopping::Merchant::Products::V1beta::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source), call_options) do |_result, response|
+        c.insert_product_input(::Google::Shopping::Merchant::Products::V1beta::InsertProductInputRequest.new(parent: parent, product_input: product_input, data_source: data_source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest
     ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::ServiceStub.stub :transcode_update_product_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_product_input_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }) do |_result, response|
+        c.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source do |_result, response|
+        c.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_product_input ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source) do |_result, response|
+        c.update_product_input ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }, call_options) do |_result, response|
+        c.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_product_input(::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source), call_options) do |_result, response|
+        c.update_product_input(::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest
     ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::ServiceStub.stub :transcode_delete_product_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_product_input_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_product_input({ name: name, data_source: data_source }) do |_result, response|
+        c.delete_product_input({ name: name, data_source: data_source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_product_input name: name, data_source: data_source do |_result, response|
+        c.delete_product_input name: name, data_source: data_source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_product_input ::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source) do |_result, response|
+        c.delete_product_input ::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_product_input({ name: name, data_source: data_source }, call_options) do |_result, response|
+        c.delete_product_input({ name: name, data_source: data_source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_product_input(::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source), call_options) do |_result, response|
+        c.delete_product_input(::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest.new(name: name, data_source: data_source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
