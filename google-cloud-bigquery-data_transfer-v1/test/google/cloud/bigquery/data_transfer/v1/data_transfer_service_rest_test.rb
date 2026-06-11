@@ -97,32 +97,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_get_data_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_source_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_source({ name: name }) do |_result, response|
+        c.get_data_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_source name: name do |_result, response|
+        c.get_data_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_source ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new(name: name) do |_result, response|
+        c.get_data_source ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_source({ name: name }, call_options) do |_result, response|
+        c.get_data_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_source(::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_source(::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_list_data_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_sources({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_data_sources({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_sources parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_data_sources parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_sources({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_data_sources({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_create_transfer_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_transfer_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_transfer_config({ parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name }) do |_result, response|
+        c.create_transfer_config({ parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_transfer_config parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name do |_result, response|
+        c.create_transfer_config parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest.new(parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name) do |_result, response|
+        c.create_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest.new(parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_transfer_config({ parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name }, call_options) do |_result, response|
+        c.create_transfer_config({ parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest.new(parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name), call_options) do |_result, response|
+        c.create_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest.new(parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_update_transfer_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_transfer_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_transfer_config({ transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name }) do |_result, response|
+        c.update_transfer_config({ transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_transfer_config transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name do |_result, response|
+        c.update_transfer_config transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest.new(transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name) do |_result, response|
+        c.update_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest.new(transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_transfer_config({ transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name }, call_options) do |_result, response|
+        c.update_transfer_config({ transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest.new(transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name), call_options) do |_result, response|
+        c.update_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest.new(transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_delete_transfer_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_transfer_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_transfer_config({ name: name }) do |_result, response|
+        c.delete_transfer_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_transfer_config name: name do |_result, response|
+        c.delete_transfer_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest.new(name: name) do |_result, response|
+        c.delete_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_transfer_config({ name: name }, call_options) do |_result, response|
+        c.delete_transfer_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_get_transfer_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_transfer_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_transfer_config({ name: name }) do |_result, response|
+        c.get_transfer_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_transfer_config name: name do |_result, response|
+        c.get_transfer_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new(name: name) do |_result, response|
+        c.get_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_transfer_config({ name: name }, call_options) do |_result, response|
+        c.get_transfer_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +434,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_list_transfer_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_transfer_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_transfer_configs({ parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_transfer_configs({ parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transfer_configs parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_transfer_configs parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transfer_configs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest.new(parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_transfer_configs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest.new(parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transfer_configs({ parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_transfer_configs({ parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transfer_configs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest.new(parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_transfer_configs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest.new(parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -490,32 +490,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_schedule_transfer_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, schedule_transfer_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.schedule_transfer_runs({ parent: parent, start_time: start_time, end_time: end_time }) do |_result, response|
+        c.schedule_transfer_runs({ parent: parent, start_time: start_time, end_time: end_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.schedule_transfer_runs parent: parent, start_time: start_time, end_time: end_time do |_result, response|
+        c.schedule_transfer_runs parent: parent, start_time: start_time, end_time: end_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.schedule_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new(parent: parent, start_time: start_time, end_time: end_time) do |_result, response|
+        c.schedule_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new(parent: parent, start_time: start_time, end_time: end_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.schedule_transfer_runs({ parent: parent, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
+        c.schedule_transfer_runs({ parent: parent, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.schedule_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new(parent: parent, start_time: start_time, end_time: end_time), call_options) do |_result, response|
+        c.schedule_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new(parent: parent, start_time: start_time, end_time: end_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_start_manual_transfer_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_manual_transfer_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_manual_transfer_runs({ parent: parent, requested_time_range: requested_time_range }) do |_result, response|
+        c.start_manual_transfer_runs({ parent: parent, requested_time_range: requested_time_range }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_manual_transfer_runs parent: parent, requested_time_range: requested_time_range do |_result, response|
+        c.start_manual_transfer_runs parent: parent, requested_time_range: requested_time_range do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range) do |_result, response|
+        c.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_manual_transfer_runs({ parent: parent, requested_time_range: requested_time_range }, call_options) do |_result, response|
+        c.start_manual_transfer_runs({ parent: parent, requested_time_range: requested_time_range }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_manual_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range), call_options) do |_result, response|
+        c.start_manual_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_get_transfer_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_transfer_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_transfer_run({ name: name }) do |_result, response|
+        c.get_transfer_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_transfer_run name: name do |_result, response|
+        c.get_transfer_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_transfer_run ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest.new(name: name) do |_result, response|
+        c.get_transfer_run ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_transfer_run({ name: name }, call_options) do |_result, response|
+        c.get_transfer_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_transfer_run(::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest.new(name: name), call_options) do |_result, response|
+        c.get_transfer_run(::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -653,32 +653,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_delete_transfer_run_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_transfer_run_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_transfer_run({ name: name }) do |_result, response|
+        c.delete_transfer_run({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_transfer_run name: name do |_result, response|
+        c.delete_transfer_run name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_transfer_run ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest.new(name: name) do |_result, response|
+        c.delete_transfer_run ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_transfer_run({ name: name }, call_options) do |_result, response|
+        c.delete_transfer_run({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_transfer_run(::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest.new(name: name), call_options) do |_result, response|
+        c.delete_transfer_run(::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -711,32 +711,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_list_transfer_runs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_transfer_runs_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_transfer_runs({ parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt }) do |_result, response|
+        c.list_transfer_runs({ parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transfer_runs parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt do |_result, response|
+        c.list_transfer_runs parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest.new(parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt) do |_result, response|
+        c.list_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest.new(parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transfer_runs({ parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt }, call_options) do |_result, response|
+        c.list_transfer_runs({ parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest.new(parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt), call_options) do |_result, response|
+        c.list_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest.new(parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -768,32 +768,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_list_transfer_logs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_transfer_logs_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_transfer_logs({ parent: parent, page_token: page_token, page_size: page_size, message_types: message_types }) do |_result, response|
+        c.list_transfer_logs({ parent: parent, page_token: page_token, page_size: page_size, message_types: message_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transfer_logs parent: parent, page_token: page_token, page_size: page_size, message_types: message_types do |_result, response|
+        c.list_transfer_logs parent: parent, page_token: page_token, page_size: page_size, message_types: message_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transfer_logs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest.new(parent: parent, page_token: page_token, page_size: page_size, message_types: message_types) do |_result, response|
+        c.list_transfer_logs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest.new(parent: parent, page_token: page_token, page_size: page_size, message_types: message_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transfer_logs({ parent: parent, page_token: page_token, page_size: page_size, message_types: message_types }, call_options) do |_result, response|
+        c.list_transfer_logs({ parent: parent, page_token: page_token, page_size: page_size, message_types: message_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transfer_logs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest.new(parent: parent, page_token: page_token, page_size: page_size, message_types: message_types), call_options) do |_result, response|
+        c.list_transfer_logs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest.new(parent: parent, page_token: page_token, page_size: page_size, message_types: message_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -822,32 +822,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_check_valid_creds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, check_valid_creds_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.check_valid_creds({ name: name }) do |_result, response|
+        c.check_valid_creds({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check_valid_creds name: name do |_result, response|
+        c.check_valid_creds name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check_valid_creds ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest.new(name: name) do |_result, response|
+        c.check_valid_creds ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check_valid_creds({ name: name }, call_options) do |_result, response|
+        c.check_valid_creds({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check_valid_creds(::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest.new(name: name), call_options) do |_result, response|
+        c.check_valid_creds(::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -877,32 +877,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_enroll_data_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enroll_data_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enroll_data_sources({ name: name, data_source_ids: data_source_ids }) do |_result, response|
+        c.enroll_data_sources({ name: name, data_source_ids: data_source_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enroll_data_sources name: name, data_source_ids: data_source_ids do |_result, response|
+        c.enroll_data_sources name: name, data_source_ids: data_source_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enroll_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids) do |_result, response|
+        c.enroll_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enroll_data_sources({ name: name, data_source_ids: data_source_ids }, call_options) do |_result, response|
+        c.enroll_data_sources({ name: name, data_source_ids: data_source_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enroll_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids), call_options) do |_result, response|
+        c.enroll_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -932,32 +932,32 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::ServiceStub.stub :transcode_unenroll_data_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, unenroll_data_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.unenroll_data_sources({ name: name, data_source_ids: data_source_ids }) do |_result, response|
+        c.unenroll_data_sources({ name: name, data_source_ids: data_source_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unenroll_data_sources name: name, data_source_ids: data_source_ids do |_result, response|
+        c.unenroll_data_sources name: name, data_source_ids: data_source_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unenroll_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids) do |_result, response|
+        c.unenroll_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unenroll_data_sources({ name: name, data_source_ids: data_source_ids }, call_options) do |_result, response|
+        c.unenroll_data_sources({ name: name, data_source_ids: data_source_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unenroll_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids), call_options) do |_result, response|
+        c.unenroll_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::UnenrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

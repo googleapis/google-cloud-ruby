@@ -97,32 +97,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_get_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_policy({ name: name }) do |_result, response|
+        c.get_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_policy name: name do |_result, response|
+        c.get_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_policy ::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new(name: name) do |_result, response|
+        c.get_policy ::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_policy({ name: name }, call_options) do |_result, response|
+        c.get_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_policy(::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_policy(::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_update_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_policy({ policy: policy }) do |_result, response|
+        c.update_policy({ policy: policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_policy policy: policy do |_result, response|
+        c.update_policy policy: policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_policy ::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new(policy: policy) do |_result, response|
+        c.update_policy ::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new(policy: policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_policy({ policy: policy }, call_options) do |_result, response|
+        c.update_policy({ policy: policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_policy(::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new(policy: policy), call_options) do |_result, response|
+        c.update_policy(::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new(policy: policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_create_attestor_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_attestor_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_attestor({ parent: parent, attestor_id: attestor_id, attestor: attestor }) do |_result, response|
+        c.create_attestor({ parent: parent, attestor_id: attestor_id, attestor: attestor }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_attestor parent: parent, attestor_id: attestor_id, attestor: attestor do |_result, response|
+        c.create_attestor parent: parent, attestor_id: attestor_id, attestor: attestor do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new(parent: parent, attestor_id: attestor_id, attestor: attestor) do |_result, response|
+        c.create_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new(parent: parent, attestor_id: attestor_id, attestor: attestor) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_attestor({ parent: parent, attestor_id: attestor_id, attestor: attestor }, call_options) do |_result, response|
+        c.create_attestor({ parent: parent, attestor_id: attestor_id, attestor: attestor }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new(parent: parent, attestor_id: attestor_id, attestor: attestor), call_options) do |_result, response|
+        c.create_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new(parent: parent, attestor_id: attestor_id, attestor: attestor), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_get_attestor_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_attestor_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_attestor({ name: name }) do |_result, response|
+        c.get_attestor({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_attestor name: name do |_result, response|
+        c.get_attestor name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new(name: name) do |_result, response|
+        c.get_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_attestor({ name: name }, call_options) do |_result, response|
+        c.get_attestor({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new(name: name), call_options) do |_result, response|
+        c.get_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -315,32 +315,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_update_attestor_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_attestor_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_attestor({ attestor: attestor }) do |_result, response|
+        c.update_attestor({ attestor: attestor }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_attestor attestor: attestor do |_result, response|
+        c.update_attestor attestor: attestor do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new(attestor: attestor) do |_result, response|
+        c.update_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new(attestor: attestor) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_attestor({ attestor: attestor }, call_options) do |_result, response|
+        c.update_attestor({ attestor: attestor }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new(attestor: attestor), call_options) do |_result, response|
+        c.update_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new(attestor: attestor), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -371,32 +371,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_list_attestors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_attestors_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_attestors({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_attestors({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_attestors parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_attestors parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_attestors ::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_attestors ::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_attestors({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_attestors({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_attestors(::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_attestors(::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -425,32 +425,32 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::ServiceStub.stub :transcode_delete_attestor_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_attestor_client_stub do
         # Create client
-        client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_attestor({ name: name }) do |_result, response|
+        c.delete_attestor({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_attestor name: name do |_result, response|
+        c.delete_attestor name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new(name: name) do |_result, response|
+        c.delete_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_attestor({ name: name }, call_options) do |_result, response|
+        c.delete_attestor({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new(name: name), call_options) do |_result, response|
+        c.delete_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -88,36 +88,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, create_read_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count }) do |response, operation|
+      c.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_read_session parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count do |response, operation|
+      c.create_read_session parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_read_session ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count) do |response, operation|
+      c.create_read_session ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count }, grpc_options) do |response, operation|
+      c.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_read_session(::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count), grpc_options) do |response, operation|
+      c.create_read_session(::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,12 +148,12 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, read_rows_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_rows({ read_stream: read_stream, offset: offset }) do |response, operation|
+      c.read_rows({ read_stream: read_stream, offset: offset }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -162,7 +162,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use named arguments
-      client.read_rows read_stream: read_stream, offset: offset do |response, operation|
+      c.read_rows read_stream: read_stream, offset: offset do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -171,7 +171,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object
-      client.read_rows ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset) do |response, operation|
+      c.read_rows ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -180,7 +180,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use hash object with options
-      client.read_rows({ read_stream: read_stream, offset: offset }, grpc_options) do |response, operation|
+      c.read_rows({ read_stream: read_stream, offset: offset }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -189,7 +189,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.read_rows(::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset), grpc_options) do |response, operation|
+      c.read_rows(::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -223,36 +223,36 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, split_read_stream_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.split_read_stream({ name: name, fraction: fraction }) do |response, operation|
+      c.split_read_stream({ name: name, fraction: fraction }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.split_read_stream name: name, fraction: fraction do |response, operation|
+      c.split_read_stream name: name, fraction: fraction do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.split_read_stream ::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new(name: name, fraction: fraction) do |response, operation|
+      c.split_read_stream ::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new(name: name, fraction: fraction) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.split_read_stream({ name: name, fraction: fraction }, grpc_options) do |response, operation|
+      c.split_read_stream({ name: name, fraction: fraction }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.split_read_stream(::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new(name: name, fraction: fraction), grpc_options) do |response, operation|
+      c.split_read_stream(::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new(name: name, fraction: fraction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

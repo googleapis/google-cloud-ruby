@@ -99,32 +99,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_create_build_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_build_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_build({ parent: parent, project_id: project_id, build: build }) do |_result, response|
+        c.create_build({ parent: parent, project_id: project_id, build: build }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_build parent: parent, project_id: project_id, build: build do |_result, response|
+        c.create_build parent: parent, project_id: project_id, build: build do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build) do |_result, response|
+        c.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_build({ parent: parent, project_id: project_id, build: build }, call_options) do |_result, response|
+        c.create_build({ parent: parent, project_id: project_id, build: build }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_build(::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build), call_options) do |_result, response|
+        c.create_build(::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_get_build_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_build_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_build({ name: name, project_id: project_id, id: id }) do |_result, response|
+        c.get_build({ name: name, project_id: project_id, id: id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_build name: name, project_id: project_id, id: id do |_result, response|
+        c.get_build name: name, project_id: project_id, id: id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id) do |_result, response|
+        c.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_build({ name: name, project_id: project_id, id: id }, call_options) do |_result, response|
+        c.get_build({ name: name, project_id: project_id, id: id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_build(::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id), call_options) do |_result, response|
+        c.get_build(::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_list_builds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_builds_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_builds({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_builds({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_builds parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_builds parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_builds({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_builds({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_builds(::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_builds(::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_cancel_build_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_build_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_build({ name: name, project_id: project_id, id: id }) do |_result, response|
+        c.cancel_build({ name: name, project_id: project_id, id: id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_build name: name, project_id: project_id, id: id do |_result, response|
+        c.cancel_build name: name, project_id: project_id, id: id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id) do |_result, response|
+        c.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_build({ name: name, project_id: project_id, id: id }, call_options) do |_result, response|
+        c.cancel_build({ name: name, project_id: project_id, id: id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_build(::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id), call_options) do |_result, response|
+        c.cancel_build(::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_retry_build_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retry_build_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retry_build({ name: name, project_id: project_id, id: id }) do |_result, response|
+        c.retry_build({ name: name, project_id: project_id, id: id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retry_build name: name, project_id: project_id, id: id do |_result, response|
+        c.retry_build name: name, project_id: project_id, id: id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id) do |_result, response|
+        c.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retry_build({ name: name, project_id: project_id, id: id }, call_options) do |_result, response|
+        c.retry_build({ name: name, project_id: project_id, id: id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retry_build(::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id), call_options) do |_result, response|
+        c.retry_build(::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -380,32 +380,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_approve_build_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, approve_build_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.approve_build({ name: name, approval_result: approval_result }) do |_result, response|
+        c.approve_build({ name: name, approval_result: approval_result }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.approve_build name: name, approval_result: approval_result do |_result, response|
+        c.approve_build name: name, approval_result: approval_result do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.approve_build ::Google::Cloud::Build::V1::ApproveBuildRequest.new(name: name, approval_result: approval_result) do |_result, response|
+        c.approve_build ::Google::Cloud::Build::V1::ApproveBuildRequest.new(name: name, approval_result: approval_result) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.approve_build({ name: name, approval_result: approval_result }, call_options) do |_result, response|
+        c.approve_build({ name: name, approval_result: approval_result }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.approve_build(::Google::Cloud::Build::V1::ApproveBuildRequest.new(name: name, approval_result: approval_result), call_options) do |_result, response|
+        c.approve_build(::Google::Cloud::Build::V1::ApproveBuildRequest.new(name: name, approval_result: approval_result), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_create_build_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_build_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_build_trigger({ parent: parent, project_id: project_id, trigger: trigger }) do |_result, response|
+        c.create_build_trigger({ parent: parent, project_id: project_id, trigger: trigger }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_build_trigger parent: parent, project_id: project_id, trigger: trigger do |_result, response|
+        c.create_build_trigger parent: parent, project_id: project_id, trigger: trigger do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_build_trigger ::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(parent: parent, project_id: project_id, trigger: trigger) do |_result, response|
+        c.create_build_trigger ::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(parent: parent, project_id: project_id, trigger: trigger) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_build_trigger({ parent: parent, project_id: project_id, trigger: trigger }, call_options) do |_result, response|
+        c.create_build_trigger({ parent: parent, project_id: project_id, trigger: trigger }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_build_trigger(::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(parent: parent, project_id: project_id, trigger: trigger), call_options) do |_result, response|
+        c.create_build_trigger(::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(parent: parent, project_id: project_id, trigger: trigger), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +492,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_get_build_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_build_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }) do |_result, response|
+        c.get_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_build_trigger name: name, project_id: project_id, trigger_id: trigger_id do |_result, response|
+        c.get_build_trigger name: name, project_id: project_id, trigger_id: trigger_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_build_trigger ::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id) do |_result, response|
+        c.get_build_trigger ::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }, call_options) do |_result, response|
+        c.get_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_build_trigger(::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id), call_options) do |_result, response|
+        c.get_build_trigger(::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_list_build_triggers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_build_triggers_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_build_triggers({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_build_triggers({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_build_triggers parent: parent, project_id: project_id, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_build_triggers parent: parent, project_id: project_id, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_build_triggers ::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_build_triggers ::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_build_triggers({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_build_triggers({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_build_triggers(::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_build_triggers(::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_delete_build_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_build_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }) do |_result, response|
+        c.delete_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_build_trigger name: name, project_id: project_id, trigger_id: trigger_id do |_result, response|
+        c.delete_build_trigger name: name, project_id: project_id, trigger_id: trigger_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_build_trigger ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id) do |_result, response|
+        c.delete_build_trigger ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }, call_options) do |_result, response|
+        c.delete_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_build_trigger(::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id), call_options) do |_result, response|
+        c.delete_build_trigger(::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_update_build_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_build_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }) do |_result, response|
+        c.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_build_trigger project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask do |_result, response|
+        c.update_build_trigger project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask) do |_result, response|
+        c.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask), call_options) do |_result, response|
+        c.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -719,32 +719,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_run_build_trigger_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_build_trigger_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id, source: source }) do |_result, response|
+        c.run_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_build_trigger name: name, project_id: project_id, trigger_id: trigger_id, source: source do |_result, response|
+        c.run_build_trigger name: name, project_id: project_id, trigger_id: trigger_id, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_build_trigger ::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id, source: source) do |_result, response|
+        c.run_build_trigger ::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id, source: source }, call_options) do |_result, response|
+        c.run_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_build_trigger(::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id, source: source), call_options) do |_result, response|
+        c.run_build_trigger(::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -777,32 +777,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_receive_trigger_webhook_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, receive_trigger_webhook_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.receive_trigger_webhook({ name: name, body: body, project_id: project_id, trigger: trigger, secret: secret }) do |_result, response|
+        c.receive_trigger_webhook({ name: name, body: body, project_id: project_id, trigger: trigger, secret: secret }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.receive_trigger_webhook name: name, body: body, project_id: project_id, trigger: trigger, secret: secret do |_result, response|
+        c.receive_trigger_webhook name: name, body: body, project_id: project_id, trigger: trigger, secret: secret do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.receive_trigger_webhook ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(name: name, body: body, project_id: project_id, trigger: trigger, secret: secret) do |_result, response|
+        c.receive_trigger_webhook ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(name: name, body: body, project_id: project_id, trigger: trigger, secret: secret) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.receive_trigger_webhook({ name: name, body: body, project_id: project_id, trigger: trigger, secret: secret }, call_options) do |_result, response|
+        c.receive_trigger_webhook({ name: name, body: body, project_id: project_id, trigger: trigger, secret: secret }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.receive_trigger_webhook(::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(name: name, body: body, project_id: project_id, trigger: trigger, secret: secret), call_options) do |_result, response|
+        c.receive_trigger_webhook(::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(name: name, body: body, project_id: project_id, trigger: trigger, secret: secret), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -834,32 +834,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_create_worker_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_worker_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }) do |_result, response|
+        c.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_worker_pool parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only do |_result, response|
+        c.create_worker_pool parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_worker_pool ::Google::Cloud::Build::V1::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only) do |_result, response|
+        c.create_worker_pool ::Google::Cloud::Build::V1::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_worker_pool(::Google::Cloud::Build::V1::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_worker_pool(::Google::Cloud::Build::V1::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -888,32 +888,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_get_worker_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_worker_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_worker_pool({ name: name }) do |_result, response|
+        c.get_worker_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_worker_pool name: name do |_result, response|
+        c.get_worker_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_worker_pool ::Google::Cloud::Build::V1::GetWorkerPoolRequest.new(name: name) do |_result, response|
+        c.get_worker_pool ::Google::Cloud::Build::V1::GetWorkerPoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_worker_pool({ name: name }, call_options) do |_result, response|
+        c.get_worker_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_worker_pool(::Google::Cloud::Build::V1::GetWorkerPoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_worker_pool(::Google::Cloud::Build::V1::GetWorkerPoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -945,32 +945,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_delete_worker_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_worker_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_worker_pool({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+        c.delete_worker_pool({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_worker_pool name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+        c.delete_worker_pool name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_worker_pool ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+        c.delete_worker_pool ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_worker_pool({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_worker_pool({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_worker_pool(::Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_worker_pool(::Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1001,32 +1001,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_update_worker_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_worker_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_worker_pool({ worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_worker_pool({ worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_worker_pool worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_worker_pool worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_worker_pool ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new(worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_worker_pool ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new(worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_worker_pool({ worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_worker_pool({ worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_worker_pool(::Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new(worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_worker_pool(::Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new(worker_pool: worker_pool, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1057,32 +1057,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_list_worker_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_worker_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_worker_pools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_worker_pools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_worker_pools ::Google::Cloud::Build::V1::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_worker_pools ::Google::Cloud::Build::V1::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_worker_pools(::Google::Cloud::Build::V1::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_worker_pools(::Google::Cloud::Build::V1::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1111,32 +1111,32 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Build::V1::CloudBuild::Rest::ServiceStub.stub :transcode_get_default_service_account_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_default_service_account_client_stub do
         # Create client
-        client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
+        c = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_default_service_account({ name: name }) do |_result, response|
+        c.get_default_service_account({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_default_service_account name: name do |_result, response|
+        c.get_default_service_account name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_default_service_account ::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest.new(name: name) do |_result, response|
+        c.get_default_service_account ::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_default_service_account({ name: name }, call_options) do |_result, response|
+        c.get_default_service_account({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_default_service_account(::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest.new(name: name), call_options) do |_result, response|
+        c.get_default_service_account(::Google::Cloud::Build::V1::GetDefaultServiceAccountRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

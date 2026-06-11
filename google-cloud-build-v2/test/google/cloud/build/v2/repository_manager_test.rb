@@ -86,40 +86,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connection({ parent: parent, connection: connection, connection_id: connection_id }) do |response, operation|
+      c.create_connection({ parent: parent, connection: connection, connection_id: connection_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connection parent: parent, connection: connection, connection_id: connection_id do |response, operation|
+      c.create_connection parent: parent, connection: connection, connection_id: connection_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connection ::Google::Cloud::Build::V2::CreateConnectionRequest.new(parent: parent, connection: connection, connection_id: connection_id) do |response, operation|
+      c.create_connection ::Google::Cloud::Build::V2::CreateConnectionRequest.new(parent: parent, connection: connection, connection_id: connection_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connection({ parent: parent, connection: connection, connection_id: connection_id }, grpc_options) do |response, operation|
+      c.create_connection({ parent: parent, connection: connection, connection_id: connection_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connection(::Google::Cloud::Build::V2::CreateConnectionRequest.new(parent: parent, connection: connection, connection_id: connection_id), grpc_options) do |response, operation|
+      c.create_connection(::Google::Cloud::Build::V2::CreateConnectionRequest.new(parent: parent, connection: connection, connection_id: connection_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connection({ name: name }) do |response, operation|
+      c.get_connection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connection name: name do |response, operation|
+      c.get_connection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connection ::Google::Cloud::Build::V2::GetConnectionRequest.new(name: name) do |response, operation|
+      c.get_connection ::Google::Cloud::Build::V2::GetConnectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connection({ name: name }, grpc_options) do |response, operation|
+      c.get_connection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connection(::Google::Cloud::Build::V2::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connection(::Google::Cloud::Build::V2::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_connections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connections ::Google::Cloud::Build::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_connections ::Google::Cloud::Build::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connections(::Google::Cloud::Build::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_connections(::Google::Cloud::Build::V2::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connection({ connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag }) do |response, operation|
+      c.update_connection({ connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connection connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag do |response, operation|
+      c.update_connection connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connection ::Google::Cloud::Build::V2::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag) do |response, operation|
+      c.update_connection ::Google::Cloud::Build::V2::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connection({ connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
+      c.update_connection({ connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connection(::Google::Cloud::Build::V2::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
+      c.update_connection(::Google::Cloud::Build::V2::UpdateConnectionRequest.new(connection: connection, update_mask: update_mask, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -347,40 +347,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connection({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
+      c.delete_connection({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connection name: name, etag: etag, validate_only: validate_only do |response, operation|
+      c.delete_connection name: name, etag: etag, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connection ::Google::Cloud::Build::V2::DeleteConnectionRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
+      c.delete_connection ::Google::Cloud::Build::V2::DeleteConnectionRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connection({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_connection({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connection(::Google::Cloud::Build::V2::DeleteConnectionRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_connection(::Google::Cloud::Build::V2::DeleteConnectionRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -414,40 +414,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |response, operation|
+      c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_repository parent: parent, repository: repository, repository_id: repository_id do |response, operation|
+      c.create_repository parent: parent, repository: repository, repository_id: repository_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_repository ::Google::Cloud::Build::V2::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |response, operation|
+      c.create_repository ::Google::Cloud::Build::V2::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, grpc_options) do |response, operation|
+      c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_repository(::Google::Cloud::Build::V2::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), grpc_options) do |response, operation|
+      c.create_repository(::Google::Cloud::Build::V2::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -479,40 +479,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_create_repositories_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_repositories({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_repositories({ parent: parent, requests: requests }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_repositories parent: parent, requests: requests do |response, operation|
+      c.batch_create_repositories parent: parent, requests: requests do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_repositories ::Google::Cloud::Build::V2::BatchCreateRepositoriesRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_repositories ::Google::Cloud::Build::V2::BatchCreateRepositoriesRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_repositories({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_repositories({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_repositories(::Google::Cloud::Build::V2::BatchCreateRepositoriesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_repositories(::Google::Cloud::Build::V2::BatchCreateRepositoriesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -542,36 +542,36 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_repository({ name: name }) do |response, operation|
+      c.get_repository({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_repository name: name do |response, operation|
+      c.get_repository name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_repository ::Google::Cloud::Build::V2::GetRepositoryRequest.new(name: name) do |response, operation|
+      c.get_repository ::Google::Cloud::Build::V2::GetRepositoryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_repository({ name: name }, grpc_options) do |response, operation|
+      c.get_repository({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_repository(::Google::Cloud::Build::V2::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_repository(::Google::Cloud::Build::V2::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -606,40 +606,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_repositories_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_repositories ::Google::Cloud::Build::V2::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_repositories ::Google::Cloud::Build::V2::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_repositories(::Google::Cloud::Build::V2::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_repositories(::Google::Cloud::Build::V2::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -673,40 +673,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_repository({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
+      c.delete_repository({ name: name, etag: etag, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_repository name: name, etag: etag, validate_only: validate_only do |response, operation|
+      c.delete_repository name: name, etag: etag, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_repository ::Google::Cloud::Build::V2::DeleteRepositoryRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
+      c.delete_repository ::Google::Cloud::Build::V2::DeleteRepositoryRequest.new(name: name, etag: etag, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_repository({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_repository({ name: name, etag: etag, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_repository(::Google::Cloud::Build::V2::DeleteRepositoryRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_repository(::Google::Cloud::Build::V2::DeleteRepositoryRequest.new(name: name, etag: etag, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -736,36 +736,36 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_read_write_token_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_read_write_token({ repository: repository }) do |response, operation|
+      c.fetch_read_write_token({ repository: repository }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_read_write_token repository: repository do |response, operation|
+      c.fetch_read_write_token repository: repository do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_read_write_token ::Google::Cloud::Build::V2::FetchReadWriteTokenRequest.new(repository: repository) do |response, operation|
+      c.fetch_read_write_token ::Google::Cloud::Build::V2::FetchReadWriteTokenRequest.new(repository: repository) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_read_write_token({ repository: repository }, grpc_options) do |response, operation|
+      c.fetch_read_write_token({ repository: repository }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_read_write_token(::Google::Cloud::Build::V2::FetchReadWriteTokenRequest.new(repository: repository), grpc_options) do |response, operation|
+      c.fetch_read_write_token(::Google::Cloud::Build::V2::FetchReadWriteTokenRequest.new(repository: repository), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -794,36 +794,36 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_read_token_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_read_token({ repository: repository }) do |response, operation|
+      c.fetch_read_token({ repository: repository }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_read_token repository: repository do |response, operation|
+      c.fetch_read_token repository: repository do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_read_token ::Google::Cloud::Build::V2::FetchReadTokenRequest.new(repository: repository) do |response, operation|
+      c.fetch_read_token ::Google::Cloud::Build::V2::FetchReadTokenRequest.new(repository: repository) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_read_token({ repository: repository }, grpc_options) do |response, operation|
+      c.fetch_read_token({ repository: repository }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_read_token(::Google::Cloud::Build::V2::FetchReadTokenRequest.new(repository: repository), grpc_options) do |response, operation|
+      c.fetch_read_token(::Google::Cloud::Build::V2::FetchReadTokenRequest.new(repository: repository), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -856,40 +856,40 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_linkable_repositories_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_linkable_repositories({ connection: connection, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_linkable_repositories({ connection: connection, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_linkable_repositories connection: connection, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_linkable_repositories connection: connection, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_linkable_repositories ::Google::Cloud::Build::V2::FetchLinkableRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_linkable_repositories ::Google::Cloud::Build::V2::FetchLinkableRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_linkable_repositories({ connection: connection, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_linkable_repositories({ connection: connection, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_linkable_repositories(::Google::Cloud::Build::V2::FetchLinkableRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_linkable_repositories(::Google::Cloud::Build::V2::FetchLinkableRepositoriesRequest.new(connection: connection, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -921,36 +921,36 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, fetch_git_refs_client_stub do
       # Create client
-      client = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
+      c = ::Google::Cloud::Build::V2::RepositoryManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_git_refs({ repository: repository, ref_type: ref_type }) do |response, operation|
+      c.fetch_git_refs({ repository: repository, ref_type: ref_type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_git_refs repository: repository, ref_type: ref_type do |response, operation|
+      c.fetch_git_refs repository: repository, ref_type: ref_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_git_refs ::Google::Cloud::Build::V2::FetchGitRefsRequest.new(repository: repository, ref_type: ref_type) do |response, operation|
+      c.fetch_git_refs ::Google::Cloud::Build::V2::FetchGitRefsRequest.new(repository: repository, ref_type: ref_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_git_refs({ repository: repository, ref_type: ref_type }, grpc_options) do |response, operation|
+      c.fetch_git_refs({ repository: repository, ref_type: ref_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_git_refs(::Google::Cloud::Build::V2::FetchGitRefsRequest.new(repository: repository, ref_type: ref_type), grpc_options) do |response, operation|
+      c.fetch_git_refs(::Google::Cloud::Build::V2::FetchGitRefsRequest.new(repository: repository, ref_type: ref_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
