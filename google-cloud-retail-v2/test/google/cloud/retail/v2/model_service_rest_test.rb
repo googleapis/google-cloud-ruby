@@ -99,32 +99,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_create_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_model({ parent: parent, model: model, dry_run: dry_run }) do |_result, response|
+        c.create_model({ parent: parent, model: model, dry_run: dry_run }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_model parent: parent, model: model, dry_run: dry_run do |_result, response|
+        c.create_model parent: parent, model: model, dry_run: dry_run do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_model ::Google::Cloud::Retail::V2::CreateModelRequest.new(parent: parent, model: model, dry_run: dry_run) do |_result, response|
+        c.create_model ::Google::Cloud::Retail::V2::CreateModelRequest.new(parent: parent, model: model, dry_run: dry_run) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_model({ parent: parent, model: model, dry_run: dry_run }, call_options) do |_result, response|
+        c.create_model({ parent: parent, model: model, dry_run: dry_run }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_model(::Google::Cloud::Retail::V2::CreateModelRequest.new(parent: parent, model: model, dry_run: dry_run), call_options) do |_result, response|
+        c.create_model(::Google::Cloud::Retail::V2::CreateModelRequest.new(parent: parent, model: model, dry_run: dry_run), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_get_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model({ name: name }) do |_result, response|
+        c.get_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model name: name do |_result, response|
+        c.get_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model ::Google::Cloud::Retail::V2::GetModelRequest.new(name: name) do |_result, response|
+        c.get_model ::Google::Cloud::Retail::V2::GetModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model({ name: name }, call_options) do |_result, response|
+        c.get_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model(::Google::Cloud::Retail::V2::GetModelRequest.new(name: name), call_options) do |_result, response|
+        c.get_model(::Google::Cloud::Retail::V2::GetModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_pause_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_model({ name: name }) do |_result, response|
+        c.pause_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_model name: name do |_result, response|
+        c.pause_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_model ::Google::Cloud::Retail::V2::PauseModelRequest.new(name: name) do |_result, response|
+        c.pause_model ::Google::Cloud::Retail::V2::PauseModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_model({ name: name }, call_options) do |_result, response|
+        c.pause_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_model(::Google::Cloud::Retail::V2::PauseModelRequest.new(name: name), call_options) do |_result, response|
+        c.pause_model(::Google::Cloud::Retail::V2::PauseModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_resume_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_model({ name: name }) do |_result, response|
+        c.resume_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_model name: name do |_result, response|
+        c.resume_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_model ::Google::Cloud::Retail::V2::ResumeModelRequest.new(name: name) do |_result, response|
+        c.resume_model ::Google::Cloud::Retail::V2::ResumeModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_model({ name: name }, call_options) do |_result, response|
+        c.resume_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_model(::Google::Cloud::Retail::V2::ResumeModelRequest.new(name: name), call_options) do |_result, response|
+        c.resume_model(::Google::Cloud::Retail::V2::ResumeModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -315,32 +315,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_delete_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_model({ name: name }) do |_result, response|
+        c.delete_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_model name: name do |_result, response|
+        c.delete_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_model ::Google::Cloud::Retail::V2::DeleteModelRequest.new(name: name) do |_result, response|
+        c.delete_model ::Google::Cloud::Retail::V2::DeleteModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_model({ name: name }, call_options) do |_result, response|
+        c.delete_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_model(::Google::Cloud::Retail::V2::DeleteModelRequest.new(name: name), call_options) do |_result, response|
+        c.delete_model(::Google::Cloud::Retail::V2::DeleteModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -371,32 +371,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_list_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_models_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_models({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_models({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_models parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_models parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_models ::Google::Cloud::Retail::V2::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_models ::Google::Cloud::Retail::V2::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_models({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_models({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_models(::Google::Cloud::Retail::V2::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_models(::Google::Cloud::Retail::V2::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -426,32 +426,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_update_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_model({ model: model, update_mask: update_mask }) do |_result, response|
+        c.update_model({ model: model, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_model model: model, update_mask: update_mask do |_result, response|
+        c.update_model model: model, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_model ::Google::Cloud::Retail::V2::UpdateModelRequest.new(model: model, update_mask: update_mask) do |_result, response|
+        c.update_model ::Google::Cloud::Retail::V2::UpdateModelRequest.new(model: model, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_model({ model: model, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_model({ model: model, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_model(::Google::Cloud::Retail::V2::UpdateModelRequest.new(model: model, update_mask: update_mask), call_options) do |_result, response|
+        c.update_model(::Google::Cloud::Retail::V2::UpdateModelRequest.new(model: model, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -480,32 +480,32 @@ class ::Google::Cloud::Retail::V2::ModelService::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Retail::V2::ModelService::Rest::ServiceStub.stub :transcode_tune_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, tune_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.tune_model({ name: name }) do |_result, response|
+        c.tune_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.tune_model name: name do |_result, response|
+        c.tune_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.tune_model ::Google::Cloud::Retail::V2::TuneModelRequest.new(name: name) do |_result, response|
+        c.tune_model ::Google::Cloud::Retail::V2::TuneModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.tune_model({ name: name }, call_options) do |_result, response|
+        c.tune_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.tune_model(::Google::Cloud::Retail::V2::TuneModelRequest.new(name: name), call_options) do |_result, response|
+        c.tune_model(::Google::Cloud::Retail::V2::TuneModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

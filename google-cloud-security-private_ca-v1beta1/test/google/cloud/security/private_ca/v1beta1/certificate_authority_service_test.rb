@@ -88,36 +88,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, create_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id }) do |response, operation|
+      c.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_certificate parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id do |response, operation|
+      c.create_certificate parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id) do |response, operation|
+      c.create_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id), grpc_options) do |response, operation|
+      c.create_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,36 +146,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, get_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_certificate({ name: name }) do |response, operation|
+      c.get_certificate({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_certificate name: name do |response, operation|
+      c.get_certificate name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRequest.new(name: name) do |response, operation|
+      c.get_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_certificate({ name: name }, grpc_options) do |response, operation|
+      c.get_certificate({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -212,40 +212,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, list_certificates_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_certificates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_certificates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_certificates ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_certificates ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_certificates(::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_certificates(::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -279,36 +279,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, revoke_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.revoke_certificate({ name: name, reason: reason, request_id: request_id }) do |response, operation|
+      c.revoke_certificate({ name: name, reason: reason, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.revoke_certificate name: name, reason: reason, request_id: request_id do |response, operation|
+      c.revoke_certificate name: name, reason: reason, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.revoke_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id) do |response, operation|
+      c.revoke_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.revoke_certificate({ name: name, reason: reason, request_id: request_id }, grpc_options) do |response, operation|
+      c.revoke_certificate({ name: name, reason: reason, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.revoke_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id), grpc_options) do |response, operation|
+      c.revoke_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -341,36 +341,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, update_certificate_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_certificate certificate: certificate, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_certificate certificate: certificate, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_certificate ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_certificate(::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -405,40 +405,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, activate_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }) do |response, operation|
+      c.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.activate_certificate_authority name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id do |response, operation|
+      c.activate_certificate_authority name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.activate_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id) do |response, operation|
+      c.activate_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }, grpc_options) do |response, operation|
+      c.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.activate_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id), grpc_options) do |response, operation|
+      c.activate_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -474,40 +474,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, create_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }) do |response, operation|
+      c.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_certificate_authority parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id do |response, operation|
+      c.create_certificate_authority parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id) do |response, operation|
+      c.create_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id), grpc_options) do |response, operation|
+      c.create_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -539,40 +539,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, disable_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.disable_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
+      c.disable_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.disable_certificate_authority name: name, request_id: request_id do |response, operation|
+      c.disable_certificate_authority name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.disable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.disable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.disable_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.disable_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.disable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.disable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -604,40 +604,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, enable_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.enable_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
+      c.enable_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.enable_certificate_authority name: name, request_id: request_id do |response, operation|
+      c.enable_certificate_authority name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.enable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.enable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.enable_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.enable_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.enable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.enable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -667,36 +667,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, fetch_certificate_authority_csr_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_certificate_authority_csr({ name: name }) do |response, operation|
+      c.fetch_certificate_authority_csr({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_certificate_authority_csr name: name do |response, operation|
+      c.fetch_certificate_authority_csr name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_certificate_authority_csr ::Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new(name: name) do |response, operation|
+      c.fetch_certificate_authority_csr ::Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_certificate_authority_csr({ name: name }, grpc_options) do |response, operation|
+      c.fetch_certificate_authority_csr({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_certificate_authority_csr(::Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new(name: name), grpc_options) do |response, operation|
+      c.fetch_certificate_authority_csr(::Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -725,36 +725,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, get_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_certificate_authority({ name: name }) do |response, operation|
+      c.get_certificate_authority({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_certificate_authority name: name do |response, operation|
+      c.get_certificate_authority name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateAuthorityRequest.new(name: name) do |response, operation|
+      c.get_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateAuthorityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_certificate_authority({ name: name }, grpc_options) do |response, operation|
+      c.get_certificate_authority({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -791,40 +791,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, list_certificate_authorities_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_certificate_authorities parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_certificate_authorities parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_certificate_authorities ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_certificate_authorities ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_certificate_authorities(::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_certificate_authorities(::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -856,40 +856,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, restore_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
+      c.restore_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_certificate_authority name: name, request_id: request_id do |response, operation|
+      c.restore_certificate_authority name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::RestoreCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.restore_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::RestoreCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.restore_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::RestoreCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.restore_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::RestoreCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -921,40 +921,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, schedule_delete_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.schedule_delete_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
+      c.schedule_delete_certificate_authority({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.schedule_delete_certificate_authority name: name, request_id: request_id do |response, operation|
+      c.schedule_delete_certificate_authority name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.schedule_delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::ScheduleDeleteCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.schedule_delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::ScheduleDeleteCertificateAuthorityRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.schedule_delete_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.schedule_delete_certificate_authority({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.schedule_delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::ScheduleDeleteCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.schedule_delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::ScheduleDeleteCertificateAuthorityRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -988,40 +988,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, update_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_certificate_authority certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_certificate_authority certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_certificate_authority ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_certificate_authority(::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1051,36 +1051,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, get_certificate_revocation_list_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_certificate_revocation_list({ name: name }) do |response, operation|
+      c.get_certificate_revocation_list({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_certificate_revocation_list name: name do |response, operation|
+      c.get_certificate_revocation_list name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRevocationListRequest.new(name: name) do |response, operation|
+      c.get_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRevocationListRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_certificate_revocation_list({ name: name }, grpc_options) do |response, operation|
+      c.get_certificate_revocation_list({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRevocationListRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRevocationListRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1117,40 +1117,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, list_certificate_revocation_lists_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_certificate_revocation_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_certificate_revocation_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_certificate_revocation_lists ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_certificate_revocation_lists ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_certificate_revocation_lists(::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_certificate_revocation_lists(::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1184,40 +1184,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, update_certificate_revocation_list_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }) do |response, operation|
+      c.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_certificate_revocation_list certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id do |response, operation|
+      c.update_certificate_revocation_list certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id) do |response, operation|
+      c.update_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+      c.update_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1247,36 +1247,36 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, get_reusable_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_reusable_config({ name: name }) do |response, operation|
+      c.get_reusable_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_reusable_config name: name do |response, operation|
+      c.get_reusable_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_reusable_config ::Google::Cloud::Security::PrivateCA::V1beta1::GetReusableConfigRequest.new(name: name) do |response, operation|
+      c.get_reusable_config ::Google::Cloud::Security::PrivateCA::V1beta1::GetReusableConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_reusable_config({ name: name }, grpc_options) do |response, operation|
+      c.get_reusable_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_reusable_config(::Google::Cloud::Security::PrivateCA::V1beta1::GetReusableConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_reusable_config(::Google::Cloud::Security::PrivateCA::V1beta1::GetReusableConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1313,40 +1313,40 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
 
     Gapic::ServiceStub.stub :new, list_reusable_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+      c = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_reusable_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_reusable_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_reusable_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_reusable_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_reusable_configs ::Google::Cloud::Security::PrivateCA::V1beta1::ListReusableConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_reusable_configs ::Google::Cloud::Security::PrivateCA::V1beta1::ListReusableConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_reusable_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_reusable_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_reusable_configs(::Google::Cloud::Security::PrivateCA::V1beta1::ListReusableConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_reusable_configs(::Google::Cloud::Security::PrivateCA::V1beta1::ListReusableConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

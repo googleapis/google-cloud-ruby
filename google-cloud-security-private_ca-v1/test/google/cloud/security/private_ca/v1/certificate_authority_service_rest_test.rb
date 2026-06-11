@@ -102,32 +102,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_create_certificate_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_certificate_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id }) do |_result, response|
+        c.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_certificate parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id do |_result, response|
+        c.create_certificate parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_certificate ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id) do |_result, response|
+        c.create_certificate ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id }, call_options) do |_result, response|
+        c.create_certificate({ parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_certificate(::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id), call_options) do |_result, response|
+        c.create_certificate(::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new(parent: parent, certificate_id: certificate_id, certificate: certificate, request_id: request_id, validate_only: validate_only, issuing_certificate_authority_id: issuing_certificate_authority_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_get_certificate_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_certificate_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_certificate({ name: name }) do |_result, response|
+        c.get_certificate({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_certificate name: name do |_result, response|
+        c.get_certificate name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_certificate ::Google::Cloud::Security::PrivateCA::V1::GetCertificateRequest.new(name: name) do |_result, response|
+        c.get_certificate ::Google::Cloud::Security::PrivateCA::V1::GetCertificateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_certificate({ name: name }, call_options) do |_result, response|
+        c.get_certificate({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_certificate(::Google::Cloud::Security::PrivateCA::V1::GetCertificateRequest.new(name: name), call_options) do |_result, response|
+        c.get_certificate(::Google::Cloud::Security::PrivateCA::V1::GetCertificateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_list_certificates_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_certificates_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_certificates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_certificates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_certificates ::Google::Cloud::Security::PrivateCA::V1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_certificates ::Google::Cloud::Security::PrivateCA::V1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_certificates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_certificates(::Google::Cloud::Security::PrivateCA::V1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_certificates(::Google::Cloud::Security::PrivateCA::V1::ListCertificatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -270,32 +270,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_revoke_certificate_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, revoke_certificate_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.revoke_certificate({ name: name, reason: reason, request_id: request_id }) do |_result, response|
+        c.revoke_certificate({ name: name, reason: reason, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.revoke_certificate name: name, reason: reason, request_id: request_id do |_result, response|
+        c.revoke_certificate name: name, reason: reason, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.revoke_certificate ::Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id) do |_result, response|
+        c.revoke_certificate ::Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.revoke_certificate({ name: name, reason: reason, request_id: request_id }, call_options) do |_result, response|
+        c.revoke_certificate({ name: name, reason: reason, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.revoke_certificate(::Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id), call_options) do |_result, response|
+        c.revoke_certificate(::Google::Cloud::Security::PrivateCA::V1::RevokeCertificateRequest.new(name: name, reason: reason, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -326,32 +326,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_update_certificate_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_certificate_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_certificate certificate: certificate, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_certificate certificate: certificate, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_certificate ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_certificate ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_certificate({ certificate: certificate, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_certificate(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_certificate(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRequest.new(certificate: certificate, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -383,32 +383,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_activate_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, activate_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }) do |_result, response|
+        c.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.activate_certificate_authority name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id do |_result, response|
+        c.activate_certificate_authority name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.activate_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id) do |_result, response|
+        c.activate_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }, call_options) do |_result, response|
+        c.activate_certificate_authority({ name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.activate_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id), call_options) do |_result, response|
+        c.activate_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::ActivateCertificateAuthorityRequest.new(name: name, pem_ca_certificate: pem_ca_certificate, subordinate_config: subordinate_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -440,32 +440,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_create_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }) do |_result, response|
+        c.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_certificate_authority parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id do |_result, response|
+        c.create_certificate_authority parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id) do |_result, response|
+        c.create_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }, call_options) do |_result, response|
+        c.create_certificate_authority({ parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id), call_options) do |_result, response|
+        c.create_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::CreateCertificateAuthorityRequest.new(parent: parent, certificate_authority_id: certificate_authority_id, certificate_authority: certificate_authority, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -496,32 +496,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_disable_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, disable_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.disable_certificate_authority({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
+        c.disable_certificate_authority({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_certificate_authority name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
+        c.disable_certificate_authority name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
+        c.disable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_certificate_authority({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
+        c.disable_certificate_authority({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
+        c.disable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DisableCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -551,32 +551,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_enable_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enable_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enable_certificate_authority({ name: name, request_id: request_id }) do |_result, response|
+        c.enable_certificate_authority({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enable_certificate_authority name: name, request_id: request_id do |_result, response|
+        c.enable_certificate_authority name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.enable_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enable_certificate_authority({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.enable_certificate_authority({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.enable_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::EnableCertificateAuthorityRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_fetch_certificate_authority_csr_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_certificate_authority_csr_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_certificate_authority_csr({ name: name }) do |_result, response|
+        c.fetch_certificate_authority_csr({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_certificate_authority_csr name: name do |_result, response|
+        c.fetch_certificate_authority_csr name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_certificate_authority_csr ::Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrRequest.new(name: name) do |_result, response|
+        c.fetch_certificate_authority_csr ::Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_certificate_authority_csr({ name: name }, call_options) do |_result, response|
+        c.fetch_certificate_authority_csr({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_certificate_authority_csr(::Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrRequest.new(name: name), call_options) do |_result, response|
+        c.fetch_certificate_authority_csr(::Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -659,32 +659,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_get_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_certificate_authority({ name: name }) do |_result, response|
+        c.get_certificate_authority({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_certificate_authority name: name do |_result, response|
+        c.get_certificate_authority name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::GetCertificateAuthorityRequest.new(name: name) do |_result, response|
+        c.get_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::GetCertificateAuthorityRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_certificate_authority({ name: name }, call_options) do |_result, response|
+        c.get_certificate_authority({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::GetCertificateAuthorityRequest.new(name: name), call_options) do |_result, response|
+        c.get_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::GetCertificateAuthorityRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -717,32 +717,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_list_certificate_authorities_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_certificate_authorities_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_certificate_authorities parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_certificate_authorities parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_certificate_authorities ::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_certificate_authorities ::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_certificate_authorities({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_certificate_authorities(::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_certificate_authorities(::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -772,32 +772,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_undelete_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_certificate_authority({ name: name, request_id: request_id }) do |_result, response|
+        c.undelete_certificate_authority({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_certificate_authority name: name, request_id: request_id do |_result, response|
+        c.undelete_certificate_authority name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::UndeleteCertificateAuthorityRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.undelete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::UndeleteCertificateAuthorityRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_certificate_authority({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.undelete_certificate_authority({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::UndeleteCertificateAuthorityRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.undelete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::UndeleteCertificateAuthorityRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -830,32 +830,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_delete_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
+        c.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_certificate_authority name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
+        c.delete_certificate_authority name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
+        c.delete_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
+        c.delete_certificate_authority({ name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
+        c.delete_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateAuthorityRequest.new(name: name, request_id: request_id, ignore_active_certificates: ignore_active_certificates, skip_grace_period: skip_grace_period, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,32 +886,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_update_certificate_authority_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_certificate_authority_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_certificate_authority certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_certificate_authority certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_certificate_authority ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_certificate_authority({ certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_certificate_authority(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateAuthorityRequest.new(certificate_authority: certificate_authority, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -943,32 +943,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_create_ca_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_ca_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_ca_pool({ parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id }) do |_result, response|
+        c.create_ca_pool({ parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_ca_pool parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id do |_result, response|
+        c.create_ca_pool parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_ca_pool ::Google::Cloud::Security::PrivateCA::V1::CreateCaPoolRequest.new(parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id) do |_result, response|
+        c.create_ca_pool ::Google::Cloud::Security::PrivateCA::V1::CreateCaPoolRequest.new(parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_ca_pool({ parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id }, call_options) do |_result, response|
+        c.create_ca_pool({ parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_ca_pool(::Google::Cloud::Security::PrivateCA::V1::CreateCaPoolRequest.new(parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id), call_options) do |_result, response|
+        c.create_ca_pool(::Google::Cloud::Security::PrivateCA::V1::CreateCaPoolRequest.new(parent: parent, ca_pool_id: ca_pool_id, ca_pool: ca_pool, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -999,32 +999,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_update_ca_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_ca_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_ca_pool({ ca_pool: ca_pool, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_ca_pool({ ca_pool: ca_pool, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_ca_pool ca_pool: ca_pool, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_ca_pool ca_pool: ca_pool, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_ca_pool ::Google::Cloud::Security::PrivateCA::V1::UpdateCaPoolRequest.new(ca_pool: ca_pool, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_ca_pool ::Google::Cloud::Security::PrivateCA::V1::UpdateCaPoolRequest.new(ca_pool: ca_pool, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_ca_pool({ ca_pool: ca_pool, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_ca_pool({ ca_pool: ca_pool, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_ca_pool(::Google::Cloud::Security::PrivateCA::V1::UpdateCaPoolRequest.new(ca_pool: ca_pool, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_ca_pool(::Google::Cloud::Security::PrivateCA::V1::UpdateCaPoolRequest.new(ca_pool: ca_pool, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1053,32 +1053,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_get_ca_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_ca_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_ca_pool({ name: name }) do |_result, response|
+        c.get_ca_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_ca_pool name: name do |_result, response|
+        c.get_ca_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_ca_pool ::Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new(name: name) do |_result, response|
+        c.get_ca_pool ::Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_ca_pool({ name: name }, call_options) do |_result, response|
+        c.get_ca_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_ca_pool(::Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_ca_pool(::Google::Cloud::Security::PrivateCA::V1::GetCaPoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1111,32 +1111,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_list_ca_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_ca_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_ca_pools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_ca_pools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_ca_pools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_ca_pools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_ca_pools ::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_ca_pools ::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_ca_pools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_ca_pools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_ca_pools(::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_ca_pools(::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1167,32 +1167,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_delete_ca_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_ca_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_ca_pool({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
+        c.delete_ca_pool({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_ca_pool name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
+        c.delete_ca_pool name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_ca_pool ::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
+        c.delete_ca_pool ::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_ca_pool({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
+        c.delete_ca_pool({ name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_ca_pool(::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
+        c.delete_ca_pool(::Google::Cloud::Security::PrivateCA::V1::DeleteCaPoolRequest.new(name: name, request_id: request_id, ignore_dependent_resources: ignore_dependent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1222,32 +1222,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_fetch_ca_certs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_ca_certs_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_ca_certs({ ca_pool: ca_pool, request_id: request_id }) do |_result, response|
+        c.fetch_ca_certs({ ca_pool: ca_pool, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_ca_certs ca_pool: ca_pool, request_id: request_id do |_result, response|
+        c.fetch_ca_certs ca_pool: ca_pool, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_ca_certs ::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsRequest.new(ca_pool: ca_pool, request_id: request_id) do |_result, response|
+        c.fetch_ca_certs ::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsRequest.new(ca_pool: ca_pool, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_ca_certs({ ca_pool: ca_pool, request_id: request_id }, call_options) do |_result, response|
+        c.fetch_ca_certs({ ca_pool: ca_pool, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_ca_certs(::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsRequest.new(ca_pool: ca_pool, request_id: request_id), call_options) do |_result, response|
+        c.fetch_ca_certs(::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsRequest.new(ca_pool: ca_pool, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1276,32 +1276,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_get_certificate_revocation_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_certificate_revocation_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_certificate_revocation_list({ name: name }) do |_result, response|
+        c.get_certificate_revocation_list({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_certificate_revocation_list name: name do |_result, response|
+        c.get_certificate_revocation_list name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1::GetCertificateRevocationListRequest.new(name: name) do |_result, response|
+        c.get_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1::GetCertificateRevocationListRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_certificate_revocation_list({ name: name }, call_options) do |_result, response|
+        c.get_certificate_revocation_list({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1::GetCertificateRevocationListRequest.new(name: name), call_options) do |_result, response|
+        c.get_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1::GetCertificateRevocationListRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1334,32 +1334,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_list_certificate_revocation_lists_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_certificate_revocation_lists_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_certificate_revocation_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_certificate_revocation_lists parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_certificate_revocation_lists ::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_certificate_revocation_lists ::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_certificate_revocation_lists({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_certificate_revocation_lists(::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_certificate_revocation_lists(::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1390,32 +1390,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_update_certificate_revocation_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_certificate_revocation_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_certificate_revocation_list certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_certificate_revocation_list certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_certificate_revocation_list ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_certificate_revocation_list({ certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_certificate_revocation_list(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateRevocationListRequest.new(certificate_revocation_list: certificate_revocation_list, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1447,32 +1447,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_create_certificate_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_certificate_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_certificate_template({ parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id }) do |_result, response|
+        c.create_certificate_template({ parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_certificate_template parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id do |_result, response|
+        c.create_certificate_template parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_certificate_template ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateTemplateRequest.new(parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id) do |_result, response|
+        c.create_certificate_template ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateTemplateRequest.new(parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_certificate_template({ parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id }, call_options) do |_result, response|
+        c.create_certificate_template({ parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_certificate_template(::Google::Cloud::Security::PrivateCA::V1::CreateCertificateTemplateRequest.new(parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id), call_options) do |_result, response|
+        c.create_certificate_template(::Google::Cloud::Security::PrivateCA::V1::CreateCertificateTemplateRequest.new(parent: parent, certificate_template_id: certificate_template_id, certificate_template: certificate_template, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1502,32 +1502,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_delete_certificate_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_certificate_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_certificate_template({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_certificate_template({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_certificate_template name: name, request_id: request_id do |_result, response|
+        c.delete_certificate_template name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_certificate_template ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateTemplateRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_certificate_template ::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateTemplateRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_certificate_template({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_certificate_template({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_certificate_template(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateTemplateRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_certificate_template(::Google::Cloud::Security::PrivateCA::V1::DeleteCertificateTemplateRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1556,32 +1556,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_get_certificate_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_certificate_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_certificate_template({ name: name }) do |_result, response|
+        c.get_certificate_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_certificate_template name: name do |_result, response|
+        c.get_certificate_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_certificate_template ::Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new(name: name) do |_result, response|
+        c.get_certificate_template ::Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_certificate_template({ name: name }, call_options) do |_result, response|
+        c.get_certificate_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_certificate_template(::Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.get_certificate_template(::Google::Cloud::Security::PrivateCA::V1::GetCertificateTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1614,32 +1614,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_list_certificate_templates_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_certificate_templates_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_certificate_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_certificate_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_certificate_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_certificate_templates parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_certificate_templates ::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_certificate_templates ::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_certificate_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_certificate_templates({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_certificate_templates(::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_certificate_templates(::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1670,32 +1670,32 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::ServiceStub.stub :transcode_update_certificate_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_certificate_template_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_certificate_template({ certificate_template: certificate_template, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_certificate_template({ certificate_template: certificate_template, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_certificate_template certificate_template: certificate_template, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_certificate_template certificate_template: certificate_template, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_certificate_template ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateTemplateRequest.new(certificate_template: certificate_template, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_certificate_template ::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateTemplateRequest.new(certificate_template: certificate_template, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_certificate_template({ certificate_template: certificate_template, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_certificate_template({ certificate_template: certificate_template, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_certificate_template(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateTemplateRequest.new(certificate_template: certificate_template, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_certificate_template(::Google::Cloud::Security::PrivateCA::V1::UpdateCertificateTemplateRequest.new(certificate_template: certificate_template, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

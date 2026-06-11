@@ -99,32 +99,32 @@ class ::Google::Cloud::Retail::V2::AnalyticsService::Rest::ClientTest < Minitest
     ::Google::Cloud::Retail::V2::AnalyticsService::Rest::ServiceStub.stub :transcode_export_analytics_metrics_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_analytics_metrics_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::AnalyticsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::AnalyticsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }) do |_result, response|
+        c.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_analytics_metrics catalog: catalog, output_config: output_config, filter: filter do |_result, response|
+        c.export_analytics_metrics catalog: catalog, output_config: output_config, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_analytics_metrics ::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter) do |_result, response|
+        c.export_analytics_metrics ::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }, call_options) do |_result, response|
+        c.export_analytics_metrics({ catalog: catalog, output_config: output_config, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_analytics_metrics(::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter), call_options) do |_result, response|
+        c.export_analytics_metrics(::Google::Cloud::Retail::V2::ExportAnalyticsMetricsRequest.new(catalog: catalog, output_config: output_config, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
